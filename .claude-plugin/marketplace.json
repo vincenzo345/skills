@@ -1,0 +1,22 @@
+{
+  "name": "vincenzo345",
+  "owner": {
+    "name": "Vince Sandoz",
+    "url": "https://github.com/vincenzo345"
+  },
+  "description": "Vince Sandoz's agent skills, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "vince-skills",
+      "source": "./",
+      "description": "Vince Sandoz's agent skills for real engineering.",
+      "category": "engineering",
+      "keywords": [
+        "engineering",
+        "skills",
+        "agent-harness",
+        "automation"
+      ]
+    }
+  ]
+}

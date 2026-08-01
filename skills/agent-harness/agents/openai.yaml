@@ -1,0 +1,3 @@
+interface:
+  display_name: "Agent Harness"
+  short_description: "Scaffold a self-verifying Planner/Generator/Evaluator build loop"

@@ -1,0 +1,3 @@
+# run_harness.py uses only the Python standard library.
+# The only hard dependency is the Claude Code CLI on your PATH:
+#   npm install -g @anthropic-ai/claude-code   # then: claude --version
