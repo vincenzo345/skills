@@ -25,6 +25,11 @@ Updates arrive when I push.
 
 ## Skills
 
+### User-invoked
+
+- [`to-record`](./skills/to-record/SKILL.md) — turn a raw meeting export into a normalised transcript whose every word is preserved and whose defects are flagged: turns reconstructed from crosstalk, a script that checks the word multiset survived, and six flags about the record rather than questions about the domain.
+- [`to-scope`](./skills/to-scope/SKILL.md) — turn a normalised transcript into a signed-off scope tree a build can run against: a story map drafted from what was said, a conflict pass with no drafting job, the developer grilled before the client is, and a review session where the client corrects a paraphrase instead of composing an answer.
+
 ### Model-invoked
 
 - [`agent-harness`](./skills/agent-harness/SKILL.md) — scaffold a stack-agnostic long-running build harness into any project: the Planner/Generator/Evaluator loop where three agents with separate context windows coordinate through files on disk, and an adversarial Evaluator verifies every sprint instead of the builder grading itself.

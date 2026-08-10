@@ -1,0 +1,188 @@
+# The review session
+
+Phase 4. Reached once the tree exists, the conflict pass has run, and the developer has been
+grilled on everything he could close himself.
+
+This is the part that matters. The strongest single piece of evidence behind this whole design
+is a null result: identical checklists mandated as **documents** rather than performed as
+**conversations** showed no measurable effect across 101 hospitals. **The artifact is the
+residue of a session, never a substitute for one.** A beautiful tree and no session is a failed
+run.
+
+---
+
+## Setup
+
+The session is **screen-shared**, and **the developer controls the scroll.** The client reads
+it as well as hears it, which is worth a great deal, and the failure that usually comes with
+showing a document - the agent walking every line while the customer goes quiet - does not
+return, because the customer is not being walked through anything. The developer moves the
+document; the agent speaks.
+
+Three variants of this session were run over identical material before it settled. Reading the
+tree out spends fifteen minutes confirming what is already right. Walking only the questions
+never shows the customer the twenty-one of thirty criteria that are still `inferred`, so it
+**cannot** produce a correction. What follows is the third variant, and it produced two
+corrections in ninety seconds from the same material that produced zero the other ways.
+
+---
+
+## Two moves per feature, in this order
+
+### Move 1 - the open questions
+
+Take that feature's open `?` off the circle-back view, in tree order. Ask them first.
+
+Questions run before the paraphrase for a reason that is not politeness: **the answers are
+scope and boundary facts**, and they teach you where the boundaries and the slice actually are
+before you commit to a narrative built on the wrong ones. One pass, not two.
+
+**A conflict `?` is asked as a neutral fact question. Never as a contest.**
+
+> Right - when a case is waiting on that signature, does anything chase it?
+
+Not *"you said two different things"*, not *"which of these is right?"*, and never a party
+named. The contest was legal in phase 3 with the developer. Here it is arbitration, and
+arbitration is forbidden.
+
+### Move 2 - say the feature back
+
+Say the **whole feature** back as a short narrative, then ask:
+
+> What is wrong with it?
+
+**The criteria are never read out.** The narrative is generated from them, so a wrong criterion
+surfaces as a wrong sentence - which the customer can hear. A criterion read aloud is a thing
+to agree with; a sentence about their own work that is subtly off is a thing they interrupt.
+
+**Build the paraphrase out of named things**, in the customer's own vocabulary: the carrier,
+the in-force illustration, the authorization, the trust. Named things survive; propositions
+evaporate. What they agreed to has to still be recallable tomorrow, and *"we agreed the system
+would handle the case where information is unavailable"* is not recallable by anyone.
+
+Worked example, one feature:
+
+> So a request comes in about a policy you don't hold. You open a case against whoever sent it,
+> get the name and the policy number off the page, and file the document in the document
+> library rather than in policy management, because you're not the agent on it yet. Then you go
+> to the carrier and find out what they need before they'll tell you anything.
+>
+> What's wrong with that?
+
+That is four criteria and a boundary in five sentences. The boundary is **narrated, not
+asked** - see below.
+
+---
+
+## Never ask about structure
+
+**No boundary question is ever put to the client.** Not *"is that one step or two?"*, not
+*"does that belong with the earlier part?"*, not *"would you call that a separate workflow?"*
+
+Structure is **narrated**. If a boundary is wrong, the narrative built on it sounds wrong, and
+the customer says so unprompted - which is the correction you wanted, arriving in the form they
+can actually give. Asked directly, a boundary question gets deference: the customer assumes you
+know why you drew it there, and agrees.
+
+The same holds for the tiers, the ids, the slice and the states. None of it is the customer's
+to arbitrate.
+
+---
+
+## The budget
+
+**One paraphrase per feature, plus that feature's open `?`.** Never per story.
+
+This is the whole cost model, and it is why it does not grow with the size of the draft. Thirty
+stories and eight stories cost the same session if they are six features either way. A budget
+denominated in stories is a budget that punishes a thorough draft, which puts pressure on the
+draft in exactly the wrong direction.
+
+### Stopping rules, which are load-bearing rather than courteous
+
+- **Three deferrals in a row - stop.** Not stop asking that question: stop the pass. Three
+  consecutive *"go with your recommendation"* answers means the customer is done, and every
+  further question is acceptance being bought by exhaustion.
+- **At most five questions per pass**, ranked by **Impact x Uncertainty**. Impact is how much
+  of the tree moves if the answer surprises you. Uncertainty is how little you can guess it.
+  Ask the top five. The rest wait for the next pass, and most of them get answered by something
+  else in the meantime.
+
+### Agreement and disengagement are the same signal
+
+In the designed-against sample the subject says *"right"* forty-one times in twenty-five
+minutes. You cannot tell those two apart from the transcript and you cannot tell them apart in
+the room. This is the second reason the stopping rules are counted rather than judged: by the
+time it *feels* like the customer is finished, the record already contains a great deal of
+approval that means nothing.
+
+---
+
+## Corrections
+
+**Apply a correction where it lands, and say one line about it.**
+
+> Got it - so the document goes into policy management as soon as the AOR is signed, not
+> before. Changing that now.
+
+**Any re-paraphrase goes to the end of the session, never in place.** The customer never sits
+through the same walk twice. If a correction was large enough that the feature needs saying
+back again, note it and come back at the end - and often you will find, by then, that a later
+answer settled it and the re-paraphrase is unnecessary.
+
+Mark every corrected or agreed criterion `confirmed`. That mark is the only reason the next
+rule can be enforced.
+
+### Zero corrections on a feature is a failure
+
+A feature that comes back untouched means **the wrong artifact was presented.** Same content,
+same customer, presented three ways: zero corrections two of those ways, two corrections in
+ninety seconds the third.
+
+So the response to zero corrections is:
+
+1. **Do not ask more questions.** The trap the binding constraint sets is exactly here: a
+   feature came back empty, so it feels like more elicitation is needed, and more elicitation
+   is what makes acceptance worthless. The response is a **better paraphrase**, or none.
+2. **Leave every criterion `inferred`.** Nothing was confirmed, so nothing is marked confirmed.
+3. **Say it at sign-off, out loud:**
+
+   > You changed nothing on this one, so this is our reading, not yours.
+
+   That sentence transfers the risk knowingly instead of burying it. The developer signs it
+   with his eyes open or he does not sign it.
+
+---
+
+## Deferrals
+
+A deferral is a **non-event that reads as assent.** The subject in the sample could not recall,
+hours later, what he had deferred on - and the record showed something that looked exactly like
+approval.
+
+So record it as a non-state, and **record the words, which are necessary here and optional for
+a signature:**
+
+```
+Deferred 2026-08-04. Tony Stark. On the call.
+"Go with your recommendation."
+This is not an agreement. Ask again in the next session.
+```
+
+A deferred `?` is still open. It blocks sign-off of its story, and it does not age out.
+
+---
+
+## Ending
+
+**The session ends at a feature.** Not mid-feature, not at a story.
+
+**The tree is the resume point.** Nothing about the session persists - there is no session
+file, no agenda, no position marker. The next session reads the tree, derives the circle-back
+view again, and starts at the next `provisional` feature. A session that needs its own state to
+resume has invented a second store that can disagree with the first.
+
+Mark every feature that got both moves as `reviewed`.
+
+**Sign-off is decoupled from this session.** What the session produces is a **signable state**.
+Signing may land inside the call or a week after it, and neither is a different process.

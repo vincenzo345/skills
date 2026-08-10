@@ -99,6 +99,12 @@ session, and a `git pull` updates every installed skill at once.
 Do not use a `ln -s` based script on Windows: on this setup `ln -s` silently
 creates real directory copies rather than links, which breaks the whole point.
 
+## Agent skills
+
+### Issue tracker
+
+Local markdown under `.scratch/` (gitignored). See `docs/agents/issue-tracker.md`.
+
 ## Style
 
 No emojis, anywhere — including in scripts and printed output.

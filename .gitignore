@@ -1,2 +1,12 @@
 node_modules
 .DS_Store
+
+# Local issue tracker and wayfinder maps — planning stays out of the public repo
+.scratch/
+
+# Browser tool output
+.playwright-mcp/
+
+# Python
+__pycache__/
+*.pyc

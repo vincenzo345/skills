@@ -1,0 +1,6 @@
+interface:
+  display_name: "To Record"
+  short_description: "Normalise a raw meeting export and flag the record's defects"
+
+policy:
+  allow_implicit_invocation: false
