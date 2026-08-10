@@ -127,10 +127,14 @@ Every criterion carries the statements it was drafted from, **unmerged**, direct
   corrupted attribution. A speaker fails for a subtler reason: in the designed-against sample
   the *developer's* recap of a prior call carried full domain authority, so even an accurate
   label does not tell you whose requirement a sentence is.
-- **Two statements under one criterion means you flattened them.** That is the whole point of
-  keeping them unmerged: it turns flattening into a visible deletion rather than an invisible
-  one. If both statements are true of the node, write two criteria. If they cannot both be
-  true, phase 2 will find it - leave them.
+- **Two statements under one criterion is a prompt to check, not an automatic split.** Apply
+  the same test phase 2 uses: **would they produce different criteria?**
+  - **Different criteria - split.** You flattened two things into one, and leaving them
+    stacked is the deletion the `from:` lines exist to make visible.
+  - **The same criterion - keep both.** They corroborate. *"the name was on it"* and *"the
+    policy number was there too"* are one fact said twice, and splitting them manufactures a
+    second criterion nobody needs. Volume is the second form of exhaustion.
+  - **They cannot both be true - leave them.** Phase 2 will find it.
 - **No `from:` lines means you proposed it.** Write `- from: (none)`. Nothing needs storing;
   the page already shows it. There is no `agent-proposed` state for the same reason.
 
