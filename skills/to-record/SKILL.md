@@ -16,6 +16,11 @@ This skill restructures that export into a normalised transcript and flags what 
 with the record. It runs in four ordered steps: **ask provenance, normalise, verify,
 resolve flags.**
 
+Two seats run through this pipeline, and `/to-scope` defines them: **the expert** does the
+work and owns the process; **the builder** owns what gets built. Here only one consequence
+matters - **every flag is the builder's to answer**, and none is ever worth spending the
+expert on.
+
 ## The preservation contract
 
 **Every word between speaker markers is carried across unchanged.** Fillers, hedges,
@@ -44,10 +49,10 @@ Ask exactly one question, and ask it first:
 The answer routes the whole run and nothing else is configurable.
 
 - **In the room.** The transcript is a memory aid. Every flag is answerable from your
-  memory, for free, without spending a second of the client's patience. **Step 4 runs.**
+  memory, for free, without spending a second of the expert's patience. **Step 4 runs.**
 - **Absent.** The transcript is evidence about people who are not here. Nobody present can
   answer. **Step 4 does not run.** Flags ride forward into `/to-scope` as known defects of
-  the input, and the only legal move later is to raise them when the stakeholder is next
+  the input, and the only legal move later is to raise them when the expert is next
   available.
 
 Do not guess the answer from the file. Ask.
@@ -69,6 +74,12 @@ convention it has never seen, and a convention you can state as a pattern is one
 actually worked out rather than assumed. Declare a marker convention, never a word: a
 pattern naming a content word is the one way to fake a pass, and it is visible in the front
 matter and on every run.
+
+**Every export declares, including the one this skill was designed against.** The verifier
+knows nothing about raw files on purpose. A pattern it applied on its own would cut words
+nobody wrote down, and it would cut them from **both** files at once - so a `(New York)`
+office spoken aloud and lost in the normalisation would read as preserved. What is not
+declared is not removed.
 
 What restructuring means, concretely:
 
@@ -120,9 +131,17 @@ sent it. Does that ever vary?
 - Front matter, then the flag list, then a `---` line, then the body.
 - **The body contains no `---` line.** The verifier finds the body by taking everything
   after the last `---`, so one inside the body would silently cut the file in half.
-- `raw_markers:` is a block list, one quoted pattern per line. Omit the key when the raw
-  export already uses the conventions the verifier knows: `(Ada Wong)` speaker markers and
-  timestamps on their own line. Every other format declares.
+- `raw_markers:` is a block list, one quoted pattern per line, and it is **never omitted.**
+  The designed-against convention - `(Ada Wong)` speaker markers, timestamps on their own
+  line - is written out like any other export's:
+
+  ```yaml
+  raw_markers:
+    - '^\s*\d{1,2}:\d{2}(?::\d{2})?\s*$'
+    - '\((?:[A-Z][\w.''-]*)(?:\s+[A-Z0-9][\w.''-]*){0,3}\)'
+  ```
+
+  An apostrophe inside a single-quoted pattern is doubled, the YAML way.
 - `labels: unverified` stays until you confirm the labels in step 4. A speaker label
   **locates a line and carries no authority** - see the flag reference.
 - Timestamps are optional in the body and carry no meaning beyond locating a turn back in
@@ -145,14 +164,20 @@ Reordering is legal, because restructuring moves words. Run
 `python <skill-dir>/scripts/verify_preservation.py --rules` to see the body-extraction rule
 it applies; the rule is stated in full at the top of the script.
 
+**Two marker sets, and they never mix.** The raw file is cut only by what you declared. The
+normalised file is cut only by the three markers its own shape uses - `[0:08]`, a leading
+`> `, and `**Ada Wong:**`. A missing declaration therefore fails loudly, with every speaker
+name and timestamp listed as missing, rather than passing on a guess.
+
 **A failure rejects the normalisation.** Redo it. Do not warn and continue, do not patch
 the two or three words the script named and call it done, and never edit the raw export to
 make the check pass. Show the user which words diverged.
 
-Where markers are declared, the script prints what each one removed, a sample of what it
-matched, and the share of the raw words they took. **Read that report.** A marker matching
-nothing is named as such and is usually wrong. A marker naming a content word would hide a
-deletion, and this report is what makes it visible.
+The script prints what each declared marker removed, a sample of what it matched, and the
+share of the raw words they took. **Read that report.** A marker matching nothing is named
+as such and is usually wrong. A marker naming a content word, or one reaching past the
+convention into speech, would hide a deletion - and this report is the only thing that makes
+it visible.
 
 **On a second consecutive failure, stop and hand both word lists to the user.** Suspect the
 declared markers first, since a wrong pattern moves whole speaker names or cue lines across
@@ -164,14 +189,14 @@ to retry.
 Only if the answer to step 1 was *in the room*. Otherwise skip to termination with every
 flag carried forward unresolved.
 
-This pass is short, addressed to **the developer only**, and asks nothing about the domain.
+This pass is short, addressed to **the builder only**, and asks nothing about the domain.
 Fact questions, of the record:
 
 > "Windflex at 2:56 - WinFlex?"
 > "Two speakers merged at 3:20 - who said 'achieve'?"
 
 Where a speaker mapping is obvious, **propose** it for correction. Never apply it silently.
-The client is never asked about transcription noise: their patience is the scarcest thing
+The expert is never asked about transcription noise: their patience is the scarcest thing
 in this whole pack and spending it on the recording tool's mistakes is its cheapest failure.
 
 Record each answer against its flag, and mark each flag `resolved`, `unresolved` or
@@ -179,7 +204,7 @@ Record each answer against its flag, and mark each flag `resolved`, `unresolved`
 the body still says *Windflex*, because the body is the record. `/to-scope` and
 `/domain-modeling` read the correction from the flag.
 
-Set `labels: confirmed` only once the developer has confirmed them.
+Set `labels: confirmed` only once the builder has confirmed them.
 
 ## Termination
 

@@ -12,9 +12,10 @@ only the multiset is compared, never the sequence.
 
 THE BODY-EXTRACTION RULE
 ------------------------
-Stated here in full, and applied literally. It is a rule, not a heuristic: if a
-transcript does not match it, declare that transcript's markers (rule 2a). Do not
-add a special case to this script.
+Stated here in full, and applied literally. Two files, two marker sets, and they
+never mix. The raw export has no fixed shape, so its markers are **declared**. The
+normalised file has the one shape `/to-record` defines, so its markers are **built
+in**. Neither set touches the other file.
 
 1. Scope.
    - raw file: the whole file is body.
@@ -22,12 +23,11 @@ add a special case to this script.
      `---`. A normalised file therefore carries its front matter and its flag list
      above that line, and its body contains no `---` line of its own.
 
-2a. Declared raw markers, removed from the RAW file only.
+2a. Declared raw markers. The only thing removed from the RAW file.
 
    Export formats are endless, so the raw file's marker convention is declared
    rather than guessed. The normalised front matter carries a `raw_markers:` block
-   list of regular expressions, and each one is removed from every raw line before
-   the built-in markers of 2b run.
+   list of regular expressions, and each one is removed from every raw line.
 
        ---
        source: meeting.vtt
@@ -39,29 +39,40 @@ add a special case to this script.
          - '<v [^>]+>'
        ---
 
-   Omit the key when the raw file matches 2b already. Patterns are matched per
-   line, in the order declared, and each is reported with its match count, the
-   words it removed and a sample of what it matched.
+   **Nothing is built in on this side, and that is the rule rather than a gap.** A
+   built-in pattern removes words nobody declared, and whatever it removes it also
+   hides: content the normalisation dropped is then deleted from *both* sides of
+   the comparison and the check still passes. A `(New York)` office spoken aloud
+   and lost in the normalisation reads as preserved. The designed-against format
+   is no exception and declares like every other:
 
-   The report is the control, and there is no threshold on it. A marker set that
+         - '^\\s*\\d{1,2}:\\d{2}(?::\\d{2})?\\s*$'
+         - '\\((?:[A-Z][\\w.''-]*)(?:\\s+[A-Z0-9][\\w.''-]*){0,3}\\)'
+
+   An apostrophe inside a single-quoted pattern is doubled, the YAML way.
+
+   Declare nothing and every speaker name and timestamp counts as a word, so the
+   run fails loudly with those words listed as missing. That is the intended
+   failure. A marker convention you have not stated is one you have not worked out.
+
+   Patterns are matched per line, in the order declared, and each is reported with
+   its match count, the words it removed and a sample of what it matched. The
+   report is the control, and there is no threshold on it. A marker set that
    swallows the whole raw body cannot fake a pass - the normalised words then have
    nowhere to come from and are reported as `not in the raw export`. What a
    threshold could not catch is a marker naming one content word, and what catches
    that is reading the declaration: it stands in the front matter of the artifact
    and prints on every run. Declare a marker convention, never a word.
 
-   They apply to the raw file alone. The normalised file has one fixed shape and
-   2b already covers it.
+2b. Built-in normalised markers. Removed from the NORMALISED file only. This skill
+   defines that file's shape, so these three are fixed:
+   a. An inline bracketed timestamp:        `[0:08]`, `[1:02:56]`
+   b. A leading interjection quote marker:  `> ` at the start of a line
+   c. A bold turn marker at line start:     `**Ada Wong:**`, `**Speaker A:**`
 
-2b. Built-in markers, removed from the body of BOTH files before any word is
-   counted, in this order:
-   a. A line that is only a timestamp:      `0:08`, `12:04`, `1:02:56`
-   b. An inline bracketed timestamp:        `[0:08]`, `[1:02:56]`
-   c. A leading interjection quote marker:  `> ` at the start of a line
-   d. A bold turn marker at line start:     `**Ada Wong:**`, `**Speaker A:**`
-   e. A bracketed speaker id:               `[Speaker A]`
-   f. A parenthesised speaker marker:       `(Ada Wong)`, `(Speaker A)`
-      Capitalised words only, up to four, so `(laughs)` is text and stays.
+   A timestamp on its own line, a `(Ada Wong)` speaker marker, a `[Speaker A]` id:
+   those are export conventions rather than this skill's output format. They
+   belong to 2a, and they are never removed from the normalised file.
 
 3. Words. What survives is lowercased and cut into words on anything that is not a
    letter, a digit or an apostrophe. Leading and trailing apostrophes are dropped.
@@ -76,11 +87,8 @@ import re
 import sys
 from collections import Counter
 
-TIMESTAMP_LINE = re.compile(r"^\s*\d{1,2}:\d{2}(?::\d{2})?\s*$")
 INLINE_TIMESTAMP = re.compile(r"\[\d{1,2}:\d{2}(?::\d{2})?\]")
-PAREN_SPEAKER = re.compile(r"\((?:[A-Z][\w.'-]*)(?:\s+[A-Z0-9][\w.'-]*){0,3}\)")
 BOLD_TURN = re.compile(r"^\s*\*\*[^*]{1,60}:\*\*")
-BRACKET_SPEAKER = re.compile(r"\[Speaker [A-Z]\]")
 LEADING_QUOTE = re.compile(r"^\s*>\s?")
 SEPARATOR = re.compile(r"^\s*---\s*$")
 WORD = re.compile(r"[a-z0-9']+")
@@ -175,25 +183,27 @@ def apply_markers(line, markers, tally=None):
     return line
 
 
-def strip_markers(line):
-    """Apply rule 2b to one line."""
-    if TIMESTAMP_LINE.match(line):
-        return ""
+def strip_normalised_markers(line):
+    """Apply rule 2b to one line of the normalised file. Never to the raw file."""
     line = INLINE_TIMESTAMP.sub(" ", line)
     line = LEADING_QUOTE.sub("", line)
     line = BOLD_TURN.sub("", line)
-    line = BRACKET_SPEAKER.sub(" ", line)
-    line = PAREN_SPEAKER.sub(" ", line)
     return line
 
 
 def words(text, role, markers=(), tally=None):
-    """The body word multiset of one file, per the rule in the module docstring."""
+    """The body word multiset of one file, per the rule in the module docstring.
+
+    Each role gets its own marker set and only its own: the raw file is cut by
+    what `raw_markers:` declares, the normalised file by the built-in three.
+    """
     counter = Counter()
     for line in body_lines(text, role):
-        if markers:
+        if role == "raw":
             line = apply_markers(line, markers, tally)
-        for word in WORD.findall(strip_markers(line).lower()):
+        else:
+            line = strip_normalised_markers(line)
+        for word in WORD.findall(line.lower()):
             word = word.strip("'")
             if word:
                 counter[word] += 1
@@ -208,6 +218,12 @@ def read(path):
 def report_markers(markers, tally, before, after, out):
     """Show what each declared marker removed. Reading this is the control on 2a."""
     out.write("raw markers declared: %d\n" % len(markers))
+    if not markers:
+        out.write(
+            "  Nothing is removed from the raw export. Every timestamp and every\n"
+            "  speaker name in it counts as a word.\n\n"
+        )
+        return
     for (pattern, _), matches in zip(markers, tally):
         out.write("  %s\n" % pattern)
         if not matches:
@@ -287,10 +303,9 @@ def main(argv=None):
         sys.stderr.write("%s\n" % error)
         return 2
 
-    if markers:
-        report_markers(
-            markers, tally, sum(undeclared.values()), sum(raw_counts.values()), sys.stdout
-        )
+    report_markers(
+        markers, tally, sum(undeclared.values()), sum(raw_counts.values()), sys.stdout
+    )
 
     return report(raw_counts, new_counts, sys.stdout)
 

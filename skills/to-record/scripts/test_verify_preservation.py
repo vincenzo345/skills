@@ -4,6 +4,8 @@
 The fixture is synthetic and carries the format signature the real material has: a
 timestamp on its own line, `(Name)` speaker markers, and a ` - ` backchannel lane
 that cuts a sentence in half so its verb lands inside the other speaker's reply.
+That signature is declared under `raw_markers:` like any other export's, because
+nothing is built in on the raw side.
 
 The calibration run against the one real sample is deliberately not here. That
 sample is confidential and lives under `.scratch/`, which is gitignored. Run it by
@@ -28,10 +30,13 @@ RAW = """0:00
 (Ada Wong) ever - (Ben Choi) Yeah, sometimes. (Ada Wong) vary?
 """
 
-NORMALISED = """---
+NORMALISED = r"""---
 source: raw.txt
 provenance: in-the-room
 labels: unverified
+raw_markers:
+  - '^\s*\d{1,2}:\d{2}(?::\d{2})?\s*$'
+  - '\((?:[A-Z][\w.''-]*)(?:\s+[A-Z0-9][\w.''-]*){0,3}\)'
 ---
 
 # Flags
@@ -169,6 +174,31 @@ def normalised_with(*patterns):
     return TWO_TURNS.format(markers=block)
 
 
+RAW_PARENTHETICAL = """0:00
+(Ada Wong) We opened the (New York) office last spring.
+"""
+
+DROPPED_PARENTHETICAL = r"""---
+source: raw.txt
+provenance: in-the-room
+labels: unverified
+raw_markers:
+  - '{markers}'
+---
+
+# Flags
+
+- none
+
+---
+
+[0:00] **Ada Wong:** We opened the {body} office last spring.
+"""
+
+TIMESTAMP_MARKER = r"^\s*\d{1,2}:\d{2}(?::\d{2})?\s*$"
+PAREN_MARKER = r"\((?:[A-Z][\w.''-]*)(?:\s+[A-Z0-9][\w.''-]*){0,3}\)"
+
+
 class TestDeclaredMarkers(unittest.TestCase):
     """Rule 2a. The formats step 2 names - VTT, Otter, Fathom, Granola - are not one
     format, so the raw marker convention is declared rather than guessed."""
@@ -240,21 +270,64 @@ class TestDeclaredMarkers(unittest.TestCase):
         code, _ = run(RAW, TWO_TURNS.format(markers="raw_markers: ['^a$']\n"))
         self.assertEqual(code, 2)
 
-    def test_no_declaration_leaves_the_built_in_rule_untouched(self):
-        code, output = run(RAW, NORMALISED)
-        self.assertEqual(code, 0, output)
-        self.assertNotIn("raw markers declared", output)
+    def test_the_declaration_is_reported_even_when_it_is_empty(self):
+        _, output = run(OTTER_RAW, normalised_with())
+        self.assertIn("raw markers declared: 0", output)
+
+
+class TestNothingIsBuiltInOnTheRawSide(unittest.TestCase):
+    """The regression this split exists for.
+
+    A built-in raw marker hides whatever it removes: the words go from both sides
+    of the comparison at once, so a deletion the normalisation made reads as
+    preserved. Only what is declared may be cut from the raw export.
+    """
+
+    def test_content_in_parentheses_is_not_swallowed_on_the_raw_side(self):
+        """`(New York)` is an office, not a speaker. Dropping it must fail."""
+        code, output = run(
+            RAW_PARENTHETICAL,
+            DROPPED_PARENTHETICAL.format(markers=TIMESTAMP_MARKER, body=""),
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("missing from the normalised file", output)
+        self.assertIn("york", output)
+
+    def test_a_declared_marker_that_overreaches_shows_up_as_extra(self):
+        """Declare the paren convention and it eats `(New York)` from the raw file.
+
+        Kept in the normalised body, those words then have nowhere to come from.
+        The overreach is visible rather than silent, and the report names it.
+        """
+        code, output = run(
+            RAW_PARENTHETICAL,
+            DROPPED_PARENTHETICAL.format(
+                markers="'\n  - '".join((TIMESTAMP_MARKER, PAREN_MARKER)),
+                body="(New York)",
+            ),
+        )
+        self.assertEqual(code, 1)
+        self.assertIn("not in the raw export", output)
+        self.assertIn("york", output)
+        self.assertIn("(New York)", output)
 
 
 class TestBodyRule(unittest.TestCase):
-    def test_parenthesised_lowercase_text_is_not_a_speaker_marker(self):
-        self.assertEqual(vp.strip_markers("(laughs) yes").strip(), "(laughs) yes")
+    """Rule 2b, which is the normalised file's shape and nothing else."""
 
-    def test_parenthesised_name_is_a_speaker_marker(self):
-        self.assertEqual(vp.strip_markers("(Ada Wong) yes").strip(), "yes")
+    def test_the_three_normalised_markers_are_removed(self):
+        self.assertEqual(
+            vp.strip_normalised_markers("[0:08] **Ada Wong:** yes").strip(), "yes"
+        )
+        self.assertEqual(vp.strip_normalised_markers("> **Ben Choi:** yes").strip(), "yes")
 
-    def test_timestamp_only_line_is_dropped(self):
-        self.assertEqual(vp.strip_markers("1:02:56"), "")
+    def test_a_paren_speaker_marker_is_not_a_normalised_marker(self):
+        self.assertEqual(
+            vp.strip_normalised_markers("(Ada Wong) yes").strip(), "(Ada Wong) yes"
+        )
+
+    def test_a_timestamp_only_line_is_not_a_normalised_marker(self):
+        self.assertEqual(vp.strip_normalised_markers("1:02:56").strip(), "1:02:56")
 
     def test_raw_body_is_the_whole_file(self):
         self.assertEqual(len(vp.body_lines("a\n---\nb\n", "raw")), 3)
