@@ -62,6 +62,14 @@ Do not write a parser. Formats are endless - VTT, Otter JSON, Fathom, Granola, a
 dump, raw notes - and the one you meet next week has no parser. Read the format, work out
 its marker convention, and restructure by hand under the contract above.
 
+**Then write that convention down**, as `raw_markers:` in the front matter - one regular
+expression per marker the raw file uses to carry something that is not speech: a speaker
+name, a cue line, a format header. The verifier reads them, because it cannot guess a
+convention it has never seen, and a convention you can state as a pattern is one you have
+actually worked out rather than assumed. Declare a marker convention, never a word: a
+pattern naming a content word is the one way to fake a pass, and it is visible in the front
+matter and on every run.
+
 What restructuring means, concretely:
 
 1. **One speaker per turn.** Split the text at speaker markers.
@@ -92,6 +100,8 @@ The verifier depends on this shape, so match it exactly.
 source: <path to the raw export>
 provenance: in-the-room | absent
 labels: unverified
+raw_markers:
+  - '<one regex per marker convention in the raw file>'
 ---
 
 # Flags
@@ -110,6 +120,9 @@ sent it. Does that ever vary?
 - Front matter, then the flag list, then a `---` line, then the body.
 - **The body contains no `---` line.** The verifier finds the body by taking everything
   after the last `---`, so one inside the body would silently cut the file in half.
+- `raw_markers:` is a block list, one quoted pattern per line. Omit the key when the raw
+  export already uses the conventions the verifier knows: `(Ada Wong)` speaker markers and
+  timestamps on their own line. Every other format declares.
 - `labels: unverified` stays until you confirm the labels in step 4. A speaker label
   **locates a line and carries no authority** - see the flag reference.
 - Timestamps are optional in the body and carry no meaning beyond locating a turn back in
@@ -136,9 +149,15 @@ it applies; the rule is stated in full at the top of the script.
 the two or three words the script named and call it done, and never edit the raw export to
 make the check pass. Show the user which words diverged.
 
-**On a second consecutive failure, stop and hand both word lists to the user.** A
-body-extraction rule may not fit this export's format, and that is a rule to fix rather than a
-normalisation to retry.
+Where markers are declared, the script prints what each one removed, a sample of what it
+matched, and the share of the raw words they took. **Read that report.** A marker matching
+nothing is named as such and is usually wrong. A marker naming a content word would hide a
+deletion, and this report is what makes it visible.
+
+**On a second consecutive failure, stop and hand both word lists to the user.** Suspect the
+declared markers first, since a wrong pattern moves whole speaker names or cue lines across
+the count. A rule that does not fit this export is a rule to fix rather than a normalisation
+to retry.
 
 ## Step 4 - resolve the flags
 

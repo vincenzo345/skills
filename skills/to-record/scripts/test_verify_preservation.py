@@ -129,6 +129,123 @@ class TestPreservation(unittest.TestCase):
         self.assertIn("normalised body words:", output)
 
 
+OTTER_RAW = """Ada Wong:  0:00
+Right, so a request comes in, and we open a case. Does that ever vary?
+
+Ben Choi:  0:16
+Yeah, sometimes.
+"""
+
+VTT_RAW = """WEBVTT
+
+00:00:00.000 --> 00:00:15.000
+<v Ada Wong>Right, so a request comes in, and we open a case. Does that ever vary?
+
+00:00:16.000 --> 00:00:18.000
+<v Ben Choi>Yeah, sometimes.
+"""
+
+TWO_TURNS = """---
+source: raw.txt
+provenance: in-the-room
+labels: unverified
+{markers}---
+
+# Flags
+
+- none
+
+---
+
+[0:00] **Ada Wong:** Right, so a request comes in, and we open a case. Does that ever vary?
+> **Ben Choi:** Yeah, sometimes.
+"""
+
+
+def normalised_with(*patterns):
+    if not patterns:
+        return TWO_TURNS.format(markers="")
+    block = "raw_markers:\n" + "".join("  - '%s'\n" % pattern for pattern in patterns)
+    return TWO_TURNS.format(markers=block)
+
+
+class TestDeclaredMarkers(unittest.TestCase):
+    """Rule 2a. The formats step 2 names - VTT, Otter, Fathom, Granola - are not one
+    format, so the raw marker convention is declared rather than guessed."""
+
+    def test_without_a_declaration_a_foreign_format_fails(self):
+        """The failure this mechanism exists for: names and timestamps read as words."""
+        code, output = run(OTTER_RAW, normalised_with())
+        self.assertEqual(code, 1)
+        self.assertIn("ada", output)
+        self.assertIn("wong", output)
+
+    def test_otter_style_passes_once_declared(self):
+        code, output = run(
+            OTTER_RAW,
+            normalised_with(r"^[A-Z][\w.'-]*(?: [A-Z][\w.'-]*)*:\s*\d{1,2}:\d{2}\s*$"),
+        )
+        self.assertEqual(code, 0, output)
+        self.assertIn("PRESERVED", output)
+
+    def test_webvtt_passes_once_declared(self):
+        code, output = run(
+            VTT_RAW,
+            normalised_with(
+                r"^WEBVTT$",
+                r"^\d{2}:\d{2}:\d{2}\.\d{3} --> .*$",
+                r"<v [^>]+>",
+            ),
+        )
+        self.assertEqual(code, 0, output)
+        self.assertIn("PRESERVED", output)
+
+    def test_declared_markers_apply_to_the_raw_file_only(self):
+        """A marker that would eat normalised text leaves the normalised side alone."""
+        code, output = run(OTTER_RAW, normalised_with(r"^[A-Z][\w.'-]*(?: [A-Z][\w.'-]*)*:\s*\d{1,2}:\d{2}\s*$", r"sometimes"))
+        self.assertEqual(code, 1)
+        self.assertIn("sometimes", output)
+
+    def test_what_each_marker_removed_is_printed(self):
+        _, output = run(
+            OTTER_RAW,
+            normalised_with(r"^[A-Z][\w.'-]*(?: [A-Z][\w.'-]*)*:\s*\d{1,2}:\d{2}\s*$"),
+        )
+        self.assertIn("raw markers declared: 1", output)
+        self.assertIn("words removed", output)
+        self.assertIn("Ada Wong:  0:00", output)
+
+    def test_a_marker_that_matches_nothing_is_called_out(self):
+        _, output = run(RAW, normalised_with(r"^NOSUCHTHING$"))
+        self.assertIn("removed nothing", output)
+
+    def test_a_greedy_marker_cannot_fake_a_pass(self):
+        """Swallow the raw body and the normalised words have nowhere to come from."""
+        code, output = run(RAW, normalised_with(r".*"))
+        self.assertEqual(code, 1)
+        self.assertIn("not in the raw export", output)
+
+    def test_the_share_removed_is_printed(self):
+        _, output = run(
+            OTTER_RAW,
+            normalised_with(r"^[A-Z][\w.'-]*(?: [A-Z][\w.'-]*)*:\s*\d{1,2}:\d{2}\s*$"),
+        )
+        self.assertIn("raw words (", output)
+
+    def test_a_broken_regex_is_a_usage_error(self):
+        code, _ = run(RAW, normalised_with(r"(unclosed"))
+        self.assertEqual(code, 2)
+
+    def test_an_inline_list_is_refused_rather_than_ignored(self):
+        code, _ = run(RAW, TWO_TURNS.format(markers="raw_markers: ['^a$']\n"))
+        self.assertEqual(code, 2)
+
+    def test_no_declaration_leaves_the_built_in_rule_untouched(self):
+        code, output = run(RAW, NORMALISED)
+        self.assertEqual(code, 0, output)
+        self.assertNotIn("raw markers declared", output)
+
+
 class TestBodyRule(unittest.TestCase):
     def test_parenthesised_lowercase_text_is_not_a_speaker_marker(self):
         self.assertEqual(vp.strip_markers("(laughs) yes").strip(), "(laughs) yes")

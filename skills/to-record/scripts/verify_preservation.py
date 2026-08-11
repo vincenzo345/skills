@@ -13,8 +13,8 @@ only the multiset is compared, never the sequence.
 THE BODY-EXTRACTION RULE
 ------------------------
 Stated here in full, and applied literally. It is a rule, not a heuristic: if a
-transcript does not match it, fix the transcript or the rule, do not add a special
-case.
+transcript does not match it, declare that transcript's markers (rule 2a). Do not
+add a special case to this script.
 
 1. Scope.
    - raw file: the whole file is body.
@@ -22,8 +22,39 @@ case.
      `---`. A normalised file therefore carries its front matter and its flag list
      above that line, and its body contains no `---` line of its own.
 
-2. Markers removed from the body of BOTH files before any word is counted, in this
-   order:
+2a. Declared raw markers, removed from the RAW file only.
+
+   Export formats are endless, so the raw file's marker convention is declared
+   rather than guessed. The normalised front matter carries a `raw_markers:` block
+   list of regular expressions, and each one is removed from every raw line before
+   the built-in markers of 2b run.
+
+       ---
+       source: meeting.vtt
+       provenance: in-the-room
+       labels: unverified
+       raw_markers:
+         - '^WEBVTT$'
+         - '^\\d{2}:\\d{2}:\\d{2}\\.\\d{3} --> .*$'
+         - '<v [^>]+>'
+       ---
+
+   Omit the key when the raw file matches 2b already. Patterns are matched per
+   line, in the order declared, and each is reported with its match count, the
+   words it removed and a sample of what it matched.
+
+   The report is the control, and there is no threshold on it. A marker set that
+   swallows the whole raw body cannot fake a pass - the normalised words then have
+   nowhere to come from and are reported as `not in the raw export`. What a
+   threshold could not catch is a marker naming one content word, and what catches
+   that is reading the declaration: it stands in the front matter of the artifact
+   and prints on every run. Declare a marker convention, never a word.
+
+   They apply to the raw file alone. The normalised file has one fixed shape and
+   2b already covers it.
+
+2b. Built-in markers, removed from the body of BOTH files before any word is
+   counted, in this order:
    a. A line that is only a timestamp:      `0:08`, `12:04`, `1:02:56`
    b. An inline bracketed timestamp:        `[0:08]`, `[1:02:56]`
    c. A leading interjection quote marker:  `> ` at the start of a line
@@ -54,6 +85,9 @@ LEADING_QUOTE = re.compile(r"^\s*>\s?")
 SEPARATOR = re.compile(r"^\s*---\s*$")
 WORD = re.compile(r"[a-z0-9']+")
 
+MARKERS_KEY = re.compile(r"^raw_markers:\s*(.*)$")
+LIST_ITEM = re.compile(r"^\s+-\s+(.*\S)\s*$")
+
 
 def body_lines(text, role):
     """Apply rule 1: cut the file down to the lines that are body."""
@@ -73,8 +107,76 @@ def body_lines(text, role):
     return lines[last_separator + 1 :]
 
 
+def unquote(value):
+    """Strip the surrounding quotes, and undouble a quote escaped the YAML way."""
+    if len(value) > 1 and value[0] == value[-1] and value[0] in "'\"":
+        return value[1:-1].replace(value[0] * 2, value[0])
+    return value
+
+
+def declared_markers(text):
+    """Apply rule 2a: read `raw_markers:` out of the normalised front matter."""
+    lines = text.splitlines()
+    if not lines or not SEPARATOR.match(lines[0]):
+        return []
+    end = None
+    for i in range(1, len(lines)):
+        if SEPARATOR.match(lines[i]):
+            end = i
+            break
+    if end is None:
+        return []
+
+    patterns = []
+    collecting = False
+    for line in lines[1:end]:
+        key = MARKERS_KEY.match(line)
+        if key:
+            if key.group(1).strip():
+                raise ValueError(
+                    "`raw_markers:` takes a block list, one pattern per line, "
+                    "indented and introduced by `- `; an inline list is not read"
+                )
+            collecting = True
+            continue
+        if not collecting:
+            continue
+        item = LIST_ITEM.match(line)
+        if item:
+            patterns.append(unquote(item.group(1)))
+        elif line.strip():
+            collecting = False
+    return patterns
+
+
+def compile_markers(patterns):
+    compiled = []
+    for pattern in patterns:
+        try:
+            compiled.append((pattern, re.compile(pattern)))
+        except re.error as error:
+            raise ValueError("raw_markers pattern %s is not a regex: %s" % (pattern, error))
+    return compiled
+
+
+def apply_markers(line, markers, tally=None):
+    """Apply rule 2a to one raw line, recording what each marker removed."""
+    for index, (_, regex) in enumerate(markers):
+        if tally is None:
+            line = regex.sub(" ", line)
+        else:
+            bucket = tally[index]
+
+            def swallow(match, bucket=bucket):
+                bucket.append(match.group(0))
+                return " "
+
+            line = regex.sub(swallow, line)
+    return line
+
+
 def strip_markers(line):
-    """Apply rule 2 to one line."""
+    """Apply rule 2b to one line."""
     if TIMESTAMP_LINE.match(line):
         return ""
     line = INLINE_TIMESTAMP.sub(" ", line)
@@ -85,10 +187,12 @@ def strip_markers(line):
     return line
 
 
-def words(text, role):
+def words(text, role, markers=(), tally=None):
     """The body word multiset of one file, per the rule in the module docstring."""
     counter = Counter()
     for line in body_lines(text, role):
+        if markers:
+            line = apply_markers(line, markers, tally)
         for word in WORD.findall(strip_markers(line).lower()):
             word = word.strip("'")
             if word:
@@ -99,6 +203,27 @@ def words(text, role):
 def read(path):
     with open(path, "r", encoding="utf-8-sig", errors="replace") as handle:
         return handle.read()
+
+
+def report_markers(markers, tally, before, after, out):
+    """Show what each declared marker removed. Reading this is the control on 2a."""
+    out.write("raw markers declared: %d\n" % len(markers))
+    for (pattern, _), matches in zip(markers, tally):
+        out.write("  %s\n" % pattern)
+        if not matches:
+            out.write("      0 matches. This marker removed nothing; check it.\n")
+            continue
+        removed = sum(len(WORD.findall(match.lower())) for match in matches)
+        distinct = list(dict.fromkeys(match.strip() for match in matches))[:4]
+        out.write(
+            "      %d matches, %d words removed. e.g. %s\n"
+            % (len(matches), removed, ", ".join('"%s"' % text for text in distinct))
+        )
+    share = (100.0 * (before - after) / before) if before else 0.0
+    out.write(
+        "  markers removed %d of %d raw words (%.0f%%). Read that share: a verbose\n"
+        "  cue format runs high, a chat log should not.\n\n" % (before - after, before, share)
+    )
 
 
 def report(raw_counts, new_counts, out):
@@ -153,11 +278,19 @@ def main(argv=None):
         return 2
 
     try:
-        raw_counts = words(raw_text, "raw")
+        markers = compile_markers(declared_markers(new_text))
+        undeclared = words(raw_text, "raw")
+        tally = [[] for _ in markers]
+        raw_counts = words(raw_text, "raw", markers, tally)
         new_counts = words(new_text, "normalised")
     except ValueError as error:
         sys.stderr.write("%s\n" % error)
         return 2
+
+    if markers:
+        report_markers(
+            markers, tally, sum(undeclared.values()), sum(raw_counts.values()), sys.stdout
+        )
 
     return report(raw_counts, new_counts, sys.stdout)
 
