@@ -1,8 +1,10 @@
 # The tree, and how it is written down
 
 Everything the draft phase needs: the three tiers and their boundaries, the criterion shape,
-the slice marks, the story ids, the node states, the signature block, and a worked rendering
-of all of it.
+the slice marks, the story ids, the folder layout, and a worked rendering of all of it.
+
+The node states and the signature block are not here. They are reached later, at sign-off, in
+`sign-off.md`.
 
 The worked rendering at the end uses **invented names**. It is a real workflow with every
 person and every business detail replaced.
@@ -214,50 +216,7 @@ every place a human reads the token.
 
 ---
 
-## 5. Node states
-
-**Three states, and they sit on the feature, not the story.**
-
-- `provisional` - drafted, not yet reviewed with the customer.
-- `reviewed` - the session happened. Not yet signed.
-- `signed` - the signature block is present, and **the file stops changing.**
-
-Plus the **non-state** `deferred`. It is not a fourth state. It records that the customer
-declined to agree, and it is never treated as one.
-
-There is no `architected` and no `ticketed`. The tree stops at the handover file, and **a state
-the tree cannot honestly maintain is worse than no state at all.**
-
-**A story has no state.** It holds three things: its criteria, its `?`s, and its slice mark.
-
----
-
-## 6. The signature block
-
-Four fields: date, name, how they agreed, and the words if any were said.
-
-```
-Signed 2026-08-04. Tony Stark. On the call.
-"Yeah, that's how it works."
-```
-
-```
-Deferred 2026-08-04. Tony Stark. On the call.
-"Go with your recommendation."
-This is not an agreement. Ask again in the next session.
-```
-
-**Words are optional for a signature and necessary for a deferral.** Without them the two are
-the same four fields, and a deferral that looks like a signature is the binding constraint
-failing in the record itself.
-
-**Re-opening.** The old signature stays. The superseded snapshot stays. The new state is written
-below it and dated. The record of what was agreed is not erased by what came after - the same
-principle that keeps a losing statement on a closed conflict.
-
----
-
-## 7. The folder, and the second dimension
+## 5. The folder, and the second dimension
 
 ```
 scope/<epic-slug>/
@@ -290,7 +249,7 @@ cannot disagree with the tree. Re-derive them; never edit them in place.
 
 ---
 
-## 8. Worked rendering
+## 6. Worked rendering
 
 Invented names throughout.
 

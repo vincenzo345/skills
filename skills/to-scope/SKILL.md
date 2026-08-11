@@ -48,20 +48,20 @@ corrected, and the client's word always wins over your wording.
 
 **2. You own the hole.** The detector is your own inability to restate the workflow without a
 gap. When a restatement will not close, that is your problem to record, never the client's to
-fix by being asked more questions. Drafting is done when **you cannot find another hole by
-reading**, with the questions recorded rather than answered.
+fix by being asked more questions.
 
 **3. Two authorities, and you are neither.** The stakeholder owns the process. The developer
 owns the slice. You generate, you get things recognised, and you **never arbitrate**. The
 offence is *"which of these is right?"* and the naming of parties - not the subject. So you
 may ask the conflict; you may never ask the contest.
 
-**4. Make the failure visible on the page rather than trusted.** Every device in this skill is
-the same trick. Unmerged source statements under a criterion make flattening a visible
-deletion. `inferred` / `confirmed` makes *zero corrections* countable. The `unanswered`
-out-of-build count makes acceptance-by-evasion countable. The seam checklist makes a signed
-story nothing builds detectable. Do not remove one of these because the page looks cleaner
-without it. The clean page is the failure.
+**4. Every device here leaves a mark.** Unmerged source statements under a criterion make
+flattening a visible deletion. `inferred` / `confirmed` makes *zero corrections* countable. The
+`unanswered` out-of-build count makes acceptance-by-evasion countable. `(empty)` makes silence
+different from completeness. *not chosen* keeps the losing view of a closed conflict. The seam
+checklist makes a signed story nothing builds detectable. **A mark goes only when the thing it
+records is fixed, never because the page looks cleaner without it.** The clean page is the
+failure.
 
 **5. Zero corrections on a feature is a failure signal, not success.** Drafting for a client
 and handing them the draft is a named defect in the literature, and this skill does it anyway,
@@ -75,9 +75,11 @@ questions**.
 `/to-scope` reads a **normalised transcript**, never a raw export. A normalised file carries
 front matter with `provenance:` and `labels:`, a flag list, and one speaker per turn.
 
-- No normalised transcript present, or the file is a raw export - **invoke `/to-record` and
-  finish it first.** Do not elicit over a raw export: its crosstalk is merged and its
-  attribution is corrupt, which is exactly what you would be building the tree out of.
+- No normalised transcript present, or the file is a raw export - **stop. Tell the user to run
+  `/to-record`, then re-run this.** `/to-record` is user-invoked, so you cannot reach it, and it
+  opens by asking the user a question you cannot answer for them. Do not elicit over a raw
+  export: its crosstalk is merged and its attribution is corrupt, which is exactly what you
+  would be building the tree out of.
 - More than one normalised transcript - read them all.
 - A project doc, brief or proposal may be read too, **as background only.** It never acquires
   equal weight with what was actually said in a room. When the doc and the transcript
@@ -93,8 +95,8 @@ finished, and it reads exactly like agreement.
 ## Phase 1 - draft the tree
 
 Read `references/tree-shape.md` before you write anything. It holds the tier boundaries, the
-criterion shape, the slice marks, the story ids, the node states, the signature block and a
-full worked rendering. The short version, so the shape is in view:
+criterion shape, the slice marks, the story ids, the folder layout and a full worked rendering.
+The short version, so the shape is in view:
 
 - **Epic** - one end-to-end workflow, one per external trigger. Bounded by a trigger the actor
   does not control, and a terminal state where they stop caring or hand off.
@@ -102,20 +104,15 @@ full worked rendering. The short version, so the shape is in view:
   wait.
 - **Story** - one step.
 
-Every boundary is causal. There is no size test anywhere in this skill, because every
-published size test is denominated in sprints or program increments and this skill has
-neither. `task` is not a tier.
+Every boundary is causal; `tree-shape.md` holds why. `task` is not a tier.
 
-The tree **is** the workflow diagram viewed as an outline. You are not inventing a structure
-over the transcript; you are projecting the process the client already described, in the order
-it happens.
+The tree **is** the workflow diagram viewed as an outline: you project the process the client
+already described, in the order it happens.
 
 Write to `scope/<epic-slug>/` in the target project: `README.md` for the epic, one file per
 feature, `handover/` created at sign-off.
 
-Then, per story: criteria in the two-block shape, the unmerged source statements attached as
-`from:` lines under each criterion, every criterion marked `inferred` or `confirmed`, every
-story marked `in-build` or `out-of-build` with a required reason on the latter.
+Then, per story: criteria in the two-block shape, each carrying its marks.
 
 **Steps that stay manual stay on the tree**, marked out-of-build. This is what makes an epic
 sign-off two claims rather than one: *this is my process*, and *this is the part you are
@@ -125,8 +122,16 @@ touching*. A manual step deleted from the tree takes the second claim with it.
 boundary. It means the handoff landed in the wrong place, and you found it by reading - it
 costs the client nothing.
 
-Phase 1 is done when **you cannot find another hole by reading.** Not when the questions are
-answered. Questions are recorded as `?` and stay open.
+Phase 1 is done when every story carries all five marks and **you cannot find another hole by
+reading**:
+
+- a goal line, or `↑`
+- a `Goes wrong` block, populated or `(empty)`
+- a `from:` line under every criterion, or `(none)`
+- `inferred` or `confirmed` on every criterion
+- `in-build`, or `out-of-build` with a reason
+
+Not when the questions are answered. Questions are recorded as `?` and stay open.
 
 ## Phase 2 - the conflict pass
 
@@ -181,40 +186,33 @@ neutral fact question, never as a contest.
 
 ## Phase 4 - the review session
 
-Read `references/session.md`. It is reached only here and holds the script.
+Read `references/session.md`. It is reached only here and holds the script, the stopping rules
+and the evidence behind them.
 
-The shape, so you know what phase 1 was drafting for: per feature, **two moves in order** -
-the open `?` first, then the feature said back as a short narrative with *what is wrong with
-it?* The criteria are **never read out.** No boundary question is ever put to the client.
-Budget is one paraphrase per feature plus that feature's open `?`, so the cost does not grow
-with the size of the draft. Stop after three deferrals in a row; ask at most five questions per
-pass, ranked by Impact x Uncertainty.
+Per feature, **two moves in order** - the open `?` first, then the feature said back as a short
+narrative with *what is wrong with it?* The criteria are **never read out.** No boundary question
+is ever put to the client.
 
-**The artifact is the residue of a session, never a substitute for one.** The strongest
-evidence behind this whole design is a null result: identical checklists mandated as
-*documents* rather than performed as *conversations* showed no measurable effect across 101
-hospitals. A run that produces a beautiful tree and no session has failed, however good the
-tree is.
+Budget is **one paraphrase per feature plus that feature's open `?`**, so the cost does not grow
+with the size of the draft. That is what phase 1 was drafting for: a thorough tree costs the
+client nothing extra.
+
+**The artifact is the residue of a session, never a substitute for one.** A run that produces a
+beautiful tree and no session has failed, however good the tree is.
 
 ## Sign-off
+
+Read `references/sign-off.md`. It holds the states, the four fields of a signature, why a
+deferral needs the words, and the re-opening rule.
 
 Sign-off is **decoupled from the session.** The session produces a *signable state*; signing
 may land inside the call or after it.
 
-- **States are on the feature, not the story:** `provisional`, `reviewed`, `signed`, plus the
-  non-state `deferred`.
-- **A signature is four fields** - date, name, how they agreed, and the words if any were
-  said. Words are optional for a signature and **necessary for a deferral**, because without
-  them a deferral and a signature are the same four fields. A deferral is not a state and not
-  an agreement; it is a non-event that reads as assent, and the subject will not recall
-  tomorrow what he deferred on.
 - **An open `?` blocks sign-off of that story alone**, never its siblings.
 - **A `?` closes two ways only:** an answer, or marking the node out-of-build with the reason
   `unanswered`. Never by aging out, never by a guess.
 - **A signed feature is a file that stops changing.** The signature is protected structurally,
   not by discipline.
-- **A re-opened feature keeps its old signature and its superseded snapshot**, with the new
-  state written below it and dated. What was agreed is not erased by what came after.
 
 ## The handover
 
@@ -223,11 +221,10 @@ and the seam checklist.
 
 Only a feature with **zero open `?`** crosses. The handover file is a **copy** of the feature
 file, transformed subtractively so the transform can be verified by reading it, and frozen. It
-is read by both `/to-spec` and `/to-tickets`, so the criteria travel by reference and every
-copy that could reword what the client signed is removed.
+is read by both the spec step and the ticketing step, so the criteria travel by reference and
+every copy that could reword what the client signed is removed.
 
-Below the seam, `/grill-with-docs`, `/to-spec`, `/to-tickets` and `/implement` run **unforked
-and untouched.**
+Below the seam the build layer runs **unforked and untouched.**
 
 ## The glossary
 

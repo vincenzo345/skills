@@ -184,14 +184,9 @@ A deferral is a **non-event that reads as assent.** The subject in the sample co
 hours later, what he had deferred on - and the record showed something that looked exactly like
 approval.
 
-So record it as a non-state, and **record the words, which are necessary here and optional for
-a signature:**
-
-```
-Deferred 2026-08-04. Tony Stark. On the call.
-"Go with your recommendation."
-This is not an agreement. Ask again in the next session.
-```
+So record it as a non-state, and **capture the customer's words while you can still hear them.**
+They are necessary for a deferral and optional for a signature, and nobody can reconstruct them
+after the call. `sign-off.md` holds the block to write them into.
 
 A deferred `?` is still open. It blocks sign-off of its story, and it does not age out.
 

@@ -1,7 +1,7 @@
 # The handover
 
-Reached at sign-off. Below this file, `/grill-with-docs`, `/to-spec`, `/to-tickets` and
-`/implement` run unforked and untouched.
+Reached at sign-off. Below this file the build layer runs unforked and untouched: spec,
+tickets, implementation, whichever skills do them.
 
 ---
 
@@ -9,10 +9,10 @@ Reached at sign-off. Below this file, `/grill-with-docs`, `/to-spec`, `/to-ticke
 
 **Only a feature with zero open `?` crosses.**
 
-Nothing unresolved reaches a skill that will resolve it silently. `/to-spec` is contractually
-forbidden to interview - *"Do NOT interview the user - just synthesize what you already know"* -
-so an open question that crosses is not asked, it is answered by synthesis, with the client's
-signature already on the page.
+Nothing unresolved reaches a skill that will resolve it silently. The spec step is contractually
+forbidden to interview - `/to-spec` carries the line *"Do NOT interview the user - just
+synthesize what you already know"* - so an open question that crosses is not asked, it is
+answered by synthesis, with the client's signature already on the page.
 
 There are exactly two exits, and they are the ones a `?` already had:
 
@@ -114,7 +114,7 @@ State the allocate-once rule in the file, because the reader downstream does not
 conventions: **numbers are allocated once and never reassigned. Process order comes from
 position in the file, never from the number.**
 
-## The instruction to `/to-tickets`
+## The instruction to the ticketing step
 
 **Every ticket names the stories it serves.**
 
@@ -124,7 +124,7 @@ the answer has to be right. Storing it on the coach side was also rejected: it w
 writing a build-layer fact into a file that exists in order to **stop changing** once signed.
 
 So the edge is stored on the build side, on the ticket, and `story -> tickets` is that same edge
-read backwards. `/to-tickets` has no slot for it and cannot be forked, so the handover file
+read backwards. The ticketing step has no slot for it and is not forked, so the handover file
 asks.
 
 ## The seam checklist
@@ -238,7 +238,7 @@ They are equal. The words are copied from the tree; nothing was reworded.
 
 ---
 
-## For `/to-tickets`
+## For the ticketing step
 
 Epic slug: `policy-review`. Across this seam a story is named `policy-review/1.1` - epic-local
 numbers, qualified once they leave the tree.

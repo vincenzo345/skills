@@ -74,6 +74,12 @@ What restructuring means, concretely:
 4. **Assign positional ids where labels are missing** - `Speaker A`, `Speaker B`. Never
    infer identity from content. Inferred attribution is fabricated attribution.
 
+**Flag as you go.** Six types, a closed set: `suspect-term`, `merged-crosstalk`,
+`unlabelled-speaker`, `thread-abandoned`, `hard-stop`, `prior-context`. Read
+`references/flags.md` for what each one catches and how each resolves. There is no seventh; a
+defect that fits none of the six is described in plain words under the flag list and named as
+unclassified.
+
 Write the output to `.scratch/`, beside its source, gitignored, never committed. It
 inherits the confidentiality of the material it restructures.
 
@@ -130,6 +136,10 @@ it applies; the rule is stated in full at the top of the script.
 the two or three words the script named and call it done, and never edit the raw export to
 make the check pass. Show the user which words diverged.
 
+**On a second consecutive failure, stop and hand both word lists to the user.** A
+body-extraction rule may not fit this export's format, and that is a rule to fix rather than a
+normalisation to retry.
+
 ## Step 4 - resolve the flags
 
 Only if the answer to step 1 was *in the room*. Otherwise skip to termination with every
@@ -151,13 +161,6 @@ the body still says *Windflex*, because the body is the record. `/to-scope` and
 `/domain-modeling` read the correction from the flag.
 
 Set `labels: confirmed` only once the developer has confirmed them.
-
-## The six flags
-
-A closed set: `suspect-term`, `merged-crosstalk`, `unlabelled-speaker`, `thread-abandoned`,
-`hard-stop`, `prior-context`. Read `references/flags.md` while classifying - it holds what
-each one catches and how each resolves. There is no seventh; a defect that fits none of the
-six is described in plain words under the flag list and named as unclassified.
 
 ## Termination
 
