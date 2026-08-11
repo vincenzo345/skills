@@ -133,6 +133,30 @@ answer settled it and the re-paraphrase is unnecessary.
 Mark every corrected or agreed criterion `confirmed`. That mark is the only reason the next
 rule can be enforced.
 
+### A correction from the developer is not one of these
+
+The developer corrects the tree too - walking it before the call, or over your shoulder during
+one. **Take the correction. Then write it `inferred`.**
+
+He was in the room, and in the designed-against sample his recap of a prior call carried full
+domain authority, so the content is worth having. What he does not own is the process. So a
+structural claim of his - where a boundary falls, which workflow runs first, who is inside the
+firm - is material for the next paraphrase, not a settled fact. **A wrong boundary sounds wrong
+when the feature is said back**, and that is the only place it gets tested.
+
+`confirmed` means the **client** corrected it or agreed to it, in a session. Nothing else earns
+the mark, because the mark exists to count a review that did not happen - and a developer's word
+entered as `confirmed` destroys the one number that can detect one.
+
+Two consequences, and both are easy to get wrong in the moment:
+
+- **A feature stays `provisional` until the client has heard it.** A walk-through with the
+  developer is not a session and does not make a feature `reviewed`.
+- **It does not spend the feature's paraphrase.** The budget is one paraphrase put to the
+  client. A developer walk-through costs nothing from it, and usually improves the narrative
+  the client will hear, because it loads more of your own claims into a single thing they can
+  contradict.
+
 ### Zero corrections on a feature is a failure
 
 A feature that comes back untouched means **the wrong artifact was presented.** Same content,
