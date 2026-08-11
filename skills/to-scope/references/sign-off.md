@@ -9,11 +9,11 @@ Dates and names below are invented.
 
 ## Three states, and they sit on the feature, not the story
 
-- `provisional` - drafted, not yet reviewed with the customer.
+- `provisional` - drafted, not yet reviewed with the expert.
 - `reviewed` - the session happened. Not yet signed.
 - `signed` - the signature block is present, and **the file stops changing.**
 
-Plus the **non-state** `deferred`. It is not a fourth state. It records that the customer
+Plus the **non-state** `deferred`. It is not a fourth state. It records that the expert
 declined to agree, and it is never treated as one.
 
 There is no `architected` and no `ticketed`. The tree stops at the handover file, and **a state
@@ -41,7 +41,7 @@ This is not an agreement. Ask again in the next session.
 **Words are optional for a signature and necessary for a deferral.** Without them the two are
 the same four fields, and a deferral that looks like a signature is the binding constraint
 failing in the record itself. A deferral is a non-event that reads as assent, and the subject
-will not recall tomorrow what he deferred on.
+will not recall tomorrow what they deferred on.
 
 ---
 

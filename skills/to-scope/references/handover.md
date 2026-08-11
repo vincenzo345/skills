@@ -12,7 +12,7 @@ tickets, implementation, whichever skills do them.
 Nothing unresolved reaches a skill that will resolve it silently. The spec step is contractually
 forbidden to interview - `/to-spec` carries the line *"Do NOT interview the user - just
 synthesize what you already know"* - so an open question that crosses is not asked, it is
-answered by synthesis, with the client's signature already on the page.
+answered by synthesis, with the expert's signature already on the page.
 
 There are exactly two exits, and they are the ones a `?` already had:
 
@@ -36,7 +36,7 @@ feature ends at a handoff and so is exactly one.
 ## The transform: copy, then subtract
 
 **The handover file is a copy of the feature file.** It is not generated from it, not
-regenerated, not re-rendered. Every step at which the wording the client signed could be
+regenerated, not re-rendered. Every step at which the wording the expert signed could be
 reworded is removed by making the operation a file copy.
 
 Then subtract, and **only** subtract, so the transform can be verified by reading the two files
@@ -64,7 +64,7 @@ side by side:
 - the `/to-tickets` section and the seam checklist.
 
 **Change nothing else. Reword nothing.** Not the criteria, not the goals, not the slice notes.
-If a criterion reads awkwardly out of context, that is the price of the client having signed
+If a criterion reads awkwardly out of context, that is the price of the expert having signed
 those exact words.
 
 ### Why the marks are left behind
@@ -72,8 +72,8 @@ those exact words.
 `inferred` / `confirmed` **does not cross.**
 
 The signature makes every criterion in the file equal - that is what a signature is. Carrying
-the marks across would hand a builder who was not in the room a measurement he cannot use,
-against a negotiation he cannot reopen. It is the refused transcript citation in another form:
+the marks across would hand someone who was not in the room a measurement they cannot use,
+against a negotiation they cannot reopen. It is the refused transcript citation in another form:
 provenance that looks authoritative exactly where it can no longer be checked.
 
 The `from:` lines go for the same reason. They did their job upstream, where two statements
@@ -130,13 +130,13 @@ asks.
 ## The seam checklist
 
 A request the reader is free to ignore is not a mechanism. This is what makes it verifiable.
-The developer runs it **in the session that publishes the tickets** - not before:
+The builder runs it **in the session that publishes the tickets** - not before:
 
 - [ ] Every **in-build** story is named by at least one ticket.
 - [ ] Every **out-of-build** story is named by **zero** tickets.
 
 The first direction catches a signed story that nothing builds. The second costs nothing - same
-query, same moment - and catches the build doing work the client did not buy.
+query, same moment - and catches the build doing work nobody signed off.
 
 A failure in either direction is a defect **at the seam**: fix the tickets, not the handover
 file. The handover file is frozen.
@@ -158,9 +158,9 @@ feature rather than correctness across the repo.
 
 It happens below the seam, and the test is the criterion test this skill already has:
 
-> Does it change what the customer would see?
+> Does it change what the expert would see?
 
-- **No** - a database, a library, a schema choice. It is settled below the seam. The customer's
+- **No** - a database, a library, a schema choice. It is settled below the seam. The expert's
   patience is not spent on it.
 - **Yes** - it goes back across the seam and becomes **an ordinary re-opened `?`** on that
   story. No new machinery. The spec is kept, and only that story's tickets stop - found by the
@@ -260,7 +260,7 @@ Run this when the tickets are published, not before. Both directions, same query
       `policy-review/1.1`, `policy-review/1.2`, `policy-review/1.3`.
 - [ ] Every **out-of-build** story is named by **zero** tickets: none in F1.
 
-The second direction costs nothing and catches the build doing work the client did not buy. A
+The second direction costs nothing and catches the build doing work nobody signed off. A
 failure in either direction is a defect at the seam: fix the tickets, not this file. This file
 is frozen.
 ````

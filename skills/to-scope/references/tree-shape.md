@@ -46,15 +46,15 @@ Every published size test - a sprint, a two-week iteration, a twelve-week progra
 is denominated in a unit this skill does not have. So each one is replaced by a boundary drawn
 from the process itself. The names are conventional; the definitions are not.
 
-The payoff is that the boundaries appear unprompted in raw speech. A client who cannot describe
-his workflow in general still says *"one I got today was a banker emailed my partner"* (an
+The payoff is that the boundaries appear unprompted in raw speech. An expert who cannot describe
+their workflow in general still says *"one I got today was a banker emailed my partner"* (an
 external trigger) and *"then it depends on how fast they sign"* (a wait). You are not imposing
 a structure. You are reading one back.
 
 ### The one structural test
 
 **A story that belongs to two features is a defect.** It means the handoff boundary landed in
-the wrong place. Move the boundary; do not duplicate the story and do not ask the client. This
+the wrong place. Move the boundary; do not duplicate the story and do not ask the expert. This
 test costs nothing, runs by reading, and it is the second job the feature tier does. The first
 is being the batching unit for sign-off.
 
@@ -85,7 +85,8 @@ Two blocks. A plain trigger and a response. No Given/When/Then, no Gherkin, no t
   - from: *"if it's in a trust you need the EIN and the trustee"*
 ```
 
-The test the wording has to pass: **it can be read aloud to a non-technical client.** Anything
+The test the wording has to pass: **it can be read aloud to the expert**, who is not reading it
+as a technical document. Anything
 that cannot be is at the wrong altitude.
 
 ### The blocks and the marker are independent axes
@@ -104,7 +105,7 @@ question, and conflating them costs you the happy-path unknown, which has nowher
 
 ### Checkability, at this altitude
 
-> Could the customer say yes or no, looking at the finished thing?
+> Could the expert say yes or no, looking at the finished thing?
 
 That is the whole test. Not *is it testable*, which is a builder's question one rung down.
 
@@ -127,7 +128,7 @@ Every criterion carries the statements it was drafted from, **unmerged**, direct
 - **The quoted words only. No speaker. No timestamp.** Both would be authoritative-looking and
   wrong. A timestamp locates into a raw export that merges crosstalk, so it points into
   corrupted attribution. A speaker fails for a subtler reason: in the designed-against sample
-  the *developer's* recap of a prior call carried full domain authority, so even an accurate
+  the *builder's* recap of a prior call carried full domain authority, so even an accurate
   label does not tell you whose requirement a sentence is.
 - **Two statements under one criterion is a prompt to check, not an automatic split.** Apply
   the same test phase 2 uses: **would they produce different criteria?**
@@ -149,7 +150,7 @@ corrupts exactly the attribution such a citation would claim.
 Every criterion carries one of these two words. **A closed two-value set, no free text.**
 
 - `inferred` - you wrote it. Nobody has looked at it.
-- `confirmed` - the customer corrected it or agreed to it, in a session.
+- `confirmed` - the expert corrected it or agreed to it, in a session.
 
 This exists to make one number countable: a feature signed with every criterion still
 `inferred` is a review that visibly did not happen. Roughly 27% of what a model extracts from a
@@ -158,11 +159,11 @@ as a request to automate it - and without this mark, none of it is visible on th
 
 ### How many
 
-**Three to five per story is an agent-side drafting smell and is never enforced on the client.**
+**Three to five per story is an agent-side drafting smell and is never enforced on the expert.**
 It is one published count and it is worth listening to when you are drafting. It is not a cap,
 because a cap creates pressure to under-record, which is the same failure from the other side.
 
-The real control is **the rejection test**: would the customer reject the finished thing if
+The real control is **the rejection test**: would the expert reject the finished thing if
 this were not true? A criterion that fails it is **marked out-of-build, not deleted.** Nothing
 silently leaves the record.
 
@@ -233,7 +234,7 @@ matches the signable unit, so a signature is protected by being a file that stop
 it matches a session that ends at a feature.
 
 The cost is that you cannot read the whole process by scrolling one buffer. That is affordable
-only because **the client never reads the tree.** The readers are the developer and the agent,
+only because **the expert never reads the tree.** The readers are the builder and the agent,
 and the backbone table is the process at low resolution.
 
 ### The store is one-dimensional. The second axis is derived.
@@ -251,7 +252,9 @@ cannot disagree with the tree. Re-derive them; never edit them in place.
 
 ## 6. Worked rendering
 
-Invented names throughout.
+Invented names throughout. **`client` below is a person inside the modelled business - the
+policyholder.** It is not the expert seat, and nothing stops a business from having its own
+`client`, `customer` or `user`. That is why the seats are named by what they own.
 
 ### `scope/policy-review/README.md`
 
@@ -275,7 +278,7 @@ Epic sign-off makes two claims: **this is the workflow**, and **this is the part
 | F5 | Present and decide | Tony Stark, client | client's decision | provisional | 1/4 | 2 |
 | F6 | Become agent of record | Tony Stark | client signs | provisional | 1/2 | 0 |
 
-`Confirmed` counts criteria the customer corrected or agreed to. A feature that is signed with
+`Confirmed` counts criteria the expert corrected or agreed to. A feature that is signed with
 a low count is a review that did not happen.
 
 ## Slice - derived from the feature files
@@ -309,13 +312,13 @@ F3 cannot start until 2.2 finishes by hand. The build must know this.
 | 5.2 | Does a case that comes back stay the same case? | open |
 | 5.2 | What holds a case until the next anniversary? | open |
 
-## Holes - derived from the shape. These cost the customer nothing
+## Holes - derived from the shape. These cost the expert nothing
 
 - 2.3 has an empty `Goes wrong` and an obvious failure: the carrier refuses after
   authorization.
 - F2 holds a wait. Nothing chases it.
 - F5 has a branch, *client wants nothing*. It does not come back and it does not stop.
-- Bruce Banner receives the trigger. He is in no feature.
+- Bruce Banner receives the trigger. They are in no feature.
 
 ## Glossary
 

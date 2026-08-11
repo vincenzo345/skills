@@ -8,7 +8,7 @@ closed and the gap stays visible.
 
 Every flag carries: the type, a timestamp or other locator, the words it is about, and a
 state - `resolved`, `unresolved` or `unresolvable`. `unresolved` is correct and expected
-when the developer was not in the room.
+when the builder was not in the room.
 
 Examples below use invented names in the format the skill was designed against.
 
@@ -84,10 +84,10 @@ unresolved
 > "Speaker C at 8:04 answers for the finance side and is called Priya twice by Ada - is
 > Speaker C Priya?"
 
-Proposing is a recognise move: the developer confirms or corrects, and confirmation is
+Proposing is a recognise move: the builder confirms or corrects, and confirmation is
 cheap. Applying silently converts a guess into a fact in the record.
 
-**Header state.** `labels: unverified` stays until the developer confirms them, for every
+**Header state.** `labels: unverified` stays until the builder confirms them, for every
 label in the file and not only the assigned ones. Wrong labels from the export are
 undetectable from the export.
 
@@ -148,11 +148,11 @@ this transcript**.
 `prior-context` 0:00 - "the three buckets" settled in an earlier call. unresolved
 
 **First-class, and the reason is a mistake made live.** In the session that designed these
-flags, the agent read exactly this passage as the *developer* proposing structure - a
-developer's requirement misread into the client's mouth, which is the single most common
-extraction error there is. The developer, who was in the room, corrected it: the passage was
+flags, the agent read exactly this passage as the *builder* proposing structure - a
+builder's requirement misread into the expert's mouth, which is the single most common
+extraction error there is. The builder, who was in the room, corrected it: the passage was
 a recap of agreement reached in a prior call. It carries **full domain authority** despite
-the developer's mouth saying it.
+the builder's mouth saying it.
 
 The finding is the flag:
 

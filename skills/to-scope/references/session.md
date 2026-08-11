@@ -1,7 +1,7 @@
 # The review session
 
-Phase 4. Reached once the tree exists, the conflict pass has run, and the developer has been
-grilled on everything he could close himself.
+Phase 4. Reached once the tree exists, the conflict pass has run, and the builder has been
+grilled on everything they could close themselves.
 
 This is the part that matters. The strongest single piece of evidence behind this whole design
 is a null result: identical checklists mandated as **documents** rather than performed as
@@ -13,15 +13,15 @@ run.
 
 ## Setup
 
-The session is **screen-shared**, and **the developer controls the scroll.** The client reads
-it as well as hears it, which is worth a great deal, and the failure that usually comes with
-showing a document - the agent walking every line while the customer goes quiet - does not
-return, because the customer is not being walked through anything. The developer moves the
+The session is **screen-shared**, and **the builder controls the scroll.** The expert reads it
+as well as hears it, which is worth a great deal, and the failure that usually comes with
+showing a document - the agent walking every line while the expert goes quiet - does not
+return, because the expert is not being walked through anything. The builder moves the
 document; the agent speaks.
 
 Three variants of this session were run over identical material before it settled. Reading the
 tree out spends fifteen minutes confirming what is already right. Walking only the questions
-never shows the customer the twenty-one of thirty criteria that are still `inferred`, so it
+never shows the expert the twenty-one of thirty criteria that are still `inferred`, so it
 **cannot** produce a correction. What follows is the third variant, and it produced two
 corrections in ninety seconds from the same material that produced zero the other ways.
 
@@ -42,7 +42,7 @@ before you commit to a narrative built on the wrong ones. One pass, not two.
 > Right - when a case is waiting on that signature, does anything chase it?
 
 Not *"you said two different things"*, not *"which of these is right?"*, and never a party
-named. The contest was legal in phase 3 with the developer. Here it is arbitration, and
+named. The contest was legal in phase 3 with the builder. Here it is arbitration, and
 arbitration is forbidden.
 
 ### Move 2 - say the feature back
@@ -52,10 +52,10 @@ Say the **whole feature** back as a short narrative, then ask:
 > What is wrong with it?
 
 **The criteria are never read out.** The narrative is generated from them, so a wrong criterion
-surfaces as a wrong sentence - which the customer can hear. A criterion read aloud is a thing
+surfaces as a wrong sentence - which the expert can hear. A criterion read aloud is a thing
 to agree with; a sentence about their own work that is subtly off is a thing they interrupt.
 
-**Build the paraphrase out of named things**, in the customer's own vocabulary: the carrier,
+**Build the paraphrase out of named things**, in the expert's own vocabulary: the carrier,
 the in-force illustration, the authorization, the trust. Named things survive; propositions
 evaporate. What they agreed to has to still be recallable tomorrow, and *"we agreed the system
 would handle the case where information is unavailable"* is not recallable by anyone.
@@ -76,15 +76,15 @@ asked** - see below.
 
 ## Never ask about structure
 
-**No boundary question is ever put to the client.** Not *"is that one step or two?"*, not
+**No boundary question is ever put to the expert.** Not *"is that one step or two?"*, not
 *"does that belong with the earlier part?"*, not *"would you call that a separate workflow?"*
 
 Structure is **narrated**. If a boundary is wrong, the narrative built on it sounds wrong, and
-the customer says so unprompted - which is the correction you wanted, arriving in the form they
-can actually give. Asked directly, a boundary question gets deference: the customer assumes you
+the expert says so unprompted - which is the correction you wanted, arriving in the form they
+can actually give. Asked directly, a boundary question gets deference: the expert assumes you
 know why you drew it there, and agrees.
 
-The same holds for the tiers, the ids, the slice and the states. None of it is the customer's
+The same holds for the tiers, the ids, the slice and the states. None of it is the expert's
 to arbitrate.
 
 ---
@@ -101,7 +101,7 @@ draft in exactly the wrong direction.
 ### Stopping rules, which are load-bearing rather than courteous
 
 - **Three deferrals in a row - stop.** Not stop asking that question: stop the pass. Three
-  consecutive *"go with your recommendation"* answers means the customer is done, and every
+  consecutive *"go with your recommendation"* answers means the expert is done, and every
   further question is acceptance being bought by exhaustion.
 - **At most five questions per pass**, ranked by **Impact x Uncertainty**. Impact is how much
   of the tree moves if the answer surprises you. Uncertainty is how little you can guess it.
@@ -113,7 +113,7 @@ draft in exactly the wrong direction.
 In the designed-against sample the subject says *"right"* forty-one times in twenty-five
 minutes. You cannot tell those two apart from the transcript and you cannot tell them apart in
 the room. This is the second reason the stopping rules are counted rather than judged: by the
-time it *feels* like the customer is finished, the record already contains a great deal of
+time it *feels* like the expert is finished, the record already contains a great deal of
 approval that means nothing.
 
 ---
@@ -125,7 +125,7 @@ approval that means nothing.
 > Got it - so the document goes into policy management as soon as the AOR is signed, not
 > before. Changing that now.
 
-**Any re-paraphrase goes to the end of the session, never in place.** The customer never sits
+**Any re-paraphrase goes to the end of the session, never in place.** The expert never sits
 through the same walk twice. If a correction was large enough that the feature needs saying
 back again, note it and come back at the end - and often you will find, by then, that a later
 answer settled it and the re-paraphrase is unnecessary.
@@ -133,34 +133,34 @@ answer settled it and the re-paraphrase is unnecessary.
 Mark every corrected or agreed criterion `confirmed`. That mark is the only reason the next
 rule can be enforced.
 
-### A correction from the developer is not one of these
+### A correction from the builder is not one of these
 
-The developer corrects the tree too - walking it before the call, or over your shoulder during
+The builder corrects the tree too - walking it before the call, or over your shoulder during
 one. **Take the correction. Then write it `inferred`.**
 
-He was in the room, and in the designed-against sample his recap of a prior call carried full
-domain authority, so the content is worth having. What he does not own is the process. So a
-structural claim of his - where a boundary falls, which workflow runs first, who is inside the
-firm - is material for the next paraphrase, not a settled fact. **A wrong boundary sounds wrong
-when the feature is said back**, and that is the only place it gets tested.
+They were in the room, and in the designed-against sample the builder's recap of a prior call
+carried full domain authority, so the content is worth having. What it never carries is the
+expert seat. So a structural claim - where a boundary falls, which workflow runs first, who is
+inside the process - is material for the next paraphrase, not a settled fact. **A wrong boundary
+sounds wrong when the feature is said back**, and that is the only place it gets tested.
 
-`confirmed` means the **client** corrected it or agreed to it, in a session. Nothing else earns
-the mark, because the mark exists to count a review that did not happen - and a developer's word
+`confirmed` means the **expert** corrected it or agreed to it, in a session. Nothing else earns
+the mark, because the mark exists to count a review that did not happen - and any other word
 entered as `confirmed` destroys the one number that can detect one.
 
 Two consequences, and both are easy to get wrong in the moment:
 
-- **A feature stays `provisional` until the client has heard it.** A walk-through with the
-  developer is not a session and does not make a feature `reviewed`.
+- **A feature stays `provisional` until the expert has heard it.** A walk-through with the
+  builder is not a session and does not make a feature `reviewed`.
 - **It does not spend the feature's paraphrase.** The budget is one paraphrase put to the
-  client. A developer walk-through costs nothing from it, and usually improves the narrative
-  the client will hear, because it loads more of your own claims into a single thing they can
+  expert. A builder walk-through costs nothing from it, and usually improves the narrative the
+  expert will hear, because it loads more of your own claims into a single thing they can
   contradict.
 
 ### Zero corrections on a feature is a failure
 
 A feature that comes back untouched means **the wrong artifact was presented.** Same content,
-same customer, presented three ways: zero corrections two of those ways, two corrections in
+same expert, presented three ways: zero corrections two of those ways, two corrections in
 ninety seconds the third.
 
 So the response to zero corrections is:
@@ -173,18 +173,18 @@ So the response to zero corrections is:
 
    > You changed nothing on this one, so this is our reading, not yours.
 
-   That sentence transfers the risk knowingly instead of burying it. The developer signs it
-   with his eyes open or he does not sign it.
+   That sentence transfers the risk knowingly instead of burying it. The builder signs it with
+   their eyes open or they do not sign it.
 
 ---
 
 ## Deferrals
 
 A deferral is a **non-event that reads as assent.** The subject in the sample could not recall,
-hours later, what he had deferred on - and the record showed something that looked exactly like
-approval.
+hours later, what they had deferred on - and the record showed something that looked exactly
+like approval.
 
-So record it as a non-state, and **capture the customer's words while you can still hear them.**
+So record it as a non-state, and **capture the expert's words while you can still hear them.**
 They are necessary for a deferral and optional for a signature, and nobody can reconstruct them
 after the call. `sign-off.md` holds the block to write them into.
 

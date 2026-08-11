@@ -6,54 +6,62 @@ disable-model-invocation: true
 
 # to-scope
 
-A developer takes a call with a client and comes away knowing less than the build needs. The
-call this skill was designed against ends with the developer saying so, on the record:
+Two seats, and this skill needs both filled.
+
+- **The expert** does the work and owns the process. They cannot describe it.
+- **The builder** owns the slice - the part that gets built. They do not own the process.
+
+Whether the two share an employer decides nothing here. A client and an agency developer fill
+these seats; so do a claims lead and the staff engineer down the hall.
+
+The builder comes away from a call knowing less than the build needs. The call this skill was
+designed against ends with the builder saying so, on the record:
 
 > "So, it sounds like we need to figure out what all those different workflows are, those
 > paths."
 
-The client is not withholding anything. Asked whether the workflow varies by case, the domain
-holder answers *"yeah and no"* and narrates one anecdote instead of describing the class.
-**He cannot describe his own work.** No amount of asking gets a general answer out of a
-cooperative expert, and asking harder makes it worse: sign-off given to stop the questions is
-worthless while still looking exactly like approval.
+The expert is not withholding anything. Asked whether the workflow varies by case, they answer
+*"yeah and no"* and narrate one anecdote instead of describing the class. **An expert cannot
+describe their own work.** No amount of asking gets a general answer out of a cooperative one,
+and asking harder makes it worse: sign-off given to stop the questions is worthless while still
+looking exactly like approval.
 
-This skill drafts the workflow as a tree, finds where the record contradicts itself, spends
-the developer's patience before the client's, and takes what survives back to the client to
-be corrected rather than composed. It runs in **four ordered phases: draft, conflict pass,
-grill the developer, review with the client.** Sign-off and the handover close it.
+This skill drafts the workflow as a tree, finds where the record contradicts itself, spends the
+builder's patience before the expert's, and takes what survives back to the expert to be
+corrected rather than composed. It runs in **four ordered phases: draft, conflict pass, grill
+the builder, review with the expert.** Sign-off and the handover close it.
 
 ## The binding constraint
 
 **Acceptance must never be won by exhaustion.** Two forms, both forbidden:
 
-- **By asking.** A stakeholder who signs off to stop the questions has given worthless
-  approval that still reads as approval.
-- **By volume.** Over-generation reads as completeness. A hundred generated stories exhaust a
-  stakeholder without ever interrogating them.
+- **By asking.** An expert who signs off to stop the questions has given worthless approval that
+  still reads as approval.
+- **By volume.** Over-generation reads as completeness. A hundred generated stories exhaust an
+  expert without ever interrogating them.
 
-When a judgement call in this skill is genuinely ambiguous, **resolve it toward fewer
-questions put to the client.** That is not a preference. It is the rule every other rule here
-was derived from, and it is why the review session asks *less* when a feature comes back with
-zero corrections.
+When a judgement call in this skill is genuinely ambiguous, **resolve it toward fewer questions
+put to the expert.** That is not a preference. It is the rule every other rule here was derived
+from, and it is why the review session asks *less* when a feature comes back with zero
+corrections.
 
 ## The standing rules
 
 Five rules hold for every phase. Nothing below overrides them.
 
-**1. Paraphrase-back, not extraction.** You restate the workflow and the client corrects it.
-This converts the client's job from **generating** to **recognising**, which is the only lever
-that exists against exhaustion. It also means the artifact is always provisional until
-corrected, and the client's word always wins over your wording.
+**1. Paraphrase-back, not extraction.** You restate the workflow and the expert corrects it.
+This converts their job from **generating** to **recognising**, which is the only lever that
+exists against exhaustion. It also means the artifact is always provisional until corrected, and
+the expert's word always wins over your wording.
 
 **2. You own the hole.** The detector is your own inability to restate the workflow without a
-gap. When a restatement will not close, that is your problem to record, never the client's to
+gap. When a restatement will not close, that is your problem to record, never the expert's to
 fix by being asked more questions.
 
-**3. Two authorities, and you are neither.** The stakeholder owns the process. The developer
-owns the slice. You generate, you get things recognised, and you **never arbitrate**. The
-offence is *"which of these is right?"* and the naming of parties - not the subject. So you
-may ask the conflict; you may never ask the contest.
+**3. Two authorities, and you are neither.** The expert owns the process. The builder owns the
+slice. You generate, you get things recognised, and you **never arbitrate**. The offence is
+*"which of these is right?"* and the naming of parties - not the subject. So you may ask the
+conflict; you may never ask the contest.
 
 **4. Every device here leaves a mark.** Unmerged source statements under a criterion make
 flattening a visible deletion. `inferred` / `confirmed` makes *zero corrections* countable. The
@@ -63,12 +71,12 @@ checklist makes a signed story nothing builds detectable. **A mark goes only whe
 records is fixed, never because the page looks cleaner without it.** The clean page is the
 failure.
 
-**5. Zero corrections on a feature is a failure signal, not success.** Drafting for a client
-and handing them the draft is a named defect in the literature, and this skill does it anyway,
-because the objection assumes a stakeholder who can co-author and the premise here is the
-opposite. It is not free. What it costs is this rule: a feature that comes back untouched
-means the wrong artifact was presented, and the answer is a better presentation, **never more
-questions**.
+**5. Zero corrections on a feature is a failure signal, not success.** Drafting for the person
+you are eliciting from and handing them the draft is a named defect in the literature, and this
+skill does it anyway, because the objection assumes someone who can co-author and the expert
+seat is defined by the opposite. It is not free. What it costs is this rule: a feature that
+comes back untouched means the wrong artifact was presented, and the answer is a better
+presentation, **never more questions**.
 
 ## Step 0 - check the input
 
@@ -89,8 +97,25 @@ Read the flag list before the body. Flags marked `resolved` carry corrections th
 the tree - a `suspect-term` resolved to **WinFlex** means the tree says WinFlex, even though
 the body still says *Windflex*, because the body is the record. Flags marked `unresolved` are
 known defects of the input; carry them, and **do not convert one into a question for the
-client.** A `hard-stop` flag matters most: everything after it is deferred rather than
+expert.** A `hard-stop` flag matters most: everything after it is deferred rather than
 finished, and it reads exactly like agreement.
+
+### Then name the seats
+
+Say who holds each seat on this run, in one line, and have it confirmed before you draft.
+
+**The expert seat is held by whoever does the work, never by whoever reports on it.** A manager
+describing their team's process is a builder with unusually good exposure. So is anyone whose
+account of the work is second-hand, however senior, and however certain.
+
+- **No expert reachable** - draft the tree and say so. Every criterion stays `inferred`, no
+  feature goes past `provisional`, and phase 4 does not run. A tree nobody corrected is a
+  legitimate output; a tree nobody corrected wearing `confirmed` marks is not.
+- **One person in both seats** - the same rule decides it, story by story. They hold the expert
+  seat for work they do themselves, and the builder seat everywhere else. Their word on the
+  slice never earns `confirmed`.
+- **Several experts** - ordinary. Phase 2 applies no cross-speaker filter, so disagreement
+  between them surfaces as a conflict like any other.
 
 ## Phase 1 - draft the tree
 
@@ -106,7 +131,7 @@ The short version, so the shape is in view:
 
 Every boundary is causal; `tree-shape.md` holds why. `task` is not a tier.
 
-The tree **is** the workflow diagram viewed as an outline: you project the process the client
+The tree **is** the workflow diagram viewed as an outline: you project the process the expert
 already described, in the order it happens.
 
 Write to `scope/<epic-slug>/` in the target project: `README.md` for the epic, one file per
@@ -120,7 +145,7 @@ touching*. A manual step deleted from the tree takes the second claim with it.
 
 **A story that belongs to two features is a structural defect.** Report it and move the
 boundary. It means the handoff landed in the wrong place, and you found it by reading - it
-costs the client nothing.
+costs the expert nothing.
 
 Phase 1 is done when every story carries all five marks and **you cannot find another hole by
 reading**:
@@ -137,17 +162,17 @@ Not when the questions are answered. Questions are recorded as `?` and stay open
 
 Run this AFK, as a **separate pass with no drafting job at all.** That is the whole point of
 it. Models detect a conflict reliably and then commit to one side without telling you
-somewhere around 97.5% of the time, silently favouring whichever stakeholder spoke more
-formally - and that is a *generation* failure. A pass with nothing to produce gives
-suppression nowhere to hide.
+somewhere around 97.5% of the time, silently favouring whichever speaker sounded more formal -
+and that is a *generation* failure. A pass with nothing to produce gives suppression nowhere to
+hide.
 
 **Its only output is: these two statements are on this node and they disagree.**
 
 - A conflict is **two statements attaching to the same node that cannot both be true of it.**
   The tree supplies the pairwise structure; walk the nodes, not the transcript.
 - **Self-contradiction and two-party disagreement go through the same channel.** No
-  cross-speaker filter. One person contradicting himself across twenty minutes is the common
-  case in real material, and a filter defending the multi-stakeholder framing would discard it.
+  cross-speaker filter. One person contradicting themselves across twenty minutes is the common
+  case in real material, and a filter defending the multi-party framing would discard it.
 - **Two statements conflict only if they would produce different criteria.** This one test
   keeps restatement drift, refinement and ordinary temporal change out of the list.
 - **No recency rule.** *The later statement supersedes* is resolution-by-preference wearing a
@@ -158,30 +183,31 @@ suppression nowhere to hide.
 - **A conflict is written as a `?` holding two views**, not as a new record type. It inherits
   blocking, the circle-back view, and the two exits that already exist. Name no party.
 - **Never fork a criterion into two.** A fork carries no `?`, so it would cross the zero-`?`
-  seam intact and be resolved silently downstream with the client's signature already on it.
+  seam intact and be resolved silently downstream with the expert's signature already on it.
   The contested criterion converts to a `?`; the uncontested criteria on the same node are
-  left alone, so the step does not vanish from the client's view while one aspect is disputed.
+  left alone, so the step does not vanish from the expert's view while one aspect is disputed.
 
 Closure keeps the loser. When a conflict closes, the losing statement stays on the node marked
 *not chosen*, so a signature never erases which view lost months before anyone learns the
 choice was wrong.
 
-## Phase 3 - grill the developer
+## Phase 3 - grill the builder
 
-Invoke `/grilling`, **unforked**, and point it at **the developer**.
+Invoke `/grilling`, **unforked**, and point it at **the builder**.
 
-Every hole the developer can close is a question the client never sits through. That makes
-this phase an anti-exhaustion device, and it is why it runs before the client sees anything.
+Every hole the builder can close is a question the expert never sits through. That makes this
+phase an anti-exhaustion device, and it is why it runs before the expert sees anything.
 
 - Hand it the conflict `?`s **alongside the ordinary ones, procedurally indistinguishable.**
   The cheapest surfacing path has to be the default one, or it will not be taken.
-- Challenge the developer on **the slice** and never on the domain. He owns what gets built.
-  He does not own how the client's business works, and grilling him about it manufactures
-  answers nobody in the room can give.
+- Challenge the builder on **the slice** and never on the domain. **Exposure is not authority.**
+  A builder who sits beside the work still answers a domain question from belief, and a belief
+  answered under pressure enters the tree looking exactly like the expert's account of it.
+  Grilling does not extract that answer, it manufactures it.
 - The full contest belongs here. This is the one place where *these two views disagree, which
-  is it?* is a legal question, because the developer is not the party being exhausted.
+  is it?* is a legal question, because the builder is not the party being exhausted.
 
-Update the tree with what closes. What does not close stays a `?` and goes to the client as a
+Update the tree with what closes. What does not close stays a `?` and goes to the expert as a
 neutral fact question, never as a contest.
 
 ## Phase 4 - the review session
@@ -191,11 +217,11 @@ and the evidence behind them.
 
 Per feature, **two moves in order** - the open `?` first, then the feature said back as a short
 narrative with *what is wrong with it?* The criteria are **never read out.** No boundary question
-is ever put to the client.
+is ever put to the expert.
 
 Budget is **one paraphrase per feature plus that feature's open `?`**, so the cost does not grow
 with the size of the draft. That is what phase 1 was drafting for: a thorough tree costs the
-client nothing extra.
+expert nothing extra.
 
 **The artifact is the residue of a session, never a substitute for one.** A run that produces a
 beautiful tree and no session has failed, however good the tree is.
@@ -222,7 +248,7 @@ and the seam checklist.
 Only a feature with **zero open `?`** crosses. The handover file is a **copy** of the feature
 file, transformed subtractively so the transform can be verified by reading it, and frozen. It
 is read by both the spec step and the ticketing step, so the criteria travel by reference and
-every copy that could reword what the client signed is removed.
+every copy that could reword what the expert signed is removed.
 
 Below the seam the build layer runs **unforked and untouched.**
 
@@ -231,8 +257,8 @@ Below the seam the build layer runs **unforked and untouched.**
 Use `/domain-modeling` throughout, with **code cross-reference off and ADRs off.** This skill
 holds no codebase model, deliberately - repo exploration belongs below the seam.
 
-Invert its *propose a canonical term* move. **Upstream, the client's word wins:** *job*, not
-*work order*, with your alias noted beside it. The client's vocabulary is the most expensive
+Invert its *propose a canonical term* move. **Upstream, the expert's word wins:** *job*, not
+*work order*, with your alias noted beside it. The expert's vocabulary is the most expensive
 thing this skill buys, and it is what makes what they agreed to still recallable tomorrow.
 Named things survive; propositions evaporate.
 
