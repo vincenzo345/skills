@@ -28,8 +28,8 @@ looking exactly like approval.
 
 This skill drafts the workflow as a tree, finds where the record contradicts itself, spends the
 builder's patience before the expert's, and takes what survives back to the expert to be
-corrected rather than composed. It runs in **four ordered phases: draft, conflict pass, grill
-the builder, review with the expert.** Sign-off and the handover close it.
+corrected rather than composed. It runs in **five ordered phases: draft, coverage pass, conflict
+pass, grill the builder, review with the expert.** Sign-off and the handover close it.
 
 ## The binding constraint
 
@@ -66,10 +66,10 @@ conflict; you may never ask the contest.
 **4. Every device here leaves a mark.** Unmerged source statements under a criterion make
 flattening a visible deletion. `inferred` / `confirmed` makes *zero corrections* countable. The
 `unanswered` out-of-build count makes acceptance-by-evasion countable. `(empty)` makes silence
-different from completeness. *not chosen* keeps the losing view of a closed conflict. The seam
-checklist makes a signed story nothing builds detectable. **A mark goes only when the thing it
-records is fixed, never because the page looks cleaner without it.** The clean page is the
-failure.
+different from completeness. *not chosen* keeps the losing view of a closed conflict. The
+off-tree count makes a silent omission countable. The seam checklist makes a signed story
+nothing builds detectable. **A mark goes only when the thing it records is fixed, never because
+the page looks cleaner without it.** The clean page is the failure.
 
 **5. Zero corrections on a feature is a failure signal, not success.** Drafting for the person
 you are eliciting from and handing them the draft is a named defect in the literature, and this
@@ -109,12 +109,12 @@ describing their team's process is a builder with unusually good exposure. So is
 account of the work is second-hand, however senior, and however certain.
 
 - **No expert reachable** - draft the tree and say so. Every criterion stays `inferred`, no
-  feature goes past `provisional`, and phase 4 does not run. A tree nobody corrected is a
+  feature goes past `provisional`, and phase 5 does not run. A tree nobody corrected is a
   legitimate output; a tree nobody corrected wearing `confirmed` marks is not.
 - **One person in both seats** - the same rule decides it, story by story. They hold the expert
   seat for work they do themselves, and the builder seat everywhere else. Their word on the
   slice never earns `confirmed`.
-- **Several experts** - ordinary. Phase 2 applies no cross-speaker filter, so disagreement
+- **Several experts** - ordinary. Phase 3 applies no cross-speaker filter, so disagreement
   between them surfaces as a conflict like any other.
 
 ## Phase 1 - draft the tree
@@ -158,7 +158,53 @@ reading**:
 
 Not when the questions are answered. Questions are recorded as `?` and stay open.
 
-## Phase 2 - the conflict pass
+**This test reads the tree, so it can only find holes inside what you drew.** Every one of the
+five marks sits on a node that exists, and a workflow nobody drafted carries no marks - so no
+mark can be missing from it. Phase 2 is the test that reads the other direction.
+
+## Phase 2 - the coverage pass
+
+Run this AFK, as a **separate pass with no drafting job at all**, for the same reason phase 3
+is run that way. A model drafting a tree will not stop to list what it declined to draft, and
+an omission it never wrote down is one it will report as completeness.
+
+**Phase 1 walked the tree. This pass walks the record.** That inversion is the whole of it.
+
+**Its only output is: this stretch of the record names work, and here is where it went.**
+
+Three destinations, and there is no fourth:
+
+- **a node** - cite the epic and the story id
+- **a named hole** - written into the `Holes` section of an epic index, with what it would take
+  to close it
+- **an off-tree note** - written into an epic index with the reason it is not on a tree
+
+How the walk is run:
+
+- **No seat filter. Walk every speaker.** The seat rule decides who can *confirm* a criterion.
+  It never decides whose words get read. Material from the builder is routed like anything else
+  and lands `inferred`, which is what it would have been anyway. Reading the expert's turns as
+  the process and everyone else's as framing is the failure this pass exists to catch.
+- **A trigger with no epic is the finding this pass is for.** An epic is one per external
+  trigger, so read the record for triggers the actor does not control and check each one has an
+  epic. A workflow the expert names in six words is still a workflow.
+- **A `prior-context` flag is not a defect to route around.** It marks material carrying
+  authority from a call you do not hold. It goes to one of the three places like everything
+  else. So does anything after a `hard-stop`.
+- **Off-tree is a decision, not a deletion.** *It is not a workflow - no trigger anywhere in the
+  record* is a legal reason. *The expert did not say it* is not, and neither is *it did not fit
+  the shape*.
+- **No cap**, and for the reason phase 3 gives. Thirty orphans tells you the draft read one
+  anecdote as the whole process. Truncating to five hides that.
+
+**Print the three counts on every epic index**, beside the `unanswered` count. This pass detects
+silence, so its own output has to be countable or it reproduces the defect.
+
+What closes: a named candidate epic is drafted by **re-entering phase 1 for that epic alone.**
+Where the record is too thin to draft one without inventing it, it stays a named hole and says
+so. Phase 3 runs once nothing in the record is unrouted.
+
+## Phase 3 - the conflict pass
 
 Run this AFK, as a **separate pass with no drafting job at all.** That is the whole point of
 it. Models detect a conflict reliably and then commit to one side without telling you
@@ -191,7 +237,7 @@ Closure keeps the loser. When a conflict closes, the losing statement stays on t
 *not chosen*, so a signature never erases which view lost months before anyone learns the
 choice was wrong.
 
-## Phase 3 - grill the builder
+## Phase 4 - grill the builder
 
 Invoke `/grilling`, **unforked**, and point it at **the builder**.
 
@@ -210,7 +256,7 @@ phase an anti-exhaustion device, and it is why it runs before the expert sees an
 Update the tree with what closes. What does not close stays a `?` and goes to the expert as a
 neutral fact question, never as a contest.
 
-## Phase 4 - the review session
+## Phase 5 - the review session
 
 Read `references/session.md`. It is reached only here and holds the script, the stopping rules
 and the evidence behind them.
@@ -279,6 +325,9 @@ these are the things that make the judgement honestly:
    grew, the tree bought acceptance by pushing hard steps out of the slice.
 5. Any feature that came back with zero corrections is named as such, marked `inferred`, and
    said at sign-off: *"you changed nothing here, so this is our reading, not yours."*
+6. Nothing in the record is unrouted, and the off-tree count is printed with its reasons. A
+   scope tree that reads as complete over a record it does not cover is the one failure here
+   that nobody downstream can detect.
 
-Report the feature states, the open `?` count, and the `unanswered` count. Hand back the path
-to `scope/<epic-slug>/`.
+Report the feature states, the open `?` count, the `unanswered` count, and the off-tree count.
+Hand back the path to `scope/<epic-slug>/`.

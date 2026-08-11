@@ -131,13 +131,13 @@ Every criterion carries the statements it was drafted from, **unmerged**, direct
   the *builder's* recap of a prior call carried full domain authority, so even an accurate
   label does not tell you whose requirement a sentence is.
 - **Two statements under one criterion is a prompt to check, not an automatic split.** Apply
-  the same test phase 2 uses: **would they produce different criteria?**
+  the same test phase 3 uses: **would they produce different criteria?**
   - **Different criteria - split.** You flattened two things into one, and leaving them
     stacked is the deletion the `from:` lines exist to make visible.
   - **The same criterion - keep both.** They corroborate. *"the name was on it"* and *"the
     policy number was there too"* are one fact said twice, and splitting them manufactures a
     second criterion nobody needs. Volume is the second form of exhaustion.
-  - **They cannot both be true - leave them.** Phase 2 will find it.
+  - **They cannot both be true - leave them.** Phase 3 will find it.
 - **No `from:` lines means you proposed it.** Write `- from: (none)`. Nothing needs storing;
   the page already shows it. There is no `agent-proposed` state for the same reason.
 
@@ -248,6 +248,21 @@ So there are **three derived views** in the epic `README.md`: **slice**, **circl
 **holes**. They are written by scanning the feature files. **They are not a store**, so they
 cannot disagree with the tree. Re-derive them; never edit them in place.
 
+### Off-tree is the one store, and it has to be
+
+The fourth section, **off-tree**, is written by the phase 2 coverage pass and is the exception
+to everything above. It cannot be derived, because it records material that is deliberately
+**not** on the tree - and nothing absent from the feature files can be recovered by scanning
+them.
+
+That makes it the one section that can drift, so it carries the cost directly: each line names
+what the material is, and the reason it is off the tree. A reason is a claim about the record
+that a reader can go and check. An off-tree line with no reason is indistinguishable from an
+omission, which is the thing the pass exists to prevent.
+
+Keep it in the epic index rather than a file of its own. A separate file is one nobody opens,
+and the count has to sit beside `unanswered` to be read at all.
+
 ---
 
 ## 6. Worked rendering
@@ -319,6 +334,15 @@ F3 cannot start until 2.2 finishes by hand. The build must know this.
 - F2 holds a wait. Nothing chases it.
 - F5 has a branch, *client wants nothing*. It does not come back and it does not stop.
 - Bruce Banner receives the trigger. They are in no feature.
+
+## Off-tree - a store. Written by the coverage pass, with reasons
+
+**Routed to a node: 14 stretches. Named a hole: 4. Off the tree: 2.**
+
+| Material | Reason |
+|---|---|
+| Commission reconciliation, 2:00 to 2:24 | Not a workflow. No trigger anywhere in the record. |
+| The document repository, 3:52 | A capability the tree runs on, named in one clause. Not a run of steps. |
 
 ## Glossary
 

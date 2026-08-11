@@ -1,7 +1,7 @@
 # The review session
 
-Phase 4. Reached once the tree exists, the conflict pass has run, and the builder has been
-grilled on everything they could close themselves.
+Phase 5. Reached once the tree exists, the coverage and conflict passes have run, and the
+builder has been grilled on everything they could close themselves.
 
 This is the part that matters. The strongest single piece of evidence behind this whole design
 is a null result: identical checklists mandated as **documents** rather than performed as
@@ -42,7 +42,7 @@ before you commit to a narrative built on the wrong ones. One pass, not two.
 > Right - when a case is waiting on that signature, does anything chase it?
 
 Not *"you said two different things"*, not *"which of these is right?"*, and never a party
-named. The contest was legal in phase 3 with the builder. Here it is arbitration, and
+named. The contest was legal in phase 4 with the builder. Here it is arbitration, and
 arbitration is forbidden.
 
 ### Move 2 - say the feature back
