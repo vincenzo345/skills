@@ -225,10 +225,11 @@ vocabulary, and a wrong word is the cheapest correction there is.
 
 ## The glossary
 
-Use `/domain-modeling` if it is installed, with **code cross-reference off and ADRs off**. If it
-is not, apply its one inverted rule inline: **the expert's word wins** - *job*, not *work order*,
-with your alias beside it. A correction in a session that renames a thing updates the glossary in
-the same sitting.
+Use `/domain-modeling`, with **code cross-reference off and ADRs off**. It ships as
+`domain-modeling` standalone and as `mattpocock-skills:domain-modeling` inside that plugin;
+either will do. If neither is installed, apply its one inverted rule inline: **the expert's word
+wins** - *job*, not *work order*, with your alias beside it. A correction in a session that
+renames a thing updates the glossary in the same sitting.
 
 The glossary **is** the repo's `CONTEXT.md`. There is no second glossary.
 

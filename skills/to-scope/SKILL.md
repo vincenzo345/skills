@@ -321,7 +321,10 @@ identical on the page. That is the same defect `(empty)` exists to prevent one t
 
 ## Phase 4 - grill the builder
 
-Invoke `/grilling`, **unforked**, and point it at **the builder**.
+Invoke `/grilling`, **unforked**, and point it at **the builder**. It ships under two names -
+`grilling` standalone, and `mattpocock-skills:grilling` when it arrives as part of that plugin.
+**Take whichever one is installed; they are the same skill.** If neither is, say so and grill the
+builder yourself against the rules below - the phase is the questions, not the tool.
 
 Every hole the builder can close is a question the expert never sits through. That makes this
 phase an anti-exhaustion device, and it is why it runs before the expert sees anything.
@@ -368,8 +371,11 @@ beautiful tree and no session has produced half of one thing, however good the t
 
 ## The glossary
 
-Use `/domain-modeling` throughout, with **code cross-reference off and ADRs off.** This skill
-holds no codebase model, deliberately - repo exploration belongs below the seam.
+Use `/domain-modeling` throughout, with **code cross-reference off and ADRs off.** It ships as
+`domain-modeling` standalone and as `mattpocock-skills:domain-modeling` inside that plugin;
+either will do. **If neither is installed, apply the rule below inline** rather than skipping the
+glossary - it is one rule, and the vocabulary is the point. This skill holds no codebase model,
+deliberately - repo exploration belongs below the seam.
 
 Invert its *propose a canonical term* move. **Upstream, the expert's word wins:** *job*, not
 *work order*, with your alias noted beside it. The expert's vocabulary is the most expensive
