@@ -31,7 +31,7 @@ Three fields: the date, who held the expert seat, and how the session was held. 
 feature under the state line.
 
 ```
-Reviewed 2026-08-14. Connor Craig, expert seat. Screen-shared call.
+Reviewed 2026-08-14. Tony Stark, expert seat. Screen-shared call.
 ```
 
 **It is written when a feature has had both moves of the session, and nothing else writes it.**
