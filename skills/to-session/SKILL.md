@@ -59,8 +59,15 @@ sign-off.
 in them. There is no session file, no agenda and no position marker, and this skill will not
 write one: a resume path with its own state is a second store that can disagree with the first.
 
-1. **Find the tree** at `scope/<epic-slug>/` in the target project. No tree - **stop. Tell the
-   user to run `/to-scope`.** Do not draft one.
+1. **Find the tree** at `scope/` in the target project. No tree - **stop. Tell the user to run
+   `/to-scope`.** Do not draft one.
+   Read `scope/README.md`, the tree index, and check the **pass log** before anything else.
+   **A tree whose grilling pass is not logged does not get a session**, and neither does one
+   holding open `?` marked `new since grilling`. Stop and say so: every `?` the builder can
+   close is a question the expert never sits through, and putting one to the expert that the
+   builder could have answered is the binding constraint failing before the call starts. The
+   same holds for an unlogged coverage pass - it is the only thing that would have found the
+   workflow the tree missed, and the expert should not be the one who finds it.
 2. **Read every feature file.** State line, `Confirmed: n of m`, every criterion and its mark,
    every open `?`, every review block and every signature.
 3. **Re-derive the three views** - slice, circle-back, holes - by scanning the feature files.
@@ -191,7 +198,10 @@ Nothing else earns the mark, because the mark exists to count a review that did 
 *Caught by:* the review block. No block, no `confirmed`.
 
 **7. The derived views are never edited in place.** They are re-derived from the feature files.
-*Caught by:* step 0 re-derives and compares before overwriting.
+The **pass log on the tree index belongs to `/to-scope`**: this skill reads it and never writes
+a line to it, because it runs none of those passes.
+*Caught by:* step 0 re-derives and compares before overwriting, and a pass line dated after the
+last draft with no work behind it is visible against the tree it claims to have walked.
 
 **8. The stopping rules are counted, not judged.** Three deferrals in a row stops the pass - not
 the question, the pass. At most five questions per pass. Agreement and disengagement sound

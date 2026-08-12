@@ -220,12 +220,14 @@ every place a human reads the token.
 ## 5. The folder, and the second dimension
 
 ```
-scope/<epic-slug>/
-  README.md              epic header, backbone table, three derived views
-  F1-<slug>.md           one file per feature
-  F2-<slug>.md
-  handover/
-    F1-<date>.md         frozen copy, written at sign-off
+scope/
+  README.md              the tree index - the sources, the pass log, the epic list
+  <epic-slug>/
+    README.md            epic header, backbone table, three derived views
+    F1-<slug>.md         one file per feature
+    F2-<slug>.md
+    handover/
+      F1-<date>.md       frozen copy, written at sign-off
 ```
 
 **A folder per epic, a file per feature.** The file unit does three jobs at once: freezing
@@ -236,6 +238,33 @@ it matches a session that ends at a feature.
 The cost is that you cannot read the whole process by scrolling one buffer. That is affordable
 only because **the expert never reads the tree.** The readers are the builder and the agent,
 and the backbone table is the process at low resolution.
+
+### `scope/README.md` - the tree index, and why a pass log is on it
+
+A run of `/to-scope` is four passes over a record, and a context ends long before a tree is
+finished. **The index is what a later run reads to find out where the last one stopped.** It
+holds three things and they are not the same kind of thing:
+
+- **The sources** - every normalised transcript the tree was drafted from, named, with the date
+  it was read. A store, and it has to be: phase 2 walks *the record*, and a later run cannot
+  know what the record was by looking at a tree that deliberately does not contain all of it.
+  It also makes new material detectable - a source file the index does not name is new.
+- **The pass log** - one line per **completed** pass, with its date and its counts. A store of
+  events, and it accumulates: a second coverage pass over new material adds a line and never
+  edits one.
+- **The epic list** - one line per epic folder with its trigger. Derived. Re-derive it.
+
+**A pass log is a mark, not a second store.** Nothing is derived from it, no other file holds
+the same fact, and it records something that cannot be recovered by reading the tree: **a pass
+that found nothing leaves nothing behind.** A conflict pass over a tree with no conflicts writes
+no `?`, so silence on the page means either *it ran and the tree is clean* or *it never ran* -
+and those two must never look the same. That is the same rule that writes `(empty)` into a
+`Goes wrong` block rather than omitting it.
+
+**Only a completed pass is logged.** An interrupted pass is re-run from the start, and this is
+cheap on purpose: phases 2 and 3 are read-only and cost the expert nothing, and phase 1 has its
+own by-reading test. The one pass that is expensive to repeat is the builder grilling, which is
+why what it settled is written onto the nodes it settled, in the same sitting.
 
 ### The store is one-dimensional. The second axis is derived.
 

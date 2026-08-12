@@ -88,6 +88,10 @@ presentation, **never more questions**.
 
 ## Step 0 - check the input
 
+**Look for a tree at the target path first.** If one is there, go to step 0a and come back: a
+resumed run may need no new transcript at all, and the checks below are about material this run
+is going to draft from.
+
 `/to-scope` reads a **normalised transcript**, never a raw export. A normalised file carries
 front matter with `provenance:` and `labels:`, a flag list, and one speaker per turn.
 
@@ -128,14 +132,42 @@ account of the work is second-hand, however senior, and however certain.
 - **Several experts** - ordinary. Phase 3 applies no cross-speaker filter, so disagreement
   between them surfaces as a conflict like any other.
 
-### If a tree already exists at that path
+## Step 0a - resume, when a tree already exists
 
-You are **extending** it, not drafting it. This is the only re-entry `/to-scope` has, and it is
-for new drafting material - a second normalised transcript, or a `/to-record` flag that resolved
-into a corrected term. **It is never how a session is resumed.** That is `/to-session`.
+**A tree at the target path means a run already happened. You are resuming it, not starting
+one.** Four passes over a record do not fit in one context, so this is the ordinary case, not
+the recovery case: `/to-scope` is re-invoked and picks up where the last run stopped.
 
-Four things this run may not do, and each is checkable by reading the tree afterwards:
+**Read the tree before you read anything else.** It says where you are. Nothing about a run
+persists anywhere else - no run file, no position marker - for the reason the derived views
+have no store: a second one can disagree with the first.
 
+1. **Read `scope/README.md`** - the tree index. It names the **sources** the tree was drafted
+   from and holds the **pass log**: one line per completed pass. `tree-shape.md` has its shape.
+   No index means the tree predates one; write it from what the tree shows, and say you did.
+2. **Read every epic index and every feature file.**
+3. **Take the position from what you find**, and start at the first line that is true:
+
+   | What the tree shows | Where you start |
+   |---|---|
+   | A transcript you were pointed at is not named in the index | **Phase 1**, over the new material only |
+   | An epic exists whose stories are missing marks | **Phase 1**, that epic alone |
+   | No coverage pass in the log, or the log predates the newest source | **Phase 2**, the whole record |
+   | No conflict pass in the log, or it predates the newest phase 1 | **Phase 3**, the whole tree |
+   | No grilling pass in the log, or open `?` marked `new since grilling` | **Phase 4**, those `?` only |
+   | All four logged, nothing newer | **Nothing. The tree is drafted.** Report it and hand to `/to-session` |
+
+4. **Log each pass as you complete it**, on the tree index. An interrupted pass is not logged
+   and is re-run whole next time - which is affordable, because the read-only passes cost the
+   expert nothing.
+
+### What a resumed run may never do
+
+Each of these is checkable by reading the tree afterwards, which is the only enforcement any of
+these documents has:
+
+- **Never re-draft what exists.** You are adding to a tree, not producing one. A feature file
+  that exists is read, never rewritten from the record.
 - **Never renumber.** Story ids allocate once. New stories take the next free number in their
   feature, so `1.9` may sit between `1.1` and `1.2`. A renumber silently redirects every ticket
   that named the old id.
@@ -144,11 +176,14 @@ Four things this run may not do, and each is checkable by reading the tree after
   conflict, so it becomes a `?` holding two views, exactly as phase 3 would write it.
 - **Never open a file whose state is `signed`.** A signed feature is a file that stops changing.
   New material against a signed feature re-opens a `?` on it under the rule in `/to-session`.
-- **Never lower a state or strip a review block.** Nothing this skill writes can move a feature
-  up either.
+- **Never lower a state and never strip a review block.** Nothing this skill writes can move a
+  feature up, either.
+- **Never re-ask the builder a `?` a logged grilling pass already put to them.** Every `?` on
+  the tree when that pass ran was put to them. A `?` written after it carries
+  `new since grilling` until a later pass covers it.
 
-Run the phases over the new material only. Phase 2 then walks the **whole** record again,
-because the count it prints is a claim about the record as a whole.
+**This is not how a session is resumed.** That is `/to-session`, and nothing here reaches the
+expert.
 
 ## Phase 1 - draft the tree
 
@@ -168,7 +203,8 @@ The tree **is** the workflow diagram viewed as an outline: you project the proce
 already described, in the order it happens.
 
 Write to `scope/<epic-slug>/` in the target project: `README.md` for the epic, one file per
-feature, `handover/` created at sign-off.
+feature, `handover/` created at sign-off. Write `scope/README.md` too - the tree index, which
+names the sources and carries the pass log a later run resumes from.
 
 Then, per story: criteria in the two-block shape, each carrying its marks.
 
@@ -194,6 +230,10 @@ Not when the questions are answered. Questions are recorded as `?` and stay open
 **This test reads the tree, so it can only find holes inside what you drew.** Every one of the
 five marks sits on a node that exists, and a workflow nobody drafted carries no marks - so no
 mark can be missing from it. Phase 2 is the test that reads the other direction.
+
+**Log the draft on the tree index** once the test passes - the date, the epics, and the feature,
+story and criterion counts. A phase that stopped half way is not logged, and a later run drafts
+the rest rather than the whole.
 
 ## Phase 2 - the coverage pass
 
@@ -237,6 +277,10 @@ What closes: a named candidate epic is drafted by **re-entering phase 1 for that
 Where the record is too thin to draft one without inventing it, it stays a named hole and says
 so. Phase 3 runs once nothing in the record is unrouted.
 
+**Log the pass on the tree index** with the same three counts and the date. A coverage pass that
+did not reach the end of the record is not logged, and the next run walks the record again from
+the start - which costs nothing but time, and buys the one number nobody downstream can check.
+
 ## Phase 3 - the conflict pass
 
 Run this AFK, as a **separate pass with no drafting job at all.** That is the whole point of
@@ -270,6 +314,11 @@ Closure keeps the loser. When a conflict closes, the losing statement stays on t
 *not chosen*, so a signature never erases which view lost months before anyone learns the
 choice was wrong.
 
+**Log the pass on the tree index, including when it found nothing** - the date, the nodes
+walked, and the conflicts written even if that number is zero. This pass is the one whose
+output can legitimately be empty, so an unlogged clean tree and a pass that never ran look
+identical on the page. That is the same defect `(empty)` exists to prevent one tier down.
+
 ## Phase 4 - grill the builder
 
 Invoke `/grilling`, **unforked**, and point it at **the builder**.
@@ -288,6 +337,16 @@ phase an anti-exhaustion device, and it is why it runs before the expert sees an
 
 Update the tree with what closes. What does not close stays a `?` and goes to the expert as a
 neutral fact question, never as a contest.
+
+**Write what the grilling settled onto the nodes it settled, in the same sitting**, with the
+date and the fact that it was the builder who said it. A slice decision with no record of who
+made it or when is indistinguishable from an assumption, and this is the one pass that is
+expensive to repeat.
+
+**Log the pass on the tree index** - the date, the `?` put to the builder, and how many closed.
+Every `?` on the tree at that moment was put to them, so a later run knows not to ask again. A
+`?` written *after* a logged grilling pass carries **`new since grilling`** until a later pass
+covers it, and that mark is what a resumed phase 4 works from.
 
 ## The handoff to the session
 
@@ -334,12 +393,16 @@ these are the things that make the judgement honestly:
 4. The `unanswered` count is printed on the epic index and you have read it out loud. If it
    grew, the tree bought acceptance by pushing hard steps out of the slice.
 5. **Every feature is `provisional` and every criterion is `inferred`**, and each epic index
-   says so on its face. If this run extended an existing tree, the marks it did not write are
+   says so on its face. If this run resumed an existing tree, the marks it did not write are
    untouched and no id moved.
-6. Nothing in the record is unrouted, and the off-tree count is printed with its reasons. A
+6. **Every pass this run completed is logged on the tree index, and every pass it did not
+   complete is not.** A log line that outruns the work is worse than none: the next run reads it
+   and skips a pass that never happened.
+7. Nothing in the record is unrouted, and the off-tree count is printed with its reasons. A
    scope tree that reads as complete over a record it does not cover is the one failure here
    that nobody downstream can detect.
 
-Report the feature states, the open `?` count, the `unanswered` count, and the off-tree count.
-Hand back the path to `scope/<epic-slug>/`, and say what happens next: **run `/to-session`
-against that path, with the expert.**
+Report the feature states, the open `?` count, the `unanswered` count and the off-tree count,
+and **say which pass you stopped after.** Hand back the path to `scope/`, and say what happens
+next: **re-run `/to-scope` if a pass is unlogged** - it resumes from the index and re-drafts
+nothing - **or run `/to-session` with the expert** once all four are logged.
