@@ -2,7 +2,9 @@
 
 My agent skills — the ones I actually use. Written for Claude Code and Codex.
 
-Every skill here is one I wrote and understand. The set is small on purpose and grows one finished skill at a time.
+The pack is one pipeline: **a meeting becomes a scope tree a build can run against**, without
+acceptance ever being won by exhausting the person who does the work. Every skill here is one I
+wrote and understand. The set is small on purpose and grows one finished skill at a time.
 
 ## Install
 
@@ -27,18 +29,15 @@ Updates arrive when I push.
 
 ### User-invoked
 
-`to-record`, `to-scope` and `to-session` are one pipeline, run in that order: a raw meeting
-export becomes a normalised transcript, the transcript becomes a drafted scope tree, and the
-tree is corrected by the expert and signed. Each stops where the next begins, and each can be
-re-run against what the last one left on disk.
+Two skills, one pipeline, run in that order. A raw meeting export becomes a normalised
+transcript; the transcript becomes a scope tree the expert has corrected and signed.
 
 - [`to-record`](./skills/to-record/SKILL.md) — turn a raw meeting export into a normalised transcript whose every word is preserved and whose defects are flagged: turns reconstructed from crosstalk, a script that checks the word multiset survived, and six flags about the record rather than questions about the domain.
-- [`to-scope`](./skills/to-scope/SKILL.md) — turn a normalised transcript into a drafted scope tree: a story map drafted from what was said, a coverage pass that walks the record for what the tree missed, a conflict pass with no drafting job, and the builder grilled so the expert sits through fewer questions. It resumes: re-invoke it and it reads the tree's pass log, picks up at the first pass that never finished, and re-drafts nothing. It stops before the expert, and nothing it writes can be marked confirmed.
-- [`to-session`](./skills/to-session/SKILL.md) — run the review session against a tree that already exists: the tree is read back as the only store, the expert corrects a paraphrase instead of composing an answer, and sign-off and the frozen handover close it. Re-enterable, because the expert is rarely free on drafting day.
+- [`to-scope`](./skills/to-scope/SKILL.md) — turn that transcript into a signed-off scope tree a build can run against: a story map drafted from what was said, a coverage pass that walks the record for what the tree missed, a conflict pass with no drafting job, the builder grilled so the expert sits through fewer questions, and a review session where the expert corrects a paraphrase instead of composing an answer.
 
-### Model-invoked
-
-- [`agent-harness`](./skills/agent-harness/SKILL.md) — scaffold a stack-agnostic long-running build harness into any project: the Planner/Generator/Evaluator loop where three agents with separate context windows coordinate through files on disk, and an adversarial Evaluator verifies every sprint instead of the builder grading itself.
+**`to-scope` resumes.** Five passes over a record do not fit in one sitting, and the expert is
+rarely free on drafting day. Re-invoke it and it reads the tree, works out which pass never
+finished, and starts there — re-drafting nothing, renumbering nothing, and re-asking nobody.
 
 ## Working on this repo
 

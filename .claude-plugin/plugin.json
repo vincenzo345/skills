@@ -1,7 +1,7 @@
 {
   "name": "vince-skills",
-  "version": "0.8.0",
-  "description": "Vince Sandoz's agent skills for real engineering.",
+  "version": "0.9.0",
+  "description": "Vince Sandoz's coach pack: a meeting becomes a scope tree a build can run against.",
   "author": {
     "name": "Vince Sandoz",
     "url": "https://github.com/vincenzo345"
@@ -10,17 +10,14 @@
   "repository": "https://github.com/vincenzo345/skills",
   "license": "MIT",
   "keywords": [
-    "engineering",
-    "skills",
-    "agent-harness",
-    "automation",
     "requirements",
-    "transcripts"
+    "transcripts",
+    "elicitation",
+    "scope",
+    "skills"
   ],
   "skills": [
-    "./skills/agent-harness",
     "./skills/to-record",
-    "./skills/to-scope",
-    "./skills/to-session"
+    "./skills/to-scope"
   ]
 }

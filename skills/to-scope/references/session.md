@@ -1,8 +1,8 @@
 # The review session
 
-The script. Reached once the tree exists, the coverage and conflict passes have run, and the
-builder has been grilled on everything they could close themselves - normally on a later day
-than the draft, which is the whole reason this runs as its own skill.
+Phase 5, and the script for it. Reached once the tree exists, the coverage and conflict passes
+have run, and the builder has been grilled on everything they could close themselves - normally
+on a later day than the draft, and reached by resuming rather than by one long run.
 
 This is the part that matters. The strongest single piece of evidence behind this whole design
 is a null result: identical checklists mandated as **documents** rather than performed as

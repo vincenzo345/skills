@@ -41,8 +41,8 @@ when. The draft and the session usually fall on different days, often weeks apar
 held later has no ambient context to fall back on - the marks are the only defence.
 
 **No review block, no `confirmed`.** A criterion marked `confirmed` on a feature carrying no
-review block is a review that cannot be shown to have happened, and the next run of
-`/to-session` finds it at step 0. This is the failure that has actually been observed: a builder
+review block is a review that cannot be shown to have happened, and the next run finds it at
+step 0a. This is the failure that has actually been observed: a builder
 improving his own draft an hour before the call, three criteria written `confirmed`, the feature
 marked `reviewed`, and nothing on the page able to tell the difference.
 

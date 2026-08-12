@@ -1,3 +1,0 @@
-# Shell scripts must stay LF or Git Bash chokes on \r — the harness runs
-# `git reset --hard` on restart verdicts, which re-checks-out these files.
-*.sh text eol=lf

@@ -4,7 +4,9 @@ Everything the draft phase needs: the three tiers and their boundaries, the crit
 the slice marks, the story ids, the folder layout, and a worked rendering of all of it.
 
 The node states, the review block and the signature block are not here. They are reached later,
-in `/to-session`, which holds them in its own `sign-off.md`. Nothing in this skill writes one.
+in phase 5 and at sign-off, and they live in `sign-off.md`. **Nothing before phase 5 writes
+one**: everything phases 1 to 4 put on the tree is `inferred`, and every feature they touch
+stays `provisional`.
 
 The worked rendering at the end uses **invented names**. It is a real workflow with every
 person and every business detail replaced.
@@ -263,8 +265,11 @@ and those two must never look the same. That is the same rule that writes `(empt
 
 **Only a completed pass is logged.** An interrupted pass is re-run from the start, and this is
 cheap on purpose: phases 2 and 3 are read-only and cost the expert nothing, and phase 1 has its
-own by-reading test. The one pass that is expensive to repeat is the builder grilling, which is
-why what it settled is written onto the nodes it settled, in the same sitting.
+own by-reading test. **The two passes that must never be repeated are the builder grilling and
+the session**, because both spend a person's patience - so both write their result onto the
+nodes as they go, and a resumed run reads those marks rather than the log. A `?` the builder
+answered is closed on its node; a feature the expert reviewed carries a review block. The log
+says the pass finished; the nodes say how far it got.
 
 ### The store is one-dimensional. The second axis is derived.
 
@@ -468,10 +473,10 @@ authorization is filed.
 
 ### What to read off that rendering
 
-**It shows a tree after a session**, which is why it carries states, a deferral and a `confirmed`
-mark. A `/to-scope` run cannot produce one: everything this skill writes is `inferred` and every
-feature it writes is `provisional`. Read the rendering for the shape of a criterion, an id, a
-slice mark and a `?` - not as a target for the draft.
+**It shows a tree after phase 5**, which is why it carries states, a deferral and a `confirmed`
+mark. **Phases 1 to 4 cannot produce one**: everything they write is `inferred` and every feature
+they touch is `provisional`. Read the rendering for the shape of a criterion, an id, a slice mark
+and a `?` - not as a target for the draft.
 
 Five things, and each one is a rule above being visible rather than trusted:
 

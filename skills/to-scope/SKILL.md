@@ -26,18 +26,16 @@ describe their own work.** No amount of asking gets a general answer out of a co
 and asking harder makes it worse: sign-off given to stop the questions is worthless while still
 looking exactly like approval.
 
-This skill drafts the workflow as a tree, finds where the record contradicts itself, and spends
-the builder's patience before the expert's. It runs in **four ordered phases: draft, coverage
-pass, conflict pass, grill the builder.**
+This skill drafts the workflow as a tree, finds where the record contradicts itself, spends the
+builder's patience before the expert's, and takes what survives back to the expert to be
+corrected rather than composed. It runs in **five ordered phases: draft, coverage pass, conflict
+pass, grill the builder, review with the expert.** Sign-off and the handover close it.
 
-**The review session is not in this skill.** It runs under `/to-session`, against the tree this
-one writes. The expert being unreachable on drafting day is the normal case, not the exception,
-and a session that has to re-enter the drafting skill would re-draft over the corrections
-already in the tree.
-
-The split does one more thing, and it is the reason for it: **this skill has no instruction that
-can write `confirmed`, mark a feature above `provisional`, or sign anything.** A `/to-scope` run
-produces a tree that is provisional everywhere, by construction rather than by discipline.
+**No run does all five in one sitting, and none is expected to.** Five passes over a record do
+not fit in one context, and the expert being unreachable on drafting day is the normal case, not
+the exception. So `/to-scope` **resumes**: re-invoke it and it reads the tree, works out which
+pass never finished, and starts there. It re-drafts nothing, renumbers nothing, and re-asks
+nobody. Step 0a is that mechanism, and it is the ordinary way this skill is entered.
 
 ## The binding constraint
 
@@ -145,8 +143,27 @@ have no store: a second one can disagree with the first.
 1. **Read `scope/README.md`** - the tree index. It names the **sources** the tree was drafted
    from and holds the **pass log**: one line per completed pass. `tree-shape.md` has its shape.
    No index means the tree predates one; write it from what the tree shows, and say you did.
-2. **Read every epic index and every feature file.**
-3. **Take the position from what you find**, and start at the first line that is true:
+2. **Read every epic index and every feature file** - the state line, `Confirmed: n of m`, every
+   criterion and its mark, every open `?`, every review block and every signature.
+3. **Re-derive the three views** by scanning the feature files, and **compare them with what the
+   epic index says before you overwrite it.** A disagreement means a view was hand-edited, or
+   the tree moved without re-derivation. Say so, then re-derive. Off-tree is the one store;
+   leave it alone.
+4. **Check the marks.** These are the checks a later reader would run, and running them at the
+   start of every run is what makes the marks worth having:
+   - Every `confirmed` criterion sits on a feature carrying a **review block**. One that does
+     not is a review that cannot be shown to have happened.
+   - Every feature above `provisional` carries the block that earns it: a review block for
+     `reviewed`, a signature for `signed`.
+   - Every `Confirmed: n of m` header matches the body. Recount it.
+   - Every deferral carries the expert's words, and every deferred `?` is still open.
+
+   **Report a defect. Do not repair it by guessing.** A `confirmed` with no review block is
+   settled by asking **the builder** whether a session was held, which costs the expert nothing.
+   If it was not, the mark comes off and the feature returns to `provisional`.
+5. **Snapshot the story ids** you found, per feature, and the next free number in each. You
+   check this again at termination.
+6. **Take the position from what you find**, and start at the first line that is true:
 
    | What the tree shows | Where you start |
    |---|---|
@@ -155,11 +172,17 @@ have no store: a second one can disagree with the first.
    | No coverage pass in the log, or the log predates the newest source | **Phase 2**, the whole record |
    | No conflict pass in the log, or it predates the newest phase 1 | **Phase 3**, the whole tree |
    | No grilling pass in the log, or open `?` marked `new since grilling` | **Phase 4**, those `?` only |
-   | All four logged, nothing newer | **Nothing. The tree is drafted.** Report it and hand to `/to-session` |
+   | Any feature still `provisional` | **Phase 5**, the first of them in backbone order |
+   | Every feature `reviewed`, none signed | **Sign-off**, which needs no session |
+   | Everything signed | **The handover**, for every feature with zero open `?` |
 
-4. **Log each pass as you complete it**, on the tree index. An interrupted pass is not logged
-   and is re-run whole next time - which is affordable, because the read-only passes cost the
-   expert nothing.
+   A `reviewed` feature has **spent its paraphrase**; its open `?` have not, and they are asked
+   in move 1 of the next sitting with no second paraphrase. A `signed` feature is closed.
+
+7. **Log each pass as you complete it**, on the tree index. An interrupted pass is not logged
+   and is re-run whole next time - which is affordable for the read-only passes, and is why the
+   two expensive ones, the grilling and the session, write their result onto the nodes as they
+   go.
 
 ### What a resumed run may never do
 
@@ -175,15 +198,18 @@ these documents has:
   the expert in a session, and this run was not in it. New material that contradicts one is a
   conflict, so it becomes a `?` holding two views, exactly as phase 3 would write it.
 - **Never open a file whose state is `signed`.** A signed feature is a file that stops changing.
-  New material against a signed feature re-opens a `?` on it under the rule in `/to-session`.
-- **Never lower a state and never strip a review block.** Nothing this skill writes can move a
-  feature up, either.
+  New material against a signed feature re-opens a `?` on it, by the rule in `handover.md`.
+- **Never lower a state and never strip a review block.** Only phase 5 raises one.
 - **Never re-ask the builder a `?` a logged grilling pass already put to them.** Every `?` on
   the tree when that pass ran was put to them. A `?` written after it carries
   `new since grilling` until a later pass covers it.
+- **Never re-open a closed `?`.** It re-opens one way only: something below the seam contradicts
+  it, by the test in `handover.md`. A closed conflict keeps its losing view marked *not chosen*,
+  and the circle-back view derives from **open** `?` only - so a closed one cannot walk back
+  into the question list by being re-derived.
 
-**This is not how a session is resumed.** That is `/to-session`, and nothing here reaches the
-expert.
+**A resumed run reaches the expert only at phase 5**, and only after the table above sends it
+there. Everything before that is reading, drafting and the builder.
 
 ## Phase 1 - draft the tree
 
@@ -351,23 +377,88 @@ Every `?` on the tree at that moment was put to them, so a later run knows not t
 `?` written *after* a logged grilling pass carries **`new since grilling`** until a later pass
 covers it, and that mark is what a resumed phase 4 works from.
 
-## The handoff to the session
+## Phase 5 - the review session
 
-This run stops here. **The session, sign-off and the handover all live in `/to-session`**, and
-they live there together because every one of them is reached only after a session, and every
-one of them has to be reachable on a day when nobody is re-drafting. A tree that can only be
-signed by re-opening the drafting skill is a tree that gets re-drafted to be signed.
+Read `references/session.md`. It holds the script, the stopping rules and the evidence behind
+them. Read `references/sign-off.md` too, for the three states and the **review block**.
 
-`/to-session` is user-invoked, so you cannot reach it. **Tell the user to run it against the
-path you hand back**, with the expert in the room.
+**Run this in a fresh context**, for the reason phases 2 and 3 are run that way and one more
+besides. A context holding the drafting instructions drafts, and here it would draft in front of
+the expert - where the failure looks like a helpful improvement to the tree. **Nothing in this
+phase opens the record.** The tree carries every quote it needs on its `from:` lines.
 
-Before you stop, say on every epic index, in plain words, that **no session has been held**, and
-that every feature is `provisional` and every criterion `inferred`. That banner is not modesty.
-A tree drafted from a good transcript reads as finished, and this is the one line that stops it
-being taken for a signed one.
+**Usually this is a later day, and often a later week.** Step 0a is how you come back to it:
+resume, check the marks, and start at the first `provisional` feature in backbone order.
+
+Per feature, **two moves in order** - the open `?` first, then the feature said back as a short
+narrative with *what is wrong with it?* The criteria are **never read out.** No boundary question
+is ever put to the expert.
+
+Budget is **one paraphrase per feature plus that feature's open `?`**, so the cost does not grow
+with the size of the draft. That is what phase 1 was drafting for: a thorough tree costs the
+expert nothing extra.
+
+Three things follow from a session that spans several sittings:
+
+- **The paraphrase is spent per feature over the life of the tree**, not per session. A feature
+  carrying a review block does not get a second one because a new session started.
+- **The five-questions-per-pass limit is per sitting**, and a later one gets its own five,
+  ranked by Impact x Uncertainty. This is the one thing re-entry legitimately renews, and it is
+  renewed by the calendar rather than by wanting to ask more.
+- **A re-paraphrase deferred to "the end of the session" that never happened is still owed.** It
+  is the first thing next time, and it writes a second review block.
+
+**Write a review block on every feature that got both moves**, and mark it `reviewed`. **No
+review block, no `confirmed`** - that pairing is what makes a review countable rather than
+asserted, and it catches the one failure this pack has actually observed: a builder improving
+his own draft an hour before the call, three criteria written `confirmed`, and nothing on the
+page able to tell the difference.
+
+**Where a correction changes the tree, the shape is on the page.** A criterion the expert
+corrects keeps its blocks, its `from:` lines and its slice mark, and changes only what they
+said. A story they add is written to match its neighbours, takes the next free number in that
+feature, and is `confirmed` because it came from the expert in the room. **A workflow they name
+that is not on the tree is a named hole in their own words, never a drafted epic** - six words
+about a workflow produce five inventions, and volume exhausts an expert as surely as questions
+do.
 
 **The artifact is the residue of a session, never a substitute for one.** A run that produces a
-beautiful tree and no session has produced half of one thing, however good the tree is.
+beautiful tree and no session has produced half of one thing, however good the tree is. Until
+the session happens, say on every epic index, in plain words, that **no session has been held**,
+and that every feature is `provisional` and every criterion `inferred`. A tree drafted from a
+good transcript reads as finished, and that banner is the one line that stops it being taken for
+a signed one.
+
+**Log the pass on the tree index** when the last feature has been reviewed - the date, and how
+many features carry a review block. A session that stopped at a feature is not logged, and step
+0a picks up the rest.
+
+## Sign-off
+
+Read `references/sign-off.md`. It holds the states, the review block, the four fields of a
+signature, why a deferral needs the words, and the re-opening rule.
+
+Sign-off is **decoupled from the session.** The session produces a *signable state*; signing may
+land inside the call or a week after it. A run that holds no session at all and only signs
+features already `reviewed` is an ordinary run.
+
+- **An open `?` blocks sign-off of that story alone**, never its siblings.
+- **A `?` closes two ways only:** an answer, or marking the node out-of-build with the reason
+  `unanswered`. Never by aging out, never by a guess, and never by a session ending.
+- **A signed feature is a file that stops changing.** The signature is protected structurally,
+  not by discipline.
+
+## The handover
+
+Read `references/handover.md` at sign-off. It holds the copy transform, the two handoff edges
+and the seam checklist.
+
+Only a feature with **zero open `?`** crosses. The handover file is a **copy** of the feature
+file, transformed subtractively so the transform can be verified by reading it, and frozen. It
+is read by both the spec step and the ticketing step, so the criteria travel by reference and
+every copy that could reword what the expert signed is removed.
+
+Below the seam the build layer runs **unforked and untouched.**
 
 ## The glossary
 
@@ -392,23 +483,26 @@ Unlike `/to-record`, this skill does not end on a checkable test. It ends on a j
 these are the things that make the judgement honestly:
 
 1. Every story carries its five marks, and every `?` this run raised is on the tree.
-2. Every `?` is open, or closed by the builder, or closed as out-of-build with `unanswered`
-   recorded. Never by aging out and never by a guess.
+2. Every `?` is open, answered, or closed as out-of-build with `unanswered` recorded. Never by
+   aging out and never by a guess.
 3. The three derived views in the epic `README.md` agree with the feature files, because they
-   were re-derived and not edited.
+   were re-derived and not edited. No id moved, and no mark this run did not write was touched.
 4. The `unanswered` count is printed on the epic index and you have read it out loud. If it
    grew, the tree bought acceptance by pushing hard steps out of the slice.
-5. **Every feature is `provisional` and every criterion is `inferred`**, and each epic index
-   says so on its face. If this run resumed an existing tree, the marks it did not write are
-   untouched and no id moved.
-6. **Every pass this run completed is logged on the tree index, and every pass it did not
+5. **Every feature reached in a session carries a state and a review block**, and every deferral
+   carries the expert's words. **Every feature that has not been reached is `provisional` with
+   every criterion `inferred`, and the epic index says so on its face.** Every `confirmed`
+   written today sits under a review block written today.
+6. Any feature that came back with **zero corrections** is named as such, left `inferred`, and
+   said at sign-off: *"you changed nothing here, so this is our reading, not yours."*
+7. **Every pass this run completed is logged on the tree index, and every pass it did not
    complete is not.** A log line that outruns the work is worse than none: the next run reads it
    and skips a pass that never happened.
-7. Nothing in the record is unrouted, and the off-tree count is printed with its reasons. A
+8. Nothing in the record is unrouted, and the off-tree count is printed with its reasons. A
    scope tree that reads as complete over a record it does not cover is the one failure here
    that nobody downstream can detect.
 
 Report the feature states, the open `?` count, the `unanswered` count and the off-tree count,
-and **say which pass you stopped after.** Hand back the path to `scope/`, and say what happens
-next: **re-run `/to-scope` if a pass is unlogged** - it resumes from the index and re-drafts
-nothing - **or run `/to-session` with the expert** once all four are logged.
+and **say which pass you stopped after and what the next one needs** - a room with the expert in
+it, or nobody at all. Hand back the path to `scope/`. **Re-running `/to-scope` picks up there**:
+it resumes from the index, re-drafts nothing, and re-asks nobody.

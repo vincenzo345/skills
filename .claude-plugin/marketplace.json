@@ -4,18 +4,18 @@
     "name": "Vince Sandoz",
     "url": "https://github.com/vincenzo345"
   },
-  "description": "Vince Sandoz's agent skills, as an installable Claude Code plugin.",
+  "description": "Vince Sandoz's coach pack, as an installable Claude Code plugin.",
   "plugins": [
     {
       "name": "vince-skills",
       "source": "./",
-      "description": "Vince Sandoz's agent skills for real engineering.",
+      "description": "A meeting becomes a scope tree a build can run against.",
       "category": "engineering",
       "keywords": [
-        "engineering",
-        "skills",
-        "agent-harness",
-        "automation"
+        "requirements",
+        "transcripts",
+        "elicitation",
+        "scope"
       ]
     }
   ]
