@@ -1,6 +1,6 @@
 ---
 name: to-scope
-description: Turn a normalised transcript into a signed-off scope tree a build can run against, one feature at a time.
+description: Turn a normalised transcript into a drafted scope tree, ready for the expert to correct in a review session.
 disable-model-invocation: true
 ---
 
@@ -26,10 +26,18 @@ describe their own work.** No amount of asking gets a general answer out of a co
 and asking harder makes it worse: sign-off given to stop the questions is worthless while still
 looking exactly like approval.
 
-This skill drafts the workflow as a tree, finds where the record contradicts itself, spends the
-builder's patience before the expert's, and takes what survives back to the expert to be
-corrected rather than composed. It runs in **five ordered phases: draft, coverage pass, conflict
-pass, grill the builder, review with the expert.** Sign-off and the handover close it.
+This skill drafts the workflow as a tree, finds where the record contradicts itself, and spends
+the builder's patience before the expert's. It runs in **four ordered phases: draft, coverage
+pass, conflict pass, grill the builder.**
+
+**The review session is not in this skill.** It runs under `/to-session`, against the tree this
+one writes. The expert being unreachable on drafting day is the normal case, not the exception,
+and a session that has to re-enter the drafting skill would re-draft over the corrections
+already in the tree.
+
+The split does one more thing, and it is the reason for it: **this skill has no instruction that
+can write `confirmed`, mark a feature above `provisional`, or sign anything.** A `/to-scope` run
+produces a tree that is provisional everywhere, by construction rather than by discipline.
 
 ## The binding constraint
 
@@ -108,14 +116,39 @@ Say who holds each seat on this run, in one line, and have it confirmed before y
 describing their team's process is a builder with unusually good exposure. So is anyone whose
 account of the work is second-hand, however senior, and however certain.
 
-- **No expert reachable** - draft the tree and say so. Every criterion stays `inferred`, no
-  feature goes past `provisional`, and phase 5 does not run. A tree nobody corrected is a
-  legitimate output; a tree nobody corrected wearing `confirmed` marks is not.
+- **The expert does not have to be reachable today.** This run does not need them, and naming
+  the seat is not the same as filling it in a room. Naming it decides who phase 4 grills, and
+  whose word could ever earn `confirmed` later. Every criterion this run writes stays
+  `inferred` and every feature stays `provisional` whether or not the expert exists - a tree
+  nobody corrected is a legitimate output; a tree nobody corrected wearing `confirmed` marks is
+  not. Say on the epic index that no session has been held.
 - **One person in both seats** - the same rule decides it, story by story. They hold the expert
   seat for work they do themselves, and the builder seat everywhere else. Their word on the
   slice never earns `confirmed`.
 - **Several experts** - ordinary. Phase 3 applies no cross-speaker filter, so disagreement
   between them surfaces as a conflict like any other.
+
+### If a tree already exists at that path
+
+You are **extending** it, not drafting it. This is the only re-entry `/to-scope` has, and it is
+for new drafting material - a second normalised transcript, or a `/to-record` flag that resolved
+into a corrected term. **It is never how a session is resumed.** That is `/to-session`.
+
+Four things this run may not do, and each is checkable by reading the tree afterwards:
+
+- **Never renumber.** Story ids allocate once. New stories take the next free number in their
+  feature, so `1.9` may sit between `1.1` and `1.2`. A renumber silently redirects every ticket
+  that named the old id.
+- **Never rewrite a criterion marked `confirmed`.** Those words were corrected or agreed to by
+  the expert in a session, and this run was not in it. New material that contradicts one is a
+  conflict, so it becomes a `?` holding two views, exactly as phase 3 would write it.
+- **Never open a file whose state is `signed`.** A signed feature is a file that stops changing.
+  New material against a signed feature re-opens a `?` on it under the rule in `/to-session`.
+- **Never lower a state or strip a review block.** Nothing this skill writes can move a feature
+  up either.
+
+Run the phases over the new material only. Phase 2 then walks the **whole** record again,
+because the count it prints is a claim about the record as a whole.
 
 ## Phase 1 - draft the tree
 
@@ -256,47 +289,23 @@ phase an anti-exhaustion device, and it is why it runs before the expert sees an
 Update the tree with what closes. What does not close stays a `?` and goes to the expert as a
 neutral fact question, never as a contest.
 
-## Phase 5 - the review session
+## The handoff to the session
 
-Read `references/session.md`. It is reached only here and holds the script, the stopping rules
-and the evidence behind them.
+This run stops here. **The session, sign-off and the handover all live in `/to-session`**, and
+they live there together because every one of them is reached only after a session, and every
+one of them has to be reachable on a day when nobody is re-drafting. A tree that can only be
+signed by re-opening the drafting skill is a tree that gets re-drafted to be signed.
 
-Per feature, **two moves in order** - the open `?` first, then the feature said back as a short
-narrative with *what is wrong with it?* The criteria are **never read out.** No boundary question
-is ever put to the expert.
+`/to-session` is user-invoked, so you cannot reach it. **Tell the user to run it against the
+path you hand back**, with the expert in the room.
 
-Budget is **one paraphrase per feature plus that feature's open `?`**, so the cost does not grow
-with the size of the draft. That is what phase 1 was drafting for: a thorough tree costs the
-expert nothing extra.
+Before you stop, say on every epic index, in plain words, that **no session has been held**, and
+that every feature is `provisional` and every criterion `inferred`. That banner is not modesty.
+A tree drafted from a good transcript reads as finished, and this is the one line that stops it
+being taken for a signed one.
 
 **The artifact is the residue of a session, never a substitute for one.** A run that produces a
-beautiful tree and no session has failed, however good the tree is.
-
-## Sign-off
-
-Read `references/sign-off.md`. It holds the states, the four fields of a signature, why a
-deferral needs the words, and the re-opening rule.
-
-Sign-off is **decoupled from the session.** The session produces a *signable state*; signing
-may land inside the call or after it.
-
-- **An open `?` blocks sign-off of that story alone**, never its siblings.
-- **A `?` closes two ways only:** an answer, or marking the node out-of-build with the reason
-  `unanswered`. Never by aging out, never by a guess.
-- **A signed feature is a file that stops changing.** The signature is protected structurally,
-  not by discipline.
-
-## The handover
-
-Read `references/handover.md` at sign-off. It holds the copy transform, the two handoff edges
-and the seam checklist.
-
-Only a feature with **zero open `?`** crosses. The handover file is a **copy** of the feature
-file, transformed subtractively so the transform can be verified by reading it, and frozen. It
-is read by both the spec step and the ticketing step, so the criteria travel by reference and
-every copy that could reword what the expert signed is removed.
-
-Below the seam the build layer runs **unforked and untouched.**
+beautiful tree and no session has produced half of one thing, however good the tree is.
 
 ## The glossary
 
@@ -317,17 +326,20 @@ costs an ADR recording both words and the reason.
 Unlike `/to-record`, this skill does not end on a checkable test. It ends on a judgement, and
 these are the things that make the judgement honestly:
 
-1. Every feature reached in the session carries a state, and every deferral carries the words.
-2. Every `?` is open, answered, or closed as out-of-build with `unanswered` recorded.
+1. Every story carries its five marks, and every `?` this run raised is on the tree.
+2. Every `?` is open, or closed by the builder, or closed as out-of-build with `unanswered`
+   recorded. Never by aging out and never by a guess.
 3. The three derived views in the epic `README.md` agree with the feature files, because they
    were re-derived and not edited.
 4. The `unanswered` count is printed on the epic index and you have read it out loud. If it
    grew, the tree bought acceptance by pushing hard steps out of the slice.
-5. Any feature that came back with zero corrections is named as such, marked `inferred`, and
-   said at sign-off: *"you changed nothing here, so this is our reading, not yours."*
+5. **Every feature is `provisional` and every criterion is `inferred`**, and each epic index
+   says so on its face. If this run extended an existing tree, the marks it did not write are
+   untouched and no id moved.
 6. Nothing in the record is unrouted, and the off-tree count is printed with its reasons. A
    scope tree that reads as complete over a record it does not cover is the one failure here
    that nobody downstream can detect.
 
 Report the feature states, the open `?` count, the `unanswered` count, and the off-tree count.
-Hand back the path to `scope/<epic-slug>/`.
+Hand back the path to `scope/<epic-slug>/`, and say what happens next: **run `/to-session`
+against that path, with the expert.**

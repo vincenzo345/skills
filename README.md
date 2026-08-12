@@ -28,7 +28,8 @@ Updates arrive when I push.
 ### User-invoked
 
 - [`to-record`](./skills/to-record/SKILL.md) — turn a raw meeting export into a normalised transcript whose every word is preserved and whose defects are flagged: turns reconstructed from crosstalk, a script that checks the word multiset survived, and six flags about the record rather than questions about the domain.
-- [`to-scope`](./skills/to-scope/SKILL.md) — turn a normalised transcript into a signed-off scope tree a build can run against: a story map drafted from what was said, a coverage pass that walks the record for what the tree missed, a conflict pass with no drafting job, the builder grilled before the expert is, and a review session where the expert corrects a paraphrase instead of composing an answer.
+- [`to-scope`](./skills/to-scope/SKILL.md) — turn a normalised transcript into a drafted scope tree: a story map drafted from what was said, a coverage pass that walks the record for what the tree missed, a conflict pass with no drafting job, and the builder grilled so the expert sits through fewer questions. It stops before the expert, and nothing it writes can be marked confirmed.
+- [`to-session`](./skills/to-session/SKILL.md) — run the review session against a tree that already exists: the tree is read back as the only store, the expert corrects a paraphrase instead of composing an answer, and sign-off and the frozen handover close it. Re-enterable, because the expert is rarely free on drafting day.
 
 ### Model-invoked
 

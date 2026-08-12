@@ -1,0 +1,6 @@
+interface:
+  display_name: "To Session"
+  short_description: "Run the review session against an existing scope tree, then sign off and hand over"
+
+policy:
+  allow_implicit_invocation: false

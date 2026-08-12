@@ -3,8 +3,8 @@
 Everything the draft phase needs: the three tiers and their boundaries, the criterion shape,
 the slice marks, the story ids, the folder layout, and a worked rendering of all of it.
 
-The node states and the signature block are not here. They are reached later, at sign-off, in
-`sign-off.md`.
+The node states, the review block and the signature block are not here. They are reached later,
+in `/to-session`, which holds them in its own `sign-off.md`. Nothing in this skill writes one.
 
 The worked rendering at the end uses **invented names**. It is a real workflow with every
 person and every business detail replaced.
@@ -438,6 +438,11 @@ authorization is filed.
 ````
 
 ### What to read off that rendering
+
+**It shows a tree after a session**, which is why it carries states, a deferral and a `confirmed`
+mark. A `/to-scope` run cannot produce one: everything this skill writes is `inferred` and every
+feature it writes is `provisional`. Read the rendering for the shape of a criterion, an id, a
+slice mark and a `?` - not as a target for the draft.
 
 Five things, and each one is a rule above being visible rather than trusted:
 

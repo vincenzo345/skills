@@ -1,6 +1,6 @@
 {
   "name": "vince-skills",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Vince Sandoz's agent skills for real engineering.",
   "author": {
     "name": "Vince Sandoz",
@@ -20,6 +20,7 @@
   "skills": [
     "./skills/agent-harness",
     "./skills/to-record",
-    "./skills/to-scope"
+    "./skills/to-scope",
+    "./skills/to-session"
   ]
 }

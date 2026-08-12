@@ -1,6 +1,6 @@
 interface:
   display_name: "To Scope"
-  short_description: "Draft a scope tree from a transcript and take it back to the expert for sign-off"
+  short_description: "Draft a scope tree from a transcript, ready for the expert to correct in a session"
 
 policy:
   allow_implicit_invocation: false

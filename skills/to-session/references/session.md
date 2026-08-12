@@ -1,7 +1,8 @@
 # The review session
 
-Phase 5. Reached once the tree exists, the coverage and conflict passes have run, and the
-builder has been grilled on everything they could close themselves.
+The script. Reached once the tree exists, the coverage and conflict passes have run, and the
+builder has been grilled on everything they could close themselves - normally on a later day
+than the draft, which is the whole reason this runs as its own skill.
 
 This is the part that matters. The strongest single piece of evidence behind this whole design
 is a null result: identical checklists mandated as **documents** rather than performed as
@@ -201,7 +202,15 @@ file, no agenda, no position marker. The next session reads the tree, derives th
 view again, and starts at the next `provisional` feature. A session that needs its own state to
 resume has invented a second store that can disagree with the first.
 
-Mark every feature that got both moves as `reviewed`.
+**This covers both ways a session stops**: at a feature because the call ran out, and at the
+last feature because the tree ran out. It also covers the gap between the draft and the first
+session, which is normally days. The next run reads the same tree the same way, and the tree is
+all it reads.
+
+Mark every feature that got both moves as `reviewed`, and **write its review block** -
+`sign-off.md` holds the three fields. That block is the one thing a session leaves behind, and
+it is a mark on the store rather than a second store: it sits on the feature it describes,
+nothing derives from it, and nothing has to be kept level with it.
 
 **Sign-off is decoupled from this session.** What the session produces is a **signable state**.
 Signing may land inside the call or a week after it, and neither is a different process.
