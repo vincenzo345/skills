@@ -1,6 +1,6 @@
 # Workbench Workflow
 
-**Status:** v0.4 pre-start routing revision validated and globally installed
+**Status:** v0.5 data-model lifecycle correction
 
 This document explains lifecycle meaning and route behavior. Workbench's purpose and authority boundaries are defined in the [charter](CHARTER.md). The versioned identifiers, route order, applicability handler IDs, gate handler IDs, planning destinations, and work statuses are owned by [`workbench-lifecycle.schema.json`](../../schemas/workbench-lifecycle.schema.json). Artifact field shapes, decision rules, and state-transition schemas belong in their named contracts; this document does not create a second vocabulary.
 
@@ -26,7 +26,7 @@ The routing receipt keeps five axes separate: business basis, solution context, 
 |---|---|
 | Frame | Intake and outcome framing |
 | Discover | Brownfield reconnaissance, evidence intake, process modeling, and process validation |
-| Design and decide | Proposal, experience design, and solution architecture |
+| Design and decide | Proposal, experience design, solution architecture, and data-model design |
 | Plan | Standards resolution, specification, and delivery planning |
 | Implement | Implementation |
 | Verify | Local verification |
@@ -35,7 +35,7 @@ The routing receipt keeps five axes separate: business basis, solution context, 
 
 The last applicable activity in a phase supplies that phase's checkpoint and exit-gate identity. This preserves the specialized vocabulary while avoiding a transition for every lens. A large work item grows through map nodes, specialist tasks, evidence, and artifacts rather than ceremonial lifecycle steps.
 
-The v0.4 source runtime implements pre-start routing correction, forward compilation through a selected destination, accepted record handoffs, derived checkpoint advances, replay, and verification projections. The loop-back semantics below remain the target lifecycle contract; post-start route correction, map-node creation, and dependency-derived readiness are not yet mutation commands. Until those commands are proven, evidence that invalidates an earlier started phase blocks dependent work and is recorded outside canonical state rather than repaired by hand.
+The v0.5 source runtime implements explicit data-model routing, pre-start routing correction, forward compilation through a selected destination, accepted record handoffs, derived checkpoint advances, replay, and verification projections. The loop-back semantics below remain the target lifecycle contract; post-start route correction, map-node creation, and dependency-derived readiness are not yet mutation commands. Until those commands are proven, evidence that invalidates an earlier started phase blocks dependent work and is recorded outside canonical state rather than repaired by hand.
 
 ## Canonical activity registry
 
@@ -51,11 +51,12 @@ Stage IDs are stable, kebab-case contract values.
 | `proposal` | A sales, funding, prioritization, or proceed/stop decision needs an integrated recommendation | Outcome and current evidence are sufficient to compare credible options | Business case, target workflow, preliminary logical/deployment view, options, recommendation, assumptions, risks, phases, and limits are packaged; the decision or external decision owner is recorded |
 | `experience-design` | Human tasks, interactions, information, service touchpoints, or accessibility are affected | Outcome and relevant process behavior are understood | Applicable journeys, task flows, information structure, interaction states, accessibility intent, and usability unknowns are settled or linked to owned evidence work |
 | `solution-architecture` | Technical boundaries or operational tradeoffs are material | Outcome and relevant process/experience constraints are available | Selected option and rejected alternatives, logical and deployment views, interfaces, data and integration constraints, operational concerns, reversibility, and unresolved decisions are recorded at the destination's required depth |
+| `data-model-design` | A database or durable store is introduced, or persisted semantics may change | Solution boundaries and an explicit persistence-impact determination are available | An evidence-backed no-impact disposition or sufficient conceptual, logical, and physical model is recorded, including invariants, ownership and tenancy, lifecycle, access patterns, security, migration and recovery, decisions, and obligations |
 | `brownfield-reconnaissance` | Existing code, data, integrations, or deployment behavior will change | Repository or system scope and intended behavior are bounded enough to inspect | Current behavior, ownership, seams, dependencies, tests, data effects, compatibility and migration constraints, deployment constraints, and blast radius are evidenced |
 | `standards-resolution` | Prototype, implementation, review, or release guidance must be selected | Technology and risk surface are known enough to evaluate applicability | Versioned applicable profiles, skipped modules, unknowns, executable mechanisms, and any waiver needs are recorded; re-evaluation triggers are set |
-| `specification` | Delivery needs a durable behavioral contract | Required product, process, UX, architecture, data, standards, and brownfield decisions are settled or explicitly blocked | The specification truthfully reports ready, draft, or blocked status and traces outcomes, behavior, constraints, acceptance, rollout, recovery, and open map nodes |
+| `specification` | Delivery needs a durable behavioral contract | Required product, process, UX, architecture, data-model disposition, standards, and brownfield decisions are settled or explicitly blocked | The specification truthfully reports ready, draft, or blocked status and traces outcomes, behavior, constraints, acceptance, rollout, recovery, and open map nodes |
 | `delivery-planning` | Work needs slicing, dependencies, coordination, or tracker publication | A ready-enough specification and publication authorization, when applicable, exist | Delivery slices, dependency types, coverage, proof obligations, release work, and final outcome-verification ownership are defined |
-| `implementation` | An authorized change is ready to build | Required inputs, standards profile, starting-state inventory, scope, and implementation authorization are present | The scoped change is implemented without claiming release; changed artifacts, deviations, and verification needs are registered |
+| `implementation` | An authorized change is ready to build | Required inputs, data-model disposition when persistence is present, standards profile, starting-state inventory, scope, and implementation authorization are present | The scoped change is implemented without claiming release; changed artifacts, deviations, and verification needs are registered |
 | `local-verification` | An implementation or executable artifact must be checked before release | A fixed review set and required proof profile exist | Applicable tests, static checks, reviews, contract checks, and failure paths have run; results are passed, failed, or honestly blocked with evidence |
 | `release` | An artifact must be promoted, published, migrated, or enabled outside the local worktree | Release authorization, acceptable local proof, target identity, rollout and recovery plan, and artifact identity exist | Promotion or rollout is recorded against the exact artifact, or the no-release disposition is explicit; incidents and rollback actions remain visible |
 | `deployed-verification` | The released behavior must be proven in its target environment | A release record and safe verification method exist | Deployment identity, critical journey, integration, migration, and operational checks required by the proof profile are evidenced or blocked |
@@ -126,7 +127,7 @@ intake
   -> outcome-verification
 ```
 
-Reconnaissance precedes solution selection. Its output establishes current behavior and blast radius; `solution-architecture` records the intended architecture delta. Business-process and experience stages remain applicable when the feature changes work outside the codebase or changes what a person must understand or do.
+Reconnaissance precedes solution selection. Its output establishes current behavior and blast radius; `solution-architecture` records the intended architecture delta, and `data-model-design` makes persistence impact explicit. Business-process and experience stages remain applicable when the feature changes work outside the codebase or changes what a person must understand or do.
 
 ### Proposal only
 
@@ -171,7 +172,7 @@ The abbreviated route is valid only when behavior and blast radius are bounded, 
 ### Loop-backs
 
 - Failed or ambiguous validation returns to `evidence-intake`, `process-model`, or `outcome-framing` according to what changed.
-- Experience and architecture may iterate when a technical constraint changes a human interaction or a user need changes a technical boundary.
+- Experience, architecture, and data-model design may iterate when a technical constraint changes a human interaction, a user need changes a technical boundary, or persistent invariants disprove an earlier design.
 - A changed stack or risk surface re-enters `standards-resolution` before affected work continues.
 - Failed local verification returns to `implementation` or the earliest stage whose assumption was disproved.
 - Failed deployed verification can return to `release`, `implementation`, or design; rollback remains an explicit release action.

@@ -72,6 +72,12 @@ def routing_input(**overrides: Any) -> dict[str, Any]:
                 "applicability": "applicable",
                 "reason": "Existing UI and pagination behavior must be bounded before editing.",
                 "evidence_references": ["captured-intake"],
+            },
+            {
+                "stage_id": "data-model-design",
+                "applicability": "not-applicable",
+                "reason": "Repository inspection found no change to persisted data semantics.",
+                "evidence_references": ["captured-intake"],
             }
         ],
         "authorization_boundary": {
@@ -578,6 +584,73 @@ def test_greenfield_profile_compiles_and_starts_without_a_legacy_route(
     started = read_result(start)
     assert started["route"] == "profile-compiled"
     assert started["current_stage"] == "outcome-framing"
+
+
+def test_database_backed_profile_makes_data_model_the_design_checkpoint(
+    tmp_path: Path,
+    workbench_cli: WorkbenchCLI,
+) -> None:
+    repo = captured_repo(tmp_path, workbench_cli, "routing-data-model")
+    value = routing_input(
+        stage_recommendations=[
+            {
+                "stage_id": "brownfield-reconnaissance",
+                "applicability": "applicable",
+                "reason": "Existing persistence behavior must be inspected before editing.",
+                "evidence_references": ["captured-intake"],
+            },
+            {
+                "stage_id": "solution-architecture",
+                "applicability": "applicable",
+                "reason": "The feature changes service and persistence boundaries.",
+                "evidence_references": ["captured-intake"],
+            },
+            {
+                "stage_id": "data-model-design",
+                "applicability": "applicable",
+                "reason": "The database schema and persisted invariants will change.",
+                "evidence_references": ["captured-intake"],
+            },
+        ]
+    )
+    result = finalize(
+        workbench_cli,
+        repo,
+        write_input(tmp_path / "data-model.json", value),
+    )
+
+    assert_succeeded(result)
+    routing = json.loads(
+        (repo / ".workbench" / "work" / WORK_ID / "routing.json").read_text(encoding="utf-8")
+    )
+    design = next(
+        phase for phase in routing["compiled_plan"]["phases"]
+        if phase["phase_id"] == "design-decide"
+    )
+    assert design["checkpoint_stage"] == "data-model-design"
+
+
+def test_software_profile_without_data_model_disposition_is_rejected_atomically(
+    tmp_path: Path,
+    workbench_cli: WorkbenchCLI,
+) -> None:
+    repo = captured_repo(tmp_path, workbench_cli, "routing-missing-data-model")
+    value = routing_input()
+    value["stage_recommendations"] = [
+        item for item in value["stage_recommendations"]
+        if item["stage_id"] != "data-model-design"
+    ]
+    before = persisted_bytes(repo)
+
+    result = finalize(
+        workbench_cli,
+        repo,
+        write_input(tmp_path / "missing-data-model.json", value),
+    )
+
+    assert_rejected(result)
+    assert "must explicitly classify data-model-design" in result.output
+    assert persisted_bytes(repo) == before
 
 
 @pytest.mark.parametrize(

@@ -43,6 +43,12 @@ def routed_repo(tmp_path: Path, cli: WorkbenchCLI) -> Path:
                 "reason": "The user already requested implementation.",
                 "evidence_references": ["captured-intake"],
             },
+            {
+                "stage_id": "data-model-design",
+                "applicability": "not-applicable",
+                "reason": "The focused test fixture does not alter persisted data semantics.",
+                "evidence_references": ["captured-intake"],
+            },
         ]
     )
     assert_succeeded(finalize(cli, repo, write_input(tmp_path / "routing.json", route)))
@@ -118,6 +124,7 @@ def test_manual_table_feedback_route_uses_six_checkpoints_without_process_or_pro
             ("proposal", "not-applicable", "Implementation was explicitly requested."),
             ("experience-design", "applicable", "Column interactions affect the user experience."),
             ("solution-architecture", "applicable", "UI, API, extraction, and CSV boundaries are material."),
+            ("data-model-design", "not-applicable", "The change does not alter persisted data semantics."),
         )
     ]
     value = routing_input(

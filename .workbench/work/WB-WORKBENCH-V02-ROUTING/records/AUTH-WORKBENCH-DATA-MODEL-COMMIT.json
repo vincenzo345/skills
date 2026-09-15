@@ -1,0 +1,37 @@
+{
+  "action": "commit",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-WORKBENCH-DATA-MODEL-COMMIT",
+  "grant": {
+    "expires_at": "2026-09-17T19:47:55.5084328Z",
+    "granted_at": "2026-09-15T19:47:55.5084328Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-15T19:47:55.5084328Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.1.0",
+  "scope": {
+    "constraints": [
+      "Commit and push only the verified first-class data-model lifecycle correction."
+    ],
+    "environment": "origin/main",
+    "targets": [
+      {
+        "kind": "repository",
+        "target_id": "skillsrepo"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

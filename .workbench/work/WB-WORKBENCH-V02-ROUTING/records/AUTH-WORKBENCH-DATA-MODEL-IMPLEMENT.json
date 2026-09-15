@@ -1,0 +1,38 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-WORKBENCH-DATA-MODEL-IMPLEMENT",
+  "grant": {
+    "expires_at": "2026-09-17T19:47:55.5084328Z",
+    "granted_at": "2026-09-15T19:47:55.5084328Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-15T19:47:55.5084328Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.1.0",
+  "scope": {
+    "constraints": [
+      "Implement only the first-class proportional data-model lifecycle correction and its verification."
+    ],
+    "environment": "local-worktree",
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

@@ -1,14 +1,22 @@
 {
-  "artifact_ids": [],
+  "artifact_ids": [
+    "ART-WORKBENCH-DATA-MODEL-CONTRACT"
+  ],
   "authorization_ids": [
-    "AUTH-WORKBENCH-V02-IMPLEMENT"
+    "AUTH-WORKBENCH-V02-IMPLEMENT",
+    "AUTH-WORKBENCH-DATA-MODEL-MUTATE",
+    "AUTH-WORKBENCH-DATA-MODEL-IMPLEMENT",
+    "AUTH-WORKBENCH-DATA-MODEL-COMMIT"
   ],
   "created_at": "2026-09-14T18:04:02.716602Z",
   "current_stage": "local-verification",
   "decision_ids": [],
   "desired_outcome": "Workbench persistently separates business basis, solution context, engagement intent, destination, and lane while escalating discovery only when material uncertainty justifies it.",
-  "handoff_ids": [],
-  "latest_event_id": "EVT-WORKBENCH-V02-ROUTING-000006",
+  "handoff_ids": [
+    "HO-WORKBENCH-DATA-MODEL-AUTH",
+    "HO-WORKBENCH-DATA-MODEL-VERIFIED"
+  ],
+  "latest_event_id": "EVT-WORKBENCH-V02-ROUTING-000008",
   "map_id": "MAP-WORKBENCH-V02-ROUTING",
   "next_action": {
     "description": "Satisfy the local-proof-disposition-recorded exit gate.",
@@ -24,7 +32,9 @@
     "kind": "human"
   },
   "planning_destination": "locally-verified-implementation",
-  "proof_ids": [],
+  "proof_ids": [
+    "PRF-WORKBENCH-DATA-MODEL-LOCAL"
+  ],
   "record_type": "workbench-state",
   "route_selection": {
     "rationale": "Selected by start command for destination locally-verified-implementation.",
@@ -114,7 +124,9 @@
         "target_id": "local-verification",
         "target_type": "stage"
       },
-      "output_artifact_ids": [],
+      "output_artifact_ids": [
+        "ART-WORKBENCH-DATA-MODEL-CONTRACT"
+      ],
       "owner": {
         "actor_id": "agent:workbench",
         "kind": "agent"
@@ -157,9 +169,9 @@
       "status": "pending"
     }
   ],
-  "state_revision": 6,
+  "state_revision": 8,
   "status": "active",
   "title": "Workbench v0.2 routing and bounded-discovery foundation",
-  "updated_at": "2026-09-14T18:30:12.405217Z",
+  "updated_at": "2026-09-15T20:04:42.837625Z",
   "work_id": "WB-WORKBENCH-V02-ROUTING"
 }

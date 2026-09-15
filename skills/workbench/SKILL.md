@@ -70,6 +70,7 @@ Read one relevant reference when its branch fires:
 - New request capture and clarification: [references/intake.md](references/intake.md)
 - Route, destination, lane, uncertainty, or specialist selection: [references/routing.md](references/routing.md)
 - Focused investigation or uncertainty escalation: [references/discovery.md](references/discovery.md)
+- Database-backed application or possible persisted-data impact: [references/data-modeling.md](references/data-modeling.md)
 - Handoff, decision, proof, authorization, or checkpoint movement: [references/stage-gates.md](references/stage-gates.md)
 - Commands, resumption, recovery, or persisted files: [references/state-management.md](references/state-management.md)
 

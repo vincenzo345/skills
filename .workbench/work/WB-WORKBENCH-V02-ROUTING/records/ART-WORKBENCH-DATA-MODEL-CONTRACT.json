@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-WORKBENCH-DATA-MODEL-CONTRACT",
+  "artifact_kind": "architecture",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "local-verification",
+      "kind": "stage",
+      "purpose": "Define proportional data-model applicability, content, gates, and proof."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "5f3ed4177b44ca9930f1244ac50e347f9a64fa97aa7a64545fb4817ed2e7fd0b"
+  },
+  "created_at": "2026-09-15T20:03:10.6877214Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": "skills/workbench/references/data-modeling.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "local-verification",
+  "proof_ids": [
+    "PRF-WORKBENCH-DATA-MODEL-LOCAL"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.3.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-WORKBENCH-V02-ROUTING",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "First-class data-model lifecycle contract",
+  "updated_at": "2026-09-15T20:03:10.6877214Z",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

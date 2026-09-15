@@ -1,6 +1,6 @@
 # Workbench Build Plan
 
-**Status:** In development — v0.4 same-item pre-start routing revision validated and globally installed  
+**Status:** In development — v0.5 first-class data-model design source-validated
 **Recorded:** 2026-09-14
 
 ## Implementation progress
@@ -8,7 +8,7 @@
 The first contract-and-runtime slice now exists:
 
 - Four foundation documents define purpose, workflow, artifacts, and informed-decision policy.
-- A machine-readable lifecycle registry owns eight operational phases, 17 reusable domain activities, five legacy replay routes, planning destinations, gate handler IDs, and honest work statuses.
+- A machine-readable lifecycle registry owns eight operational phases, 18 reusable domain activities, five legacy replay routes, planning destinations, gate handler IDs, and honest work statuses.
 - Twelve bundled schemas define lifecycle/common vocabulary plus pre-route intake, intake-bound routing, state, events, maps, artifacts, decisions, proof, authorizations, and specialist handoffs.
 - Five executable route scenarios cover existing process, unproven process, brownfield feature, proposal-only, and the small-change fast lane.
 - Comparison fixtures preserve evidence attribution, process modeling, uncertainty mapping, informed decisions, ticket coverage, and proof-level behavior.
@@ -20,9 +20,10 @@ The first contract-and-runtime slice now exists:
 - `status` and `resume` return the complete actionable projection; `next` remains an optional focused view. A bound start cites and hashes both `intake.json` and the latest valid routing receipt. Greenfield and brownfield profiles compile directly without inventing a fixed route for each combination.
 - Event replay reconstructs state and map from an empty projection, validates every event/state/map/proof/authorization against the bundled schemas, checks canonical transition metadata and exact target IDs, and blocks snapshot divergence.
 - Mutations use idempotency fingerprints, expected revisions, an OS-released exclusive lock, a transaction journal, content hashes, and bounded roll-forward recovery. Gate enforcement includes registered exit-gate identity, receipt freshness, destination proof kind, exact proof semantics, and scoped implementation, deployment, and closure authorization.
-- The black-box runtime suite covers normal commands, durable free-form intake, routing finalization and blockers, append-only routing revision, legacy receipt upgrade, exact revision provenance, phase compilation, accepted handoffs, record and content tamper detection, proof-target fidelity, separated verification scopes, corruption rejection, stale revisions, illegal before-values, record identity conflicts, malformed proof/authorization records, capability scope/expiry, destination completion, crash recovery, and atomic rejection. The v0.4 source and installed-package runs pass 83 tests.
+- The black-box runtime suite covers normal commands, durable free-form intake, routing finalization and blockers, append-only routing revision, legacy receipt upgrade, exact revision provenance, phase compilation, explicit data-model classification, accepted handoffs, record and content tamper detection, proof-target fidelity, separated verification scopes, corruption rejection, stale revisions, illegal before-values, record identity conflicts, malformed proof/authorization records, capability scope/expiry, destination completion, crash recovery, and atomic rejection. The v0.5 source run passes 85 tests; the previously installed v0.4 package passed 83.
 - The v0.4 package is installed at `C:\Users\vince\.agents\skills\workbench` and exposed to Codex at `C:\Users\vince\.codex\skills\workbench`. The source and installed junction each pass all 83 runtime/status tests; an isolated copied package passes validation plus 24 focused routing and v0.3 compatibility tests. Its 25 maintained source files match the installed hashes. Prior v0.2, v0.3, and pre-v0.4 copies remain recoverable under `C:\Users\vince\.agents\skill-backups`, outside the discoverable skill directory.
 - The v0.3.1 skill correction narrows new-item invocation to an explicit human signal, treats specialist activities as methods rather than automatic subagents, reuses one evidence inventory and canonical phase artifact, makes review and verification risk-targeted, and moves legacy manual-receipt instructions off the normal path.
+- The v0.5 correction makes `data-model-design` a first-class Design and Decide activity. Every greenfield or brownfield software profile must explicitly record its applicability; database-impacting work cannot silently proceed to specification or implementation, while an evidenced no-impact disposition keeps bounded work lean.
 
 Independent reviews first blocked mutation until lifecycle, decision, delegation, replay, handoff, scenario, map, and proof-vocabulary drift was resolved. Runtime review then found and drove fixes for shallow embedded-record checks, duplicate identities, record-target tampering, crash-stale locks, schema-invalid replay, mismatched proof semantics, and contradictory audit metadata.
 
@@ -84,6 +85,17 @@ The v0.4 correction:
 - preserves backward compatibility by treating older receipts without an explicit revision field as revision one.
 
 This solves the pre-start clarification path only. Evidence that invalidates routing after lifecycle start still requires a separate event-sourced route-correction slice; agents must preserve the same item and report that limitation rather than editing state or creating a duplicate.
+
+## v0.5: first-class data-model design
+
+Database design must not disappear inside a generic architecture or implementation step. The v0.5 correction:
+
+- adds `data-model-design` to Design and Decide and `data-model` to the artifact vocabulary;
+- requires every greenfield or brownfield software routing receipt to classify the activity explicitly;
+- makes the activity the phase checkpoint when persistent concepts, invariants, ownership, lifecycle, access patterns, security, or migration behavior may change;
+- permits a concise evidence-backed no-impact disposition when persistence is genuinely unaffected;
+- requires the applicable disposition before specification or implementation; and
+- routes detailed conceptual, logical, physical, migration, operational, and proof guidance through one conditional reference rather than bloating the Workbench entrypoint.
 
 ## Purpose
 
@@ -479,19 +491,20 @@ Vendor an exact upstream commit, retain the upstream license and attribution, re
 5. Add `finalize-intake` and an immutable routing receipt that separates business basis, solution context, engagement intent, destination, and lane; project it through `status`, `next`, `resume`, bound starts, and replay. **Complete, forward-tested, and globally installed for v0.2.**
 6. Add proportional phase compilation, destination truncation, atomic route-and-start, accepted handoffs, local artifact integrity, proof-target fidelity, and multidimensional verification. **Implemented, source-validated, copied-package forward-tested, and globally installed in v0.3: 79 black-box runtime/status tests, 10 comparison cases, 10 negative contract cases, 14 record instances, five scenarios, 12 schemas, and skill-package validation pass.**
 7. Add same-item, append-only pre-start routing revision with explicit question resolutions, lineage validation, exact start binding, and legacy-receipt compatibility. **Complete, forward-tested, and globally installed for v0.4: 83 source tests, 24 copied-package compatibility tests, 83 installed-package tests, and skill-package validation pass.**
-8. Exercise the manual-table feedback case plus existing-process, greenfield, and brownfield requests through the v0.3 kernel using real contracts and specialist stubs where needed.
-9. Rebuild `to-record` as evidence intake, retaining its tested word-preservation check while adding source-span and attribution lineage.
-10. Split `to-scope` into process modeling and build scoping; preserve recognition-based review, authority, coverage, conflicts, manual work, and anti-exhaustion behavior without requiring every process to be a tree.
-11. Add process validation and proposal generation, including a proposal-only stop before POC or implementation.
-12. Add experience design and solution/infrastructure architecture as collaborating specialists.
-13. Add brownfield reconnaissance and architecture-delta handling.
-14. Add the standards resolver with a small vertical profile.
-15. Centralize the delivery-proof contract, then adapt `to-spec`, `to-tickets`, `implement`, and `code-review` to consume it.
-16. Add release, deployed verification, and transfer of long-running outcome measurement.
-17. Vendor and adapt UI/UX Pro Max after its advisory boundary and update tests are exercised.
-18. Adapt triage, diagnosis, module-deepening, TDD, and merge resolution as conditional specialist entrances and methods.
-19. Retire the superseded router, setup, and handoff behaviors only after comparison fixtures and real scenarios pass.
-20. Exercise the complete system on real work before declaring version 1 stable.
+8. Make data-model design a first-class conditional activity with an explicit routing disposition for every software profile. **Complete and source-validated for v0.5: 85 runtime/status tests, schema/fixture validation, skill-package validation, and plugin-manifest validation pass.**
+9. Exercise the manual-table feedback case plus existing-process, greenfield, and brownfield requests through the v0.3 kernel using real contracts and specialist stubs where needed.
+10. Rebuild `to-record` as evidence intake, retaining its tested word-preservation check while adding source-span and attribution lineage.
+11. Split `to-scope` into process modeling and build scoping; preserve recognition-based review, authority, coverage, conflicts, manual work, and anti-exhaustion behavior without requiring every process to be a tree.
+12. Add process validation and proposal generation, including a proposal-only stop before POC or implementation.
+13. Add experience design and solution/infrastructure architecture as collaborating specialists.
+14. Add brownfield reconnaissance and architecture-delta handling.
+15. Add the standards resolver with a small vertical profile.
+16. Centralize the delivery-proof contract, then adapt `to-spec`, `to-tickets`, `implement`, and `code-review` to consume it.
+17. Add release, deployed verification, and transfer of long-running outcome measurement.
+18. Vendor and adapt UI/UX Pro Max after its advisory boundary and update tests are exercised.
+19. Adapt triage, diagnosis, module-deepening, TDD, and merge resolution as conditional specialist entrances and methods.
+20. Retire the superseded router, setup, and handoff behaviors only after comparison fixtures and real scenarios pass.
+21. Exercise the complete system on real work before declaring version 1 stable.
 
 ## First pilot
 
@@ -541,6 +554,6 @@ Complete and promote the v0.3 correction slice:
 
 7. ~~Validate and globally promote v0.4, including the exact finalized-question/answered-question failure case, legacy receipt compatibility, stale-update rejection, predecessor tamper detection, and fresh-repository installation proof.~~ **Passed: 83 source tests, 24 isolated-package focused tests, 83 installed-package tests, schema/fixture validation, package validation, and exact 25-file source/install hash parity.**
 
-After v0.4 is proven, add map-node mutation and dependency-derived readiness as one bounded slice, then post-start route correction and validation loops. Add a new discovery abstraction only if two real pilots expose the same unmet method.
+After v0.5 is promoted, add map-node mutation and dependency-derived readiness as one bounded slice, then post-start route correction and validation loops. Add a new discovery abstraction only if two real pilots expose the same unmet method.
 
-Workbench v0.4 is now the globally installed coordinator. The next runtime slice is map-node mutation and dependency-derived readiness, followed by post-start route correction and validation loops. Those deferred capabilities must not be simulated by hand-editing canonical state.
+Workbench v0.4 remains the globally installed coordinator; v0.5 is the source-validated candidate. The next runtime slice after promotion is map-node mutation and dependency-derived readiness, followed by post-start route correction and validation loops. Those deferred capabilities must not be simulated by hand-editing canonical state.

@@ -1,0 +1,61 @@
+{
+  "applicability": {
+    "applied": [
+      "data-model-design",
+      "local-verification"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": "skills/workbench/references/data-modeling.md",
+      "record_id": "ART-WORKBENCH-DATA-MODEL-CONTRACT",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-WORKBENCH-DATA-MODEL-MUTATE",
+    "AUTH-WORKBENCH-DATA-MODEL-IMPLEMENT",
+    "AUTH-WORKBENCH-DATA-MODEL-COMMIT"
+  ],
+  "created_at": "2026-09-15T20:03:10.6877214Z",
+  "decisions_required": [],
+  "findings": [
+    "Every new greenfield or brownfield routing receipt must explicitly classify data-model-design.",
+    "An applicable data-model activity becomes the Design and Decide checkpoint; an evidenced no-impact disposition keeps it non-applicable.",
+    "Legacy fixed-route replay remains unchanged.",
+    "The 85-test runtime/status suite and all structural validators pass."
+  ],
+  "handoff_id": "HO-WORKBENCH-DATA-MODEL-VERIFIED",
+  "idempotency_key": "workbench:data-model-gap:verification:001",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "b28fb5f0ea3430250db1d2791ecc188c7c76d0909b5805bb0569f72611e70d0a"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-WORKBENCH-V02-ROUTING",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-WORKBENCH-V02-ROUTING",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "artifact_contracts": "0.3.0",
+    "decision_policy": "0.3.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.3.0",
+  "specialist": "local-verification",
+  "stage": "local-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "why_next": "The correction is locally verified; commit and push it under the recorded authorization without claiming Workbench item closure.",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

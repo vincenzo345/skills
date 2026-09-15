@@ -15,6 +15,7 @@
         "proposal",
         "experience-design",
         "solution-architecture",
+        "data-model-design",
         "brownfield-reconnaissance",
         "standards-resolution",
         "specification",
@@ -71,7 +72,7 @@
     }
   },
   "x-workbench": {
-    "registry_version": "0.3.0",
+    "registry_version": "0.5.0",
     "phases": [
       {
         "id": "frame",
@@ -85,8 +86,8 @@
       },
       {
         "id": "design-decide",
-        "activities": ["proposal", "experience-design", "solution-architecture"],
-        "default_checkpoint": "solution-architecture"
+        "activities": ["proposal", "experience-design", "solution-architecture", "data-model-design"],
+        "default_checkpoint": "data-model-design"
       },
       {
         "id": "plan",
@@ -214,6 +215,13 @@
         "applicability_rule": "technical-boundaries-material",
         "entry_gate": "solution-constraints-available",
         "exit_gate": "architecture-decision-recorded"
+      },
+      {
+        "id": "data-model-design",
+        "phase_id": "design-decide",
+        "applicability_rule": "database-backed-application",
+        "entry_gate": "solution-boundaries-and-persistence-impact-known",
+        "exit_gate": "data-model-disposition-recorded"
       },
       {
         "id": "brownfield-reconnaissance",

@@ -189,6 +189,10 @@ def validate_schemas(check: Check) -> tuple[dict[str, Any], Registry[Any]]:
         "lifecycle: planning-destination enum and registry differ",
     )
     check.require(work_statuses == registered_statuses, "lifecycle: work-status enum and registry differ")
+    check.require(
+        "data-model-design" in stage_ids,
+        "lifecycle: data-model-design is not a first-class activity",
+    )
     phase_memberships: Counter[str] = Counter()
     phase_for_stage: dict[str, str] = {}
     for phase in machine_registry.get("phases", []):
@@ -257,6 +261,16 @@ def validate_schemas(check: Check) -> tuple[dict[str, Any], Registry[Any]]:
         .get("$defs", {})
         .get("proofKind", {})
         .get("enum", [])
+    )
+    artifact_kinds = set(
+        documents.get("workbench-artifact.schema.json", {})
+        .get("properties", {})
+        .get("artifact_kind", {})
+        .get("enum", [])
+    )
+    check.require(
+        "data-model" in artifact_kinds,
+        "artifact contract: data-model is not a first-class artifact kind",
     )
     for destination in machine_registry.get("destinations", []):
         destination_id = destination.get("id", "<missing>")

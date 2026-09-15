@@ -26,7 +26,7 @@ else:
 HERE = Path(__file__).resolve().parent
 SCHEMA_DIR = HERE.parent / "references" / "schemas"
 LIFECYCLE_PATH = SCHEMA_DIR / "workbench-lifecycle.schema.json"
-RUNTIME_VERSION = "0.4.0"
+RUNTIME_VERSION = "0.5.0"
 WORK_ID_RE = re.compile(r"^WB-[A-Z0-9][A-Z0-9._-]{1,63}$")
 BLOCKING = {"waiting-for-human", "external-blocked", "evidence-blocked"}
 LEGAL_CHANGE_PREFIXES = {
@@ -1362,6 +1362,9 @@ def validate_routing(record: dict[str, Any], intake: dict[str, Any] | None = Non
     if context == "greenfield":
         fail(runtime_route is None,
              f"{label} cannot force a greenfield profile into a legacy runtime route")
+    if schema_version >= (0, 5, 0) and context in {"greenfield", "brownfield"}:
+        fail("data-model-design" in stage_ids,
+             f"{label} must explicitly classify data-model-design for software work")
 
     if schema_version >= (0, 3, 0):
         _, _, destinations, phases = lifecycle()

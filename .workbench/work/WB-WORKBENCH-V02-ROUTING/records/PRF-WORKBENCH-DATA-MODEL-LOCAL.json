@@ -1,0 +1,54 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-WORKBENCH-DATA-MODEL-CONTRACT",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "This proves local source behavior, not global installation or deployment."
+      ],
+      "non_vacuity_check": "Two focused regression tests fail against the pre-v0.5 behavior and pass against the corrected runtime.",
+      "observed_at": "2026-09-15T20:03:10.6877214Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Pytest exercised 85 runtime/status cases; Workbench, skill, and plugin validators passed.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-WORKBENCH-DATA-MODEL-LOCAL",
+      "result": "passed"
+    }
+  ],
+  "applicability": "required",
+  "claim": "The Workbench source implements and validates explicit proportional data-model design for new software profiles.",
+  "created_at": "2026-09-15T20:03:10.6877214Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-WORKBENCH-DATA-MODEL-LOCAL",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Software routing without a data-model disposition is rejected atomically.",
+        "Applicable data-model work becomes the design checkpoint.",
+        "Legacy fixed routes and the complete regression suite remain valid."
+      ],
+      "description": "Exercise data-model routing enforcement, applicable checkpoint compilation, legacy compatibility, and package contracts.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Independent runtime tests and structural validators report concrete passing results.",
+      "requirement_id": "REQ-WORKBENCH-DATA-MODEL-LOCAL"
+    }
+  ],
+  "schema_version": "0.1.0",
+  "status": "passed",
+  "updated_at": "2026-09-15T20:03:10.6877214Z",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

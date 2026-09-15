@@ -1,0 +1,83 @@
+{
+  "applicability": {
+    "applied": [
+      "local-verification"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [],
+  "authorization_ids": [
+    "AUTH-WORKBENCH-DATA-MODEL-MUTATE",
+    "AUTH-WORKBENCH-DATA-MODEL-IMPLEMENT",
+    "AUTH-WORKBENCH-DATA-MODEL-COMMIT"
+  ],
+  "blockers": [
+    {
+      "description": "The lifecycle omits a first-class data-model activity and persistence-impact disposition.",
+      "kind": "validation",
+      "next_action": {
+        "description": "Implement and verify the authorized lifecycle correction.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "local-verification",
+        "target_type": "stage"
+      },
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "references": [
+        {
+          "record_id": "WB-WORKBENCH-V02-ROUTING",
+          "record_type": "work"
+        }
+      ]
+    }
+  ],
+  "created_at": "2026-09-15T19:47:55.5084328Z",
+  "decisions_required": [],
+  "findings": [
+    "The lifecycle can reach specification or implementation without explicitly determining whether a database-backed application needs data-model design."
+  ],
+  "handoff_id": "HO-WORKBENCH-DATA-MODEL-AUTH",
+  "idempotency_key": "workbench:data-model-gap:authorization:001",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "b28fb5f0ea3430250db1d2791ecc188c7c76d0909b5805bb0569f72611e70d0a"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-WORKBENCH-V02-ROUTING",
+      "record_type": "work"
+    }
+  ],
+  "next_action": {
+    "description": "Add and verify a first-class proportional data-model activity before accepting local verification.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "local-verification",
+    "target_type": "stage"
+  },
+  "node_id": "O-WORKBENCH-V02-ROUTING",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "artifact_contracts": "0.3.0",
+    "decision_policy": "0.3.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.3.0",
+  "specialist": "local-verification",
+  "stage": "local-verification",
+  "status": "blocked",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}
