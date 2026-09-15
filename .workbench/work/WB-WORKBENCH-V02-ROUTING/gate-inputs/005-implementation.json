@@ -1,0 +1,15 @@
+{
+  "work_id": "WB-WORKBENCH-V02-ROUTING",
+  "state_revision": 5,
+  "stage_id": "implementation",
+  "exit_gate": "scoped-change-registered",
+  "result": "passed",
+  "checked_at": "2026-09-14T18:29:09Z",
+  "checked_by": "agent:codex",
+  "evidence": [
+    {"record_type": "external", "record_id": "WORKBENCH-ROUTING-SCHEMA", "uri": "schemas/workbench-routing-receipt.schema.json"},
+    {"record_type": "external", "record_id": "WORKBENCH-RUNTIME-SOURCE", "uri": "skills/skills/engineering/workbench/scripts/workbench.py"},
+    {"record_type": "external", "record_id": "WORKBENCH-ROUTING-TESTS", "uri": "tests/runtime/test_workbench_routing.py"},
+    {"record_type": "external", "record_id": "WORKBENCH-GLOBAL-PACKAGE", "uri": "C:/Users/vince/.agents/skills/workbench"}
+  ]
+}

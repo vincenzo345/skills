@@ -1,0 +1,107 @@
+{
+  "record_type": "workbench-handoff",
+  "schema_version": "0.1.0",
+  "handoff_id": "HO-PROP-001",
+  "work_id": "WB-PROP-001",
+  "node_id": "D-PROP-001",
+  "stage": "proposal",
+  "specialist": "proposal-review",
+  "status": "decision-required",
+  "owner": {
+    "actor_id": "agent:proposal-review",
+    "kind": "agent"
+  },
+  "idempotency_key": "WB-PROP-001:proposal-review:HO-PROP-001",
+  "next_action": {
+    "description": "Sponsor selects proceed, hold, or reject in DEC-PROP-001.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human",
+      "display_name": "Vince"
+    },
+    "target_type": "decision",
+    "target_id": "DEC-PROP-001"
+  },
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "inputs_used": [
+    {
+      "record_type": "artifact",
+      "record_id": "ART-PROP-001",
+      "path": "proposals/scheduling-discovery.md"
+    }
+  ],
+  "applicability": {
+    "applied": [
+      "proposal-quality-review",
+      "decision-framing"
+    ],
+    "skipped": [],
+    "could_not_determine": []
+  },
+  "policy_versions": {
+    "decision_policy": "0.1.0",
+    "artifact_contracts": "0.1.0"
+  },
+  "findings": [
+    "The proposal is internally complete for its stated planning destination.",
+    "The preliminary architecture remains a proposal hypothesis, not a delivery architecture commitment."
+  ],
+  "options": [
+    {
+      "name": "Proceed to delivery discovery",
+      "benefits": [
+        "Tests the proposal's process and architecture assumptions."
+      ],
+      "costs": [
+        "Requires separate funding and authorization."
+      ],
+      "risks": [
+        "Discovery may invalidate proposal assumptions."
+      ]
+    },
+    {
+      "name": "Hold or reject",
+      "benefits": [
+        "Avoids immediate discovery cost."
+      ],
+      "costs": [
+        "Delays or ends this path toward resolving the scheduling problem."
+      ],
+      "risks": [
+        "The proposal may become stale while held."
+      ]
+    }
+  ],
+  "recommendation": {
+    "choice": "Proceed to delivery discovery",
+    "rationale": "The proposal justifies a bounded next investigation while preserving the human's authority over funding and scope.",
+    "assumptions": [
+      "The sponsor still values the desired outcome."
+    ],
+    "tradeoffs": [
+      "Spend on discovery now to reduce delivery risk later."
+    ],
+    "confidence": "medium"
+  },
+  "decisions_required": [
+    {
+      "decision_id": "DEC-PROP-001",
+      "question": "Should the sponsor fund delivery discovery, hold the proposal, or reject it?"
+    }
+  ],
+  "artifacts_produced": [],
+  "node_updates": [
+    {
+      "node_id": "D-PROP-001",
+      "proposed_status": "waiting-for-human",
+      "rationale": "The proposal review is complete; only the sponsor can make the consequential disposition decision."
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-PROP-001"
+  ],
+  "created_at": "2026-09-14T11:00:00-05:00"
+}

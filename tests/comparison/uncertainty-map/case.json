@@ -1,0 +1,143 @@
+{
+  "fixture_version": "1.0.0",
+  "desired_outcome": {
+    "node_id": "O-INTAKE-001",
+    "statement": "Reduce incomplete intake submissions without increasing staff rescue work."
+  },
+  "initial_fog": [
+    {
+      "fog_id": "FOG-INTAKE-001",
+      "description": "We do not know whether failures come from confusing questions or missing customer information.",
+      "owner": "agent"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "Q-FAILURE-001",
+      "kind": "question",
+      "owner": "agent",
+      "question": "Where and why do representative users abandon or require rescue?"
+    },
+    {
+      "node_id": "E-OBSERVE-001",
+      "kind": "evidence-task",
+      "owner": "agent",
+      "question": "What do completion, abandonment, and rescue observations show?"
+    },
+    {
+      "node_id": "D-PROCESS-001",
+      "kind": "decision",
+      "owner": "user",
+      "question": "Which intake behavior should be tested next?"
+    },
+    {
+      "node_id": "OB-MEASURE-001",
+      "kind": "obligation",
+      "owner": "external",
+      "question": "Who will measure rescue work after the test period?"
+    },
+    {
+      "node_id": "DLV-EXPERIMENT-001",
+      "kind": "deliverable",
+      "owner": "agent",
+      "question": "What bounded experiment implements the selected test?"
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "E-OBSERVE-001",
+      "to": "Q-FAILURE-001",
+      "relationship": "supports"
+    },
+    {
+      "from": "Q-FAILURE-001",
+      "to": "D-PROCESS-001",
+      "relationship": "supports"
+    },
+    {
+      "from": "D-PROCESS-001",
+      "to": "OB-MEASURE-001",
+      "relationship": "creates"
+    },
+    {
+      "from": "D-PROCESS-001",
+      "to": "DLV-EXPERIMENT-001",
+      "relationship": "enables"
+    }
+  ],
+  "events": [
+    "fog-recorded",
+    "question-formed",
+    "evidence-task-created",
+    "evidence-attached",
+    "decision-confirmed",
+    "obligation-created",
+    "deliverable-created",
+    "evidence-invalidated"
+  ],
+  "checkpoints": [
+    {
+      "name": "after-question-formation",
+      "ready_frontier": {
+        "agent": [
+          "E-OBSERVE-001"
+        ],
+        "user": [],
+        "external": []
+      },
+      "blocked": [
+        "D-PROCESS-001",
+        "OB-MEASURE-001",
+        "DLV-EXPERIMENT-001"
+      ]
+    },
+    {
+      "name": "after-evidence",
+      "ready_frontier": {
+        "agent": [],
+        "user": [
+          "D-PROCESS-001"
+        ],
+        "external": []
+      },
+      "blocked": [
+        "OB-MEASURE-001",
+        "DLV-EXPERIMENT-001"
+      ]
+    },
+    {
+      "name": "after-decision",
+      "ready_frontier": {
+        "agent": [
+          "DLV-EXPERIMENT-001"
+        ],
+        "user": [],
+        "external": [
+          "OB-MEASURE-001"
+        ]
+      },
+      "blocked": []
+    },
+    {
+      "name": "after-invalidation",
+      "ready_frontier": {
+        "agent": [
+          "E-OBSERVE-001"
+        ],
+        "user": [],
+        "external": []
+      },
+      "blocked": [
+        "D-PROCESS-001",
+        "OB-MEASURE-001",
+        "DLV-EXPERIMENT-001"
+      ],
+      "expected_state_changes": [
+        "Q-FAILURE-001 reopens",
+        "D-PROCESS-001 is superseded",
+        "OB-MEASURE-001 and DLV-EXPERIMENT-001 remain visible but blocked"
+      ]
+    }
+  ],
+  "migration_invariant": "Fog becomes a precise question and ready evidence work; evidence unlocks a human decision; the decision creates owned delivery work; invalidation reopens the earliest dependency without erasing obligations or history."
+}

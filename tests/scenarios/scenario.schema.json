@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/test-scenario.schema.json",
+  "title": "Workbench route acceptance scenario",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scenario_version",
+    "id",
+    "title",
+    "entrance",
+    "planning_destination",
+    "request",
+    "given",
+    "expected"
+  ],
+  "properties": {
+    "scenario_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^SCN-[A-Z0-9][A-Z0-9-]{2,63}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entrance": {
+      "$ref": "https://workbench.local/schemas/v1/workbench-lifecycle.schema.json#/$defs/routeKind"
+    },
+    "planning_destination": {
+      "$ref": "https://workbench.local/schemas/v1/workbench-lifecycle.schema.json#/$defs/planningDestination"
+    },
+    "request": {
+      "type": "string",
+      "minLength": 1
+    },
+    "given": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_present",
+        "existing_process",
+        "process_claim_proven",
+        "human_interaction_changed",
+        "external_approval_required",
+        "authorized_actions"
+      ],
+      "properties": {
+        "repository_present": {
+          "type": "boolean"
+        },
+        "existing_process": {
+          "type": "boolean"
+        },
+        "process_claim_proven": {
+          "type": "boolean"
+        },
+        "human_interaction_changed": {
+          "type": "boolean"
+        },
+        "external_approval_required": {
+          "type": "boolean"
+        },
+        "authorized_actions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://workbench.local/schemas/v1/workbench-authorization.schema.json#/properties/action"
+          }
+        }
+      }
+    },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route",
+        "required_map_nodes",
+        "required_artifacts",
+        "decisions",
+        "authorizations",
+        "valid_stop_after",
+        "terminal_disposition",
+        "must_not_create",
+        "route_expansion_when"
+      ],
+      "properties": {
+        "route": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "https://workbench.local/schemas/v1/workbench-lifecycle.schema.json#/$defs/stageId"
+          }
+        },
+        "required_map_nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mapExpectation"
+          }
+        },
+        "required_artifacts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/decisionExpectation"
+          }
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/authorizationExpectation"
+          }
+        },
+        "valid_stop_after": {
+          "$ref": "https://workbench.local/schemas/v1/workbench-lifecycle.schema.json#/$defs/stageId"
+        },
+        "terminal_disposition": {
+          "$ref": "https://workbench.local/schemas/v1/workbench-lifecycle.schema.json#/$defs/workStatus"
+        },
+        "must_not_create": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "route_expansion_when": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "condition"
+            ],
+            "properties": {
+              "condition": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reenter_at": {
+                "$ref": "https://workbench.local/schemas/v1/workbench-lifecycle.schema.json#/$defs/stageId"
+              },
+              "disposition": {
+                "$ref": "https://workbench.local/schemas/v1/workbench-lifecycle.schema.json#/$defs/workStatus"
+              }
+            },
+            "oneOf": [
+              {
+                "required": [
+                  "reenter_at"
+                ]
+              },
+              {
+                "required": [
+                  "disposition"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "mapExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "kind",
+        "owner",
+        "question",
+        "done_when",
+        "depends_on"
+      ],
+      "properties": {
+        "node_id": {
+          "$ref": "https://workbench.local/schemas/v1/workbench-common.schema.json#/$defs/nodeId"
+        },
+        "kind": {
+          "enum": [
+            "outcome",
+            "question",
+            "evidence-task",
+            "experiment",
+            "decision",
+            "obligation",
+            "deliverable"
+          ]
+        },
+        "owner": {
+          "enum": [
+            "agent",
+            "user",
+            "external"
+          ]
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "done_when": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "depends_on": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://workbench.local/schemas/v1/workbench-common.schema.json#/$defs/nodeId"
+          }
+        }
+      }
+    },
+    "decisionExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_id",
+        "owner",
+        "question",
+        "consequence"
+      ],
+      "properties": {
+        "decision_id": {
+          "$ref": "https://workbench.local/schemas/v1/workbench-common.schema.json#/$defs/decisionId"
+        },
+        "owner": {
+          "const": "user"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consequence": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "authorizationExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "status",
+        "target"
+      ],
+      "properties": {
+        "action": {
+          "$ref": "https://workbench.local/schemas/v1/workbench-authorization.schema.json#/properties/action"
+        },
+        "status": {
+          "enum": [
+            "granted",
+            "requested",
+            "not-required"
+          ]
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

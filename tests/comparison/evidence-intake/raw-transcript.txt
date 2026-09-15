@@ -1,0 +1,8 @@
+0:00
+(Ada Wong) A request arrives in the shared inbox.
+0:08
+(Ada Wong) I create the case. - (Ben Choi) Right.
+0:16
+(Ada Wong) Finance verifies the amount.
+0:24
+(Ben Choi) Operations submits the approved payment.

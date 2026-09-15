@@ -1,0 +1,39 @@
+{
+  "work_id": "WB-WORKBENCH-V02-ROUTING",
+  "state_revision": 4,
+  "stage_id": "standards-resolution",
+  "exit_gate": "applicable-profile-recorded",
+  "result": "passed",
+  "checked_at": "2026-09-14T18:29:09Z",
+  "checked_by": "agent:codex",
+  "evidence": [
+    {"record_type": "external", "record_id": "WORKBENCH-SKILL-CONTRACT", "uri": "skills/skills/engineering/workbench/SKILL.md"},
+    {"record_type": "external", "record_id": "WORKBENCH-TEST-CONTRACT", "uri": "tests/runtime/test_workbench_routing.py"}
+  ],
+  "authorization_records": [
+    {
+      "record_type": "workbench-authorization",
+      "schema_version": "0.1.0",
+      "authorization_id": "AUTH-WORKBENCH-V02-IMPLEMENT",
+      "work_id": "WB-WORKBENCH-V02-ROUTING",
+      "action": "implementation",
+      "status": "granted",
+      "scope": {
+        "targets": [
+          {"kind": "stage", "target_id": "implementation", "stage_id": "implementation"}
+        ],
+        "constraints": [
+          "Implement and globally install the v0.2 routing foundation; do not commit or deploy."
+        ]
+      },
+      "requested_by": {"actor_id": "agent:codex", "kind": "agent"},
+      "authority": {"actor_id": "user:vince", "kind": "human"},
+      "requested_at": "2026-09-14T18:03:00Z",
+      "grant": {
+        "granted_by": {"actor_id": "user:vince", "kind": "human"},
+        "granted_at": "2026-09-14T18:03:00Z",
+        "expires_at": "2026-09-15T18:03:00Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-intake.schema.json",
+  "title": "Workbench Captured Intake",
+  "description": "An immutable copy of the user's free-form request before Workbench commits a route, destination, or synthesized outcome.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "work_id",
+    "status",
+    "raw_request",
+    "source_references",
+    "route",
+    "planning_destination",
+    "owner",
+    "next_action",
+    "idempotency_key",
+    "input_fingerprint",
+    "created_at"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "workbench-intake"
+    },
+    "schema_version": {
+      "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+    },
+    "work_id": {
+      "$ref": "workbench-common.schema.json#/$defs/workId"
+    },
+    "status": {
+      "const": "captured"
+    },
+    "raw_request": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 65536,
+      "pattern": "\\S"
+    },
+    "source_references": {
+      "type": "array",
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+      }
+    },
+    "route": {
+      "const": null
+    },
+    "planning_destination": {
+      "const": null
+    },
+    "owner": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "next_action": {
+      "$ref": "workbench-common.schema.json#/$defs/nextAction"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256
+    },
+    "input_fingerprint": {
+      "$ref": "workbench-common.schema.json#/$defs/digest"
+    },
+    "created_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    }
+  }
+}

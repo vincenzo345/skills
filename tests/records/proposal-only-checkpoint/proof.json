@@ -1,0 +1,56 @@
+{
+  "record_type": "workbench-proof",
+  "schema_version": "0.1.0",
+  "proof_id": "PRF-PROP-001",
+  "work_id": "WB-PROP-001",
+  "claim": "The proposal contains the information required for a proceed, hold, or reject decision without implying delivery authorization.",
+  "applicability": "required",
+  "status": "passed",
+  "owner": {
+    "actor_id": "human:proposal-reviewer",
+    "kind": "human",
+    "display_name": "Proposal reviewer"
+  },
+  "required_proof": [
+    {
+      "requirement_id": "REQ-PROP-001",
+      "kind": "artifact-validity",
+      "description": "Independently inspect the proposal package for required content and claim boundaries.",
+      "acceptance_criteria": [
+        "The desired outcome, scope, assumptions, risks, preliminary architecture, and next decision are explicit.",
+        "The proposal does not claim process validation, implementation authorization, deployment, or business-outcome achievement."
+      ],
+      "oracle_requirement": "A reviewer other than the producing agent compares the rendered proposal with the checklist."
+    }
+  ],
+  "achieved_proof": [
+    {
+      "requirement_id": "REQ-PROP-001",
+      "kind": "artifact-validity",
+      "result": "passed",
+      "oracle": {
+        "kind": "human-independent",
+        "description": "An independent proposal reviewer checked the rendered artifact against each acceptance criterion."
+      },
+      "evidence": [
+        {
+          "record_type": "artifact",
+          "record_id": "ART-PROP-001",
+          "path": "proposals/scheduling-discovery.md"
+        }
+      ],
+      "non_vacuity_check": "The reviewer identified each required section in the rendered proposal and confirmed the explicit non-authorization boundary.",
+      "observed_by": {
+        "actor_id": "human:proposal-reviewer",
+        "kind": "human",
+        "display_name": "Proposal reviewer"
+      },
+      "observed_at": "2026-09-14T10:50:00-05:00",
+      "limitations": [
+        "This proves proposal completeness, not feasibility or business value."
+      ]
+    }
+  ],
+  "created_at": "2026-09-14T10:46:00-05:00",
+  "updated_at": "2026-09-14T10:50:00-05:00"
+}

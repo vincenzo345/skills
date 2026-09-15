@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-09-14T18:02:23.528576Z",
+  "idempotency_key": "workbench-v02:capture:001",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "7eb39be42c198fdadece8628297666ce810317684b860a47e18eccd1ca63f70a"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-WORKBENCH-V02-ROUTING",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "do it",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "WORKBENCH-BUILD-PLAN.md",
+    "WORKBENCH-SKILL-AUDIT.md",
+    "skills/skills/engineering/workbench/references/schemas/workbench-lifecycle.schema.json"
+  ],
+  "status": "captured",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

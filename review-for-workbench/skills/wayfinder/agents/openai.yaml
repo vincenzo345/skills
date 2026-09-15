@@ -1,0 +1,5 @@
+interface:
+  display_name: "Wayfinder"
+  short_description: "Map decisions into a proven spec handoff"
+policy:
+  allow_implicit_invocation: false

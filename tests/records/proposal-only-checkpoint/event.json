@@ -1,0 +1,77 @@
+{
+  "record_type": "workbench-event",
+  "schema_version": "0.1.0",
+  "event_id": "EVT-PROP-008",
+  "work_id": "WB-PROP-001",
+  "sequence": 8,
+  "event_type": "handoff-recorded",
+  "occurred_at": "2026-09-14T11:00:00-05:00",
+  "actor": {
+    "actor_id": "agent:proposal-review",
+    "kind": "agent"
+  },
+  "cause": {
+    "kind": "specialist-output",
+    "description": "Proposal review completed with a sponsor decision still required.",
+    "references": [
+      {
+        "record_type": "artifact",
+        "record_id": "ART-PROP-001",
+        "path": "proposals/scheduling-discovery.md"
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "record_type": "artifact",
+      "record_id": "ART-PROP-001",
+      "path": "proposals/scheduling-discovery.md"
+    },
+    {
+      "record_type": "decision",
+      "record_id": "DEC-PROP-001"
+    },
+    {
+      "record_type": "proof",
+      "record_id": "PRF-PROP-001"
+    },
+    {
+      "record_type": "authorization",
+      "record_id": "AUTH-PROP-001"
+    }
+  ],
+  "outputs": [
+    {
+      "record_type": "handoff",
+      "record_id": "HO-PROP-001"
+    }
+  ],
+  "state_revision_before": 7,
+  "state_revision_after": 8,
+  "idempotency_key": "WB-PROP-001:handoff-recorded:HO-PROP-001",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "changes": [
+    {
+      "target": {
+        "record_type": "work",
+        "record_id": "WB-PROP-001"
+      },
+      "path": "/status",
+      "before": {
+        "present": true,
+        "value": "active"
+      },
+      "after": {
+        "present": true,
+        "value": "paused"
+      }
+    }
+  ],
+  "payload": {
+    "handoff_id": "HO-PROP-001",
+    "result": "decision-required"
+  }
+}

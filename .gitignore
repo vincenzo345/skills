@@ -4,6 +4,9 @@ node_modules
 # Local issue tracker and wayfinder maps — planning stays out of the public repo
 .scratch/
 
+# Workbench runtime lock (durable records under .workbench remain versioned)
+.workbench/.lock
+
 # Browser tool output
 .playwright-mcp/
 

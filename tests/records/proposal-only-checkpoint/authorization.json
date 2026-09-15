@@ -1,0 +1,42 @@
+{
+  "record_type": "workbench-authorization",
+  "schema_version": "0.1.0",
+  "authorization_id": "AUTH-PROP-001",
+  "work_id": "WB-PROP-001",
+  "action": "closure",
+  "status": "requested",
+  "scope": {
+    "targets": [
+      {
+        "kind": "work",
+        "target_id": "WB-PROP-001",
+        "planning_destination": "proposal"
+      }
+    ],
+    "constraints": [
+      "May be granted only after DEC-PROP-001 is confirmed.",
+      "Does not authorize implementation, deployment, or claims of business-outcome achievement."
+    ]
+  },
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human",
+    "display_name": "Vince"
+  },
+  "requested_at": "2026-09-14T10:55:00-05:00",
+  "next_action": {
+    "description": "After resolving DEC-PROP-001, grant or deny closure for the proposal destination.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human",
+      "display_name": "Vince"
+    },
+    "target_type": "authorization",
+    "target_id": "AUTH-PROP-001"
+  },
+  "decision_id": "DEC-PROP-001"
+}

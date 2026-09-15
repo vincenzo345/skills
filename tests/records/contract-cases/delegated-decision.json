@@ -1,0 +1,103 @@
+{
+  "record_type": "workbench-decision",
+  "schema_version": "0.1.0",
+  "decision_id": "DEC-TECH-001",
+  "work_id": "WB-PROP-001",
+  "question": "Which reversible persistence adapter should the prototype use?",
+  "materiality": "consequential",
+  "authority": "delegable",
+  "state": "confirmed",
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human",
+    "display_name": "Vince"
+  },
+  "options": [
+    {
+      "option_id": "OPT-FILE",
+      "name": "File-backed adapter",
+      "benefits": [
+        "Keeps the prototype inspectable and reversible."
+      ],
+      "costs": [
+        "Does not prove concurrent multi-user storage."
+      ],
+      "risks": [
+        "A later database adapter will still need contract tests."
+      ]
+    },
+    {
+      "option_id": "OPT-DB",
+      "name": "Database adapter",
+      "benefits": [
+        "Exercises concurrent persistence earlier."
+      ],
+      "costs": [
+        "Adds infrastructure before the state contract is proven."
+      ],
+      "risks": [
+        "Infrastructure complexity can hide contract defects."
+      ]
+    }
+  ],
+  "provenance": {
+    "artifact_inputs": [],
+    "evidence": [
+      {
+        "record_type": "external",
+        "record_id": "prototype-storage-constraints",
+        "uri": "urn:workbench:evidence:prototype-storage-constraints"
+      }
+    ],
+    "prior_decisions": [],
+    "assumptions": [
+      "The prototype remains single-user."
+    ],
+    "policy_versions": {
+      "decision_policy": "0.1.0"
+    }
+  },
+  "resolution": {
+    "basis": "delegated-agent-decision",
+    "selected_option_id": "OPT-FILE",
+    "rationale": "The delegated bounds prefer the reversible option and prohibit new infrastructure commitments.",
+    "resolved_by": {
+      "actor_id": "agent:solution-architect",
+      "kind": "agent"
+    },
+    "resolved_at": "2026-09-14T11:40:00-05:00",
+    "authorization_id": "AUTH-DELEGATE-001"
+  },
+  "consequence_receipt": {
+    "receipt_version": "0.1.0",
+    "consequence_summary": "Use file-backed persistence for the prototype only.",
+    "long_term_tradeoffs": [
+      "Production persistence remains an explicit later decision."
+    ],
+    "alternatives_not_selected": [
+      {
+        "option_id": "OPT-DB",
+        "reason": "It exceeds the prototype's authorized infrastructure bounds."
+      }
+    ],
+    "assumptions": [
+      "Only one process writes the prototype state."
+    ],
+    "uncertainties": [
+      "The production concurrency model is unknown."
+    ],
+    "confidence": "high",
+    "reversibility": "The adapter boundary permits replacement after the prototype.",
+    "revisit_triggers": [
+      "Concurrent writers become a requirement."
+    ],
+    "known_falsifiers": [
+      "The file adapter cannot preserve atomic state updates in the prototype."
+    ],
+    "downstream_effects": [
+      "Prototype code must depend on the persistence interface rather than file APIs."
+    ]
+  },
+  "created_at": "2026-09-14T11:35:00-05:00",
+  "updated_at": "2026-09-14T11:40:00-05:00"
+}

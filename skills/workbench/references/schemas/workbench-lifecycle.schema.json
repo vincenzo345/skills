@@ -1,0 +1,482 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-lifecycle.schema.json",
+  "title": "Workbench Lifecycle Vocabulary and Registry",
+  "description": "The versioned machine-readable source for Workbench stage, route, planning-destination, and work-status identifiers. The x-workbench registry binds those identifiers to route order and gate handler IDs.",
+  "type": "object",
+  "$defs": {
+    "stageId": {
+      "enum": [
+        "intake",
+        "evidence-intake",
+        "process-model",
+        "process-validation",
+        "outcome-framing",
+        "proposal",
+        "experience-design",
+        "solution-architecture",
+        "brownfield-reconnaissance",
+        "standards-resolution",
+        "specification",
+        "delivery-planning",
+        "implementation",
+        "local-verification",
+        "release",
+        "deployed-verification",
+        "outcome-verification"
+      ]
+    },
+    "routeKind": {
+      "enum": [
+        "existing-process",
+        "unproven-process",
+        "brownfield-feature",
+        "proposal-only",
+        "small-change-fast-lane"
+      ]
+    },
+    "phaseId": {
+      "enum": [
+        "frame",
+        "discover",
+        "design-decide",
+        "plan",
+        "implement",
+        "verify",
+        "release",
+        "measure"
+      ]
+    },
+    "planningDestination": {
+      "enum": [
+        "proposal",
+        "proof-of-concept",
+        "specification",
+        "implementation-plan",
+        "locally-verified-implementation",
+        "released-software",
+        "business-outcome"
+      ]
+    },
+    "workStatus": {
+      "enum": [
+        "active",
+        "paused",
+        "blocked",
+        "stopped",
+        "completed-for-destination",
+        "completed-for-outcome",
+        "cancelled"
+      ]
+    }
+  },
+  "x-workbench": {
+    "registry_version": "0.3.0",
+    "phases": [
+      {
+        "id": "frame",
+        "activities": ["intake", "outcome-framing"],
+        "default_checkpoint": "outcome-framing"
+      },
+      {
+        "id": "discover",
+        "activities": ["brownfield-reconnaissance", "evidence-intake", "process-model", "process-validation"],
+        "default_checkpoint": "evidence-intake"
+      },
+      {
+        "id": "design-decide",
+        "activities": ["proposal", "experience-design", "solution-architecture"],
+        "default_checkpoint": "solution-architecture"
+      },
+      {
+        "id": "plan",
+        "activities": ["standards-resolution", "specification", "delivery-planning"],
+        "default_checkpoint": "delivery-planning"
+      },
+      {
+        "id": "implement",
+        "activities": ["implementation"],
+        "default_checkpoint": "implementation"
+      },
+      {
+        "id": "verify",
+        "activities": ["local-verification"],
+        "default_checkpoint": "local-verification"
+      },
+      {
+        "id": "release",
+        "activities": ["release", "deployed-verification"],
+        "default_checkpoint": "deployed-verification"
+      },
+      {
+        "id": "measure",
+        "activities": ["outcome-verification"],
+        "default_checkpoint": "outcome-verification"
+      }
+    ],
+    "destinations": [
+      {
+        "id": "proposal",
+        "completion_stage": "proposal",
+        "completion_status": "completed-for-destination",
+        "required_proof_kind": "artifact-validity"
+      },
+      {
+        "id": "proof-of-concept",
+        "completion_stage": "process-validation",
+        "completion_status": "completed-for-destination",
+        "required_proof_kind": "artifact-validity"
+      },
+      {
+        "id": "specification",
+        "completion_stage": "specification",
+        "completion_status": "completed-for-destination",
+        "required_proof_kind": "artifact-validity"
+      },
+      {
+        "id": "implementation-plan",
+        "completion_stage": "delivery-planning",
+        "completion_status": "completed-for-destination",
+        "required_proof_kind": "artifact-validity"
+      },
+      {
+        "id": "locally-verified-implementation",
+        "completion_stage": "local-verification",
+        "completion_status": "completed-for-destination",
+        "required_proof_kind": "local-implementation"
+      },
+      {
+        "id": "released-software",
+        "completion_stage": "deployed-verification",
+        "completion_status": "completed-for-destination",
+        "required_proof_kind": "deployed-behavior"
+      },
+      {
+        "id": "business-outcome",
+        "completion_stage": "outcome-verification",
+        "completion_status": "completed-for-outcome",
+        "required_proof_kind": "business-outcome"
+      }
+    ],
+    "stages": [
+      {
+        "id": "intake",
+        "phase_id": "frame",
+        "applicability_rule": "always",
+        "entry_gate": "request-present",
+        "exit_gate": "intake-recorded"
+      },
+      {
+        "id": "evidence-intake",
+        "phase_id": "discover",
+        "applicability_rule": "evidence-required",
+        "entry_gate": "questions-or-claims-known",
+        "exit_gate": "sources-registered"
+      },
+      {
+        "id": "process-model",
+        "phase_id": "discover",
+        "applicability_rule": "process-understanding-required",
+        "entry_gate": "modeling-sources-available",
+        "exit_gate": "process-model-complete-enough"
+      },
+      {
+        "id": "process-validation",
+        "phase_id": "discover",
+        "applicability_rule": "process-claim-unproven",
+        "entry_gate": "validation-contract-recorded",
+        "exit_gate": "validation-disposition-recorded"
+      },
+      {
+        "id": "outcome-framing",
+        "phase_id": "frame",
+        "applicability_rule": "beyond-intake",
+        "entry_gate": "preliminary-outcome-available",
+        "exit_gate": "outcome-frame-recorded"
+      },
+      {
+        "id": "proposal",
+        "phase_id": "design-decide",
+        "applicability_rule": "proceed-decision-required",
+        "entry_gate": "credible-options-comparable",
+        "exit_gate": "proposal-and-decision-owner-recorded"
+      },
+      {
+        "id": "experience-design",
+        "phase_id": "design-decide",
+        "applicability_rule": "human-experience-affected",
+        "entry_gate": "process-and-outcome-understood",
+        "exit_gate": "experience-contract-recorded"
+      },
+      {
+        "id": "solution-architecture",
+        "phase_id": "design-decide",
+        "applicability_rule": "technical-boundaries-material",
+        "entry_gate": "solution-constraints-available",
+        "exit_gate": "architecture-decision-recorded"
+      },
+      {
+        "id": "brownfield-reconnaissance",
+        "phase_id": "discover",
+        "applicability_rule": "existing-system-changes",
+        "entry_gate": "inspection-scope-bounded",
+        "exit_gate": "current-state-and-blast-radius-evidenced"
+      },
+      {
+        "id": "standards-resolution",
+        "phase_id": "plan",
+        "applicability_rule": "executable-work-or-review",
+        "entry_gate": "technology-and-risk-surface-known",
+        "exit_gate": "applicable-profile-recorded"
+      },
+      {
+        "id": "specification",
+        "phase_id": "plan",
+        "applicability_rule": "durable-behavior-contract-required",
+        "entry_gate": "upstream-decisions-ready-or-blocked",
+        "exit_gate": "specification-status-and-lineage-recorded"
+      },
+      {
+        "id": "delivery-planning",
+        "phase_id": "plan",
+        "applicability_rule": "delivery-slicing-required",
+        "entry_gate": "ready-enough-specification-available",
+        "exit_gate": "delivery-coverage-and-obligations-recorded"
+      },
+      {
+        "id": "implementation",
+        "phase_id": "implement",
+        "applicability_rule": "implementation-authorized",
+        "entry_gate": "implementation-inputs-and-authorization-valid",
+        "exit_gate": "scoped-change-registered"
+      },
+      {
+        "id": "local-verification",
+        "phase_id": "verify",
+        "applicability_rule": "executable-artifact-produced",
+        "entry_gate": "fixed-review-set-and-proof-profile-known",
+        "exit_gate": "local-proof-disposition-recorded"
+      },
+      {
+        "id": "release",
+        "phase_id": "release",
+        "applicability_rule": "external-promotion-required",
+        "entry_gate": "release-authorization-and-recovery-ready",
+        "exit_gate": "release-disposition-recorded"
+      },
+      {
+        "id": "deployed-verification",
+        "phase_id": "release",
+        "applicability_rule": "release-occurred",
+        "entry_gate": "release-record-and-safe-oracle-available",
+        "exit_gate": "deployed-proof-disposition-recorded"
+      },
+      {
+        "id": "outcome-verification",
+        "phase_id": "measure",
+        "applicability_rule": "outcome-can-be-measured-or-transferred",
+        "entry_gate": "outcome-effect-measurable",
+        "exit_gate": "outcome-or-owned-measurement-obligation-recorded"
+      }
+    ],
+    "routes": [
+      {
+        "id": "existing-process",
+        "ordered_stages": [
+          "intake",
+          "evidence-intake",
+          "process-model",
+          "outcome-framing",
+          "process-validation",
+          "proposal",
+          "experience-design",
+          "solution-architecture",
+          "standards-resolution",
+          "specification",
+          "delivery-planning",
+          "implementation",
+          "local-verification",
+          "release",
+          "deployed-verification",
+          "outcome-verification"
+        ],
+        "conditional_stages": [
+          "process-validation",
+          "proposal",
+          "experience-design",
+          "delivery-planning",
+          "release",
+          "deployed-verification"
+        ],
+        "allowed_destinations": [
+          "proposal",
+          "proof-of-concept",
+          "specification",
+          "implementation-plan",
+          "locally-verified-implementation",
+          "released-software",
+          "business-outcome"
+        ]
+      },
+      {
+        "id": "unproven-process",
+        "ordered_stages": [
+          "intake",
+          "outcome-framing",
+          "evidence-intake",
+          "process-model",
+          "process-validation"
+        ],
+        "conditional_stages": [],
+        "allowed_destinations": [
+          "proof-of-concept",
+          "proposal",
+          "specification"
+        ],
+        "supported_handoff": {
+          "route": "existing-process",
+          "resume": "first-incomplete-applicable-stage"
+        },
+        "validation_dispositions": {
+          "supported": "supported-handoff",
+          "revise": "loop-to-evidence-or-process-model",
+          "defer": "paused",
+          "rejected": "stopped",
+          "evidence-blocked": "blocked"
+        }
+      },
+      {
+        "id": "brownfield-feature",
+        "ordered_stages": [
+          "intake",
+          "outcome-framing",
+          "brownfield-reconnaissance",
+          "evidence-intake",
+          "process-model",
+          "proposal",
+          "experience-design",
+          "solution-architecture",
+          "standards-resolution",
+          "specification",
+          "delivery-planning",
+          "implementation",
+          "local-verification",
+          "release",
+          "deployed-verification",
+          "outcome-verification"
+        ],
+        "conditional_stages": [
+          "evidence-intake",
+          "process-model",
+          "proposal",
+          "experience-design",
+          "delivery-planning",
+          "release",
+          "deployed-verification",
+          "outcome-verification"
+        ],
+        "allowed_destinations": [
+          "proposal",
+          "specification",
+          "implementation-plan",
+          "locally-verified-implementation",
+          "released-software",
+          "business-outcome"
+        ]
+      },
+      {
+        "id": "proposal-only",
+        "ordered_stages": [
+          "intake",
+          "evidence-intake",
+          "process-model",
+          "outcome-framing",
+          "process-validation",
+          "proposal"
+        ],
+        "conditional_stages": [
+          "process-model",
+          "process-validation"
+        ],
+        "allowed_destinations": [
+          "proposal"
+        ]
+      },
+      {
+        "id": "small-change-fast-lane",
+        "ordered_stages": [
+          "intake",
+          "outcome-framing",
+          "brownfield-reconnaissance",
+          "standards-resolution",
+          "implementation",
+          "local-verification",
+          "release",
+          "deployed-verification",
+          "outcome-verification"
+        ],
+        "conditional_stages": [
+          "release",
+          "deployed-verification",
+          "outcome-verification"
+        ],
+        "allowed_destinations": [
+          "locally-verified-implementation",
+          "released-software",
+          "business-outcome"
+        ]
+      }
+    ],
+    "work_statuses": [
+      {
+        "id": "active",
+        "terminal": false,
+        "required_context": [
+          "next_action"
+        ]
+      },
+      {
+        "id": "paused",
+        "terminal": false,
+        "required_context": [
+          "next_action"
+        ]
+      },
+      {
+        "id": "blocked",
+        "terminal": false,
+        "required_context": [
+          "next_action"
+        ]
+      },
+      {
+        "id": "stopped",
+        "terminal": true,
+        "required_context": [
+          "stop_reason"
+        ]
+      },
+      {
+        "id": "completed-for-destination",
+        "terminal": true,
+        "required_context": [
+          "completion"
+        ]
+      },
+      {
+        "id": "completed-for-outcome",
+        "terminal": true,
+        "required_context": [
+          "completion"
+        ]
+      },
+      {
+        "id": "cancelled",
+        "terminal": true,
+        "required_context": [
+          "stop_reason"
+        ]
+      }
+    ]
+  }
+}

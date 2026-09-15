@@ -1,0 +1,621 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-decision.schema.json",
+  "title": "Workbench Decision",
+  "description": "A material choice or factual resolution with authority separated from lifecycle state and with explicit provenance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "decision_id",
+    "work_id",
+    "question",
+    "materiality",
+    "authority",
+    "state",
+    "owner",
+    "provenance",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "workbench-decision"
+    },
+    "schema_version": {
+      "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+    },
+    "decision_id": {
+      "$ref": "workbench-common.schema.json#/$defs/decisionId"
+    },
+    "work_id": {
+      "$ref": "workbench-common.schema.json#/$defs/workId"
+    },
+    "node_id": {
+      "$ref": "workbench-common.schema.json#/$defs/nodeId"
+    },
+    "question": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "materiality": {
+      "enum": [
+        "routine",
+        "consequential"
+      ]
+    },
+    "authority": {
+      "enum": [
+        "user-owned",
+        "delegable",
+        "factual"
+      ]
+    },
+    "state": {
+      "enum": [
+        "proposed",
+        "evidence-blocked",
+        "confirmed",
+        "superseded",
+        "withdrawn"
+      ]
+    },
+    "owner": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "next_action": {
+      "$ref": "workbench-common.schema.json#/$defs/nextAction"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/option"
+      }
+    },
+    "recommendation": {
+      "$ref": "workbench-common.schema.json#/$defs/recommendation"
+    },
+    "provenance": {
+      "$ref": "#/$defs/provenance"
+    },
+    "blockers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/blocker"
+      }
+    },
+    "resolution": {
+      "$ref": "#/$defs/resolution"
+    },
+    "consequence_receipt": {
+      "$ref": "#/$defs/consequenceReceipt"
+    },
+    "superseded_by": {
+      "$ref": "workbench-common.schema.json#/$defs/decisionId"
+    },
+    "withdrawal_reason": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "created_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    },
+    "updated_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "authority": {
+            "enum": [
+              "user-owned",
+              "delegable"
+            ]
+          }
+        },
+        "required": [
+          "authority"
+        ]
+      },
+      "then": {
+        "required": [
+          "options"
+        ],
+        "properties": {
+          "options": {
+            "minItems": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authority": {
+            "const": "delegable"
+          },
+          "state": {
+            "const": "confirmed"
+          }
+        },
+        "required": [
+          "authority",
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "resolution": {
+            "properties": {
+              "basis": {
+                "enum": [
+                  "human-decision",
+                  "delegated-agent-decision"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authority": {
+            "enum": [
+              "user-owned",
+              "delegable"
+            ]
+          },
+          "state": {
+            "const": "confirmed"
+          }
+        },
+        "required": [
+          "authority",
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "consequence_receipt"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "proposed",
+              "evidence-blocked"
+            ]
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "next_action"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "evidence-blocked"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "blockers"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "confirmed"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "resolution"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "superseded"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded_by"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "withdrawn"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "withdrawal_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authority": {
+            "const": "user-owned"
+          },
+          "state": {
+            "const": "confirmed"
+          }
+        },
+        "required": [
+          "authority",
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "resolution": {
+            "properties": {
+              "basis": {
+                "const": "human-decision"
+              },
+              "resolved_by": {
+                "properties": {
+                  "kind": {
+                    "const": "human"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "authority": {
+            "const": "factual"
+          },
+          "state": {
+            "const": "confirmed"
+          }
+        },
+        "required": [
+          "authority",
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "resolution": {
+            "properties": {
+              "basis": {
+                "const": "factual-evidence"
+              }
+            }
+          },
+          "provenance": {
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "option_id",
+        "name",
+        "benefits",
+        "costs",
+        "risks"
+      ],
+      "properties": {
+        "option_id": {
+          "type": "string",
+          "pattern": "^OPT-[A-Z0-9][A-Z0-9._-]{0,63}$"
+        },
+        "name": {
+          "$ref": "workbench-common.schema.json#/$defs/shortString"
+        },
+        "benefits": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "costs": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_inputs",
+        "evidence",
+        "prior_decisions",
+        "assumptions",
+        "policy_versions"
+      ],
+      "properties": {
+        "artifact_inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/artifactRef"
+          },
+          "uniqueItems": true
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/recordRef"
+          },
+          "uniqueItems": true
+        },
+        "prior_decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/decisionRef"
+          },
+          "uniqueItems": true
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "policy_versions": {
+          "$ref": "workbench-common.schema.json#/$defs/policyVersions"
+        }
+      }
+    },
+    "consequenceReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "receipt_version",
+        "consequence_summary",
+        "long_term_tradeoffs",
+        "alternatives_not_selected",
+        "assumptions",
+        "uncertainties",
+        "confidence",
+        "reversibility",
+        "revisit_triggers",
+        "known_falsifiers",
+        "downstream_effects"
+      ],
+      "properties": {
+        "receipt_version": {
+          "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+        },
+        "consequence_summary": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "long_term_tradeoffs": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "alternatives_not_selected": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "option_id",
+              "reason"
+            ],
+            "properties": {
+              "option_id": {
+                "type": "string",
+                "pattern": "^OPT-[A-Z0-9][A-Z0-9._-]{0,63}$"
+              },
+              "reason": {
+                "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "confidence": {
+          "$ref": "workbench-common.schema.json#/$defs/confidence"
+        },
+        "reversibility": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "revisit_triggers": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "known_falsifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "downstream_effects": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        }
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "basis",
+        "rationale",
+        "resolved_by",
+        "resolved_at"
+      ],
+      "properties": {
+        "basis": {
+          "enum": [
+            "human-decision",
+            "delegated-agent-decision",
+            "factual-evidence"
+          ]
+        },
+        "selected_option_id": {
+          "type": "string",
+          "pattern": "^OPT-[A-Z0-9][A-Z0-9._-]{0,63}$"
+        },
+        "rationale": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "resolved_by": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        },
+        "resolved_at": {
+          "$ref": "workbench-common.schema.json#/$defs/timestamp"
+        },
+        "authorization_id": {
+          "$ref": "workbench-common.schema.json#/$defs/authorizationId"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "const": "human-decision"
+              }
+            },
+            "required": [
+              "basis"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resolved_by": {
+                "properties": {
+                  "kind": {
+                    "const": "human"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "enum": [
+                  "human-decision",
+                  "delegated-agent-decision"
+                ]
+              }
+            },
+            "required": [
+              "basis"
+            ]
+          },
+          "then": {
+            "required": [
+              "selected_option_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "const": "delegated-agent-decision"
+              }
+            },
+            "required": [
+              "basis"
+            ]
+          },
+          "then": {
+            "required": [
+              "authorization_id"
+            ],
+            "properties": {
+              "resolved_by": {
+                "properties": {
+                  "kind": {
+                    "const": "agent"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

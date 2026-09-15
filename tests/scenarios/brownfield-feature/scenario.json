@@ -1,0 +1,116 @@
+{
+  "scenario_version": "1.0.0",
+  "id": "SCN-BROWNFIELD-001",
+  "title": "Add an asynchronous approval feature to an existing application",
+  "entrance": "brownfield-feature",
+  "planning_destination": "locally-verified-implementation",
+  "request": "Add queued approval processing to the existing application without breaking current synchronous clients.",
+  "given": {
+    "repository_present": true,
+    "existing_process": true,
+    "process_claim_proven": true,
+    "human_interaction_changed": true,
+    "external_approval_required": false,
+    "authorized_actions": [
+      "repository-mutation",
+      "implementation",
+      "closure"
+    ]
+  },
+  "expected": {
+    "route": [
+      "intake",
+      "outcome-framing",
+      "brownfield-reconnaissance",
+      "experience-design",
+      "solution-architecture",
+      "standards-resolution",
+      "specification",
+      "delivery-planning",
+      "implementation",
+      "local-verification"
+    ],
+    "required_map_nodes": [
+      {
+        "node_id": "E-COMPAT-001",
+        "kind": "evidence-task",
+        "owner": "agent",
+        "question": "Which callers, data paths, tests, and deployments depend on synchronous completion?",
+        "done_when": [
+          "current public behavior is evidenced",
+          "compatibility and migration constraints are listed",
+          "blast radius and unknown ownership are visible"
+        ],
+        "depends_on": []
+      },
+      {
+        "node_id": "D-PENDING-001",
+        "kind": "decision",
+        "owner": "user",
+        "question": "May clients observe a pending state while compatibility is preserved?",
+        "done_when": [
+          "the user-visible consequence and rollback path are confirmed"
+        ],
+        "depends_on": [
+          "E-COMPAT-001"
+        ]
+      }
+    ],
+    "required_artifacts": [
+      "brownfield-reconnaissance",
+      "architecture-delta",
+      "experience-state-model",
+      "standards-profile",
+      "specification",
+      "delivery-plan",
+      "local-proof-receipts",
+      "release-obligation"
+    ],
+    "decisions": [
+      {
+        "decision_id": "DEC-COMPAT-001",
+        "owner": "user",
+        "question": "May clients observe a pending state while compatibility is preserved?",
+        "consequence": "Clients gain asynchronous resilience but must handle a new visible state."
+      }
+    ],
+    "authorizations": [
+      {
+        "action": "repository-mutation",
+        "status": "granted",
+        "target": "existing application repository"
+      },
+      {
+        "action": "implementation",
+        "status": "granted",
+        "target": "approved asynchronous approval feature"
+      },
+      {
+        "action": "deployment",
+        "status": "requested",
+        "target": "owned future release obligation"
+      },
+      {
+        "action": "closure",
+        "status": "granted",
+        "target": "locally-verified implementation destination"
+      }
+    ],
+    "valid_stop_after": "local-verification",
+    "terminal_disposition": "completed-for-destination",
+    "must_not_create": [
+      "release-record",
+      "deployed-proof-receipt"
+    ],
+    "route_expansion_when": [
+      {
+        "condition": "reconnaissance finds a business-process change outside the application",
+        "reenter_at": "process-model"
+      },
+      {
+        "condition": "release authorization is later granted",
+        "reenter_at": "release"
+      }
+    ]
+  }
+}

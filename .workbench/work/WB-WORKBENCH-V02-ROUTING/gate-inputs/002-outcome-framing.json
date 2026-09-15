@@ -1,0 +1,13 @@
+{
+  "work_id": "WB-WORKBENCH-V02-ROUTING",
+  "state_revision": 2,
+  "stage_id": "outcome-framing",
+  "exit_gate": "outcome-frame-recorded",
+  "result": "passed",
+  "checked_at": "2026-09-14T18:29:09Z",
+  "checked_by": "agent:codex",
+  "evidence": [
+    {"record_type": "external", "record_id": "WORKBENCH-BUILD-PLAN", "uri": "WORKBENCH-BUILD-PLAN.md"},
+    {"record_type": "external", "record_id": "ADR-0001", "uri": "docs/adr/0001-route-profiles-over-fixed-workflow-routes.md"}
+  ]
+}

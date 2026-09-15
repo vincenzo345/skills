@@ -1,0 +1,125 @@
+{
+  "scenario_version": "1.0.0",
+  "id": "SCN-UNPROVEN-001",
+  "title": "Test a proposed intake process before building software",
+  "entrance": "unproven-process",
+  "planning_destination": "specification",
+  "request": "Test whether customers and staff can complete a proposed guided intake process, revise it from evidence, and proceed to software only if supported.",
+  "given": {
+    "repository_present": false,
+    "existing_process": false,
+    "process_claim_proven": false,
+    "human_interaction_changed": true,
+    "external_approval_required": true,
+    "authorized_actions": [
+      "closure"
+    ]
+  },
+  "expected": {
+    "route": [
+      "intake",
+      "outcome-framing",
+      "evidence-intake",
+      "process-model",
+      "process-validation",
+      "evidence-intake",
+      "process-model",
+      "process-validation",
+      "proposal",
+      "experience-design",
+      "solution-architecture",
+      "standards-resolution",
+      "specification"
+    ],
+    "required_map_nodes": [
+      {
+        "node_id": "X-VALIDATE-001",
+        "kind": "experiment",
+        "owner": "agent",
+        "question": "Can representative users complete the proposed intake without staff rescue?",
+        "done_when": [
+          "population and success threshold are set before the test",
+          "completion and rescue observations are recorded",
+          "limitations and falsifying evidence are retained"
+        ],
+        "depends_on": []
+      },
+      {
+        "node_id": "D-PROCEED-001",
+        "kind": "decision",
+        "owner": "user",
+        "question": "Does the scoped evidence justify entering the software route?",
+        "done_when": [
+          "supported, revise, defer, or stop is explicitly recorded"
+        ],
+        "depends_on": [
+          "X-VALIDATE-001"
+        ]
+      }
+    ],
+    "required_artifacts": [
+      "process-hypothesis",
+      "experiment-contract",
+      "experiment-evidence",
+      "validation-result",
+      "proposal",
+      "experience-design",
+      "preliminary-architecture",
+      "standards-profile",
+      "specification"
+    ],
+    "decisions": [
+      {
+        "decision_id": "DEC-THRESHOLD-001",
+        "owner": "user",
+        "question": "What evidence threshold will count as support or failure?",
+        "consequence": "The threshold controls whether the process is revised, stopped, or allowed into software design."
+      },
+      {
+        "decision_id": "DEC-PROCEED-001",
+        "owner": "user",
+        "question": "Does the scoped evidence justify entering the software route?",
+        "consequence": "Proceeding commits further design effort; rejecting avoids building around an unsupported process."
+      },
+      {
+        "decision_id": "DEC-DIRECTION-001",
+        "owner": "user",
+        "question": "Which software direction should the specification commit to?",
+        "consequence": "The selected direction constrains the production experience and architecture."
+      }
+    ],
+    "authorizations": [
+      {
+        "action": "closure",
+        "status": "granted",
+        "target": "specification planning destination only"
+      },
+      {
+        "action": "implementation",
+        "status": "not-required",
+        "target": "implementation remains outside this destination"
+      },
+      {
+        "action": "deployment",
+        "status": "not-required",
+        "target": "deployment remains outside this destination"
+      }
+    ],
+    "valid_stop_after": "specification",
+    "terminal_disposition": "completed-for-destination",
+    "must_not_create": [
+      "implementation-change",
+      "release-record"
+    ],
+    "route_expansion_when": [
+      {
+        "condition": "the experiment does not meet the agreed threshold but exposes a testable revision",
+        "reenter_at": "evidence-intake"
+      },
+      {
+        "condition": "the process claim is rejected or no longer worth pursuing",
+        "disposition": "stopped"
+      }
+    ]
+  }
+}

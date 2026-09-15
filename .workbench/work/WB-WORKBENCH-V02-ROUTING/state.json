@@ -1,0 +1,165 @@
+{
+  "artifact_ids": [],
+  "authorization_ids": [
+    "AUTH-WORKBENCH-V02-IMPLEMENT"
+  ],
+  "created_at": "2026-09-14T18:04:02.716602Z",
+  "current_stage": "local-verification",
+  "decision_ids": [],
+  "desired_outcome": "Workbench persistently separates business basis, solution context, engagement intent, destination, and lane while escalating discovery only when material uncertainty justifies it.",
+  "handoff_ids": [],
+  "latest_event_id": "EVT-WORKBENCH-V02-ROUTING-000006",
+  "map_id": "MAP-WORKBENCH-V02-ROUTING",
+  "next_action": {
+    "description": "Satisfy the local-proof-disposition-recorded exit gate.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "local-verification",
+    "target_type": "stage"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "proof_ids": [],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Selected by start command for destination locally-verified-implementation.",
+    "route": "small-change-fast-lane",
+    "selected_at": "2026-09-14T18:04:02.716602Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.1.0",
+  "stages": [
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "completed_at": "2026-09-14T18:30:10.806095Z",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "intake",
+      "started_at": "2026-09-14T18:04:02.716602Z",
+      "status": "complete"
+    },
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "completed_at": "2026-09-14T18:30:11.212190Z",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-14T18:30:10.806095Z",
+      "status": "complete"
+    },
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "completed_at": "2026-09-14T18:30:11.593553Z",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "brownfield-reconnaissance",
+      "started_at": "2026-09-14T18:30:11.212190Z",
+      "status": "complete"
+    },
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "completed_at": "2026-09-14T18:30:11.985291Z",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "standards-resolution",
+      "started_at": "2026-09-14T18:30:11.593553Z",
+      "status": "complete"
+    },
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "completed_at": "2026-09-14T18:30:12.405217Z",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "implementation",
+      "started_at": "2026-09-14T18:30:11.985291Z",
+      "status": "complete"
+    },
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "next_action": {
+        "description": "Satisfy the local-proof-disposition-recorded exit gate.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "local-verification",
+        "target_type": "stage"
+      },
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "local-verification",
+      "started_at": "2026-09-14T18:30:12.405217Z",
+      "status": "active"
+    },
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "release",
+      "status": "pending"
+    },
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "deployed-verification",
+      "status": "pending"
+    },
+    {
+      "applicability": "applicable",
+      "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "stage_id": "outcome-verification",
+      "status": "pending"
+    }
+  ],
+  "state_revision": 6,
+  "status": "active",
+  "title": "Workbench v0.2 routing and bounded-discovery foundation",
+  "updated_at": "2026-09-14T18:30:12.405217Z",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

@@ -1,0 +1,25 @@
+{
+  "fixture_version": "1.0.0",
+  "source": "raw-transcript.txt",
+  "cases": [
+    {
+      "artifact": "normalized-correct.md",
+      "expected": {
+        "word_multiset_preserved": true,
+        "token_order_preserved": true,
+        "speaker_attribution_valid": true,
+        "unresolved_defects": 0
+      }
+    },
+    {
+      "artifact": "normalized-misattributed.md",
+      "expected": {
+        "word_multiset_preserved": true,
+        "token_order_preserved": true,
+        "speaker_attribution_valid": false,
+        "unresolved_defects": 1
+      }
+    }
+  ],
+  "migration_invariant": "A word-preservation pass cannot imply attribution validity."
+}

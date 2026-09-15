@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-artifact.schema.json",
+  "title": "Workbench Artifact",
+  "description": "A registered artifact with stable identity, source lineage, ownership, and named downstream consumers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "artifact_id",
+    "work_id",
+    "artifact_kind",
+    "title",
+    "status",
+    "owner",
+    "producing_stage",
+    "produced_by",
+    "location",
+    "source_lineage",
+    "consumers",
+    "proof_ids",
+    "obligation_node_ids",
+    "confidentiality",
+    "known_defects",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "workbench-artifact"
+    },
+    "schema_version": {
+      "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+    },
+    "artifact_id": {
+      "$ref": "workbench-common.schema.json#/$defs/artifactId"
+    },
+    "work_id": {
+      "$ref": "workbench-common.schema.json#/$defs/workId"
+    },
+    "artifact_kind": {
+      "enum": [
+        "evidence-record",
+        "process-model",
+        "validation-plan",
+        "validation-result",
+        "proposal",
+        "experience-design",
+        "prototype",
+        "architecture",
+        "diagram",
+        "standards-profile",
+        "specification",
+        "delivery-plan",
+        "implementation",
+        "review",
+        "release-record",
+        "outcome-measurement",
+        "other"
+      ]
+    },
+    "custom_kind": {
+      "$ref": "workbench-common.schema.json#/$defs/shortString"
+    },
+    "title": {
+      "$ref": "workbench-common.schema.json#/$defs/shortString"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "current",
+        "superseded",
+        "withdrawn"
+      ]
+    },
+    "owner": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "producing_stage": {
+      "$ref": "workbench-common.schema.json#/$defs/stageId"
+    },
+    "produced_by": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "value"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "workspace-path",
+            "uri",
+            "tracker",
+            "embedded"
+          ]
+        },
+        "value": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "source_lineage": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/lineageEntry"
+      }
+    },
+    "consumers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/consumer"
+      }
+    },
+    "proof_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/proofId"
+      },
+      "uniqueItems": true
+    },
+    "obligation_node_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/nodeId"
+      },
+      "uniqueItems": true
+    },
+    "content_integrity": {
+      "$ref": "workbench-common.schema.json#/$defs/digest"
+    },
+    "confidentiality": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessed_at",
+        "assessment"
+      ],
+      "properties": {
+        "assessed_at": {
+          "$ref": "workbench-common.schema.json#/$defs/timestamp"
+        },
+        "assessment": {
+          "enum": [
+            "current",
+            "possibly-stale",
+            "stale",
+            "unknown"
+          ]
+        },
+        "valid_until": {
+          "$ref": "workbench-common.schema.json#/$defs/timestamp"
+        },
+        "rationale": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "known_defects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "description",
+          "impact",
+          "owner",
+          "next_action"
+        ],
+        "properties": {
+          "description": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          },
+          "impact": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          },
+          "owner": {
+            "$ref": "workbench-common.schema.json#/$defs/actorRef"
+          },
+          "next_action": {
+            "$ref": "workbench-common.schema.json#/$defs/nextAction"
+          }
+        }
+      }
+    },
+    "superseded_by": {
+      "$ref": "workbench-common.schema.json#/$defs/artifactId"
+    },
+    "withdrawal_reason": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "created_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    },
+    "updated_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "current",
+              "superseded"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "content_integrity"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_kind": {
+            "const": "other"
+          }
+        },
+        "required": [
+          "artifact_kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "custom_kind"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "superseded"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "superseded_by"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "withdrawn"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "withdrawal_reason"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "lineageEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relationship",
+        "source"
+      ],
+      "properties": {
+        "relationship": {
+          "enum": [
+            "derived-from",
+            "summarizes",
+            "supersedes",
+            "implements",
+            "verifies",
+            "records",
+            "provided-by"
+          ]
+        },
+        "source": {
+          "$ref": "workbench-common.schema.json#/$defs/recordRef"
+        },
+        "note": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "consumer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "consumer_id",
+        "purpose"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "stage",
+            "specialist",
+            "node",
+            "external-party",
+            "work-item"
+          ]
+        },
+        "consumer_id": {
+          "$ref": "workbench-common.schema.json#/$defs/shortString"
+        },
+        "purpose": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "fixture_version": "1.0.0",
+  "requirements": [
+    {
+      "id": "AC-001",
+      "text": "Every accepted request appears in the ERP exactly once.",
+      "required_proof": "deployed-behavior"
+    },
+    {
+      "id": "AC-002",
+      "text": "A requester can see and recover from a failed submission.",
+      "required_proof": "deployed-behavior"
+    }
+  ],
+  "ticket_sets": [
+    {
+      "name": "complete",
+      "tickets": [
+        {
+          "id": "TKT-001",
+          "covers": [
+            "AC-001"
+          ]
+        },
+        {
+          "id": "TKT-002",
+          "covers": [
+            "AC-002"
+          ]
+        }
+      ],
+      "expected_coverage_valid": true
+    },
+    {
+      "name": "orphaned-recovery",
+      "tickets": [
+        {
+          "id": "TKT-001",
+          "covers": [
+            "AC-001"
+          ]
+        }
+      ],
+      "expected_coverage_valid": false
+    }
+  ],
+  "proof_cases": [
+    {
+      "name": "empty-population",
+      "criterion": "AC-001",
+      "achieved_proof": "deployed-behavior",
+      "actual_population": 0,
+      "reported_status": "passed",
+      "expected_valid": false
+    },
+    {
+      "name": "local-only",
+      "criterion": "AC-002",
+      "achieved_proof": "local-implementation",
+      "actual_population": 3,
+      "reported_status": "passed",
+      "expected_valid": false
+    },
+    {
+      "name": "sufficient-deployed-proof",
+      "criterion": "AC-001",
+      "achieved_proof": "deployed-behavior",
+      "actual_population": 3,
+      "reported_status": "passed",
+      "expected_valid": true
+    }
+  ],
+  "migration_invariant": "Coverage uses the complete source ledger as its denominator, and proof passes only with a nonzero population at the required level."
+}

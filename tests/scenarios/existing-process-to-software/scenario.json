@@ -1,0 +1,135 @@
+{
+  "scenario_version": "1.0.0",
+  "id": "SCN-EXISTING-001",
+  "title": "Improve a measured approval process and deliver supporting software",
+  "entrance": "existing-process",
+  "planning_destination": "business-outcome",
+  "request": "Reduce request approval time without removing financial controls, then build and release the supporting software.",
+  "given": {
+    "repository_present": false,
+    "existing_process": true,
+    "process_claim_proven": false,
+    "human_interaction_changed": true,
+    "external_approval_required": true,
+    "authorized_actions": [
+      "repository-mutation",
+      "implementation",
+      "commit",
+      "deployment",
+      "closure"
+    ]
+  },
+  "expected": {
+    "route": [
+      "intake",
+      "evidence-intake",
+      "process-model",
+      "outcome-framing",
+      "process-validation",
+      "proposal",
+      "experience-design",
+      "solution-architecture",
+      "standards-resolution",
+      "specification",
+      "delivery-planning",
+      "implementation",
+      "local-verification",
+      "release",
+      "deployed-verification",
+      "outcome-verification"
+    ],
+    "required_map_nodes": [
+      {
+        "node_id": "E-CYCLE-001",
+        "kind": "evidence-task",
+        "owner": "agent",
+        "question": "Where does current approval cycle time accumulate?",
+        "done_when": [
+          "cycle time is calculated for every measurable state",
+          "missing timestamps and population limits are recorded",
+          "suspected bottlenecks cite operational evidence"
+        ],
+        "depends_on": []
+      },
+      {
+        "node_id": "D-MODEL-001",
+        "kind": "decision",
+        "owner": "user",
+        "question": "Which control-preserving operating model should be proposed?",
+        "done_when": [
+          "the selected option and accepted consequence are confirmed"
+        ],
+        "depends_on": [
+          "E-CYCLE-001"
+        ]
+      }
+    ],
+    "required_artifacts": [
+      "evidence-register",
+      "current-process-model",
+      "validation-result",
+      "proposal",
+      "experience-design",
+      "solution-architecture",
+      "standards-profile",
+      "specification",
+      "delivery-plan",
+      "proof-receipts"
+    ],
+    "decisions": [
+      {
+        "decision_id": "DEC-MODEL-001",
+        "owner": "user",
+        "question": "Which control-preserving operating model should proceed?",
+        "consequence": "The choice changes staff work, software scope, and the controls that must be proven."
+      },
+      {
+        "decision_id": "DEC-RISK-001",
+        "owner": "user",
+        "question": "Is the observed residual risk acceptable after deployed verification?",
+        "consequence": "Acceptance permits the outcome claim; rejection creates corrective work or rollback."
+      }
+    ],
+    "authorizations": [
+      {
+        "action": "repository-mutation",
+        "status": "granted",
+        "target": "supporting software repository"
+      },
+      {
+        "action": "tracker-publication",
+        "status": "not-required",
+        "target": "no external tracker configured"
+      },
+      {
+        "action": "implementation",
+        "status": "granted",
+        "target": "approved operating-model specification"
+      },
+      {
+        "action": "commit",
+        "status": "granted",
+        "target": "supporting software repository"
+      },
+      {
+        "action": "deployment",
+        "status": "granted",
+        "target": "named production environment and exact artifact"
+      },
+      {
+        "action": "closure",
+        "status": "granted",
+        "target": "business-outcome destination"
+      }
+    ],
+    "valid_stop_after": "outcome-verification",
+    "terminal_disposition": "completed-for-outcome",
+    "must_not_create": [],
+    "route_expansion_when": [
+      {
+        "condition": "new evidence invalidates the process baseline",
+        "reenter_at": "evidence-intake"
+      }
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Delivery Proof"
+  short_description: "Define and verify delivery evidence"
+  default_prompt: "Use $delivery-proof to define the evidence required before this work can be called done."

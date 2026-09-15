@@ -1,0 +1,61 @@
+{
+  "record_type": "workbench-authorization",
+  "schema_version": "0.1.0",
+  "authorization_id": "AUTH-DELEGATE-001",
+  "work_id": "WB-PROP-001",
+  "action": "decision-delegation",
+  "status": "granted",
+  "scope": {
+    "targets": [
+      {
+        "kind": "decision",
+        "target_id": "DEC-TECH-001"
+      }
+    ],
+    "constraints": [
+      "The choice must not change the approved user-visible behavior."
+    ]
+  },
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human",
+    "display_name": "Vince"
+  },
+  "requested_at": "2026-09-14T11:35:00-05:00",
+  "grant": {
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human",
+      "display_name": "Vince"
+    },
+    "granted_at": "2026-09-14T11:36:00-05:00",
+    "expires_at": "2026-09-21T11:36:00-05:00"
+  },
+  "delegation": {
+    "delegate": {
+      "actor_id": "agent:solution-architect",
+      "kind": "agent"
+    },
+    "decision_ids": [
+      "DEC-TECH-001"
+    ],
+    "defaults": [
+      "Prefer the reversible option when evidence is otherwise equal."
+    ],
+    "escalation_thresholds": [
+      "Escalate any option that adds a new external vendor or irreversible migration."
+    ],
+    "excluded_actions": [
+      "implementation",
+      "commit",
+      "deployment",
+      "closure"
+    ],
+    "terminating_condition": "Ends when DEC-TECH-001 is confirmed, withdrawn, or superseded."
+  },
+  "decision_id": "DEC-TECH-001"
+}

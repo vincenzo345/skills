@@ -1,0 +1,397 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-authorization.schema.json",
+  "title": "Workbench Authorization",
+  "description": "A typed, scoped authorization. This record does not prove the granting actor has legal or organizational authority; runtime policy must establish that separately.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "authorization_id",
+    "work_id",
+    "action",
+    "status",
+    "scope",
+    "requested_by",
+    "authority",
+    "requested_at"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "workbench-authorization"
+    },
+    "schema_version": {
+      "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+    },
+    "authorization_id": {
+      "$ref": "workbench-common.schema.json#/$defs/authorizationId"
+    },
+    "work_id": {
+      "$ref": "workbench-common.schema.json#/$defs/workId"
+    },
+    "action": {
+      "enum": [
+        "decision-delegation",
+        "repository-mutation",
+        "tracker-publication",
+        "implementation",
+        "commit",
+        "deployment",
+        "closure"
+      ]
+    },
+    "status": {
+      "enum": [
+        "requested",
+        "granted",
+        "denied",
+        "revoked",
+        "expired",
+        "consumed"
+      ]
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "requested_by": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "authority": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "requested_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    },
+    "next_action": {
+      "$ref": "workbench-common.schema.json#/$defs/nextAction"
+    },
+    "grant": {
+      "$ref": "#/$defs/grant"
+    },
+    "status_reason": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "consumption": {
+      "$ref": "#/$defs/consumption"
+    },
+    "decision_id": {
+      "$ref": "workbench-common.schema.json#/$defs/decisionId"
+    },
+    "delegation": {
+      "$ref": "#/$defs/delegation"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "requested"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "next_action"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "granted",
+              "consumed"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "grant"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "denied",
+              "revoked",
+              "expired"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "status_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "consumed"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "consumption"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "decision-delegation"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "delegation"
+        ],
+        "properties": {
+          "scope": {
+            "properties": {
+              "targets": {
+                "items": {
+                  "properties": {
+                    "kind": {
+                      "const": "decision"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "closure"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "properties": {
+          "scope": {
+            "properties": {
+              "targets": {
+                "items": {
+                  "required": [
+                    "planning_destination"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "const": "work"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "authorizationTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "target_id"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "work",
+            "stage",
+            "artifact",
+            "decision",
+            "repository",
+            "tracker",
+            "environment",
+            "external-system",
+            "other"
+          ]
+        },
+        "target_id": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "qualifier": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "planning_destination": {
+          "$ref": "workbench-lifecycle.schema.json#/$defs/planningDestination"
+        },
+        "stage_id": {
+          "$ref": "workbench-lifecycle.schema.json#/$defs/stageId"
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "targets",
+        "constraints"
+      ],
+      "properties": {
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/authorizationTarget"
+          },
+          "uniqueItems": true
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "environment": {
+          "$ref": "workbench-common.schema.json#/$defs/shortString"
+        }
+      }
+    },
+    "delegation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "delegate",
+        "defaults",
+        "escalation_thresholds",
+        "excluded_actions",
+        "terminating_condition"
+      ],
+      "properties": {
+        "delegate": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        },
+        "decision_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/decisionId"
+          },
+          "uniqueItems": true
+        },
+        "decision_class": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "defaults": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "escalation_thresholds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "excluded_actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "terminating_condition": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "decision_ids"
+          ]
+        },
+        {
+          "required": [
+            "decision_class"
+          ]
+        }
+      ]
+    },
+    "grant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "granted_by",
+        "granted_at"
+      ],
+      "properties": {
+        "granted_by": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        },
+        "granted_at": {
+          "$ref": "workbench-common.schema.json#/$defs/timestamp"
+        },
+        "expires_at": {
+          "$ref": "workbench-common.schema.json#/$defs/timestamp"
+        }
+      }
+    },
+    "consumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "consumed_by",
+        "consumed_at",
+        "event_ids"
+      ],
+      "properties": {
+        "consumed_by": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        },
+        "consumed_at": {
+          "$ref": "workbench-common.schema.json#/$defs/timestamp"
+        },
+        "event_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/eventId"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

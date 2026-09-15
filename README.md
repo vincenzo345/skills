@@ -1,10 +1,8 @@
 # Skills
 
-My agent skills — the ones I actually use. Written for Claude Code and Codex.
-
-The pack is one pipeline: **a meeting becomes a scope tree a build can run against**, without
-acceptance ever being won by exhausting the person who does the work. Every skill here is one I
-wrote and understand. The set is small on purpose and grows one finished skill at a time.
+My focused agent skills for Claude Code and Codex. The set stays small on purpose: durable
+Workbench coordination, reusable engineering workflows, and a requirements pipeline that turns
+a meeting into a scope tree a build can run against.
 
 ## Install
 
@@ -39,6 +37,20 @@ transcript; the transcript becomes a scope tree the expert has corrected and sig
 rarely free on drafting day. Re-invoke it and it reads the tree, works out which pass never
 finished, and starts there — re-drafting nothing, renumbering nothing, and re-asking nobody.
 
+### Model-invoked
+
+- [`workbench`](./skills/workbench/SKILL.md) — coordinate explicitly requested durable work from persisted state, with proportional routing, proof, resumability, and session closure.
+- [`code-review`](./skills/code-review/SKILL.md) — review a branch or worktree against both repository standards and its originating specification.
+- [`diagnosing-bugs`](./skills/diagnosing-bugs/SKILL.md) — diagnose difficult bugs and performance regressions with an evidence-driven loop.
+- [`prototype`](./skills/prototype/SKILL.md) — build a throwaway prototype to answer a focused design question.
+- [`research`](./skills/research/SKILL.md) — resolve a question from high-trust primary sources.
+- [`resolving-merge-conflicts`](./skills/resolving-merge-conflicts/SKILL.md) — resolve an active merge or rebase conflict safely.
+- [`tdd`](./skills/tdd/SKILL.md) — develop behavior test-first at meaningful public seams.
+
+Nine additional candidates live under [`review-for-workbench`](./review-for-workbench/INVENTORY.md).
+They are intentionally excluded from the installable skill tree until their useful behavior is
+incorporated or they are retired.
+
 ## Working on this repo
 
 Clone it, then link every skill into your local agent directories as junctions, so edits are live:
@@ -51,7 +63,9 @@ Conventions for adding a skill live in [CLAUDE.md](./CLAUDE.md).
 
 ## Credit
 
-The shape of this repo — buckets of skills, a plugin manifest, a link script, the user-invoked vs model-invoked split — is modelled on [mattpocock/skills](https://github.com/mattpocock/skills), which is worth reading. No text from it ships here.
+The repository shape and several retained engineering workflows were adapted from
+[mattpocock/skills](https://github.com/mattpocock/skills), then narrowed and made self-contained
+for this pack.
 
 ## Licence
 

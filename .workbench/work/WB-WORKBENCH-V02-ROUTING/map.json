@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-09-14T18:04:02.716602Z",
+  "desired_outcome_node_id": "O-WORKBENCH-V02-ROUTING",
+  "edges": [],
+  "fog": [],
+  "map_id": "MAP-WORKBENCH-V02-ROUTING",
+  "nodes": [
+    {
+      "done_when": [
+        "The locally-verified-implementation destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Satisfy the local-proof-disposition-recorded exit gate.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "local-verification",
+        "target_type": "stage"
+      },
+      "node_id": "O-WORKBENCH-V02-ROUTING",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Workbench v0.2 routing and bounded-discovery foundation",
+      "why_it_matters": "Workbench persistently separates business basis, solution context, engagement intent, destination, and lane while escalating discovery only when material uncertainty justifies it."
+    }
+  ],
+  "planning_destination": "locally-verified-implementation",
+  "record_type": "workbench-map",
+  "schema_version": "0.1.0",
+  "updated_at": "2026-09-14T18:30:12.405217Z",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

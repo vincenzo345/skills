@@ -1,0 +1,472 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-map.schema.json",
+  "title": "Workbench Uncertainty Map",
+  "description": "The normalized node-and-edge graph for questions, evidence, experiments, decisions, obligations, deliverables, and outcomes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "map_id",
+    "work_id",
+    "desired_outcome_node_id",
+    "planning_destination",
+    "nodes",
+    "edges",
+    "fog",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "workbench-map"
+    },
+    "schema_version": {
+      "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+    },
+    "map_id": {
+      "$ref": "workbench-common.schema.json#/$defs/mapId"
+    },
+    "work_id": {
+      "$ref": "workbench-common.schema.json#/$defs/workId"
+    },
+    "desired_outcome_node_id": {
+      "$ref": "workbench-common.schema.json#/$defs/nodeId"
+    },
+    "planning_destination": {
+      "$ref": "workbench-common.schema.json#/$defs/planningDestination"
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    },
+    "fog": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fogItem"
+      }
+    },
+    "created_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    },
+    "updated_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "kind",
+        "title",
+        "why_it_matters",
+        "owner",
+        "status",
+        "done_when",
+        "evidence"
+      ],
+      "properties": {
+        "node_id": {
+          "$ref": "workbench-common.schema.json#/$defs/nodeId"
+        },
+        "kind": {
+          "$ref": "workbench-common.schema.json#/$defs/nodeKind"
+        },
+        "title": {
+          "$ref": "workbench-common.schema.json#/$defs/shortString"
+        },
+        "question": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "why_it_matters": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "owner": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        },
+        "status": {
+          "$ref": "workbench-common.schema.json#/$defs/nodeStatus"
+        },
+        "next_action": {
+          "$ref": "workbench-common.schema.json#/$defs/nextAction"
+        },
+        "done_when": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/recordRef"
+          },
+          "uniqueItems": true
+        },
+        "resolution": {
+          "$ref": "#/$defs/resolution"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "question",
+                  "evidence-task",
+                  "experiment",
+                  "decision"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "question"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "draft",
+                  "ready",
+                  "in-progress",
+                  "waiting-for-human",
+                  "evidence-blocked",
+                  "external-blocked"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "next_action"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "evidence-established",
+                  "decided",
+                  "completed",
+                  "excluded",
+                  "superseded"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "resolution"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "evidence-established"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resolution": {
+                "properties": {
+                  "basis": {
+                    "const": "evidence"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "decided"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resolution": {
+                "properties": {
+                  "basis": {
+                    "enum": [
+                      "human-decision",
+                      "delegated-agent-decision"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resolution": {
+                "properties": {
+                  "basis": {
+                    "const": "completion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "excluded"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resolution": {
+                "properties": {
+                  "basis": {
+                    "const": "exclusion"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "superseded"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resolution": {
+                "properties": {
+                  "basis": {
+                    "const": "supersession"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "basis",
+        "rationale",
+        "resolved_at",
+        "resolved_by",
+        "references"
+      ],
+      "properties": {
+        "basis": {
+          "enum": [
+            "evidence",
+            "human-decision",
+            "delegated-agent-decision",
+            "factual-evidence",
+            "completion",
+            "exclusion",
+            "supersession"
+          ]
+        },
+        "rationale": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "resolved_at": {
+          "$ref": "workbench-common.schema.json#/$defs/timestamp"
+        },
+        "resolved_by": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        },
+        "references": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/recordRef"
+          },
+          "uniqueItems": true
+        },
+        "superseded_by": {
+          "$ref": "workbench-common.schema.json#/$defs/nodeId"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "const": "supersession"
+              }
+            },
+            "required": [
+              "basis"
+            ]
+          },
+          "then": {
+            "required": [
+              "superseded_by"
+            ]
+          }
+        }
+      ]
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edge_id",
+        "from_node_id",
+        "to_node_id",
+        "relationship"
+      ],
+      "properties": {
+        "edge_id": {
+          "$ref": "workbench-common.schema.json#/$defs/edgeId"
+        },
+        "from_node_id": {
+          "$ref": "workbench-common.schema.json#/$defs/nodeId"
+        },
+        "to_node_id": {
+          "$ref": "workbench-common.schema.json#/$defs/nodeId"
+        },
+        "relationship": {
+          "enum": [
+            "depends-on",
+            "supports",
+            "blocks",
+            "invalidates",
+            "supersedes",
+            "delivers",
+            "traces-to"
+          ]
+        },
+        "rationale": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "fogItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fog_id",
+        "description",
+        "status",
+        "owner"
+      ],
+      "properties": {
+        "fog_id": {
+          "$ref": "workbench-common.schema.json#/$defs/fogId"
+        },
+        "description": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "status": {
+          "enum": [
+            "unresolved",
+            "clarified",
+            "dismissed",
+            "superseded"
+          ]
+        },
+        "owner": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        },
+        "next_action": {
+          "$ref": "workbench-common.schema.json#/$defs/nextAction"
+        },
+        "resolution": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "unresolved"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "next_action"
+            ]
+          },
+          "else": {
+            "required": [
+              "resolution"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

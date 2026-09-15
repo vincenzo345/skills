@@ -1,0 +1,89 @@
+{
+  "scenario_version": "1.0.0",
+  "id": "SCN-FAST-001",
+  "title": "Make a bounded low-risk validation-message change",
+  "entrance": "small-change-fast-lane",
+  "planning_destination": "locally-verified-implementation",
+  "request": "Change the existing invalid-date message without changing validation behavior or the public API.",
+  "given": {
+    "repository_present": true,
+    "existing_process": true,
+    "process_claim_proven": true,
+    "human_interaction_changed": true,
+    "external_approval_required": false,
+    "authorized_actions": [
+      "repository-mutation",
+      "implementation",
+      "closure"
+    ]
+  },
+  "expected": {
+    "route": [
+      "intake",
+      "outcome-framing",
+      "brownfield-reconnaissance",
+      "standards-resolution",
+      "implementation",
+      "local-verification"
+    ],
+    "required_map_nodes": [
+      {
+        "node_id": "E-BOUNDS-001",
+        "kind": "evidence-task",
+        "owner": "agent",
+        "question": "Is the requested copy isolated from validation behavior, localization, accessibility, and public contracts?",
+        "done_when": [
+          "affected references and tests are inventoried",
+          "no unresolved material choice or wider blast radius remains"
+        ],
+        "depends_on": []
+      }
+    ],
+    "required_artifacts": [
+      "minimal-behavior-contract",
+      "brownfield-preflight",
+      "standards-profile",
+      "implementation-change",
+      "local-proof-receipts"
+    ],
+    "decisions": [],
+    "authorizations": [
+      {
+        "action": "repository-mutation",
+        "status": "granted",
+        "target": "bounded validation-message change"
+      },
+      {
+        "action": "implementation",
+        "status": "granted",
+        "target": "bounded validation-message change"
+      },
+      {
+        "action": "deployment",
+        "status": "not-required",
+        "target": "release is outside the selected destination"
+      },
+      {
+        "action": "closure",
+        "status": "granted",
+        "target": "locally-verified implementation destination"
+      }
+    ],
+    "valid_stop_after": "local-verification",
+    "terminal_disposition": "completed-for-destination",
+    "must_not_create": [
+      "release-record",
+      "deployed-proof-receipt"
+    ],
+    "route_expansion_when": [
+      {
+        "condition": "copy is shared externally, localized, regulated, or behaviorally load-bearing",
+        "reenter_at": "experience-design"
+      },
+      {
+        "condition": "blast radius or public behavior is not bounded",
+        "reenter_at": "brownfield-reconnaissance"
+      }
+    ]
+  }
+}

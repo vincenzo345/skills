@@ -1,0 +1,13 @@
+{
+  "work_id": "WB-WORKBENCH-V02-ROUTING",
+  "state_revision": 3,
+  "stage_id": "brownfield-reconnaissance",
+  "exit_gate": "current-state-and-blast-radius-evidenced",
+  "result": "passed",
+  "checked_at": "2026-09-14T18:29:09Z",
+  "checked_by": "agent:codex",
+  "evidence": [
+    {"record_type": "external", "record_id": "WORKBENCH-RUNTIME-SOURCE", "uri": "skills/skills/engineering/workbench/scripts/workbench.py"},
+    {"record_type": "external", "record_id": "WORKBENCH-V01-REGRESSION", "uri": "tests/runtime"}
+  ]
+}

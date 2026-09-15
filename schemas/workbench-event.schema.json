@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-event.schema.json",
+  "title": "Workbench Event",
+  "description": "One append-only fact explaining a Workbench transition. Append-only storage, sequence continuity, and before/after revision arithmetic are runtime invariants.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "event_id",
+    "work_id",
+    "sequence",
+    "event_type",
+    "occurred_at",
+    "actor",
+    "cause",
+    "inputs",
+    "outputs",
+    "state_revision_before",
+    "state_revision_after",
+    "idempotency_key",
+    "input_fingerprint",
+    "changes"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "workbench-event"
+    },
+    "schema_version": {
+      "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+    },
+    "event_id": {
+      "$ref": "workbench-common.schema.json#/$defs/eventId"
+    },
+    "work_id": {
+      "$ref": "workbench-common.schema.json#/$defs/workId"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "event_type": {
+      "enum": [
+        "work-started",
+        "route-selected",
+        "stage-entered",
+        "stage-skipped",
+        "stage-blocked",
+        "stage-completed",
+        "node-created",
+        "node-updated",
+        "artifact-registered",
+        "decision-recorded",
+        "decision-overridden",
+        "proof-recorded",
+        "authorization-recorded",
+        "authorization-consumed",
+        "handoff-recorded",
+        "handoff-accepted",
+        "handoff-rejected",
+        "work-stopped",
+        "work-completed",
+        "state-corrected"
+      ]
+    },
+    "occurred_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    },
+    "actor": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "cause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "description",
+        "references"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "user-request",
+            "specialist-output",
+            "evidence",
+            "decision",
+            "authorization",
+            "validation",
+            "override",
+            "system"
+          ]
+        },
+        "description": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/recordRef"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/recordRef"
+      },
+      "uniqueItems": true
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/recordRef"
+      },
+      "uniqueItems": true
+    },
+    "state_revision_before": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "state_revision_after": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256
+    },
+    "input_fingerprint": {
+      "$ref": "workbench-common.schema.json#/$defs/digest"
+    },
+    "changes": {
+      "description": "Replayable changes to canonical records. Runtime policy validates that the event type and actor may change each target path.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/change"
+      }
+    },
+    "payload": {
+      "description": "Optional event-type-specific diagnostics. This is not the replay source of truth.",
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target",
+        "path",
+        "before",
+        "after"
+      ],
+      "properties": {
+        "target": {
+          "$ref": "workbench-common.schema.json#/$defs/recordRef"
+        },
+        "path": {
+          "description": "JSON Pointer into the target record.",
+          "type": "string",
+          "pattern": "^(?:/(?:[^~/]|~0|~1)*)+$"
+        },
+        "before": {
+          "$ref": "#/$defs/valueState"
+        },
+        "after": {
+          "$ref": "#/$defs/valueState"
+        }
+      }
+    },
+    "valueState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "present"
+      ],
+      "properties": {
+        "present": {
+          "type": "boolean"
+        },
+        "value": true
+      },
+      "if": {
+        "properties": {
+          "present": {
+            "const": true
+          }
+        },
+        "required": [
+          "present"
+        ]
+      },
+      "then": {
+        "required": [
+          "value"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "value"
+          ]
+        }
+      }
+    }
+  }
+}

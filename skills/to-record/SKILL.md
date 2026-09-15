@@ -201,8 +201,8 @@ in this whole pack and spending it on the recording tool's mistakes is its cheap
 
 Record each answer against its flag, and mark each flag `resolved`, `unresolved` or
 `unresolvable`. Corrections to a suspect term go **in the flag list, not in the body** -
-the body still says *Windflex*, because the body is the record. `/to-scope` and
-`/domain-modeling` read the correction from the flag.
+the body still says *Windflex*, because the body is the record. Downstream scope and
+glossary passes read the correction from the flag.
 
 Set `labels: confirmed` only once the builder has confirmed them.
 

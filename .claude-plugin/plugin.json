@@ -1,7 +1,7 @@
 {
   "name": "vince-skills",
-  "version": "0.9.0",
-  "description": "Vince Sandoz's coach pack: a meeting becomes a scope tree a build can run against.",
+  "version": "1.0.0",
+  "description": "Vince Sandoz's focused skills for durable work, engineering, and requirements discovery.",
   "author": {
     "name": "Vince Sandoz",
     "url": "https://github.com/vincenzo345"
@@ -14,10 +14,19 @@
     "transcripts",
     "elicitation",
     "scope",
+    "workbench",
+    "engineering",
     "skills"
   ],
   "skills": [
+    "./skills/code-review",
+    "./skills/diagnosing-bugs",
+    "./skills/prototype",
+    "./skills/research",
+    "./skills/resolving-merge-conflicts",
+    "./skills/tdd",
     "./skills/to-record",
-    "./skills/to-scope"
+    "./skills/to-scope",
+    "./skills/workbench"
   ]
 }

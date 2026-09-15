@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workflow Workbench — Logic Prototype</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17211b;
+      --muted: #657168;
+      --paper: #f5f6f1;
+      --panel: #ffffff;
+      --line: #d9ded7;
+      --accent: #166447;
+      --accent-soft: #e4f0e9;
+      --warning: #9b4d16;
+      --warning-soft: #fff1e6;
+      --shadow: 0 14px 35px rgba(31, 48, 39, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 36px auto 72px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 8px; font-size: clamp(1.9rem, 4vw, 3rem); letter-spacing: -0.04em; }
+    h2 { font-size: 1.15rem; }
+    h3 { margin-bottom: 8px; font-size: 0.98rem; }
+    .lede { max-width: 850px; color: var(--muted); font-size: 1.05rem; }
+
+    .prototype-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 9px;
+      border: 1px solid var(--warning);
+      border-radius: 999px;
+      color: var(--warning);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .question {
+      margin: 24px 0;
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .question strong { display: block; margin-bottom: 4px; }
+
+    .toolbar, .tabs, .actions, .step-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 650;
+      padding: 9px 12px;
+    }
+
+    button:hover { border-color: var(--accent); }
+    button.primary { background: var(--accent); border-color: var(--accent); color: white; }
+    button.secondary { background: var(--accent-soft); border-color: #b8d3c4; }
+    button.tab.active { background: var(--ink); border-color: var(--ink); color: white; }
+    button.done { opacity: 0.58; text-decoration: line-through; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .stage-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .state-item {
+      min-height: 94px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    .state-item.wide { grid-column: 1 / -1; }
+    .state-item p, .state-item ul { margin-bottom: 0; color: #354239; font-size: 0.9rem; }
+    .state-item ul { padding-left: 18px; }
+    .empty { color: var(--muted) !important; font-style: italic; }
+
+    .decision-card {
+      margin-top: 14px;
+      padding: 16px;
+      border: 1px solid #b8d3c4;
+      border-radius: 10px;
+      background: #f7fbf8;
+    }
+
+    .decision-card .confidence { color: var(--muted); font-size: 0.82rem; }
+    .decision-card ul { padding-left: 18px; }
+    .decision-card .actions { margin-top: 12px; }
+
+    .notice {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 9px;
+      background: var(--accent-soft);
+      font-size: 0.9rem;
+    }
+
+    .notice.blocked { background: var(--warning-soft); color: #74380f; }
+
+    .walkthrough { margin-top: 18px; }
+    .walkthrough-copy { color: var(--muted); }
+    .step-list { flex-direction: column; align-items: stretch; }
+    .step-list button { text-align: left; }
+    .step-list button::before { content: attr(data-number) ". "; color: var(--accent); }
+
+    .timeline {
+      max-height: 320px;
+      overflow: auto;
+      margin: 0;
+      padding-left: 22px;
+      color: #354239;
+      font-size: 0.86rem;
+    }
+
+    .timeline li { margin-bottom: 8px; }
+
+    .free-play { margin-top: 18px; }
+    .free-play .actions { margin-top: 10px; }
+
+    @media (max-width: 820px) {
+      .grid { grid-template-columns: 1fr; }
+      .state-grid { grid-template-columns: 1fr; }
+      .state-item.wide { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <span class="prototype-label">Throwaway workflow prototype</span>
+    <h1>Workflow Workbench</h1>
+    <p class="lede">Drive two business cases through a shared workflow. Every action exposes the current stage, evidence, assumptions, decisions, artifacts, and next gate.</p>
+
+    <div class="question">
+      <strong>Question this prototype answers</strong>
+      Can one understandable state model support both an unproven net-new process and an existing process being turned into software—without silently promoting recommendations into decisions or forcing the user to orchestrate individual skills?
+    </div>
+
+    <div class="toolbar">
+      <button class="primary" data-action="START_NEW">Load net-new process</button>
+      <button class="primary" data-action="START_EXISTING">Load existing process</button>
+      <button data-action="RESET">Reset</button>
+    </div>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="stage-row">
+          <div>
+            <div class="badge" id="caseType">No case loaded</div>
+            <h2 id="caseTitle" style="margin: 8px 0 0;">Choose a walkthrough</h2>
+          </div>
+          <div style="text-align:right;">
+            <small style="color:var(--muted);">Current stage</small>
+            <div id="stage" style="font-weight:800;">Not started</div>
+          </div>
+        </div>
+
+        <div class="state-grid">
+          <div class="state-item wide">
+            <h3>Desired outcome</h3>
+            <p id="outcome" class="empty">Not captured</p>
+          </div>
+          <div class="state-item">
+            <h3>Known reality</h3>
+            <ul id="reality"><li class="empty">Nothing observed yet</li></ul>
+          </div>
+          <div class="state-item">
+            <h3>Assumptions and unknowns</h3>
+            <ul id="assumptions"><li class="empty">Nothing surfaced yet</li></ul>
+          </div>
+          <div class="state-item">
+            <h3>Confirmed decisions</h3>
+            <ul id="decisions"><li class="empty">No user-owned decisions</li></ul>
+          </div>
+          <div class="state-item">
+            <h3>Artifacts</h3>
+            <ul id="artifacts"><li class="empty">No artifacts</li></ul>
+          </div>
+          <div class="state-item wide">
+            <h3>Next gate</h3>
+            <p id="nextGate" class="empty">Load a case</p>
+          </div>
+        </div>
+
+        <div id="decisionCard"></div>
+        <div id="notice" class="notice" hidden></div>
+      </div>
+
+      <aside class="panel">
+        <h2>Guided walkthroughs</h2>
+        <div class="tabs">
+          <button class="tab active" data-tab="new">Net-new, unproven</button>
+          <button class="tab" data-tab="existing">Existing → software</button>
+        </div>
+
+        <div class="walkthrough" id="walkthrough"></div>
+
+        <div class="free-play">
+          <h3>Free play</h3>
+          <p style="color:var(--muted);font-size:.86rem;">Try actions out of order. Illegal transitions should explain what is missing.</p>
+          <div class="actions">
+            <button data-action="EXPLAIN">Explain recommendation</button>
+            <button data-action="COMPARE">Compare options</button>
+            <button data-action="DEFER">Defer decision</button>
+            <button data-action="REQUEST_SPEC">Send to specification</button>
+          </div>
+        </div>
+
+        <h3 style="margin-top:20px;">Activity</h3>
+        <ol class="timeline" id="timeline"><li>Prototype ready.</li></ol>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    // Portable prototype logic: a pure reducer over a plain workflow state.
+    const emptyState = () => ({
+      caseType: null,
+      title: "Choose a walkthrough",
+      stage: "Not started",
+      outcome: "",
+      reality: [],
+      assumptions: [],
+      decisions: [],
+      artifacts: [],
+      nextGate: "Load a case",
+      recommendation: null,
+      notice: "",
+      blocked: false,
+      history: ["Prototype ready."],
+      completedActions: []
+    });
+
+    const cases = {
+      new: {
+        title: "Proactive renewal-risk outreach",
+        outcome: "Reduce preventable customer churn without creating unwanted contact or unsustainable work for the customer-success team."
+      },
+      existing: {
+        title: "Customer onboarding coordination",
+        outcome: "Help operations complete onboarding reliably and give customers clear progress visibility, while preserving necessary exception handling."
+      }
+    };
+
+    function addUnique(items, values) {
+      return [...new Set([...items, ...values])];
+    }
+
+    function log(state, message) {
+      return { ...state, history: [...state.history, message], notice: message };
+    }
+
+    function block(state, message) {
+      return { ...state, history: [...state.history, `Blocked: ${message}`], notice: message, blocked: true };
+    }
+
+    function complete(state, action) {
+      return { ...state, completedActions: addUnique(state.completedActions, [action]), blocked: false };
+    }
+
+    function reducer(state, action) {
+      let next = { ...state, notice: "", blocked: false };
+
+      if (action === "RESET") return emptyState();
+
+      if (action === "START_NEW") {
+        return {
+          ...emptyState(),
+          caseType: "new",
+          title: cases.new.title,
+          stage: "Capture",
+          nextGate: "State the business outcome without assuming a process or software solution.",
+          history: ["Loaded the net-new process case."],
+          completedActions: ["START_NEW"]
+        };
+      }
+
+      if (action === "START_EXISTING") {
+        return {
+          ...emptyState(),
+          caseType: "existing",
+          title: cases.existing.title,
+          stage: "Record current reality",
+          nextGate: "Observe the real process before proposing automation.",
+          history: ["Loaded the existing-process case."],
+          completedActions: ["START_EXISTING"]
+        };
+      }
+
+      if (!state.caseType) return block(state, "Load a case before performing workflow actions.");
+
+      switch (action) {
+        case "CAPTURE_NEW_OUTCOME":
+          if (state.caseType !== "new") return block(state, "This action belongs to the net-new case.");
+          next = complete(next, action);
+          next.stage = "Frame the hypothesis";
+          next.outcome = cases.new.outcome;
+          next.reality = addUnique(next.reality, ["No renewal-risk outreach process exists today.", "The team has churn anecdotes but no causal evidence."]);
+          next.nextGate = "Separate facts from assumptions that could make the process fail.";
+          return log(next, "Captured an outcome without treating outreach or software as the answer.");
+
+        case "SURFACE_ASSUMPTIONS":
+          if (state.caseType !== "new" || !state.outcome) return block(state, "Capture the net-new outcome first.");
+          next = complete(next, action);
+          next.stage = "Assumption review";
+          next.assumptions = addUnique(next.assumptions, [
+            "At-risk customers can be identified early enough.",
+            "Customers will find proactive contact useful rather than intrusive.",
+            "The team can act consistently without harming other work.",
+            "Outreach can change renewal behavior."
+          ]);
+          next.nextGate = "Choose the smallest experiment that can test the fatal assumptions.";
+          return log(next, "Made four outcome-critical assumptions visible.");
+
+        case "PROPOSE_PILOT":
+          if (state.caseType !== "new" || !state.completedActions.includes("SURFACE_ASSUMPTIONS")) return block(state, "Surface the unproven assumptions before proposing a pilot.");
+          next = complete(next, action);
+          next.stage = "Experiment decision";
+          next.recommendation = {
+            question: "How should we test the process before specifying software?",
+            recommendation: "Run a four-week manual pilot with one customer segment and a capped daily outreach queue.",
+            why: "It tests customer response, signal usefulness, staff effort, and behavioral lift without committing to automation.",
+            alternatives: [
+              "Build a lightweight tool first — faster automation learning, but process risk and wasted-code risk are high.",
+              "Conduct interviews only — cheap, but stated preference will not prove operational behavior.",
+              "Do nothing yet — preserves capacity, but leaves the churn hypothesis unresolved."
+            ],
+            tradeoff: "The pilot delays software work and produces a smaller sample, but keeps the test reversible.",
+            confidence: "Medium: structurally sound, but thresholds require business input.",
+            explained: false,
+            compared: false,
+            status: "open"
+          };
+          next.nextGate = "Understand the alternatives, then confirm, revise, delegate, or defer the pilot choice.";
+          return log(next, "Presented a recommendation as an open decision, not an accepted plan.");
+
+        case "CONFIRM_PILOT":
+          if (state.caseType !== "new" || !state.recommendation || state.recommendation.status !== "open") return block(state, "There is no open pilot decision to confirm.");
+          next = complete(next, action);
+          next.stage = "Pilot planned";
+          next.decisions = addUnique(next.decisions, ["Run a four-week, manually operated pilot before designing software."]);
+          next.artifacts = addUnique(next.artifacts, ["Pilot charter: segment, queue cap, consent language, measures, stop conditions"]);
+          next.recommendation = { ...next.recommendation, status: "confirmed" };
+          next.nextGate = "Run the pilot and collect customer response, staff effort, and renewal-proxy evidence.";
+          return log(next, "The user confirmed the pilot after seeing its tradeoff.");
+
+        case "ADD_PILOT_EVIDENCE":
+          if (state.caseType !== "new" || !state.decisions.some(item => item.includes("four-week"))) return block(state, "Confirm a pilot design before recording pilot evidence.");
+          next = complete(next, action);
+          next.stage = "Evidence review";
+          next.reality = addUnique(next.reality, ["Pilot: 31 of 40 selected customers reached.", "12 customers took a retention action; 3 opted out.", "Median staff effort was 11 minutes per case."]);
+          next.artifacts = addUnique(next.artifacts, ["Pilot evidence summary with raw counts and staff notes"]);
+          next.recommendation = {
+            question: "Is the process promising enough to shape for repeatable use?",
+            recommendation: "Proceed to process shaping, but keep opt-out handling and staff-capacity limits as explicit constraints.",
+            why: "The pilot produced observable engagement and manageable effort, while exposing consent and capacity risks.",
+            alternatives: ["Extend the pilot for stronger evidence.", "Revise the targeting signal and rerun.", "Stop because the evidence does not justify the operational cost."],
+            tradeoff: "Proceeding accepts uncertainty about long-term renewal lift; extending delays learning about repeatability.",
+            confidence: "Medium: enough to shape a process, not enough to claim proven churn reduction.",
+            explained: false,
+            compared: false,
+            status: "open"
+          };
+          next.nextGate = "Make an explicit proceed, adapt, extend, or stop decision.";
+          return log(next, "Added non-vacuous pilot evidence without overstating the business outcome.");
+
+        case "CONFIRM_PROCEED":
+          if (state.caseType !== "new" || !state.completedActions.includes("ADD_PILOT_EVIDENCE")) return block(state, "Pilot evidence is required before proceeding.");
+          next = complete(next, action);
+          next.stage = "Shape the process";
+          next.decisions = addUnique(next.decisions, ["Proceed to shape a repeatable process; churn reduction remains an unproven outcome."]);
+          next.recommendation = next.recommendation ? { ...next.recommendation, status: "confirmed" } : null;
+          next.nextGate = "Define roles, trigger, workflow states, exceptions, controls, and measures.";
+          return log(next, "Confirmed a bounded next step while preserving the remaining uncertainty.");
+
+        case "SHAPE_NEW_PROCESS":
+          if (state.caseType !== "new" || !state.completedActions.includes("CONFIRM_PROCEED")) return block(state, "Confirm the evidence-based proceed decision first.");
+          next = complete(next, action);
+          next.stage = "Process shaped";
+          next.artifacts = addUnique(next.artifacts, ["Target process: trigger → review → contact → response → follow-up → close", "Exception and consent rules", "Operational measures and outcome experiment"]);
+          next.nextGate = "Review the shaped process for specification readiness.";
+          return log(next, "Shaped the process from observed learning rather than the original idea alone.");
+
+        case "MAP_CURRENT_PROCESS":
+          if (state.caseType !== "existing") return block(state, "This action belongs to the existing-process case.");
+          next = complete(next, action);
+          next.stage = "Current-state map";
+          next.outcome = cases.existing.outcome;
+          next.reality = addUnique(next.reality, [
+            "Sales starts onboarding by emailing Operations.",
+            "Operations copies tasks into a spreadsheet and requests documents by email.",
+            "Specialists coordinate exceptions in chat.",
+            "Customers ask Sales for status because no shared view exists."
+          ]);
+          next.artifacts = addUnique(next.artifacts, ["Current-state map with actors, triggers, states, handoffs, and exceptions"]);
+          next.nextGate = "Validate which failures are frequent and consequential before redesigning the process.";
+          return log(next, "Recorded the existing process before proposing software.");
+
+        case "VALIDATE_PAIN":
+          if (state.caseType !== "existing" || !state.completedActions.includes("MAP_CURRENT_PROCESS")) return block(state, "Map the current process first.");
+          next = complete(next, action);
+          next.stage = "Pain validated";
+          next.reality = addUnique(next.reality, ["18% of active onboardings have an overdue task.", "Status inquiries average 14 per week.", "Most delays occur at document collection and specialist exceptions."]);
+          next.artifacts = addUnique(next.artifacts, ["Baseline evidence: overdue work, inquiries, delay causes"]);
+          next.nextGate = "Choose what process behavior software should own and what remains human judgment.";
+          return log(next, "Validated pain with counts instead of relying on the software request alone.");
+
+        case "PROPOSE_BOUNDARY":
+          if (state.caseType !== "existing" || !state.completedActions.includes("VALIDATE_PAIN")) return block(state, "Validate the operational pain before choosing the software boundary.");
+          next = complete(next, action);
+          next.stage = "Software-boundary decision";
+          next.assumptions = addUnique(next.assumptions, ["A shared task state will reduce status inquiries.", "Specialist exceptions can be represented without forcing a false standard path."]);
+          next.recommendation = {
+            question: "What should the first software release own?",
+            recommendation: "Own case state, task ownership, due dates, document requests, customer-visible status, and escalation; leave exception resolution to people.",
+            why: "This addresses observed coordination failures without pretending the messy judgment work is standardized.",
+            alternatives: [
+              "Automate the entire onboarding flow — greater theoretical efficiency, much higher exception and adoption risk.",
+              "Build only a customer status page — faster, but internal coordination remains fragmented.",
+              "Replace the spreadsheet only — improves task visibility, but customers and document collection remain disconnected."
+            ],
+            tradeoff: "The first release will not eliminate chat or specialist judgment, but it creates one reliable operational spine.",
+            confidence: "Medium-high: grounded in current-state evidence; UX validation is still needed.",
+            explained: false,
+            compared: false,
+            status: "open"
+          };
+          next.nextGate = "Understand and choose the first-release boundary.";
+          return log(next, "Presented a bounded software recommendation with alternatives and limitations.");
+
+        case "CONFIRM_BOUNDARY":
+          if (state.caseType !== "existing" || !state.recommendation || state.recommendation.status !== "open") return block(state, "There is no open software-boundary decision.");
+          next = complete(next, action);
+          next.stage = "Experience design";
+          next.decisions = addUnique(next.decisions, ["First release owns coordination and visibility; humans retain exception resolution."]);
+          next.recommendation = { ...next.recommendation, status: "confirmed" };
+          next.nextGate = "Design and validate task flows and information architecture before visual styling.";
+          return log(next, "The user confirmed the software boundary after comparison.");
+
+        case "DESIGN_UX_FLOW":
+          if (state.caseType !== "existing" || !state.completedActions.includes("CONFIRM_BOUNDARY")) return block(state, "Confirm the software boundary before designing screens.");
+          next = complete(next, action);
+          next.stage = "UX flow review";
+          next.artifacts = addUnique(next.artifacts, ["Role-based task flows", "Information architecture and screen-state inventory", "Low-fidelity onboarding workspace prototype"]);
+          next.nextGate = "Validate that Operations, specialists, Sales, and customers can complete their real journeys.";
+          return log(next, "Defined interactions before choosing colors, typography, or component styling.");
+
+        case "ADD_UI_GUIDANCE":
+          if (state.caseType !== "existing" || !state.completedActions.includes("DESIGN_UX_FLOW")) return block(state, "Validate the UX structure before consulting visual-design intelligence.");
+          next = complete(next, action);
+          next.stage = "Visual direction review";
+          next.artifacts = addUnique(next.artifacts, ["Owned UI guidance snapshot derived from the vendored UI/UX knowledge base", "Design-system candidate: dense operations workspace plus calm customer status view", "Accessibility, responsive, and interaction checklist"]);
+          next.nextGate = "Compare visible design directions and approve or revise one.";
+          return log(next, "Used UI/UX guidance as evidence after the workflow and interaction model were understood.");
+
+        case "APPROVE_UX":
+          if (state.caseType !== "existing" || !state.completedActions.includes("ADD_UI_GUIDANCE")) return block(state, "Produce and review UI guidance before approving the experience direction.");
+          next = complete(next, action);
+          next.stage = "Experience approved";
+          next.decisions = addUnique(next.decisions, ["Use the validated role-based flows and approved visual direction as the experience contract."]);
+          next.artifacts = addUnique(next.artifacts, ["Experience contract: flows, states, responsive behavior, accessibility, and approved references"]);
+          next.nextGate = "Audit business, software-boundary, and experience decisions for specification readiness.";
+          return log(next, "Approved the experience contract without allowing the design advisor to redefine product behavior.");
+
+        case "EXPLAIN":
+          if (!state.recommendation) return block(state, "There is no active recommendation to explain.");
+          next = complete(next, action);
+          next.recommendation = { ...next.recommendation, explained: true };
+          return log(next, `Explanation: ${next.recommendation.why} Tradeoff: ${next.recommendation.tradeoff}`);
+
+        case "COMPARE":
+          if (!state.recommendation) return block(state, "There is no active recommendation to compare.");
+          next = complete(next, action);
+          next.recommendation = { ...next.recommendation, compared: true };
+          return log(next, "Displayed the recommendation beside credible alternatives; no decision was recorded.");
+
+        case "DEFER":
+          if (!state.recommendation || state.recommendation.status !== "open") return block(state, "There is no open recommendation to defer.");
+          next = complete(next, action);
+          next.recommendation = { ...next.recommendation, status: "deferred" };
+          next.nextGate = "Name the missing evidence or decision owner before resuming.";
+          return log(next, "Deferred the choice without treating it as implicit acceptance.");
+
+        case "REQUEST_SPEC": {
+          const newReady = state.caseType === "new" && state.completedActions.includes("SHAPE_NEW_PROCESS");
+          const existingReady = state.caseType === "existing" && state.completedActions.includes("APPROVE_UX");
+          if (!newReady && !existingReady) {
+            const reason = state.caseType === "new"
+              ? "The process is not ready: obtain pilot evidence, make the proceed decision, and shape the operating model."
+              : "The software is not ready: validate the current process, choose its software boundary, and approve the experience contract.";
+            return block(state, reason);
+          }
+          next = complete(next, action);
+          next.stage = "Ready for specification";
+          next.artifacts = addUnique(next.artifacts, ["Normalized work packet for the specification stage"]);
+          next.nextGate = "Specification consumes confirmed decisions and evidence; it must not restart discovery or invent missing behavior.";
+          return log(next, "The readiness gate passed. The work packet can move to specification.");
+        }
+
+        default:
+          return block(state, `Unknown action: ${action}`);
+      }
+    }
+
+    const walkthroughs = {
+      new: {
+        title: "Case A: a process that does not exist yet",
+        copy: "The team wants proactive renewal outreach, but the behavior, capacity, customer response, and business effect are unproven. Watch the workflow refuse to turn the idea directly into requirements.",
+        steps: [
+          ["START_NEW", "Load the unproven process"],
+          ["CAPTURE_NEW_OUTCOME", "Capture the outcome, not the proposed solution"],
+          ["SURFACE_ASSUMPTIONS", "Expose assumptions that could invalidate the process"],
+          ["PROPOSE_PILOT", "Offer a reversible pilot with alternatives"],
+          ["COMPARE", "Compare options without making a decision"],
+          ["EXPLAIN", "Explain why the pilot is recommended"],
+          ["CONFIRM_PILOT", "Confirm the pilot as a user-owned choice"],
+          ["REQUEST_SPEC", "Try to specify too early and observe the block"],
+          ["ADD_PILOT_EVIDENCE", "Record pilot evidence without overstating it"],
+          ["COMPARE", "Compare proceed, adapt, extend, and stop"],
+          ["CONFIRM_PROCEED", "Confirm an evidence-bounded next step"],
+          ["SHAPE_NEW_PROCESS", "Shape the learned operating process"],
+          ["REQUEST_SPEC", "Pass the specification-readiness gate"]
+        ]
+      },
+      existing: {
+        title: "Case B: existing work becoming software",
+        copy: "Operations already coordinates onboarding through email, spreadsheets, and chat. Watch the workflow preserve real exceptions, define the software boundary, and place UI/UX after task-flow design.",
+        steps: [
+          ["START_EXISTING", "Load the existing process"],
+          ["MAP_CURRENT_PROCESS", "Record actors, triggers, handoffs, and exceptions"],
+          ["VALIDATE_PAIN", "Validate the failure pattern with evidence"],
+          ["PROPOSE_BOUNDARY", "Recommend a bounded first software release"],
+          ["COMPARE", "Compare credible software boundaries"],
+          ["EXPLAIN", "Explain the recommendation and what it leaves manual"],
+          ["CONFIRM_BOUNDARY", "Confirm what software should own"],
+          ["DESIGN_UX_FLOW", "Design roles, tasks, states, and journeys first"],
+          ["ADD_UI_GUIDANCE", "Consult the owned UI/UX knowledge base"],
+          ["APPROVE_UX", "Approve the experience contract"],
+          ["REQUEST_SPEC", "Pass the specification-readiness gate"]
+        ]
+      }
+    };
+
+    let state = emptyState();
+    let activeTab = "new";
+
+    const $ = id => document.getElementById(id);
+
+    function listHtml(items, emptyText) {
+      return items.length
+        ? items.map(item => `<li>${item}</li>`).join("")
+        : `<li class="empty">${emptyText}</li>`;
+    }
+
+    function renderDecision() {
+      if (!state.recommendation) {
+        $("decisionCard").innerHTML = "";
+        return;
+      }
+      const rec = state.recommendation;
+      const stateLabel = rec.status === "open" ? "Awaiting your decision" : `Decision ${rec.status}`;
+      $("decisionCard").innerHTML = `
+        <div class="decision-card">
+          <h3>Decision card — ${stateLabel}</h3>
+          <p><strong>${rec.question}</strong></p>
+          <p><strong>Recommendation:</strong> ${rec.recommendation}</p>
+          <p class="confidence">${rec.confidence}</p>
+          ${rec.explained ? `<p><strong>Why:</strong> ${rec.why}</p><p><strong>Tradeoff:</strong> ${rec.tradeoff}</p>` : ""}
+          ${rec.compared ? `<div><strong>Alternatives:</strong><ul>${rec.alternatives.map(item => `<li>${item}</li>`).join("")}</ul></div>` : ""}
+          <div class="actions">
+            <button data-action="EXPLAIN">Explain</button>
+            <button data-action="COMPARE">Compare</button>
+            <button data-action="DEFER">Defer</button>
+            ${state.caseType === "new" && state.completedActions.includes("ADD_PILOT_EVIDENCE")
+              ? `<button class="primary" data-action="CONFIRM_PROCEED">Proceed to shaping</button>`
+              : state.caseType === "new"
+                ? `<button class="primary" data-action="CONFIRM_PILOT">Choose pilot</button>`
+                : `<button class="primary" data-action="CONFIRM_BOUNDARY">Choose boundary</button>`}
+          </div>
+        </div>`;
+    }
+
+    function renderWalkthrough() {
+      const flow = walkthroughs[activeTab];
+      $("walkthrough").innerHTML = `
+        <h3>${flow.title}</h3>
+        <p class="walkthrough-copy">${flow.copy}</p>
+        <div class="step-list">
+          ${flow.steps.map(([action, label], index) => {
+            const done = state.completedActions.includes(action) && !["COMPARE", "EXPLAIN", "REQUEST_SPEC"].includes(action);
+            return `<button class="${done ? "done" : ""}" data-number="${index + 1}" data-action="${action}">${label}</button>`;
+          }).join("")}
+        </div>`;
+    }
+
+    function render() {
+      $("caseType").textContent = state.caseType === "new" ? "Net-new process" : state.caseType === "existing" ? "Existing process → software" : "No case loaded";
+      $("caseTitle").textContent = state.title;
+      $("stage").textContent = state.stage;
+      $("outcome").textContent = state.outcome || "Not captured";
+      $("outcome").className = state.outcome ? "" : "empty";
+      $("reality").innerHTML = listHtml(state.reality, "Nothing observed yet");
+      $("assumptions").innerHTML = listHtml(state.assumptions, "Nothing surfaced yet");
+      $("decisions").innerHTML = listHtml(state.decisions, "No user-owned decisions");
+      $("artifacts").innerHTML = listHtml(state.artifacts, "No artifacts");
+      $("nextGate").textContent = state.nextGate;
+      $("nextGate").className = state.nextGate ? "" : "empty";
+      $("timeline").innerHTML = state.history.map(item => `<li>${item}</li>`).join("");
+      $("timeline").scrollTop = $("timeline").scrollHeight;
+      const notice = $("notice");
+      notice.hidden = !state.notice;
+      notice.textContent = state.notice;
+      notice.className = `notice${state.blocked ? " blocked" : ""}`;
+      document.querySelectorAll(".tab").forEach(tab => tab.classList.toggle("active", tab.dataset.tab === activeTab));
+      renderDecision();
+      renderWalkthrough();
+    }
+
+    document.addEventListener("click", event => {
+      const tab = event.target.closest("[data-tab]");
+      if (tab) {
+        activeTab = tab.dataset.tab;
+        render();
+        return;
+      }
+      const button = event.target.closest("[data-action]");
+      if (!button) return;
+      state = reducer(state, button.dataset.action);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "record_type": "workbench-artifact",
+  "schema_version": "0.1.0",
+  "artifact_id": "ART-PROP-001",
+  "work_id": "WB-PROP-001",
+  "artifact_kind": "proposal",
+  "title": "Scheduling discovery proposal",
+  "status": "current",
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human",
+    "display_name": "Vince"
+  },
+  "producing_stage": "proposal",
+  "produced_by": {
+    "actor_id": "agent:proposal-author",
+    "kind": "agent"
+  },
+  "location": {
+    "kind": "workspace-path",
+    "value": "proposals/scheduling-discovery.md"
+  },
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_type": "external",
+        "record_id": "sponsor-brief-2026-09-14",
+        "uri": "urn:workbench:source:sponsor-brief-2026-09-14"
+      },
+      "note": "The proposal preserves the stated scheduling problem, constraints, and requested decision."
+    }
+  ],
+  "consumers": [
+    {
+      "kind": "node",
+      "consumer_id": "D-PROP-001",
+      "purpose": "Provide the evidence needed for the sponsor disposition."
+    },
+    {
+      "kind": "external-party",
+      "consumer_id": "sponsor",
+      "purpose": "Support the proceed, hold, or reject decision."
+    }
+  ],
+  "proof_ids": [
+    "PRF-PROP-001"
+  ],
+  "obligation_node_ids": [],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "confidentiality": "internal",
+  "freshness": {
+    "assessed_at": "2026-09-14T10:50:00-05:00",
+    "assessment": "current",
+    "rationale": "The proposal was reviewed against the same-day sponsor brief."
+  },
+  "known_defects": [],
+  "created_at": "2026-09-14T10:45:00-05:00",
+  "updated_at": "2026-09-14T10:50:00-05:00"
+}

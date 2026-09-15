@@ -1,0 +1,39 @@
+{
+  "fixture_version": "1.0.0",
+  "decision": {
+    "id": "DEC-001",
+    "question": "Should submitted requests be processed synchronously or through a queue?",
+    "owner": "user",
+    "consequence": "Queued processing improves resilience but introduces delayed completion states that users must understand."
+  },
+  "turns": [
+    {
+      "actor": "assistant",
+      "kind": "recommendation",
+      "text": "Use queued processing, assuming several minutes of delay is acceptable."
+    },
+    {
+      "actor": "user",
+      "kind": "confusion",
+      "text": "I don't really understand it. Just go with your recommendation.",
+      "expected_decision_state_after_turn": "proposed"
+    },
+    {
+      "actor": "assistant",
+      "kind": "explanation",
+      "text": "The user submits once, sees a pending state, and may wait several minutes. The alternative returns success or failure while they remain on the request."
+    },
+    {
+      "actor": "assistant",
+      "kind": "consequence-receipt",
+      "text": "Select queued processing; accept delayed completion and pending/error UI; decline immediate in-request completion; rollback remains possible behind an adapter."
+    },
+    {
+      "actor": "user",
+      "kind": "confirmation",
+      "text": "Yes, I understand and accept that consequence.",
+      "expected_decision_state_after_turn": "confirmed"
+    }
+  ],
+  "migration_invariant": "Confusion and recommendation-following do not authorize a user-owned decision; explicit later confirmation of the consequence can."
+}

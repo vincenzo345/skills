@@ -1,0 +1,90 @@
+{
+  "scenario_version": "1.0.0",
+  "id": "SCN-PROPOSAL-001",
+  "title": "Produce a preliminary sales proposal without a POC",
+  "entrance": "proposal-only",
+  "planning_destination": "proposal",
+  "request": "Prepare a proposal with a target workflow and preliminary logical architecture so the client can decide whether to fund discovery or a POC.",
+  "given": {
+    "repository_present": false,
+    "existing_process": true,
+    "process_claim_proven": false,
+    "human_interaction_changed": true,
+    "external_approval_required": true,
+    "authorized_actions": [
+      "repository-mutation",
+      "closure"
+    ]
+  },
+  "expected": {
+    "route": [
+      "intake",
+      "evidence-intake",
+      "process-model",
+      "outcome-framing",
+      "process-validation",
+      "proposal"
+    ],
+    "required_map_nodes": [
+      {
+        "node_id": "DLV-PROPOSAL-001",
+        "kind": "deliverable",
+        "owner": "agent",
+        "question": "What decision-ready proposal can be supported by the evidence currently available?",
+        "done_when": [
+          "target workflow and preliminary logical and deployment views are included",
+          "assumptions, risks, options, phases, and limits are visible",
+          "the proposal does not claim implementation or POC evidence"
+        ],
+        "depends_on": []
+      }
+    ],
+    "required_artifacts": [
+      "evidence-register",
+      "current-process-model",
+      "outcome-frame",
+      "proposal",
+      "preliminary-logical-diagram",
+      "preliminary-deployment-diagram"
+    ],
+    "decisions": [
+      {
+        "decision_id": "DEC-INVEST-001",
+        "owner": "user",
+        "question": "Should the client fund further discovery or delivery?",
+        "consequence": "Proceeding funds the next evidence or delivery stage; rejection stops this proposed path."
+      }
+    ],
+    "authorizations": [
+      {
+        "action": "repository-mutation",
+        "status": "granted",
+        "target": "proposal artifacts in the authorized workspace"
+      },
+      {
+        "action": "closure",
+        "status": "granted",
+        "target": "proposal planning destination only"
+      },
+      {
+        "action": "implementation",
+        "status": "not-required",
+        "target": "implementation is outside the proposal destination"
+      }
+    ],
+    "valid_stop_after": "proposal",
+    "terminal_disposition": "completed-for-destination",
+    "must_not_create": [
+      "poc",
+      "specification",
+      "implementation-ticket",
+      "implementation-change"
+    ],
+    "route_expansion_when": [
+      {
+        "condition": "the client funds further discovery or delivery",
+        "reenter_at": "experience-design"
+      }
+    ]
+  }
+}

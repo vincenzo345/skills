@@ -1,0 +1,126 @@
+{
+  "record_type": "workbench-decision",
+  "schema_version": "0.1.0",
+  "decision_id": "DEC-PROP-002",
+  "work_id": "WB-PROP-001",
+  "node_id": "D-PROP-001",
+  "question": "Should the sponsor proceed to bounded delivery discovery?",
+  "materiality": "consequential",
+  "authority": "user-owned",
+  "state": "confirmed",
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human",
+    "display_name": "Vince"
+  },
+  "options": [
+    {
+      "option_id": "OPT-PROCEED",
+      "name": "Proceed",
+      "benefits": [
+        "Tests the proposal assumptions before implementation."
+      ],
+      "costs": [
+        "Funds a bounded discovery phase."
+      ],
+      "risks": [
+        "Discovery may invalidate the preferred direction."
+      ]
+    },
+    {
+      "option_id": "OPT-STOP",
+      "name": "Stop",
+      "benefits": [
+        "Avoids further investment."
+      ],
+      "costs": [
+        "Leaves the scheduling problem unresolved."
+      ],
+      "risks": [
+        "Current delays continue."
+      ]
+    }
+  ],
+  "recommendation": {
+    "choice": "Proceed",
+    "rationale": "The bounded phase tests the largest assumptions before delivery.",
+    "assumptions": [
+      "The scheduling problem remains worth addressing."
+    ],
+    "tradeoffs": [
+      "Spend on evidence now to reduce implementation risk later."
+    ],
+    "confidence": "medium"
+  },
+  "provenance": {
+    "artifact_inputs": [
+      {
+        "record_type": "artifact",
+        "record_id": "ART-PROP-001",
+        "path": "proposals/scheduling-discovery.md"
+      }
+    ],
+    "evidence": [
+      {
+        "record_type": "proof",
+        "record_id": "PRF-PROP-001"
+      }
+    ],
+    "prior_decisions": [
+      {
+        "record_type": "decision",
+        "record_id": "DEC-PROP-001"
+      }
+    ],
+    "assumptions": [
+      "Discovery funding is available."
+    ],
+    "policy_versions": {
+      "decision_policy": "0.1.0"
+    }
+  },
+  "resolution": {
+    "basis": "human-decision",
+    "selected_option_id": "OPT-PROCEED",
+    "rationale": "The sponsor accepted the bounded cost and uncertainty.",
+    "resolved_by": {
+      "actor_id": "user:vince",
+      "kind": "human",
+      "display_name": "Vince"
+    },
+    "resolved_at": "2026-09-14T11:30:00-05:00"
+  },
+  "consequence_receipt": {
+    "receipt_version": "0.1.0",
+    "consequence_summary": "Fund bounded delivery discovery without authorizing implementation.",
+    "long_term_tradeoffs": [
+      "The team accepts near-term discovery cost to reduce later rework."
+    ],
+    "alternatives_not_selected": [
+      {
+        "option_id": "OPT-STOP",
+        "reason": "The sponsor prefers to investigate before abandoning the outcome."
+      }
+    ],
+    "assumptions": [
+      "Representative staff and users can participate."
+    ],
+    "uncertainties": [
+      "The best production architecture remains unsettled."
+    ],
+    "confidence": "medium",
+    "reversibility": "Discovery can stop before any implementation commitment.",
+    "revisit_triggers": [
+      "Evidence shows the proposed process is not viable."
+    ],
+    "known_falsifiers": [
+      "Representative users cannot complete the proposed process within the agreed threshold."
+    ],
+    "downstream_effects": [
+      "Create a separately scoped discovery work item.",
+      "Keep implementation and deployment unauthorized."
+    ]
+  },
+  "created_at": "2026-09-14T10:50:00-05:00",
+  "updated_at": "2026-09-14T11:30:00-05:00"
+}

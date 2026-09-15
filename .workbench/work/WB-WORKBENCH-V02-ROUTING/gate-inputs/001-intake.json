@@ -1,0 +1,13 @@
+{
+  "work_id": "WB-WORKBENCH-V02-ROUTING",
+  "state_revision": 1,
+  "stage_id": "intake",
+  "exit_gate": "intake-recorded",
+  "result": "passed",
+  "checked_at": "2026-09-14T18:29:09Z",
+  "checked_by": "agent:codex",
+  "evidence": [
+    {"record_type": "external", "record_id": "WORKBENCH-V02-INTAKE", "uri": "intake.json"},
+    {"record_type": "external", "record_id": "WORKBENCH-BUILD-PLAN", "uri": "WORKBENCH-BUILD-PLAN.md"}
+  ]
+}

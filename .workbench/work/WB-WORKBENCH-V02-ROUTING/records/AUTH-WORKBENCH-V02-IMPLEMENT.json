@@ -1,0 +1,37 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-WORKBENCH-V02-IMPLEMENT",
+  "grant": {
+    "expires_at": "2026-09-15T18:03:00Z",
+    "granted_at": "2026-09-14T18:03:00Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-14T18:03:00Z",
+  "requested_by": {
+    "actor_id": "agent:codex",
+    "kind": "agent"
+  },
+  "schema_version": "0.1.0",
+  "scope": {
+    "constraints": [
+      "Implement and globally install the v0.2 routing foundation; do not commit or deploy."
+    ],
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

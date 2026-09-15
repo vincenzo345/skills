@@ -1,0 +1,451 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-proof.schema.json",
+  "title": "Workbench Proof",
+  "description": "A claim's required proof and achieved proof, with independent status for pending, passed, failed, blocked, and not-applicable outcomes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "proof_id",
+    "work_id",
+    "claim",
+    "applicability",
+    "status",
+    "owner",
+    "required_proof",
+    "achieved_proof",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "workbench-proof"
+    },
+    "schema_version": {
+      "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+    },
+    "proof_id": {
+      "$ref": "workbench-common.schema.json#/$defs/proofId"
+    },
+    "work_id": {
+      "$ref": "workbench-common.schema.json#/$defs/workId"
+    },
+    "claim": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "verification_scope": {
+      "enum": [
+        "feature-implementation", "feature-focused", "integration-journey",
+        "repository-health", "user-acceptance", "deployment-readiness",
+        "deployed-behavior", "business-outcome"
+      ]
+    },
+    "applicability": {
+      "enum": [
+        "required",
+        "not-applicable"
+      ]
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "passed",
+        "failed",
+        "blocked",
+        "not-applicable"
+      ]
+    },
+    "owner": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "next_action": {
+      "$ref": "workbench-common.schema.json#/$defs/nextAction"
+    },
+    "required_proof": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/proofRequirement"
+      }
+    },
+    "achieved_proof": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/achievedProof"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/blocker"
+      }
+    },
+    "failure_summary": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "not_applicable_reason": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "created_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    },
+    "updated_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "applicability": {
+            "const": "not-applicable"
+          }
+        },
+        "required": [
+          "applicability"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "not-applicable"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "applicability": {
+            "const": "required"
+          }
+        },
+        "required": [
+          "applicability"
+        ]
+      },
+      "then": {
+        "properties": {
+          "required_proof": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "pending",
+              "blocked"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "next_action"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "passed"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "achieved_proof": {
+            "minItems": 1,
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/achievedProof"
+                },
+                {
+                  "properties": {
+                    "result": {
+                      "const": "passed"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "failed"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "failure_summary"
+        ],
+        "properties": {
+          "achieved_proof": {
+            "contains": {
+              "properties": {
+                "result": {
+                  "const": "failed"
+                }
+              },
+              "required": [
+                "result"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "blocked"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "blockers"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "not-applicable"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "not_applicable_reason"
+        ],
+        "properties": {
+          "applicability": {
+            "const": "not-applicable"
+          },
+          "required_proof": {
+            "maxItems": 0
+          },
+          "achieved_proof": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "proofKind": {
+      "enum": [
+        "packaging",
+        "artifact-validity",
+        "local-implementation",
+        "integration",
+        "deployed-behavior",
+        "security",
+        "performance",
+        "accessibility",
+        "recovery",
+        "business-outcome",
+        "manual-observation",
+        "other"
+      ]
+    },
+    "proofRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement_id",
+        "kind",
+        "description",
+        "acceptance_criteria",
+        "oracle_requirement"
+      ],
+      "properties": {
+        "requirement_id": {
+          "$ref": "workbench-common.schema.json#/$defs/requirementId"
+        },
+        "kind": {
+          "$ref": "#/$defs/proofKind"
+        },
+        "custom_kind": {
+          "$ref": "workbench-common.schema.json#/$defs/shortString"
+        },
+        "description": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "oracle_requirement": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "verification_target": {
+          "$ref": "#/$defs/verificationTarget"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "other"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "custom_kind"
+            ]
+          }
+        }
+      ]
+    },
+    "achievedProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement_id",
+        "kind",
+        "result",
+        "oracle",
+        "evidence",
+        "observed_by",
+        "observed_at",
+        "limitations"
+      ],
+      "properties": {
+        "requirement_id": {
+          "$ref": "workbench-common.schema.json#/$defs/requirementId"
+        },
+        "kind": {
+          "$ref": "#/$defs/proofKind"
+        },
+        "result": {
+          "enum": [
+            "passed",
+            "failed",
+            "blocked"
+          ]
+        },
+        "oracle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "description"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "automated-independent",
+                "human-independent",
+                "external-system",
+                "producer-check"
+              ]
+            },
+            "description": {
+              "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+            }
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/recordRef"
+          },
+          "uniqueItems": true
+        },
+        "non_vacuity_check": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "observed_by": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        },
+        "observed_at": {
+          "$ref": "workbench-common.schema.json#/$defs/timestamp"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        },
+        "verification_target": {
+          "$ref": "#/$defs/verificationTarget"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "result": {
+                "const": "passed"
+              }
+            },
+            "required": [
+              "result"
+            ]
+          },
+          "then": {
+            "required": [
+              "non_vacuity_check"
+            ],
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "verificationTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environment", "seam", "journey"],
+      "properties": {
+        "environment": {"$ref": "workbench-common.schema.json#/$defs/nonEmptyString"},
+        "seam": {"$ref": "workbench-common.schema.json#/$defs/nonEmptyString"},
+        "journey": {"$ref": "workbench-common.schema.json#/$defs/nonEmptyString"}
+      }
+    }
+  }
+}

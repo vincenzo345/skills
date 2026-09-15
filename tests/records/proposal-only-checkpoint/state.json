@@ -1,0 +1,130 @@
+{
+  "record_type": "workbench-state",
+  "schema_version": "0.1.0",
+  "state_revision": 8,
+  "work_id": "WB-PROP-001",
+  "title": "Decision-ready scheduling proposal",
+  "desired_outcome": "Give the sponsor enough evidence and design detail to decide whether to fund delivery discovery.",
+  "planning_destination": "proposal",
+  "route_selection": {
+    "route": "proposal-only",
+    "rationale": "The authorized destination is a sales proposal, not implementation or deployment.",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human",
+      "display_name": "Vince"
+    },
+    "selected_at": "2026-09-14T10:05:00-05:00"
+  },
+  "current_stage": "proposal",
+  "stages": [
+    {
+      "stage_id": "intake",
+      "applicability": "applicable",
+      "status": "complete",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "applicability_reason": "Every route begins with intake.",
+      "completed_at": "2026-09-14T10:05:00-05:00",
+      "output_artifact_ids": []
+    },
+    {
+      "stage_id": "evidence-intake",
+      "applicability": "applicable",
+      "status": "complete",
+      "owner": {
+        "actor_id": "agent:evidence-intake",
+        "kind": "agent"
+      },
+      "applicability_reason": "The sponsor brief had to be captured before proposal design.",
+      "completed_at": "2026-09-14T10:15:00-05:00",
+      "output_artifact_ids": []
+    },
+    {
+      "stage_id": "process-model",
+      "applicability": "not-applicable",
+      "status": "skipped",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "applicability_reason": "The proposal is for bounded discovery; it does not claim a validated operating process.",
+      "skip_consequence": "Delivery discovery must model and validate the operating process before implementation."
+    },
+    {
+      "stage_id": "outcome-framing",
+      "applicability": "applicable",
+      "status": "complete",
+      "owner": {
+        "actor_id": "agent:outcome-framing",
+        "kind": "agent"
+      },
+      "applicability_reason": "The proposal needs an explicit decision outcome.",
+      "completed_at": "2026-09-14T10:25:00-05:00",
+      "output_artifact_ids": []
+    },
+    {
+      "stage_id": "process-validation",
+      "applicability": "not-applicable",
+      "status": "skipped",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "applicability_reason": "No process-effectiveness claim is made at the proposal destination.",
+      "skip_consequence": "The proposal cannot be treated as proof that the proposed process works."
+    },
+    {
+      "stage_id": "proposal",
+      "applicability": "applicable",
+      "status": "complete",
+      "owner": {
+        "actor_id": "agent:proposal-review",
+        "kind": "agent"
+      },
+      "applicability_reason": "A decision-ready proposal is the selected planning destination.",
+      "started_at": "2026-09-14T10:30:00-05:00",
+      "completed_at": "2026-09-14T10:55:00-05:00",
+      "output_artifact_ids": [
+        "ART-PROP-001"
+      ]
+    }
+  ],
+  "map_id": "MAP-PROP-001",
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human",
+    "display_name": "Vince"
+  },
+  "status": "paused",
+  "next_action": {
+    "description": "Resolve the proceed, hold, or reject decision recorded in DEC-PROP-001.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human",
+      "display_name": "Vince"
+    },
+    "target_type": "decision",
+    "target_id": "DEC-PROP-001"
+  },
+  "latest_event_id": "EVT-PROP-008",
+  "artifact_ids": [
+    "ART-PROP-001"
+  ],
+  "decision_ids": [
+    "DEC-PROP-001"
+  ],
+  "proof_ids": [
+    "PRF-PROP-001"
+  ],
+  "authorization_ids": [
+    "AUTH-PROP-001"
+  ],
+  "handoff_ids": [
+    "HO-PROP-001"
+  ],
+  "created_at": "2026-09-14T10:00:00-05:00",
+  "updated_at": "2026-09-14T11:00:00-05:00"
+}

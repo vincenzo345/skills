@@ -1,0 +1,403 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-routing-receipt.schema.json",
+  "title": "Workbench Routing Receipt",
+  "description": "An immutable, intake-bound classification and authorization boundary. Later pre-start receipts supersede earlier receipts without overwriting them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_type",
+    "schema_version",
+    "routing_id",
+    "work_id",
+    "intake",
+    "title",
+    "desired_outcome",
+    "business_basis",
+    "solution_context",
+    "engagement_intent",
+    "planning_destination",
+    "execution_lane",
+    "runtime_route",
+    "rationale",
+    "evidence_references",
+    "facts",
+    "constraints",
+    "acceptance_evidence",
+    "assumptions",
+    "unresolved_questions",
+    "stage_recommendations",
+    "authorization_boundary",
+    "recommendation",
+    "owner",
+    "idempotency_key",
+    "input_fingerprint",
+    "created_at"
+  ],
+  "properties": {
+    "record_type": {
+      "const": "workbench-routing-receipt"
+    },
+    "schema_version": {
+      "$ref": "workbench-common.schema.json#/$defs/semanticVersion"
+    },
+    "routing_id": {
+      "type": "string",
+      "pattern": "^RTR-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "routing_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "supersedes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference",
+        "sha256"
+      ],
+      "properties": {
+        "reference": {
+          "$ref": "workbench-common.schema.json#/$defs/externalRef"
+        },
+        "sha256": {
+          "$ref": "workbench-common.schema.json#/$defs/digest"
+        }
+      }
+    },
+    "work_id": {
+      "$ref": "workbench-common.schema.json#/$defs/workId"
+    },
+    "intake": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference",
+        "sha256"
+      ],
+      "properties": {
+        "reference": {
+          "$ref": "workbench-common.schema.json#/$defs/externalRef"
+        },
+        "sha256": {
+          "$ref": "workbench-common.schema.json#/$defs/digest"
+        }
+      }
+    },
+    "title": {
+      "$ref": "workbench-common.schema.json#/$defs/shortString"
+    },
+    "desired_outcome": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "business_basis": {
+      "enum": [
+        "hypothesis",
+        "operating-process",
+        "supplied-requirements",
+        "technical-only"
+      ]
+    },
+    "solution_context": {
+      "enum": [
+        "greenfield",
+        "brownfield",
+        "process-only",
+        "undetermined"
+      ]
+    },
+    "engagement_intent": {
+      "enum": [
+        "explore",
+        "plan",
+        "implement",
+        "release"
+      ]
+    },
+    "planning_destination": {
+      "$ref": "workbench-common.schema.json#/$defs/planningDestination"
+    },
+    "execution_lane": {
+      "enum": [
+        "fast",
+        "full"
+      ]
+    },
+    "runtime_route": {
+      "oneOf": [
+        {
+          "$ref": "workbench-common.schema.json#/$defs/routeKind"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "compiled_plan": {
+      "$ref": "#/$defs/compiledPlan"
+    },
+    "rationale": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "evidence_references": {
+      "type": "array",
+      "maxItems": 128,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+      }
+    },
+    "facts": {
+      "type": "array",
+      "maxItems": 128,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/fact"
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "maxItems": 128,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+      }
+    },
+    "acceptance_evidence": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "maxItems": 128,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+      }
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/unresolvedQuestion"
+      }
+    },
+    "revision_reason": {
+      "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+    },
+    "resolved_questions": {
+      "type": "array",
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/resolvedQuestion"
+      }
+    },
+    "stage_recommendations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/stageRecommendation"
+      }
+    },
+    "authorization_boundary": {
+      "$ref": "#/$defs/authorizationBoundary"
+    },
+    "recommendation": {
+      "$ref": "workbench-common.schema.json#/$defs/recommendation"
+    },
+    "owner": {
+      "$ref": "workbench-common.schema.json#/$defs/actorRef"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256
+    },
+    "input_fingerprint": {
+      "$ref": "workbench-common.schema.json#/$defs/digest"
+    },
+    "created_at": {
+      "$ref": "workbench-common.schema.json#/$defs/timestamp"
+    }
+  },
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "source_references"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "source_references": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        }
+      }
+    },
+    "unresolvedQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question",
+        "why_material",
+        "owner"
+      ],
+      "properties": {
+        "question": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "why_material": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "owner": {
+          "$ref": "workbench-common.schema.json#/$defs/actorRef"
+        }
+      }
+    },
+    "resolvedQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "question",
+        "answer",
+        "source_references"
+      ],
+      "properties": {
+        "question": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "answer": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "source_references": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        }
+      }
+    },
+    "stageRecommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage_id",
+        "applicability",
+        "reason",
+        "evidence_references"
+      ],
+      "properties": {
+        "stage_id": {
+          "$ref": "workbench-common.schema.json#/$defs/stageId"
+        },
+        "applicability": {
+          "enum": [
+            "applicable",
+            "not-applicable",
+            "undetermined"
+          ]
+        },
+        "reason": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "evidence_references": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          }
+        }
+      }
+    },
+    "authorizationBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "granted_actions"
+      ],
+      "properties": {
+        "granted_actions": {
+          "$ref": "#/$defs/actionList"
+        },
+        "withheld_actions": {
+          "$ref": "#/$defs/actionList"
+        }
+      }
+    },
+    "compiledPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["compiler_version", "phases", "destination_stage"],
+      "properties": {
+        "compiler_version": {"$ref": "workbench-common.schema.json#/$defs/semanticVersion"},
+        "destination_stage": {"$ref": "workbench-common.schema.json#/$defs/stageId"},
+        "phases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/compiledPhase"}
+        }
+      }
+    },
+    "compiledPhase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["phase_id", "checkpoint_stage", "activities"],
+      "properties": {
+        "phase_id": {"$ref": "workbench-lifecycle.schema.json#/$defs/phaseId"},
+        "checkpoint_stage": {"$ref": "workbench-common.schema.json#/$defs/stageId"},
+        "activities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/compiledActivity"}
+        }
+      }
+    },
+    "compiledActivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage_id", "applicability", "reason"],
+      "properties": {
+        "stage_id": {"$ref": "workbench-common.schema.json#/$defs/stageId"},
+        "applicability": {"enum": ["applicable", "not-applicable"]},
+        "reason": {"$ref": "workbench-common.schema.json#/$defs/nonEmptyString"}
+      }
+    },
+    "actionList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "decision-delegation",
+          "repository-mutation",
+          "tracker-publication",
+          "implementation",
+          "commit",
+          "deployment",
+          "closure"
+        ]
+      }
+    }
+  }
+}

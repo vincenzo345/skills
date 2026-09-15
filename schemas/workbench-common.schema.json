@@ -1,0 +1,496 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://workbench.local/schemas/v1/workbench-common.schema.json",
+  "title": "Workbench Common Definitions",
+  "description": "Reusable structural definitions for Workbench records. Cross-record existence, authorization legitimacy, graph consistency, and state-transition policy remain runtime concerns.",
+  "type": "object",
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "\\S"
+    },
+    "shortString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "\\S"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "workId": {
+      "type": "string",
+      "pattern": "^WB-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "eventId": {
+      "type": "string",
+      "pattern": "^EVT-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "mapId": {
+      "type": "string",
+      "pattern": "^MAP-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "nodeId": {
+      "type": "string",
+      "pattern": "^(?:NODE|O|Q|E|X|D|OB|DLV)-[A-Z0-9][A-Z0-9._-]{0,63}$"
+    },
+    "artifactId": {
+      "type": "string",
+      "pattern": "^ART-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "decisionId": {
+      "type": "string",
+      "pattern": "^DEC-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "proofId": {
+      "type": "string",
+      "pattern": "^PRF-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "authorizationId": {
+      "type": "string",
+      "pattern": "^AUTH-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "handoffId": {
+      "type": "string",
+      "pattern": "^HO-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "requirementId": {
+      "type": "string",
+      "pattern": "^REQ-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "fogId": {
+      "type": "string",
+      "pattern": "^FOG-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "edgeId": {
+      "type": "string",
+      "pattern": "^EDGE-[A-Z0-9][A-Z0-9._-]{1,63}$"
+    },
+    "actorId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z][A-Za-z0-9._:@/-]+$"
+    },
+    "stageId": {
+      "$ref": "workbench-lifecycle.schema.json#/$defs/stageId"
+    },
+    "specialistId": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 96,
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{64}$"
+        }
+      }
+    },
+    "actorKind": {
+      "enum": [
+        "human",
+        "agent",
+        "system",
+        "external"
+      ]
+    },
+    "actorRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_id",
+        "kind"
+      ],
+      "properties": {
+        "actor_id": {
+          "$ref": "#/$defs/actorId"
+        },
+        "kind": {
+          "$ref": "#/$defs/actorKind"
+        },
+        "display_name": {
+          "$ref": "#/$defs/shortString"
+        }
+      }
+    },
+    "routeKind": {
+      "$ref": "workbench-lifecycle.schema.json#/$defs/routeKind"
+    },
+    "planningDestination": {
+      "$ref": "workbench-lifecycle.schema.json#/$defs/planningDestination"
+    },
+    "nodeKind": {
+      "enum": [
+        "outcome",
+        "question",
+        "evidence-task",
+        "experiment",
+        "decision",
+        "obligation",
+        "deliverable"
+      ]
+    },
+    "nodeStatus": {
+      "enum": [
+        "draft",
+        "ready",
+        "in-progress",
+        "waiting-for-human",
+        "evidence-blocked",
+        "external-blocked",
+        "evidence-established",
+        "decided",
+        "completed",
+        "excluded",
+        "superseded"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "recordRef": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/workRef"
+        },
+        {
+          "$ref": "#/$defs/eventRef"
+        },
+        {
+          "$ref": "#/$defs/mapRef"
+        },
+        {
+          "$ref": "#/$defs/nodeRef"
+        },
+        {
+          "$ref": "#/$defs/artifactRef"
+        },
+        {
+          "$ref": "#/$defs/decisionRef"
+        },
+        {
+          "$ref": "#/$defs/proofRef"
+        },
+        {
+          "$ref": "#/$defs/authorizationRef"
+        },
+        {
+          "$ref": "#/$defs/handoffRef"
+        },
+        {
+          "$ref": "#/$defs/externalRef"
+        }
+      ]
+    },
+    "workRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "work"
+        },
+        "record_id": {
+          "$ref": "#/$defs/workId"
+        }
+      }
+    },
+    "eventRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "event"
+        },
+        "record_id": {
+          "$ref": "#/$defs/eventId"
+        }
+      }
+    },
+    "mapRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "map"
+        },
+        "record_id": {
+          "$ref": "#/$defs/mapId"
+        }
+      }
+    },
+    "nodeRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "node"
+        },
+        "record_id": {
+          "$ref": "#/$defs/nodeId"
+        }
+      }
+    },
+    "artifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "artifact"
+        },
+        "record_id": {
+          "$ref": "#/$defs/artifactId"
+        },
+        "path": {
+          "$ref": "#/$defs/nonEmptyString"
+        }
+      }
+    },
+    "decisionRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "decision"
+        },
+        "record_id": {
+          "$ref": "#/$defs/decisionId"
+        }
+      }
+    },
+    "proofRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "proof"
+        },
+        "record_id": {
+          "$ref": "#/$defs/proofId"
+        }
+      }
+    },
+    "authorizationRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "authorization"
+        },
+        "record_id": {
+          "$ref": "#/$defs/authorizationId"
+        }
+      }
+    },
+    "handoffRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "handoff"
+        },
+        "record_id": {
+          "$ref": "#/$defs/handoffId"
+        }
+      }
+    },
+    "externalRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "record_type",
+        "record_id"
+      ],
+      "properties": {
+        "record_type": {
+          "const": "external"
+        },
+        "record_id": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri-reference"
+        }
+      }
+    },
+    "nextAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "owner",
+        "target_type",
+        "target_id"
+      ],
+      "properties": {
+        "description": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "owner": {
+          "$ref": "#/$defs/actorRef"
+        },
+        "target_type": {
+          "enum": [
+            "stage",
+            "node",
+            "decision",
+            "evidence",
+            "authorization",
+            "handoff",
+            "external"
+          ]
+        },
+        "target_id": {
+          "$ref": "#/$defs/shortString"
+        },
+        "due_at": {
+          "$ref": "#/$defs/timestamp"
+        }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "description",
+        "owner",
+        "next_action"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "evidence",
+            "external",
+            "decision",
+            "authorization",
+            "dependency",
+            "validation"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "owner": {
+          "$ref": "#/$defs/actorRef"
+        },
+        "next_action": {
+          "$ref": "#/$defs/nextAction"
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/recordRef"
+          },
+          "uniqueItems": true,
+          "default": []
+        }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "choice",
+        "rationale",
+        "assumptions",
+        "tradeoffs",
+        "confidence"
+      ],
+      "properties": {
+        "choice": {
+          "$ref": "#/$defs/shortString"
+        },
+        "rationale": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "tradeoffs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      }
+    },
+    "policyVersions": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/semanticVersion"
+      }
+    }
+  }
+}

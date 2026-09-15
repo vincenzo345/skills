@@ -1,0 +1,5 @@
+interface:
+  display_name: "To Spec"
+  short_description: "Create a traceable, proof-ready spec"
+policy:
+  allow_implicit_invocation: false

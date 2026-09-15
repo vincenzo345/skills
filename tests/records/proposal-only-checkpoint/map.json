@@ -1,0 +1,146 @@
+{
+  "record_type": "workbench-map",
+  "schema_version": "0.1.0",
+  "map_id": "MAP-PROP-001",
+  "work_id": "WB-PROP-001",
+  "desired_outcome_node_id": "O-PROP-001",
+  "planning_destination": "proposal",
+  "nodes": [
+    {
+      "node_id": "O-PROP-001",
+      "kind": "outcome",
+      "title": "Decision-ready discovery proposal",
+      "why_it_matters": "The sponsor needs a bounded basis for a proceed, hold, or reject decision.",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human",
+        "display_name": "Vince"
+      },
+      "status": "completed",
+      "done_when": [
+        "A proposal states the outcome, scope, preliminary architecture, risks, price assumptions, and next decision."
+      ],
+      "evidence": [
+        {
+          "record_type": "artifact",
+          "record_id": "ART-PROP-001",
+          "path": "proposals/scheduling-discovery.md"
+        },
+        {
+          "record_type": "proof",
+          "record_id": "PRF-PROP-001"
+        }
+      ],
+      "resolution": {
+        "basis": "completion",
+        "rationale": "The proposal artifact passed its independent completeness review.",
+        "resolved_at": "2026-09-14T10:50:00-05:00",
+        "resolved_by": {
+          "actor_id": "human:proposal-reviewer",
+          "kind": "human",
+          "display_name": "Proposal reviewer"
+        },
+        "references": [
+          {
+            "record_type": "artifact",
+            "record_id": "ART-PROP-001",
+            "path": "proposals/scheduling-discovery.md"
+          },
+          {
+            "record_type": "proof",
+            "record_id": "PRF-PROP-001"
+          }
+        ]
+      }
+    },
+    {
+      "node_id": "DLV-PROP-001",
+      "kind": "deliverable",
+      "title": "Scheduling discovery proposal",
+      "why_it_matters": "This is the concrete deliverable promised by the proposal-only route.",
+      "owner": {
+        "actor_id": "agent:proposal-author",
+        "kind": "agent"
+      },
+      "status": "completed",
+      "done_when": [
+        "The registered proposal is current and its completeness proof passes."
+      ],
+      "evidence": [
+        {
+          "record_type": "artifact",
+          "record_id": "ART-PROP-001",
+          "path": "proposals/scheduling-discovery.md"
+        }
+      ],
+      "resolution": {
+        "basis": "completion",
+        "rationale": "The proposal was produced and registered.",
+        "resolved_at": "2026-09-14T10:45:00-05:00",
+        "resolved_by": {
+          "actor_id": "agent:proposal-author",
+          "kind": "agent"
+        },
+        "references": [
+          {
+            "record_type": "artifact",
+            "record_id": "ART-PROP-001",
+            "path": "proposals/scheduling-discovery.md"
+          }
+        ]
+      }
+    },
+    {
+      "node_id": "D-PROP-001",
+      "kind": "decision",
+      "title": "Sponsor disposition",
+      "question": "Should the sponsor fund delivery discovery, hold the proposal, or reject it?",
+      "why_it_matters": "The answer controls whether this work closes or a separately authorized route begins.",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human",
+        "display_name": "Vince"
+      },
+      "status": "waiting-for-human",
+      "next_action": {
+        "description": "Select proceed, hold, or reject after reviewing the proposal.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human",
+          "display_name": "Vince"
+        },
+        "target_type": "decision",
+        "target_id": "DEC-PROP-001"
+      },
+      "done_when": [
+        "DEC-PROP-001 is confirmed, withdrawn, or superseded by the sponsor."
+      ],
+      "evidence": [
+        {
+          "record_type": "artifact",
+          "record_id": "ART-PROP-001",
+          "path": "proposals/scheduling-discovery.md"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "EDGE-PROP-001",
+      "from_node_id": "DLV-PROP-001",
+      "to_node_id": "O-PROP-001",
+      "relationship": "supports",
+      "rationale": "The proposal deliverable realizes the route's desired outcome."
+    },
+    {
+      "edge_id": "EDGE-PROP-002",
+      "from_node_id": "D-PROP-001",
+      "to_node_id": "DLV-PROP-001",
+      "relationship": "depends-on",
+      "rationale": "The sponsor decision depends on the completed proposal."
+    }
+  ],
+  "fog": [],
+  "created_at": "2026-09-14T10:00:00-05:00",
+  "updated_at": "2026-09-14T11:00:00-05:00"
+}

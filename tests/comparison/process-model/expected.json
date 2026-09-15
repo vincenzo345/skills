@@ -1,0 +1,47 @@
+{
+  "fixture_version": "1.0.0",
+  "sources": [
+    "interview.md",
+    "operations.csv"
+  ],
+  "expected_model": {
+    "external_trigger": "request arrives by email",
+    "desired_outcome": "reduce receipt-to-approved-payment time without removing the financial control",
+    "actors": [
+      "coordinator",
+      "finance analyst",
+      "department approver",
+      "operations clerk",
+      "vendor",
+      "requester"
+    ],
+    "systems": [
+      "shared inbox",
+      "case tracker",
+      "ERP"
+    ],
+    "manual_steps_include": [
+      "log request in case tracker",
+      "enter approved payment in ERP",
+      "email requester"
+    ],
+    "branches_include": [
+      "missing tax form",
+      "amount at least $10,000"
+    ],
+    "controls_include": [
+      "Finance compares amount with contract"
+    ],
+    "waits_include": [
+      "wait for missing vendor tax form"
+    ],
+    "unresolved_questions_include": [
+      "Who owns reminders for missing tax forms?",
+      "What should happen if Operations changes an amount after Finance approval?"
+    ],
+    "evidence_tasks_include": [
+      "measure elapsed time by process state and record missing timestamp limitations"
+    ]
+  },
+  "migration_invariant": "The current-state model includes manual and out-of-build work and exposes evidence gaps instead of filling them."
+}

@@ -1,0 +1,103 @@
+{
+  "record_type": "workbench-decision",
+  "schema_version": "0.1.0",
+  "decision_id": "DEC-PROP-001",
+  "work_id": "WB-PROP-001",
+  "node_id": "D-PROP-001",
+  "question": "Should the sponsor fund delivery discovery, hold the proposal, or reject it?",
+  "materiality": "consequential",
+  "authority": "user-owned",
+  "state": "proposed",
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human",
+    "display_name": "Vince"
+  },
+  "next_action": {
+    "description": "Review the proposal and select one of the recorded options.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human",
+      "display_name": "Vince"
+    },
+    "target_type": "decision",
+    "target_id": "DEC-PROP-001"
+  },
+  "options": [
+    {
+      "option_id": "OPT-PROCEED",
+      "name": "Proceed to delivery discovery",
+      "benefits": [
+        "Tests process and architecture assumptions before implementation."
+      ],
+      "costs": [
+        "Requires a separately funded discovery engagement."
+      ],
+      "risks": [
+        "Discovery may falsify assumptions in the preliminary proposal."
+      ]
+    },
+    {
+      "option_id": "OPT-HOLD",
+      "name": "Hold",
+      "benefits": [
+        "Preserves the proposal while the sponsor resolves timing or budget."
+      ],
+      "costs": [
+        "Evidence and estimates may become stale."
+      ],
+      "risks": [
+        "The business problem may continue without mitigation."
+      ]
+    },
+    {
+      "option_id": "OPT-REJECT",
+      "name": "Reject",
+      "benefits": [
+        "Avoids spending on an engagement the sponsor does not value."
+      ],
+      "costs": [
+        "Ends this proposed path to the desired business outcome."
+      ],
+      "risks": [
+        "The underlying scheduling problem remains unresolved."
+      ]
+    }
+  ],
+  "recommendation": {
+    "choice": "Proceed to delivery discovery",
+    "rationale": "The proposal is complete enough to justify bounded discovery but not to authorize implementation.",
+    "assumptions": [
+      "The sponsor still values reducing scheduling delays."
+    ],
+    "tradeoffs": [
+      "Discovery adds cost now in exchange for reducing implementation risk later."
+    ],
+    "confidence": "medium"
+  },
+  "provenance": {
+    "artifact_inputs": [
+      {
+        "record_type": "artifact",
+        "record_id": "ART-PROP-001",
+        "path": "proposals/scheduling-discovery.md"
+      }
+    ],
+    "evidence": [
+      {
+        "record_type": "proof",
+        "record_id": "PRF-PROP-001"
+      }
+    ],
+    "prior_decisions": [],
+    "assumptions": [
+      "A bounded delivery-discovery phase is commercially acceptable."
+    ],
+    "policy_versions": {
+      "decision_policy": "0.1.0",
+      "artifact_contracts": "0.1.0"
+    }
+  },
+  "created_at": "2026-09-14T10:50:00-05:00",
+  "updated_at": "2026-09-14T11:00:00-05:00"
+}
