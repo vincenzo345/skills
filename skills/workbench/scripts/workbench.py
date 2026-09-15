@@ -46,6 +46,13 @@ LEGAL_CHANGE_PREFIXES = {
             "/state_revision", "/updated_at", "/latest_event_id",
             "/next_action", "/status",
         ),
+        "map": ("/nodes", "/edges", "/fog", "/updated_at"),
+    },
+    "work-closed": {
+        "work": (
+            "/state_revision", "/updated_at", "/latest_event_id",
+            "/next_action", "/status", "/completion", "/authorization_ids",
+        ),
         "map": ("/nodes/", "/updated_at"),
     },
 }
@@ -817,6 +824,7 @@ def replay_events(events: list[dict[str, Any]], expected_work_id: str) -> tuple[
             "work-started": "start",
             "stage-completed": "advance-stage",
             "handoff-accepted": "accept-handoff",
+            "work-closed": "close",
         }.get(event_type)
         fail(expected_command is not None, f"unsupported replay event type: {event_type}")
         fail(fp_input.get("command") == expected_command,
@@ -829,9 +837,13 @@ def replay_events(events: list[dict[str, Any]], expected_work_id: str) -> tuple[
         expected_outputs = [{"record_type": "work", "record_id": expected_work_id}]
         if event_type == "handoff-accepted":
             expected_outputs.extend(copy.deepcopy(fp_input.get("record_refs", [])))
+        elif event_type == "work-closed":
+            expected_outputs.append(copy.deepcopy(fp_input["authorization_reference"]))
         fail(event.get("outputs") == expected_outputs,
              f"event {expected_sequence} has noncanonical outputs")
         expected_inputs = copy.deepcopy(fp_input.get("inputs_used", [])) if event_type == "handoff-accepted" else []
+        if event_type == "work-closed":
+            expected_inputs = [copy.deepcopy(fp_input["authorization_reference"])]
         if event_type == "work-started":
             for field in ("intake_reference", "routing_reference"):
                 reference = fp_input.get(field)
@@ -843,6 +855,7 @@ def replay_events(events: list[dict[str, Any]], expected_work_id: str) -> tuple[
             "work-started": "Start Workbench work item.",
             "stage-completed": f"Complete stage {(fp_input.get('gate_receipt') or {}).get('stage_id')}.",
             "handoff-accepted": f"Accept specialist handoff {fp_input.get('handoff_id')}.",
+            "work-closed": "Close the accepted Workbench destination.",
         }[event_type]
         expected_cause_kind = "specialist-output" if event_type == "handoff-accepted" else "user-request"
         fail(event.get("cause") == {
@@ -957,6 +970,11 @@ def checked_checkpoint(store: Store, work_id: str) -> tuple[dict[str, Any], dict
                 if isinstance(record, dict):
                     _, _, record_id = record_identity(record)
                     event_records[record_id] = digest(record)
+        elif event.get("event_type") == "work-closed":
+            authorization = fp_input.get("authorization_record")
+            if isinstance(authorization, dict):
+                _, _, record_id = record_identity(authorization)
+                event_records[record_id] = digest(authorization)
         for record_id, expected_digest in event_records.items():
             fail(isinstance(record_id, str) and isinstance(expected_digest, str),
                  "event contains an invalid accepted-record digest")
@@ -1011,6 +1029,16 @@ def change(kind: str, record_id: str, pointer: str, before: tuple[bool, Any], af
 def event_id(work_id: str, sequence: int) -> str:
     token = work_id.removeprefix("WB-")
     return f"EVT-{token[:57]}-{sequence:06d}"
+
+
+def derived_id(prefix: str, *parts: object) -> str:
+    """Create a stable, schema-safe identifier for projected map records."""
+    seed = "|".join(str(part) for part in parts)
+    return f"{prefix}-{hashlib.sha256(seed.encode()).hexdigest()[:16].upper()}"
+
+
+def short_title(value: str, limit: int = 160) -> str:
+    return value if len(value) <= limit else value[:limit - 3].rstrip() + "..."
 
 
 def actor(actor_id: str) -> dict[str, str]:
@@ -1907,7 +1935,7 @@ def summary(state: dict[str, Any], map_record: dict[str, Any],
     decisions = [
         {"node_id": node["node_id"], "question": node.get("question", node["title"]), "status": node["status"]}
         for node in map_record["nodes"] if node.get("kind") == "decision"
-        and node.get("status") in {"waiting-for-human", "decided"}
+        and node.get("status") in {"ready", "waiting-for-human", "decided"}
     ]
     uncertainties = [
         {"id": item.get("fog_id"), "description": item.get("description"), "status": item.get("status")}
@@ -1918,7 +1946,11 @@ def summary(state: dict[str, Any], map_record: dict[str, Any],
         for node in map_record["nodes"] if node.get("status") in {"ready", "in-progress"}
         and (node.get("owner") or {}).get("kind") == "agent"
     ]
-    user_decisions = [item for item in decisions if item["status"] == "waiting-for-human"]
+    user_decisions = [
+        item for item in decisions
+        if item["status"] in {"ready", "waiting-for-human"}
+        and next(node for node in map_record["nodes"] if node["node_id"] == item["node_id"])["owner"]["kind"] == "human"
+    ]
     external_blockers = [item for item in blockers if item["status"] in {"external-blocked", "evidence-blocked"}]
     if current.get("status") == "active" and (current.get("owner") or {}).get("kind") == "agent" and not blockers:
         agent_ready.append({"stage_id": current["stage_id"], "title": (current.get("next_action") or {}).get("description"), "status": "active"})
@@ -2293,7 +2325,8 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
             validated_workspace_artifact(store, record)
         known_records[handoff["handoff_id"]] = handoff
 
-        is_v03 = tuple(int(part) for part in handoff["schema_version"].split("-")[0].split(".")[:3]) >= (0, 3, 0)
+        handoff_version = tuple(int(part) for part in handoff["schema_version"].split("-")[0].split(".")[:3])
+        is_v03 = handoff_version >= (0, 3, 0)
         if is_v03:
             expected_input_fingerprint = digest({
                 "inputs_used": handoff["inputs_used"],
@@ -2301,6 +2334,24 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
             })
             fail((handoff.get("input_fingerprint") or {}).get("value") == expected_input_fingerprint,
                  "handoff input fingerprint does not match inputs_used and policy_versions")
+        handoff_policy_version = handoff["policy_versions"].get("workbench")
+        if handoff_version >= (0, 5, 0):
+            fail(handoff_policy_version == RUNTIME_VERSION,
+                 f"v0.5 handoff policy_versions.workbench must equal installed runtime {RUNTIME_VERSION}")
+        elif handoff_policy_version is not None:
+            fail(handoff_policy_version == RUNTIME_VERSION,
+                 f"handoff cites stale Workbench policy {handoff_policy_version}")
+        for record in bundled_records:
+            if record.get("record_type") != "workbench-decision":
+                continue
+            decision_version = tuple(int(part) for part in record["schema_version"].split("-")[0].split(".")[:3])
+            policy_version = (record.get("provenance") or {}).get("policy_versions", {}).get("workbench")
+            if decision_version >= (0, 5, 0):
+                fail(policy_version == RUNTIME_VERSION,
+                     f"v0.5 decision {record['decision_id']} must cite installed Workbench {RUNTIME_VERSION}")
+            elif policy_version is not None:
+                fail(policy_version == RUNTIME_VERSION,
+                     f"decision {record['decision_id']} cites stale Workbench policy {policy_version}")
         for index, reference in enumerate(handoff["inputs_used"]):
             validate_reference_resolution(reference, state, map_record, known_records, store,
                                           f"handoff.inputs_used[{index}]")
@@ -2347,6 +2398,92 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
             *updated["stages"][stage_index].get("output_artifact_ids", []), *sorted(produced_ids),
         ]))
         output_references = [record_reference(handoff), *(record_reference(record) for record in bundled_records)]
+        outcome_node_id = updated_map["desired_outcome_node_id"]
+        existing_node_ids = {node["node_id"] for node in updated_map["nodes"]}
+        additions = False
+        for index, finding in enumerate(handoff["findings"], 1):
+            node_id = derived_id("E", handoff["handoff_id"], "finding", index)
+            fail(node_id not in existing_node_ids, f"projected finding node already exists: {node_id}")
+            existing_node_ids.add(node_id)
+            updated_map["nodes"].append({
+                "node_id": node_id,
+                "kind": "evidence-task",
+                "title": short_title(finding),
+                "question": f"What did {handoff['specialist']} establish?",
+                "why_it_matters": finding,
+                "owner": copy.deepcopy(handoff["owner"]),
+                "status": "evidence-established",
+                "done_when": ["The finding is backed by the accepted handoff and its registered outputs."],
+                "evidence": copy.deepcopy(output_references),
+                "resolution": {
+                    "basis": "evidence",
+                    "rationale": finding,
+                    "resolved_at": timestamp,
+                    "resolved_by": actor(args.actor),
+                    "references": copy.deepcopy(output_references),
+                },
+            })
+            updated_map["edges"].append({
+                "edge_id": derived_id("EDGE", node_id, outcome_node_id, "supports"),
+                "from_node_id": node_id,
+                "to_node_id": outcome_node_id,
+                "relationship": "supports",
+                "rationale": "Accepted evidence informs the desired outcome.",
+            })
+            additions = True
+        for record in bundled_records:
+            if record.get("record_type") != "workbench-decision":
+                continue
+            node_id = record.get("node_id") or derived_id("D", record["decision_id"])
+            if node_id in existing_node_ids and record.get("node_id"):
+                continue
+            fail(node_id not in existing_node_ids, f"projected decision node already exists: {node_id}")
+            existing_node_ids.add(node_id)
+            decision_node = {
+                "node_id": node_id,
+                "kind": "decision",
+                "title": short_title(record["question"]),
+                "question": record["question"],
+                "why_it_matters": (record.get("recommendation") or {}).get("rationale") or "This material choice affects the route or its downstream obligations.",
+                "owner": copy.deepcopy(record["owner"]),
+                "done_when": ["The authorized decision is confirmed or explicitly withdrawn."],
+                "evidence": [record_reference(record)],
+            }
+            if record["state"] == "confirmed":
+                decision_node["status"] = "decided"
+                decision_node["resolution"] = {
+                    "basis": record["resolution"]["basis"],
+                    "rationale": record["resolution"]["rationale"],
+                    "resolved_at": record["resolution"]["resolved_at"],
+                    "resolved_by": copy.deepcopy(record["resolution"]["resolved_by"]),
+                    "references": [record_reference(record)],
+                }
+            elif record["state"] == "evidence-blocked":
+                decision_node["status"] = "evidence-blocked"
+                decision_node["next_action"] = copy.deepcopy(record["next_action"])
+            elif record["state"] == "proposed":
+                decision_node["status"] = "ready"
+                decision_node["next_action"] = copy.deepcopy(record["next_action"])
+            else:
+                decision_node["status"] = "excluded"
+                decision_node["resolution"] = {
+                    "basis": "exclusion",
+                    "rationale": record.get("withdrawal_reason") or "The decision record is no longer active.",
+                    "resolved_at": record["updated_at"],
+                    "resolved_by": copy.deepcopy(record["owner"]),
+                    "references": [record_reference(record)],
+                }
+            updated_map["nodes"].append(decision_node)
+            additions = True
+        for index, uncertainty in enumerate(handoff.get("uncertainties", []), 1):
+            updated_map["fog"].append({
+                "fog_id": derived_id("FOG", handoff["handoff_id"], "uncertainty", index),
+                "description": uncertainty["description"],
+                "status": "unresolved",
+                "owner": copy.deepcopy(uncertainty["owner"]),
+                "next_action": copy.deepcopy(uncertainty["next_action"]),
+            })
+            additions = True
         final_basis = {
             "evidence-established": "evidence", "completed": "completion",
             "excluded": "exclusion", "superseded": "supersession",
@@ -2383,7 +2520,7 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
         updated["state_revision"] = new_revision
         updated["latest_event_id"] = eid
         updated["updated_at"] = timestamp
-        if handoff["node_updates"]:
+        if handoff["node_updates"] or additions:
             updated_map["updated_at"] = timestamp
 
         changes: list[dict[str, Any]] = []
@@ -2392,12 +2529,18 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
             if get_pointer(state, pointer) != get_pointer(updated, pointer):
                 changes.append(change("work", args.work_id, pointer,
                                       get_pointer(state, pointer), get_pointer(updated, pointer)))
-        for index, _ in enumerate(map_record["nodes"]):
-            for suffix in ("status", "next_action", "resolution"):
-                pointer = f"/nodes/{index}/{suffix}"
+        if additions:
+            for pointer in ("/nodes", "/edges", "/fog"):
                 if get_pointer(map_record, pointer) != get_pointer(updated_map, pointer):
                     changes.append(change("map", map_record["map_id"], pointer,
                                           get_pointer(map_record, pointer), get_pointer(updated_map, pointer)))
+        else:
+            for index, _ in enumerate(map_record["nodes"]):
+                for suffix in ("status", "next_action", "resolution"):
+                    pointer = f"/nodes/{index}/{suffix}"
+                    if get_pointer(map_record, pointer) != get_pointer(updated_map, pointer):
+                        changes.append(change("map", map_record["map_id"], pointer,
+                                              get_pointer(map_record, pointer), get_pointer(updated_map, pointer)))
         if map_record.get("updated_at") != updated_map.get("updated_at"):
             changes.append(change("map", map_record["map_id"], "/updated_at",
                                   get_pointer(map_record, "/updated_at"), get_pointer(updated_map, "/updated_at")))
@@ -2503,9 +2646,11 @@ def verify_gate(receipt: dict[str, Any], state: dict[str, Any], map_record: dict
             result.get("kind") == required_kind and result.get("result") == "passed"
             for result in proof.get("achieved_proof", []) if isinstance(result, dict)
         ) for proof in available_proofs), f"stage or destination completion requires passed {required_kind} proof")
-    if completing:
-        fail(any(matching_authorization(item, "closure", state, None, operation_time) for item in available_auths),
-             "destination completion requires unexpired closure authorization scoped to this work and destination")
+    supplied_closure = [item for item in auths if item.get("action") == "closure"]
+    if completing and supplied_closure:
+        fail(any(matching_authorization(item, "closure", state, None, operation_time)
+                 for item in supplied_closure),
+             "supplied closure authorization is not scoped to this work and destination")
     return available_proofs, available_auths
 
 
@@ -2581,21 +2726,31 @@ def advance(args: argparse.Namespace, store: Store, routes: dict[str, Any], stag
         updated_current["completed_at"] = timestamp
         updated_current.pop("next_action", None)
         if destination_complete:
-            updated["status"] = destination["completion_status"]
-            updated.pop("next_action", None)
             proof_ids = [item["proof_id"] for item in proofs if item.get("status") == "passed"]
-            authorization_id = next(item.get("authorization_id") for item in authorizations
-                                    if matching_authorization(item, "closure", state, None, datetime.now(timezone.utc)))
-            fail(isinstance(authorization_id, str) and authorization_id, "closure authorization record needs authorization_id")
-            updated["completion"] = {"claim": f"Planning destination {state['planning_destination']} completed.",
-                                     "proof_ids": proof_ids, "open_obligation_node_ids": [],
-                                     "authorized_by": authorization_id, "completed_at": timestamp}
             outcome = next(node for node in updated_map["nodes"] if node["node_id"] == updated_map["desired_outcome_node_id"])
-            outcome["status"] = "completed"
-            outcome.pop("next_action", None)
-            outcome["resolution"] = {"basis": "completion", "rationale": "The selected planning destination passed its final gate.",
-                                     "resolved_at": timestamp, "resolved_by": actor(args.actor),
-                                     "references": receipt["evidence"]}
+            closure = next((item for item in authorizations
+                            if matching_authorization(item, "closure", state, None, datetime.now(timezone.utc))), None)
+            if closure is not None:
+                updated["status"] = destination["completion_status"]
+                updated.pop("next_action", None)
+                updated["completion"] = {"claim": f"Planning destination {state['planning_destination']} completed.",
+                                         "proof_ids": proof_ids, "open_obligation_node_ids": [],
+                                         "authorized_by": closure["authorization_id"], "completed_at": timestamp}
+                outcome["status"] = "completed"
+                outcome.pop("next_action", None)
+                outcome["resolution"] = {"basis": "completion", "rationale": "The selected planning destination passed its final gate.",
+                                         "resolved_at": timestamp, "resolved_by": actor(args.actor),
+                                         "references": receipt["evidence"]}
+            else:
+                acceptance_action = {
+                    "description": "Review the destination result, then authorize closure or request a revision.",
+                    "owner": copy.deepcopy(state["owner"]),
+                    "target_type": "authorization",
+                    "target_id": state["work_id"],
+                }
+                updated["status"] = "awaiting-acceptance"
+                updated["next_action"] = copy.deepcopy(acceptance_action)
+                outcome["next_action"] = copy.deepcopy(acceptance_action)
         else:
             next_stage = entering_stage
             updated["current_stage"] = next_stage
@@ -2628,10 +2783,12 @@ def advance(args: argparse.Namespace, store: Store, routes: dict[str, Any], stag
         else:
             updated_map["updated_at"] = timestamp
             for pointer in ("/status", "/next_action", "/completion"):
-                changes.append(change("work", args.work_id, pointer, get_pointer(state, pointer), get_pointer(updated, pointer)))
+                if get_pointer(state, pointer) != get_pointer(updated, pointer):
+                    changes.append(change("work", args.work_id, pointer, get_pointer(state, pointer), get_pointer(updated, pointer)))
             outcome_index = next(index for index, node in enumerate(map_record["nodes"]) if node["node_id"] == map_record["desired_outcome_node_id"])
             for pointer in (f"/nodes/{outcome_index}/status", f"/nodes/{outcome_index}/next_action", f"/nodes/{outcome_index}/resolution", "/updated_at"):
-                changes.append(change("map", map_record["map_id"], pointer, get_pointer(map_record, pointer), get_pointer(updated_map, pointer)))
+                if get_pointer(map_record, pointer) != get_pointer(updated_map, pointer):
+                    changes.append(change("map", map_record["map_id"], pointer, get_pointer(map_record, pointer), get_pointer(updated_map, pointer)))
         for pointer in ("/state_revision", "/latest_event_id", "/updated_at"):
             changes.append(change("work", args.work_id, pointer, get_pointer(state, pointer), get_pointer(updated, pointer)))
         for pointer in ("/proof_ids", "/authorization_ids"):
@@ -2652,6 +2809,116 @@ def advance(args: argparse.Namespace, store: Store, routes: dict[str, Any], stag
             writes[record_path] = encode_json(record)
         store.transaction(writes)
         return {"result": "advanced", **summary(updated, updated_map, store=store)}
+
+
+def close_work(args: argparse.Namespace, store: Store,
+               destinations: dict[str, Any]) -> dict[str, Any]:
+    authorization = load_json(Path(args.authorization_record))
+    validate_record(authorization, "closure authorization")
+    fail(authorization.get("record_type") == "workbench-authorization",
+         "close requires a workbench-authorization record")
+    reference = record_reference(authorization)
+    fp_input = {
+        "command": "close",
+        "work_id": args.work_id,
+        "authorization_record": authorization,
+        "authorization_reference": reference,
+        "actor": args.actor,
+        "expected_revision": args.expected_revision,
+    }
+    with store.locked():
+        state, map_record, events = checked_checkpoint(store, args.work_id)
+        if ensure_idempotency(events, args.idempotency_key, fp_input):
+            return {"result": "idempotent", **summary(state, map_record, store=store)}
+        if args.expected_revision is not None:
+            fail(args.expected_revision == state["state_revision"],
+                 f"stale expected revision {args.expected_revision}; current is {state['state_revision']}")
+        fail(state["status"] == "awaiting-acceptance",
+             "close requires a destination that is awaiting acceptance")
+        destination = destinations[state["planning_destination"]]
+        current = next(item for item in state["stages"] if item["stage_id"] == state["current_stage"])
+        fail(current["stage_id"] == destination["completion_stage"] and current["status"] == "complete",
+             "close requires a completed destination stage")
+        fail(authorization.get("work_id") == state["work_id"],
+             "closure authorization belongs to another work item")
+        fail(matching_authorization(authorization, "closure", state, None, datetime.now(timezone.utc)),
+             "closure authorization is expired or not scoped to this work and destination")
+
+        updated = copy.deepcopy(state)
+        updated_map = copy.deepcopy(map_record)
+        timestamp = now()
+        new_revision = state["state_revision"] + 1
+        eid = event_id(args.work_id, new_revision)
+        updated["status"] = destination["completion_status"]
+        updated.pop("next_action", None)
+        updated["authorization_ids"] = list(dict.fromkeys([
+            *updated.get("authorization_ids", []), authorization["authorization_id"],
+        ]))
+        folder = store.work_dir(args.work_id)
+        passed_proof_ids = [
+            proof_id for proof_id in updated.get("proof_ids", [])
+            if load_json(folder / "records" / f"{proof_id}.json").get("status") == "passed"
+        ]
+        open_obligations = [
+            node["node_id"] for node in updated_map["nodes"]
+            if node.get("kind") == "obligation"
+            and node.get("status") not in {"completed", "excluded", "superseded"}
+        ]
+        updated["completion"] = {
+            "claim": f"Planning destination {state['planning_destination']} completed.",
+            "proof_ids": passed_proof_ids,
+            "open_obligation_node_ids": open_obligations,
+            "authorized_by": authorization["authorization_id"],
+            "completed_at": timestamp,
+        }
+        updated["state_revision"] = new_revision
+        updated["latest_event_id"] = eid
+        updated["updated_at"] = timestamp
+        outcome_index = next(index for index, node in enumerate(updated_map["nodes"])
+                             if node["node_id"] == updated_map["desired_outcome_node_id"])
+        outcome = updated_map["nodes"][outcome_index]
+        outcome["status"] = "completed"
+        outcome.pop("next_action", None)
+        outcome["resolution"] = {
+            "basis": "completion",
+            "rationale": "The destination result passed its gate and the human authorized closure.",
+            "resolved_at": timestamp,
+            "resolved_by": actor(args.actor),
+            "references": [reference],
+        }
+        updated_map["updated_at"] = timestamp
+
+        changes = []
+        for pointer in ("/status", "/next_action", "/authorization_ids", "/completion",
+                        "/state_revision", "/latest_event_id", "/updated_at"):
+            if get_pointer(state, pointer) != get_pointer(updated, pointer):
+                changes.append(change("work", args.work_id, pointer,
+                                      get_pointer(state, pointer), get_pointer(updated, pointer)))
+        for pointer in (f"/nodes/{outcome_index}/status", f"/nodes/{outcome_index}/next_action",
+                        f"/nodes/{outcome_index}/resolution", "/updated_at"):
+            if get_pointer(map_record, pointer) != get_pointer(updated_map, pointer):
+                changes.append(change("map", map_record["map_id"], pointer,
+                                      get_pointer(map_record, pointer), get_pointer(updated_map, pointer)))
+        event = make_event(
+            args.work_id, new_revision, "work-closed", args.actor, args.idempotency_key,
+            fp_input, changes, "Close the accepted Workbench destination.",
+            inputs=[reference],
+            outputs=[{"record_type": "work", "record_id": args.work_id}, reference],
+        )
+        validate_record(updated, "closed state")
+        validate_record(updated_map, "closed map")
+        validate_record(event, "closure event")
+        authorization_path = folder / "records" / f"{authorization['authorization_id']}.json"
+        if authorization_path.exists():
+            fail(load_json(authorization_path) == authorization,
+                 f"record ID already exists with different content: {authorization['authorization_id']}")
+        store.transaction({
+            folder / "state.json": encode_json(updated),
+            folder / "map.json": encode_json(updated_map),
+            folder / "events.jsonl": encode_events([*events, event]),
+            authorization_path: encode_json(authorization),
+        })
+        return {"result": "closed", **summary(updated, updated_map, store=store)}
 
 
 def read_command(args: argparse.Namespace, store: Store, command: str) -> dict[str, Any]:
@@ -2763,6 +3030,13 @@ def parser() -> argparse.ArgumentParser:
     handoff_p.add_argument("--idempotency-key", required=True)
     handoff_p.add_argument("--expected-revision", type=int)
     handoff_p.add_argument("--actor", default="agent:workbench")
+    close_p = commands.add_parser("close"); add_common(close_p)
+    close_p.add_argument("--work-id", required=True)
+    close_p.add_argument("--authorization-record", required=True,
+                         help="JSON workbench-authorization granting closure for this destination")
+    close_p.add_argument("--idempotency-key", required=True)
+    close_p.add_argument("--expected-revision", type=int)
+    close_p.add_argument("--actor", default="user:local")
     return root
 
 
@@ -2800,6 +3074,8 @@ def main(argv: list[str] | None = None) -> int:
             result = advance(args, store, routes, stages, destinations)
         elif args.command == "accept-handoff":
             result = accept_handoff(args, store)
+        elif args.command == "close":
+            result = close_work(args, store, destinations)
         else:
             result = read_command(args, store, args.command)
     except (WorkbenchError, OSError) as exc:

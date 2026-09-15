@@ -1,0 +1,60 @@
+{
+  "applicability": {
+    "applied": [
+      "proposal-compilation",
+      "data-model-audit",
+      "reasoning-continuity",
+      "destination-acceptance",
+      "global-packaging"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-WORKBENCH-V02-ROUTING/artifacts/workbench-v05-wayfinding.md",
+      "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-15T22:40:42.2851383Z",
+  "decisions_required": [],
+  "findings": [
+    "Proposal compilation now retains every applicable design lens before the proposal checkpoint.",
+    "Accepted handoffs now project material findings, uncertainties, and decisions into resumable Workbench state.",
+    "A passed destination can wait for human acceptance and close later with scoped authorization.",
+    "The source and globally linked Workbench skill pass the complete local regression and packaging checks."
+  ],
+  "handoff_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+  "idempotency_key": "workbench-v05-wayfinding-handoff-v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "dd3b42635383ecba3cd2de981ac287fe8202a18ab15f147ca3f21b0a9e576e1c"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-WORKBENCH-V02-ROUTING",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-WORKBENCH-V02-ROUTING",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-runtime-verification",
+  "stage": "local-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The locally verified Workbench result is ready for human acceptance; commit and push remain separately authorized by the current user request.",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

@@ -1,0 +1,67 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "This proves local implementation and globally linked packaging, not remote deployment or business outcome."
+      ],
+      "non_vacuity_check": "The new regression cases exercise the previously failing proposal cutoff, empty resume projection, stale provenance, and closure-only completion paths.",
+      "observed_at": "2026-09-15T22:40:42.2851383Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Pytest ran 115 tests; Workbench, skill, and Skill Creator validators passed; global links exposed the updated CLI.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-WORKBENCH-V05-WAYFINDING",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local-repository",
+        "journey": "route-audit-persist-resume-accept-close",
+        "seam": "workbench-cli-and-skill-package"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "Workbench locally implements the corrected proposal, audit, reasoning-continuity, and destination-acceptance behavior.",
+  "created_at": "2026-09-15T22:40:42.2851383Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-WORKBENCH-V05-WAYFINDING",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Proposal destinations include explicitly applicable data-model design.",
+        "Accepted findings, uncertainties, and decisions remain visible after resume.",
+        "Stale v0.5 Workbench provenance is rejected atomically.",
+        "A final gate can wait for acceptance and later close with scoped authorization.",
+        "All repository tests and validators pass."
+      ],
+      "description": "Exercise the corrected Workbench runtime, schemas, skill guidance, replay, and package validators.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Independent black-box runtime tests and repository validators report non-vacuous passing results.",
+      "requirement_id": "REQ-WORKBENCH-V05-WAYFINDING",
+      "verification_target": {
+        "environment": "local-repository",
+        "journey": "route-audit-persist-resume-accept-close",
+        "seam": "workbench-cli-and-skill-package"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-15T22:40:42.2851383Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-WORKBENCH-V02-ROUTING"
+}

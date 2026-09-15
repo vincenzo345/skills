@@ -91,6 +91,25 @@
         "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
       }
     },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["description", "owner", "next_action"],
+        "properties": {
+          "description": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          },
+          "owner": {
+            "$ref": "workbench-common.schema.json#/$defs/actorRef"
+          },
+          "next_action": {
+            "$ref": "workbench-common.schema.json#/$defs/nextAction"
+          }
+        }
+      }
+    },
     "options": {
       "type": "array",
       "items": {

@@ -83,6 +83,13 @@ Never assume the current repository contains the runtime. Never run a developmen
   ```
 
   Verify which lifecycle, proof, handoff, authorization-consumption, and destination-completion checks the installed version enforces. Report unenforced checks and do not describe the transition as fully validated when they remain outside the runtime.
+- `close` converts a destination that already passed its final gate and is `awaiting-acceptance` into its terminal completion status. It requires a schema-valid, unexpired closure authorization scoped to the same work and planning destination:
+
+  ```text
+  python -B "<workbench-skill-dir>/scripts/workbench.py" close --repo "<current-repo>" --work-id "WB-..." --authorization-record "<authorization.json>" --idempotency-key "..." --expected-revision N --actor "human:..."
+  ```
+
+  Closure records acceptance of the destination claim; it does not upgrade proposal, implementation, deployment, or business-outcome evidence.
 - `replay` rebuilds or checks the current projection from the append-only event stream. A mismatch blocks mutation until repaired through a supported recovery path.
 
 `resume`, `status`, `next`, and `replay` accept an optional `--work-id`; without it they use `.workbench/active-work.json`. Add `--json` when deterministic structured output is needed.
@@ -91,7 +98,7 @@ Successful mutations return the updated projection. Do not immediately rerun `st
 
 ## Repository state
 
-Canonical work records live under `.workbench/work/<work-id>/` in the current repository. A new pre-start item contains immutable `intake.json` and, after finalization, immutable `routing.json`. Corrections append under `routing-revisions/<revision>.json`; the highest valid contiguous revision is current, and every revision binds its predecessor's reference and digest. Routed start binds the exact intake and current routing revision into the first event. Lifecycle work additionally persists state, events, the uncertainty map, and accepted records beneath `records/`. `accept-handoff` is the registration path for artifacts, decisions, proofs, authorizations, and handoffs. Map-node creation and dependency mutation remain deferred. Generated status, diagrams, tracker items, and specialist documents are projections or referenced artifacts, not alternate state stores.
+Canonical work records live under `.workbench/work/<work-id>/` in the current repository. A new pre-start item contains immutable `intake.json` and, after finalization, immutable `routing.json`. Corrections append under `routing-revisions/<revision>.json`; the highest valid contiguous revision is current, and every revision binds its predecessor's reference and digest. Routed start binds the exact intake and current routing revision into the first event. Lifecycle work additionally persists state, events, the uncertainty map, and accepted records beneath `records/`. `accept-handoff` is the registration path for artifacts, decisions, proofs, authorizations, handoffs, and their projected findings, uncertainties, and decision nodes. Dependency-derived readiness and post-start route correction remain deferred. Generated status, diagrams, tracker items, and specialist documents are projections or referenced artifacts, not alternate state stores.
 
 Treat the event stream as append-only and current state as its projection. Preserve stable IDs across retries, corrections, route changes, and fresh sessions. Current or superseded artifacts must retain content integrity and exact lineage. Do not rename IDs to match filenames, tracker tickets, or stage labels.
 

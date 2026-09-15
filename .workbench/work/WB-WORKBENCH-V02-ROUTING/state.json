@@ -1,6 +1,7 @@
 {
   "artifact_ids": [
-    "ART-WORKBENCH-DATA-MODEL-CONTRACT"
+    "ART-WORKBENCH-DATA-MODEL-CONTRACT",
+    "ART-WORKBENCH-V05-WAYFINDING"
   ],
   "authorization_ids": [
     "AUTH-WORKBENCH-V02-IMPLEMENT",
@@ -14,18 +15,19 @@
   "desired_outcome": "Workbench persistently separates business basis, solution context, engagement intent, destination, and lane while escalating discovery only when material uncertainty justifies it.",
   "handoff_ids": [
     "HO-WORKBENCH-DATA-MODEL-AUTH",
-    "HO-WORKBENCH-DATA-MODEL-VERIFIED"
+    "HO-WORKBENCH-DATA-MODEL-VERIFIED",
+    "HO-WORKBENCH-V05-WAYFINDING-VERIFIED"
   ],
-  "latest_event_id": "EVT-WORKBENCH-V02-ROUTING-000008",
+  "latest_event_id": "EVT-WORKBENCH-V02-ROUTING-000010",
   "map_id": "MAP-WORKBENCH-V02-ROUTING",
   "next_action": {
-    "description": "Satisfy the local-proof-disposition-recorded exit gate.",
+    "description": "Review the destination result, then authorize closure or request a revision.",
     "owner": {
-      "actor_id": "agent:workbench",
-      "kind": "agent"
+      "actor_id": "user:vince",
+      "kind": "human"
     },
-    "target_id": "local-verification",
-    "target_type": "stage"
+    "target_id": "WB-WORKBENCH-V02-ROUTING",
+    "target_type": "authorization"
   },
   "owner": {
     "actor_id": "user:vince",
@@ -33,7 +35,8 @@
   },
   "planning_destination": "locally-verified-implementation",
   "proof_ids": [
-    "PRF-WORKBENCH-DATA-MODEL-LOCAL"
+    "PRF-WORKBENCH-DATA-MODEL-LOCAL",
+    "PRF-WORKBENCH-V05-WAYFINDING"
   ],
   "record_type": "workbench-state",
   "route_selection": {
@@ -115,17 +118,10 @@
     {
       "applicability": "applicable",
       "applicability_reason": "Included by the small-change-fast-lane lifecycle route.",
-      "next_action": {
-        "description": "Satisfy the local-proof-disposition-recorded exit gate.",
-        "owner": {
-          "actor_id": "agent:workbench",
-          "kind": "agent"
-        },
-        "target_id": "local-verification",
-        "target_type": "stage"
-      },
+      "completed_at": "2026-09-15T22:42:53.302459Z",
       "output_artifact_ids": [
-        "ART-WORKBENCH-DATA-MODEL-CONTRACT"
+        "ART-WORKBENCH-DATA-MODEL-CONTRACT",
+        "ART-WORKBENCH-V05-WAYFINDING"
       ],
       "owner": {
         "actor_id": "agent:workbench",
@@ -133,7 +129,7 @@
       },
       "stage_id": "local-verification",
       "started_at": "2026-09-14T18:30:12.405217Z",
-      "status": "active"
+      "status": "complete"
     },
     {
       "applicability": "applicable",
@@ -169,9 +165,9 @@
       "status": "pending"
     }
   ],
-  "state_revision": 8,
-  "status": "active",
+  "state_revision": 10,
+  "status": "awaiting-acceptance",
   "title": "Workbench v0.2 routing and bounded-discovery foundation",
-  "updated_at": "2026-09-15T20:04:42.837625Z",
+  "updated_at": "2026-09-15T22:42:53.302459Z",
   "work_id": "WB-WORKBENCH-V02-ROUTING"
 }

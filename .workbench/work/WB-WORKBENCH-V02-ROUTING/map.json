@@ -1,7 +1,36 @@
 {
   "created_at": "2026-09-14T18:04:02.716602Z",
   "desired_outcome_node_id": "O-WORKBENCH-V02-ROUTING",
-  "edges": [],
+  "edges": [
+    {
+      "edge_id": "EDGE-0E18AA7173E34575",
+      "from_node_id": "E-8655C30D7D9C20D2",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-WORKBENCH-V02-ROUTING"
+    },
+    {
+      "edge_id": "EDGE-60F0795FF7D8201F",
+      "from_node_id": "E-0D3B57098B1ED51F",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-WORKBENCH-V02-ROUTING"
+    },
+    {
+      "edge_id": "EDGE-5DC4CC3B7A28E6D0",
+      "from_node_id": "E-D19AD46B06F3B230",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-WORKBENCH-V02-ROUTING"
+    },
+    {
+      "edge_id": "EDGE-E433EF29C37B4C7F",
+      "from_node_id": "E-02910144EB1CBF44",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-WORKBENCH-V02-ROUTING"
+    }
+  ],
   "fog": [],
   "map_id": "MAP-WORKBENCH-V02-ROUTING",
   "nodes": [
@@ -12,13 +41,13 @@
       "evidence": [],
       "kind": "outcome",
       "next_action": {
-        "description": "Satisfy the local-proof-disposition-recorded exit gate.",
+        "description": "Review the destination result, then authorize closure or request a revision.",
         "owner": {
-          "actor_id": "agent:workbench",
-          "kind": "agent"
+          "actor_id": "user:vince",
+          "kind": "human"
         },
-        "target_id": "local-verification",
-        "target_type": "stage"
+        "target_id": "WB-WORKBENCH-V02-ROUTING",
+        "target_type": "authorization"
       },
       "node_id": "O-WORKBENCH-V02-ROUTING",
       "owner": {
@@ -28,11 +57,219 @@
       "status": "in-progress",
       "title": "Workbench v0.2 routing and bounded-discovery foundation",
       "why_it_matters": "Workbench persistently separates business basis, solution context, engagement intent, destination, and lane while escalating discovery only when material uncertainty justifies it."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-WORKBENCH-V05-WAYFINDING",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-8655C30D7D9C20D2",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-runtime-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Proposal compilation now retains every applicable design lens before the proposal checkpoint.",
+        "references": [
+          {
+            "record_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-WORKBENCH-V05-WAYFINDING",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-15T22:42:44.245928Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Proposal compilation now retains every applicable design lens before the proposal checkpoint.",
+      "why_it_matters": "Proposal compilation now retains every applicable design lens before the proposal checkpoint."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-WORKBENCH-V05-WAYFINDING",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-0D3B57098B1ED51F",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-runtime-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Accepted handoffs now project material findings, uncertainties, and decisions into resumable Workbench state.",
+        "references": [
+          {
+            "record_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-WORKBENCH-V05-WAYFINDING",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-15T22:42:44.245928Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Accepted handoffs now project material findings, uncertainties, and decisions into resumable Workbench state.",
+      "why_it_matters": "Accepted handoffs now project material findings, uncertainties, and decisions into resumable Workbench state."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-WORKBENCH-V05-WAYFINDING",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-D19AD46B06F3B230",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-runtime-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "A passed destination can wait for human acceptance and close later with scoped authorization.",
+        "references": [
+          {
+            "record_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-WORKBENCH-V05-WAYFINDING",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-15T22:42:44.245928Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "A passed destination can wait for human acceptance and close later with scoped authorization.",
+      "why_it_matters": "A passed destination can wait for human acceptance and close later with scoped authorization."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-WORKBENCH-V05-WAYFINDING",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-02910144EB1CBF44",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-runtime-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The source and globally linked Workbench skill pass the complete local regression and packaging checks.",
+        "references": [
+          {
+            "record_id": "HO-WORKBENCH-V05-WAYFINDING-VERIFIED",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WORKBENCH-V05-WAYFINDING",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-WORKBENCH-V05-WAYFINDING",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-15T22:42:44.245928Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The source and globally linked Workbench skill pass the complete local regression and packaging checks.",
+      "why_it_matters": "The source and globally linked Workbench skill pass the complete local regression and packaging checks."
     }
   ],
   "planning_destination": "locally-verified-implementation",
   "record_type": "workbench-map",
   "schema_version": "0.1.0",
-  "updated_at": "2026-09-14T18:30:12.405217Z",
+  "updated_at": "2026-09-15T22:42:53.302459Z",
   "work_id": "WB-WORKBENCH-V02-ROUTING"
 }

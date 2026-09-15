@@ -45,8 +45,8 @@ For existing work, read [references/state-management.md](references/state-manage
 1. **Orient once.** Use the latest mutation or `resume` projection. Refresh with `status` only when state may have changed; use `next` only for a deliberately narrower frontier view. Make five answers visible: where we are, what we learned, what was decided and rejected, why the proposed action is next, and what remains uncertain.
 2. **Act on the ready frontier.** Execute agent-owned work whose dependencies, scope, and authorization are satisfied. Pause dependent work for a human decision or external blocker while continuing independent ready work.
 3. **Apply only useful methods.** An activity label identifies a concern to cover, not a mandatory stage, document, skill invocation, or subagent. Use a focused method only when it creates evidence, resolves uncertainty, supports a decision, or proves a required claim.
-4. **Accept one meaningful phase handoff.** Validate and register the consolidated bundle with `accept-handoff`, then use `advance-stage --accepted-handoff` so the runtime derives mechanical gate evidence. Never edit canonical state to imitate an unsupported mutation.
-5. **Stop at the selected destination.** Report separate dispositions for feature behavior, focused verification, integration journey, repository health, user acceptance, deployment readiness, deployed behavior, and business outcome only when applicable.
+4. **Accept one meaningful phase handoff.** Validate and register the consolidated bundle with `accept-handoff`; its findings, uncertainties, and decisions become the durable reasoning frontier. Then use `advance-stage --accepted-handoff` so the runtime derives mechanical gate evidence. Preserve a material follow-up as a versioned artifact rather than leaving it only in chat.
+5. **Stop at the selected destination.** Passing its gate produces either authorized completion or `awaiting-acceptance`; do not make closure ceremony the headline. Report separate dispositions for feature behavior, focused verification, integration journey, repository health, user acceptance, deployment readiness, deployed behavior, and business outcome only when applicable.
 
 ## Control rules
 
@@ -71,6 +71,7 @@ Read one relevant reference when its branch fires:
 - Route, destination, lane, uncertainty, or specialist selection: [references/routing.md](references/routing.md)
 - Focused investigation or uncertainty escalation: [references/discovery.md](references/discovery.md)
 - Database-backed application or possible persisted-data impact: [references/data-modeling.md](references/data-modeling.md)
+- Review or audit of an existing persisted model: [references/data-model-auditing.md](references/data-model-auditing.md)
 - Handoff, decision, proof, authorization, or checkpoint movement: [references/stage-gates.md](references/stage-gates.md)
 - Commands, resumption, recovery, or persisted files: [references/state-management.md](references/state-management.md)
 

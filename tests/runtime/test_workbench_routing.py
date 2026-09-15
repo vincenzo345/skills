@@ -202,6 +202,48 @@ def read_result(result: Any) -> dict[str, Any]:
     return json.loads(result.stdout)
 
 
+def test_proposal_destination_includes_applicable_data_model_design(
+    tmp_path: Path,
+    workbench_cli: WorkbenchCLI,
+) -> None:
+    repo = captured_repo(tmp_path, workbench_cli, "proposal-data-model")
+    value = routing_input(
+        engagement_intent="explore",
+        planning_destination="proposal",
+        execution_lane="full",
+        runtime_route=None,
+        authorization_boundary={"granted_actions": [], "withheld_actions": sorted(ALL_ACTIONS)},
+        stage_recommendations=[
+            {
+                "stage_id": "data-model-design",
+                "applicability": "applicable",
+                "reason": "The requested proposal is a data-model audit.",
+                "evidence_references": ["captured-intake"],
+            }
+        ],
+    )
+
+    result = finalize(
+        workbench_cli,
+        repo,
+        write_input(tmp_path / "proposal-data-model.json", value),
+    )
+
+    assert_succeeded(result)
+    receipt = json.loads(
+        (repo / ".workbench" / "work" / WORK_ID / "routing.json").read_text(encoding="utf-8")
+    )
+    design = next(
+        phase for phase in receipt["compiled_plan"]["phases"]
+        if phase["phase_id"] == "design-decide"
+    )
+    assert design["checkpoint_stage"] == "proposal"
+    assert [item["stage_id"] for item in design["activities"] if item["applicability"] == "applicable"] == [
+        "data-model-design",
+        "proposal",
+    ]
+
+
 def test_finalize_persists_valid_receipt_and_projects_ready_state(
     tmp_path: Path,
     workbench_cli: WorkbenchCLI,

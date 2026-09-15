@@ -25,6 +25,18 @@ Stop escalating when the current question has enough evidence for its agreed dec
 - Use domain modeling when terminology or responsibility boundaries are unstable.
 - Use grilling only after evidence exposes a consequential decision whose assumptions, tradeoffs, or alternatives need stress-testing.
 
+## Challenge the destination when it matters
+
+Before committing a nontrivial route or recommending an irreversible direction, run one compact destination challenge. Ask only the probes that can change the route:
+
+- Is the desired outcome different from the requested deliverable?
+- What credible alternative destination includes stopping, deferring, or gathering evidence first?
+- Which assumption would invalidate the recommendation, and what is its cheapest falsifier?
+- Which choice is costly to reverse, and who owns it?
+- What observable evidence proves the destination is reached?
+
+Resolve discoverable probes through inspection. Persist only material unanswered probes as uncertainties or decision nodes, with dependencies and owners. A bounded, reversible request with explicit acceptance evidence passes without a ceremonial grill. Repeat the challenge only when new evidence changes a premise.
+
 Give the method one bounded question, its known evidence references, expected output, proof threshold, and authorization boundary. Perform it in the current agent when it shares the same working set; delegate only independent work that justifies the additional context and synthesis. Workbench owns state and accepts or rejects the result; never let a specialist create a competing map or lifecycle.
 
 ## Escalation and stopping tests

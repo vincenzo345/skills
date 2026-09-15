@@ -569,7 +569,6 @@ def test_valid_human_grant_allows_entry_to_implementation(
     [
         "missing-proof",
         "wrong-proof-kind",
-        "missing-closure",
         "wrong-destination-closure",
         "schema-invalid-proof",
         "schema-invalid-closure",
@@ -589,8 +588,6 @@ def test_local_completion_rejects_incomplete_or_mismatched_evidence_atomically(
         proofs = []
     elif completion_evidence == "wrong-proof-kind":
         proofs = [local_implementation_proof(state, kind="artifact-validity")]
-    elif completion_evidence == "missing-closure":
-        authorizations = []
     elif completion_evidence == "wrong-destination-closure":
         authorizations = [closure_authorization(state, destination="released-software")]
     elif completion_evidence == "schema-invalid-proof":
@@ -629,6 +626,53 @@ def test_local_completion_rejects_incomplete_or_mismatched_evidence_atomically(
     _, after = load_state(repo_at_local_verification)
     assert after["current_stage"] == "local-verification"
     assert after["status"] == "active"
+
+
+def test_final_gate_without_closure_waits_for_acceptance_then_closes(
+    repo_at_local_verification: Path,
+    tmp_path: Path,
+    workbench_cli: WorkbenchCLI,
+) -> None:
+    _, state = load_state(repo_at_local_verification)
+    proof = local_implementation_proof(state)
+
+    ready = advance_current_stage(
+        workbench_cli,
+        repo_at_local_verification,
+        tmp_path,
+        "destination-ready-without-closure",
+        proof_records=[proof],
+        authorization_records=[],
+    )
+
+    assert_succeeded(ready)
+    _, awaiting = load_state(repo_at_local_verification)
+    assert awaiting["status"] == "awaiting-acceptance"
+    assert next(item for item in awaiting["stages"] if item["stage_id"] == "local-verification")["status"] == "complete"
+    assert "completion" not in awaiting
+    assert awaiting["next_action"]["owner"]["kind"] == "human"
+
+    closure = closure_authorization(awaiting)
+    closure_path = tmp_path / "closure-after-acceptance.json"
+    closure_path.write_text(json.dumps(closure, indent=2) + "\n", encoding="utf-8")
+    closed = workbench_cli.invoke(
+        "close",
+        repo_at_local_verification,
+        (
+            "--work-id", awaiting["work_id"],
+            "--authorization-record", str(closure_path),
+            "--idempotency-key", "runtime-test:close-after-acceptance",
+            "--expected-revision", str(awaiting["state_revision"]),
+            "--actor", "human:runtime-test",
+            "--json",
+        ),
+    )
+
+    assert_succeeded(closed)
+    _, completed = load_state(repo_at_local_verification)
+    assert completed["status"] == "completed-for-destination"
+    assert completed["completion"]["authorized_by"] == closure["authorization_id"]
+    assert_repo_records_schema_valid(repo_at_local_verification)
 
 
 def test_matching_local_proof_and_exact_closure_complete_at_destination_stage(

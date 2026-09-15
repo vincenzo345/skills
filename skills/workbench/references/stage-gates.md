@@ -18,7 +18,7 @@ Do not manually reinterpret a handler ID. If the installed runtime does not impl
 
 ## Accepted handoff path
 
-The normal v0.3 path is one structured handoff bundle followed by a derived advance:
+The normal v0.5 path is one structured handoff bundle followed by a derived advance:
 
 ```text
 python -B "<workbench-skill-dir>/scripts/workbench.py" accept-handoff --repo "<current-repo>" --work-id "WB-DEMO-001" --handoff-bundle "<bundle.json>" --idempotency-key "..." --expected-revision 1 --actor "agent:workbench"
@@ -26,6 +26,8 @@ python -B "<workbench-skill-dir>/scripts/workbench.py" advance-stage --repo "<cu
 ```
 
 The bundle contains one `handoff` valid against `workbench-handoff.schema.json` and a `records` array containing its artifact, decision, proof, and authorization outputs. The handoff's `input_fingerprint` is the canonical SHA-256 digest of its `inputs_used` and `policy_versions`. Every workspace artifact must exist beneath the target repository and match its recorded digest. Workbench registers the records, updates state pointers and checkpoint outputs, and appends one event atomically. An exact retry is idempotent; a conflicting retry or any invalid record changes nothing.
+
+For a v0.5 handoff, set `schema_version` and `policy_versions.workbench` to the installed runtime version. Accepted findings become evidence nodes, uncertainties become durable fog, and supplied decision records become decision nodes, so `resume` exposes the reasoning frontier without rereading the artifact. Use `node_updates` for existing nodes; do not duplicate the automatically projected records.
 
 `advance-stage --accepted-handoff` derives the gate evidence from that registered handoff and its outputs. It cannot make a weak handoff stronger: the checkpoint still requires the record types named by its gate, and destination, implementation, deployment, and closure rules still apply.
 
@@ -83,7 +85,7 @@ Read the selected destination entry in the lifecycle registry for its completion
 
 For every v0.3 proof, record `verification_scope`. Each required and achieved result also names its exact verification target—environment, seam, and journey—and the targets must match. If the required authenticated application journey cannot run, record that integration scope as `blocked`; do not pass it with an isolated component harness. A feature-focused pass can coexist with blocked integration proof and failing pre-existing repository health without collapsing those dispositions into one ambiguous status.
 
-Use `paused` for a coherent item waiting on a user or external event; use `blocked` when an applicable stage cannot meet its exit; use a terminal stop only for its recorded reason. Closure requires destination-specific authorization. A completed proposal may support a proceed, hold, or reject decision without proving feasibility, authorizing implementation, or achieving the business outcome.
+Use `paused` for a coherent item waiting on a user or external event; use `blocked` when an applicable stage cannot meet its exit; use a terminal stop only for its recorded reason. Passing the destination gate without closure authorization produces `awaiting-acceptance`: the requested result is ready for review while administrative closure remains a separate human action. `close` requires destination-specific authorization and records the terminal claim. A completed proposal may support a proceed, hold, or reject decision without proving feasibility, authorizing implementation, or achieving the business outcome.
 
 ## Handoff acceptance
 

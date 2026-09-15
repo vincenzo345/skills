@@ -13,7 +13,7 @@ The routing receipt keeps five axes separate: business basis, solution context, 
 ## Lifecycle rules
 
 - The lifecycle has eight stable phases. The 17 stage identifiers are domain activities grouped inside those phases.
-- A compiled phase has at most one operational checkpoint: its last applicable activity. Other activities remain visible in the routing receipt and specialist handoff without forcing transitions.
+- A compiled phase has at most one operational checkpoint: its last applicable activity. In design-and-decide, proposal is the consolidating activity after applicable experience, architecture, and data-model lenses. Other activities remain visible in the routing receipt and specialist handoff without forcing transitions.
 - An activity marked not applicable can never become the phase checkpoint. Unresolved material applicability blocks the affected frontier.
 - A phase can call multiple specialists. Specialist invocation does not itself advance the lifecycle; one accepted handoff may cover several activities in the same phase.
 - Persisted state and recorded transitions determine position. A narrative document, tracker issue, or conversation does not.
@@ -26,7 +26,7 @@ The routing receipt keeps five axes separate: business basis, solution context, 
 |---|---|
 | Frame | Intake and outcome framing |
 | Discover | Brownfield reconnaissance, evidence intake, process modeling, and process validation |
-| Design and decide | Proposal, experience design, solution architecture, and data-model design |
+| Design and decide | Experience design, solution architecture, data-model design, and a consolidating proposal |
 | Plan | Standards resolution, specification, and delivery planning |
 | Implement | Implementation |
 | Verify | Local verification |
@@ -35,7 +35,7 @@ The routing receipt keeps five axes separate: business basis, solution context, 
 
 The last applicable activity in a phase supplies that phase's checkpoint and exit-gate identity. This preserves the specialized vocabulary while avoiding a transition for every lens. A large work item grows through map nodes, specialist tasks, evidence, and artifacts rather than ceremonial lifecycle steps.
 
-The v0.5 source runtime implements explicit data-model routing, pre-start routing correction, forward compilation through a selected destination, accepted record handoffs, derived checkpoint advances, replay, and verification projections. The loop-back semantics below remain the target lifecycle contract; post-start route correction, map-node creation, and dependency-derived readiness are not yet mutation commands. Until those commands are proven, evidence that invalidates an earlier started phase blocks dependent work and is recorded outside canonical state rather than repaired by hand.
+The v0.5 source runtime implements explicit data-model routing, pre-start routing correction, forward compilation through a selected destination, accepted record handoffs with projected findings, uncertainties, and decisions, derived checkpoint advances, destination acceptance, closure, replay, and verification projections. The loop-back semantics below remain the target lifecycle contract; post-start route correction and dependency-derived readiness are not yet mutation commands. Until those commands are proven, evidence that invalidates an earlier started phase blocks dependent work without rewriting canonical history.
 
 ## Canonical activity registry
 
@@ -164,6 +164,7 @@ The abbreviated route is valid only when behavior and blast radius are bounded, 
 ### Stops and pauses
 
 - `completed-for-destination` means the authorized planning destination was reached; it never upgrades the claim to implementation, deployment, or business outcome. `completed-for-outcome` is reserved for supported outcome claims.
+- `awaiting-acceptance` means the final destination gate passed but closure was not authorized. The result is ready for human review; `close` records acceptance without rerunning the completed phase.
 - `stopped` is valid when the human rejects the premise, validation falsifies it, risk is unacceptable, or proceeding no longer has sufficient value. The reason and surviving obligations are recorded.
 - `paused` is valid when an otherwise coherent work item is waiting for a user decision, external event, evidence source, or authorization. `blocked` means an applicable stage cannot satisfy its exit criteria. Both require an owner and next action; they are not synonyms.
 - A proposal handoff, a rejected or deferred process hypothesis, and transfer of long-running outcome measurement are valid endpoints when their narrower claims are explicit.

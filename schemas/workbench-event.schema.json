@@ -48,6 +48,7 @@
         "stage-skipped",
         "stage-blocked",
         "stage-completed",
+        "work-closed",
         "node-created",
         "node-updated",
         "artifact-registered",

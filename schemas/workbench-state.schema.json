@@ -157,6 +157,7 @@
           "status": {
             "enum": [
               "active",
+              "awaiting-acceptance",
               "paused",
               "blocked"
             ]

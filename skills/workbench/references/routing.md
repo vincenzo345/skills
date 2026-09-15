@@ -31,7 +31,7 @@ Persist and start a ready profile with `route-and-start`. When a material human 
 
 New work is `profile-compiled`: the runtime applies the recorded activity recommendations and its deterministic defaults, groups the applicable activities into phases, selects at most one checkpoint per active phase, and stops the plan at the chosen destination. The compiled plan on each routing revision is immutable evidence of what that revision included, excluded, and why.
 
-The eight phases are `frame`, `discover`, `design-decide`, `plan`, `implement`, `verify`, `release`, and `measure`. Activity stages retain the domain vocabulary—such as evidence intake, experience design, architecture, data-model design, standards, specification, and review—but an activity is not automatically a lifecycle checkpoint. Several activities may collaborate within one phase and produce one accepted handoff.
+The eight phases are `frame`, `discover`, `design-decide`, `plan`, `implement`, `verify`, `release`, and `measure`. Activity stages retain the domain vocabulary—such as evidence intake, experience design, architecture, data-model design, standards, specification, and review—but an activity is not automatically a lifecycle checkpoint. Several activities may collaborate within one phase and produce one accepted handoff. `proposal` is the consolidating checkpoint at the end of `design-decide`, so every explicitly applicable design lens can contribute to a proposal destination.
 
 `runtime_route` records the closest historical route when one exists and may be `null`, especially for greenfield. It does not control a profile-compiled plan. The five fixed route IDs remain supported for replay and direct legacy starts only; do not create another fixed route for every combination of context, destination, and depth.
 
@@ -48,7 +48,7 @@ When the path is unclear:
 3. Add the smallest evidence task, experiment, decision, obligation, or deliverable needed to resolve a question.
 4. Give every open node an owner, dependency set, next action, and completion condition.
 5. Attach evidence to the node and decision it informs.
-6. Recompute the ready frontier after accepted evidence or a changed dependency. Dependency-edge evaluation and map mutation remain manual in v0.3; do not claim that a persisted edge was automatically resolved.
+6. Recompute the ready frontier after accepted evidence or a changed dependency. Accepted v0.5 handoffs project their findings, uncertainties, and decision records into the canonical map; dependency-derived readiness and post-start rerouting remain explicit rather than inferred.
 
 Prefer breadth-first discovery: expose the major questions blocking the destination before deeply pursuing one branch. Admit a node only when it supports the desired outcome, the planning destination, or a surviving obligation.
 
@@ -64,7 +64,7 @@ Prioritize work that unlocks the most blocked nodes, tests the riskiest falsifia
 
 ## Invoke specialists without surrendering control
 
-Use focused skills for their methods—for example research or a prototype to resolve uncertainty, domain modeling for shared terms, codebase design for an applicable design lens, the spec and ticket skills for delivery contracts, and implementation/review/proof skills for delivery. Check that the selected specialist is installed and its invocation policy permits use.
+Use Workbench's embedded contracts for routing, destination challenge, data-model work, handoffs, and proof. A focused installed skill may deepen research, prototyping, domain modeling, codebase design, specification, ticketing, implementation, review, or proof when its method adds value; Workbench must still remain usable when that optional specialist is absent.
 
 A specialist is a bounded method and handoff contract, not automatically another agent. Run related methods in the current agent when they share the same evidence and working context. Delegate only independent evidence work or a genuinely independence-sensitive review whose expected value exceeds the prompt, rereading, and synthesis cost. Never create one subagent per activity label.
 
