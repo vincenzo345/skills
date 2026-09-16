@@ -1,0 +1,41 @@
+{
+  "action": "repository-mutation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-WAH-GLOBAL-SYNC",
+  "grant": {
+    "expires_at": "2026-09-17T16:11:21.4432434Z",
+    "granted_at": "2026-09-16T16:11:21.4432434Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-16T16:11:21.4432434Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Exact grant language: commit, push, and update the global skills to reflect this newest version",
+      "Sync only the Workbench skill from the committed skills/workbench source.",
+      "Validate the installed skill after sync.",
+      "Do not modify other global skills."
+    ],
+    "environment": "global Codex skills",
+    "targets": [
+      {
+        "kind": "environment",
+        "qualifier": "global Workbench skill installation",
+        "target_id": "C:\\Users\\vince\\.codex\\skills\\workbench"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

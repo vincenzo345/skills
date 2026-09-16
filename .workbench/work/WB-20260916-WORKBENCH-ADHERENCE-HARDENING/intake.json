@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-09-16T15:23:58.707445Z",
+  "idempotency_key": "workbench-adherence-hardening:capture:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "bb8cb1baeb1bae108babb2bb54500dba9c755fdb69ae68547050f3df9b9b1dfc"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "$vince-skills:workbench convert this evidence into a small skill patch, runtime issues, and regression evals—while leaving the affected Workbench item frozen",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "conversation evidence: manual-extraction Workbench adherence audit",
+    "WB-WORKBENCH-V02-ROUTING"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

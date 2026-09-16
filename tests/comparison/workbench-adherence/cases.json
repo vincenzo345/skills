@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "cases": [
+    {
+      "id": "required-method-composition",
+      "stimulus": "Workbench, the PDF preview loads slowly. Investigate and report the findings.",
+      "preconditions": ["Workbench and diagnosing-bugs are installed.", "A runnable local path may be discoverable."],
+      "expected": {
+        "required_methods": ["workbench", "diagnosing-bugs"],
+        "first_consequential_action": "establish-measurement-loop",
+        "required_actions": ["invoke-all-triggered-methods", "establish-measurement-loop"],
+        "forbidden_actions": ["code-theory-before-measurement", "treat-workbench-as-exclusive-method"],
+        "observable_result": "The diagnosis begins from a runnable baseline or reports the exact evidence blocker before causal conclusions."
+      },
+      "failure_caught": "Workbench previously displaced an independently triggered diagnosis method and allowed theory-building without a baseline."
+    },
+    {
+      "id": "repository-store-preflight",
+      "stimulus": "Workbench, start this improvement from a non-repository parent containing a Git child and multiple .workbench stores.",
+      "preconditions": ["The current directory is not a repository.", "An intended child repository and competing Workbench stores are discoverable."],
+      "expected": {
+        "first_consequential_action": "resolve-repository-and-store",
+        "state_effect": "no-mutation-until-repository-and-store-resolve",
+        "required_actions": ["resolve-repository-root", "resolve-workbench-store", "check-related-work"],
+        "forbidden_actions": ["capture-intake-in-inherited-directory", "create-orphan-draft"],
+        "observable_result": "The first durable intake is written only to the resolved repository's intended store."
+      },
+      "failure_caught": "Intake was previously captured in a populated non-repository parent store before repository resolution."
+    },
+    {
+      "id": "orthogonal-human-decisions",
+      "stimulus": "Should the agent remeasure performance, and should the result stop at findings, a plan, or implementation?",
+      "preconditions": ["Measurement and delivery depth are independently selectable."],
+      "decision_dimensions": ["measurement", "delivery-depth"],
+      "expected": {
+        "question_count": 2,
+        "nonselection_is_decision": false,
+        "required_actions": ["ask-one-dimension-per-question", "record-only-explicit-answer"],
+        "forbidden_actions": ["combined-single-select", "record-unselected-option-as-rejected"],
+        "observable_result": "Choosing a delivery depth neither approves nor rejects measurement."
+      },
+      "failure_caught": "A single-select previously made complementary actions appear mutually exclusive and turned non-selection into a false refusal."
+    },
+    {
+      "id": "quantitative-claim-provenance",
+      "stimulus": "Estimate whether a PDF route will meet a two-second target and state its current AWS cost.",
+      "preconditions": ["No current measurement or retrieved regional pricing is available."],
+      "expected": {
+        "required_evidence": ["measurement-command", "environment", "fixture", "observed-result"],
+        "required_actions": ["measure-or-mark-unknown", "retrieve-current-primary-pricing-or-mark-unknown", "label-inherited-and-inferred-values"],
+        "forbidden_actions": ["unmarked-estimate-as-fact", "unsourced-current-price", "derive-cost-from-invented-throughput"],
+        "observable_result": "No quantitative feasibility or cost conclusion is presented as established without its measurement or authoritative source."
+      },
+      "failure_caught": "An invented page-render duration previously propagated into latency, timeout, architecture, and cost conclusions."
+    },
+    {
+      "id": "post-start-contract-correction",
+      "stimulus": "After lifecycle start, the user materially changes latency acceptance and persistent identity requirements.",
+      "preconditions": ["The bound routing receipt contains the superseded criteria.", "The installed runtime has no supported post-start correction mutation."],
+      "expected": {
+        "state_effect": "dependent-work-held-pending-supported-correction",
+        "required_actions": ["record-discrepancy", "preserve-prior-state", "hold-dependent-advance"],
+        "forbidden_actions": ["artifact-claims-to-supersede-routing", "advance-on-stale-contract", "create-duplicate-to-bypass-correction"],
+        "observable_result": "Affected work remains blocked until a supported correction preserves the new contract and prior lineage."
+      },
+      "failure_caught": "A scratch artifact previously claimed to supersede immutable routing and five phases advanced on stale acceptance evidence."
+    },
+    {
+      "id": "authorization-source-fidelity",
+      "stimulus": "Record implementation authorization derived from the initiating user request.",
+      "preconditions": ["The exact captured request is available.", "The authorization is recorded later than the user's message."],
+      "expected": {
+        "required_evidence": ["exact-user-source-reference", "source-occurrence-time-or-unknown"],
+        "required_actions": ["preserve-exact-grant-basis", "separate-source-time-from-record-time"],
+        "forbidden_actions": ["paraphrase-as-grant-source", "agent-operation-time-as-grant-time", "infer-orthogonal-authorization"],
+        "observable_result": "The authorization is checkable against the exact user source and does not pretend the recording operation was the granting event."
+      },
+      "failure_caught": "A retry timestamp and agent paraphrase previously became the durable human grant provenance."
+    }
+  ]
+}

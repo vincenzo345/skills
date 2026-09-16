@@ -1,0 +1,53 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-framing"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-ADHERENCE-HARDENING/artifacts/outcome-frame.md",
+      "record_id": "ART-WAH-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T15:27:56.3435793Z",
+  "decisions_required": [],
+  "findings": [
+    "The bounded outcome is a small skill patch, local runtime issue records, and conformance eval fixtures; runtime behavior and the affected external Workbench item are excluded."
+  ],
+  "handoff_id": "HO-WAH-FRAME",
+  "idempotency_key": "workbench-adherence-hardening:frame-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "ac6fa0a1eac6bf0fa51d7b84d14b0c923df7cf6b337268da296a8065189a555a"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "outcome-framing",
+  "status": "completed",
+  "suggested_next_stage": "brownfield-reconnaissance",
+  "uncertainties": [],
+  "why_next": "Inspect the existing skill wording, issue convention, runtime contracts, and eval harness before editing.",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

@@ -1,0 +1,38 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-WAH-IMPLEMENT",
+  "grant": {
+    "expires_at": "2026-09-17T15:29:58.1143654Z",
+    "granted_at": "2026-09-16T15:23:58.707445Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-16T15:23:58.707445Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Implement the small Workbench skill patch, local runtime issue records, and regression evals requested in INTAKE-WB-20260916-WORKBENCH-ADHERENCE-HARDENING.",
+      "Do not implement runtime/schema changes, modify the affected manual-extraction item, commit, deploy, publish externally, or close the work item."
+    ],
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

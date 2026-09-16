@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-WAH-FRAME",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "brownfield-reconnaissance",
+      "kind": "stage",
+      "purpose": "Bound the repository inspection and implementation scope."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "c7cf99188b76df5e4f6f976c5ad35a60b4129dac39bbab2034c9779088180ad1"
+  },
+  "created_at": "2026-09-16T15:27:56.3435793Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-ADHERENCE-HARDENING/artifacts/outcome-frame.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-framing",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Workbench adherence hardening outcome frame",
+  "updated_at": "2026-09-16T15:27:56.3435793Z",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-WAH-STANDARDS",
+  "artifact_kind": "standards-profile",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "implementation",
+      "kind": "stage",
+      "purpose": "Constrain the skill patch, local issues, and conformance evals."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "487929beebde12ae3fb383ef6984839ee952318768dde5fbe0ae5cc82e772ded"
+  },
+  "created_at": "2026-09-16T15:30:15.5036886Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-ADHERENCE-HARDENING/artifacts/standards-profile.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "standards-resolution",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WAH-RECON",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Standards profile for Workbench adherence hardening",
+  "updated_at": "2026-09-16T15:30:15.5036886Z",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

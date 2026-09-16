@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-WAH-VERIFICATION",
+  "artifact_kind": "review",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+      "kind": "work-item",
+      "purpose": "Support destination acceptance."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "9df61d8741a5f4577eb909ef8b4ec01808fa94b61908533a443c9894a9d6f945"
+  },
+  "created_at": "2026-09-16T15:39:06.4842629Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-ADHERENCE-HARDENING/artifacts/verification.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "local-verification",
+  "proof_ids": [
+    "PRF-WAH-LOCAL"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WAH-IMPLEMENT",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Workbench adherence hardening verification",
+  "updated_at": "2026-09-16T15:39:06.4842629Z",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

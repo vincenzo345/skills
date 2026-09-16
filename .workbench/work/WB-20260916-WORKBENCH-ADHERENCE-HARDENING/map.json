@@ -1,0 +1,428 @@
+{
+  "created_at": "2026-09-16T15:26:36.797893Z",
+  "desired_outcome_node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING",
+  "edges": [
+    {
+      "edge_id": "EDGE-62A772BF3FFAD6A6",
+      "from_node_id": "E-324CC04055A81BBA",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING"
+    },
+    {
+      "edge_id": "EDGE-294FC3F997A76824",
+      "from_node_id": "E-7787B5FD3DE8EC7A",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING"
+    },
+    {
+      "edge_id": "EDGE-8D63138CEC592C7E",
+      "from_node_id": "E-EB2767EF379CD4C1",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING"
+    },
+    {
+      "edge_id": "EDGE-FDF4CD52C10AF4BF",
+      "from_node_id": "E-A6FB93EE5F668011",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING"
+    },
+    {
+      "edge_id": "EDGE-ED34D3FB54F11BD1",
+      "from_node_id": "E-6E3406E19DA5795A",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING"
+    },
+    {
+      "edge_id": "EDGE-B7BE439126391896",
+      "from_node_id": "E-EFC93EB4AB7AE439",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING"
+    },
+    {
+      "edge_id": "EDGE-B1E7E235C33DBFB3",
+      "from_node_id": "E-8901E4623BEAFD22",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260916-WORKBENCH-ADHERENCE-HARDENING",
+  "nodes": [
+    {
+      "done_when": [
+        "The locally-verified-implementation destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Review the destination result, then authorize closure or request a revision.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        },
+        "target_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+        "target_type": "authorization"
+      },
+      "node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Harden Workbench against adherence failures",
+      "why_it_matters": "Workbench gives agents a small set of explicit adherence guardrails, preserves the diagnosed runtime gaps as actionable issues, and carries executable regression evals for the observed failures without touching the affected manual-extraction item."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WAH-FRAME",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WAH-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-324CC04055A81BBA",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The bounded outcome is a small skill patch, local runtime issue records, and conformance eval fixtures; runtime behavior and the affected external Workbench item are excluded.",
+        "references": [
+          {
+            "record_id": "HO-WAH-FRAME",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WAH-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T15:28:32.489886Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The bounded outcome is a small skill patch, local runtime issue records, and conformance eval fixtures; runtime behavior and the affected external Workbench...",
+      "why_it_matters": "The bounded outcome is a small skill patch, local runtime issue records, and conformance eval fixtures; runtime behavior and the affected external Workbench item are excluded."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WAH-RECON",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WAH-RECON",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-7787B5FD3DE8EC7A",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did brownfield-reconnaissance establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Three concise Workbench guardrails fit in the entry skill; behavioral conformance cases can be validated structurally, while runtime schema changes belong in local issue tickets.",
+        "references": [
+          {
+            "record_id": "HO-WAH-RECON",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WAH-RECON",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T15:29:36.247914Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Three concise Workbench guardrails fit in the entry skill; behavioral conformance cases can be validated structurally, while runtime schema changes belong in...",
+      "why_it_matters": "Three concise Workbench guardrails fit in the entry skill; behavioral conformance cases can be validated structurally, while runtime schema changes belong in local issue tickets."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WAH-STANDARDS",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WAH-STANDARDS",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "AUTH-WAH-IMPLEMENT",
+          "record_type": "authorization"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-EB2767EF379CD4C1",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did skill-authoring establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The change should add three entry-skill guardrails, validate behavior-oriented conformance fixtures, and defer runtime/schema changes to local issues.",
+        "references": [
+          {
+            "record_id": "HO-WAH-STANDARDS",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WAH-STANDARDS",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "AUTH-WAH-IMPLEMENT",
+            "record_type": "authorization"
+          }
+        ],
+        "resolved_at": "2026-09-16T15:30:57.822064Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The change should add three entry-skill guardrails, validate behavior-oriented conformance fixtures, and defer runtime/schema changes to local issues.",
+      "why_it_matters": "The change should add three entry-skill guardrails, validate behavior-oriented conformance fixtures, and defer runtime/schema changes to local issues."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WAH-IMPLEMENT",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WAH-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-A6FB93EE5F668011",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did skill-and-eval-implementation establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The bounded implementation adds three Workbench guardrails, three open local runtime issues, and six conformance cases with seven focused passing checks; runtime behavior remains unchanged.",
+        "references": [
+          {
+            "record_id": "HO-WAH-IMPLEMENT",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WAH-IMPLEMENT",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T15:34:59.800641Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The bounded implementation adds three Workbench guardrails, three open local runtime issues, and six conformance cases with seven focused passing checks; run...",
+      "why_it_matters": "The bounded implementation adds three Workbench guardrails, three open local runtime issues, and six conformance cases with seven focused passing checks; runtime behavior remains unchanged."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WAH-VERIFIED",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WAH-VERIFICATION",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-WAH-LOCAL",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-6E3406E19DA5795A",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The Workbench skill contains the three bounded adherence guardrails and remains within the repository entrypoint budget.",
+        "references": [
+          {
+            "record_id": "HO-WAH-VERIFIED",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WAH-VERIFICATION",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-WAH-LOCAL",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-16T15:39:52.869075Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The Workbench skill contains the three bounded adherence guardrails and remains within the repository entrypoint budget.",
+      "why_it_matters": "The Workbench skill contains the three bounded adherence guardrails and remains within the repository entrypoint budget."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WAH-VERIFIED",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WAH-VERIFICATION",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-WAH-LOCAL",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-EFC93EB4AB7AE439",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Six conformance cases and seven focused checks cover the diagnosed incident seams without claiming that a model was executed.",
+        "references": [
+          {
+            "record_id": "HO-WAH-VERIFIED",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WAH-VERIFICATION",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-WAH-LOCAL",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-16T15:39:52.869075Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Six conformance cases and seven focused checks cover the diagnosed incident seams without claiming that a model was executed.",
+      "why_it_matters": "Six conformance cases and seven focused checks cover the diagnosed incident seams without claiming that a model was executed."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-WAH-VERIFIED",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-WAH-VERIFICATION",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-WAH-LOCAL",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-8901E4623BEAFD22",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "All 89 runtime tests and the Workbench, skill-packaging, Skill Creator, and diff validators pass.",
+        "references": [
+          {
+            "record_id": "HO-WAH-VERIFIED",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-WAH-VERIFICATION",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-WAH-LOCAL",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-16T15:39:52.869075Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "All 89 runtime tests and the Workbench, skill-packaging, Skill Creator, and diff validators pass.",
+      "why_it_matters": "All 89 runtime tests and the Workbench, skill-packaging, Skill Creator, and diff validators pass."
+    }
+  ],
+  "planning_destination": "locally-verified-implementation",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-16T15:40:59.330010Z",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

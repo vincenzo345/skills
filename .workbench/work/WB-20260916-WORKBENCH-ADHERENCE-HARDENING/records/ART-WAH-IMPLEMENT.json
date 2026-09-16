@@ -1,0 +1,66 @@
+{
+  "artifact_id": "ART-WAH-IMPLEMENT",
+  "artifact_kind": "implementation",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "local-verification",
+      "kind": "stage",
+      "purpose": "Verify the skill patch, issue set, and conformance evals."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "29801709f4f5cf9bee76e006d4371ec41fbc9de4c1bebd2e0ce60599f8a73e8b"
+  },
+  "created_at": "2026-09-16T15:34:02.8628852Z",
+  "known_defects": [
+    {
+      "description": "The conformance fixtures are structurally validated but do not invoke a model.",
+      "impact": "Repository tests prove the eval contract, not future agent adherence.",
+      "next_action": {
+        "description": "Run the fixtures through an external model-evaluation harness when behavioral scoring is required.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        },
+        "target_id": "workbench-adherence-model-eval",
+        "target_type": "external"
+      },
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      }
+    }
+  ],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-ADHERENCE-HARDENING/artifacts/implementation.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "implementation",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WAH-STANDARDS",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Workbench adherence hardening implementation",
+  "updated_at": "2026-09-16T15:34:02.8628852Z",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

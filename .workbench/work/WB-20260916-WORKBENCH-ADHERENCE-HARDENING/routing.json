@@ -1,0 +1,249 @@
+{
+  "acceptance_evidence": [
+    "The Workbench skill requires repository/store resolution before capture, preserves independently triggered methods, and prevents multi-axis questions from becoming false decisions.",
+    "Local runtime issue tickets state the failure, invariant, proposed contract, acceptance criteria, and regression coverage without presenting implementation as complete.",
+    "Regression eval fixtures cover mandatory method composition, repository resolution, orthogonal decisions, quantitative provenance, post-start correction, and authorization-source fidelity.",
+    "The repository validation and focused eval tests pass, and git status shows no changes to the affected external Workbench item."
+  ],
+  "assumptions": [
+    "The requested 'runtime issues' are actionable local issue records rather than authorization to implement the runtime changes now.",
+    "The user-message-to-agent-behavior contract is the public seam for conformance evals; the Workbench CLI remains the public seam for runtime behavior.",
+    "The prior WB-WORKBENCH-V02-ROUTING item is related historical context but does not already represent this new incident-driven hardening increment."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation"
+    ],
+    "withheld_actions": [
+      "decision-delegation",
+      "tracker-publication",
+      "commit",
+      "deployment",
+      "closure"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "local-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Existing skill wording, runtime schemas, tests, and issue conventions must bound the change.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "brownfield-reconnaissance",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Skill authoring and TDD instructions govern the patch and regression evals.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The captured audit evidence and acceptance list are sufficient for this bounded hardening increment; runtime changes are separately specified in issue tickets.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The implementation is a small skill edit plus focused eval fixtures; the runtime backlog is represented directly by issue tickets.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "standards-resolution",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      }
+    ]
+  },
+  "constraints": [
+    "Keep the Workbench instruction patch small and avoid duplicating specialist methods.",
+    "Document runtime changes as local issues; do not implement schema or runtime changes in this work item.",
+    "Do not read, resume, repair, or mutate the affected manual-extraction Workbench item.",
+    "Do not commit, deploy, publish externally, or close either Workbench item."
+  ],
+  "created_at": "2026-09-16T15:26:36.787114Z",
+  "desired_outcome": "Workbench gives agents a small set of explicit adherence guardrails, preserves the diagnosed runtime gaps as actionable issues, and carries executable regression evals for the observed failures without touching the affected manual-extraction item.",
+  "engagement_intent": "implement",
+  "evidence_references": [
+    "captured-intake",
+    "conversation evidence: manual-extraction Workbench adherence audit",
+    "skills/workbench/SKILL.md",
+    "skills/workbench/references/intake.md",
+    "skills/workbench/references/routing.md",
+    "skills/workbench/references/stage-gates.md",
+    "tests/runtime/conftest.py",
+    "tests/comparison/README.md",
+    "docs/agents/issue-tracker.md",
+    "WB-WORKBENCH-V02-ROUTING"
+  ],
+  "execution_lane": "fast",
+  "facts": [
+    {
+      "source_references": [
+        "conversation evidence: manual-extraction Workbench adherence audit"
+      ],
+      "statement": "The audit established missed mandatory method selection, a wrong repository/store capture, a multi-axis decision question, unsupported quantitative claims, and advancement after a material post-start correction."
+    },
+    {
+      "source_references": [
+        "docs/agents/issue-tracker.md",
+        "tests/runtime/conftest.py"
+      ],
+      "statement": "The current repository stores runtime issues under .scratch and exercises the runtime through its documented CLI and file-backed records."
+    },
+    {
+      "source_references": [
+        "captured-intake"
+      ],
+      "statement": "The affected manual-extraction Workbench item is outside this repository and is excluded from mutation."
+    }
+  ],
+  "idempotency_key": "workbench-adherence-hardening:route-start:v1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "c0db7aea7a28aabba0fc447b22e531250401baeb656b9beb2e0ef38f71d26eec"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "2bb930e88764b504f7d461ee1f68e17c0b14be9ee3797d1134816ae07fa6c058"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "rationale": "The evidence identifies three narrow instruction gaps and a bounded set of runtime follow-ups. The repository already has the Workbench skill, local issue convention, black-box CLI harness, and comparison fixtures needed for a contained change.",
+  "recommendation": {
+    "assumptions": [
+      "Runtime implementation is intentionally deferred."
+    ],
+    "choice": "Apply three concise Workbench guardrails, create three local runtime issues, and add focused conformance eval fixtures without changing runtime behavior.",
+    "confidence": "high",
+    "rationale": "This addresses the demonstrated instruction gaps now while keeping larger schema and lifecycle work explicit and separately reviewable.",
+    "tradeoffs": [
+      "The eval fixtures can detect contract regressions but cannot guarantee every future model follows the skill without an external model-evaluation runner."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260916-WORKBENCH-ADHERENCE-HARDENING",
+  "routing_revision": 1,
+  "runtime_route": "small-change-fast-lane",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/workbench/SKILL.md",
+        "tests/runtime/conftest.py",
+        "docs/agents/issue-tracker.md"
+      ],
+      "reason": "Existing skill wording, runtime schemas, tests, and issue conventions must bound the change.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured-intake"
+      ],
+      "reason": "This pass records proposed schema changes as issues but does not change persisted Workbench record semantics.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skill-creator",
+        "writing-for-agents",
+        "tdd"
+      ],
+      "reason": "Skill authoring and TDD instructions govern the patch and regression evals.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured-intake"
+      ],
+      "reason": "The captured audit evidence and acceptance list are sufficient for this bounded hardening increment; runtime changes are separately specified in issue tickets.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured-intake"
+      ],
+      "reason": "The implementation is a small skill edit plus focused eval fixtures; the runtime backlog is represented directly by issue tickets.",
+      "stage_id": "delivery-planning"
+    }
+  ],
+  "title": "Harden Workbench against adherence failures",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

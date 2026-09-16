@@ -1,0 +1,55 @@
+{
+  "applicability": {
+    "applied": [
+      "authorization",
+      "commit",
+      "global-skill-sync"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-ADHERENCE-HARDENING/artifacts/release-authorization.md",
+      "record_id": "ART-WAH-RELEASE-AUTH",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-WAH-COMMIT-PUSH",
+    "AUTH-WAH-GLOBAL-SYNC"
+  ],
+  "created_at": "2026-09-16T16:11:21.4432434Z",
+  "decisions_required": [],
+  "findings": [],
+  "handoff_id": "HO-WAH-RELEASE-AUTH",
+  "idempotency_key": "workbench-adherence-hardening:release-authorization:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "bf8e0690c8a8ad43da14c1b2fe100d7ab073c94d588d2ad5dd2a9b989d4e8889"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-WAH-VERIFICATION",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-release-authorization",
+  "stage": "local-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "why_next": "Commit and push the verified result, then validate the linked global installation without closing the item.",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

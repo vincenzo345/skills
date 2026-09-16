@@ -1,0 +1,53 @@
+{
+  "applicability": {
+    "applied": [
+      "brownfield-reconnaissance"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-ADHERENCE-HARDENING/artifacts/reconnaissance.md",
+      "record_id": "ART-WAH-RECON",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T15:29:03.6753376Z",
+  "decisions_required": [],
+  "findings": [
+    "Three concise Workbench guardrails fit in the entry skill; behavioral conformance cases can be validated structurally, while runtime schema changes belong in local issue tickets."
+  ],
+  "handoff_id": "HO-WAH-RECON",
+  "idempotency_key": "workbench-adherence-hardening:recon-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "b610ec0bacadc106436491c4febcdcc772eb087e7e20d417d1a81ed546f7656a"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-WAH-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-ADHERENCE-HARDENING",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "brownfield-reconnaissance",
+  "stage": "brownfield-reconnaissance",
+  "status": "completed",
+  "suggested_next_stage": "standards-resolution",
+  "uncertainties": [],
+  "why_next": "Fix the exact instruction boundaries and eval contract before implementation.",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

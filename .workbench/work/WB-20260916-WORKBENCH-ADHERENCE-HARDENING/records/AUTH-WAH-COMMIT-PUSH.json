@@ -1,0 +1,41 @@
+{
+  "action": "commit",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-WAH-COMMIT-PUSH",
+  "grant": {
+    "expires_at": "2026-09-17T16:11:21.4432434Z",
+    "granted_at": "2026-09-16T16:11:21.4432434Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-16T16:11:21.4432434Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Exact grant language: commit, push, and update the global skills to reflect this newest version",
+      "Commit only the locally verified adherence patch, regression fixtures and tests, and its Workbench audit trail.",
+      "Push the resulting main commit to origin/main.",
+      "Do not close the Workbench item or publish the local runtime issue tickets."
+    ],
+    "environment": "origin/main",
+    "targets": [
+      {
+        "kind": "repository",
+        "qualifier": "main to origin/main",
+        "target_id": "skillsrepo"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}

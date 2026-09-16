@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-WAH-RELEASE-AUTH",
+  "artifact_kind": "release-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+      "kind": "work-item",
+      "purpose": "Preserve the exact grant basis for commit, push, and global installation sync."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "756b412711fd7c3d676cb487e2693caeb0f0d60b96d3d3dc454bb1ffa3dc9eb6"
+  },
+  "created_at": "2026-09-16T16:11:21.4432434Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-ADHERENCE-HARDENING/artifacts/release-authorization.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "local-verification",
+  "proof_ids": [
+    "PRF-WAH-LOCAL"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WAH-VERIFICATION",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Release authorization source",
+  "updated_at": "2026-09-16T16:11:21.4432434Z",
+  "work_id": "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+}
