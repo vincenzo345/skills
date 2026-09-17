@@ -4,6 +4,18 @@ My focused agent skills for Claude Code and Codex. The set stays small on purpos
 Workbench coordination, reusable engineering workflows, and a requirements pipeline that turns
 a meeting into a scope tree a build can run against.
 
+## Claude Code rigor harness
+
+Install the correctness-focused Claude Code harness directly from this GitHub repository:
+
+```bash
+npx skills@latest add vincenzo345/skills --skill claude-rigor --agent claude-code --global --copy -y
+```
+
+Start a new Claude Code session after installation. The installed folder activates the
+rigorous default agent and the one-shot completion-review hook without changing the user's
+global `CLAUDE.md` or `settings.json`. No public Claude marketplace listing is required.
+
 ## Install
 
 **Any agent (Claude Code, Codex, and others):**
@@ -13,18 +25,6 @@ npx skills@latest add vincenzo345/skills
 ```
 
 Pick the skills you want and which agents to install them on.
-
-To install the tested correctness-focused Claude Code harness directly from this GitHub
-repository, select only `claude-rigor` and install it globally for Claude Code:
-
-```bash
-npx skills@latest add vincenzo345/skills --skill claude-rigor --agent claude-code --global --copy -y
-```
-
-Start a new Claude Code session after installation. The installed folder is also a
-self-contained Claude Code plugin: it activates the rigorous default agent and the
-one-shot completion-review hook without changing the user's global `CLAUDE.md` or
-`settings.json`. No public Claude marketplace listing is required.
 
 **Claude Code, as a managed plugin from this GitHub repository (optional):**
 
