@@ -14,7 +14,19 @@ npx skills@latest add vincenzo345/skills
 
 Pick the skills you want and which agents to install them on.
 
-**Claude Code, as a managed plugin:**
+To install the tested correctness-focused Claude Code harness directly from this GitHub
+repository, select only `claude-rigor` and install it globally for Claude Code:
+
+```bash
+npx skills@latest add vincenzo345/skills --skill claude-rigor --agent claude-code --global --copy -y
+```
+
+Start a new Claude Code session after installation. The installed folder is also a
+self-contained Claude Code plugin: it activates the rigorous default agent and the
+one-shot completion-review hook without changing the user's global `CLAUDE.md` or
+`settings.json`. No public Claude marketplace listing is required.
+
+**Claude Code, as a managed plugin from this GitHub repository (optional):**
 
 ```bash
 claude plugin marketplace add vincenzo345/skills
@@ -27,9 +39,11 @@ Updates arrive when I push.
 
 ### User-invoked
 
-Two skills, one pipeline, run in that order. A raw meeting export becomes a normalised
+The `claude-rigor` harness is independent of the two-skill requirements pipeline below.
+In that pipeline, a raw meeting export becomes a normalised
 transcript; the transcript becomes a scope tree the expert has corrected and signed.
 
+- [`claude-rigor`](./skills/claude-rigor/SKILL.md) — install and inspect the direct-GitHub Claude Code harness that applies the validated operating contract and enforces one skeptical review after code edits.
 - [`to-record`](./skills/to-record/SKILL.md) — turn a raw meeting export into a normalised transcript whose every word is preserved and whose defects are flagged: turns reconstructed from crosstalk, a script that checks the word multiset survived, and six flags about the record rather than questions about the domain.
 - [`to-scope`](./skills/to-scope/SKILL.md) — turn that transcript into a signed-off scope tree a build can run against: a story map drafted from what was said, a coverage pass that walks the record for what the tree missed, a conflict pass with no drafting job, the builder grilled so the expert sits through fewer questions, and a review session where the expert corrects a paraphrase instead of composing an answer.
 

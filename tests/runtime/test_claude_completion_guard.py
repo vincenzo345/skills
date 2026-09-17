@@ -1,0 +1,99 @@
+"""Executable contract for the distributed Claude completion-review Stop hook."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+import subprocess
+
+
+HOOK = Path(__file__).parents[2] / "skills" / "claude-rigor" / "hooks" / "completion_guard.js"
+
+
+def run_hook(tmp_path: Path, entries: list[dict], **overrides: object) -> tuple[int, dict, str]:
+    transcript = tmp_path / "transcript.jsonl"
+    transcript.write_text("".join(json.dumps(entry) + "\n" for entry in entries), encoding="utf-8")
+    payload = {
+        "hook_event_name": "Stop",
+        "stop_hook_active": False,
+        "transcript_path": str(transcript),
+        "last_assistant_message": "Implemented the requested change.",
+        **overrides,
+    }
+    result = subprocess.run(
+        ["node", str(HOOK)],
+        input=json.dumps(payload),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return result.returncode, json.loads(result.stdout) if result.stdout.strip() else {}, result.stderr
+
+
+def test_blocks_first_stop_after_edit_with_contract_review_guidance(tmp_path: Path) -> None:
+    entries = [
+        {"type": "user", "message": {"content": "Fix the public parser contract"}},
+        {"type": "assistant", "message": {"content": [{"type": "tool_use", "name": "Edit", "input": {}}]}},
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries)
+
+    assert code == 0
+    assert output["decision"] == "block"
+    assert "input partitions" in output["reason"]
+    assert "existing behavior" in output["reason"]
+    assert "judgment calls" in output["reason"]
+    assert stderr == ""
+
+
+def test_allows_second_stop_to_prevent_an_infinite_loop(tmp_path: Path) -> None:
+    entries = [
+        {"type": "user", "message": {"content": "Fix it"}},
+        {"type": "assistant", "message": {"content": [{"type": "tool_use", "name": "Edit", "input": {}}]}},
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries, stop_hook_active=True)
+
+    assert code == 0
+    assert output == {}
+    assert stderr == ""
+
+
+def test_does_not_interrupt_read_only_answers(tmp_path: Path) -> None:
+    entries = [
+        {"type": "user", "message": {"content": "Explain this code"}},
+        {"type": "assistant", "message": {"content": [{"type": "tool_use", "name": "Read", "input": {}}]}},
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries)
+
+    assert code == 0
+    assert output == {}
+    assert stderr == ""
+
+
+def test_task_workspace_blocks_even_when_transcript_omits_edit_events(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    (workspace / "TASK.md").write_text("Fix the parser", encoding="utf-8")
+
+    code, output, stderr = run_hook(tmp_path, [], cwd=str(workspace))
+
+    assert code == 0
+    assert output["decision"] == "block"
+    assert stderr == ""
+
+
+def test_only_considers_edits_after_latest_user_request(tmp_path: Path) -> None:
+    entries = [
+        {"type": "user", "message": {"content": "Fix it"}},
+        {"type": "assistant", "message": {"content": [{"type": "tool_use", "name": "Edit", "input": {}}]}},
+        {"type": "user", "message": {"content": "Now explain why"}},
+        {"type": "assistant", "message": {"content": "Explanation"}},
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries)
+
+    assert code == 0
+    assert output == {}
+    assert stderr == ""

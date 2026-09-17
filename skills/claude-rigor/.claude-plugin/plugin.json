@@ -1,0 +1,12 @@
+{
+  "name": "claude-rigor",
+  "version": "1.0.0",
+  "description": "A correctness-focused Claude Code harness with an enforced final review.",
+  "author": {
+    "name": "Vince Sandoz",
+    "url": "https://github.com/vincenzo345"
+  },
+  "homepage": "https://github.com/vincenzo345/skills",
+  "repository": "https://github.com/vincenzo345/skills",
+  "license": "MIT"
+}

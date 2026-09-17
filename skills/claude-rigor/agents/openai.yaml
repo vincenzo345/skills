@@ -1,0 +1,5 @@
+interface:
+  display_name: "Claude Rigor"
+  short_description: "Install a self-verifying Claude Code harness"
+policy:
+  allow_implicit_invocation: false
