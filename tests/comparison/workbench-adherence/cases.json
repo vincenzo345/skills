@@ -76,6 +76,110 @@
         "observable_result": "The authorization is checkable against the exact user source and does not pretend the recording operation was the granting event."
       },
       "failure_caught": "A retry timestamp and agent paraphrase previously became the durable human grant provenance."
+    },
+    {
+      "id": "code-reading-remains-hypothesis",
+      "stimulus": "The agent reads a slow request path and sees a full-file download and synchronous parser call.",
+      "preconditions": [
+        "No timing, intervention, or comparative run has isolated either operation's end-to-end effect."
+      ],
+      "expected": {
+        "allowed_classification": "hypothesis",
+        "root_cause_status": "not-established",
+        "required_actions": [
+          "record-code-derived-theory-as-hypothesis",
+          "design-discriminating-measurement"
+        ],
+        "forbidden_actions": [
+          "code-path-as-root-cause",
+          "rank-unmeasured-contributors-as-findings"
+        ],
+        "observable_result": "The code trace narrows what to test but is not registered or reported as established causal evidence."
+      },
+      "failure_caught": "Code inspection previously produced a ranked root-cause report before a runnable measurement loop existed."
+    },
+    {
+      "id": "measured-bottleneck-needs-discrimination",
+      "stimulus": "One stage consumes most of a measured request, and the agent is asked for the true root cause.",
+      "preconditions": [
+        "A baseline attributes elapsed time to the stage.",
+        "No intervention has yet removed, bypassed, or varied that stage while measuring the user-visible outcome."
+      ],
+      "expected": {
+        "required_evidence": [
+          "baseline-measurement",
+          "discriminating-intervention",
+          "end-to-end-result"
+        ],
+        "root_cause_status_before_intervention": "not-established",
+        "required_actions": [
+          "state-measured-bottleneck",
+          "run-or-propose-discriminating-intervention",
+          "compare-end-to-end-result"
+        ],
+        "forbidden_actions": [
+          "measured-correlation-as-root-cause",
+          "architecture-recommendation-as-causal-proof"
+        ],
+        "observable_result": "The stage may be reported as the measured bottleneck, but root-cause language appears only after an intervention changes the end-to-end outcome as predicted."
+      },
+      "failure_caught": "A measured slow stage can still be misattributed as causal when another prerequisite or fan-out behavior controls the actual user-visible delay."
+    },
+    {
+      "id": "aggregate-metrics-do-not-prove-endpoint-cause",
+      "stimulus": "The shared API Lambda has frequent cold starts, and one manual-preview endpoint is reported slow.",
+      "preconditions": [
+        "The aggregate invocation and initialization metrics do not identify request paths.",
+        "No authenticated open-to-first-preview trace is available."
+      ],
+      "expected": {
+        "allowed_classification": "leading-hypothesis",
+        "root_cause_status": "not-established",
+        "required_evidence": [
+          "endpoint-scoped-request-identity",
+          "authenticated-user-journey",
+          "cold-warm-comparison"
+        ],
+        "required_actions": [
+          "bound-aggregate-metrics-to-service-scope",
+          "request-endpoint-specific-measurement",
+          "preserve-user-visible-latency-as-unknown"
+        ],
+        "forbidden_actions": [
+          "aggregate-cold-start-rate-as-endpoint-cause",
+          "unauthenticated-rejection-as-complete-user-journey"
+        ],
+        "observable_result": "Cold starts may be reported as a service-level contributor and endpoint hypothesis, but not as the dominant manual-preview cause until endpoint-scoped authenticated evidence exists."
+      },
+      "failure_caught": "Aggregate Lambda statistics previously became a definitive manual-preview bottleneck claim even though the logs could not identify successful preview requests."
+    },
+    {
+      "id": "single-fixture-does-not-generalize-performance",
+      "stimulus": "A local benchmark renders one PDF quickly while users report slow loading across a varied document workload.",
+      "preconditions": [
+        "Only one document fixture was benchmarked.",
+        "Document size, page complexity, rotation, crop boxes, and image content vary in production."
+      ],
+      "expected": {
+        "allowed_classification": "fixture-bounded-measurement",
+        "workload_claim_status": "not-established",
+        "required_evidence": [
+          "fixture-identity",
+          "representativeness-boundary",
+          "same-environment-comparison"
+        ],
+        "required_actions": [
+          "report-fixture-specific-result",
+          "retain-rendering-as-open-contributor",
+          "propose-representative-fixture-matrix"
+        ],
+        "forbidden_actions": [
+          "single-fixture-as-workload-wide-proof",
+          "cross-environment-latency-equivalence"
+        ],
+        "observable_result": "The benchmark narrows the hypothesis for that fixture while broader renderer and workload conclusions remain explicitly unproven."
+      },
+      "failure_caught": "A fast render on one small fixture previously dismissed rendering even though a larger representative document showed materially different cost."
     }
   ]
 }

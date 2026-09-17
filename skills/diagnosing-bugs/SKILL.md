@@ -40,6 +40,23 @@ Treat the loop as a product. Once you have _a_ loop, **tighten** it:
 
 A 30-second flaky loop is barely better than no loop; a 2-second deterministic one is tight — a debugging superpower.
 
+### Performance evidence and causal claims
+
+For a performance problem, the loop measures the user's affected journey. Record enough identity to make every number reusable: environment and deployed version, endpoint or seam, fixture, warm/cold and cached/uncached state, concurrency, sample size, observed distribution, and the command or telemetry source. When one field is unknown, bound the claim rather than silently generalizing it.
+
+Keep four conclusions distinct:
+
+- **Observed measurement** — what the named command or telemetry recorded in its stated scope.
+- **Measured contributor** — a stage associated with latency in the measured journey.
+- **Leading hypothesis** — a falsifiable causal explanation not yet isolated.
+- **Established cause** — a discriminating intervention changed the matching end-to-end journey as predicted.
+
+Aggregate service metrics do not establish an endpoint cause without request identity. An unauthenticated rejection does not prove the complete authenticated journey. A local or single-fixture benchmark stays bounded to that environment and fixture; use a small representative matrix when document size, complexity, rotation, crop, or content can change the result.
+
+Use “root cause,” “main bottleneck,” or equivalent dominant-cause language only after a baseline, a one-variable intervention, and the matching end-to-end result support it. Otherwise report the measured contributor or leading hypothesis and name the smallest discriminating measurement still needed.
+
+For an options-only request, keep mechanisms atomic before recommending a bundle. Separate renderer, source reuse, scheduling, caching, memory, and warm-capacity changes so effect, risk, and proof can be evaluated independently. Label projected effects, preserve implementation authorization boundaries, and stop when more evidence cannot change the ranking, recommendation, or material uncertainty.
+
 ### Non-deterministic bugs
 
 The goal is not a clean repro but a **higher reproduction rate**. Loop the trigger 100×, parallelise, add stress, narrow timing windows, inject sleeps. A 50%-flake bug is debuggable; 1% is not — keep raising the rate until it's debuggable.
@@ -56,6 +73,8 @@ Phase 1 is done when the loop is **tight** and **red-capable**: you can name **o
 - [ ] **Deterministic** — same verdict every run (flaky bugs: a pinned, high reproduction rate, per above).
 - [ ] **Fast** — seconds, not minutes.
 - [ ] **Agent-runnable** — you can run it unattended; a human in the loop only via `scripts/hitl-loop.template.sh`.
+
+For an investigation without an agreed performance threshold, the command may instead measure the exact affected journey reproducibly and distinguish a proposed improvement from the baseline. If access prevents that measurement, continue only with explicitly bounded observations and hypotheses; do not promote them to a causal conclusion.
 
 If you catch yourself reading code to build a theory before this command exists, **stop — jumping straight to a hypothesis is the exact failure this skill prevents.** No red-capable command, no Phase 2.
 

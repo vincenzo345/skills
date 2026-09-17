@@ -72,6 +72,82 @@ def test_does_not_interrupt_read_only_answers(tmp_path: Path) -> None:
     assert stderr == ""
 
 
+def test_blocks_first_stop_after_read_only_performance_investigation(
+    tmp_path: Path,
+) -> None:
+    entries = [
+        {
+            "type": "user",
+            "message": {
+                "content": "The PDF preview is slow. Investigate and give me options."
+            },
+        },
+        {
+            "type": "assistant",
+            "message": {
+                "content": [{"type": "tool_use", "name": "Read", "input": {}}]
+            },
+        },
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries)
+
+    assert code == 0
+    assert output["decision"] == "block"
+    assert "environment, seam, fixture" in output["reason"]
+    assert "aggregate service metrics" in output["reason"]
+    assert "discriminating intervention" in output["reason"]
+    assert "atomic" in output["reason"]
+    assert "input partitions" not in output["reason"]
+    assert stderr == ""
+
+
+def test_diagnostic_prompt_without_investigative_tool_use_does_not_block(
+    tmp_path: Path,
+) -> None:
+    entries = [
+        {
+            "type": "user",
+            "message": {"content": "Why can software sometimes feel slow?"},
+        },
+        {"type": "assistant", "message": {"content": "Several factors can contribute."}},
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries)
+
+    assert code == 0
+    assert output == {}
+    assert stderr == ""
+
+
+def test_diagnostic_review_takes_precedence_when_investigation_also_edits(
+    tmp_path: Path,
+) -> None:
+    entries = [
+        {
+            "type": "user",
+            "message": {"content": "Diagnose the slow API and record the findings."},
+        },
+        {
+            "type": "assistant",
+            "message": {
+                "content": [
+                    {"type": "tool_use", "name": "Read", "input": {}},
+                    {"type": "tool_use", "name": "Write", "input": {}},
+                ]
+            },
+        },
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries)
+
+    assert code == 0
+    assert output["decision"] == "block"
+    assert "discriminating intervention" in output["reason"]
+    assert "input partitions" not in output["reason"]
+    assert stderr == ""
+
+
 def test_task_workspace_blocks_even_when_transcript_omits_edit_events(tmp_path: Path) -> None:
     workspace = tmp_path / "workspace"
     workspace.mkdir()

@@ -16,6 +16,10 @@ REQUIRED_CASES = {
     "quantitative-claim-provenance",
     "post-start-contract-correction",
     "authorization-source-fidelity",
+    "code-reading-remains-hypothesis",
+    "measured-bottleneck-needs-discrimination",
+    "aggregate-metrics-do-not-prove-endpoint-cause",
+    "single-fixture-does-not-generalize-performance",
 }
 
 
@@ -95,3 +99,43 @@ def test_authorization_preserves_exact_source_and_source_time() -> None:
         "source-occurrence-time-or-unknown",
     ]
     assert "agent-operation-time-as-grant-time" in case["expected"]["forbidden_actions"]
+
+
+def test_code_reading_cannot_establish_a_root_cause() -> None:
+    case = by_id(load_cases())["code-reading-remains-hypothesis"]
+
+    assert case["expected"]["allowed_classification"] == "hypothesis"
+    assert case["expected"]["root_cause_status"] == "not-established"
+    assert "code-path-as-root-cause" in case["expected"]["forbidden_actions"]
+
+
+def test_measured_bottleneck_needs_a_discriminating_intervention() -> None:
+    case = by_id(load_cases())["measured-bottleneck-needs-discrimination"]
+
+    assert case["expected"]["required_evidence"] == [
+        "baseline-measurement",
+        "discriminating-intervention",
+        "end-to-end-result",
+    ]
+    assert case["expected"]["root_cause_status_before_intervention"] == "not-established"
+
+
+def test_aggregate_metrics_cannot_establish_an_endpoint_root_cause() -> None:
+    case = by_id(load_cases())["aggregate-metrics-do-not-prove-endpoint-cause"]
+
+    assert case["expected"]["allowed_classification"] == "leading-hypothesis"
+    assert case["expected"]["root_cause_status"] == "not-established"
+    assert "endpoint-scoped-request-identity" in case["expected"]["required_evidence"]
+    assert (
+        "aggregate-cold-start-rate-as-endpoint-cause"
+        in case["expected"]["forbidden_actions"]
+    )
+
+
+def test_single_fixture_measurement_stays_fixture_bounded() -> None:
+    case = by_id(load_cases())["single-fixture-does-not-generalize-performance"]
+
+    assert case["expected"]["allowed_classification"] == "fixture-bounded-measurement"
+    assert case["expected"]["workload_claim_status"] == "not-established"
+    assert "representativeness-boundary" in case["expected"]["required_evidence"]
+    assert "single-fixture-as-workload-wide-proof" in case["expected"]["forbidden_actions"]

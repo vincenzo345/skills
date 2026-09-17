@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 This folder is both an Agent Skill and a self-contained Claude Code skills-directory
 plugin. When installed under `~/.claude/skills/claude-rigor`, Claude Code automatically
-loads its default `rigorous-engineer` agent and one-shot completion-review hook in new
+loads its default `rigorous-engineer` agent and task-aware one-shot completion-review hook in new
 sessions. It does not edit or replace the user's global `CLAUDE.md` or `settings.json`.
 
 Use this skill when the user explicitly asks to inspect, verify, or explain the installed

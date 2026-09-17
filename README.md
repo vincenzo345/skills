@@ -43,7 +43,7 @@ The `claude-rigor` harness is independent of the two-skill requirements pipeline
 In that pipeline, a raw meeting export becomes a normalised
 transcript; the transcript becomes a scope tree the expert has corrected and signed.
 
-- [`claude-rigor`](./skills/claude-rigor/SKILL.md) — install and inspect the direct-GitHub Claude Code harness that applies the validated operating contract and enforces one skeptical review after code edits.
+- [`claude-rigor`](./skills/claude-rigor/SKILL.md) — install and inspect the direct-GitHub Claude Code harness that applies the validated operating contract and enforces one task-aware skeptical review after implementation or diagnosis work.
 - [`to-record`](./skills/to-record/SKILL.md) — turn a raw meeting export into a normalised transcript whose every word is preserved and whose defects are flagged: turns reconstructed from crosstalk, a script that checks the word multiset survived, and six flags about the record rather than questions about the domain.
 - [`to-scope`](./skills/to-scope/SKILL.md) — turn that transcript into a signed-off scope tree a build can run against: a story map drafted from what was said, a coverage pass that walks the record for what the tree missed, a conflict pass with no drafting job, the builder grilled so the expert sits through fewer questions, and a review session where the expert corrects a paraphrase instead of composing an answer.
 
