@@ -1,0 +1,72 @@
+{
+  "applicability": {
+    "applied": [
+      "brownfield-reconnaissance"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/reconnaissance.md",
+      "record_id": "ART-WSC-RECON",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-WSC-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Research already ships from this repository, while feature-planner and openai-docs were environment-only dependencies in the reported session."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-WSC-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Workbench routing treated a missing optional specialist as a blocker, coupling route completion to the active harness installation."
+    }
+  ],
+  "handoff_id": "HO-WSC-RECON",
+  "idempotency_key": "workbench-self-contained:recon-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "0e211a2fe029bf69974fd2cbdf867204b7fecb5a0f8eb7b5eafc38445a3cae61"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-WSC-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-SELF-CONTAINED",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "skill-packaging-reconnaissance",
+  "stage": "brownfield-reconnaissance",
+  "status": "completed",
+  "suggested_next_stage": "standards-resolution",
+  "uncertainties": [],
+  "why_next": "Apply the repository packaging and portable instruction standards to a bounded implementation plan.",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

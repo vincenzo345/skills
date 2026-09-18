@@ -1,0 +1,11 @@
+Implemented the cleanup contract in [resources.py](C:/Users/vince/projects/skillsrepo/.workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/campaigns/holdout-r3/codex/resource-cleanup-contract/workspace/resources.py).
+
+Verified:
+
+- Exact `read()` result returned.
+- Handle closed exactly once on success and read failure.
+- Original read exception preserved even when `close()` also fails.
+- Opener exceptions propagate without cleanup.
+- No context-manager support required.
+- `git diff --check` passed.
+- Generated caches were left untouched.

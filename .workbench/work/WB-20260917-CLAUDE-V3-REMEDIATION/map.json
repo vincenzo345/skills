@@ -1,0 +1,408 @@
+{
+  "created_at": "2026-09-17T22:18:29.189408Z",
+  "desired_outcome_node_id": "O-20260917-CLAUDE-V3-REMEDIATION",
+  "edges": [
+    {
+      "edge_id": "EDGE-B9F6DE2583A212EA",
+      "from_node_id": "E-2D7EE94D00272307",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    },
+    {
+      "edge_id": "EDGE-5D69F4E7F4E5C5BC",
+      "from_node_id": "E-C151B622D14699A3",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    },
+    {
+      "edge_id": "EDGE-BDD88DBE77B878A6",
+      "from_node_id": "E-200901CA6E8F9E00",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    },
+    {
+      "edge_id": "EDGE-C65DDAA9B4E84C7B",
+      "from_node_id": "E-44344A599E8BA161",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    },
+    {
+      "edge_id": "EDGE-A5BF21E25672A0C6",
+      "from_node_id": "E-C7C669C34251D0B9",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    },
+    {
+      "edge_id": "EDGE-D4E4ABAF8182B0D3",
+      "from_node_id": "E-B614CC8DF5E07862",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    },
+    {
+      "edge_id": "EDGE-EEA9AFBCC42F3FCF",
+      "from_node_id": "E-B788DC846F0873E1",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    },
+    {
+      "edge_id": "EDGE-414E1F97A5AB0875",
+      "from_node_id": "E-06C79BA4AD6637A0",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    },
+    {
+      "edge_id": "EDGE-6F5A8B0D86C89F69",
+      "from_node_id": "E-643FB21533F8E632",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-V3-REMEDIATION"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260917-CLAUDE-V3-REMEDIATION",
+  "nodes": [
+    {
+      "done_when": [
+        "The implementation-plan destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Review the destination result, then authorize closure or request a revision.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        },
+        "target_id": "WB-20260917-CLAUDE-V3-REMEDIATION",
+        "target_type": "authorization"
+      },
+      "node_id": "O-20260917-CLAUDE-V3-REMEDIATION",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Plan Claude v3 remediation",
+      "why_it_matters": "Produce an implementation-ready, repository-grounded plan that fixes the Claude v3 failures: late environment discovery, stale Workbench state, weak evidence provenance, duplicated completion hooks, schema-heavy ceremony, and excessive investigation cost."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-2D7EE94D00272307",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did feature-planner establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The user requires Claude to meet or exceed Codex under the established grading criteria, with harness changes as the primary mechanism.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-V3-REMEDIATION-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T22:27:40.888886Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The user requires Claude to meet or exceed Codex under the established grading criteria, with harness changes as the primary mechanism.",
+      "why_it_matters": "The user requires Claude to meet or exceed Codex under the established grading criteria, with harness changes as the primary mechanism."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-C151B622D14699A3",
+        "target_type": "evidence"
+      },
+      "node_id": "E-C151B622D14699A3",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "Quality and efficiency must be co-equal acceptance conditions because v3 improved its final calibration only after costly late rework.",
+      "why_it_matters": "Quality and efficiency must be co-equal acceptance conditions because v3 improved its final calibration only after costly late rework."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-200901CA6E8F9E00",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did feature-planner establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "V3 routed and advanced before resolving local versus deployed environment, then asked that prerequisite together with a dependent option-selection question.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T22:27:49.817777Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "V3 routed and advanced before resolving local versus deployed environment, then asked that prerequisite together with a dependent option-selection question.",
+      "why_it_matters": "V3 routed and advanced before resolving local versus deployed environment, then asked that prerequisite together with a dependent option-selection question."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-44344A599E8BA161",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did feature-planner establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The task-aware Stop hook improved the final answer, while a second legacy global Stop hook duplicated review and the investigation incurred four schema-repair loops.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T22:27:49.817777Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The task-aware Stop hook improved the final answer, while a second legacy global Stop hook duplicated review and the investigation incurred four schema-repai...",
+      "why_it_matters": "The task-aware Stop hook improved the final answer, while a second legacy global Stop hook duplicated review and the investigation incurred four schema-repair loops."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-C7C669C34251D0B9",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did feature-planner establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The v3 investigation used approximately 211k tokens and 39 minutes, substantially above the comparison target despite stronger final calibration.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T22:27:49.817777Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The v3 investigation used approximately 211k tokens and 39 minutes, substantially above the comparison target despite stronger final calibration.",
+      "why_it_matters": "The v3 investigation used approximately 211k tokens and 39 minutes, substantially above the comparison target despite stronger final calibration."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-B614CC8DF5E07862",
+        "target_type": "evidence"
+      },
+      "node_id": "E-B614CC8DF5E07862",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "The highest-leverage architecture is one canonical Claude operating prompt, one early diagnosis preflight, one task-aware final review, and an idempotent ins...",
+      "why_it_matters": "The highest-leverage architecture is one canonical Claude operating prompt, one early diagnosis preflight, one task-aware final review, and an idempotent installer that removes known duplicate registrations."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-B788DC846F0873E1",
+        "target_type": "evidence"
+      },
+      "node_id": "E-B788DC846F0873E1",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "Preventing stale proposals should precede a general Workbench route-correction engine; a compact handoff builder is the only planned Workbench runtime addition.",
+      "why_it_matters": "Preventing stale proposals should precede a general Workbench route-correction engine; a compact handoff builder is the only planned Workbench runtime addition."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-06C79BA4AD6637A0",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did feature-planner establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The plan is ordered around a frozen Claude-versus-Codex rubric, canonical prompt changes, early and late hook enforcement, singular installation, bounded Workbench support, and two fresh live repetitions.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-V3-REMEDIATION-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T22:28:39.520468Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The plan is ordered around a frozen Claude-versus-Codex rubric, canonical prompt changes, early and late hook enforcement, singular installation, bounded Wor...",
+      "why_it_matters": "The plan is ordered around a frozen Claude-versus-Codex rubric, canonical prompt changes, early and late hook enforcement, singular installation, bounded Workbench support, and two fresh live repetitions."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "PRF-CLAUDE-V3-REMEDIATION-PLAN",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-643FB21533F8E632",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did feature-planner establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The plan passes the implementation-readiness gate without claiming that the harness changes or parity outcome have already been implemented or measured.",
+        "references": [
+          {
+            "record_id": "PRF-CLAUDE-V3-REMEDIATION-PLAN",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-17T22:28:39.520468Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The plan passes the implementation-readiness gate without claiming that the harness changes or parity outcome have already been implemented or measured.",
+      "why_it_matters": "The plan passes the implementation-readiness gate without claiming that the harness changes or parity outcome have already been implemented or measured."
+    }
+  ],
+  "planning_destination": "implementation-plan",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-17T22:28:40.047377Z",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

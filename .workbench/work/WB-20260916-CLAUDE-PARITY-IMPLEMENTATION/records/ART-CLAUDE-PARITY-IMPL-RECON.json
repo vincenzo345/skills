@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-IMPL-RECON",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "data-model-design",
+      "kind": "stage",
+      "purpose": "Supply the data-model-design checkpoint."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "5868cb88e03808a2a688f06c31067c6fb241475e7f0deb35bc454d7b4ab37383"
+  },
+  "created_at": "2026-09-16T23:50:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/reconnaissance.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "brownfield-reconnaissance",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-IMPL-FRAME",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Parity controller brownfield reconnaissance",
+  "updated_at": "2026-09-16T23:50:00Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

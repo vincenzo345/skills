@@ -1,0 +1,552 @@
+{
+  "created_at": "2026-09-16T19:12:15.383955Z",
+  "desired_outcome_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT",
+  "edges": [
+    {
+      "edge_id": "EDGE-A9892D800C5BDE04",
+      "from_node_id": "E-5B5DB52F1244DF70",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    },
+    {
+      "edge_id": "EDGE-755F2CCBAEB5949C",
+      "from_node_id": "E-0CF40CC9D0F75D7B",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    },
+    {
+      "edge_id": "EDGE-F7C55A780298719C",
+      "from_node_id": "E-DB5D35D52E923BEE",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    },
+    {
+      "edge_id": "EDGE-AE2A27C226F1B1EB",
+      "from_node_id": "E-A0A3EF5FE515DB05",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    },
+    {
+      "edge_id": "EDGE-2D3D2CC9036AB624",
+      "from_node_id": "E-B2AEE3D400718A8E",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    },
+    {
+      "edge_id": "EDGE-FDE964A734D3EBB3",
+      "from_node_id": "E-A3A8E8524ED8CED9",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    },
+    {
+      "edge_id": "EDGE-FAC92491FAA07B0D",
+      "from_node_id": "E-4AB970528A2011A9",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    },
+    {
+      "edge_id": "EDGE-1E47AA73C47945D8",
+      "from_node_id": "E-F1340220FF06054B",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    },
+    {
+      "edge_id": "EDGE-1ABD4801635AC07A",
+      "from_node_id": "E-6EC84D65454EEC06",
+      "rationale": "Accepted evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260916-CLAUDE-CODE-CODEX-PROMPT",
+  "nodes": [
+    {
+      "done_when": [
+        "The specification destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "resolution": {
+        "basis": "completion",
+        "rationale": "The destination result passed its gate and the human authorized closure.",
+        "references": [
+          {
+            "record_id": "AUTH-CLAUDE-CODE-CODEX-PROMPT-CLOSURE",
+            "record_type": "authorization"
+          }
+        ],
+        "resolved_at": "2026-09-16T20:02:14.667688Z",
+        "resolved_by": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        }
+      },
+      "status": "completed",
+      "title": "Make Claude Code execute with Codex-like rigor",
+      "why_it_matters": "A concise, ready-to-use global Claude Code instruction document consistently drives outcome-first implementation, evidence-based verification, skeptical self-review, honest completion claims, and persistence through genuine completion or a precise blocker."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-FRAME",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-5B5DB52F1244DF70",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The operative failure is premature completion: plausible implementation is being mistaken for verified outcome achievement.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-FRAME",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:14:43.655624Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The operative failure is premature completion: plausible implementation is being mistaken for verified outcome achievement.",
+      "why_it_matters": "The operative failure is premature completion: plausible implementation is being mistaken for verified outcome achievement."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-FRAME",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-0CF40CC9D0F75D7B",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The prompt must change behavior at four gates—orientation, action, falsification, and closure—rather than merely request thoroughness.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-FRAME",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:14:43.655624Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The prompt must change behavior at four gates—orientation, action, falsification, and closure—rather than merely request thoroughness.",
+      "why_it_matters": "The prompt must change behavior at four gates—orientation, action, falsification, and closure—rather than merely request thoroughness."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-FRAME",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-DB5D35D52E923BEE",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Prompt conformance can be checked statically now; comparative Claude behavior remains outside the current proof boundary.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-FRAME",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:14:43.655624Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Prompt conformance can be checked statically now; comparative Claude behavior remains outside the current proof boundary.",
+      "why_it_matters": "Prompt conformance can be checked statically now; comparative Claude behavior remains outside the current proof boundary."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-DISCOVER",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-A0A3EF5FE515DB05",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Claude Code's supported persistent cross-project surface is ~/.claude/CLAUDE.md, but its instructions are contextual guidance rather than client-enforced system policy.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-DISCOVER",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:16:09.299526Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Claude Code's supported persistent cross-project surface is ~/.claude/CLAUDE.md, but its instructions are contextual guidance rather than client-enforced sys...",
+      "why_it_matters": "Claude Code's supported persistent cross-project surface is ~/.claude/CLAUDE.md, but its instructions are contextual guidance rather than client-enforced system policy."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-DISCOVER",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-B2AEE3D400718A8E",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "A four-gate loop—Orient, Act, Falsify, Close—places checkable completion criteria at the points where premature completion occurs.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-DISCOVER",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:16:09.299526Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "A four-gate loop—Orient, Act, Falsify, Close—places checkable completion criteria at the points where premature completion occurs.",
+      "why_it_matters": "A four-gate loop—Orient, Act, Falsify, Close—places checkable completion criteria at the points where premature completion occurs."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-DISCOVER",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-A3A8E8524ED8CED9",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The verification demand should scale with blast radius and risk while always matching the environment, seam, and journey claimed in the final answer.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-DISCOVER",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:16:09.299526Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The verification demand should scale with blast radius and risk while always matching the environment, seam, and journey claimed in the final answer.",
+      "why_it_matters": "The verification demand should scale with blast radius and risk while always matching the environment, seam, and journey claimed in the final answer."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-VERIFY",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-4AB970528A2011A9",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The 74-line global instruction contract maps every reported correctness risk to a concrete execution or completion criterion.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-VERIFY",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:20:47.124031Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The 74-line global instruction contract maps every reported correctness risk to a concrete execution or completion criterion.",
+      "why_it_matters": "The 74-line global instruction contract maps every reported correctness risk to a concrete execution or completion criterion."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-VERIFY",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-F1340220FF06054B",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The document stays repository-agnostic and leaves project commands and mechanically enforced invariants to local instructions, tests, hooks, permissions, and CI.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-VERIFY",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:20:47.124031Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The document stays repository-agnostic and leaves project commands and mechanically enforced invariants to local instructions, tests, hooks, permissions, and...",
+      "why_it_matters": "The document stays repository-agnostic and leaves project commands and mechanically enforced invariants to local instructions, tests, hooks, permissions, and CI."
+    },
+    {
+      "done_when": [
+        "The finding is backed by the accepted handoff and its registered outputs."
+      ],
+      "evidence": [
+        {
+          "record_id": "HO-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "handoff"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-VERIFY",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "PRF-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-6EC84D65454EEC06",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did writing-for-agents establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Static artifact validity passed; behavioral improvement across Claude models remains unmeasured until the user authorizes a representative comparative task suite.",
+        "references": [
+          {
+            "record_id": "HO-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "handoff"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "ART-CLAUDE-CODE-CODEX-VERIFY",
+            "record_type": "artifact"
+          },
+          {
+            "record_id": "PRF-CLAUDE-CODE-CODEX-SPEC",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-16T19:20:47.124031Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Static artifact validity passed; behavioral improvement across Claude models remains unmeasured until the user authorizes a representative comparative task s...",
+      "why_it_matters": "Static artifact validity passed; behavioral improvement across Claude models remains unmeasured until the user authorizes a representative comparative task suite."
+    }
+  ],
+  "planning_destination": "specification",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-16T20:02:14.667688Z",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

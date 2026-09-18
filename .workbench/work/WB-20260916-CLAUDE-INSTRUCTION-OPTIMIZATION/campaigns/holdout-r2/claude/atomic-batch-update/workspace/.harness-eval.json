@@ -1,0 +1,12 @@
+{
+  "category": "integration",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "atomicity",
+    "state",
+    "exceptions"
+  ],
+  "task_id": "atomic-batch-update",
+  "title": "Atomic in-place batch update"
+}

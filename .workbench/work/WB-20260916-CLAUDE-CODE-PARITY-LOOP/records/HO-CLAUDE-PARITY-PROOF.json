@@ -1,0 +1,64 @@
+{
+  "applicability": {
+    "applied": [
+      "feature-plan-evaluation",
+      "adversarial-review",
+      "artifact-validity"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/plan-review.md",
+      "record_id": "ART-CLAUDE-PARITY-REVIEW",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:35:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "PRF-CLAUDE-PARITY-PLAN",
+          "record_type": "proof"
+        }
+      ],
+      "statement": "The registered plan passes the feature-planning gate and an adversarial review after credential-inheritance and validation-overfit risks were made explicit."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-PROOF",
+  "idempotency_key": "claude-parity:proof-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "5798ad42499f4c09b8d17ae4c4ac8967fccb23064c66624bd232f97c5aefc207"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-PLAN",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "feature-plan-review",
+  "stage": "delivery-planning",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The implementation plan and its artifact-validity proof are ready for user acceptance; implementation and live campaign use remain separately withheld.",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

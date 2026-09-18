@@ -1,0 +1,69 @@
+{
+  "applicability": {
+    "applied": [
+      "standards-resolution",
+      "specification",
+      "writing-for-agents"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-CODE-CODEX-PROMPT/artifacts/global-claude.md",
+      "record_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+      "record_type": "artifact"
+    },
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-CODE-CODEX-PROMPT/artifacts/verification.md",
+      "record_id": "ART-CLAUDE-CODE-CODEX-VERIFY",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T19:18:07.7805490+00:00",
+  "decisions_required": [],
+  "findings": [
+    "The 74-line global instruction contract maps every reported correctness risk to a concrete execution or completion criterion.",
+    "The document stays repository-agnostic and leaves project commands and mechanically enforced invariants to local instructions, tests, hooks, permissions, and CI.",
+    "Static artifact validity passed; behavioral improvement across Claude models remains unmeasured until the user authorizes a representative comparative task suite."
+  ],
+  "handoff_id": "HO-CLAUDE-CODE-CODEX-SPEC",
+  "idempotency_key": "claude-code-codex-prompt:spec-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "8ce0427a6c9662357c64c8c40c3d95b2dbc594f4b513b3442e7fb51b968d5cbf"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT",
+      "record_type": "work"
+    },
+    {
+      "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+      "record_type": "artifact"
+    },
+    {
+      "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "writing-for-agents",
+  "stage": "specification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "why_next": "Present the valid specification for user review and await authorization before installing or behaviorally evaluating it.",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

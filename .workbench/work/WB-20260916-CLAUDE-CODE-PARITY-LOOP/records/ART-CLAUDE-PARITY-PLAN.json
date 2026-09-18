@@ -1,0 +1,53 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-PLAN",
+  "artifact_kind": "delivery-plan",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+      "kind": "work-item",
+      "purpose": "Authorize and guide a later implementation destination without repeating discovery."
+    },
+    {
+      "consumer_id": "user-vince",
+      "kind": "external-party",
+      "purpose": "Review the plan and choose whether to authorize implementation and later campaign usage."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "73387f57374c182cafdf4bd88eadac659e83067b71853f0f1c218cac5acb71f3"
+  },
+  "created_at": "2026-09-16T23:32:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/implementation-plan.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "delivery-planning",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-ARCH",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Automated Claude Code parity loop implementation plan",
+  "updated_at": "2026-09-16T23:32:00Z",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

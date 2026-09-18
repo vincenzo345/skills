@@ -1,0 +1,62 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-framing"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/outcome-frame.md",
+      "record_id": "ART-CLAUDE-PARITY-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:25:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+          "record_type": "work"
+        }
+      ],
+      "statement": "The destination is an implementation-ready plan for a bounded automated loop that terminates at operational parity or a measured plateau, without claiming universal model equivalence."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-FRAME",
+  "idempotency_key": "claude-parity:frame-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "060eb41baf5312545d41f2b1778397077ab3b9308263c3d28fdae892f7eaf3f4"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "outcome-framing",
+  "status": "completed",
+  "suggested_next_stage": "process-model",
+  "uncertainties": [],
+  "why_next": "Inspect the existing evaluator and current product surfaces, then make the experiment process explicit.",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

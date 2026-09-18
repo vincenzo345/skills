@@ -1,0 +1,231 @@
+{
+  "artifact_ids": [
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-AUTH",
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION",
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+    "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME"
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENT"
+  ],
+  "created_at": "2026-09-17T01:51:17.212297Z",
+  "current_stage": "outcome-verification",
+  "decision_ids": [],
+  "desired_outcome": "Through a repeatable live test-diagnose-revise-retest loop, produce global Claude Code instructions that measurably improve acceptance-test performance over Claude's clean baseline and reach the Codex reference band on held-out representative coding tasks, or establish a reproducible plateau after targeted interventions are exhausted.",
+  "handoff_ids": [
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENT-AUTH",
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION",
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+    "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME"
+  ],
+  "latest_event_id": "EVT-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION-000018",
+  "map_id": "MAP-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "next_action": {
+    "description": "Review the destination result, then authorize closure or request a revision.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    },
+    "target_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+    "target_type": "authorization"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "business-outcome",
+  "proof_ids": [
+    "PRF-CLAUDE-INSTRUCTION-OPTIMIZATION-LOCAL",
+    "PRF-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+    "PRF-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-17T01:51:17.212297Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-17T01:53:11.989447Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-17T01:51:17.212297Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance",
+        "evidence-intake",
+        "process-model",
+        "process-validation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-17T03:05:37.777452Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "process-validation",
+      "started_at": "2026-09-17T01:53:11.989447Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "solution-architecture",
+        "data-model-design"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "completed_at": "2026-09-17T03:07:20.448349Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "data-model-design",
+      "started_at": "2026-09-17T03:05:37.777452Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification",
+        "delivery-planning"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-17T03:09:04.645509Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-AUTH"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "delivery-planning",
+      "started_at": "2026-09-17T03:07:20.448349Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "implementation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the implement phase.",
+      "completed_at": "2026-09-17T03:10:01.325607Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "implement",
+      "stage_id": "implementation",
+      "started_at": "2026-09-17T03:09:04.645509Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "local-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the verify phase.",
+      "completed_at": "2026-09-17T03:11:47.083555Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "verify",
+      "stage_id": "local-verification",
+      "started_at": "2026-09-17T03:10:01.325607Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "release",
+        "deployed-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the release phase.",
+      "completed_at": "2026-09-17T03:12:41.903684Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "release",
+      "stage_id": "deployed-verification",
+      "started_at": "2026-09-17T03:11:47.083555Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "outcome-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the measure phase.",
+      "completed_at": "2026-09-17T03:13:57.237086Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "measure",
+      "stage_id": "outcome-verification",
+      "started_at": "2026-09-17T03:12:41.903684Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 18,
+  "status": "awaiting-acceptance",
+  "title": "Empirically optimize global Claude Code instructions",
+  "updated_at": "2026-09-17T03:13:57.237086Z",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

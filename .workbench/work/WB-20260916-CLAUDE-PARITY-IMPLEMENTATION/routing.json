@@ -1,0 +1,348 @@
+{
+  "acceptance_evidence": [
+    "Public CLI tests prove doctor plus experiment init, run, resume, stop, and report behavior without model calls.",
+    "Fake Claude and Codex adapters drive reproducible task attempts through the existing stage and verify seam and produce immutable hashed artifacts.",
+    "Crash/resume and idempotency tests prove completed cells do not rerun and interrupted attempts are not counted as valid repetitions.",
+    "Budget, round, timeout, output, stop, redaction, and live-mode preflight gates fail closed.",
+    "Existing evaluator tests and the full relevant runtime suite pass, and documentation states the implementation and proof boundaries."
+  ],
+  "assumptions": [
+    "This destination implements and verifies the zero-cost controller foundation; sealed private task authoring and credentialed live campaigns remain later authorized operations.",
+    "Append-only JSONL and immutable JSON/text artifacts remain sufficient; no database is introduced.",
+    "The accepted CLI and artifact-store seams satisfy the TDD seam-confirmation requirement.",
+    "Vendor adapters may be implemented and argv-tested without launching them; fake adapters are the only executable agents during verification."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "deployment",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "supplied-requirements",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "local-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The implementation boundary must distinguish zero-cost local proof from later live campaigns and global promotion.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The controller extends the existing package and must preserve its CLI and tests.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "Current product research and primary-source findings are already registered in the predecessor item.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The accepted predecessor plan already fixes the experiment loop and stopping behavior.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No real campaign claim is part of this local implementation destination.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "brownfield-reconnaissance",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "The surface is a machine-oriented CLI and Markdown/JSON artifacts.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Implementation must bind the accepted predecessor architecture to the current package and durable-store seams.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Implementation introduces durable manifests, event streams, run records, decisions, state projection, and content integrity.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The user accepted the approach and explicitly asked to begin.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "data-model-design",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Implementation must preserve standard-library, CLI compatibility, TDD, deterministic artifact, and fail-closed safety conventions.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The predecessor implementation plan supplies the specification and must be bound to this implementation item.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The predecessor plan supplies ten ordered delivery slices that govern this implementation.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "delivery-planning",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The user explicitly authorized starting implementation.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The destination requires public-seam tests, regression checks, and explicit proof boundaries.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      }
+    ]
+  },
+  "constraints": [
+    "Use test-driven vertical slices at the confirmed CLI and artifact-store seams.",
+    "Do not invoke Claude or Codex models, access enterprise credentials, spend quota, or modify global Claude/Codex files or hooks during local implementation verification.",
+    "Preserve every existing evaluator command and unrelated dirty-worktree change.",
+    "Use the Python standard library unless a later optional GEPA integration is isolated behind an absent optional dependency.",
+    "Real-model mode must fail closed until exact models, auth permission, usage cap, qualified isolation, and sealed-set configuration are supplied.",
+    "Commit, deployment, external publication, global configuration promotion, and Workbench closure remain unauthorized."
+  ],
+  "created_at": "2026-09-16T23:42:30.005277Z",
+  "desired_outcome": "A locally verified, zero-cost experiment controller can configure, initialize, dry-run, stop, resume, and report reproducible Claude Code versus Codex campaigns through fake adapters, while real model execution and global prompt or hook promotion remain fail-closed behind explicit authorization and safety gates.",
+  "engagement_intent": "implement",
+  "evidence_references": [
+    ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/intake.json",
+    ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/implementation-plan.md",
+    ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/architecture-and-data.md",
+    ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/records/PRF-CLAUDE-PARITY-PLAN.json",
+    "claude_harness_eval/__main__.py",
+    "claude_harness_eval/runner.py",
+    "tests/runtime/test_claude_harness_eval.py"
+  ],
+  "execution_lane": "full",
+  "facts": [
+    {
+      "source_references": [
+        ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/records/PRF-CLAUDE-PARITY-PLAN.json"
+      ],
+      "statement": "The predecessor implementation plan passed artifact-validity review and fixes the CLI, adapter, state, safety, metric, and delivery contracts."
+    },
+    {
+      "source_references": [
+        "claude_harness_eval/__main__.py",
+        "tests/runtime/test_claude_harness_eval.py"
+      ],
+      "statement": "The existing package exposes argparse-based list, stage, verify, apply-reference, and validate commands with public-seam runtime tests."
+    },
+    {
+      "source_references": [
+        "repository inspection"
+      ],
+      "statement": "The current implementation uses only the Python standard library and has no project-level dependency manifest."
+    }
+  ],
+  "idempotency_key": "route-start-claude-parity-implementation-v1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "370f71d3830b5f2aac620f83f5ca297a3fee2c3a996bd65d361a2b2ce8df49bf"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "73c01c5abba587b136101eb386d2971eba2827d0dfdecb86d3de6061c6e57d0b"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "rationale": "The predecessor Workbench item produced and proved an implementation-ready plan. This successor implements that accepted design in the existing claude_harness_eval package, beginning with zero-cost fake-adapter and persistence slices so no account, credential, or spend decision blocks safe repository work.",
+  "recommendation": {
+    "assumptions": [
+      "Live model use and global promotion will receive separate explicit authorization after local proof."
+    ],
+    "choice": "Implement the zero-cost controller foundation before any live campaign.",
+    "confidence": "high",
+    "rationale": "Fake adapters and deterministic persistence exercise the highest-risk orchestration behavior without spending quota or exposing credentials, and preserve a clean gate for later live use.",
+    "tradeoffs": [
+      "The first verified destination will not yet establish Claude-versus-Codex performance or install a winning global prompt."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+  "routing_revision": 1,
+  "runtime_route": "brownfield-feature",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request",
+        "predecessor plan"
+      ],
+      "reason": "The implementation boundary must distinguish zero-cost local proof from later live campaigns and global promotion.",
+      "stage_id": "outcome-framing"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/__main__.py",
+        "tests/runtime/test_claude_harness_eval.py"
+      ],
+      "reason": "The controller extends the existing package and must preserve its CLI and tests.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "docs/research/claude-codex-parity-loop.md"
+      ],
+      "reason": "Current product research and primary-source findings are already registered in the predecessor item.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "predecessor implementation plan"
+      ],
+      "reason": "The accepted predecessor plan already fixes the experiment loop and stopping behavior.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "authorization boundary"
+      ],
+      "reason": "No real campaign claim is part of this local implementation destination.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "predecessor implementation plan"
+      ],
+      "reason": "The surface is a machine-oriented CLI and Markdown/JSON artifacts.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "predecessor architecture artifact",
+        "claude_harness_eval/__main__.py"
+      ],
+      "reason": "Implementation must bind the accepted predecessor architecture to the current package and durable-store seams.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "predecessor architecture artifact"
+      ],
+      "reason": "Implementation introduces durable manifests, event streams, run records, decisions, state projection, and content integrity.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user accepted the approach and explicitly asked to begin.",
+      "stage_id": "proposal"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "AGENTS.md",
+        "predecessor plan"
+      ],
+      "reason": "Implementation must preserve standard-library, CLI compatibility, TDD, deterministic artifact, and fail-closed safety conventions.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "predecessor implementation plan"
+      ],
+      "reason": "The predecessor implementation plan supplies the specification and must be bound to this implementation item.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "predecessor implementation plan"
+      ],
+      "reason": "The predecessor plan supplies ten ordered delivery slices that govern this implementation.",
+      "stage_id": "delivery-planning"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user explicitly authorized starting implementation.",
+      "stage_id": "implementation"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The destination requires public-seam tests, regression checks, and explicit proof boundaries.",
+      "stage_id": "local-verification"
+    }
+  ],
+  "title": "Implement the Claude Code parity controller",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

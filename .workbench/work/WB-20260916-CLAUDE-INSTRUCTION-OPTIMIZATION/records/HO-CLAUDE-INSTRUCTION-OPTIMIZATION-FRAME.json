@@ -1,0 +1,72 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-framing"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/outcome-frame.md",
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T01:52:22Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Behavioral improvement requires live paired trials; static instruction checks and harness unit tests cannot establish it."
+    },
+    {
+      "basis": "inference",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Claude --safe-mode is the least contaminated available clean baseline because it preserves the installed client and account while disabling CLAUDE.md customizations."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+  "idempotency_key": "claude-instruction-optimization:frame:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "ae2ea647b9a22d62d7833fe8bcd268c0bccc88e7f10e88f2c5a885c991dd465b"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "outcome-framing",
+  "status": "completed",
+  "suggested_next_stage": "brownfield-reconnaissance",
+  "uncertainties": [],
+  "why_next": "Inspect and extend the existing controller and provider seams, then run the first safe paired smoke trial.",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

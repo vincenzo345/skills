@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-CONTROLLER-IMPLEMENT",
+  "artifact_kind": "implementation",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "local-verification",
+      "kind": "stage",
+      "purpose": "Define the fixed implementation surface and withheld live boundary."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "a63324f818ca227c1962797335d174faa1b7d1349ae87c5c178daade543290ca"
+  },
+  "created_at": "2026-09-17T00:00:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/implementation.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "implementation",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "implements",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-IMPL-PLAN",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Zero-cost parity controller implementation",
+  "updated_at": "2026-09-17T00:00:00Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

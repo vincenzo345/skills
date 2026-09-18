@@ -1,0 +1,38 @@
+schema_version = 1
+campaign_id = "claude-codex-dry-run"
+mode = "fake"
+task_ids = [
+  "inclusive-range-partition",
+  "unicode-username-match",
+  "one-shot-iterator",
+  "pagination-cursor",
+  "cache-key-completeness",
+  "config-precedence",
+  "backward-compatible-api",
+  "error-contract",
+  "cross-file-symbol-rename",
+  "serialization-extensions",
+  "cli-stream-semantics",
+  "atomic-settings-write",
+  "path-containment",
+  "secret-safe-diagnostics",
+  "sqlite-transaction",
+  "concurrent-memoization",
+  "shared-validator-refactor",
+  "implementation-not-tests",
+  "two-cause-regression",
+  "preserve-dirty-file",
+]
+repetitions = 1
+seed = 20260916
+max_rounds = 3
+max_total_runs = 40
+max_concurrency = 1
+
+[agents.claude]
+model = "fake-claude"
+behavior = "reference"
+
+[agents.codex]
+model = "fake-codex"
+behavior = "noop"

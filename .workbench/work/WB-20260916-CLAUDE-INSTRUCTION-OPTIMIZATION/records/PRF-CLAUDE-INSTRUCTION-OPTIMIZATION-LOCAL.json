@@ -1,0 +1,69 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "Parity is bounded to the defined synthetic distribution and pinned model/CLI conditions.",
+        "Claude had file tools but no shell during scored tasks.",
+        "Codex required danger-full-access for disposable synthetic workspaces because its Windows workspace-write sandbox rejected read-only commands."
+      ],
+      "non_vacuity_check": "Untouched seeds failed, reference overlays passed, the original Claude failure was reproduced, prompt-only challengers were rejected, the hook block appears in debug logs, and independent evaluator-owned oracles scored fresh workspaces.",
+      "observed_at": "2026-09-17T03:04:54Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Executable task oracles, hook debug logs, 36 focused tests, 167 repository tests, target repetitions, regression tasks, and frozen Claude/Codex holdouts.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-CLAUDE-INSTRUCTION-OPTIMIZATION-LOCAL",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local-windows-personal-claude-and-synthetic-workspaces",
+        "journey": "baseline-to-candidate-rejection-to-hook-promotion-to-regression-to-frozen-holdout",
+        "seam": "global-claude-instructions-stop-hook-and-evaluator-owned-task-oracles"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The prompt-plus-hook harness is locally implemented and verified against executable coding-task outcomes and repository regressions.",
+  "created_at": "2026-09-17T03:04:54Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-INSTRUCTION-OPTIMIZATION-LOCAL",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Reproduce at least one clean/prior-prompt failure.",
+        "Reject nondeterministic challengers.",
+        "Promoted candidate passes target repetitions and regression checks.",
+        "Frozen holdout is within one accepted task of Codex with no guardrail regression.",
+        "Focused and full repository tests pass."
+      ],
+      "description": "Verify the local Claude instruction and completion-hook improvement loop with executable acceptance tests.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Evaluator-owned executable oracles and repository tests report non-vacuous results.",
+      "requirement_id": "REQ-CLAUDE-INSTRUCTION-OPTIMIZATION-LOCAL",
+      "verification_target": {
+        "environment": "local-windows-personal-claude-and-synthetic-workspaces",
+        "journey": "baseline-to-candidate-rejection-to-hook-promotion-to-regression-to-frozen-holdout",
+        "seam": "global-claude-instructions-stop-hook-and-evaluator-owned-task-oracles"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-17T03:04:54Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

@@ -1,0 +1,53 @@
+{
+  "applicability": {
+    "applied": [
+      "data-model-design"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-EVIDENCE-GUARDS/artifacts/finding-model.md",
+      "record_id": "ART-WEG-MODEL",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T21:35:09.1331077Z",
+  "decisions_required": [],
+  "findings": [
+    "The compatible finding contract can require provenance for facts and measurements while preserving legacy strings as non-established drafts."
+  ],
+  "handoff_id": "HO-WEG-MODEL",
+  "idempotency_key": "workbench-evidence-guards:model-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "68f8346db1b39828f9d907df5ef738ec434a894371eb16c036287fa6fe299aa2"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-WEG-RECON",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-EVIDENCE-GUARDS",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "data-model-design",
+  "stage": "data-model-design",
+  "status": "completed",
+  "suggested_next_stage": "standards-resolution",
+  "uncertainties": [],
+  "why_next": "Apply TDD, schema, hook, and skill-authoring constraints to the agreed model.",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

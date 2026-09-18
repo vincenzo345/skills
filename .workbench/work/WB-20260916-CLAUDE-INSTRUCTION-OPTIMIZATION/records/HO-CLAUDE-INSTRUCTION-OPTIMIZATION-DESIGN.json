@@ -1,0 +1,63 @@
+{
+  "applicability": {
+    "applied": [
+      "solution-architecture",
+      "data-model-design"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md",
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T03:04:54Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The promoted harness is a content-hashed global instruction file plus a one-shot Stop hook, fresh task workspaces, external executable oracles, and immutable debug evidence of hook activation."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+  "idempotency_key": "claude-instruction-optimization:design:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "58e943a076b92eb25cf86703aafa5109efe6b5ee81caeb6e6954507b6a4c06a2"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "data-model-design",
+  "status": "completed",
+  "suggested_next_stage": "standards-resolution",
+  "uncertainties": [],
+  "why_next": "Record the already-executed promotion, holdout, safety, and verification plan.",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

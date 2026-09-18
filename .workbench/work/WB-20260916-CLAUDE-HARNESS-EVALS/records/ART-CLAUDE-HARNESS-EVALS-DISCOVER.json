@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-HARNESS-EVALS-DISCOVER",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "solution-architecture",
+      "kind": "stage",
+      "purpose": "Constrain task packaging, isolation, runner commands, and proof boundaries."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "b6a3d5eacc4bd961569ef386313ee9c8832dc77502a0ebf4b4dce36d370dbfb8"
+  },
+  "created_at": "2026-09-16T22:23:46.969080Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/discovery-and-process.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "process-model",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude harness evaluation discovery and process",
+  "updated_at": "2026-09-16T22:23:46.969080Z",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

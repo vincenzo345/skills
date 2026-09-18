@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-09-17T00:45:08.181886Z",
+  "idempotency_key": "capture-claude-parity-live-runner-v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "3dd74e63ea63e0e7fd3ec72b4b8f1b3a7d22c31e5dafea2e43d1f6ad5922f011"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "continue, you have full access",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+    "accepted, go"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

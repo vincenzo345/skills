@@ -1,0 +1,410 @@
+{
+  "acceptance_evidence": [
+    "At least one fresh Codex reference and at least two fresh Claude candidate runs use equivalent Applications4Life snapshots, the same Workbench prompt, pinned model/effort settings, and complete transcripts and runtime metrics.",
+    "Claude meets or exceeds Codex on factual/causal correctness, evidence calibration, coverage/actionability, Workbench fidelity, clarity, and weighted total, with every substantive dimension at least 4.0.",
+    "Claude's median usage is no more than 150,000 tokens and 1,500 seconds, with no Workbench schema failure, stale/deployed provenance error, unregistered correction, legacy/Ralph hook, or premature ranking before environment disposition.",
+    "Representative sample-codebase regression tasks confirm the hooks remain scoped, one-shot, fail-open for malformed input, and do not degrade ordinary implementation behavior.",
+    "The winning canonical prompt and hooks are installed globally, their hashes match the evaluated candidate, legacy registrations are removed, and a fresh Claude session reproduces the passing behavior."
+  ],
+  "assumptions": [
+    "The user's explicit instruction authorizes repeated subscription-backed Claude and Codex runs and mutation of the user's global Claude prompt, hooks, settings, and installed claude-rigor harness.",
+    "The named Applications4Life task is diagnostic and read-only; scored runs may create only disposable Workbench records in isolated copies.",
+    "Provider throttling, authentication expiry, or outage is an external impasse only after bounded retries and preserved resumable evidence."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation",
+      "deployment"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "outcome-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Parity and genuine-impasse stopping require falsifiable thresholds.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Existing global Claude configuration, plugin source, optimizer, transcripts, and dirty application repository must be preserved and understood.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Prior transcripts and frozen comparison criteria establish the baseline failures and grading contract.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The champion-challenger loop, repetition policy, promotion gate, rollback, and stopping conditions must remain explicit.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Real model trials are required to establish that the harness changes behavior.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "process-validation",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "This changes an agent harness rather than an interactive user interface.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Prompt source, plugin hooks, settings migration, disposable repositories, evaluator isolation, and deployment hashes are consequential seams.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Immutable candidate, transcript, score, decision, runtime, and deployment records are required for trustworthy comparisons.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The user selected live iterative optimization and global deployment.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "data-model-design",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Frozen grading, writing-for-agents guidance, isolation, and repository instructions constrain the solution.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Preflight behavior, Stop behavior, migration rules, and promotion gates need executable contracts.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Local hook tests and sample tasks must precede expensive brownfield repetitions and global promotion.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "delivery-planning",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Canonical prompt, hooks, installer, tests, and possibly controller behavior require changes.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Hook, installer, migration, isolation, grading, and sample-task behavior require executable checks.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The passing harness must be installed into the user's global Claude configuration.",
+            "stage_id": "release"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "A fresh session must prove the installed hashes and effective hook inventory reproduce the candidate behavior.",
+            "stage_id": "deployed-verification"
+          }
+        ],
+        "checkpoint_stage": "deployed-verification",
+        "phase_id": "release"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The requested end state is measured Claude-versus-Codex performance, not merely deployment.",
+            "stage_id": "outcome-verification"
+          }
+        ],
+        "checkpoint_stage": "outcome-verification",
+        "phase_id": "measure"
+      }
+    ]
+  },
+  "constraints": [
+    "Preserve unrelated changes in both repositories and do not modify Applications4Life application code; use disposable copies or worktrees for scored trials.",
+    "Do not inspect secret-bearing paths prohibited by the Applications4Life AGENTS.md and redact any captured evidence.",
+    "Use the frozen rubric and Codex baseline; do not tune grading after seeing candidate results.",
+    "Promote only a candidate that passes all hard gates, does not regress any substantive dimension, and meets the token/time ceilings across repeated fresh sessions.",
+    "Preserve personal Graphify instructions and unrelated Claude settings; keep timestamped rollback backups.",
+    "Commit, push, tracker publication, and administrative Workbench closure remain outside scope unless separately requested."
+  ],
+  "created_at": "2026-09-18T00:18:39.128573Z",
+  "desired_outcome": "Claude Code, using the installed global prompt and hooks, meets or exceeds the established Codex baseline on every substantive grading dimension for the Applications4Life Workbench diagnosis prompt, remains within the 150,000-token and 25-minute ceilings, and preserves that behavior across representative disposable sample codebases; otherwise the campaign stops only at a reproducible provider or technical impasse.",
+  "engagement_intent": "release",
+  "evidence_references": [
+    ".workbench/work/WB-20260917-CLAUDE-WORKBENCH-PARITY-LIVE/intake.json",
+    ".workbench/work/WB-20260917-CLAUDE-OPTIMIZATION-LOOP/state.json",
+    ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md",
+    "claude test v3.md",
+    "codex test.md",
+    "tests/comparison/claude-codex-investigation/rubric.json",
+    "C:/Users/vince/.claude/CLAUDE.md",
+    "C:/Users/vince/.claude/settings.json",
+    "C:/Users/vince/AI agency business/applications4life/illustration report generator"
+  ],
+  "execution_lane": "full",
+  "facts": [
+    {
+      "source_references": [
+        "claude test v3.md",
+        ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md"
+      ],
+      "statement": "The prior Claude v3 transcript did not meet the Codex comparison bar and showed premature investigation, duplicated legacy hooks, source-provenance errors, Workbench schema repair loops, and excessive cost."
+    },
+    {
+      "source_references": [
+        "C:/Users/vince/.claude/settings.json",
+        "C:/Users/vince/.claude/hooks/completion_guard.py",
+        "C:/Users/vince/.agents/skills/workbench/scripts/workbench_diagnosis_hook.py"
+      ],
+      "statement": "The current global Claude configuration still registers the legacy Python completion guard and separate Workbench diagnosis hook instead of the planned self-contained claude-rigor preflight and sole Stop review."
+    },
+    {
+      "source_references": [
+        "claude_harness_eval/experiment/optimization.py",
+        "tests/comparison/claude-codex-investigation/rubric.json",
+        "skills/claude-rigor"
+      ],
+      "statement": "The repository contains a locally verified resumable optimizer, a frozen rubric, the prior Claude and Codex transcripts, and a canonical claude-rigor prompt and hook source."
+    }
+  ],
+  "idempotency_key": "claude-workbench-parity-live-route-v1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "e518c1b61f76875e939f946e04e8b70371d9cd6a9070b1112e3d91831adfe56c"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260917-CLAUDE-WORKBENCH-PARITY-LIVE",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "096916d69f2fabf1444effee0ff4fa0ba82f3dc36dde23a03e9ba5ccca501b8d"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "business-outcome",
+  "rationale": "A locally verified optimization controller and a detailed v3 remediation plan exist, but the requested outcome requires live Claude and Codex trials, iterative prompt and hook changes, global installation, fresh-session verification, and measured parity on the named brownfield Workbench task.",
+  "recommendation": {
+    "assumptions": [
+      "Claude and Codex CLIs remain authenticated and provider quota is available."
+    ],
+    "choice": "Execute a frozen-rubric champion-challenger campaign and deploy the best passing Claude prompt-and-hook bundle.",
+    "confidence": "high",
+    "rationale": "This directly measures the named failure, protects against prompt overfitting with sample tasks and repetitions, and makes global promotion reversible and evidence-bound.",
+    "tradeoffs": [
+      "Repeated frontier-model runs can consume substantial time and subscription quota.",
+      "Strict non-regression gates may require several targeted candidates."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260917-CLAUDE-WORKBENCH-PARITY-LIVE",
+  "routing_revision": 1,
+  "runtime_route": "brownfield-feature",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request",
+        "tests/comparison/claude-codex-investigation/rubric.json"
+      ],
+      "reason": "Parity and genuine-impasse stopping require falsifiable thresholds.",
+      "stage_id": "outcome-framing"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/claude-rigor",
+        "C:/Users/vince/.claude/settings.json",
+        "Applications4Life git status"
+      ],
+      "reason": "Existing global Claude configuration, plugin source, optimizer, transcripts, and dirty application repository must be preserved and understood.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude test v3.md",
+        "codex test.md",
+        "rubric.json"
+      ],
+      "reason": "Prior transcripts and frozen comparison criteria establish the baseline failures and grading contract.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment/optimization.py"
+      ],
+      "reason": "The champion-challenger loop, repetition policy, promotion gate, rollback, and stopping conditions must remain explicit.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "Real model trials are required to establish that the harness changes behavior.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "skills/claude-rigor"
+      ],
+      "reason": "This changes an agent harness rather than an interactive user interface.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/claude-rigor",
+        "claude_harness_eval/experiment"
+      ],
+      "reason": "Prompt source, plugin hooks, settings migration, disposable repositories, evaluator isolation, and deployment hashes are consequential seams.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment/optimization.py"
+      ],
+      "reason": "Immutable candidate, transcript, score, decision, runtime, and deployment records are required for trustworthy comparisons.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user selected live iterative optimization and global deployment.",
+      "stage_id": "proposal"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "rubric.json",
+        "AGENTS.md"
+      ],
+      "reason": "Frozen grading, writing-for-agents guidance, isolation, and repository instructions constrain the solution.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "implementation-plan.md"
+      ],
+      "reason": "Preflight behavior, Stop behavior, migration rules, and promotion gates need executable contracts.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "implementation-plan.md"
+      ],
+      "reason": "Local hook tests and sample tasks must precede expensive brownfield repetitions and global promotion.",
+      "stage_id": "delivery-planning"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/claude-rigor",
+        "scripts",
+        "tests/runtime"
+      ],
+      "reason": "Canonical prompt, hooks, installer, tests, and possibly controller behavior require changes.",
+      "stage_id": "implementation"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "tests/runtime"
+      ],
+      "reason": "Hook, installer, migration, isolation, grading, and sample-task behavior require executable checks.",
+      "stage_id": "local-verification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "C:/Users/vince/.claude"
+      ],
+      "reason": "The passing harness must be installed into the user's global Claude configuration.",
+      "stage_id": "release"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "A fresh session must prove the installed hashes and effective hook inventory reproduce the candidate behavior.",
+      "stage_id": "deployed-verification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The requested end state is measured Claude-versus-Codex performance, not merely deployment.",
+      "stage_id": "outcome-verification"
+    }
+  ],
+  "title": "Optimize and deploy Claude Workbench parity harness",
+  "unresolved_questions": [],
+  "work_id": "WB-20260917-CLAUDE-WORKBENCH-PARITY-LIVE"
+}

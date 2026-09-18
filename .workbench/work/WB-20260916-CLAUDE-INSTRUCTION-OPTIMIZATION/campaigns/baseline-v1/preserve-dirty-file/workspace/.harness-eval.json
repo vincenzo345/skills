@@ -1,0 +1,12 @@
+{
+  "category": "work-discipline",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "scope",
+    "dirty-worktree",
+    "preservation"
+  ],
+  "task_id": "preserve-dirty-file",
+  "title": "Preserve unrelated user work"
+}

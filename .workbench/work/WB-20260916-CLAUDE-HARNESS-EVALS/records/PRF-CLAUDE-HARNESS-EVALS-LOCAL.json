@@ -1,0 +1,69 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "No Claude, Codex, or DSPy trial was run.",
+        "Linux parity and independent human task review remain unverified.",
+        "Filesystem separation is not an operating-system sandbox for candidate code."
+      ],
+      "non_vacuity_check": "Forty untouched baselines failed while the corresponding forty evaluator-only reference overlays passed, and staging enumerated public files for every task.",
+      "observed_at": "2026-09-16T22:54:16.356293Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Nine focused tests, 105 total runtime tests, two 20-task red/green repetitions, two repository validators, AST parsing, and diff checks passed.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-CLAUDE-HARNESS-EVALS-LOCAL",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local-windows-repository",
+        "journey": "catalog-to-stage-to-hidden-verify-to-author-validation",
+        "seam": "claude-harness-eval-cli-and-isolated-workspace"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The 20-task isolated coding-agent evaluation suite is locally implemented and verified at its catalog, staging, verification, author-validation, CLI, and repository-regression seams.",
+  "created_at": "2026-09-16T22:54:16.356293Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-HARNESS-EVALS-LOCAL",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Exactly 20 specified tasks span all four required categories.",
+        "Every staged workspace contains only public instruction, metadata, and seed material.",
+        "Every baseline fails and every reference passes on two complete repetitions.",
+        "Focused CLI/runner tests and the complete repository runtime suite pass.",
+        "Repository structural validators and final diff checks pass."
+      ],
+      "description": "Verify the complete 20-task suite, hidden-oracle staging boundary, red baselines, green references, result contract, and relevant repository regressions.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Independent evaluator-owned acceptance programs, pytest, repository validators, and final change-surface inspection report non-vacuous results.",
+      "requirement_id": "REQ-CLAUDE-HARNESS-EVALS-LOCAL",
+      "verification_target": {
+        "environment": "local-windows-repository",
+        "journey": "catalog-to-stage-to-hidden-verify-to-author-validation",
+        "seam": "claude-harness-eval-cli-and-isolated-workspace"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-16T22:54:16.356293Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

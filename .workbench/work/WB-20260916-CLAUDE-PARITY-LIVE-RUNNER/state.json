@@ -1,0 +1,187 @@
+{
+  "artifact_ids": [
+    "ART-CLAUDE-PARITY-LIVE-RUNNER-FRAME",
+    "ART-CLAUDE-PARITY-LIVE-RUNNER-RECON",
+    "ART-CLAUDE-PARITY-LIVE-RUNNER-ARCH",
+    "ART-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+    "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH",
+    "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH-V2",
+    "ART-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+    "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY"
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-PARITY-LIVE-RUNNER-IMPL",
+    "AUTH-CLAUDE-PARITY-LIVE-RUNNER-IMPL-V2"
+  ],
+  "created_at": "2026-09-17T00:46:01.400181Z",
+  "current_stage": "local-verification",
+  "decision_ids": [],
+  "desired_outcome": "The evaluation controller can qualify and exercise a Docker-backed agent runner through explicit filesystem, secret, network, resource, timeout, and cleanup controls, persists auditable qualification evidence, and refuses live campaign execution unless that evidence matches the configured runner. No paid model is invoked in this destination.",
+  "handoff_ids": [
+    "HO-CLAUDE-PARITY-LIVE-RUNNER-FRAME",
+    "HO-CLAUDE-PARITY-LIVE-RUNNER-RECON",
+    "HO-CLAUDE-PARITY-LIVE-RUNNER-ARCH",
+    "HO-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+    "HO-CLAUDE-PARITY-LIVE-RUNNER-AUTH",
+    "HO-CLAUDE-PARITY-LIVE-RUNNER-AUTH-V2",
+    "HO-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+    "HO-CLAUDE-PARITY-LIVE-RUNNER-VERIFIED"
+  ],
+  "latest_event_id": "EVT-20260916-CLAUDE-PARITY-LIVE-RUNNER-000015",
+  "map_id": "MAP-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "next_action": {
+    "description": "Review the destination result, then authorize closure or request a revision.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    },
+    "target_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+    "target_type": "authorization"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "proof_ids": [
+    "PRF-CLAUDE-PARITY-LIVE-RUNNER-LOCAL"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-17T00:46:01.400181Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-17T00:47:30.922812Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-LIVE-RUNNER-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-17T00:46:01.400181Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-17T00:50:16.088297Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-LIVE-RUNNER-RECON"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "brownfield-reconnaissance",
+      "started_at": "2026-09-17T00:47:30.922812Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "solution-architecture",
+        "data-model-design"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "completed_at": "2026-09-17T00:52:01.804539Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-LIVE-RUNNER-ARCH"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "data-model-design",
+      "started_at": "2026-09-17T00:50:16.088297Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification",
+        "delivery-planning"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-17T00:57:06.669415Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+        "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH",
+        "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH-V2"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "delivery-planning",
+      "started_at": "2026-09-17T00:52:01.804539Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "implementation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the implement phase.",
+      "completed_at": "2026-09-17T01:14:45.438492Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "implement",
+      "stage_id": "implementation",
+      "started_at": "2026-09-17T00:57:06.669415Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "local-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the verify phase.",
+      "completed_at": "2026-09-17T01:16:43.329857Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "verify",
+      "stage_id": "local-verification",
+      "started_at": "2026-09-17T01:14:45.438492Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 15,
+  "status": "awaiting-acceptance",
+  "title": "Qualify the isolated live-runner boundary",
+  "updated_at": "2026-09-17T01:16:43.329857Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

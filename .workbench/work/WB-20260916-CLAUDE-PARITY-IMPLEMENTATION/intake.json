@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-09-16T23:40:25.755267Z",
+  "idempotency_key": "capture-claude-parity-implementation-v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "0851e64a8c95215e45f58fa93032baeca7262c9f52e505636f6c9bcc36337a3c"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "that sounds great. lets get started",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+    ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/implementation-plan.md"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

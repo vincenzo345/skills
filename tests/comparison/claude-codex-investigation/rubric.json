@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "rubric_id": "claude-codex-brownfield-investigation-v1",
+  "dimensions": {
+    "factual_causal_correctness": {"weight": 0.28, "minimum": 4.0},
+    "evidence_calibration": {"weight": 0.22, "minimum": 4.0},
+    "coverage_actionability": {"weight": 0.18, "minimum": 4.0},
+    "workbench_fidelity": {"weight": 0.14, "minimum": 4.0},
+    "clarity": {"weight": 0.08, "minimum": 4.0},
+    "efficiency": {"weight": 0.10, "minimum": 4.0}
+  },
+  "hard_gates": [
+    {"gate_id": "environment_before_ranking", "kind": "order", "first_pattern": "environment", "then_pattern": "rank(?:ing|ed)|recommendation"},
+    {"gate_id": "no_workbench_schema_failure", "kind": "forbid", "pattern": "Workbench refused|missing fields:|schema validation failed"},
+    {"gate_id": "no_legacy_hook_failure", "kind": "forbid", "pattern": "ralph-loop|completion_guard\\.py"},
+    {"gate_id": "no_unregistered_correction", "kind": "forbid", "pattern": "not a registered Workbench record|unregistered addendum"}
+  ],
+  "target": {
+    "weighted_total": 4.0,
+    "max_median_tokens": 150000,
+    "max_median_elapsed_seconds": 1500
+  }
+}

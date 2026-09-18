@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-16T23:17:33.354090Z",
+  "idempotency_key": "workbench-self-contained:capture:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "4f38f9a623ef7c7e0687f5ef229769a51464ad2fa582ea6529f265aabe59b821"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260916-WORKBENCH-SELF-CONTAINED",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "there are a lot of skills being envoked during a workbench session that arent in workbench. this needs to be a harness agnostic skillset thats self contained. heres an example of some Explored\n  └ Read SKILL.md (feature-planner skill), SKILL.md (openai-docs skill), SKILL.md (research skill), intake.md, routing.md. if these skills are valuable enough to be used, they must be added and deployable from the workbench repo",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "feature-planner skill",
+    "openai-docs skill",
+    "research skill",
+    "skills/workbench/references/intake.md",
+    "skills/workbench/references/routing.md"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

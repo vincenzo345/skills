@@ -1,0 +1,62 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-framing"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/outcome-frame.md",
+      "record_id": "ART-WSC-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "WB-20260916-WORKBENCH-SELF-CONTAINED",
+          "record_type": "work"
+        }
+      ],
+      "statement": "The bounded outcome is a repository-shipped portable companion set for the demonstrated Workbench methods, with no undeclared external skill prerequisite."
+    }
+  ],
+  "handoff_id": "HO-WSC-FRAME",
+  "idempotency_key": "workbench-self-contained:frame-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "66293d0baad0a57dabc3ad1cc512a751b379fbb87d3a6ea03a014b1b7d4e6c7e"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-WORKBENCH-SELF-CONTAINED",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-SELF-CONTAINED",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "outcome-framing",
+  "status": "completed",
+  "suggested_next_stage": "brownfield-reconnaissance",
+  "uncertainties": [],
+  "why_next": "Inspect the existing skill packages, manifests, validator, and Workbench dependency language.",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

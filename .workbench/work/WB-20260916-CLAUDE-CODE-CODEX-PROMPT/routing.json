@@ -1,0 +1,259 @@
+{
+  "acceptance_evidence": [
+    "A ready-to-paste global CLAUDE.md is under 200 lines and has explicit completion criteria.",
+    "The document requires reconnaissance before edits, end-to-end impact tracing, proportionate tests, diff review, and an attempt to falsify the solution before completion.",
+    "The document distinguishes verified, inferred, and unverified claims and forbids success claims while relevant checks are failing or omitted without disclosure.",
+    "The document preserves user scope and existing changes, asks only material questions, and continues until the requested outcome is achieved or a precise external blocker remains.",
+    "A verification note maps the user's reported failure mode to the prompt's operative instructions and explains the supported installation surface."
+  ],
+  "assumptions": [
+    "The phrase 'global system prompt' primarily means persistent instructions for all interactive Claude Code projects; the supported default surface is ~/.claude/CLAUDE.md even though Claude injects it as user context rather than the literal system message.",
+    "The prompt should remain language- and repository-agnostic, allowing project CLAUDE.md files and executable repository checks to supply local commands and standards.",
+    "The user wants the prompt text and installation guidance now, not an unapproved write to the home-directory configuration."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "deployment",
+      "implementation",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "specification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "No existing software implementation is being changed; repository instructions are evidence inputs only.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Claude Code's documented instruction loading, precedence, and enforcement limits must bound the deliverable.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The behavioral contract must define a repeatable execution loop with explicit gates between inspection, implementation, verification, and completion.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No business-process value claim must be proven before drafting the instruction contract.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "process-model",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The writing-for-agents method and Claude Code documentation define concision, instruction hierarchy, and checkable completion criteria.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The requested prompt is itself a durable behavioral contract ready for installation.",
+            "stage_id": "specification"
+          }
+        ],
+        "checkpoint_stage": "specification",
+        "phase_id": "plan"
+      }
+    ]
+  },
+  "constraints": [
+    "Optimize behavior rather than imitate Codex's prose style or expose hidden prompts.",
+    "Keep always-loaded instructions concise, non-duplicative, concrete, and checkable.",
+    "Do not claim that a prompt can guarantee correctness; distinguish behavioral guidance from client-enforced hooks, permissions, and tests.",
+    "Do not write outside the repository or alter the user's installed Claude configuration without separate authorization.",
+    "Do not commit, deploy, publish externally, or close the Workbench item without user acceptance."
+  ],
+  "created_at": "2026-09-16T19:12:15.375416Z",
+  "desired_outcome": "A concise, ready-to-use global Claude Code instruction document consistently drives outcome-first implementation, evidence-based verification, skeptical self-review, honest completion claims, and persistence through genuine completion or a precise blocker.",
+  "engagement_intent": "plan",
+  "evidence_references": [
+    "captured-intake",
+    "AGENTS.md",
+    "C:/Users/vince/.agents/skills/writing-for-agents/SKILL.md",
+    "https://code.claude.com/docs/en/memory",
+    "https://code.claude.com/docs/en/how-claude-code-works"
+  ],
+  "execution_lane": "fast",
+  "facts": [
+    {
+      "source_references": [
+        "captured-intake"
+      ],
+      "statement": "The user reports that Claude Code can implement changes and still be wrong, while Codex more often investigates and verifies thoroughly."
+    },
+    {
+      "source_references": [
+        "https://code.claude.com/docs/en/memory"
+      ],
+      "statement": "Claude Code loads personal cross-project instructions from ~/.claude/CLAUDE.md, treats them as context rather than enforced configuration, and recommends concise concrete instructions under roughly 200 lines."
+    },
+    {
+      "source_references": [
+        "AGENTS.md"
+      ],
+      "statement": "This repository's agent priorities already encode outcome, token economy, proportional execution, and session closure, which are relevant source material for the requested behavior."
+    }
+  ],
+  "idempotency_key": "claude-code-codex-prompt:route-start:v1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "3b13f47abd51a46c9a99a313caf774fd075fbad0da9d6bc25da6c7c7004ea893"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-CLAUDE-CODE-CODEX-PROMPT",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "a2e91e123fd90547a411c524277b309af4516291a80127832ab06eb1490d3589"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "specification",
+  "rationale": "The requested deliverable is an agent-facing behavioral contract rather than a software change. Existing repository priorities, the writing-for-agents method, and Claude Code's documented global instruction mechanism provide enough evidence to produce it without a product decision from the user.",
+  "recommendation": {
+    "assumptions": [
+      "The user prefers a general cross-project default over language-specific rules."
+    ],
+    "choice": "Use a compact ~/.claude/CLAUDE.md organized around Outcome, Evidence, Falsification, and Closure, with project instructions and executable checks providing repository-specific enforcement.",
+    "confidence": "high",
+    "rationale": "This targets the reported failure at the decision points where agents commonly stop early: before sufficient inspection, after implementation but before proof, and during the final completion claim.",
+    "tradeoffs": [
+      "The instruction layer improves behavior but cannot enforce commands; critical invariants still belong in tests, hooks, permissions, and CI."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260916-CLAUDE-CODE-CODEX-PROMPT",
+  "routing_revision": 1,
+  "runtime_route": null,
+  "schema_version": "0.5.0",
+  "solution_context": "process-only",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "https://code.claude.com/docs/en/memory",
+        "https://code.claude.com/docs/en/how-claude-code-works"
+      ],
+      "reason": "Claude Code's documented instruction loading, precedence, and enforcement limits must bound the deliverable.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured-intake",
+        "AGENTS.md",
+        "C:/Users/vince/.agents/skills/writing-for-agents/SKILL.md"
+      ],
+      "reason": "The behavioral contract must define a repeatable execution loop with explicit gates between inspection, implementation, verification, and completion.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured-intake"
+      ],
+      "reason": "No business-process value claim must be proven before drafting the instruction contract.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured-intake"
+      ],
+      "reason": "No user interface or interaction flow is being designed; final reporting guidance is part of the behavioral specification.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "https://code.claude.com/docs/en/memory"
+      ],
+      "reason": "The supported user-level instruction location is documented and no software boundary decision remains.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured-intake"
+      ],
+      "reason": "The deliverable does not introduce or change a database or durable application-data contract.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "AGENTS.md",
+        "captured-intake"
+      ],
+      "reason": "No existing software implementation is being changed; repository instructions are evidence inputs only.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "C:/Users/vince/.agents/skills/writing-for-agents/SKILL.md",
+        "https://code.claude.com/docs/en/memory"
+      ],
+      "reason": "The writing-for-agents method and Claude Code documentation define concision, instruction hierarchy, and checkable completion criteria.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured-intake"
+      ],
+      "reason": "The requested prompt is itself a durable behavioral contract ready for installation.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "https://code.claude.com/docs/en/memory"
+      ],
+      "reason": "Installation is a single documented file placement and does not require delivery slicing.",
+      "stage_id": "delivery-planning"
+    }
+  ],
+  "title": "Make Claude Code execute with Codex-like rigor",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

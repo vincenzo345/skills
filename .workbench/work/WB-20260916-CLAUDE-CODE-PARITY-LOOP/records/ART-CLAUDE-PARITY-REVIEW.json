@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-REVIEW",
+  "artifact_kind": "review",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+      "kind": "work-item",
+      "purpose": "Supply destination artifact-validity evidence."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "cf681726c44ef65fcd984ee8195df61a2f4eefd8648b3ccc6596400fff742ffc"
+  },
+  "created_at": "2026-09-16T23:35:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/plan-review.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "delivery-planning",
+  "proof_ids": [
+    "PRF-CLAUDE-PARITY-PLAN"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "verifies",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-PLAN",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude Code parity plan validity review",
+  "updated_at": "2026-09-16T23:35:00Z",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

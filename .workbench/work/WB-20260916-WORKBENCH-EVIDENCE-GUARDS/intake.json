@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-09-16T21:30:46.490264Z",
+  "idempotency_key": "capture-workbench-evidence-guards-v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "9ce36593b825ee50df7b0443a59099a9e40ee445710350eb2412ec0f91a188ee"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260916-WORKBENCH-EVIDENCE-GUARDS",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "implement this",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+    "conversation:minimum typed-findings hook and causal-regression-evals recommendation"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

@@ -1,0 +1,63 @@
+{
+  "applicability": {
+    "applied": [
+      "solution-architecture",
+      "data-model-design"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/architecture-and-data.md",
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-ARCH",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T01:00:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Qualification will be an immutable, digest-protected record bound to Docker server identity, immutable image ID, canonical policy, and executable canary results; every use revalidates those bindings."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-LIVE-RUNNER-ARCH",
+  "idempotency_key": "claude-parity-live-runner:arch:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "f723c871dd5e6abca4f4fe948302e5dd571f57af5c2dcadf86e258b10b399353"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-RECON",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "data-model-design",
+  "status": "completed",
+  "suggested_next_stage": "delivery-planning",
+  "uncertainties": [],
+  "why_next": "Translate the accepted boundary into ordered red-green slices and executable acceptance checks.",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

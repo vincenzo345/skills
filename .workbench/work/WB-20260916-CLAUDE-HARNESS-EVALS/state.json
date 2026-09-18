@@ -1,0 +1,181 @@
+{
+  "artifact_ids": [
+    "ART-CLAUDE-HARNESS-EVALS-FRAME",
+    "ART-CLAUDE-HARNESS-EVALS-DISCOVER",
+    "ART-CLAUDE-HARNESS-EVALS-ARCH",
+    "ART-CLAUDE-HARNESS-EVALS-PLAN",
+    "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+    "ART-CLAUDE-HARNESS-EVALS-VERIFY"
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-HARNESS-EVALS-IMPLEMENT"
+  ],
+  "created_at": "2026-09-16T22:20:11.744511Z",
+  "current_stage": "local-verification",
+  "decision_ids": [],
+  "desired_outcome": "A locally runnable suite of 15–30 representative coding tasks can stage isolated workspaces and determine, through independent executable acceptance oracles, whether a Claude Code run achieved the requested behavior rather than merely producing a plausible patch.",
+  "handoff_ids": [
+    "HO-CLAUDE-HARNESS-EVALS-FRAME",
+    "HO-CLAUDE-HARNESS-EVALS-DISCOVER",
+    "HO-CLAUDE-HARNESS-EVALS-ARCH",
+    "HO-CLAUDE-HARNESS-EVALS-PLAN",
+    "HO-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+    "HO-CLAUDE-HARNESS-EVALS-VERIFIED"
+  ],
+  "latest_event_id": "EVT-20260916-CLAUDE-HARNESS-EVALS-000013",
+  "map_id": "MAP-20260916-CLAUDE-HARNESS-EVALS",
+  "next_action": {
+    "description": "Review the destination result, then authorize closure or request a revision.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    },
+    "target_id": "WB-20260916-CLAUDE-HARNESS-EVALS",
+    "target_type": "authorization"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "proof_ids": [
+    "PRF-CLAUDE-HARNESS-EVALS-LOCAL"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-16T22:20:11.744511Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-16T22:22:44.007098Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-HARNESS-EVALS-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-16T22:20:11.744511Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance",
+        "evidence-intake",
+        "process-model"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-16T22:24:38.686936Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-HARNESS-EVALS-DISCOVER"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "process-model",
+      "started_at": "2026-09-16T22:22:44.007098Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "solution-architecture"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "completed_at": "2026-09-16T22:26:56.440997Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-HARNESS-EVALS-ARCH"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "solution-architecture",
+      "started_at": "2026-09-16T22:24:38.686936Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification",
+        "delivery-planning"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-16T22:28:47.121372Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-HARNESS-EVALS-PLAN"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "delivery-planning",
+      "started_at": "2026-09-16T22:26:56.440997Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "implementation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the implement phase.",
+      "completed_at": "2026-09-16T22:46:25.453606Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "implement",
+      "stage_id": "implementation",
+      "started_at": "2026-09-16T22:28:47.121372Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "local-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the verify phase.",
+      "completed_at": "2026-09-16T22:55:26.248217Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-HARNESS-EVALS-VERIFY"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "verify",
+      "stage_id": "local-verification",
+      "started_at": "2026-09-16T22:46:25.453606Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 13,
+  "status": "awaiting-acceptance",
+  "title": "Build executable Claude harness evaluations",
+  "updated_at": "2026-09-16T22:55:26.248217Z",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

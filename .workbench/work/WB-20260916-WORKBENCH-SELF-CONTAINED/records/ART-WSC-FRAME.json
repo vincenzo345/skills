@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-WSC-FRAME",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "brownfield-reconnaissance",
+      "kind": "stage",
+      "purpose": "Bound repository inspection and the portable packaging change."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "e96d85b46682f2c7d69127adc2b47a05c0f9f2bec8cf9601f9fa305f18642159"
+  },
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/outcome-frame.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-framing",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-20260916-WORKBENCH-SELF-CONTAINED",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Self-contained Workbench outcome frame",
+  "updated_at": "2026-09-16T23:28:37.9152429Z",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

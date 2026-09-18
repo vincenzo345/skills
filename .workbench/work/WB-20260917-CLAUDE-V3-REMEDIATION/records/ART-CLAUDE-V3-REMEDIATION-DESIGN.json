@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+  "artifact_kind": "architecture",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "delivery-planning",
+      "kind": "stage",
+      "purpose": "Bind implementation sequencing to the harness-first ownership model."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "4bfbe7503932d0ffe97b7885c0ac9175b936cd702b04428a45b9d5c82bda8f3d"
+  },
+  "created_at": "2026-09-17T22:24:59Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "data-model-design",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude v3 harness remediation architecture",
+  "updated_at": "2026-09-17T22:24:59Z",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

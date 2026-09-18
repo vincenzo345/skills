@@ -1,0 +1,12 @@
+{
+  "category": "integration",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "exceptions",
+    "contracts",
+    "validation"
+  ],
+  "task_id": "error-contract",
+  "title": "Public error-contract preservation"
+}

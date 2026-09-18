@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "implementation",
+      "kind": "stage",
+      "purpose": "Bind implementation to the pre-registered evaluation and stopping rules."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "e925b33eae1f44b81c8c7a105d99e695329ef10f59b10f81654da4697f513cd0"
+  },
+  "created_at": "2026-09-17T03:04:54Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "delivery-planning",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude instruction optimization delivery and evaluation plan",
+  "updated_at": "2026-09-17T03:04:54Z",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

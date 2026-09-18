@@ -1,0 +1,12 @@
+{
+  "category": "robustness",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "paths",
+    "security",
+    "cross-platform"
+  ],
+  "task_id": "path-containment",
+  "title": "Path containment"
+}

@@ -2355,6 +2355,14 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
         for index, reference in enumerate(handoff["inputs_used"]):
             validate_reference_resolution(reference, state, map_record, known_records, store,
                                           f"handoff.inputs_used[{index}]")
+        for finding_index, finding in enumerate(handoff["findings"]):
+            if not isinstance(finding, dict):
+                continue
+            for source_index, reference in enumerate(finding["source_references"]):
+                validate_reference_resolution(
+                    reference, state, map_record, known_records, store,
+                    f"handoff.findings[{finding_index}].source_references[{source_index}]",
+                )
 
         produced_ids = {item["record_id"] for item in handoff["artifacts_produced"]}
         supplied_artifact_ids = {
@@ -2402,33 +2410,66 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
         existing_node_ids = {node["node_id"] for node in updated_map["nodes"]}
         additions = False
         for index, finding in enumerate(handoff["findings"], 1):
+            if isinstance(finding, str):
+                statement = finding
+                basis = "legacy-untyped"
+                source_references: list[dict[str, str]] = []
+            else:
+                statement = finding["statement"]
+                basis = finding["basis"]
+                source_references = copy.deepcopy(finding["source_references"])
+            established = basis in {"fact", "measurement"}
             node_id = derived_id("E", handoff["handoff_id"], "finding", index)
             fail(node_id not in existing_node_ids, f"projected finding node already exists: {node_id}")
             existing_node_ids.add(node_id)
-            updated_map["nodes"].append({
+            finding_node = {
                 "node_id": node_id,
                 "kind": "evidence-task",
-                "title": short_title(finding),
-                "question": f"What did {handoff['specialist']} establish?",
-                "why_it_matters": finding,
+                "title": short_title(statement),
+                "question": (
+                    f"What did {handoff['specialist']} establish?"
+                    if established
+                    else "What evidence would establish or reject this finding?"
+                ),
+                "why_it_matters": statement,
                 "owner": copy.deepcopy(handoff["owner"]),
-                "status": "evidence-established",
-                "done_when": ["The finding is backed by the accepted handoff and its registered outputs."],
-                "evidence": copy.deepcopy(output_references),
-                "resolution": {
+                "status": "evidence-established" if established else "draft",
+                "done_when": [
+                    "The finding is backed by its cited source records."
+                    if established
+                    else "Discriminating evidence establishes, rejects, or supersedes the finding."
+                ],
+                "evidence": source_references,
+            }
+            if established:
+                finding_node["resolution"] = {
                     "basis": "evidence",
-                    "rationale": finding,
+                    "rationale": statement,
                     "resolved_at": timestamp,
                     "resolved_by": actor(args.actor),
-                    "references": copy.deepcopy(output_references),
-                },
-            })
+                    "references": source_references,
+                }
+            else:
+                finding_node["next_action"] = {
+                    "description": "Gather discriminating evidence before treating this finding as established.",
+                    "owner": copy.deepcopy(handoff["owner"]),
+                    "target_type": "evidence",
+                    "target_id": node_id,
+                }
+            updated_map["nodes"].append(finding_node)
             updated_map["edges"].append({
-                "edge_id": derived_id("EDGE", node_id, outcome_node_id, "supports"),
+                "edge_id": derived_id(
+                    "EDGE", node_id, outcome_node_id,
+                    "supports" if established else "traces-to",
+                ),
                 "from_node_id": node_id,
                 "to_node_id": outcome_node_id,
-                "relationship": "supports",
-                "rationale": "Accepted evidence informs the desired outcome.",
+                "relationship": "supports" if established else "traces-to",
+                "rationale": (
+                    "Established evidence informs the desired outcome."
+                    if established
+                    else "The unestablished finding remains visible without supporting the outcome."
+                ),
             })
             additions = True
         for record in bundled_records:

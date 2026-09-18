@@ -1,0 +1,3 @@
+# Delivery contract
+
+Use vertical TDD slices at two confirmed seams: the CLI and the campaign artifact directory. Implement in this order: configuration/doctor; initialization/store; fake run/resume/stop/report; vendor argv adapters without launch; scoring and terminal rules; documentation and regression verification. Each slice starts with a failing public-seam test. The implementation authorization is limited to repository code, tests, and documentation for zero-cost local behavior. Live models, credentials, sealed external tasks, global Claude/Codex files, hooks, commit, deployment, publication, and closure remain withheld.

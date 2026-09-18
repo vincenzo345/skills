@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+  "artifact_kind": "validation-result",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+      "kind": "work-item",
+      "purpose": "Supply local-implementation proof for the selected destination."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "e781cbf9f984d7c7a19639cf762d1c222b846bcf753fe4d1bb54f9b323b327fd"
+  },
+  "created_at": "2026-09-17T00:04:54Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/verification.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "local-verification",
+  "proof_ids": [
+    "PRF-CLAUDE-PARITY-CONTROLLER-LOCAL"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "verifies",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-CONTROLLER-IMPLEMENT",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Zero-cost parity controller local verification",
+  "updated_at": "2026-09-17T00:04:54Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

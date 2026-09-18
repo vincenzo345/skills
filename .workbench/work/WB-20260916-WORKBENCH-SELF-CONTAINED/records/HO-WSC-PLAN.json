@@ -1,0 +1,66 @@
+{
+  "applicability": {
+    "applied": [
+      "standards-resolution",
+      "skill-creator",
+      "writing-for-agents"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/standards-plan.md",
+      "record_id": "ART-WSC-PLAN",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-WSC-IMPLEMENT"
+  ],
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-WSC-RECON",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The implementation contract adds two flat portable skill packages, updates Workbench's dependency boundary, declares both packages, and validates the complete companion set."
+    }
+  ],
+  "handoff_id": "HO-WSC-PLAN",
+  "idempotency_key": "workbench-self-contained:plan-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "fb03937e25d08097dddbeac72a4736980774a7e88cc89c4a1c906f0b01a8fb0d"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-WSC-RECON",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-SELF-CONTAINED",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "portable-skill-authoring",
+  "stage": "standards-resolution",
+  "status": "completed",
+  "suggested_next_stage": "implementation",
+  "uncertainties": [],
+  "why_next": "The file surfaces, portable wording constraints, packaging contract, scoped authorization, and proof commands are fixed.",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

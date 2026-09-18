@@ -1,0 +1,37 @@
+{
+  "action": "closure",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-CLAUDE-CODE-CODEX-PROMPT-CLOSURE",
+  "grant": {
+    "granted_at": "2026-09-16T20:01:49.9847183Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-16T20:01:49.9847183Z",
+  "requested_by": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Accept and close the completed specification destination only.",
+      "No commit, deployment, tracker publication, or unrelated mutation is authorized."
+    ],
+    "targets": [
+      {
+        "kind": "work",
+        "planning_destination": "specification",
+        "target_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

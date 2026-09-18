@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenAI Docs"
+  short_description: "Research current official OpenAI documentation"
+  default_prompt: "Use $openai-docs to answer this from current official OpenAI documentation."

@@ -1,0 +1,11 @@
+Implemented `matching.first_match` as a single-pass, short-circuiting loop.
+
+Verified:
+
+- First matching record is returned.
+- `None` is returned when no match exists.
+- One-shot iterators are consumed once.
+- Predicates run exactly once per inspected record.
+- Iteration stops immediately after a match.
+- Python compilation and `git diff --check` pass.
+- All 3 targeted tests pass.

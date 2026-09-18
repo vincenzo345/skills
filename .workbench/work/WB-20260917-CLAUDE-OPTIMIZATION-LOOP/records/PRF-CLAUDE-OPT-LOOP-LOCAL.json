@@ -1,0 +1,69 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "No paid Claude or Codex provider call was made.",
+        "Rubric agreement on a real secret-scrubbed brownfield fixture is unverified.",
+        "Claude-versus-Codex performance parity and global harness installation are unverified."
+      ],
+      "non_vacuity_check": "The 186-test suite includes targeted rejection, budget blocking, tamper detection, completed-run mutation detection, live argv, fresh fixture copying, marker enforcement, and CLI round-trip tests; a fresh fake campaign exercised six sessions, two promotions, target stopping, reporting, and idempotent resume.",
+      "observed_at": "2026-09-17T23:12:41Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Automated repository tests, skill validation, compilation, diff checks, and a fresh deterministic fake-provider campaign.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-CLAUDE-OPT-LOOP-LOCAL",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local-windows-repository-and-disposable-fake-workspaces",
+        "journey": "initialize-run-promote-stop-report-resume",
+        "seam": "optimization-controller-cli-provider-boundaries-and-immutable-evidence"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The resumable Claude harness optimization loop is locally implemented and verified without consuming model-provider budget.",
+  "created_at": "2026-09-17T23:12:41Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-OPT-LOOP-LOCAL",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Campaign state is resumable and tamper-evident.",
+        "Promotion requires hard-gate success, no dimension regression, and sufficient quality or efficiency gain.",
+        "Attempts use fresh marked workspaces and bounded provider invocations.",
+        "Budget, provider failure, no-progress, manual stop, and target-reached conditions are terminal and deterministic.",
+        "Focused and complete repository verification passes without paid provider calls."
+      ],
+      "description": "Verify the local optimization controller, persistence, safety boundaries, promotion policy, stopping policy, provider command construction, and CLI lifecycle.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Automated tests and a fresh deterministic campaign exercise success and failure paths with immutable evidence checks.",
+      "requirement_id": "REQ-CLAUDE-OPT-LOOP-LOCAL",
+      "verification_target": {
+        "environment": "local-windows-repository-and-disposable-fake-workspaces",
+        "journey": "initialize-run-promote-stop-report-resume",
+        "seam": "optimization-controller-cli-provider-boundaries-and-immutable-evidence"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-17T23:12:41Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP"
+}

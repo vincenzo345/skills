@@ -1,0 +1,75 @@
+{
+  "applicability": {
+    "applied": [
+      "brownfield-reconnaissance",
+      "evidence-intake",
+      "process-model",
+      "research"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/discovery-and-process.md",
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-DISCOVER",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T22:23:46.969080Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Primary benchmark sources support original isolated fixtures, evaluator-owned tests, mandatory no-op failure and reference success, and a separate trajectory evidence channel."
+    },
+    {
+      "basis": "inference",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "A 20-task Python-standard-library suite can fit the repository's existing synthetic-fixture and pytest conventions without containers, network access, or a database."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-HARNESS-EVALS-DISCOVER",
+  "idempotency_key": "claude-harness-evals:discover-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "ac70d375e51b18ad8c4ce92af4c47abc768b171fb84ed785e61471607a027973"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-HARNESS-EVALS",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "research-and-reconnaissance",
+  "stage": "process-model",
+  "status": "completed",
+  "suggested_next_stage": "solution-architecture",
+  "uncertainties": [],
+  "why_next": "Fix the catalog, isolation, verifier, and author-validation boundaries before specifying the task packages.",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

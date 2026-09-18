@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+  "artifact_kind": "process-model",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "specification",
+      "kind": "stage",
+      "purpose": "Supply the accepted execution gates and proof semantics for the global instruction contract."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "1d019e1c866b5706a425904699e0f2357cae20e3aa52930a9a796e578524e547"
+  },
+  "created_at": "2026-09-16T19:15:29.3659796+00:00",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-CODE-CODEX-PROMPT/artifacts/execution-loop.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "process-model",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude Code rigorous execution loop",
+  "updated_at": "2026-09-16T19:15:29.3659796+00:00",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

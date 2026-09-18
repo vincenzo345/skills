@@ -1,0 +1,62 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-framing"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/outcome-frame.md",
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T00:50:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The destination is bounded to Docker isolation qualification and deterministic fake-agent execution; real provider sessions, credentials, spend, parity, and global promotion remain excluded."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-LIVE-RUNNER-FRAME",
+  "idempotency_key": "claude-parity-live-runner:frame:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "e3295bf23f18d2a785790443359d39079538380c86fde37e13e91b141941865f"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "outcome-framing",
+  "status": "completed",
+  "suggested_next_stage": "brownfield-reconnaissance",
+  "uncertainties": [],
+  "why_next": "Map the exact controller, config, CLI, and artifact-store changes before implementation.",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

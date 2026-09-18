@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-HARNESS-EVALS-ARCH",
+  "artifact_kind": "architecture",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "delivery-planning",
+      "kind": "stage",
+      "purpose": "Define the public CLI, catalog contract, verification result, and vertical implementation slices."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "9e6031ed5ea1602f3efac1454670fe15d9a74d15c09e768d95ca252b3abcfe90"
+  },
+  "created_at": "2026-09-16T22:25:38.983837Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/architecture.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "solution-architecture",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-HARNESS-EVALS-DISCOVER",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude harness evaluation architecture",
+  "updated_at": "2026-09-16T22:25:38.983837Z",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

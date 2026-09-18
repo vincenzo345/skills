@@ -1,0 +1,403 @@
+{
+  "acceptance_evidence": [
+    "A live clean-baseline run and installed-instruction run execute against the same pinned representative tasks, with executable acceptance results and immutable run metadata.",
+    "At least one instruction candidate is tested after a failure-derived diagnosis, and promotion or rejection is decided by pre-registered validation rules rather than subjective transcript review.",
+    "The promoted Claude instructions improve over Claude safe-mode by at least one whole validation task, with no regression in scope-violation or false-completion guardrails.",
+    "On an untouched holdout repeated three times, promoted Claude is within one whole task of Codex's acceptance count and is no worse on scope-violation or false-completion guardrails; otherwise the record demonstrates plateau after three consecutive targeted candidates fail to improve validation by at least one task.",
+    "The winning content is installed in the global CLAUDE.md with its original personal instructions preserved, and a reproducible pre/post report identifies what failed before and passed after."
+  ],
+  "assumptions": [
+    "The user's repeated directions to start, continue with full access, keep the personal Claude login, and iterate until satisfactory authorize live Claude and Codex subscription-backed invocations for this bounded experiment.",
+    "The first campaign may consume up to 24 total live agent invocations before an automatic quota checkpoint; if evidence is still improving and the provider remains available, the campaign resumes in additional 24-invocation tranches under the same stopping rules.",
+    "Provider rate limits may lengthen the campaign but do not change scoring or promotion rules.",
+    "Codex is a reference condition and secondary optimization target; Claude instruction parity remains the primary objective."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "deployment",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "outcome-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Parity, satisfactory performance, and plateau require falsifiable stopping rules.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The existing runner, controller, tasks, settings, and global file must be extended safely.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Local CLI behavior and prior experiment artifacts determine the runnable baseline and safety boundary.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The iterative candidate lifecycle, promotion rules, retry semantics, and stopping conditions must remain explicit.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Live paired trials are the essential proof that instructions change behavior.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "process-validation",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "The experiment uses a machine-oriented CLI and generated reports, not an interactive product UI.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Provider invocation, workspace isolation, oracle separation, candidate injection, and resumability are consequential seams.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Immutable trial, candidate, decision, budget, and terminal-state records are required for trustworthy comparisons.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The user has already selected the empirical optimization approach.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "data-model-design",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Reproducibility, isolation, scoring, and prompt-writing rules constrain implementation.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The live adapter contract and promotion semantics require executable precision.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "A safe smoke run must precede the wider iterative campaign.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "delivery-planning",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The current controller deliberately disables provider execution and must be extended.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Adapter, isolation, scoring, resume, and safety behavior require executable tests before live calls.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Installing the promoted candidate into the user's actual global CLAUDE.md is the release boundary for this local harness change.",
+            "stage_id": "release"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The installed global file must be exercised by fresh Claude Code sessions to prove the evaluated candidate and the deployed candidate are identical in behavior and hash.",
+            "stage_id": "deployed-verification"
+          }
+        ],
+        "checkpoint_stage": "deployed-verification",
+        "phase_id": "release"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The requested outcome is measured behavioral improvement or an evidenced plateau.",
+            "stage_id": "outcome-verification"
+          }
+        ],
+        "checkpoint_stage": "outcome-verification",
+        "phase_id": "measure"
+      }
+    ]
+  },
+  "constraints": [
+    "Use only synthetic task workspaces and evaluator-owned oracles; never expose employer, client, production, or personal repository data to the experiment.",
+    "Run agents with least privilege, bounded wall time, no session persistence, and explicit task workspaces; record CLI/model/config/prompt/task hashes for every trial.",
+    "Do not promote a candidate based only on its development tasks; validation and held-out evidence are mandatory.",
+    "Preserve unrelated working-tree changes and the user's original seven-line Graphify instructions.",
+    "Commit, deployment, tracker publication, and external publication remain outside scope.",
+    "Treat subscription throttling, authentication expiry, or provider outage as resumable external stops rather than failed task outcomes."
+  ],
+  "created_at": "2026-09-17T01:51:07.360124Z",
+  "desired_outcome": "Through a repeatable live test-diagnose-revise-retest loop, produce global Claude Code instructions that measurably improve acceptance-test performance over Claude's clean baseline and reach the Codex reference band on held-out representative coding tasks, or establish a reproducible plateau after targeted interventions are exhausted.",
+  "engagement_intent": "implement",
+  "evidence_references": [
+    ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/intake.json",
+    ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/routing.json",
+    ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/state.json",
+    "claude_harness_eval/experiment",
+    "tests/runtime/test_claude_harness_experiment.py",
+    "C:/Users/vince/.claude/CLAUDE.md"
+  ],
+  "execution_lane": "full",
+  "facts": [
+    {
+      "source_references": [
+        "tests/runtime/test_claude_harness_eval.py",
+        "tests/runtime/test_claude_harness_experiment.py",
+        ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/verification.md"
+      ],
+      "statement": "The existing automated suite validates task staging, evaluator-owned executable acceptance tests, controller behavior, and isolation mechanics, but no live Claude or Codex behavioral run has yet established an instruction improvement."
+    },
+    {
+      "source_references": [
+        "local inspection: claude --help"
+      ],
+      "statement": "Claude Code exposes --safe-mode, which disables CLAUDE.md and other customizations while retaining the same installed CLI and authenticated account, providing a clean paired baseline condition."
+    },
+    {
+      "source_references": [
+        "C:/Users/vince/.claude/CLAUDE.md",
+        "C:/Users/vince/.claude/CLAUDE.md.backup-before-codex-rigor-20260916"
+      ],
+      "statement": "The current global CLAUDE.md has a pre-change backup and an installed rigor contract, so both baseline and candidate conditions can be identified by content hash."
+    }
+  ],
+  "idempotency_key": "finalize-claude-instruction-optimization-v2",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "cd5498e59970f1784858fc90f3b2f14bd9c8bf9309b07b82c8b3520fadf9da94"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "a4cd780ce9a419c2056fd9ea38a3c4363537cb89740e6b0ecd471747f840574f"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "business-outcome",
+  "rationale": "The harness, task catalog, controller, and global instruction file already exist. The missing outcome is live behavioral evidence and iterative promotion of instruction candidates, which requires implementation, local verification, and measured outcome verification rather than another static prompt review.",
+  "recommendation": {
+    "assumptions": [
+      "Live subscription-backed runs remain available within provider rate limits."
+    ],
+    "choice": "Run a staged champion-challenger loop using Claude --safe-mode as the clean baseline, global/candidate instructions as challengers, and Codex as the reference condition.",
+    "confidence": "high",
+    "rationale": "This isolates the effect of user instructions, keeps acceptance executable, prevents development-set overfitting, and yields either a promoted global prompt or an honest bounded plateau.",
+    "tradeoffs": [
+      "Repeated holdout trials consume quota and time.",
+      "Strict promotion rules may reject candidates whose apparent gains are within task noise."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "routing_revision": 1,
+  "runtime_route": "brownfield-feature",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "Parity, satisfactory performance, and plateau require falsifiable stopping rules.",
+      "stage_id": "outcome-framing"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment",
+        "C:/Users/vince/.claude/CLAUDE.md"
+      ],
+      "reason": "The existing runner, controller, tasks, settings, and global file must be extended safely.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "local CLI inspection",
+        ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/verification.md"
+      ],
+      "reason": "Local CLI behavior and prior experiment artifacts determine the runnable baseline and safety boundary.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request",
+        ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/routing.json"
+      ],
+      "reason": "The iterative candidate lifecycle, promotion rules, retry semantics, and stopping conditions must remain explicit.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "Live paired trials are the essential proof that instructions change behavior.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment"
+      ],
+      "reason": "The experiment uses a machine-oriented CLI and generated reports, not an interactive product UI.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment"
+      ],
+      "reason": "Provider invocation, workspace isolation, oracle separation, candidate injection, and resumability are consequential seams.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment/store.py"
+      ],
+      "reason": "Immutable trial, candidate, decision, budget, and terminal-state records are required for trustworthy comparisons.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user has already selected the empirical optimization approach.",
+      "stage_id": "proposal"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "AGENTS.md",
+        "tests/runtime"
+      ],
+      "reason": "Reproducibility, isolation, scoring, and prompt-writing rules constrain implementation.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The live adapter contract and promotion semantics require executable precision.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "constraints"
+      ],
+      "reason": "A safe smoke run must precede the wider iterative campaign.",
+      "stage_id": "delivery-planning"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment/controller.py"
+      ],
+      "reason": "The current controller deliberately disables provider execution and must be extended.",
+      "stage_id": "implementation"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "tests/runtime"
+      ],
+      "reason": "Adapter, isolation, scoring, resume, and safety behavior require executable tests before live calls.",
+      "stage_id": "local-verification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "C:/Users/vince/.claude/CLAUDE.md",
+        "captured user request"
+      ],
+      "reason": "Installing the promoted candidate into the user's actual global CLAUDE.md is the release boundary for this local harness change.",
+      "stage_id": "release"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence",
+        "desired outcome"
+      ],
+      "reason": "The installed global file must be exercised by fresh Claude Code sessions to prove the evaluated candidate and the deployed candidate are identical in behavior and hash.",
+      "stage_id": "deployed-verification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The requested outcome is measured behavioral improvement or an evidenced plateau.",
+      "stage_id": "outcome-verification"
+    }
+  ],
+  "title": "Empirically optimize global Claude Code instructions",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

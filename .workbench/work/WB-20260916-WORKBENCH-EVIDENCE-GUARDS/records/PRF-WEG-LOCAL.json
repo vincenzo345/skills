@@ -1,0 +1,67 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-WEG-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "The comparison catalog was not executed against an external model.",
+        "Source resolution does not prove that a source semantically entails a claim."
+      ],
+      "non_vacuity_check": "Tests inspect persisted map classifications, atomic rejection, and real hook subprocess output against synthetic Claude transcripts.",
+      "observed_at": "2026-09-16T21:50:37.0888394Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Pytest reported 96 runtime passes; Workbench foundation, skill packaging, JSON, and diff validators passed.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-WEG-LOCAL",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local-repository-and-user-claude-config",
+        "journey": "unsupported-claim-to-controlled-evidence-and-diagnosis",
+        "seam": "handoff-projection-hook-stdio-and-eval-contract"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "Typed finding projection, the narrow Claude diagnosis hook, and the two causal regression cases are locally implemented and verified.",
+  "created_at": "2026-09-16T21:50:37.0888394Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-WEG-LOCAL",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Only sourced facts and measurements become evidence-established.",
+        "The hook blocks pre-diagnosis investigation and allows post-invocation or unrelated work.",
+        "The causal eval cases preserve hypotheses and require a discriminating intervention.",
+        "Runtime, schema, skill, configuration, and diff validators pass."
+      ],
+      "description": "Verify typed finding enforcement, hook deny/allow behavior, causal eval contracts, packaging, and global registration.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Black-box CLI and hook tests plus repository validators report non-vacuous passing results.",
+      "requirement_id": "REQ-WEG-LOCAL",
+      "verification_target": {
+        "environment": "local-repository-and-user-claude-config",
+        "journey": "unsupported-claim-to-controlled-evidence-and-diagnosis",
+        "seam": "handoff-projection-hook-stdio-and-eval-contract"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-16T21:50:37.0888394Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

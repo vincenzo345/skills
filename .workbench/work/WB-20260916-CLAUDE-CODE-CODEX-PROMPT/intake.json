@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-09-16T19:08:23.184899Z",
+  "idempotency_key": "claude-code-codex-prompt:capture:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "4a8357a857a5f3cec7470b8d2e85a729dc559605bb87821b8326cc72301afc56"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260916-CLAUDE-CODE-CODEX-PROMPT",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "$vince-skills:workbench your goal is to give me a global system prompt that will make claude code behave more like codex. claude can implement things and be wrong a lot. codex has a tendency to be more thorough and get things right. I want this",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "skills/workbench/SKILL.md"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

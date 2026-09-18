@@ -1,0 +1,12 @@
+{
+  "category": "integration",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "serialization",
+    "compatibility",
+    "round-trip"
+  ],
+  "task_id": "serialization-extensions",
+  "title": "Serialization extension round trip"
+}

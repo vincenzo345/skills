@@ -1,0 +1,10 @@
+Implemented atomic updates in [batch.py](C:/Users/vince/projects/skillsrepo/.workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/campaigns/holdout-r2/codex/atomic-batch-update/workspace/batch.py).
+
+The function now:
+
+- Validates every update before mutating state.
+- Preserves state if validation raises, propagating the exact exception.
+- Consumes one-shot iterables only once.
+- Returns the original state object and preserves unrelated keys.
+
+Verification passed with behavioral assertions and `py_compile`. Generated caches were left untouched.

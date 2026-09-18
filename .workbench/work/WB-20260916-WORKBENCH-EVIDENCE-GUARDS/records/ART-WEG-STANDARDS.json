@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-WEG-STANDARDS",
+  "artifact_kind": "standards-profile",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "implementation",
+      "kind": "stage",
+      "purpose": "Constrain the three TDD slices."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "5bb6d3319e6a0a6ee7e779b8aff153f988fc7303a3a4115b171704e04f5534de"
+  },
+  "created_at": "2026-09-16T21:36:02.0089640Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-EVIDENCE-GUARDS/artifacts/standards-profile.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "standards-resolution",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WEG-MODEL",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Evidence-guard standards profile",
+  "updated_at": "2026-09-16T21:36:02.0089640Z",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

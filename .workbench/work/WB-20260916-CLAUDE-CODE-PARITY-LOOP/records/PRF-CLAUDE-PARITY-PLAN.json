@@ -1,0 +1,72 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-PLAN",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "ART-CLAUDE-PARITY-REVIEW",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "artifact-validity",
+      "limitations": [
+        "No controller code was implemented or executed.",
+        "No Claude or Codex model call, account check, or spend authorization occurred.",
+        "Parity and plateau thresholds are planned experimental rules, not observed outcomes."
+      ],
+      "non_vacuity_check": "The review found two material omissions in the draft—credential inheritance and repeated-validation overfit—and the registered plan was revised before this proof was issued.",
+      "observed_at": "2026-09-16T23:35:00Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Verified the SHA-256-registered bytes, checked every planning-gate section and routing criterion, then adversarially reviewed credential, overfitting, failure, rollout, and proof boundaries.",
+        "kind": "producer-check"
+      },
+      "requirement_id": "REQ-CLAUDE-PARITY-PLAN",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local repository artifacts",
+        "journey": "captured request through researched architecture, delivery plan, and review",
+        "seam": "registered implementation-plan Markdown artifact"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The automated Claude Code parity-loop implementation plan is coherent, decision-complete, evidence-grounded, and covers the routing acceptance criteria without claiming implementation or model results.",
+  "created_at": "2026-09-16T23:35:00Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-PARITY-PLAN",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "The plan defines adapters, isolation, persistence, metrics, optimization, reporting, and resume at named seams.",
+        "The plan pre-registers parity, plateau, promotion, holdout, cost, safety, and Codex-secondary behavior.",
+        "The plan has concrete unit, integration, security, dry-run, live-smoke, and final-campaign verification.",
+        "Execution-time auth, model, and spend choices are explicit gates and no real run is implied."
+      ],
+      "description": "Review the registered implementation plan against the captured acceptance criteria, feature-plan evaluation gate, source evidence, and an adversarial risk pass.",
+      "kind": "artifact-validity",
+      "oracle_requirement": "Content-integrity verification plus a producer review against every feature-plan gate and an adversarial pass for hidden assumptions and safety gaps.",
+      "requirement_id": "REQ-CLAUDE-PARITY-PLAN",
+      "verification_target": {
+        "environment": "local repository artifacts",
+        "journey": "captured request through researched architecture, delivery plan, and review",
+        "seam": "registered implementation-plan Markdown artifact"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-16T23:35:00Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

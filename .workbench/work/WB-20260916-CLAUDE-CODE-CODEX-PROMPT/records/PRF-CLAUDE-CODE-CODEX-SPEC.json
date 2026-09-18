@@ -1,0 +1,71 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+          "record_type": "artifact"
+        },
+        {
+          "record_id": "ART-CLAUDE-CODE-CODEX-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "artifact-validity",
+      "limitations": [
+        "No Claude model was invoked, so this proves artifact validity rather than measured behavioral improvement.",
+        "User acceptance and installation are not yet recorded."
+      ],
+      "non_vacuity_check": "The check searched for distinct instructions governing outcome definition, end-to-end reconnaissance, public-seam verification, falsification, diff review, user-visible journey testing, claim-state separation, persistence, and mechanical enforcement boundaries.",
+      "observed_at": "2026-09-16T19:18:07.7805490+00:00",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "PowerShell counted 74 lines and checked for each required operative phrase; the producer then reviewed the fixed acceptance mapping in verification.md.",
+        "kind": "producer-check"
+      },
+      "requirement_id": "REQ-CLAUDE-CODE-CODEX-SPEC",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local repository artifacts",
+        "journey": "captured requirements through rendered prompt and static conformance review",
+        "seam": "global Claude Code CLAUDE.md instruction document"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The global Claude Code instruction specification is correctly scoped, concrete, internally consistent, and covers the reported premature-completion failure without overstating prompt enforcement.",
+  "created_at": "2026-09-16T19:18:07.7805490+00:00",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-CODE-CODEX-SPEC",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "The document is ready to paste into ~/.claude/CLAUDE.md and remains below 200 lines.",
+        "It installs checkable Orient, Act, Falsify, and Close gates covering reconnaissance, coherent implementation, proportionate verification, skeptical diff review, and honest completion claims.",
+        "It distinguishes contextual guidance from mechanically enforced tests, hooks, permissions, and CI.",
+        "The verification note maps every captured failure or requirement to an operative instruction and discloses the behavioral-evaluation limitation."
+      ],
+      "description": "Check the rendered global instruction document against the captured acceptance criteria and Claude Code's documented instruction constraints.",
+      "kind": "artifact-validity",
+      "oracle_requirement": "A deterministic line-count and content-presence check plus a producer review against the fixed acceptance mapping.",
+      "requirement_id": "REQ-CLAUDE-CODE-CODEX-SPEC",
+      "verification_target": {
+        "environment": "local repository artifacts",
+        "journey": "captured requirements through rendered prompt and static conformance review",
+        "seam": "global Claude Code CLAUDE.md instruction document"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-16T19:18:07.7805490+00:00",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

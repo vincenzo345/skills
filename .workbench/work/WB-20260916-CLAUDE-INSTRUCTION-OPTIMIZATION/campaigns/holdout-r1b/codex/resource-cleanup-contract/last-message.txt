@@ -1,0 +1,10 @@
+Implemented the cleanup contract in [resources.py](C:/Users/vince/projects/skillsrepo/.workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/campaigns/holdout-r1b/codex/resource-cleanup-contract/workspace/resources.py).
+
+Verified:
+
+- Exact read result returned
+- Handle closed exactly once
+- Read exceptions preserved, even if closing fails
+- Opener exceptions propagated without cleanup
+- No context-manager support required
+- Python compilation and diff checks passed

@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-WEG-RECON",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "data-model-design",
+      "kind": "stage",
+      "purpose": "Define the backward-compatible finding contract."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "fce29c7abe85c971f717e67a206582c789d523a88ad69bd64ae033fcee249496"
+  },
+  "created_at": "2026-09-16T21:34:08.9026796Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-EVIDENCE-GUARDS/artifacts/reconnaissance.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "brownfield-reconnaissance",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WEG-FRAME",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Evidence-guard reconnaissance",
+  "updated_at": "2026-09-16T21:34:08.9026796Z",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

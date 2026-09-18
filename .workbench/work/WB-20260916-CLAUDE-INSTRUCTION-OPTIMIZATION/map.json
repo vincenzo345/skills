@@ -1,0 +1,549 @@
+{
+  "created_at": "2026-09-17T01:51:17.212297Z",
+  "desired_outcome_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "edges": [
+    {
+      "edge_id": "EDGE-FC77C22DFD8DA303",
+      "from_node_id": "E-2A898EE2EA711BFF",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-A013AFB9D435D61E",
+      "from_node_id": "E-CC1680F34D05113C",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-5424676B5561715E",
+      "from_node_id": "E-11C59C77D81EA560",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-4C6EABA01935C20A",
+      "from_node_id": "E-6FCE9C3241C754C2",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-E466BCDB3E911527",
+      "from_node_id": "E-725FBC48798C9E77",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-F854A907C24C8A55",
+      "from_node_id": "E-FB0626C50F4B740B",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-5E62FBC2465A6D5B",
+      "from_node_id": "E-9B71F3E4ED7F4886",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-9BEA8349E4B3ED0B",
+      "from_node_id": "E-2C2E5073DA38CDE3",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-291217032FC41F81",
+      "from_node_id": "E-5BA68800396FD682",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-82C365C97F96F4BF",
+      "from_node_id": "E-3A5E5C9B0C320EDA",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-0A508831117AFC46",
+      "from_node_id": "E-CA042AB23D488AE8",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    },
+    {
+      "edge_id": "EDGE-5F4E83407B2D24E5",
+      "from_node_id": "E-AF4C47BB7FE02526",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "nodes": [
+    {
+      "done_when": [
+        "The business-outcome destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Review the destination result, then authorize closure or request a revision.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        },
+        "target_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+        "target_type": "authorization"
+      },
+      "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Empirically optimize global Claude Code instructions",
+      "why_it_matters": "Through a repeatable live test-diagnose-revise-retest loop, produce global Claude Code instructions that measurably improve acceptance-test performance over Claude's clean baseline and reach the Codex reference band on held-out representative coding tasks, or establish a reproducible plateau after targeted interventions are exhausted."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-2A898EE2EA711BFF",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Behavioral improvement requires live paired trials; static instruction checks and harness unit tests cannot establish it.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T01:53:04.745101Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Behavioral improvement requires live paired trials; static instruction checks and harness unit tests cannot establish it.",
+      "why_it_matters": "Behavioral improvement requires live paired trials; static instruction checks and harness unit tests cannot establish it."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-CC1680F34D05113C",
+        "target_type": "evidence"
+      },
+      "node_id": "E-CC1680F34D05113C",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "Claude --safe-mode is the least contaminated available clean baseline because it preserves the installed client and account while disabling CLAUDE.md customi...",
+      "why_it_matters": "Claude --safe-mode is the least contaminated available clean baseline because it preserves the installed client and account while disabling CLAUDE.md customizations."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-11C59C77D81EA560",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Claude's clean baseline passed 19 of 20 original tasks and failed error-contract; the prior installed global instructions failed the same executable oracle.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:05:30.179413Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Claude's clean baseline passed 19 of 20 original tasks and failed error-contract; the prior installed global instructions failed the same executable oracle.",
+      "why_it_matters": "Claude's clean baseline passed 19 of 20 original tasks and failed error-contract; the prior installed global instructions failed the same executable oracle."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-6FCE9C3241C754C2",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Prompt-only candidates remained nondeterministic, while the corrected one-shot completion hook produced three consecutive target-task passes with recorded hook activation.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:05:30.179413Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Prompt-only candidates remained nondeterministic, while the corrected one-shot completion hook produced three consecutive target-task passes with recorded ho...",
+      "why_it_matters": "Prompt-only candidates remained nondeterministic, while the corrected one-shot completion hook produced three consecutive target-task passes with recorded hook activation."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-725FBC48798C9E77",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The Windows Codex workspace-write sandbox rejected read-only commands, so blocked trials were excluded and disposable Codex holdouts used danger-full-access with a workspace-only instruction.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:05:30.179413Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The Windows Codex workspace-write sandbox rejected read-only commands, so blocked trials were excluded and disposable Codex holdouts used danger-full-access...",
+      "why_it_matters": "The Windows Codex workspace-write sandbox rejected read-only commands, so blocked trials were excluded and disposable Codex holdouts used danger-full-access with a workspace-only instruction."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-FB0626C50F4B740B",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The promoted harness is a content-hashed global instruction file plus a one-shot Stop hook, fresh task workspaces, external executable oracles, and immutable debug evidence of hook activation.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:07:12.291278Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The promoted harness is a content-hashed global instruction file plus a one-shot Stop hook, fresh task workspaces, external executable oracles, and immutable...",
+      "why_it_matters": "The promoted harness is a content-hashed global instruction file plus a one-shot Stop hook, fresh task workspaces, external executable oracles, and immutable debug evidence of hook activation."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-9B71F3E4ED7F4886",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Delivery used staged call tranches, candidate rejection on nondeterminism, five regression tasks, a four-task frozen holdout with three repetitions, Codex reference runs, and a normal-discovery deployed smoke.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:07:50.395577Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Delivery used staged call tranches, candidate rejection on nondeterminism, five regression tasks, a four-task frozen holdout with three repetitions, Codex re...",
+      "why_it_matters": "Delivery used staged call tranches, candidate rejection on nondeterminism, five regression tasks, a four-task frozen holdout with three repetitions, Codex reference runs, and a normal-discovery deployed smoke."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-2C2E5073DA38CDE3",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The global CLAUDE.md, settings Stop hook, repository hook source and tests, four holdout tasks, documentation, and pre/post evidence are implemented; original Graphify instructions are preserved.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:09:52.572306Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The global CLAUDE.md, settings Stop hook, repository hook source and tests, four holdout tasks, documentation, and pre/post evidence are implemented; origina...",
+      "why_it_matters": "The global CLAUDE.md, settings Stop hook, repository hook source and tests, four holdout tasks, documentation, and pre/post evidence are implemented; original Graphify instructions are preserved."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-5BA68800396FD682",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The focused harness suite passed 36 tests and the complete repository suite passed 167 tests.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:11:35.955198Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The focused harness suite passed 36 tests and the complete repository suite passed 167 tests.",
+      "why_it_matters": "The focused harness suite passed 36 tests and the complete repository suite passed 167 tests."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-3A5E5C9B0C320EDA",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The promoted Claude candidate passed the target 3/3, regression 5/5, and frozen holdout 12/12; Codex passed the same holdout 12/12.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:11:35.955198Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The promoted Claude candidate passed the target 3/3, regression 5/5, and frozen holdout 12/12; Codex passed the same holdout 12/12.",
+      "why_it_matters": "The promoted Claude candidate passed the target 3/3, regression 5/5, and frozen holdout 12/12; Codex passed the same holdout 12/12."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-CA042AB23D488AE8",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did deployed-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "A fresh Claude session with normal automatic global-settings discovery recorded the installed completion guard blocking once and then passed the inclusive-range executable oracle.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:12:33.020143Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "A fresh Claude session with normal automatic global-settings discovery recorded the installed completion guard blocking once and then passed the inclusive-ra...",
+      "why_it_matters": "A fresh Claude session with normal automatic global-settings discovery recorded the installed completion guard blocking once and then passed the inclusive-range executable oracle."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-AF4C47BB7FE02526",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did outcome-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The satisfactory stopping threshold is met: frozen-holdout Claude and Codex results are both 12/12 across three repetitions, with no observed scope or false-completion regression.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T03:13:46.873569Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The satisfactory stopping threshold is met: frozen-holdout Claude and Codex results are both 12/12 across three repetitions, with no observed scope or false-...",
+      "why_it_matters": "The satisfactory stopping threshold is met: frozen-holdout Claude and Codex results are both 12/12 across three repetitions, with no observed scope or false-completion regression."
+    }
+  ],
+  "planning_destination": "business-outcome",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-17T03:13:57.237086Z",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

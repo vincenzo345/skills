@@ -1,0 +1,70 @@
+{
+  "applicability": {
+    "applied": [
+      "implementation",
+      "skill-creator",
+      "writing-for-agents"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/implementation.md",
+      "record_id": "ART-WSC-IMPLEMENT",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-WSC-IMPLEMENT"
+  ],
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-WSC-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The repository now ships portable feature-planner, openai-docs, and research companions; Workbench treats external skills as optional extensions and validation enforces the package contract."
+    }
+  ],
+  "handoff_id": "HO-WSC-IMPLEMENT",
+  "idempotency_key": "workbench-self-contained:implementation-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "df5bea4f089c40e3a77575460b9018e81ec72e8433943b89ca43fea1531e839a"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-WSC-PLAN",
+      "record_type": "artifact"
+    },
+    {
+      "record_id": "AUTH-WSC-IMPLEMENT",
+      "record_type": "authorization"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-SELF-CONTAINED",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "portable-skill-implementation",
+  "stage": "implementation",
+  "status": "completed",
+  "suggested_next_stage": "local-verification",
+  "uncertainties": [],
+  "why_next": "Verify skill structure, plugin packaging, portable dependency behavior, and the complete repository test suite.",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

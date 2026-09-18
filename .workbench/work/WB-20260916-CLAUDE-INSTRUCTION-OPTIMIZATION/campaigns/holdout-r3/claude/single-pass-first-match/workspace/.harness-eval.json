@@ -1,0 +1,12 @@
+{
+  "category": "algorithmic",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "iterators",
+    "side-effects",
+    "single-pass"
+  ],
+  "task_id": "single-pass-first-match",
+  "title": "Single-pass first matching record"
+}

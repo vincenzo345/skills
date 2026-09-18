@@ -1,0 +1,56 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-DISCOVER",
+  "artifact_kind": "process-model",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "data-model-design",
+      "kind": "stage",
+      "purpose": "Drive execution architecture, isolation, persistence, and failure semantics."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "7366c17c80c7d0836ba60d679f027d0c7b87b5aa45c2d4a24fceb27a5fa51590"
+  },
+  "created_at": "2026-09-16T23:27:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/discovery-and-loop.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "process-model",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-FRAME",
+        "record_type": "artifact"
+      }
+    },
+    {
+      "relationship": "summarizes",
+      "source": {
+        "record_id": "parity-loop-research",
+        "record_type": "external",
+        "uri": "docs/research/claude-codex-parity-loop.md"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude and Codex experiment process",
+  "updated_at": "2026-09-16T23:27:00Z",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

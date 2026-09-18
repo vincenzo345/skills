@@ -1,0 +1,500 @@
+{
+  "created_at": "2026-09-16T22:20:11.744511Z",
+  "desired_outcome_node_id": "O-20260916-CLAUDE-HARNESS-EVALS",
+  "edges": [
+    {
+      "edge_id": "EDGE-F46BD69A2E5B47B3",
+      "from_node_id": "E-49B5FF3080B90130",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-CCF1DCF4D1A4C983",
+      "from_node_id": "E-A53FCC6B63807830",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-34BCE6BBF00F94D2",
+      "from_node_id": "E-1430C1E4129DB050",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-E10FC2F9A6818591",
+      "from_node_id": "E-2ED838966BAF15D4",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-D81B5ACEAFA3B7D8",
+      "from_node_id": "E-90EE909A803917B1",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-BAC3CD373C76D131",
+      "from_node_id": "E-E73BBF13F958698E",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-3452F5A58733D3A6",
+      "from_node_id": "E-05888465FFFCBB92",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-341C5923752546D0",
+      "from_node_id": "E-297FA1A3F15D6C95",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-2F3E00ACFBE586A3",
+      "from_node_id": "E-B59E2E407A378280",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-3BF5196F82262EDD",
+      "from_node_id": "E-E7A8584DC7FB9593",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    },
+    {
+      "edge_id": "EDGE-824C02325E0D707E",
+      "from_node_id": "E-7F83383FC1CF175F",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-HARNESS-EVALS"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260916-CLAUDE-HARNESS-EVALS",
+  "nodes": [
+    {
+      "done_when": [
+        "The locally-verified-implementation destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Review the destination result, then authorize closure or request a revision.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        },
+        "target_id": "WB-20260916-CLAUDE-HARNESS-EVALS",
+        "target_type": "authorization"
+      },
+      "node_id": "O-20260916-CLAUDE-HARNESS-EVALS",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Build executable Claude harness evaluations",
+      "why_it_matters": "A locally runnable suite of 15–30 representative coding tasks can stage isolated workspaces and determine, through independent executable acceptance oracles, whether a Claude Code run achieved the requested behavior rather than merely producing a plausible patch."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "WB-20260916-CLAUDE-HARNESS-EVALS",
+          "record_type": "work"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-49B5FF3080B90130",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The bounded outcome is a 20-task offline suite whose public CLI isolates agent-visible fixtures from evaluator-owned acceptance tests and reference solutions.",
+        "references": [
+          {
+            "record_id": "WB-20260916-CLAUDE-HARNESS-EVALS",
+            "record_type": "work"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:22:35.260394Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The bounded outcome is a 20-task offline suite whose public CLI isolates agent-visible fixtures from evaluator-owned acceptance tests and reference solutions.",
+      "why_it_matters": "The bounded outcome is a 20-task offline suite whose public CLI isolates agent-visible fixtures from evaluator-owned acceptance tests and reference solutions."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-A53FCC6B63807830",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did research-and-reconnaissance establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Primary benchmark sources support original isolated fixtures, evaluator-owned tests, mandatory no-op failure and reference success, and a separate trajectory evidence channel.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:24:30.821707Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Primary benchmark sources support original isolated fixtures, evaluator-owned tests, mandatory no-op failure and reference success, and a separate trajectory...",
+      "why_it_matters": "Primary benchmark sources support original isolated fixtures, evaluator-owned tests, mandatory no-op failure and reference success, and a separate trajectory evidence channel."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-1430C1E4129DB050",
+        "target_type": "evidence"
+      },
+      "node_id": "E-1430C1E4129DB050",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "A 20-task Python-standard-library suite can fit the repository's existing synthetic-fixture and pytest conventions without containers, network access, or a d...",
+      "why_it_matters": "A 20-task Python-standard-library suite can fit the repository's existing synthetic-fixture and pytest conventions without containers, network access, or a database."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-DISCOVER",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-2ED838966BAF15D4",
+        "target_type": "evidence"
+      },
+      "node_id": "E-2ED838966BAF15D4",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "An immutable typed catalog plus an isolated stage/verify CLI preserves evaluator secrecy with less fixture sprawl than four physical evaluator files per task.",
+      "why_it_matters": "An immutable typed catalog plus an isolated stage/verify CLI preserves evaluator secrecy with less fixture sprawl than four physical evaluator files per task."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-DISCOVER",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-90EE909A803917B1",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did solution-architecture establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Filesystem separation protects evaluator assets from ordinary agent access but does not constitute an operating-system sandbox for executing untrusted candidate code.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-HARNESS-EVALS-DISCOVER",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:26:46.443721Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Filesystem separation protects evaluator assets from ordinary agent access but does not constitute an operating-system sandbox for executing untrusted candid...",
+      "why_it_matters": "Filesystem separation protects evaluator assets from ordinary agent access but does not constitute an operating-system sandbox for executing untrusted candidate code."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-E73BBF13F958698E",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did tdd-and-agent-instruction-design establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The fixed delivery contract defines 20 distinct task IDs, the stage/verify JSON interface, evaluator isolation rules, and five vertical TDD slices.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-HARNESS-EVALS-ARCH",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:28:38.369182Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The fixed delivery contract defines 20 distinct task IDs, the stage/verify JSON interface, evaluator isolation rules, and five vertical TDD slices.",
+      "why_it_matters": "The fixed delivery contract defines 20 distinct task IDs, the stage/verify JSON interface, evaluator isolation rules, and five vertical TDD slices."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-05888465FFFCBB92",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did tdd establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The implementation adds the five-command runner, exactly 20 original task contracts, evaluator-owned red/green oracles, focused public-seam tests, and operating documentation without modifying unrelated user changes.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:46:17.666968Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The implementation adds the five-command runner, exactly 20 original task contracts, evaluator-owned red/green oracles, focused public-seam tests, and operat...",
+      "why_it_matters": "The implementation adds the five-command runner, exactly 20 original task contracts, evaluator-owned red/green oracles, focused public-seam tests, and operating documentation without modifying unrelated user changes."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-297FA1A3F15D6C95",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did tdd establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The focused suite passed 8 tests and a one-pass author check observed all 20 baselines fail and all 20 references pass on the current Windows environment.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:46:17.666968Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The focused suite passed 8 tests and a one-pass author check observed all 20 baselines fail and all 20 references pass on the current Windows environment.",
+      "why_it_matters": "The focused suite passed 8 tests and a one-pass author check observed all 20 baselines fail and all 20 references pass on the current Windows environment."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-B59E2E407A378280",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Two full author-validation repetitions produced 40 intended baseline failures and 40 reference passes across the 20-task catalog.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:55:14.584858Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Two full author-validation repetitions produced 40 intended baseline failures and 40 reference passes across the 20-task catalog.",
+      "why_it_matters": "Two full author-validation repetitions produced 40 intended baseline failures and 40 reference passes across the 20-task catalog."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-E7A8584DC7FB9593",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The focused suite passed 9 tests, the complete runtime suite passed 105 tests, and both repository validators passed on the current Windows environment.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:55:14.584858Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The focused suite passed 9 tests, the complete runtime suite passed 105 tests, and both repository validators passed on the current Windows environment.",
+      "why_it_matters": "The focused suite passed 9 tests, the complete runtime suite passed 105 tests, and both repository validators passed on the current Windows environment."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-7F83383FC1CF175F",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "No model behavior, Linux parity, independent human solvability, or operating-system sandbox claim is established by the local proof.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T22:55:14.584858Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "No model behavior, Linux parity, independent human solvability, or operating-system sandbox claim is established by the local proof.",
+      "why_it_matters": "No model behavior, Linux parity, independent human solvability, or operating-system sandbox claim is established by the local proof."
+    }
+  ],
+  "planning_destination": "locally-verified-implementation",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-16T22:55:26.248217Z",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

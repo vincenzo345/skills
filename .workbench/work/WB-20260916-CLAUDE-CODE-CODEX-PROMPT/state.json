@@ -1,0 +1,118 @@
+{
+  "artifact_ids": [
+    "ART-CLAUDE-CODE-CODEX-FRAME",
+    "ART-CLAUDE-CODE-CODEX-LOOP",
+    "ART-CLAUDE-CODE-CODEX-SPEC",
+    "ART-CLAUDE-CODE-CODEX-VERIFY"
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-CODE-CODEX-PROMPT-CLOSURE"
+  ],
+  "completion": {
+    "authorized_by": "AUTH-CLAUDE-CODE-CODEX-PROMPT-CLOSURE",
+    "claim": "Planning destination specification completed.",
+    "completed_at": "2026-09-16T20:02:14.667688Z",
+    "open_obligation_node_ids": [],
+    "proof_ids": [
+      "PRF-CLAUDE-CODE-CODEX-SPEC"
+    ]
+  },
+  "created_at": "2026-09-16T19:12:15.383955Z",
+  "current_stage": "specification",
+  "decision_ids": [],
+  "desired_outcome": "A concise, ready-to-use global Claude Code instruction document consistently drives outcome-first implementation, evidence-based verification, skeptical self-review, honest completion claims, and persistence through genuine completion or a precise blocker.",
+  "handoff_ids": [
+    "HO-CLAUDE-CODE-CODEX-FRAME",
+    "HO-CLAUDE-CODE-CODEX-DISCOVER",
+    "HO-CLAUDE-CODE-CODEX-SPEC"
+  ],
+  "latest_event_id": "EVT-20260916-CLAUDE-CODE-CODEX-PROMPT-000008",
+  "map_id": "MAP-20260916-CLAUDE-CODE-CODEX-PROMPT",
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "specification",
+  "proof_ids": [
+    "PRF-CLAUDE-CODE-CODEX-SPEC"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-16T19:12:15.383955Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-16T19:14:53.940493Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-CODE-CODEX-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-16T19:12:15.383955Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "evidence-intake",
+        "process-model"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-16T19:16:17.321618Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-CODE-CODEX-LOOP"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "process-model",
+      "started_at": "2026-09-16T19:14:53.940493Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-16T19:20:54.152575Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-CODE-CODEX-SPEC",
+        "ART-CLAUDE-CODE-CODEX-VERIFY"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "specification",
+      "started_at": "2026-09-16T19:16:17.321618Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 8,
+  "status": "completed-for-destination",
+  "title": "Make Claude Code execute with Codex-like rigor",
+  "updated_at": "2026-09-16T20:02:14.667688Z",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

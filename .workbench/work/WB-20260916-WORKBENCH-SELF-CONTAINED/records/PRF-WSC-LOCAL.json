@@ -1,0 +1,66 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-WSC-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "Remote publication and clean installation were not performed.",
+        "Future model behavior across every harness is not proven by structural validation."
+      ],
+      "non_vacuity_check": "Validation enumerated 11 skill packages and the regression test asserts the three reported companions are declared and present.",
+      "observed_at": "2026-09-16T23:28:37.9152429Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Repository validation, two per-skill validators, both plugin validators, 11 focused tests, and 113 total tests passed.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-WSC-LOCAL",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local-windows-repository",
+        "journey": "repository-package-to-validation",
+        "seam": "skills-plugin-and-workbench-routing"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The repository locally ships and validates the demonstrated portable Workbench companion set without requiring undeclared external skills for route completion.",
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-WSC-LOCAL",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "feature-planner, openai-docs, and research are deployable repository skills.",
+        "Workbench routes remain executable without an optional external skill.",
+        "Skill, plugin, focused, and full repository validation pass."
+      ],
+      "description": "Verify companion presence, portable instruction contracts, manifest consistency, and repository regressions.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Independent repository validators, plugin validators, tests, and file inspection report consistent results.",
+      "requirement_id": "REQ-WSC-LOCAL",
+      "verification_target": {
+        "environment": "local-windows-repository",
+        "journey": "repository-package-to-validation",
+        "seam": "skills-plugin-and-workbench-routing"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-16T23:28:37.9152429Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

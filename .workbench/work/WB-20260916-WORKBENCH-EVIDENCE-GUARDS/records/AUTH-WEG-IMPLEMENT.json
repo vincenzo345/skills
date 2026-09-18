@@ -1,0 +1,38 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-WEG-IMPLEMENT",
+  "grant": {
+    "expires_at": "2026-09-17T21:36:02.0089640Z",
+    "granted_at": "2026-09-16T21:30:46.490264Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-16T21:30:46.490264Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Grant basis is the captured exact user request 'implement this' at INTAKE-WB-20260916-WORKBENCH-EVIDENCE-GUARDS, referring to the accepted minimum typed-findings, narrow-hook, and two-eval recommendation.",
+      "May update the repository and register the narrow hook in the user's Claude settings; may not modify frozen Workbench items, commit, push, deploy, publish, or close."
+    ],
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

@@ -1,0 +1,38 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-CLAUDE-OPT-LOOP-IMPLEMENT",
+  "grant": {
+    "granted_at": "2026-09-17T23:12:41Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-17T23:12:41Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Implement and locally validate the reusable Claude harness optimization loop in this repository.",
+      "Use fake providers for this implementation session; do not spend model-provider budget or run against an unsanitized brownfield workspace.",
+      "Do not mutate global Claude configuration, commit, push, deploy, publish, or administratively close the Workbench item."
+    ],
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP"
+}

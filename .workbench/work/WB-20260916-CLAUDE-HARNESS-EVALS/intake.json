@@ -1,0 +1,32 @@
+{
+  "created_at": "2026-09-16T21:30:42.374468Z",
+  "idempotency_key": "claude-harness-evals:capture:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "18ba469a208829ec458f6c2c57949d3d2615b3a7a0f3235506a929fefc6323ae"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260916-CLAUDE-HARNESS-EVALS",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "$vince-skills:workbench  help me build those 15-30 representative coding tasks with ewxecutable acceptance tests. feel free to use an existing github repo somewhere for ideas",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "skills/workbench/SKILL.md",
+    "conversation:claude-code-codex-prompt-and-dspy"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

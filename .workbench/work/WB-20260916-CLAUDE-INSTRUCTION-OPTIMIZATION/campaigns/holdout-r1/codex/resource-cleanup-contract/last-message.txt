@@ -1,0 +1,1 @@
+Blocked by workspace permissions: the environment rejects even read-only access to `TASK.md`, and filesystem writes are disabled. I couldn’t inspect, implement, or verify the requested change. Please rerun with workspace read/write access enabled.

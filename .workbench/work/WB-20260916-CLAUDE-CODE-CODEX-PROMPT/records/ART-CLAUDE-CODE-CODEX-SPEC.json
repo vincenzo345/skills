@@ -1,0 +1,57 @@
+{
+  "artifact_id": "ART-CLAUDE-CODE-CODEX-SPEC",
+  "artifact_kind": "specification",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "user:vince",
+      "kind": "external-party",
+      "purpose": "Install as personal cross-project Claude Code instructions after review."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "0601f20d7aec9e30db717f2e1e3ef871804ade5c330294213fd56a5835aa5ff1"
+  },
+  "created_at": "2026-09-16T19:18:07.7805490+00:00",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-CODE-CODEX-PROMPT/artifacts/global-claude.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "specification",
+  "proof_ids": [
+    "PRF-CLAUDE-CODE-CODEX-SPEC"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+        "record_type": "artifact"
+      }
+    },
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Global Claude Code rigorous execution instructions",
+  "updated_at": "2026-09-16T19:18:07.7805490+00:00",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

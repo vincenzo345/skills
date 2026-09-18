@@ -1,0 +1,64 @@
+{
+  "applicability": {
+    "applied": [
+      "implementation"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md",
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENT"
+  ],
+  "created_at": "2026-09-17T03:04:54Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The global CLAUDE.md, settings Stop hook, repository hook source and tests, four holdout tasks, documentation, and pre/post evidence are implemented; original Graphify instructions are preserved."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION",
+  "idempotency_key": "claude-instruction-optimization:implementation:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "80b461377702b55fc2f946fc135b7e537156ad53309677baf2ee8c69b27588a3"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-AUTH",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "implementation",
+  "status": "completed",
+  "suggested_next_stage": "local-verification",
+  "uncertainties": [],
+  "why_next": "Register focused, repository-wide, live holdout, and deployed-global verification.",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

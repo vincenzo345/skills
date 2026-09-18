@@ -1,0 +1,12 @@
+{
+  "category": "algorithmic",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "iterators",
+    "generators",
+    "regression"
+  ],
+  "task_id": "one-shot-iterator",
+  "title": "One-shot iterator support"
+}

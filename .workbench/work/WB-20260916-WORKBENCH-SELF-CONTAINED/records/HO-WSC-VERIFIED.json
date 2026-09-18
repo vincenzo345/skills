@@ -1,0 +1,75 @@
+{
+  "applicability": {
+    "applied": [
+      "local-verification",
+      "skill-validation",
+      "plugin-validation",
+      "repository-regression"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/verification.md",
+      "record_id": "ART-WSC-VERIFY",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-WSC-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Repository validation passed for all 11 skills and both new skills passed individual structural validation."
+    },
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-WSC-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Both Claude plugin manifests passed validation and the complete local suite passed 113 tests."
+    }
+  ],
+  "handoff_id": "HO-WSC-VERIFIED",
+  "idempotency_key": "workbench-self-contained:verification-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "df89319b8c44b02e3a579afb3a97c0902063d06fc8d7d6c15d6cd0bb490127e5"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-WSC-IMPLEMENT",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-SELF-CONTAINED",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "local-skill-verification",
+  "stage": "local-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The locally verified repository change is ready for human review; installation, publication, commit, deployment, and closure remain separate actions.",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

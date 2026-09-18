@@ -1,0 +1,12 @@
+{
+  "category": "robustness",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "sqlite",
+    "transactions",
+    "rollback"
+  ],
+  "task_id": "sqlite-transaction",
+  "title": "SQLite transaction boundary"
+}

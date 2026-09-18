@@ -1,0 +1,141 @@
+{
+  "artifact_ids": [
+    "ART-CLAUDE-PARITY-FRAME",
+    "ART-CLAUDE-PARITY-DISCOVER",
+    "ART-CLAUDE-PARITY-ARCH",
+    "ART-CLAUDE-PARITY-PLAN",
+    "ART-CLAUDE-PARITY-REVIEW"
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:18:21.576094Z",
+  "current_stage": "delivery-planning",
+  "decision_ids": [],
+  "desired_outcome": "An implementation-ready, safety-bounded plan defines how to run reproducible Claude Code and Codex coding-agent evaluations, improve Claude's harness configuration automatically until it reaches operational parity or a measured plateau, and only then explore Codex improvements without contaminating final evaluation evidence.",
+  "handoff_ids": [
+    "HO-CLAUDE-PARITY-FRAME",
+    "HO-CLAUDE-PARITY-DISCOVER",
+    "HO-CLAUDE-PARITY-ARCH",
+    "HO-CLAUDE-PARITY-PLAN",
+    "HO-CLAUDE-PARITY-PROOF"
+  ],
+  "latest_event_id": "EVT-20260916-CLAUDE-CODE-PARITY-LOOP-000010",
+  "map_id": "MAP-20260916-CLAUDE-CODE-PARITY-LOOP",
+  "next_action": {
+    "description": "Review the destination result, then authorize closure or request a revision.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    },
+    "target_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+    "target_type": "authorization"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "implementation-plan",
+  "proof_ids": [
+    "PRF-CLAUDE-PARITY-PLAN"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-16T23:18:21.576094Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-16T23:23:19.919180Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-16T23:18:21.576094Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance",
+        "evidence-intake",
+        "process-model"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-16T23:24:21.693459Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-DISCOVER"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "process-model",
+      "started_at": "2026-09-16T23:23:19.919180Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "solution-architecture",
+        "data-model-design"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "completed_at": "2026-09-16T23:25:06.277993Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-ARCH"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "data-model-design",
+      "started_at": "2026-09-16T23:24:21.693459Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification",
+        "delivery-planning"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-16T23:28:22.449847Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-PLAN",
+        "ART-CLAUDE-PARITY-REVIEW"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "delivery-planning",
+      "started_at": "2026-09-16T23:25:06.277993Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 10,
+  "status": "awaiting-acceptance",
+  "title": "Plan an automated Claude Code parity loop",
+  "updated_at": "2026-09-16T23:28:22.449847Z",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

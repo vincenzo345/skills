@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+  "artifact_kind": "validation-result",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+      "kind": "work-item",
+      "purpose": "Supply local-implementation proof for the selected destination."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "70101762c4fa59637fb23da7fc394f32c6ff8ad3d0dd14da45ba3e4cfe182918"
+  },
+  "created_at": "2026-09-17T01:15:40Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/verification.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "local-verification",
+  "proof_ids": [
+    "PRF-CLAUDE-PARITY-LIVE-RUNNER-LOCAL"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "verifies",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Docker isolation runner local verification",
+  "updated_at": "2026-09-17T01:15:40Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

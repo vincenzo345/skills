@@ -1,0 +1,355 @@
+{
+  "acceptance_evidence": [
+    "A public CLI command runs Docker canaries and writes a hashed qualification artifact bound to the Docker server, image digest, and enforced policy.",
+    "Canaries prove the staged workspace is writable, host/evaluator paths and a planted host secret are absent, networking is disabled, the root filesystem is read-only, privileges are dropped, resources are capped, and timeout cleanup removes the container.",
+    "A public runner API executes a deterministic fake agent in the qualified container and returns bounded stdout, stderr, exit, timeout, and duration data.",
+    "Negative tests prove unavailable Docker, failing canaries, artifact tampering, policy drift, image drift, timeouts, and excess output fail closed.",
+    "Focused tests, the full relevant runtime suite, and a real Docker smoke journey pass without invoking either model."
+  ],
+  "assumptions": [
+    "The phrase full access applies to local machine and repository operations, not unbounded model spend or permission to export enterprise credentials.",
+    "Network-disabled Docker qualification is the correct first safety boundary; provider egress allowlisting and credential injection belong to a later explicitly authorized live-model destination.",
+    "File-backed immutable JSON qualification records are sufficient; no database is introduced."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "deployment",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "supplied-requirements",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "local-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Separate isolation proof from later provider authentication, spend, and parity claims.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The runner extends the existing controller, config, CLI, and artifact store.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The predecessor already captured current vendor and harness research; this phase tests a local technical boundary.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The accepted predecessor plan already defines the experiment loop.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No business process or real-model parity claim is in this destination.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "brownfield-reconnaissance",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "The surface is a machine-oriented CLI and JSON artifact.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Isolation policy, qualification, execution, and evidence binding form a security-critical adapter boundary.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The change introduces a durable qualification artifact and binds campaign execution to its identity and policy.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The user accepted the staged plan and explicitly directed continuation.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "data-model-design",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The security boundary needs deterministic fail-closed behavior, safe subprocess construction, and standard-library compatibility.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Executable canary and failure semantics must be fixed before enabling the backend.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Vertical slices must qualify policy before connecting it to campaign execution.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "delivery-planning",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The user explicitly requested continuation with machine access.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The destination requires public-seam tests and a real local Docker smoke journey.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      }
+    ]
+  },
+  "constraints": [
+    "Use vertical red-green TDD at the confirmed public CLI, artifact-store, and isolation-runner seams.",
+    "Do not invoke Claude or Codex models, access or copy provider credentials, or consume paid or enterprise quota in this destination.",
+    "Use the already-local python:3.12-slim image and pin qualification evidence to its immutable image identity.",
+    "The evaluator repository and hidden acceptance material must never be mounted into an agent container.",
+    "Live execution must fail closed on missing, stale, tampered, or mismatched qualification evidence.",
+    "Preserve existing commands, tests, and unrelated dirty-worktree changes.",
+    "Commit, deployment, global CLAUDE.md or hook promotion, tracker publication, and Workbench closure remain unauthorized."
+  ],
+  "created_at": "2026-09-17T00:46:01.391070Z",
+  "desired_outcome": "The evaluation controller can qualify and exercise a Docker-backed agent runner through explicit filesystem, secret, network, resource, timeout, and cleanup controls, persists auditable qualification evidence, and refuses live campaign execution unless that evidence matches the configured runner. No paid model is invoked in this destination.",
+  "engagement_intent": "implement",
+  "evidence_references": [
+    ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/intake.json",
+    ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/implementation.md",
+    ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/verification.md",
+    ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/implementation-plan.md",
+    "claude_harness_eval/experiment/controller.py",
+    "claude_harness_eval/experiment/config.py",
+    "tests/runtime/test_claude_harness_experiment.py",
+    "docker info"
+  ],
+  "execution_lane": "full",
+  "facts": [
+    {
+      "source_references": [
+        "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+        "claude_harness_eval/experiment/controller.py"
+      ],
+      "statement": "The predecessor controller foundation is completed for its locally verified destination and deliberately rejects live execution."
+    },
+    {
+      "source_references": [
+        "docker info --format '{{json .ServerVersion}}'"
+      ],
+      "statement": "Docker Desktop's Linux engine is reachable and reports server version 28.3.2."
+    },
+    {
+      "source_references": [
+        "docker image ls"
+      ],
+      "statement": "A local python:3.12-slim image is already present, so isolation canaries need no image download."
+    },
+    {
+      "source_references": [
+        "claude_harness_eval/experiment/config.py",
+        "claude_harness_eval/experiment/controller.py"
+      ],
+      "statement": "The current campaign schema stores an operator assertion named isolation_qualified but has no bound qualification artifact or executable isolation backend."
+    }
+  ],
+  "idempotency_key": "route-start-claude-parity-live-runner-v1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "7f31929deb3ceca111dc8f599490fb2f812aefc3bd18292688f23a21a715aabf"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "8f7793754920019bd59e74eba1b15210f7d5917e7f7d0b16e9bb817ba4d2fb8b"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "rationale": "The accepted predecessor deliberately stopped before live execution. Docker is now available, so the next bounded risk is the isolation and subprocess runner boundary; it can be implemented and proven with deterministic canaries before credentials or model spend are introduced.",
+  "recommendation": {
+    "assumptions": [
+      "Local machine access does not authorize model quota consumption."
+    ],
+    "choice": "Implement and qualify the Docker isolation boundary before any live provider session.",
+    "confidence": "high",
+    "rationale": "This resolves the highest-impact safety and reproducibility uncertainty without credentials or spend.",
+    "tradeoffs": [
+      "Provider authentication and network egress remain intentionally untested until a later authorization."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "routing_revision": 1,
+  "runtime_route": "brownfield-feature",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "predecessor verification boundary"
+      ],
+      "reason": "Separate isolation proof from later provider authentication, spend, and parity claims.",
+      "stage_id": "outcome-framing"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment"
+      ],
+      "reason": "The runner extends the existing controller, config, CLI, and artifact store.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "docs/research/claude-codex-parity-loop.md"
+      ],
+      "reason": "The predecessor already captured current vendor and harness research; this phase tests a local technical boundary.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "predecessor implementation plan"
+      ],
+      "reason": "The accepted predecessor plan already defines the experiment loop.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "destination boundary"
+      ],
+      "reason": "No business process or real-model parity claim is in this destination.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "claude_harness_eval/__main__.py"
+      ],
+      "reason": "The surface is a machine-oriented CLI and JSON artifact.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "predecessor architecture",
+        "Docker engine"
+      ],
+      "reason": "Isolation policy, qualification, execution, and evidence binding form a security-critical adapter boundary.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The change introduces a durable qualification artifact and binds campaign execution to its identity and policy.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "accepted, go",
+        "continue, you have full access"
+      ],
+      "reason": "The user accepted the staged plan and explicitly directed continuation.",
+      "stage_id": "proposal"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "AGENTS.md",
+        "TDD skill"
+      ],
+      "reason": "The security boundary needs deterministic fail-closed behavior, safe subprocess construction, and standard-library compatibility.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "Executable canary and failure semantics must be fixed before enabling the backend.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "TDD skill"
+      ],
+      "reason": "Vertical slices must qualify policy before connecting it to campaign execution.",
+      "stage_id": "delivery-planning"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user explicitly requested continuation with machine access.",
+      "stage_id": "implementation"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The destination requires public-seam tests and a real local Docker smoke journey.",
+      "stage_id": "local-verification"
+    }
+  ],
+  "title": "Qualify the isolated live-runner boundary",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

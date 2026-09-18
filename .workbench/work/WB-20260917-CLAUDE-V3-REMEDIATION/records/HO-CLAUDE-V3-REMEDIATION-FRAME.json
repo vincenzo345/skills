@@ -1,0 +1,72 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-framing"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md",
+      "record_id": "ART-CLAUDE-V3-REMEDIATION-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T22:24:59Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The user requires Claude to meet or exceed Codex under the established grading criteria, with harness changes as the primary mechanism."
+    },
+    {
+      "basis": "inference",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Quality and efficiency must be co-equal acceptance conditions because v3 improved its final calibration only after costly late rework."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-V3-REMEDIATION-FRAME",
+  "idempotency_key": "claude-v3-remediation:frame:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "7c702b6a49a14fec7c9c3c46de412a0eabe17456111057e16e966249d7bec936"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260917-CLAUDE-V3-REMEDIATION",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-20260917-CLAUDE-V3-REMEDIATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "feature-planner",
+  "stage": "outcome-framing",
+  "status": "completed",
+  "suggested_next_stage": "brownfield-reconnaissance",
+  "uncertainties": [],
+  "why_next": "Trace the v3 failures to the current prompt, hooks, installation, Workbench support, and comparison evidence.",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

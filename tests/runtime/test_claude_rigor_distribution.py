@@ -32,6 +32,12 @@ def test_plugin_registers_portable_one_shot_completion_guard() -> None:
     assert "completion_guard.js" in command
     assert (PLUGIN / "hooks" / "completion_guard.js").is_file()
 
+    preflight = hooks["hooks"]["PreToolUse"]
+    preflight_command = preflight[0]["hooks"][0]["command"]
+    assert "${CLAUDE_PLUGIN_ROOT}" in preflight_command
+    assert "diagnosis_preflight.js" in preflight_command
+    assert (PLUGIN / "hooks" / "diagnosis_preflight.js").is_file()
+
 
 def test_default_agent_carries_the_validated_operating_contract() -> None:
     agent = (PLUGIN / "agents" / "rigorous-engineer.md").read_text(encoding="utf-8")
@@ -43,6 +49,9 @@ def test_default_agent_carries_the_validated_operating_contract() -> None:
     assert "Close honestly" in agent
     assert "valid inputs, boundary values, malformed values, wrong-type values" in agent
     assert "wrong input type" in agent
+    assert "Diagnosis preflight" in agent
+    assert "environment, deployed revision or source provenance" in agent
+    assert "ask that prerequisite question by itself" in agent
 
 
 def test_plugin_has_no_repository_relative_runtime_dependencies() -> None:
@@ -51,6 +60,7 @@ def test_plugin_has_no_repository_relative_runtime_dependencies() -> None:
         PLUGIN / "agents" / "rigorous-engineer.md",
         PLUGIN / "hooks" / "hooks.json",
         PLUGIN / "hooks" / "completion_guard.js",
+        PLUGIN / "hooks" / "diagnosis_preflight.js",
     ]
 
     for path in runtime_files:

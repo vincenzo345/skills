@@ -1,0 +1,12 @@
+Implemented bounded retry semantics in [retrying.py](C:/Users/vince/projects/skillsrepo/.workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/campaigns/holdout-r2/codex/retry-attempt-semantics/workspace/retrying.py).
+
+Verified:
+
+- Exactly `max_attempts` calls permitted.
+- Immediate return on success.
+- Only `TransientError` is retried.
+- Final transient exception is re-raised unchanged.
+- Other exceptions propagate immediately.
+- Non-positive attempts raise `ValueError` before invocation.
+- Python compilation passed.
+- Five focused behavioral tests passed.

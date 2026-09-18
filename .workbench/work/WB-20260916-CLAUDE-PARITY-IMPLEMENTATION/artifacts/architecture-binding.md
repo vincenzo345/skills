@@ -1,0 +1,3 @@
+# Architecture and data binding
+
+The accepted predecessor architecture binds to this repository as follows: typed contracts and TOML parsing in `experiment/config.py`; immutable JSON/JSONL state in `experiment/store.py`; agent protocols and fake/vendor argv adapters in `experiment/adapters.py`; orchestration in `experiment/controller.py`; reporting in `experiment/report.py`; CLI wiring in `__main__.py`. Campaign roots are caller-selected and never default inside source control. Manifests and terminal run results are immutable; `state.json` is atomically replaced; `events.jsonl` is append-only. Stable SHA-256 IDs prevent duplicate completed cells on resume. A live adapter is never launched unless explicit live authorization and isolation qualification are present.

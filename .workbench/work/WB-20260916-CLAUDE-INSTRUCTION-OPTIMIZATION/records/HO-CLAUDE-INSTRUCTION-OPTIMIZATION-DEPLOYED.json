@@ -1,0 +1,63 @@
+{
+  "applicability": {
+    "applied": [
+      "release",
+      "deployed-verification"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md",
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T03:04:54Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "A fresh Claude session with normal automatic global-settings discovery recorded the installed completion guard blocking once and then passed the inclusive-range executable oracle."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+  "idempotency_key": "claude-instruction-optimization:deployed:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "3b6faee925b04de0d1f6b7f45b9563254394c0973e92ff3922203352b54b5133"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "deployed-verification",
+  "stage": "deployed-verification",
+  "status": "completed",
+  "suggested_next_stage": "outcome-verification",
+  "uncertainties": [],
+  "why_next": "Compare the deployed Claude outcome with the pre-registered parity threshold and stop rule.",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

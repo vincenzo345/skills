@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-FRAME",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "process-model",
+      "kind": "stage",
+      "purpose": "Bound discovery and the experiment-loop design."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "c7975f0affecc281a146a533b480d2b38f1454beff933c3f2c6ff44590c72b15"
+  },
+  "created_at": "2026-09-16T23:25:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/outcome-frame.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-framing",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude Code parity loop outcome frame",
+  "updated_at": "2026-09-16T23:25:00Z",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "process-model",
+      "kind": "stage",
+      "purpose": "Bound the execution loop to the reported failure and explicit proof boundary."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "4256b485972ba37831913d68569e54ee0fe19e5a8c57140c00d2e6077eae6b97"
+  },
+  "created_at": "2026-09-16T19:14:03.8035706+00:00",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-CODE-CODEX-PROMPT/artifacts/outcome-frame.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-framing",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude Code rigor outcome frame",
+  "updated_at": "2026-09-16T19:14:03.8035706+00:00",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

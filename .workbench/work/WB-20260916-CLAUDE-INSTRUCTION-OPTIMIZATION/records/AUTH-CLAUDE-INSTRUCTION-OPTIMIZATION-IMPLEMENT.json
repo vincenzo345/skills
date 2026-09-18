@@ -1,0 +1,38 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENT",
+  "grant": {
+    "granted_at": "2026-09-16T00:00:00Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-16T00:00:00Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Implement and validate the global Claude instructions, completion hook, synthetic evaluation tasks, and local evidence in this repository and the user's personal Claude configuration.",
+      "Use only synthetic workspaces for live model trials and preserve the user's original Graphify instructions.",
+      "Do not commit, externally publish, deploy unrelated software, or administratively close the Workbench item."
+    ],
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

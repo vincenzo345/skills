@@ -1,0 +1,74 @@
+{
+  "applicability": {
+    "applied": [
+      "brownfield-reconnaissance",
+      "evidence-intake",
+      "process-model"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260917-CLAUDE-OPTIMIZATION-LOOP/artifacts/implementation-and-verification.md",
+      "record_id": "ART-CLAUDE-OPT-LOOP-DISCOVERY",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T23:12:41Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The prior experiment controller already supplied immutable manifests, atomic state, fake runs, resumability, run ceilings, provider argv builders, and reports."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The missing behavior was candidate lifecycle, rubric evaluation, bounded improvement, non-regression promotion, fresh live workspaces, and terminal stopping rules."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-OPT-LOOP-DISCOVERY",
+  "idempotency_key": "claude-opt-loop:discovery:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "11cc772aae873fce37a4f0af0f87670982ef0d2a88237564bab00e1236ff3ac1"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-OPT-LOOP-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "process-model",
+  "status": "completed",
+  "suggested_next_stage": "solution-architecture",
+  "uncertainties": [],
+  "why_next": "Assign durable ownership to runner, evaluator, improver, candidate registry, comparator, and promoter seams.",
+  "work_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP"
+}

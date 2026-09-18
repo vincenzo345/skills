@@ -1,0 +1,359 @@
+{
+  "created_at": "2026-09-16T23:18:21.576094Z",
+  "desired_outcome_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP",
+  "edges": [
+    {
+      "edge_id": "EDGE-53D2DAE4404E7171",
+      "from_node_id": "E-5E307E10A5EF4DDA",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP"
+    },
+    {
+      "edge_id": "EDGE-2CB50621C3DA40EF",
+      "from_node_id": "E-6422F161012408B6",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP"
+    },
+    {
+      "edge_id": "EDGE-77A52F8DC6EEDDB8",
+      "from_node_id": "E-E10A15B6643D69B6",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP"
+    },
+    {
+      "edge_id": "EDGE-4C0E72AC7EF76DEA",
+      "from_node_id": "E-E765344DDAB453C8",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP"
+    },
+    {
+      "edge_id": "EDGE-3ABA0D875DB38123",
+      "from_node_id": "E-A0107DBDD9A5DCEF",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP"
+    },
+    {
+      "edge_id": "EDGE-2A85B137EC7577F7",
+      "from_node_id": "E-9AC3FC3C682514FD",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP"
+    },
+    {
+      "edge_id": "EDGE-C757CF012B7936FC",
+      "from_node_id": "E-2A68861CD61CBEB3",
+      "rationale": "The unestablished finding remains visible without supporting the outcome.",
+      "relationship": "traces-to",
+      "to_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP"
+    },
+    {
+      "edge_id": "EDGE-89996CCD5A5E3DE8",
+      "from_node_id": "E-734750714212C863",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260916-CLAUDE-CODE-PARITY-LOOP",
+  "nodes": [
+    {
+      "done_when": [
+        "The implementation-plan destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Review the destination result, then authorize closure or request a revision.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        },
+        "target_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+        "target_type": "authorization"
+      },
+      "node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Plan an automated Claude Code parity loop",
+      "why_it_matters": "An implementation-ready, safety-bounded plan defines how to run reproducible Claude Code and Codex coding-agent evaluations, improve Claude's harness configuration automatically until it reaches operational parity or a measured plateau, and only then explore Codex improvements without contaminating final evaluation evidence."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+          "record_type": "work"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-5E307E10A5EF4DDA",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The destination is an implementation-ready plan for a bounded automated loop that terminates at operational parity or a measured plateau, without claiming universal model equivalence.",
+        "references": [
+          {
+            "record_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+            "record_type": "work"
+          }
+        ],
+        "resolved_at": "2026-09-16T23:23:17.379495Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The destination is an implementation-ready plan for a bounded automated loop that terminates at operational parity or a measured plateau, without claiming un...",
+      "why_it_matters": "The destination is an implementation-ready plan for a bounded automated loop that terminates at operational parity or a measured plateau, without claiming universal model equivalence."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-DISCOVER",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-6422F161012408B6",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did research-and-process-design establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The existing stage-and-verify suite is a sound development substrate, while a credible final comparison requires sealed validation and holdout tasks not exposed to the optimizer.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-DISCOVER",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T23:24:19.137944Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The existing stage-and-verify suite is a sound development substrate, while a credible final comparison requires sealed validation and holdout tasks not expo...",
+      "why_it_matters": "The existing stage-and-verify suite is a sound development substrate, while a credible final comparison requires sealed validation and holdout tasks not exposed to the optimizer."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-DISCOVER",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-E10A15B6643D69B6",
+        "target_type": "evidence"
+      },
+      "node_id": "E-E10A15B6643D69B6",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "Both installed CLIs expose non-interactive machine-readable runs, but Claude Enterprise access does not by itself establish API entitlement and GEPA requires...",
+      "why_it_matters": "Both installed CLIs expose non-interactive machine-readable runs, but Claude Enterprise access does not by itself establish API entitlement and GEPA requires its own proposal-model access and budget."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-E765344DDAB453C8",
+        "target_type": "evidence"
+      },
+      "node_id": "E-E765344DDAB453C8",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "A vendor-neutral controller, separate agent and verifier isolation boundaries, and append-only hashed run artifacts provide the smallest sufficient architect...",
+      "why_it_matters": "A vendor-neutral controller, separate agent and verifier isolation boundaries, and append-only hashed run artifacts provide the smallest sufficient architecture for reproducible and resumable trials."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-A0107DBDD9A5DCEF",
+        "target_type": "evidence"
+      },
+      "node_id": "E-A0107DBDD9A5DCEF",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "The durable model can use immutable files plus an atomic state projection; a relational database is not required for the first implementation.",
+      "why_it_matters": "The durable model can use immutable files plus an atomic state projection; a relational database is not required for the first implementation."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-9AC3FC3C682514FD",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did feature-planner establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The plan fixes module seams, CLI contracts, data flow, isolation, metrics, terminal rules, test coverage, rollout gates, and ten ordered delivery slices without authorizing real model usage.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T23:26:26.479672Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The plan fixes module seams, CLI contracts, data flow, isolation, metrics, terminal rules, test coverage, rollout gates, and ten ordered delivery slices with...",
+      "why_it_matters": "The plan fixes module seams, CLI contracts, data flow, isolation, metrics, terminal rules, test coverage, rollout gates, and ten ordered delivery slices without authorizing real model usage."
+    },
+    {
+      "done_when": [
+        "Discriminating evidence establishes, rejects, or supersedes the finding."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "next_action": {
+        "description": "Gather discriminating evidence before treating this finding as established.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "E-2A68861CD61CBEB3",
+        "target_type": "evidence"
+      },
+      "node_id": "E-2A68861CD61CBEB3",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What evidence would establish or reject this finding?",
+      "status": "draft",
+      "title": "A deterministic candidate queue should qualify the controller before optional GEPA optimization, and Codex optimization must be a separately linked campaign...",
+      "why_it_matters": "A deterministic candidate queue should qualify the controller before optional GEPA optimization, and Codex optimization must be a separately linked campaign after the Claude comparison freezes."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "PRF-CLAUDE-PARITY-PLAN",
+          "record_type": "proof"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-734750714212C863",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did feature-plan-review establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The registered plan passes the feature-planning gate and an adversarial review after credential-inheritance and validation-overfit risks were made explicit.",
+        "references": [
+          {
+            "record_id": "PRF-CLAUDE-PARITY-PLAN",
+            "record_type": "proof"
+          }
+        ],
+        "resolved_at": "2026-09-16T23:28:20.217823Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The registered plan passes the feature-planning gate and an adversarial review after credential-inheritance and validation-overfit risks were made explicit.",
+      "why_it_matters": "The registered plan passes the feature-planning gate and an adversarial review after credential-inheritance and validation-overfit risks were made explicit."
+    }
+  ],
+  "planning_destination": "implementation-plan",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-16T23:28:22.449847Z",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

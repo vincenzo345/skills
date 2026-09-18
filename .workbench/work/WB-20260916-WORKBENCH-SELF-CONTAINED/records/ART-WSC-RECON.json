@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-WSC-RECON",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "standards-resolution",
+      "kind": "stage",
+      "purpose": "Fix packaging, portability, and validation requirements."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "79fcef2aa7072102599cb98f26f09ce48ada11a4003cc458c67f401e62f368b3"
+  },
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/reconnaissance.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "brownfield-reconnaissance",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WSC-FRAME",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Portable companion reconnaissance",
+  "updated_at": "2026-09-16T23:28:37.9152429Z",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

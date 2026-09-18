@@ -88,7 +88,14 @@
     "findings": {
       "type": "array",
       "items": {
-        "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        "oneOf": [
+          {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          },
+          {
+            "$ref": "#/$defs/finding"
+          }
+        ]
       }
     },
     "uncertainties": {
@@ -272,6 +279,54 @@
     }
   ],
   "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "basis",
+        "source_references"
+      ],
+      "properties": {
+        "statement": {
+          "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+        },
+        "basis": {
+          "enum": [
+            "fact",
+            "measurement",
+            "hypothesis",
+            "inference"
+          ]
+        },
+        "source_references": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/recordRef"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "enum": ["fact", "measurement"]
+              }
+            },
+            "required": ["basis"]
+          },
+          "then": {
+            "properties": {
+              "source_references": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
     "terminalDisposition": {
       "enum": [
         "stopped",

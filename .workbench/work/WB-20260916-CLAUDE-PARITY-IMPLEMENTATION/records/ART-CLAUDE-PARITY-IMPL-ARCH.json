@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-IMPL-ARCH",
+  "artifact_kind": "data-model",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "delivery-planning",
+      "kind": "stage",
+      "purpose": "Supply the delivery-planning checkpoint."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "a744d3791c6681adb58f52192f93c70c6ad6c252c91cfa0ca6db5a62aad8b830"
+  },
+  "created_at": "2026-09-16T23:50:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/architecture-binding.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "data-model-design",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-IMPL-RECON",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Parity controller architecture binding",
+  "updated_at": "2026-09-16T23:50:00Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

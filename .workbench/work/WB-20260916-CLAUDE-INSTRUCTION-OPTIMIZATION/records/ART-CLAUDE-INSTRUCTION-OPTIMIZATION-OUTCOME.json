@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+  "artifact_kind": "validation-result",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "outcome-verification",
+      "kind": "stage",
+      "purpose": "Support user review and acceptance of the measured parity result and installed configuration."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "e925b33eae1f44b81c8c7a105d99e695329ef10f59b10f81654da4697f513cd0"
+  },
+  "created_at": "2026-09-17T03:04:54Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-verification",
+  "proof_ids": [
+    "PRF-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude instruction optimization business outcome",
+  "updated_at": "2026-09-17T03:04:54Z",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

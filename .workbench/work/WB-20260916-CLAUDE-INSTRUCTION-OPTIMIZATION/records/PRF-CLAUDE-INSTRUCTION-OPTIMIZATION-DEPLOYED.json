@@ -1,0 +1,66 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "deployed-behavior",
+      "limitations": [
+        "The deployed smoke is one representative task; the broader 12/12 holdout proof is recorded separately as local feature verification."
+      ],
+      "non_vacuity_check": "The fresh process omitted --settings, the hook debug log records completion_guard.py returning a blocking decision, Claude performed the added review turn, and the external oracle passed.",
+      "observed_at": "2026-09-17T03:04:54Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Claude hook debug log plus evaluator-owned inclusive-range acceptance program.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+      "result": "passed",
+      "verification_target": {
+        "environment": "user-global-claude-code-configuration-on-windows",
+        "journey": "fresh-session-auto-discovers-global-settings-to-stop-hook-review-to-external-oracle",
+        "seam": "installed-CLAUDE.md-settings.json-and-completion_guard.py"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The exact promoted Claude instruction and hook configuration is installed globally and works through normal automatic discovery.",
+  "created_at": "2026-09-17T03:04:54Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Fresh Claude session does not receive an explicit settings path.",
+        "Installed Stop hook blocks once after edits.",
+        "Claude performs the review continuation.",
+        "Evaluator-owned acceptance test passes."
+      ],
+      "description": "Verify the promoted configuration in the user's actual global Claude discovery path.",
+      "kind": "deployed-behavior",
+      "oracle_requirement": "Hook debug evidence and an external executable task oracle must both pass.",
+      "requirement_id": "REQ-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+      "verification_target": {
+        "environment": "user-global-claude-code-configuration-on-windows",
+        "journey": "fresh-session-auto-discovers-global-settings-to-stop-hook-review-to-external-oracle",
+        "seam": "installed-CLAUDE.md-settings.json-and-completion_guard.py"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-17T03:04:54Z",
+  "verification_scope": "deployed-behavior",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

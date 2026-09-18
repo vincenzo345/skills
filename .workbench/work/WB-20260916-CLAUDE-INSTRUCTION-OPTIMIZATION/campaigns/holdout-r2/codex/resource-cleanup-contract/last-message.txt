@@ -1,0 +1,11 @@
+Implemented the resource cleanup contract in `resources.py`.
+
+Verified:
+
+- Successful reads return the exact object and close once.
+- Failed reads preserve the original exception and close once.
+- Cleanup errors do not replace read errors.
+- Opener errors propagate without cleanup.
+- Python compilation passes.
+
+Generated caches were left untouched.

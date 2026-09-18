@@ -1,0 +1,84 @@
+{
+  "applicability": {
+    "applied": [
+      "local-verification",
+      "runtime-regression",
+      "repository-validation"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/verification.md",
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-VERIFY",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T22:54:16.356293Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Two full author-validation repetitions produced 40 intended baseline failures and 40 reference passes across the 20-task catalog."
+    },
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The focused suite passed 9 tests, the complete runtime suite passed 105 tests, and both repository validators passed on the current Windows environment."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "No model behavior, Linux parity, independent human solvability, or operating-system sandbox claim is established by the local proof."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-HARNESS-EVALS-VERIFIED",
+  "idempotency_key": "claude-harness-evals:verification-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "dfd981e66431af097bc445d6402d200b5765b3c89c7f17efbb4af098cf3e84cd"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-HARNESS-EVALS",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "local-verification",
+  "stage": "local-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The locally verified suite is ready for human acceptance; model trials, Linux CI, independent task review, and Workbench closure remain separate actions.",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

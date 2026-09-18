@@ -1,0 +1,37 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-WSC-IMPLEMENT",
+  "grant": {
+    "granted_at": "2026-09-16T23:17:33.354090Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-16T23:17:33.354090Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Add and modify only repository skill packages, manifests, documentation, validation, tests, and this Workbench item's records needed for the requested self-contained skillset.",
+      "Do not install globally, commit, publish, deploy, or close the item."
+    ],
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

@@ -1,0 +1,12 @@
+{
+  "category": "integration",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "refactor",
+    "exports",
+    "registry"
+  ],
+  "task_id": "cross-file-symbol-rename",
+  "title": "Cross-file symbol rename"
+}

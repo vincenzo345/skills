@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-09-18T00:17:11.062776Z",
+  "idempotency_key": "claude-workbench-parity-live-intake-v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "451d1ad018e37320fc80ed166b1d869ddfe5250d3ef08b4b8525b4ba39602183"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260917-CLAUDE-WORKBENCH-PARITY-LIVE",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "do it. when you fonish,  I expect the goal to either be met or for you to reach an impassable problem  hard stops are ok if genuine. otherwise execute the loop until the desired outcome is achieved across the sample workbemch prompt in the applications4life code base. please use this and sample codebases for testing and comparing codex vs claude code for improving Claude code",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "WB-20260917-CLAUDE-OPTIMIZATION-LOOP",
+    "C:\\Users\\vince\\AI agency business\\applications4life\\illustration report generator",
+    "claude test v3.md",
+    "codex test.md",
+    "tests/comparison/claude-codex-investigation/rubric.json"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260917-CLAUDE-WORKBENCH-PARITY-LIVE"
+}

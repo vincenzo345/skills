@@ -1,0 +1,74 @@
+{
+  "applicability": {
+    "applied": [
+      "standards-resolution",
+      "specification",
+      "delivery-planning"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md",
+      "record_id": "ART-CLAUDE-V3-REMEDIATION-PLAN",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T22:24:59Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The plan is ordered around a frozen Claude-versus-Codex rubric, canonical prompt changes, early and late hook enforcement, singular installation, bounded Workbench support, and two fresh live repetitions."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "PRF-CLAUDE-V3-REMEDIATION-PLAN",
+          "record_type": "proof"
+        }
+      ],
+      "statement": "The plan passes the implementation-readiness gate without claiming that the harness changes or parity outcome have already been implemented or measured."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-V3-REMEDIATION-PLAN",
+  "idempotency_key": "claude-v3-remediation:plan:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "63055625f93e4bf0140cd9bdb7bd5696d7ce275a35d14b7ef0334bbb9c5839c3"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260917-CLAUDE-V3-REMEDIATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "feature-planner",
+  "stage": "delivery-planning",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The harness-first implementation plan is ready for user review; implementation, installation, live model runs, commit, and deployment remain separately withheld.",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

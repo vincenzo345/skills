@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-WEG-FRAME",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "brownfield-reconnaissance",
+      "kind": "stage",
+      "purpose": "Bound the control surfaces and excluded machinery."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "618711a8c51de3d4d031f9a5390a60057f36c14eb79f47196f12f1af2d9b9b30"
+  },
+  "created_at": "2026-09-16T21:32:26.9696316Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-EVIDENCE-GUARDS/artifacts/outcome-frame.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-framing",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Workbench evidence guards outcome frame",
+  "updated_at": "2026-09-16T21:32:26.9696316Z",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

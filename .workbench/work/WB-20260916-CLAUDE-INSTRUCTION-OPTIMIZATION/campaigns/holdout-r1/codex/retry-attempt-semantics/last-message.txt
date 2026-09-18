@@ -1,0 +1,3 @@
+Blocked by workspace permissions: the sandbox rejects all commands, including reading `TASK.md`, and filesystem access is read-only. I therefore couldn’t inspect, implement, or verify the change.
+
+Please rerun with workspace read/write and command-execution permissions enabled.

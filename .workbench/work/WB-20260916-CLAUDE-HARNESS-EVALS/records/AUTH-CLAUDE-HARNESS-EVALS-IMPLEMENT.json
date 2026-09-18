@@ -1,0 +1,37 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+  "grant": {
+    "granted_at": "2026-09-16T21:30:42.374468Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-16T21:30:42.374468Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Implement the 20-task isolated coding-agent evaluation suite and executable local acceptance tests requested in the captured intake.",
+      "Do not invoke paid models, change global Claude settings, commit, deploy, publish externally, or close the Workbench item."
+    ],
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

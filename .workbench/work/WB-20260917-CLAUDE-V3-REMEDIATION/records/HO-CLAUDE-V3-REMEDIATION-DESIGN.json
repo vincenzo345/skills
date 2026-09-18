@@ -1,0 +1,73 @@
+{
+  "applicability": {
+    "applied": [
+      "solution-architecture",
+      "data-model-design"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md",
+      "record_id": "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T22:24:59Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "inference",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The highest-leverage architecture is one canonical Claude operating prompt, one early diagnosis preflight, one task-aware final review, and an idempotent installer that removes known duplicate registrations."
+    },
+    {
+      "basis": "inference",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Preventing stale proposals should precede a general Workbench route-correction engine; a compact handoff builder is the only planned Workbench runtime addition."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-V3-REMEDIATION-DESIGN",
+  "idempotency_key": "claude-v3-remediation:design:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "13421272aa51c784eb9ded5186bb100a3a6425e5d515b1fcde19fa40af3a5d8c"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260917-CLAUDE-V3-REMEDIATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "feature-planner",
+  "stage": "data-model-design",
+  "status": "completed",
+  "suggested_next_stage": "standards-resolution",
+  "uncertainties": [],
+  "why_next": "Turn the harness-first architecture into ordered file-level changes, regression cases, migration, and a controlled comparison gate.",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

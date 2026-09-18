@@ -1,0 +1,389 @@
+{
+  "created_at": "2026-09-16T23:42:30.015483Z",
+  "desired_outcome_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+  "edges": [
+    {
+      "edge_id": "EDGE-5F00AD87BF1E35C6",
+      "from_node_id": "E-FB347683660D1017",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+    },
+    {
+      "edge_id": "EDGE-559367DD04247F9E",
+      "from_node_id": "E-9674338D51E5A482",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+    },
+    {
+      "edge_id": "EDGE-0D3FCE62A76C8273",
+      "from_node_id": "E-1F57C3B42E0DE31E",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+    },
+    {
+      "edge_id": "EDGE-28A61828ADE34AE7",
+      "from_node_id": "E-7864E8087A18C246",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+    },
+    {
+      "edge_id": "EDGE-64B90D3A09D03D81",
+      "from_node_id": "E-B6A50D6E072DA770",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+    },
+    {
+      "edge_id": "EDGE-CD35B1FA780FF32A",
+      "from_node_id": "E-7225FB5839FCC753",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+    },
+    {
+      "edge_id": "EDGE-DA14E5FA7B235C1E",
+      "from_node_id": "E-6B08B226E740AF86",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+    },
+    {
+      "edge_id": "EDGE-06D84B21AFAE2105",
+      "from_node_id": "E-1EB8F28341F71379",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+  "nodes": [
+    {
+      "done_when": [
+        "The locally-verified-implementation destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "resolution": {
+        "basis": "completion",
+        "rationale": "The destination result passed its gate and the human authorized closure.",
+        "references": [
+          {
+            "record_id": "AUTH-CLAUDE-PARITY-IMPLEMENTATION-CLOSE",
+            "record_type": "authorization"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:42:14.527854Z",
+        "resolved_by": {
+          "actor_id": "human:vince",
+          "kind": "human"
+        }
+      },
+      "status": "completed",
+      "title": "Implement the Claude Code parity controller",
+      "why_it_matters": "A locally verified, zero-cost experiment controller can configure, initialize, dry-run, stop, resume, and report reproducible Claude Code versus Codex campaigns through fake adapters, while real model execution and global prompt or hook promotion remain fail-closed behind explicit authorization and safety gates."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-IMPL-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-FB347683660D1017",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The implementation destination is bounded to a zero-cost locally verified controller; live models and global promotion remain withheld.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-IMPL-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T23:44:43.929484Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The implementation destination is bounded to a zero-cost locally verified controller; live models and global promotion remain withheld.",
+      "why_it_matters": "The implementation destination is bounded to a zero-cost locally verified controller; live models and global promotion remain withheld."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-IMPL-RECON",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-9674338D51E5A482",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The controller can extend the existing standard-library CLI through a new experiment package while preserving every current command.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-IMPL-RECON",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T23:44:48.361241Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The controller can extend the existing standard-library CLI through a new experiment package while preserving every current command.",
+      "why_it_matters": "The controller can extend the existing standard-library CLI through a new experiment package while preserving every current command."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-IMPL-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-1F57C3B42E0DE31E",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The accepted architecture is bound to typed config, immutable artifacts, append-only events, atomic state, stable IDs, and fail-closed live execution.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-IMPL-ARCH",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T23:44:52.794607Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The accepted architecture is bound to typed config, immutable artifacts, append-only events, atomic state, stable IDs, and fail-closed live execution.",
+      "why_it_matters": "The accepted architecture is bound to typed config, immutable artifacts, append-only events, atomic state, stable IDs, and fail-closed live execution."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-IMPL-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-7864E8087A18C246",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did tdd establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The confirmed CLI and artifact-store seams are divided into vertical TDD slices, with implementation authority limited to zero-cost repository work.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-IMPL-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-16T23:44:57.093595Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The confirmed CLI and artifact-store seams are divided into vertical TDD slices, with implementation authority limited to zero-cost repository work.",
+      "why_it_matters": "The confirmed CLI and artifact-store seams are divided into vertical TDD slices, with implementation authority limited to zero-cost repository work."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-CONTROLLER-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-B6A50D6E072DA770",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did tdd establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The zero-cost controller foundation is implemented through public CLI and artifact-store seams, while live execution remains fail-closed.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-CONTROLLER-IMPLEMENT",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:01:19.344999Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The zero-cost controller foundation is implemented through public CLI and artifact-store seams, while live execution remains fail-closed.",
+      "why_it_matters": "The zero-cost controller foundation is implemented through public CLI and artifact-store seams, while live execution remains fail-closed."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-7225FB5839FCC753",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The complete runtime suite passed 115 tests and the focused experiment/evaluator suite passed 17 tests.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:05:55.523874Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The complete runtime suite passed 115 tests and the focused experiment/evaluator suite passed 17 tests.",
+      "why_it_matters": "The complete runtime suite passed 115 tests and the focused experiment/evaluator suite passed 17 tests."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-6B08B226E740AF86",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "A 40-cell fake campaign completed with the intended 20 reference passes and 20 no-op failures, then resumed with zero launches and 40 valid result digests.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:05:55.523874Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "A 40-cell fake campaign completed with the intended 20 reference passes and 20 no-op failures, then resumed with zero launches and 40 valid result digests.",
+      "why_it_matters": "A 40-cell fake campaign completed with the intended 20 reference passes and 20 no-op failures, then resumed with zero launches and 40 valid result digests."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-1EB8F28341F71379",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "No real model behavior, credential safety in a live runner, sealed-set isolation, or global prompt improvement is established by this local proof.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:05:55.523874Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "No real model behavior, credential safety in a live runner, sealed-set isolation, or global prompt improvement is established by this local proof.",
+      "why_it_matters": "No real model behavior, credential safety in a live runner, sealed-set isolation, or global prompt improvement is established by this local proof."
+    }
+  ],
+  "planning_destination": "locally-verified-implementation",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-17T00:42:14.527854Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

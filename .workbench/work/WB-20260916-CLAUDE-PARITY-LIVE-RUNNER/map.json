@@ -1,0 +1,469 @@
+{
+  "created_at": "2026-09-17T00:46:01.400181Z",
+  "desired_outcome_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "edges": [
+    {
+      "edge_id": "EDGE-483411FD1D042AC9",
+      "from_node_id": "E-9289F4EA84B28CEF",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-DCC22E3149E27B87",
+      "from_node_id": "E-D4BF872E6ABDFD79",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-264F31563DDC9AA4",
+      "from_node_id": "E-1B3B081A96BCCCAA",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-70FC5A6E09B8AF74",
+      "from_node_id": "E-42EB5B0805A144B9",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-B582A7C627947208",
+      "from_node_id": "E-2C335BA6C7E80695",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-2F646856EAD24478",
+      "from_node_id": "E-2BAB2E4F9CED6992",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-15888822891C72FA",
+      "from_node_id": "E-AC326A65A5795088",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-977F893890622CB9",
+      "from_node_id": "E-6EF7406EE1EECD44",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-FDFEE979062BA8A8",
+      "from_node_id": "E-A16AF08B2D3D8D94",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    },
+    {
+      "edge_id": "EDGE-FA8AA8FA529B2CBA",
+      "from_node_id": "E-0F47BE1628EDD1D6",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "nodes": [
+    {
+      "done_when": [
+        "The locally-verified-implementation destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Review the destination result, then authorize closure or request a revision.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        },
+        "target_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+        "target_type": "authorization"
+      },
+      "node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Qualify the isolated live-runner boundary",
+      "why_it_matters": "The evaluation controller can qualify and exercise a Docker-backed agent runner through explicit filesystem, secret, network, resource, timeout, and cleanup controls, persists auditable qualification evidence, and refuses live campaign execution unless that evidence matches the configured runner. No paid model is invoked in this destination."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-9289F4EA84B28CEF",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The destination is bounded to Docker isolation qualification and deterministic fake-agent execution; real provider sessions, credentials, spend, parity, and global promotion remain excluded.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:47:22.120390Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The destination is bounded to Docker isolation qualification and deterministic fake-agent execution; real provider sessions, credentials, spend, parity, and...",
+      "why_it_matters": "The destination is bounded to Docker isolation qualification and deterministic fake-agent execution; real provider sessions, credentials, spend, parity, and global promotion remain excluded."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-RECON",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-D4BF872E6ABDFD79",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The isolation backend can be added behind one new module and narrow config, controller, CLI, and test changes without modifying task staging or verification.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-RECON",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:50:12.984752Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The isolation backend can be added behind one new module and narrow config, controller, CLI, and test changes without modifying task staging or verification.",
+      "why_it_matters": "The isolation backend can be added behind one new module and narrow config, controller, CLI, and test changes without modifying task staging or verification."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-1B3B081A96BCCCAA",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Qualification will be an immutable, digest-protected record bound to Docker server identity, immutable image ID, canonical policy, and executable canary results; every use revalidates those bindings.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-ARCH",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:51:58.767458Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Qualification will be an immutable, digest-protected record bound to Docker server identity, immutable image ID, canonical policy, and executable canary resu...",
+      "why_it_matters": "Qualification will be an immutable, digest-protected record bound to Docker server identity, immutable image ID, canonical policy, and executable canary results; every use revalidates those bindings."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-42EB5B0805A144B9",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did tdd establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The confirmed CLI, artifact-store, and isolation-runner seams are divided into eight vertical red-green slices ending in a real Docker journey and regression proof.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:53:29.823090Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The confirmed CLI, artifact-store, and isolation-runner seams are divided into eight vertical red-green slices ending in a real Docker journey and regression...",
+      "why_it_matters": "The confirmed CLI, artifact-store, and isolation-runner seams are divided into eight vertical red-green slices ending in a real Docker journey and regression proof."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-2C335BA6C7E80695",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The user authorized local repository and Docker implementation while model use, credentials, spend, global promotion, commit, deployment, publication, and closure remain excluded.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:55:04.549119Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The user authorized local repository and Docker implementation while model use, credentials, spend, global promotion, commit, deployment, publication, and cl...",
+      "why_it_matters": "The user authorized local repository and Docker implementation while model use, credentials, spend, global promotion, commit, deployment, publication, and closure remain excluded."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH-V2",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-2BAB2E4F9CED6992",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The corrected current-time grant authorizes local repository and Docker implementation while model use, credentials, spend, global promotion, commit, deployment, publication, and closure remain excluded.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH-V2",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T00:57:03.579671Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The corrected current-time grant authorizes local repository and Docker implementation while model use, credentials, spend, global promotion, commit, deploym...",
+      "why_it_matters": "The corrected current-time grant authorizes local repository and Docker implementation while model use, credentials, spend, global promotion, commit, deployment, publication, and closure remain excluded."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-AC326A65A5795088",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did tdd establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The Docker isolation boundary, executable qualification evidence, qualified fake execution, CLI, and evidence-bound live preflight are implemented while provider execution remains fail-closed.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T01:14:42.166672Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The Docker isolation boundary, executable qualification evidence, qualified fake execution, CLI, and evidence-bound live preflight are implemented while prov...",
+      "why_it_matters": "The Docker isolation boundary, executable qualification evidence, qualified fake execution, CLI, and evidence-bound live preflight are implemented while provider execution remains fail-closed."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-6EF7406EE1EECD44",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The complete runtime suite passed 129 tests; the focused isolation/controller suite passed 22 tests including a real Docker CLI journey.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T01:16:35.249508Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The complete runtime suite passed 129 tests; the focused isolation/controller suite passed 22 tests including a real Docker CLI journey.",
+      "why_it_matters": "The complete runtime suite passed 129 tests; the focused isolation/controller suite passed 22 tests including a real Docker CLI journey."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-A16AF08B2D3D8D94",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Qualification 37553f0ad0134a50778e117d revalidated against Docker 28.3.2 and the immutable local image with all 13 canaries true and no leftover harness container.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T01:16:35.249508Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Qualification 37553f0ad0134a50778e117d revalidated against Docker 28.3.2 and the immutable local image with all 13 canaries true and no leftover harness cont...",
+      "why_it_matters": "Qualification 37553f0ad0134a50778e117d revalidated against Docker 28.3.2 and the immutable local image with all 13 canaries true and no leftover harness container."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-0F47BE1628EDD1D6",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "No provider model, credential, egress, cost-accounting, parity, optimizer, or global-promotion claim is established by this proof.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T01:16:35.249508Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "No provider model, credential, egress, cost-accounting, parity, optimizer, or global-promotion claim is established by this proof.",
+      "why_it_matters": "No provider model, credential, egress, cost-accounting, parity, optimizer, or global-promotion claim is established by this proof."
+    }
+  ],
+  "planning_destination": "locally-verified-implementation",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-17T01:16:43.329857Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

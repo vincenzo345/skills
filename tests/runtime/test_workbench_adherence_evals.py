@@ -139,3 +139,26 @@ def test_single_fixture_measurement_stays_fixture_bounded() -> None:
     assert case["expected"]["workload_claim_status"] == "not-established"
     assert "representativeness-boundary" in case["expected"]["required_evidence"]
     assert "single-fixture-as-workload-wide-proof" in case["expected"]["forbidden_actions"]
+
+
+def test_workbench_routes_remain_executable_without_external_skills() -> None:
+    routing = (ROOT / "skills" / "workbench" / "references" / "routing.md").read_text(
+        encoding="utf-8"
+    )
+    discovery = (ROOT / "skills" / "workbench" / "references" / "discovery.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert "never as undeclared route prerequisites" in routing
+    assert "absence of an optional skill is not itself a blocker" in routing
+    assert "shipped by the same repository distribution as Workbench" in discovery
+
+
+def test_reported_workbench_companions_are_shipped() -> None:
+    manifest = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+    declared = {Path(entry).name for entry in manifest["skills"]}
+
+    assert {"feature-planner", "openai-docs", "research"} <= declared
+    for name in ("feature-planner", "openai-docs", "research"):
+        assert (ROOT / "skills" / name / "SKILL.md").is_file()
+        assert (ROOT / "skills" / name / "agents" / "openai.yaml").is_file()

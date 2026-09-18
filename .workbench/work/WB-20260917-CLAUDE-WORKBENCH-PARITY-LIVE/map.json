@@ -1,0 +1,38 @@
+{
+  "created_at": "2026-09-18T00:18:39.140198Z",
+  "desired_outcome_node_id": "O-20260917-CLAUDE-WORKBENCH-PARITY-LIVE",
+  "edges": [],
+  "fog": [],
+  "map_id": "MAP-20260917-CLAUDE-WORKBENCH-PARITY-LIVE",
+  "nodes": [
+    {
+      "done_when": [
+        "The business-outcome destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Satisfy the outcome-frame-recorded exit gate.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "outcome-framing",
+        "target_type": "stage"
+      },
+      "node_id": "O-20260917-CLAUDE-WORKBENCH-PARITY-LIVE",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Optimize and deploy Claude Workbench parity harness",
+      "why_it_matters": "Claude Code, using the installed global prompt and hooks, meets or exceeds the established Codex baseline on every substantive grading dimension for the Applications4Life Workbench diagnosis prompt, remains within the 150,000-token and 25-minute ceilings, and preserves that behavior across representative disposable sample codebases; otherwise the campaign stops only at a reproducible provider or technical impasse."
+    }
+  ],
+  "planning_destination": "business-outcome",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-18T00:18:39.140198Z",
+  "work_id": "WB-20260917-CLAUDE-WORKBENCH-PARITY-LIVE"
+}

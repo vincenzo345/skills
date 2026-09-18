@@ -1,0 +1,82 @@
+{
+  "applicability": {
+    "applied": [
+      "solution-architecture",
+      "data-model-design"
+    ],
+    "could_not_determine": [],
+    "skipped": [
+      {
+        "method_id": "experience-design",
+        "reason": "The first surface is a machine-oriented CLI and report."
+      },
+      {
+        "method_id": "proposal",
+        "reason": "The user already selected the automated comparison direction."
+      }
+    ]
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/architecture-and-data.md",
+      "record_id": "ART-CLAUDE-PARITY-ARCH",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:29:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "inference",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "A vendor-neutral controller, separate agent and verifier isolation boundaries, and append-only hashed run artifacts provide the smallest sufficient architecture for reproducible and resumable trials."
+    },
+    {
+      "basis": "inference",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The durable model can use immutable files plus an atomic state projection; a relational database is not required for the first implementation."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-ARCH",
+  "idempotency_key": "claude-parity:architecture-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "70f45838398fb32546525f774b3c48d4791aae01e6579a2f6a8f497d28926e07"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-DISCOVER",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "solution-and-data-design",
+  "stage": "data-model-design",
+  "status": "completed",
+  "suggested_next_stage": "delivery-planning",
+  "uncertainties": [],
+  "why_next": "Technical boundaries, identities, state transitions, persistence semantics, failure behavior, and isolation gates are decision-complete enough to specify delivery slices.",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

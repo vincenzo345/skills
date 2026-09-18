@@ -1,0 +1,12 @@
+{
+  "category": "robustness",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "resources",
+    "exceptions",
+    "cleanup"
+  ],
+  "task_id": "resource-cleanup-contract",
+  "title": "Resource cleanup without exception masking"
+}

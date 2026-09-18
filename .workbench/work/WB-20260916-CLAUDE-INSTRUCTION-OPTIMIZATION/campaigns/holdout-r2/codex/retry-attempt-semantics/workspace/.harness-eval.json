@@ -1,0 +1,12 @@
+{
+  "category": "robustness",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "retries",
+    "exceptions",
+    "boundaries"
+  ],
+  "task_id": "retry-attempt-semantics",
+  "title": "Bounded retry and exception contract"
+}

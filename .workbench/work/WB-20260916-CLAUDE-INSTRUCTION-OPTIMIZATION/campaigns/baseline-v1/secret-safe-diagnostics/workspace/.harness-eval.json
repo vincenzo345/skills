@@ -1,0 +1,12 @@
+{
+  "category": "robustness",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "secrets",
+    "errors",
+    "redaction"
+  ],
+  "task_id": "secret-safe-diagnostics",
+  "title": "Secret-safe diagnostics"
+}

@@ -1,0 +1,62 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-framing"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/outcome-frame.md",
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T22:21:19.921548Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "WB-20260916-CLAUDE-HARNESS-EVALS",
+          "record_type": "work"
+        }
+      ],
+      "statement": "The bounded outcome is a 20-task offline suite whose public CLI isolates agent-visible fixtures from evaluator-owned acceptance tests and reference solutions."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-HARNESS-EVALS-FRAME",
+  "idempotency_key": "claude-harness-evals:frame-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "87bd88c08049ce387e6c93f95121c90a7658f12dd942bd34af7cc6545121c0b3"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-CLAUDE-HARNESS-EVALS",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-HARNESS-EVALS",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "outcome-framing",
+  "status": "completed",
+  "suggested_next_stage": "process-model",
+  "uncertainties": [],
+  "why_next": "Inspect benchmark evidence and the repository, then fix the stage-run-verify process and architectural boundaries.",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

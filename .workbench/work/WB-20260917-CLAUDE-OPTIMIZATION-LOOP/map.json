@@ -1,0 +1,469 @@
+{
+  "created_at": "2026-09-17T22:52:11.035235Z",
+  "desired_outcome_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP",
+  "edges": [
+    {
+      "edge_id": "EDGE-74DA311872E194E6",
+      "from_node_id": "E-DF425AF75268917F",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-60C77B30AB9DA38C",
+      "from_node_id": "E-7FB2BEA2748DC5EA",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-A1ABD169A4D879D5",
+      "from_node_id": "E-9724C9F649E90200",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-7F4967039738317F",
+      "from_node_id": "E-1B57C3C5CE7FEC0D",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-EC9905A8F21315B0",
+      "from_node_id": "E-8917832DFAC14171",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-03EF32141A3F0232",
+      "from_node_id": "E-D42E966BBE4576FD",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-ACB8302796866BA9",
+      "from_node_id": "E-1A9429860E296F29",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-770BC989BCE08F2C",
+      "from_node_id": "E-C40DA69C289A9F56",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-D18BAB37151DD2C5",
+      "from_node_id": "E-8F5D6648011094CC",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    },
+    {
+      "edge_id": "EDGE-04AB07E8AF5B5C67",
+      "from_node_id": "E-FFA4AA035ACBBD1E",
+      "rationale": "Established evidence informs the desired outcome.",
+      "relationship": "supports",
+      "to_node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP"
+    }
+  ],
+  "fog": [],
+  "map_id": "MAP-20260917-CLAUDE-OPTIMIZATION-LOOP",
+  "nodes": [
+    {
+      "done_when": [
+        "The locally-verified-implementation destination is proven and authorized complete."
+      ],
+      "evidence": [],
+      "kind": "outcome",
+      "next_action": {
+        "description": "Review the destination result, then authorize closure or request a revision.",
+        "owner": {
+          "actor_id": "user:vince",
+          "kind": "human"
+        },
+        "target_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP",
+        "target_type": "authorization"
+      },
+      "node_id": "O-20260917-CLAUDE-OPTIMIZATION-LOOP",
+      "owner": {
+        "actor_id": "user:vince",
+        "kind": "human"
+      },
+      "status": "in-progress",
+      "title": "Implement Claude harness optimization loop",
+      "why_it_matters": "Deliver a locally verified, resumable controller that runs fresh Claude harness candidates against pinned scenarios, evaluates them with the established Claude-versus-Codex criteria, generates one bounded improvement at a time, retests, and promotes only a non-regressing candidate within fixed safety and efficiency budgets."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-DF425AF75268917F",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Completion requires a resumable champion-challenger controller proven without model calls; paid execution and global promotion remain separate.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-FRAME",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:15:18.395887Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Completion requires a resumable champion-challenger controller proven without model calls; paid execution and global promotion remain separate.",
+      "why_it_matters": "Completion requires a resumable champion-challenger controller proven without model calls; paid execution and global promotion remain separate."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-7FB2BEA2748DC5EA",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The prior experiment controller already supplied immutable manifests, atomic state, fake runs, resumability, run ceilings, provider argv builders, and reports.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-DISCOVERY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:15:25.055061Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The prior experiment controller already supplied immutable manifests, atomic state, fake runs, resumability, run ceilings, provider argv builders, and reports.",
+      "why_it_matters": "The prior experiment controller already supplied immutable manifests, atomic state, fake runs, resumability, run ceilings, provider argv builders, and reports."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-9724C9F649E90200",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The missing behavior was candidate lifecycle, rubric evaluation, bounded improvement, non-regression promotion, fresh live workspaces, and terminal stopping rules.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-DISCOVERY",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:15:25.055061Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The missing behavior was candidate lifecycle, rubric evaluation, bounded improvement, non-regression promotion, fresh live workspaces, and terminal stopping...",
+      "why_it_matters": "The missing behavior was candidate lifecycle, rubric evaluation, bounded improvement, non-regression promotion, fresh live workspaces, and terminal stopping rules."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-DESIGN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-1B57C3C5CE7FEC0D",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The implemented architecture injects runner, evaluator, and improver interfaces while keeping campaign orchestration and promotion deterministic.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-DESIGN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:15:31.692157Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The implemented architecture injects runner, evaluator, and improver interfaces while keeping campaign orchestration and promotion deterministic.",
+      "why_it_matters": "The implemented architecture injects runner, evaluator, and improver interfaces while keeping campaign orchestration and promotion deterministic."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-DESIGN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-8917832DFAC14171",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Filesystem persistence is append-only or immutable for evidence and atomic for state; no database schema or application data model changes.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-DESIGN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:15:31.692157Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Filesystem persistence is append-only or immutable for evidence and atomic for state; no database schema or application data model changes.",
+      "why_it_matters": "Filesystem persistence is append-only or immutable for evidence and atomic for state; no database schema or application data model changes."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-D42E966BBE4576FD",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Delivery is partitioned into strict configuration and rubric loading, immutable evidence persistence, injected provider boundaries, deterministic promotion and stopping, CLI integration, and zero-cost verification.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:17:34.302732Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Delivery is partitioned into strict configuration and rubric loading, immutable evidence persistence, injected provider boundaries, deterministic promotion a...",
+      "why_it_matters": "Delivery is partitioned into strict configuration and rubric loading, immutable evidence persistence, injected provider boundaries, deterministic promotion and stopping, CLI integration, and zero-cost verification."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-1A9429860E296F29",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "Paid provider runs, real brownfield rubric agreement, global harness installation, and Claude-versus-Codex parity are excluded from this locally verified implementation destination.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-PLAN",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:17:34.302732Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "Paid provider runs, real brownfield rubric agreement, global harness installation, and Claude-versus-Codex parity are excluded from this locally verified imp...",
+      "why_it_matters": "Paid provider runs, real brownfield rubric agreement, global harness installation, and Claude-versus-Codex parity are excluded from this locally verified implementation destination."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-IMPLEMENTATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-C40DA69C289A9F56",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did workbench-coordinator establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The repository now contains a resumable Claude champion-challenger loop with strict configuration, frozen grading, isolated attempts, immutable evidence, deterministic promotion, bounded stopping, fake providers, live provider adapters, and optimize CLI commands.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-IMPLEMENTATION",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:18:46.651390Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The repository now contains a resumable Claude champion-challenger loop with strict configuration, frozen grading, isolated attempts, immutable evidence, det...",
+      "why_it_matters": "The repository now contains a resumable Claude champion-challenger loop with strict configuration, frozen grading, isolated attempts, immutable evidence, deterministic promotion, bounded stopping, fake providers, live provider adapters, and optimize CLI commands."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-8F5D6648011094CC",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "The complete repository suite passed 186 tests in 161.90 seconds; skill validation, diff checks, and Python compilation also passed.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-VERIFICATION",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:19:48.241523Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "The complete repository suite passed 186 tests in 161.90 seconds; skill validation, diff checks, and Python compilation also passed.",
+      "why_it_matters": "The complete repository suite passed 186 tests in 161.90 seconds; skill validation, diff checks, and Python compilation also passed."
+    },
+    {
+      "done_when": [
+        "The finding is backed by its cited source records."
+      ],
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-OPT-LOOP-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "evidence-task",
+      "node_id": "E-FFA4AA035ACBBD1E",
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "question": "What did local-verification establish?",
+      "resolution": {
+        "basis": "evidence",
+        "rationale": "A fresh fake-provider campaign promoted two challengers across six sessions, reached the target, reported decreasing token and time costs, and preserved byte-identical state on resume.",
+        "references": [
+          {
+            "record_id": "ART-CLAUDE-OPT-LOOP-VERIFICATION",
+            "record_type": "artifact"
+          }
+        ],
+        "resolved_at": "2026-09-17T23:19:48.241523Z",
+        "resolved_by": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        }
+      },
+      "status": "evidence-established",
+      "title": "A fresh fake-provider campaign promoted two challengers across six sessions, reached the target, reported decreasing token and time costs, and preserved byte...",
+      "why_it_matters": "A fresh fake-provider campaign promoted two challengers across six sessions, reached the target, reported decreasing token and time costs, and preserved byte-identical state on resume."
+    }
+  ],
+  "planning_destination": "locally-verified-implementation",
+  "record_type": "workbench-map",
+  "schema_version": "0.5.0",
+  "updated_at": "2026-09-17T23:19:51.548278Z",
+  "work_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP"
+}

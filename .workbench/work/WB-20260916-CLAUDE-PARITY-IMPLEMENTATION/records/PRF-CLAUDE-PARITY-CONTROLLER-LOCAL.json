@@ -1,0 +1,70 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "No Claude or Codex model was invoked.",
+        "Live isolation and credential inheritance are not implemented or qualified.",
+        "Sealed validation/holdout sets and prompt optimization are not yet implemented.",
+        "No global CLAUDE.md, hooks, or Codex instructions were promoted."
+      ],
+      "non_vacuity_check": "The fake reference condition passed all 20 executable oracles while the independently staged no-op condition failed all 20, and a second resume launched zero runs.",
+      "observed_at": "2026-09-17T00:04:54Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "115 runtime tests, 17 focused tests, two full author-validation repetitions, a 40-cell fake campaign, independent digest verification, repository validators, compilation, and diff checks passed.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-CLAUDE-PARITY-CONTROLLER-LOCAL",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local-windows-repository",
+        "journey": "config-doctor-to-init-to-40-cell-fake-run-to-report-to-idempotent-resume",
+        "seam": "claude-harness-eval-cli-and-campaign-artifact-store"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The zero-cost Claude Code and Codex experiment-controller foundation is locally implemented and verified at its CLI, configuration, durable-state, fake-execution, integrity, resume, reporting, and regression seams.",
+  "created_at": "2026-09-17T00:04:54Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-PARITY-CONTROLLER-LOCAL",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Public CLI and artifact-store tests pass.",
+        "A full fake campaign uses all 20 tasks and produces independently verified expected outcomes.",
+        "Resume, stop, conflict, crash-reconciliation, and tamper paths are exercised.",
+        "Existing evaluator and repository runtime tests pass.",
+        "No live model or global configuration claim is made."
+      ],
+      "description": "Verify the zero-cost controller foundation and its fail-closed boundary through public seams.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Pytest, evaluator-owned acceptance programs, independent digest checks, repository validators, compilation, and diff checks report non-vacuous results.",
+      "requirement_id": "REQ-CLAUDE-PARITY-CONTROLLER-LOCAL",
+      "verification_target": {
+        "environment": "local-windows-repository",
+        "journey": "config-doctor-to-init-to-40-cell-fake-run-to-report-to-idempotent-resume",
+        "seam": "claude-harness-eval-cli-and-campaign-artifact-store"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-17T00:04:54Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

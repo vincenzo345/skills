@@ -1,0 +1,33 @@
+{
+  "created_at": "2026-09-16T23:14:29.855680Z",
+  "idempotency_key": "capture-claude-code-parity-loop-v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "9e7178d56d6a8682cce5d1876c3b4c2c65ada93cc114b85d773404d01b77fe53"
+  },
+  "next_action": {
+    "description": "Inspect the repository and accessible references, synthesize what is known, then ask only for material decisions that cannot be determined.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "INTAKE-WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+    "target_type": "evidence"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": null,
+  "raw_request": "-skills:workbench  I want to go through the evaluation and improvement process for claude code, we can also compare against codex. come up with a plan to do this. I want it automated and for you to keep iterating until you have pairity or claude's capabilities are maxed. Additionally, if youre able to improve codex, do that to. but this is a secondary request.",
+  "record_type": "workbench-intake",
+  "route": null,
+  "schema_version": "0.1.0",
+  "source_references": [
+    "WB-20260916-CLAUDE-HARNESS-EVALS",
+    "claude_harness_eval",
+    "C:\\Users\\vince\\.claude\\CLAUDE.md"
+  ],
+  "status": "captured",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

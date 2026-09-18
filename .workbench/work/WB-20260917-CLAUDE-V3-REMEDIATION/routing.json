@@ -1,0 +1,379 @@
+{
+  "acceptance_evidence": [
+    "The plan maps each v3 failure to a concrete repository seam, ordered implementation change, and regression test.",
+    "The plan defines when environment and execution seam must be established, when a question blocks routing or proposal acceptance, and how dependent questions are sequenced.",
+    "The plan specifies a single authoritative Claude completion hook and an idempotent migration that removes the legacy duplicate without disturbing unrelated settings.",
+    "The plan states the persistence and schema impact of post-start correction, including a bounded first release and a clear deferral boundary.",
+    "The plan includes measurable live-rerun criteria for correctness, durable-state fidelity, schema failures, tool-call cost, tokens, and elapsed time.",
+    "No material implementation or product decision is left for the implementer to invent."
+  ],
+  "assumptions": [
+    "The desired deployment target remains Claude Code on Windows, while Workbench policy and eval cases remain portable to other harnesses.",
+    "The claude-rigor plugin should remain the sole owner of Claude's final skeptical review.",
+    "A correction discovered after lifecycle start should preserve the same work ID and append lineage rather than silently overwrite or create a duplicate work item.",
+    "The next live comparison can state the observed environment in the prompt so it tests the remediated reasoning path rather than environment elicitation latency."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation"
+    ],
+    "withheld_actions": [
+      "decision-delegation",
+      "implementation",
+      "commit",
+      "deployment",
+      "tracker-publication",
+      "closure"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "delivery-planning",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The remediation needs explicit behavioral and efficiency success criteria.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The current Claude hooks, Workbench runtime, distribution model, tests, and global installation must be traced.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The v3 transcript and persisted prior campaign establish the failure modes and current behavior.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Environment preflight, routing, investigation, proposal gating, correction, and completion review form a stateful workflow.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "This item plans the changes; executable and live validation belongs to the implementation item.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "process-model",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "No product UI is changing; the user-visible surface is agent behavior and concise prompts.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Portable policy, Claude-specific enforcement, Workbench persistence, and installation migration need explicit ownership boundaries.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "A bounded post-start correction path affects append-only Workbench state, lineage, and replay semantics.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The user has selected remediation; the remaining work is an executable implementation plan.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "data-model-design",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Harness neutrality, append-only state, idempotent installation, and evidence classifications constrain the solution.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The guard decisions, lifecycle correction contract, and failure handling need precise behavior.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The changes need a low-risk order, migration step, and live field rerun.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "delivery-planning",
+        "phase_id": "plan"
+      }
+    ]
+  },
+  "constraints": [
+    "Plan only; do not implement harness, hook, Workbench runtime, installation, or global-setting changes in this item.",
+    "Preserve the repository's existing uncommitted and untracked work.",
+    "Keep the fix harness-agnostic at the Workbench method and evaluation layers; isolate Claude-specific enforcement and installation in the Claude adapter/plugin.",
+    "Do not depend on the removed Ralph loop or any separately installed skill that is absent from this repository.",
+    "Prefer preventive gates and generated templates over a broad lifecycle rewrite.",
+    "Treat transcript token and elapsed-time counts as comparative field evidence, not a deterministic performance benchmark."
+  ],
+  "created_at": "2026-09-17T22:18:29.178682Z",
+  "desired_outcome": "Produce an implementation-ready, repository-grounded plan that fixes the Claude v3 failures: late environment discovery, stale Workbench state, weak evidence provenance, duplicated completion hooks, schema-heavy ceremony, and excessive investigation cost.",
+  "engagement_intent": "plan",
+  "evidence_references": [
+    ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/intake.json",
+    "claude test v3.md",
+    ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/state.json",
+    "skills/claude-rigor/hooks/completion_guard.js",
+    "skills/workbench/scripts/workbench_diagnosis_hook.py",
+    "tests/comparison/workbench-adherence/cases.json",
+    "C:/Users/vince/.claude/settings.json"
+  ],
+  "execution_lane": "full",
+  "facts": [
+    {
+      "source_references": [
+        "claude test v3.md"
+      ],
+      "statement": "Claude v3 invoked Workbench and diagnosing-bugs, but it routed and advanced the proposal before asking whether the observed slowdown was local or deployed; the user's deployed answer materially changed the option ranking."
+    },
+    {
+      "source_references": [
+        "claude test v3.md",
+        "skills/claude-rigor/hooks/completion_guard.js"
+      ],
+      "statement": "The revised deployed recommendation initially treated authorization-request duration as endpoint latency and ranked provisioned concurrency first; the diagnosis completion guard forced later retractions and a narrower final conclusion."
+    },
+    {
+      "source_references": [
+        "claude test v3.md",
+        "skills/workbench/references/routing.md"
+      ],
+      "statement": "The environment correction was written to an unregistered addendum because Workbench v0.5 has no supported post-start route-correction mutation, leaving durable lifecycle state stale."
+    },
+    {
+      "source_references": [
+        "claude test v3.md"
+      ],
+      "statement": "The transcript records four avoidable Workbench schema-validation failures while hand-building routing and handoff records."
+    },
+    {
+      "source_references": [
+        "skills/claude-rigor/hooks/hooks.json",
+        "C:/Users/vince/.claude/settings.json"
+      ],
+      "statement": "Claude currently receives the portable claude-rigor Stop hook and a separate legacy global completion_guard.py Stop hook; the global settings also register the Workbench diagnosis PreToolUse hook."
+    },
+    {
+      "source_references": [
+        "tests/comparison/workbench-adherence/cases.json",
+        "tests/runtime/test_workbench_adherence_evals.py"
+      ],
+      "statement": "Existing adherence evaluations cover method composition, post-start correction blocking, quantitative provenance, aggregate metrics, and fixture-bounded claims, but not environment-before-ranking, active-source provenance, or proposal gating on material uncertainty."
+    }
+  ],
+  "idempotency_key": "route-claude-v3-remediation-1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "efe22e5099e8faec816ae42d4ece5dfb148b4b04b9e1aadc2380668610651e79"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260917-CLAUDE-V3-REMEDIATION",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "f4609f24741440c454a782621c18d53a2a0ae44520dd96a0bb5661dae20ad9b1"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "implementation-plan",
+  "rationale": "The failures cross the installed Claude harness, Workbench lifecycle behavior, distribution configuration, and regression evaluations. The user requested a plan rather than implementation, so the route should resolve interfaces, sequencing, acceptance criteria, and rollout without modifying those systems yet.",
+  "recommendation": {
+    "assumptions": [
+      "Workbench remains append-only and Claude-specific enforcement stays outside its portable policy core."
+    ],
+    "choice": "Add preventive preflight and proposal gates first, then a bounded correction path and one-hook migration.",
+    "confidence": "high",
+    "rationale": "Most v3 waste and stale state began before proposal acceptance. Preventing that error is smaller and higher leverage; append-only correction remains necessary as a safety net, while hook consolidation removes contradictory duplicate reviews.",
+    "tradeoffs": [
+      "A stricter preflight may add one early question when environment cannot be discovered.",
+      "Post-start correction adds runtime and replay complexity, so it should follow the preventive controls."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260917-CLAUDE-V3-REMEDIATION",
+  "routing_revision": 1,
+  "runtime_route": "brownfield-feature",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request",
+        "claude test v3.md"
+      ],
+      "reason": "The remediation needs explicit behavioral and efficiency success criteria.",
+      "stage_id": "outcome-framing"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/claude-rigor",
+        "skills/workbench",
+        "tests/runtime"
+      ],
+      "reason": "The current Claude hooks, Workbench runtime, distribution model, tests, and global installation must be traced.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude test v3.md",
+        "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+      ],
+      "reason": "The v3 transcript and persisted prior campaign establish the failure modes and current behavior.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/workbench/SKILL.md",
+        "skills/diagnosing-bugs/SKILL.md"
+      ],
+      "reason": "Environment preflight, routing, investigation, proposal gating, correction, and completion review form a stateful workflow.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "This item plans the changes; executable and live validation belongs to the implementation item.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "No product UI is changing; the user-visible surface is agent behavior and concise prompts.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/claude-rigor",
+        "skills/workbench",
+        "C:/Users/vince/.claude/settings.json"
+      ],
+      "reason": "Portable policy, Claude-specific enforcement, Workbench persistence, and installation migration need explicit ownership boundaries.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/workbench/references/state-management.md",
+        "skills/workbench/scripts/workbench.py"
+      ],
+      "reason": "A bounded post-start correction path affects append-only Workbench state, lineage, and replay semantics.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user has selected remediation; the remaining work is an executable implementation plan.",
+      "stage_id": "proposal"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "AGENTS.md",
+        "skills/workbench/SKILL.md"
+      ],
+      "reason": "Harness neutrality, append-only state, idempotent installation, and evidence classifications constrain the solution.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude test v3.md",
+        "tests/runtime"
+      ],
+      "reason": "The guard decisions, lifecycle correction contract, and failure handling need precise behavior.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The changes need a low-risk order, migration step, and live field rerun.",
+      "stage_id": "delivery-planning"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "Implementation is outside this planning request.",
+      "stage_id": "implementation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The plan defines verification, but no implementation will be locally verified in this item.",
+      "stage_id": "local-verification"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "No release or global installation change is authorized.",
+      "stage_id": "release"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The future implementation plan will require a fresh Claude session rerun; this planning item does not deploy.",
+      "stage_id": "deployed-verification"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "Behavioral outcome measurement follows implementation and deployment.",
+      "stage_id": "outcome-verification"
+    }
+  ],
+  "title": "Plan Claude v3 remediation",
+  "unresolved_questions": [],
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-CLAUDE-V3-REMEDIATION-PLAN",
+  "artifact_kind": "delivery-plan",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "implementation",
+      "kind": "stage",
+      "purpose": "Provide the decision-complete harness implementation and comparison sequence."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "4bfbe7503932d0ffe97b7885c0ac9175b936cd702b04428a45b9d5c82bda8f3d"
+  },
+  "created_at": "2026-09-17T22:24:59Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "delivery-planning",
+  "proof_ids": [
+    "PRF-CLAUDE-V3-REMEDIATION-PLAN"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude v3 harness remediation implementation plan",
+  "updated_at": "2026-09-17T22:24:59Z",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

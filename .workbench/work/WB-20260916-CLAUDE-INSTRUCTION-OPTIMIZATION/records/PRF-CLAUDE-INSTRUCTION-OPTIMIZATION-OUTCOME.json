@@ -1,0 +1,67 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "business-outcome",
+      "limitations": [
+        "Parity is an operational result on this synthetic distribution, not a universal model-capability equivalence.",
+        "The hook adds one review turn after edits."
+      ],
+      "non_vacuity_check": "Clean/prior-prompt failures were reproduced, several challengers were rejected, the promoted hook was observed blocking, four new red-seed/green-reference holdouts remained frozen, and both agents were scored by external executable oracles in 12 trials.",
+      "observed_at": "2026-09-17T03:04:54Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Three-repetition frozen holdout comparison plus target, regression, deployed-global, and repository verification evidence.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+      "result": "passed",
+      "verification_target": {
+        "environment": "pinned-local-claude-and-codex-synthetic-evaluation",
+        "journey": "frozen-candidate-to-three-repetition-holdout-parity-to-global-deployed-smoke",
+        "seam": "agent-produced-repository-state-to-evaluator-owned-acceptance-oracle"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The installed Claude harness reached the pre-registered satisfactory parity threshold or better on the frozen coding-task holdout.",
+  "created_at": "2026-09-17T03:04:54Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Frozen holdout is repeated three times per agent.",
+        "Claude is within one accepted task of Codex.",
+        "Claude is no worse on scope or false-completion guardrails.",
+        "The promoted candidate is installed globally and passes a fresh automatic-discovery smoke."
+      ],
+      "description": "Establish satisfactory Claude/Codex operational parity or an evidenced plateau.",
+      "kind": "business-outcome",
+      "oracle_requirement": "Evaluator-owned executable acceptance results and deployed hook evidence must support the stopping decision.",
+      "requirement_id": "REQ-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+      "verification_target": {
+        "environment": "pinned-local-claude-and-codex-synthetic-evaluation",
+        "journey": "frozen-candidate-to-three-repetition-holdout-parity-to-global-deployed-smoke",
+        "seam": "agent-produced-repository-state-to-evaluator-owned-acceptance-oracle"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-17T03:04:54Z",
+  "verification_scope": "business-outcome",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

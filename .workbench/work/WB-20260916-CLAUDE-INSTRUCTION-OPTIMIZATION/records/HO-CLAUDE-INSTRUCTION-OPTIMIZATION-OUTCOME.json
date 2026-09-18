@@ -1,0 +1,62 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-verification"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md",
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T03:04:54Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The satisfactory stopping threshold is met: frozen-holdout Claude and Codex results are both 12/12 across three repetitions, with no observed scope or false-completion regression."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-OUTCOME",
+  "idempotency_key": "claude-instruction-optimization:outcome:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "69f8fe9191c7b0b395ca8a0a3be3d48379229d615063214fb3a5d1daf94c1ce4"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DEPLOYED",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "outcome-verification",
+  "stage": "outcome-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-outcome",
+  "uncertainties": [],
+  "why_next": "The requested empirical optimization outcome is ready for user acceptance; administrative closure remains withheld.",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

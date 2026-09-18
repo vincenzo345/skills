@@ -1,0 +1,12 @@
+{
+  "category": "integration",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "cache",
+    "contracts",
+    "state"
+  ],
+  "task_id": "cache-key-completeness",
+  "title": "Cache key completeness"
+}

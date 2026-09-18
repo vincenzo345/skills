@@ -1,0 +1,12 @@
+{
+  "category": "work-discipline",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "refactor",
+    "duplication",
+    "call-sites"
+  ],
+  "task_id": "shared-validator-refactor",
+  "title": "Shared validator refactor"
+}

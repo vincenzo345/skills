@@ -1,0 +1,12 @@
+{
+  "category": "work-discipline",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "regression",
+    "multiple-paths",
+    "call-sites"
+  ],
+  "task_id": "two-cause-regression",
+  "title": "Two-cause key normalization regression"
+}

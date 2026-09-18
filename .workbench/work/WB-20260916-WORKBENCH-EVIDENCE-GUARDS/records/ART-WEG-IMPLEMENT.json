@@ -1,0 +1,55 @@
+{
+  "artifact_id": "ART-WEG-IMPLEMENT",
+  "artifact_kind": "implementation",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "local-verification",
+      "kind": "stage",
+      "purpose": "Verify the implemented controls and global hook registration."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "e52d5f1779f2c2980e8de9608e8ef1d65942b70848ca7aec65e15ea23b87deb4"
+  },
+  "created_at": "2026-09-16T21:49:16.2065235Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-EVIDENCE-GUARDS/artifacts/implementation.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "implementation",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WEG-STANDARDS",
+        "record_type": "artifact"
+      }
+    },
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "AUTH-WEG-IMPLEMENT",
+        "record_type": "authorization"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Evidence-guard implementation",
+  "updated_at": "2026-09-16T21:49:16.2065235Z",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

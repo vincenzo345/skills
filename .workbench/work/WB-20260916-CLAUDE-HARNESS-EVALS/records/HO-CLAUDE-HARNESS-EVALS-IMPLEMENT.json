@@ -1,0 +1,80 @@
+{
+  "applicability": {
+    "applied": [
+      "implementation",
+      "tdd",
+      "writing-for-agents"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/implementation.md",
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-HARNESS-EVALS-IMPLEMENT"
+  ],
+  "created_at": "2026-09-16T22:45:09.002937Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The implementation adds the five-command runner, exactly 20 original task contracts, evaluator-owned red/green oracles, focused public-seam tests, and operating documentation without modifying unrelated user changes."
+    },
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The focused suite passed 8 tests and a one-pass author check observed all 20 baselines fail and all 20 references pass on the current Windows environment."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+  "idempotency_key": "claude-harness-evals:implementation-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "354ea783b4d163edff3d46c1ecf3cfc8ae2e9b08b05900fc2adcc8c75a1d92dd"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+      "record_type": "artifact"
+    },
+    {
+      "record_id": "AUTH-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+      "record_type": "authorization"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-HARNESS-EVALS",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "tdd",
+  "stage": "implementation",
+  "status": "completed",
+  "suggested_next_stage": "local-verification",
+  "uncertainties": [],
+  "why_next": "Challenge the complete catalog with repeated author validation, repository regressions, and final change-surface review.",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

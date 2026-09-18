@@ -1,0 +1,12 @@
+Implemented `run_with_retries` in [retrying.py](C:/Users/vince/projects/skillsrepo/.workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/campaigns/holdout-r3/codex/retry-attempt-semantics/workspace/retrying.py).
+
+It now:
+
+- Treats `max_attempts` as total calls.
+- Returns on first success.
+- Retries only `TransientError`.
+- Re-raises the exact final transient exception.
+- Immediately propagates other exceptions.
+- Rejects non-positive attempts before invoking the operation.
+
+Verification passed: 5 behavioral tests plus Python compilation. Generated caches were left intact.

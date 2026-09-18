@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+  "artifact_kind": "delivery-plan",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "implementation",
+      "kind": "stage",
+      "purpose": "Drive the five vertical TDD slices and fixed 20-task acceptance matrix."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "4b93960ce803229cc8308e13bdab3f1f9699a4da71dfade00071bd2787a1d313"
+  },
+  "created_at": "2026-09-16T22:27:54.102177Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/specification-and-delivery-plan.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "delivery-planning",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-HARNESS-EVALS-ARCH",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude harness evaluation specification and delivery plan",
+  "updated_at": "2026-09-16T22:27:54.102177Z",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

@@ -1,0 +1,68 @@
+{
+  "applicability": {
+    "applied": [
+      "standards-resolution",
+      "specification",
+      "delivery-planning",
+      "tdd",
+      "writing-for-agents"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/specification-and-delivery-plan.md",
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-PLAN",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-HARNESS-EVALS-IMPLEMENT"
+  ],
+  "created_at": "2026-09-16T22:27:54.102177Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-HARNESS-EVALS-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The fixed delivery contract defines 20 distinct task IDs, the stage/verify JSON interface, evaluator isolation rules, and five vertical TDD slices."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-HARNESS-EVALS-PLAN",
+  "idempotency_key": "claude-harness-evals:plan-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "bafb1a7c68ece6859906a34392f54d6e6061f079ec80e48f5355d1a0ba30f2f0"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-HARNESS-EVALS-ARCH",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-HARNESS-EVALS",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "tdd-and-agent-instruction-design",
+  "stage": "delivery-planning",
+  "status": "completed",
+  "suggested_next_stage": "implementation",
+  "uncertainties": [],
+  "why_next": "The public seam, task matrix, authoring gates, implementation slices, and scoped implementation authorization are recorded.",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

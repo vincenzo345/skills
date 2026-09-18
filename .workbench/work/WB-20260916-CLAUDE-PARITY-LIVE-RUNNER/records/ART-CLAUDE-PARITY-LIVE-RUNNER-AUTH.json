@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-AUTH",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "implementation",
+      "kind": "stage",
+      "purpose": "Record the implementation grant boundary."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "6698f231638a8dea12011ba3c98a807e2cd7fe212f5baf2aaa09abeab7888b50"
+  },
+  "created_at": "2026-09-17T01:06:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/implementation-authorization.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "delivery-planning",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Implementation authorization boundary",
+  "updated_at": "2026-09-17T01:06:00Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

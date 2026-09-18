@@ -1,0 +1,12 @@
+{
+  "category": "robustness",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "concurrency",
+    "cache",
+    "synchronization"
+  ],
+  "task_id": "concurrent-memoization",
+  "title": "Concurrent memoization"
+}

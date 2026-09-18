@@ -1,0 +1,138 @@
+{
+  "artifact_ids": [
+    "ART-CLAUDE-V3-REMEDIATION-FRAME",
+    "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+    "ART-CLAUDE-V3-REMEDIATION-DESIGN",
+    "ART-CLAUDE-V3-REMEDIATION-PLAN"
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T22:18:29.189408Z",
+  "current_stage": "delivery-planning",
+  "decision_ids": [],
+  "desired_outcome": "Produce an implementation-ready, repository-grounded plan that fixes the Claude v3 failures: late environment discovery, stale Workbench state, weak evidence provenance, duplicated completion hooks, schema-heavy ceremony, and excessive investigation cost.",
+  "handoff_ids": [
+    "HO-CLAUDE-V3-REMEDIATION-FRAME",
+    "HO-CLAUDE-V3-REMEDIATION-DISCOVERY",
+    "HO-CLAUDE-V3-REMEDIATION-DESIGN",
+    "HO-CLAUDE-V3-REMEDIATION-PLAN"
+  ],
+  "latest_event_id": "EVT-20260917-CLAUDE-V3-REMEDIATION-000009",
+  "map_id": "MAP-20260917-CLAUDE-V3-REMEDIATION",
+  "next_action": {
+    "description": "Review the destination result, then authorize closure or request a revision.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    },
+    "target_id": "WB-20260917-CLAUDE-V3-REMEDIATION",
+    "target_type": "authorization"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "implementation-plan",
+  "proof_ids": [
+    "PRF-CLAUDE-V3-REMEDIATION-PLAN"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-17T22:18:29.189408Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-17T22:27:41.358772Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-V3-REMEDIATION-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-17T22:18:29.189408Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance",
+        "evidence-intake",
+        "process-model"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-17T22:27:50.263465Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-V3-REMEDIATION-DISCOVERY"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "process-model",
+      "started_at": "2026-09-17T22:27:41.358772Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "solution-architecture",
+        "data-model-design"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "completed_at": "2026-09-17T22:28:29.362214Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-V3-REMEDIATION-DESIGN"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "data-model-design",
+      "started_at": "2026-09-17T22:27:50.263465Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification",
+        "delivery-planning"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-17T22:28:40.047377Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-V3-REMEDIATION-PLAN"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "delivery-planning",
+      "started_at": "2026-09-17T22:28:29.362214Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 9,
+  "status": "awaiting-acceptance",
+  "title": "Plan Claude v3 remediation",
+  "updated_at": "2026-09-17T22:28:40.047377Z",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

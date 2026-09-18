@@ -1,0 +1,85 @@
+{
+  "applicability": {
+    "applied": [
+      "local-verification",
+      "runtime-regression",
+      "artifact-integrity",
+      "repository-validation"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/verification.md",
+      "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T00:04:54Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The complete runtime suite passed 115 tests and the focused experiment/evaluator suite passed 17 tests."
+    },
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "A 40-cell fake campaign completed with the intended 20 reference passes and 20 no-op failures, then resumed with zero launches and 40 valid result digests."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-CONTROLLER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "No real model behavior, credential safety in a live runner, sealed-set isolation, or global prompt improvement is established by this local proof."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-CONTROLLER-VERIFIED",
+  "idempotency_key": "claude-parity-controller:verification:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "50a5dc61039aea50a19f90e2a58a6662d634f5f8dd5ea98149eebfc92205ed13"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-CONTROLLER-IMPLEMENT",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "local-verification",
+  "stage": "local-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The zero-cost controller foundation is ready for human acceptance; live isolation, model budget, vendor trials, optimization, and global promotion remain separately gated.",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

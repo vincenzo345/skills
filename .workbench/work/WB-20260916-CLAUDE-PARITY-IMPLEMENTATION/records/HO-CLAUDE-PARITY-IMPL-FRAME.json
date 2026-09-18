@@ -1,0 +1,62 @@
+{
+  "applicability": {
+    "applied": [
+      "outcome-framing"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/outcome-frame.md",
+      "record_id": "ART-CLAUDE-PARITY-IMPL-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:50:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-IMPL-FRAME",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The implementation destination is bounded to a zero-cost locally verified controller; live models and global promotion remain withheld."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-IMPL-FRAME",
+  "idempotency_key": "claude-parity-implementation:frame:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "0194e05e756db6b067491c3ed3d4db88dfa6f5847054efbf4e69c8f0f3c21952"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+      "record_type": "work"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "outcome-framing",
+  "status": "completed",
+  "suggested_next_stage": "brownfield-reconnaissance",
+  "uncertainties": [],
+  "why_next": "Proceed to brownfield-reconnaissance under the accepted predecessor plan.",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

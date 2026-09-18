@@ -1,0 +1,12 @@
+{
+  "category": "algorithmic",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "unicode",
+    "normalization",
+    "public-contract"
+  ],
+  "task_id": "unicode-username-match",
+  "title": "Unicode username matching"
+}

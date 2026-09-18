@@ -1,0 +1,85 @@
+{
+  "applicability": {
+    "applied": [
+      "local-verification",
+      "runtime-regression",
+      "artifact-integrity",
+      "real-docker-integration"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/verification.md",
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T01:15:40Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The complete runtime suite passed 129 tests; the focused isolation/controller suite passed 22 tests including a real Docker CLI journey."
+    },
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Qualification 37553f0ad0134a50778e117d revalidated against Docker 28.3.2 and the immutable local image with all 13 canaries true and no leftover harness container."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "No provider model, credential, egress, cost-accounting, parity, optimizer, or global-promotion claim is established by this proof."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-LIVE-RUNNER-VERIFIED",
+  "idempotency_key": "claude-parity-live-runner:verification:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "f68d0ad541109662f8bbc7b759d7b7cf01ffe17ce92926c69be6abf20ae86692"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "local-verification",
+  "stage": "local-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The isolated fake-agent runner is ready for human acceptance; provider CLI images, credential injection, restricted egress, exact spend authorization, live campaigns, optimization, and global promotion remain separately gated.",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

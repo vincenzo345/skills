@@ -64,7 +64,7 @@ Prioritize work that unlocks the most blocked nodes, tests the riskiest falsifia
 
 ## Invoke specialists without surrendering control
 
-Use Workbench's embedded contracts for routing, destination challenge, data-model work, handoffs, and proof. A focused installed skill may deepen research, prototyping, domain modeling, codebase design, specification, ticketing, implementation, review, or proof when its method adds value; Workbench must still remain usable when that optional specialist is absent.
+Use Workbench's embedded contracts for routing, destination challenge, data-model work, handoffs, and proof. The portable repository bundle supplies focused companions for feature planning, official OpenAI documentation, research, prototyping, diagnosis, test-driven implementation, code review, and merge-conflict resolution. Select one only when its method adds evidence or resolves a live uncertainty. Treat harness-native or separately installed skills as optional extensions, never as undeclared route prerequisites.
 
 A specialist is a bounded method and handoff contract, not automatically another agent. Run related methods in the current agent when they share the same evidence and working context. Delegate only independent evidence work or a genuinely independence-sensitive review whose expected value exceeds the prompt, rereading, and synthesis cost. Never create one subagent per activity label.
 
@@ -74,7 +74,7 @@ Each delegated assignment names one bounded outcome, its inputs and exclusive or
 
 Give each method exact record references, one bounded question, the current phase checkpoint and included activities, expected handoff, applicable policy versions, and authorization limits. Share a compact evidence inventory instead of copying full upstream artifacts into every prompt. Accept only a handoff that identifies inputs used, findings, applicability, remaining decisions or blockers, produced artifacts, proposed node changes, and routing advice. One checkpoint normally accepts one consolidated phase handoff even when several methods contributed. Workbench—not the specialist—decides whether the lifecycle gate passed.
 
-If no suitable specialist is installed, leave the node ready or blocked with an explicit missing capability. Do not invent a private workflow or silently collapse several domains into Workbench.
+If no focused companion is available, apply the baseline method in Workbench's references and keep the node ready. Record a capability blocker only when the outcome genuinely requires a tool or domain capability absent from the environment; the absence of an optional skill is not itself a blocker. Do not silently collapse several domains into one claim.
 
 ## Correct the route when evidence changes
 

@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-CLAUDE-HARNESS-EVALS-VERIFY",
+  "artifact_kind": "review",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-CLAUDE-HARNESS-EVALS",
+      "kind": "work-item",
+      "purpose": "Support destination acceptance."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "273c07d76ed7d3eb979f56dbecc096437cb608bc7a37b42556c1dc53136d416b"
+  },
+  "created_at": "2026-09-16T22:54:16.356293Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/verification.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "local-verification",
+  "proof_ids": [
+    "PRF-CLAUDE-HARNESS-EVALS-LOCAL"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "verifies",
+      "source": {
+        "record_id": "ART-CLAUDE-HARNESS-EVALS-IMPLEMENT",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude harness evaluation local verification",
+  "updated_at": "2026-09-16T22:54:16.356293Z",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

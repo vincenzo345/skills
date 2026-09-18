@@ -1,0 +1,37 @@
+{
+  "action": "implementation",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-CLAUDE-PARITY-LIVE-RUNNER-IMPL",
+  "grant": {
+    "granted_at": "2026-09-17T01:06:00Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-17T01:06:00Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Implement and locally verify the Docker isolation qualification and deterministic fake-agent runner in the current repository.",
+      "Do not invoke Claude or Codex models, access or copy provider credentials, consume quota, modify global CLAUDE.md or hooks, commit, deploy, publish, or close the item."
+    ],
+    "targets": [
+      {
+        "kind": "stage",
+        "stage_id": "implementation",
+        "target_id": "implementation"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

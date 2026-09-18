@@ -1,0 +1,64 @@
+{
+  "applicability": {
+    "applied": [
+      "standards-resolution",
+      "specification",
+      "delivery-planning"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/delivery-plan.md",
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T01:05:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The confirmed CLI, artifact-store, and isolation-runner seams are divided into eight vertical red-green slices ending in a real Docker journey and regression proof."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+  "idempotency_key": "claude-parity-live-runner:plan:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "a4cdd14fd8f1042336df9a2731e5668bea10220c8c77b6e7a5d13c66bf8ea65f"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-ARCH",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "tdd",
+  "stage": "delivery-planning",
+  "status": "completed",
+  "suggested_next_stage": "implementation",
+  "uncertainties": [],
+  "why_next": "Begin the first red test at the public isolation-runner seam.",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

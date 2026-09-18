@@ -1,0 +1,12 @@
+{
+  "category": "integration",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "cli",
+    "stderr",
+    "exit-code"
+  ],
+  "task_id": "cli-stream-semantics",
+  "title": "CLI stream and exit semantics"
+}

@@ -19,11 +19,14 @@ Stop escalating when the current question has enough evidence for its agreed dec
 ## Select a specialist method
 
 - Use repository inspection for current behavior, blast radius, integration boundaries, and existing tests.
-- Use research for an external fact that needs authoritative sources.
+- Use the bundled research companion for an external fact that needs authoritative sources; for current OpenAI facts, use the bundled OpenAI Docs companion.
+- Use the bundled feature-planner companion when a repository change needs a decision-complete implementation plan.
 - Use data analysis for process frequency, delay, defects, demand, or bottlenecks.
-- Use a prototype for a behavioral, state-model, feasibility, or visual question that can be answered cheaply without production claims.
+- Use the bundled prototype companion for a behavioral, state-model, feasibility, or visual question that can be answered cheaply without production claims.
 - Use domain modeling when terminology or responsibility boundaries are unstable.
 - Use grilling only after evidence exposes a consequential decision whose assumptions, tradeoffs, or alternatives need stress-testing.
+
+“Bundled” means shipped by the same repository distribution as Workbench. Harness-provided methods may add depth, but the route and its completion criteria must remain executable without them.
 
 ## Challenge the destination when it matters
 

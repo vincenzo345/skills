@@ -1,0 +1,84 @@
+{
+  "applicability": {
+    "applied": [
+      "brownfield-reconnaissance",
+      "evidence-intake",
+      "process-model"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md",
+      "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T22:24:59Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "V3 routed and advanced before resolving local versus deployed environment, then asked that prerequisite together with a dependent option-selection question."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The task-aware Stop hook improved the final answer, while a second legacy global Stop hook duplicated review and the investigation incurred four schema-repair loops."
+    },
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The v3 investigation used approximately 211k tokens and 39 minutes, substantially above the comparison target despite stronger final calibration."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-V3-REMEDIATION-DISCOVERY",
+  "idempotency_key": "claude-v3-remediation:discovery:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "1962a48bbfd312a68f36a86852b96d78abe6162f9e4c20212a886292e98f66bd"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-V3-REMEDIATION-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260917-CLAUDE-V3-REMEDIATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "feature-planner",
+  "stage": "process-model",
+  "status": "completed",
+  "suggested_next_stage": "solution-architecture",
+  "uncertainties": [],
+  "why_next": "Assign each failure to the canonical prompt, early and late hooks, installer, or bounded Workbench support seam.",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

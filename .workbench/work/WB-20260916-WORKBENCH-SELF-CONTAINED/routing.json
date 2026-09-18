@@ -1,0 +1,251 @@
+{
+  "acceptance_evidence": [
+    "feature-planner, openai-docs, and research are present in the repository's deployable skill set with valid cross-harness metadata.",
+    "Workbench documents a bundled companion boundary and can continue from embedded baseline contracts rather than blocking on an undeclared external skill.",
+    "Repository validation enforces the portable companion catalog, manifests, metadata, and relative links.",
+    "Focused and full local validation pass."
+  ],
+  "assumptions": [
+    "The named three skills are the demonstrated minimum companion set; other methods remain eligible for later inclusion when evidence shows repeated value.",
+    "Harness agnostic means instructions express capabilities and evidence requirements rather than requiring Codex-only or Claude-only tool identifiers.",
+    "Repository mutation and implementation are authorized by the user's explicit request; local installation, commit, publication, and deployment remain withheld."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "deployment",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "local-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Existing skill contents, packaging manifests, validators, and Workbench routing language determine the bounded change.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "brownfield-reconnaissance",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Repository skill conventions and portable agent-instruction rules govern packaging and wording.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The explicit companion list, existing packaging convention, and acceptance evidence make a separate specification unnecessary.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "This is a bounded repository patch with no rollout or migration sequence beyond the existing plugin packaging path.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "standards-resolution",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      }
+    ]
+  },
+  "constraints": [
+    "Keep every shipped companion usable by both Claude Code and Codex without relying on a harness-specific tool name or filesystem location.",
+    "Retain progressive disclosure: Workbench coordinates, while focused companion skills own reusable methods.",
+    "Do not change Workbench persistence schemas or runtime lifecycle behavior.",
+    "Do not commit, publish, deploy, or close the durable item without separate authorization."
+  ],
+  "created_at": "2026-09-16T23:19:45.960611Z",
+  "desired_outcome": "A Workbench installation from this repository carries every reusable companion method demonstrated in the reported session, uses harness-neutral instructions, and does not require undeclared external skills to complete a Workbench route.",
+  "engagement_intent": "implement",
+  "evidence_references": [
+    "captured-intake",
+    "skills/workbench/SKILL.md",
+    "skills/workbench/references/intake.md",
+    "skills/workbench/references/routing.md",
+    "skills/workbench/references/discovery.md",
+    "skills/research/SKILL.md",
+    ".claude-plugin/plugin.json",
+    "README.md",
+    "scripts/validate-skills.py",
+    "CLAUDE.md"
+  ],
+  "execution_lane": "fast",
+  "facts": [
+    {
+      "source_references": [
+        "captured-intake"
+      ],
+      "statement": "The reported Workbench session loaded feature-planner, openai-docs, and research in addition to Workbench references."
+    },
+    {
+      "source_references": [
+        "skills/research/SKILL.md",
+        ".claude-plugin/plugin.json"
+      ],
+      "statement": "Research is already shipped by this repository, while feature-planner and openai-docs are absent from its skills directory and plugin manifest."
+    },
+    {
+      "source_references": [
+        "skills/workbench/references/routing.md"
+      ],
+      "statement": "Workbench routing currently permits installed specialist skills and treats absence of a suitable specialist as a blocker, creating an undeclared environment dependency."
+    }
+  ],
+  "idempotency_key": "workbench-self-contained:route-start:v1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "fd8fee3344a5d4c8a8a1ec7ba889a4b53c510d17ac609e7f038366a4f7f159c1"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-WORKBENCH-SELF-CONTAINED",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "421c39c6d271151575630ac2625096bccb0b9f707475495727adcfde20655938"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "rationale": "The gap is bounded to skill packaging, portable instruction contracts, manifests, catalog documentation, and regression validation. Existing Workbench runtime state semantics and persistence are unaffected.",
+  "recommendation": {
+    "assumptions": [
+      "The reported three-skill example is the current minimum required set."
+    ],
+    "choice": "Ship portable feature-planner and openai-docs companions, retain the existing research companion, harden Workbench's dependency boundary, and enforce the set in validation.",
+    "confidence": "high",
+    "rationale": "This directly closes the demonstrated packaging gap without copying harness-specific mechanics into Workbench itself.",
+    "tradeoffs": [
+      "The repository gains two model-invoked skill descriptions, increasing always-loaded discovery metadata slightly."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260916-WORKBENCH-SELF-CONTAINED",
+  "routing_revision": 1,
+  "runtime_route": "small-change-fast-lane",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/workbench/references/routing.md",
+        ".claude-plugin/plugin.json",
+        "scripts/validate-skills.py"
+      ],
+      "reason": "Existing skill contents, packaging manifests, validators, and Workbench routing language determine the bounded change.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "skills/workbench/scripts/workbench.py",
+        "captured-intake"
+      ],
+      "reason": "The change adds instruction packages and validation contracts without altering Workbench records or any durable data semantics.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "CLAUDE.md",
+        "scripts/validate-skills.py"
+      ],
+      "reason": "Repository skill conventions and portable agent-instruction rules govern packaging and wording.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured-intake",
+        "CLAUDE.md"
+      ],
+      "reason": "The explicit companion list, existing packaging convention, and acceptance evidence make a separate specification unnecessary.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        ".claude-plugin/plugin.json",
+        "README.md"
+      ],
+      "reason": "This is a bounded repository patch with no rollout or migration sequence beyond the existing plugin packaging path.",
+      "stage_id": "delivery-planning"
+    }
+  ],
+  "title": "Make the Workbench skillset self-contained",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

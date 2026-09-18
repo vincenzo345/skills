@@ -1,0 +1,65 @@
+{
+  "applicability": {
+    "applied": [
+      "implementation",
+      "tdd"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/implementation.md",
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-PARITY-LIVE-RUNNER-IMPL-V2"
+  ],
+  "created_at": "2026-09-17T01:14:22Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The Docker isolation boundary, executable qualification evidence, qualified fake execution, CLI, and evidence-bound live preflight are implemented while provider execution remains fail-closed."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-LIVE-RUNNER-IMPLEMENT",
+  "idempotency_key": "claude-parity-live-runner:implementation:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "522c188c832432a4b1b5496501a76384cd9607c263e3541a59b548ebc268bb44"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-PLAN",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "tdd",
+  "stage": "implementation",
+  "status": "completed",
+  "suggested_next_stage": "local-verification",
+  "uncertainties": [],
+  "why_next": "Verify focused adversarial behavior, the real Docker journey, benchmark invariants, repository regression health, and proof boundaries.",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

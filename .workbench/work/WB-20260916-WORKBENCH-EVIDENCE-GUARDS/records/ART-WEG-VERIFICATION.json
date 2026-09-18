@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-WEG-VERIFICATION",
+  "artifact_kind": "review",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS",
+      "kind": "work-item",
+      "purpose": "Support destination acceptance."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "95ea0cd021db0c88de0b70ba1a9cf6acdc1e6fbfe70aea2a56aad4960eb6755a"
+  },
+  "created_at": "2026-09-16T21:50:37.0888394Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-EVIDENCE-GUARDS/artifacts/verification.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "local-verification",
+  "proof_ids": [
+    "PRF-WEG-LOCAL"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "ART-WEG-IMPLEMENT",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Evidence-guard local verification",
+  "updated_at": "2026-09-16T21:50:37.0888394Z",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

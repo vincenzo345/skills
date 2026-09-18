@@ -1,0 +1,64 @@
+{
+  "applicability": {
+    "applied": [
+      "standards-resolution",
+      "specification",
+      "delivery-planning"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md",
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T03:04:54Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Delivery used staged call tranches, candidate rejection on nondeterminism, five regression tasks, a four-task frozen holdout with three repetitions, Codex reference runs, and a normal-discovery deployed smoke."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-PLAN",
+  "idempotency_key": "claude-instruction-optimization:plan:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "13b5845a5e339c427c6475bb575a2c74535cbea98abf1dd9db0421e20ff3077d"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DESIGN",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "delivery-planning",
+  "status": "completed",
+  "suggested_next_stage": "implementation",
+  "uncertainties": [],
+  "why_next": "Register the implemented global prompt, hook, holdouts, and tests.",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

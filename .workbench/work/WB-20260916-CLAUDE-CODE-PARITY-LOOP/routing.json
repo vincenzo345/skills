@@ -1,0 +1,326 @@
+{
+  "acceptance_evidence": [
+    "One implementation plan defines the experiment controller, Claude and Codex adapters, isolation boundary, immutable run data model, metrics, optimizer, reporting, and resume behavior at named repository seams.",
+    "The plan defines pre-registered operational criteria for Claude parity, plateau/maxed-within-scope, candidate promotion, holdout use, and the secondary Codex optimization branch.",
+    "The plan includes an economical staged run schedule, hard concurrency/time/spend limits, a kill switch, credential handling, and a no-paid-run preflight gate.",
+    "The test plan covers adapter contract tests, fake-CLI integration tests, deterministic scoring, interruption/resume, security canaries, baseline comparisons, validation promotion, and a sealed final holdout.",
+    "All material product-surface assumptions are tied to current primary documentation or local CLI evidence, and remaining account or budget decisions are explicit execution-time gates rather than hidden assumptions."
+  ],
+  "assumptions": [
+    "The current 20 tasks become development and smoke-test material because their contents are already present in this repository and have been discussed during prompt design.",
+    "A separate sealed evaluation set will be authored or stored where prompt-generating agents cannot read its oracles; only aggregate diagnostics cross back into optimization.",
+    "Append-only JSONL plus immutable per-run JSON and text artifacts are sufficient for the first implementation; no relational database is required.",
+    "The first implementation will support Claude Code and Codex CLI through subprocess adapters and will keep DSPy optional behind the same candidate-proposal interface.",
+    "Actual campaign execution will require a separately recorded model/access choice and hard usage budget; until then the controller must remain in dry-run or fake-adapter mode."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "deployment",
+      "implementation",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "delivery-planning",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Parity and maxed require bounded, falsifiable operational definitions before experiments or implementation.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The plan extends the existing catalog, runner, CLI, documentation, and test conventions.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Current Claude Code, Codex, and DSPy automation surfaces and safety constraints materially affect the architecture.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The baseline, diagnose, propose, screen, promote, holdout, stop, and optional Codex-improvement loop must be explicit.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "This destination is an implementation plan; empirical validation belongs to the later campaign and cannot be claimed without authorized model runs.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "process-model",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "The initial interface is a machine-oriented CLI and generated report, with no interactive human UI.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Agent adapters, isolation, credential boundaries, evaluator separation, optimization, and resumability are material technical seams.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Experiments require durable immutable manifests, event streams, run results, candidate lineage, promotion decisions, budgets, and terminal-state records even though a database is not required.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The user already selected an automated comparison-and-improvement loop; the plan records the architecture rather than asking whether to pursue it.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "data-model-design",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The implementation needs fixed reproducibility, statistical, security, and artifact-retention standards.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Adapter contracts, commands, schemas, metrics, gates, and failure semantics must be decision-complete.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The work must be sliced so fake-adapter automation and safety proof precede any credentialed or paid campaign.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "delivery-planning",
+        "phase_id": "plan"
+      }
+    ]
+  },
+  "constraints": [
+    "Do not invoke Claude or Codex models, consume paid credits, use enterprise credentials, or alter global Claude/Codex instructions while producing this plan.",
+    "Use only synthetic evaluation repositories with no employer, client, production, or personal data.",
+    "Every real trial must run in a disposable least-privilege environment and must keep evaluator-only oracles outside the agent-visible workspace.",
+    "Pin model identifiers, CLI versions, prompt hashes, permissions, time and token or spend limits, task revisions, and repetition counts for comparable conditions.",
+    "Treat capability parity and capability maximum as bounded experimental claims, not universal statements about either product.",
+    "Preserve unrelated repository and Workbench changes; commit, deployment, external publication, and Workbench closure remain unauthorized."
+  ],
+  "created_at": "2026-09-16T23:18:21.561780Z",
+  "desired_outcome": "An implementation-ready, safety-bounded plan defines how to run reproducible Claude Code and Codex coding-agent evaluations, improve Claude's harness configuration automatically until it reaches operational parity or a measured plateau, and only then explore Codex improvements without contaminating final evaluation evidence.",
+  "engagement_intent": "plan",
+  "evidence_references": [
+    ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/intake.json",
+    ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/routing-revisions/000002.json",
+    "docs/claude-harness-evals.md",
+    "claude_harness_eval/runner.py",
+    "tests/runtime/test_claude_harness_eval.py",
+    "official OpenAI documentation: https://developers.openai.com/codex/noninteractive",
+    "local CLI inspection: claude 2.1.273 and codex-cli 0.154.0",
+    "docs/research/claude-codex-parity-loop.md"
+  ],
+  "execution_lane": "full",
+  "facts": [
+    {
+      "source_references": [
+        "docs/claude-harness-evals.md",
+        "claude_harness_eval/runner.py",
+        "tests/runtime/test_claude_harness_eval.py",
+        ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/routing-revisions/000002.json"
+      ],
+      "statement": "The predecessor suite has 20 synthetic tasks in four categories, stages only public seed material, verifies final state with evaluator-owned executable oracles, and has locally passed its red-baseline/green-reference validation."
+    },
+    {
+      "source_references": [
+        "local CLI inspection: claude --version and claude --help"
+      ],
+      "statement": "Claude Code 2.1.273 exposes non-interactive output, JSON and stream-JSON results, system-prompt injection, explicit model and effort selection, tool and permission controls, worktrees, structured output, and per-run API budget limits."
+    },
+    {
+      "source_references": [
+        "local CLI inspection: codex --version and codex exec --help",
+        "official OpenAI documentation: https://developers.openai.com/codex/noninteractive"
+      ],
+      "statement": "Codex CLI 0.154.0 exposes non-interactive execution, JSONL events, model selection, workspace sandboxing, ephemeral sessions, structured output, explicit working directories, and managed worktrees."
+    },
+    {
+      "source_references": [
+        "docs/claude-harness-evals.md"
+      ],
+      "statement": "Optimizing repeatedly against the existing public task set would make it development evidence rather than an unbiased final holdout."
+    }
+  ],
+  "idempotency_key": "route-start-claude-code-parity-loop-v1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "c212bd80d2a5557562c140d37798134302540a6a984482a5d27e3e15af22ac91"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-CLAUDE-CODE-PARITY-LOOP",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "ea8e5606e20aec76720bf8d690633be89bc39614a2a5317c5d0e4f9943ae9117"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "implementation-plan",
+  "rationale": "The repository already contains a verified 20-task stage-and-verify suite, but it lacks model adapters, isolated execution, run records, statistical comparison, prompt optimization, promotion gates, and stopping rules. Those boundaries are consequential enough to require discovery, architecture, persistence semantics, specification, and delivery planning before any paid or credentialed trial runs.",
+  "recommendation": {
+    "assumptions": [
+      "The user will authorize a concrete account/model matrix and campaign budget only after reviewing the implementation plan."
+    ],
+    "choice": "Build a resumable champion-challenger controller with sealed promotion gates.",
+    "confidence": "high",
+    "rationale": "This design automates iteration while preserving independent evidence, bounds cost and safety risk, and supports either a parity conclusion or an honest plateau conclusion without equating repeated prompt tuning with universal model capability.",
+    "tradeoffs": [
+      "Sealed tasks and repeated paired trials add authoring and compute cost.",
+      "Strict promotion and stop gates make the campaign slower than ad hoc prompt tweaking but prevent optimistic overfitting.",
+      "A CLI-level DSPy wrapper can propose prompts, but it cannot expose or rewrite Claude Code's proprietary internal harness."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260916-CLAUDE-CODE-PARITY-LOOP",
+  "routing_revision": 1,
+  "runtime_route": "brownfield-feature",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "Parity and maxed require bounded, falsifiable operational definitions before experiments or implementation.",
+      "stage_id": "outcome-framing"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/runner.py",
+        "tests/runtime/test_claude_harness_eval.py"
+      ],
+      "reason": "The plan extends the existing catalog, runner, CLI, documentation, and test conventions.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "docs/research/claude-codex-parity-loop.md",
+        "official OpenAI documentation: https://developers.openai.com/codex/noninteractive"
+      ],
+      "reason": "Current Claude Code, Codex, and DSPy automation surfaces and safety constraints materially affect the architecture.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "desired outcome"
+      ],
+      "reason": "The baseline, diagnose, propose, screen, promote, holdout, stop, and optional Codex-improvement loop must be explicit.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "planning destination",
+        "authorization boundary"
+      ],
+      "reason": "This destination is an implementation plan; empirical validation belongs to the later campaign and cannot be claimed without authorized model runs.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "desired outcome"
+      ],
+      "reason": "The initial interface is a machine-oriented CLI and generated report, with no interactive human UI.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "local CLI inspection",
+        "docs/claude-harness-evals.md"
+      ],
+      "reason": "Agent adapters, isolation, credential boundaries, evaluator separation, optimization, and resumability are material technical seams.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "desired outcome",
+        "skills/workbench/references/data-modeling.md"
+      ],
+      "reason": "Experiments require durable immutable manifests, event streams, run results, candidate lineage, promotion decisions, budgets, and terminal-state records even though a database is not required.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user already selected an automated comparison-and-improvement loop; the plan records the architecture rather than asking whether to pursue it.",
+      "stage_id": "proposal"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "AGENTS.md",
+        "docs/claude-harness-evals.md"
+      ],
+      "reason": "The implementation needs fixed reproducibility, statistical, security, and artifact-retention standards.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "Adapter contracts, commands, schemas, metrics, gates, and failure semantics must be decision-complete.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "constraints",
+        "acceptance evidence"
+      ],
+      "reason": "The work must be sliced so fake-adapter automation and safety proof precede any credentialed or paid campaign.",
+      "stage_id": "delivery-planning"
+    }
+  ],
+  "title": "Plan an automated Claude Code parity loop",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

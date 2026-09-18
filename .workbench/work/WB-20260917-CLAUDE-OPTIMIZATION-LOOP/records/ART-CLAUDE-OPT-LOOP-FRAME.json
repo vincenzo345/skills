@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-OPT-LOOP-FRAME",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "process-model",
+      "kind": "stage",
+      "purpose": "Bind the optimization state machine to the requested outcome and proof boundary."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "e55dd71cc79d53d2d2c19ee3e170091e61b059a5d53fca11befcd8da04dbb208"
+  },
+  "created_at": "2026-09-17T23:12:41Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260917-CLAUDE-OPTIMIZATION-LOOP/artifacts/implementation-and-verification.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-framing",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude optimization loop outcome frame",
+  "updated_at": "2026-09-17T23:12:41Z",
+  "work_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP"
+}

@@ -1,0 +1,182 @@
+{
+  "artifact_ids": [],
+  "authorization_ids": [],
+  "created_at": "2026-09-18T00:18:39.140198Z",
+  "current_stage": "outcome-framing",
+  "decision_ids": [],
+  "desired_outcome": "Claude Code, using the installed global prompt and hooks, meets or exceeds the established Codex baseline on every substantive grading dimension for the Applications4Life Workbench diagnosis prompt, remains within the 150,000-token and 25-minute ceilings, and preserves that behavior across representative disposable sample codebases; otherwise the campaign stops only at a reproducible provider or technical impasse.",
+  "handoff_ids": [],
+  "latest_event_id": "EVT-20260917-CLAUDE-WORKBENCH-PARITY-LIVE-000001",
+  "map_id": "MAP-20260917-CLAUDE-WORKBENCH-PARITY-LIVE",
+  "next_action": {
+    "description": "Satisfy the outcome-frame-recorded exit gate.",
+    "owner": {
+      "actor_id": "agent:workbench",
+      "kind": "agent"
+    },
+    "target_id": "outcome-framing",
+    "target_type": "stage"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "business-outcome",
+  "proof_ids": [],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-18T00:18:39.140198Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "next_action": {
+        "description": "Satisfy the outcome-frame-recorded exit gate.",
+        "owner": {
+          "actor_id": "agent:workbench",
+          "kind": "agent"
+        },
+        "target_id": "outcome-framing",
+        "target_type": "stage"
+      },
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-18T00:18:39.140198Z",
+      "status": "active"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance",
+        "evidence-intake",
+        "process-model",
+        "process-validation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "process-validation",
+      "status": "pending"
+    },
+    {
+      "activity_stage_ids": [
+        "solution-architecture",
+        "data-model-design"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "data-model-design",
+      "status": "pending"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification",
+        "delivery-planning"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "delivery-planning",
+      "status": "pending"
+    },
+    {
+      "activity_stage_ids": [
+        "implementation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the implement phase.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "implement",
+      "stage_id": "implementation",
+      "status": "pending"
+    },
+    {
+      "activity_stage_ids": [
+        "local-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the verify phase.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "verify",
+      "stage_id": "local-verification",
+      "status": "pending"
+    },
+    {
+      "activity_stage_ids": [
+        "release",
+        "deployed-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the release phase.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "release",
+      "stage_id": "deployed-verification",
+      "status": "pending"
+    },
+    {
+      "activity_stage_ids": [
+        "outcome-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the measure phase.",
+      "output_artifact_ids": [],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "measure",
+      "stage_id": "outcome-verification",
+      "status": "pending"
+    }
+  ],
+  "state_revision": 1,
+  "status": "active",
+  "title": "Optimize and deploy Claude Workbench parity harness",
+  "updated_at": "2026-09-18T00:18:39.140198Z",
+  "work_id": "WB-20260917-CLAUDE-WORKBENCH-PARITY-LIVE"
+}

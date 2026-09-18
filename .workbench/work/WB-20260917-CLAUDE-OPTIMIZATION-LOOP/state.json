@@ -1,0 +1,185 @@
+{
+  "artifact_ids": [
+    "ART-CLAUDE-OPT-LOOP-FRAME",
+    "ART-CLAUDE-OPT-LOOP-DISCOVERY",
+    "ART-CLAUDE-OPT-LOOP-DESIGN",
+    "ART-CLAUDE-OPT-LOOP-PLAN",
+    "ART-CLAUDE-OPT-LOOP-AUTH",
+    "ART-CLAUDE-OPT-LOOP-IMPLEMENTATION",
+    "ART-CLAUDE-OPT-LOOP-VERIFICATION"
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-OPT-LOOP-IMPLEMENT"
+  ],
+  "created_at": "2026-09-17T22:52:11.035235Z",
+  "current_stage": "local-verification",
+  "decision_ids": [],
+  "desired_outcome": "Deliver a locally verified, resumable controller that runs fresh Claude harness candidates against pinned scenarios, evaluates them with the established Claude-versus-Codex criteria, generates one bounded improvement at a time, retests, and promotes only a non-regressing candidate within fixed safety and efficiency budgets.",
+  "handoff_ids": [
+    "HO-CLAUDE-OPT-LOOP-FRAME",
+    "HO-CLAUDE-OPT-LOOP-DISCOVERY",
+    "HO-CLAUDE-OPT-LOOP-DESIGN",
+    "HO-CLAUDE-OPT-LOOP-PLAN",
+    "HO-CLAUDE-OPT-LOOP-IMPLEMENT-AUTH",
+    "HO-CLAUDE-OPT-LOOP-IMPLEMENTATION",
+    "HO-CLAUDE-OPT-LOOP-VERIFICATION"
+  ],
+  "latest_event_id": "EVT-20260917-CLAUDE-OPTIMIZATION-LOOP-000014",
+  "map_id": "MAP-20260917-CLAUDE-OPTIMIZATION-LOOP",
+  "next_action": {
+    "description": "Review the destination result, then authorize closure or request a revision.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    },
+    "target_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP",
+    "target_type": "authorization"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "proof_ids": [
+    "PRF-CLAUDE-OPT-LOOP-LOCAL"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-17T22:52:11.035235Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-17T23:15:21.879102Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-OPT-LOOP-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-17T22:52:11.035235Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance",
+        "evidence-intake",
+        "process-model"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-17T23:15:28.358582Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-OPT-LOOP-DISCOVERY"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "process-model",
+      "started_at": "2026-09-17T23:15:21.879102Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "solution-architecture",
+        "data-model-design"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "completed_at": "2026-09-17T23:15:34.976500Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-OPT-LOOP-DESIGN"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "data-model-design",
+      "started_at": "2026-09-17T23:15:28.358582Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification",
+        "delivery-planning"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-17T23:18:28.627011Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-OPT-LOOP-PLAN",
+        "ART-CLAUDE-OPT-LOOP-AUTH"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "delivery-planning",
+      "started_at": "2026-09-17T23:15:34.976500Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "implementation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the implement phase.",
+      "completed_at": "2026-09-17T23:18:49.776221Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-OPT-LOOP-IMPLEMENTATION"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "implement",
+      "stage_id": "implementation",
+      "started_at": "2026-09-17T23:18:28.627011Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "local-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the verify phase.",
+      "completed_at": "2026-09-17T23:19:51.548278Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-OPT-LOOP-VERIFICATION"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "verify",
+      "stage_id": "local-verification",
+      "started_at": "2026-09-17T23:18:49.776221Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 14,
+  "status": "awaiting-acceptance",
+  "title": "Implement Claude harness optimization loop",
+  "updated_at": "2026-09-17T23:19:51.548278Z",
+  "work_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP"
+}

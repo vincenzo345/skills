@@ -1,0 +1,75 @@
+{
+  "applicability": {
+    "applied": [
+      "local-verification",
+      "runtime-regression",
+      "skill-validation",
+      "hook-validation"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-WORKBENCH-EVIDENCE-GUARDS/artifacts/verification.md",
+      "record_id": "ART-WEG-VERIFICATION",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T21:50:37.0888394Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-WEG-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The full Workbench runtime suite passes 96 tests with the typed-finding compatibility behavior enabled."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-WEG-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The global Workbench skill and hook resolve to the implemented repository files, and Claude settings contain the narrow PreToolUse registration."
+    }
+  ],
+  "handoff_id": "HO-WEG-VERIFIED",
+  "idempotency_key": "workbench-evidence-guards:verification-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "f2f50f77e1c9aa74273528a8250b016fa928b48da110d2053105485e4aae80c8"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-WEG-IMPLEMENT",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-WORKBENCH-EVIDENCE-GUARDS",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-local-verification",
+  "stage": "local-verification",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The locally verified controls are ready for review; commit, publication, deployment, and closure remain separate actions.",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

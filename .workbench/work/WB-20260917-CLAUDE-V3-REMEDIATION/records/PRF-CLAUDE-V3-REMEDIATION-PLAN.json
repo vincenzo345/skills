@@ -1,0 +1,68 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-V3-REMEDIATION-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "artifact-validity",
+      "limitations": [
+        "No harness or Workbench implementation was changed.",
+        "No new Claude or Codex comparison run was executed.",
+        "Token and elapsed-time thresholds remain future acceptance criteria rather than observed results."
+      ],
+      "non_vacuity_check": "The review challenged the initial Workbench-runtime-heavy direction against the user's clarified objective and revised the plan so the canonical Claude prompt, early hook, final hook, and singular installer lead the work while route correction is deferred.",
+      "observed_at": "2026-09-17T22:24:59Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "Producer review against the feature-planner readiness gate, every v3 failure, the existing Codex comparison target, and the user's harness-first clarification.",
+        "kind": "producer-check"
+      },
+      "requirement_id": "REQ-CLAUDE-V3-REMEDIATION-PLAN",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local skills repository",
+        "journey": "v3 findings through harness-first implementation and controlled Claude-Codex comparison plan",
+        "seam": "registered implementation-plan Markdown artifact"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The Claude v3 remediation plan is implementation-ready, harness-first, evidence-grounded, and defines measurable non-inferiority or superiority against Codex without claiming the future result.",
+  "created_at": "2026-09-17T22:24:59Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-V3-REMEDIATION-PLAN",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Every v3 failure maps to a prompt, hook, installation, bounded Workbench, or evaluation change.",
+        "Claude must meet or exceed Codex on each substantive grading dimension and total score without trading correctness for speed.",
+        "The plan defines concrete files, interfaces, regression cases, migration, rollback, and live comparison evidence.",
+        "Implementation, global installation, model runs, and a general Workbench correction engine remain outside the completed planning claim."
+      ],
+      "description": "Review the remediation plan for decision completeness, harness-first scope, evidence linkage, proportionality, and a falsifiable Claude-versus-Codex success gate.",
+      "kind": "artifact-validity",
+      "oracle_requirement": "A content-integrity check and producer review against the feature-planning readiness gate, v3 findings, and clarified comparison objective.",
+      "requirement_id": "REQ-CLAUDE-V3-REMEDIATION-PLAN",
+      "verification_target": {
+        "environment": "local skills repository",
+        "journey": "v3 findings through harness-first implementation and controlled Claude-Codex comparison plan",
+        "seam": "registered implementation-plan Markdown artifact"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-17T22:24:59Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260917-CLAUDE-V3-REMEDIATION"
+}

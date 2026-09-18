@@ -1,0 +1,56 @@
+{
+  "artifact_id": "ART-WSC-IMPLEMENT",
+  "artifact_kind": "implementation",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "local-verification",
+      "kind": "stage",
+      "purpose": "Verify the portable companion packaging and behavior contracts."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "03aa392b075271c2dfecd1a4cc006e944aed62159c3ba16fc9dbc1a1e0eae4a6"
+  },
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/implementation.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "implementation",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "implements",
+      "source": {
+        "record_id": "ART-WSC-PLAN",
+        "record_type": "artifact"
+      }
+    },
+    {
+      "note": "Scoped repository implementation authorization.",
+      "relationship": "provided-by",
+      "source": {
+        "record_id": "AUTH-WSC-IMPLEMENT",
+        "record_type": "authorization"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Self-contained companion implementation",
+  "updated_at": "2026-09-16T23:28:37.9152429Z",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

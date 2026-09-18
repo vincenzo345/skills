@@ -1,0 +1,63 @@
+{
+  "applicability": {
+    "applied": [
+      "solution-architecture",
+      "data-model-design"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-PARITY-IMPLEMENTATION/artifacts/architecture-binding.md",
+      "record_id": "ART-CLAUDE-PARITY-IMPL-ARCH",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:50:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-IMPL-ARCH",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The accepted architecture is bound to typed config, immutable artifacts, append-only events, atomic state, stable IDs, and fail-closed live execution."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-IMPL-ARCH",
+  "idempotency_key": "claude-parity-implementation:arch:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "2fa0f640d49cec8876ec9dfcf741c3c6e32d8ac9ae16c2a599f8d650494fc20e"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-IMPL-RECON",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "data-model-design",
+  "status": "completed",
+  "suggested_next_stage": "delivery-planning",
+  "uncertainties": [],
+  "why_next": "Proceed to delivery-planning under the accepted predecessor plan.",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

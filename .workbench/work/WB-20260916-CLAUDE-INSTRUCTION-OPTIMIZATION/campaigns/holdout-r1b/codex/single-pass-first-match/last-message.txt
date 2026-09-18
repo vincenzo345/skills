@@ -1,0 +1,11 @@
+Implemented `first_match` in [matching.py](C:\Users\vince\projects\skillsrepo\.workbench\work\WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION\campaigns\holdout-r1b\codex\single-pass-first-match\workspace\matching.py).
+
+It now:
+
+- Consumes the iterable once.
+- Calls the predicate once per inspected record.
+- Stops immediately on the first match.
+- Returns `None` when nothing matches.
+- Avoids materializing the iterable.
+
+Verification passed, including one-shot iterator and short-circuit checks.

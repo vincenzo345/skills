@@ -1,0 +1,12 @@
+{
+  "category": "integration",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "configuration",
+    "precedence",
+    "falsey-values"
+  ],
+  "task_id": "config-precedence",
+  "title": "Configuration precedence with falsey values"
+}

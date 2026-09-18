@@ -1,0 +1,181 @@
+{
+  "artifact_ids": [
+    "ART-CLAUDE-PARITY-IMPL-FRAME",
+    "ART-CLAUDE-PARITY-IMPL-RECON",
+    "ART-CLAUDE-PARITY-IMPL-ARCH",
+    "ART-CLAUDE-PARITY-IMPL-PLAN",
+    "ART-CLAUDE-PARITY-CONTROLLER-IMPLEMENT",
+    "ART-CLAUDE-PARITY-CONTROLLER-VERIFY"
+  ],
+  "authorization_ids": [
+    "AUTH-CLAUDE-PARITY-IMPL",
+    "AUTH-CLAUDE-PARITY-IMPLEMENTATION-CLOSE"
+  ],
+  "completion": {
+    "authorized_by": "AUTH-CLAUDE-PARITY-IMPLEMENTATION-CLOSE",
+    "claim": "Planning destination locally-verified-implementation completed.",
+    "completed_at": "2026-09-17T00:42:14.527854Z",
+    "open_obligation_node_ids": [],
+    "proof_ids": [
+      "PRF-CLAUDE-PARITY-CONTROLLER-LOCAL"
+    ]
+  },
+  "created_at": "2026-09-16T23:42:30.015483Z",
+  "current_stage": "local-verification",
+  "decision_ids": [],
+  "desired_outcome": "A locally verified, zero-cost experiment controller can configure, initialize, dry-run, stop, resume, and report reproducible Claude Code versus Codex campaigns through fake adapters, while real model execution and global prompt or hook promotion remain fail-closed behind explicit authorization and safety gates.",
+  "handoff_ids": [
+    "HO-CLAUDE-PARITY-IMPL-FRAME",
+    "HO-CLAUDE-PARITY-IMPL-RECON",
+    "HO-CLAUDE-PARITY-IMPL-ARCH",
+    "HO-CLAUDE-PARITY-IMPL-PLAN",
+    "HO-CLAUDE-PARITY-CONTROLLER-IMPLEMENT",
+    "HO-CLAUDE-PARITY-CONTROLLER-VERIFIED"
+  ],
+  "latest_event_id": "EVT-20260916-CLAUDE-PARITY-IMPLEMENTATION-000014",
+  "map_id": "MAP-20260916-CLAUDE-PARITY-IMPLEMENTATION",
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "proof_ids": [
+    "PRF-CLAUDE-PARITY-CONTROLLER-LOCAL"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-16T23:42:30.015483Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-16T23:44:46.172721Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-IMPL-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-16T23:42:30.015483Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-16T23:44:50.672005Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-IMPL-RECON"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "brownfield-reconnaissance",
+      "started_at": "2026-09-16T23:44:46.172721Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "solution-architecture",
+        "data-model-design"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "completed_at": "2026-09-16T23:44:54.941525Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-IMPL-ARCH"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "data-model-design",
+      "started_at": "2026-09-16T23:44:50.672005Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution",
+        "specification",
+        "delivery-planning"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-16T23:46:02.041899Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-IMPL-PLAN"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "delivery-planning",
+      "started_at": "2026-09-16T23:44:54.941525Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "implementation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the implement phase.",
+      "completed_at": "2026-09-17T00:01:21.647644Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-CONTROLLER-IMPLEMENT"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "implement",
+      "stage_id": "implementation",
+      "started_at": "2026-09-16T23:46:02.041899Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "local-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the verify phase.",
+      "completed_at": "2026-09-17T00:05:57.805182Z",
+      "output_artifact_ids": [
+        "ART-CLAUDE-PARITY-CONTROLLER-VERIFY"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "verify",
+      "stage_id": "local-verification",
+      "started_at": "2026-09-17T00:01:21.647644Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 14,
+  "status": "completed-for-destination",
+  "title": "Implement the Claude Code parity controller",
+  "updated_at": "2026-09-17T00:42:14.527854Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

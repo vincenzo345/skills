@@ -1,0 +1,75 @@
+{
+  "applicability": {
+    "applied": [
+      "standards-resolution",
+      "specification",
+      "delivery-planning",
+      "feature-planner"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-CODE-PARITY-LOOP/artifacts/implementation-plan.md",
+      "record_id": "ART-CLAUDE-PARITY-PLAN",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T23:32:00Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The plan fixes module seams, CLI contracts, data flow, isolation, metrics, terminal rules, test coverage, rollout gates, and ten ordered delivery slices without authorizing real model usage."
+    },
+    {
+      "basis": "inference",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-PLAN",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "A deterministic candidate queue should qualify the controller before optional GEPA optimization, and Codex optimization must be a separately linked campaign after the Claude comparison freezes."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-PARITY-PLAN",
+  "idempotency_key": "claude-parity:plan-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "a262c2159ba2001c5ec326a3e81079f18078bc3931636de10a004172ac118d03"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-PARITY-ARCH",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-CODE-PARITY-LOOP",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "feature-planner",
+  "stage": "delivery-planning",
+  "status": "completed",
+  "terminal_disposition": "completed-for-destination",
+  "uncertainties": [],
+  "why_next": "The implementation-plan destination is ready for user review; implementation and model-run authorization remain separately withheld.",
+  "work_id": "WB-20260916-CLAUDE-CODE-PARITY-LOOP"
+}

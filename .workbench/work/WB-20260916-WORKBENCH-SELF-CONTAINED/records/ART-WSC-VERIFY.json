@@ -1,0 +1,50 @@
+{
+  "artifact_id": "ART-WSC-VERIFY",
+  "artifact_kind": "review",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "WB-20260916-WORKBENCH-SELF-CONTAINED",
+      "kind": "work-item",
+      "purpose": "Support destination acceptance."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "66fd833b3cc87d71ea19d8aea8b0348cd9384ed75c2ba25f1471baae93ee3d59"
+  },
+  "created_at": "2026-09-16T23:28:37.9152429Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-WORKBENCH-SELF-CONTAINED/artifacts/verification.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "local-verification",
+  "proof_ids": [
+    "PRF-WSC-LOCAL"
+  ],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "verifies",
+      "source": {
+        "record_id": "ART-WSC-IMPLEMENT",
+        "record_type": "artifact"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Self-contained companion local verification",
+  "updated_at": "2026-09-16T23:28:37.9152429Z",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

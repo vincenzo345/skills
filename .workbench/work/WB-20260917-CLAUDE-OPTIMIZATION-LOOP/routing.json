@@ -1,0 +1,378 @@
+{
+  "acceptance_evidence": [
+    "A public CLI initializes and runs an optimization campaign through baseline, evaluation, improvement, retest, promotion or rejection, and a terminal stopping rule.",
+    "Deterministic fake providers prove multiple rounds, non-regression promotion, no-progress stopping, budget stopping, interruption resume, and artifact tamper detection without model calls.",
+    "The live Claude command uses a fresh nonpersistent streamed session with pinned prompt/plugin/settings inputs and captures transcript, hook, timing, token, and exit metadata.",
+    "The evaluator combines hard gates with frozen weighted dimensions and rejects any hard-gate failure or substantive-dimension regression even when the total score improves.",
+    "The improver receives only the incumbent, failed dimensions, bounded transcript evidence, and development evidence; it cannot read holdout results or mutate global configuration.",
+    "Focused and full repository tests pass, and documentation includes a zero-cost dry run plus the separately authorized live workflow."
+  ],
+  "assumptions": [
+    "The first implementation can use injected fake runner, evaluator, and improver components to prove orchestration while leaving paid execution operator-triggered.",
+    "The established rubric will be represented as a versioned JSON document and can be refined without changing the loop state machine.",
+    "A fixed audited hook executable will consume declarative candidate policy; arbitrary hook source generation is excluded.",
+    "Codex will be the default independent evaluator and improvement provider for live campaigns, but the core loop will depend on interfaces rather than a specific harness."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation"
+    ],
+    "withheld_actions": [
+      "decision-delegation",
+      "commit",
+      "deployment",
+      "tracker-publication",
+      "closure"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "local-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Promotion and stopping behavior need explicit observable criteria.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The controller, adapters, CLI, isolation runner, storage, and tests are existing extension points.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The predecessor plan and v3 measurements define the comparison and efficiency gates.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Candidate generation, grading, promotion, rejection, resume, and stopping form an explicit state machine.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The implementation is proven by fake integration tests and local CLI checks rather than a separate prototype phase.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "process-model",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "The surface is a machine-oriented CLI and artifacts, not an interactive product UI.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Runner, evaluator, improver, state store, candidate registry, and promoter require explicit boundaries.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "New immutable campaign, round, candidate, score, and decision records extend durable filesystem persistence and resume semantics.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The predecessor item selected the architecture and the user authorized implementation.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "data-model-design",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Safety, reproducibility, non-regression, token economy, and secret isolation constrain implementation.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "State transitions, evaluator contract, promotion comparator, and failure handling require executable precision.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Implementation must proceed from fake state-machine proof to live adapter qualification without paid execution.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "delivery-planning",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The controller and CLI need code changes.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Resume, integrity, scoring, promotion, CLI, and live-command construction require executable tests.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      }
+    ]
+  },
+  "constraints": [
+    "Preserve all unrelated dirty-worktree changes.",
+    "Do not execute a paid Claude or Codex campaign during local implementation verification.",
+    "Do not modify the user's global Claude configuration or promote a candidate globally.",
+    "Candidate generation may change prompt text and declarative hook policy, but must not execute model-generated hook code.",
+    "Every round, result, evaluation, candidate, and promotion decision must be immutable or append-only and safely resumable.",
+    "Holdout evidence must not be exposed to the improvement step.",
+    "Provider failure, timeout, malformed output, budget exhaustion, or integrity mismatch must stop without promoting a candidate."
+  ],
+  "created_at": "2026-09-17T22:52:11.024521Z",
+  "desired_outcome": "Deliver a locally verified, resumable controller that runs fresh Claude harness candidates against pinned scenarios, evaluates them with the established Claude-versus-Codex criteria, generates one bounded improvement at a time, retests, and promotes only a non-regressing candidate within fixed safety and efficiency budgets.",
+  "engagement_intent": "implement",
+  "evidence_references": [
+    ".workbench/work/WB-20260917-CLAUDE-OPTIMIZATION-LOOP/intake.json",
+    ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md",
+    "claude_harness_eval/experiment/controller.py",
+    "claude_harness_eval/experiment/config.py",
+    "claude_harness_eval/experiment/adapters.py",
+    "tests/runtime/test_claude_harness_experiment.py"
+  ],
+  "execution_lane": "full",
+  "facts": [
+    {
+      "source_references": [
+        "claude_harness_eval/experiment/controller.py",
+        "claude_harness_eval/experiment/store.py"
+      ],
+      "statement": "The existing controller already persists immutable manifests and run results, resumes idempotently, enforces run ceilings, and reports fake campaign results."
+    },
+    {
+      "source_references": [
+        "claude_harness_eval/experiment/controller.py"
+      ],
+      "statement": "The existing live path validates isolation and then deliberately refuses provider execution."
+    },
+    {
+      "source_references": [
+        "local inspection: claude --help 2026-09-17"
+      ],
+      "statement": "Claude Code supports noninteractive streamed JSON, session-local prompt and settings overrides, hook-event output, fresh no-persistence sessions, and session-only plugin loading in the installed CLI."
+    },
+    {
+      "source_references": [
+        ".workbench/work/WB-20260917-CLAUDE-V3-REMEDIATION/artifacts/implementation-plan.md"
+      ],
+      "statement": "The accepted predecessor plan requires a frozen comparison rubric, hard evidence gates, champion-challenger promotion, bounded prompt/hook-policy candidates, and no global mutation during experiments."
+    }
+  ],
+  "idempotency_key": "route-claude-optimization-loop-1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "7051b760e0a5756f2a3e6130e926c9890ee60809c3e5a597bc48e4c44fbd0a72"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260917-CLAUDE-OPTIMIZATION-LOOP",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "9dbd579e5496188633c32a9eade6ac0f0b82a8d489889ad609dec5b9b3aa1301"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "rationale": "The repository already contains an immutable campaign controller, task fixtures, provider argv builders, isolation qualification, and fake-run tests. The requested loop extends those existing seams with candidate, grading, improvement, and promotion state plus a live subprocess boundary, so implementation and local verification are required.",
+  "recommendation": {
+    "assumptions": [
+      "Fake components are sufficient to establish local controller correctness; live behavioral superiority remains a later measurement."
+    ],
+    "choice": "Extend the existing experiment controller with an injected champion-challenger optimization state machine and qualified live boundaries.",
+    "confidence": "high",
+    "rationale": "This reuses proven immutable storage and scheduling, makes the full loop testable without quota, and separates orchestration correctness from later provider and global-promotion authorization.",
+    "tradeoffs": [
+      "The initial implementation will not automatically install the winning harness globally.",
+      "A frozen rubric and declarative hook policy add configuration that must be versioned carefully."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260917-CLAUDE-OPTIMIZATION-LOOP",
+  "routing_revision": 1,
+  "runtime_route": "brownfield-feature",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "accepted predecessor plan"
+      ],
+      "reason": "Promotion and stopping behavior need explicit observable criteria.",
+      "stage_id": "outcome-framing"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment",
+        "tests/runtime/test_claude_harness_experiment.py"
+      ],
+      "reason": "The controller, adapters, CLI, isolation runner, storage, and tests are existing extension points.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "WB-20260917-CLAUDE-V3-REMEDIATION"
+      ],
+      "reason": "The predecessor plan and v3 measurements define the comparison and efficiency gates.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "requested loop"
+      ],
+      "reason": "Candidate generation, grading, promotion, rejection, resume, and stopping form an explicit state machine.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The implementation is proven by fake integration tests and local CLI checks rather than a separate prototype phase.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "requested loop"
+      ],
+      "reason": "The surface is a machine-oriented CLI and artifacts, not an interactive product UI.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "accepted predecessor plan"
+      ],
+      "reason": "Runner, evaluator, improver, state store, candidate registry, and promoter require explicit boundaries.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "claude_harness_eval/experiment/store.py"
+      ],
+      "reason": "New immutable campaign, round, candidate, score, and decision records extend durable filesystem persistence and resume semantics.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "do it"
+      ],
+      "reason": "The predecessor item selected the architecture and the user authorized implementation.",
+      "stage_id": "proposal"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "AGENTS.md",
+        "accepted predecessor plan"
+      ],
+      "reason": "Safety, reproducibility, non-regression, token economy, and secret isolation constrain implementation.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "State transitions, evaluator contract, promotion comparator, and failure handling require executable precision.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "constraints"
+      ],
+      "reason": "Implementation must proceed from fake state-machine proof to live adapter qualification without paid execution.",
+      "stage_id": "delivery-planning"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "do it"
+      ],
+      "reason": "The controller and CLI need code changes.",
+      "stage_id": "implementation"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "Resume, integrity, scoring, promotion, CLI, and live-command construction require executable tests.",
+      "stage_id": "local-verification"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "constraints"
+      ],
+      "reason": "Global installation and release are not authorized by this implementation request.",
+      "stage_id": "release"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "constraints"
+      ],
+      "reason": "No global harness deployment or paid campaign occurs in this item.",
+      "stage_id": "deployed-verification"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "constraints"
+      ],
+      "reason": "Claude-versus-Codex performance is measured only after separate live-run authorization.",
+      "stage_id": "outcome-verification"
+    }
+  ],
+  "title": "Implement Claude harness optimization loop",
+  "unresolved_questions": [],
+  "work_id": "WB-20260917-CLAUDE-OPTIMIZATION-LOOP"
+}

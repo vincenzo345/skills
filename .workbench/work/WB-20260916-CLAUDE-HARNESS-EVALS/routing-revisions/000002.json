@@ -1,0 +1,379 @@
+{
+  "acceptance_evidence": [
+    "The catalog contains between 15 and 30 unique tasks spanning multiple realistic failure modes and change shapes.",
+    "A documented public runner stages each task without exposing hidden oracles or reference solutions to the evaluated agent.",
+    "Every pristine staged task fails its acceptance oracle for the intended reason.",
+    "Every bundled reference solution passes its task's acceptance oracle.",
+    "Catalog and runner tests validate uniqueness, metadata completeness, isolation, deterministic exit status, and machine-readable results.",
+    "The focused suite passes locally and its proof boundary states that no Claude model behavior has yet been measured."
+  ],
+  "assumptions": [
+    "The first version may use small synthetic repositories rather than vendoring or mutating third-party repositories.",
+    "Python standard-library fixtures and the repository's existing pytest environment are sufficient unless research shows a material representativeness gap.",
+    "Outcome correctness and run-process evidence remain separable so executable acceptance does not depend on exact model narration.",
+    "The confirmed public seam is a CLI that stages isolated workspaces, runs evaluator-only black-box oracles, and emits machine-readable results."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "deployment",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "local-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The suite needs an explicit behavioral claim and proof boundary.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The runner and fixtures must fit existing repository testing and comparison conventions.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Established coding-agent benchmarks should inform task coverage, oracle design, and contamination safeguards.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "The stage-run-verify-score flow and separation of agent-visible from evaluator-only assets must be modeled.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No business-process feasibility claim is being made; the software harness is directly executable.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "process-model",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "The initial surface is a machine-oriented CLI and fixture contract rather than a human UI.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Isolation, oracle visibility, task packaging, result schemas, and cross-platform execution are material technical boundaries.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The change adds versioned files and ephemeral staged workspaces but no database or durable application-data model.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The user already chose implementation; architecture decisions can be recorded in the implementation specification without a separate proceed decision.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "solution-architecture",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The suite needs fixed conventions for deterministic, independent, cross-platform acceptance oracles.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Twenty tasks require a durable catalog contract and fixed coverage matrix before implementation.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Twenty task packages and their shared runner need an explicit vertical-slice order so each red and green oracle remains independently validated.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "delivery-planning",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The user explicitly asked to build the task suite and executable acceptance tests.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "The deliverable must prove red baselines, green references, runner isolation, and deterministic results locally.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      }
+    ]
+  },
+  "constraints": [
+    "Use synthetic tasks with no client or production data.",
+    "Acceptance outcomes must come from independent executable oracles rather than exact response wording or self-reported completion.",
+    "Preserve unrelated existing repository and Workbench changes.",
+    "Prefer deterministic offline execution across Windows and Linux; external services, containers, and network access must not be required to score a task.",
+    "Do not copy upstream benchmark tasks verbatim; preserve citations and license boundaries for borrowed design ideas.",
+    "No commit, deployment, external publication, Workbench closure, or real Claude usage is authorized by this request."
+  ],
+  "created_at": "2026-09-16T22:20:04.807009Z",
+  "desired_outcome": "A locally runnable suite of 15–30 representative coding tasks can stage isolated workspaces and determine, through independent executable acceptance oracles, whether a Claude Code run achieved the requested behavior rather than merely producing a plausible patch.",
+  "engagement_intent": "implement",
+  "evidence_references": [
+    ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/intake.json",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "tests/comparison/README.md",
+    "tests/comparison/workbench-adherence/README.md",
+    "tests/runtime/test_workbench_adherence_evals.py",
+    "docs/research/claude-harness-eval-benchmarks.md",
+    "conversation:claude-code-codex-prompt-and-dspy"
+  ],
+  "execution_lane": "full",
+  "facts": [
+    {
+      "source_references": [
+        ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/intake.json"
+      ],
+      "statement": "The user requested 15–30 representative coding tasks with executable acceptance tests for improving and evaluating a Claude Code harness."
+    },
+    {
+      "source_references": [
+        "tests/comparison/README.md",
+        "tests/comparison/workbench-adherence/README.md",
+        "tests/runtime/test_workbench_adherence_evals.py"
+      ],
+      "statement": "The repository already uses synthetic comparison fixtures and pytest checks while explicitly separating structural fixture validity from actual model-behavior evidence."
+    },
+    {
+      "source_references": [
+        "repository inspection",
+        "AGENTS.md"
+      ],
+      "statement": "The requested suite changes repository code and test assets but does not require a database or alter persisted application-data semantics."
+    },
+    {
+      "source_references": [
+        "docs/research/claude-harness-eval-benchmarks.md"
+      ],
+      "statement": "Primary benchmark sources converge on isolated task workspaces, evaluator-only acceptance tests, no-op-fails and oracle-passes authoring gates, and separate trajectory evidence."
+    }
+  ],
+  "idempotency_key": "claude-harness-evals:revise:v3",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "a7c75e8c681feee5e7d4d6a3932317622163f4f10b4da9d8e6680ad3d54c9f9f"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-CLAUDE-HARNESS-EVALS",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "7e8a722fe02eaf8f870124876f9cb943c3d3b8ca17923520a482ec7007fb5c6b"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "rationale": "The request adds a substantial evaluation subsystem to an existing repository. The repository already supplies pytest, synthetic comparison-fixture conventions, and black-box acceptance-test patterns, but the task catalog, isolation boundary, runner contract, scoring boundary, and external benchmark evidence require explicit discovery and design before implementation.",
+  "recommendation": {
+    "assumptions": [
+      "Research does not reveal a licensing or representativeness constraint requiring a different fixture strategy."
+    ],
+    "choice": "Build a 20-task synthetic, offline evaluation suite around an isolated stage-and-verify CLI, with outcome acceptance separated from optional transcript metrics.",
+    "confidence": "high",
+    "rationale": "Twenty tasks fit the requested range, provide enough coverage for prompt optimization, and remain small enough to validate every red and green oracle in one local run. A harness-neutral state seam makes results comparable across Claude Code, Codex, and prompt variants.",
+    "tradeoffs": [
+      "Synthetic tasks trade real-repository scale for determinism, speed, and clear independent oracles.",
+      "Keeping transcript scoring separate means the first suite evaluates achieved behavior more strongly than reasoning style."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "resolved_questions": [
+    {
+      "answer": "yes",
+      "question": "May the suite use a CLI that stages each task into an isolated workspace and runs hidden black-box oracles against the final repository state as its public acceptance seam, with transcript and tool-use scoring kept as a separate optional metric?",
+      "source_references": [
+        "user-response:2026-09-16-confirmed-public-acceptance-seam"
+      ]
+    }
+  ],
+  "revision_reason": "The user confirmed the proposed public acceptance seam, and the completed benchmark research supplied primary-source support for the isolation and evaluator design.",
+  "routing_id": "RTR-20260916-CLAUDE-HARNESS-EVALS-R000002",
+  "routing_revision": 2,
+  "runtime_route": "brownfield-feature",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "conversation:claude-code-codex-prompt-and-dspy"
+      ],
+      "reason": "The suite needs an explicit behavioral claim and proof boundary.",
+      "stage_id": "outcome-framing"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "tests/comparison/README.md",
+        "tests/runtime/test_workbench_adherence_evals.py"
+      ],
+      "reason": "The runner and fixtures must fit existing repository testing and comparison conventions.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "user request to use GitHub repositories for ideas"
+      ],
+      "reason": "Established coding-agent benchmarks should inform task coverage, oracle design, and contamination safeguards.",
+      "stage_id": "evidence-intake"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "desired outcome"
+      ],
+      "reason": "The stage-run-verify-score flow and separation of agent-visible from evaluator-only assets must be modeled.",
+      "stage_id": "process-model"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "technical-only business basis"
+      ],
+      "reason": "No business-process feasibility claim is being made; the software harness is directly executable.",
+      "stage_id": "process-validation"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "recommended public seam"
+      ],
+      "reason": "The initial surface is a machine-oriented CLI and fixture contract rather than a human UI.",
+      "stage_id": "experience-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "Isolation, oracle visibility, task packaging, result schemas, and cross-platform execution are material technical boundaries.",
+      "stage_id": "solution-architecture"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "repository inspection"
+      ],
+      "reason": "The change adds versioned files and ephemeral staged workspaces but no database or durable application-data model.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user already chose implementation; architecture decisions can be recorded in the implementation specification without a separate proceed decision.",
+      "stage_id": "proposal"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "AGENTS.md",
+        "CLAUDE.md"
+      ],
+      "reason": "The suite needs fixed conventions for deterministic, independent, cross-platform acceptance oracles.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "Twenty tasks require a durable catalog contract and fixed coverage matrix before implementation.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "docs/research/claude-harness-eval-benchmarks.md",
+        "acceptance evidence"
+      ],
+      "reason": "Twenty task packages and their shared runner need an explicit vertical-slice order so each red and green oracle remains independently validated.",
+      "stage_id": "delivery-planning"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "captured user request"
+      ],
+      "reason": "The user explicitly asked to build the task suite and executable acceptance tests.",
+      "stage_id": "implementation"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "acceptance evidence"
+      ],
+      "reason": "The deliverable must prove red baselines, green references, runner isolation, and deterministic results locally.",
+      "stage_id": "local-verification"
+    }
+  ],
+  "supersedes": {
+    "reference": {
+      "record_id": "RTR-20260916-CLAUDE-HARNESS-EVALS",
+      "record_type": "external",
+      "uri": "routing.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "14cd0bc7c4d63093487256480b19e4e323bc6f41ae772e1dfa1628c1b7c8a9a2"
+    }
+  },
+  "title": "Build executable Claude harness evaluations",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}

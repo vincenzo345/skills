@@ -1,0 +1,271 @@
+{
+  "acceptance_evidence": [
+    "A handoff fact or measurement with a resolvable source becomes evidence-established; a hypothesis, inference, or legacy string remains non-established.",
+    "A Workbench diagnosis prompt cannot begin an investigative Claude tool call until diagnosing-bugs has been invoked, while unrelated prompts and post-invocation tools proceed.",
+    "Two conformance cases require code-derived theories to remain hypotheses and measured bottlenecks to pass a discriminating intervention before receiving a root-cause label.",
+    "Focused runtime, hook, schema, skill, and comparison validations pass without changing the frozen predecessor item."
+  ],
+  "assumptions": [
+    "The narrow hook is installed only in Claude's global settings because the observed adherence failure occurred in Claude; the Workbench runtime and eval changes remain client-neutral.",
+    "The previously agreed seams remain the public test seams: accept-handoff/map projection, hook stdin/stdout, and the adherence-eval catalog."
+  ],
+  "authorization_boundary": {
+    "granted_actions": [
+      "repository-mutation",
+      "implementation"
+    ],
+    "withheld_actions": [
+      "closure",
+      "commit",
+      "decision-delegation",
+      "deployment",
+      "tracker-publication"
+    ]
+  },
+  "business_basis": "technical-only",
+  "compiled_plan": {
+    "compiler_version": "0.5.0",
+    "destination_stage": "local-verification",
+    "phases": [
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "intake"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "outcome-framing"
+          }
+        ],
+        "checkpoint_stage": "outcome-framing",
+        "phase_id": "frame"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Existing handoff schemas, projection behavior, hook configuration, and tests bound the patch.",
+            "stage_id": "brownfield-reconnaissance"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "evidence-intake"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "process-model"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "process-validation"
+          }
+        ],
+        "checkpoint_stage": "brownfield-reconnaissance",
+        "phase_id": "discover"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "experience-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "solution-architecture"
+          },
+          {
+            "applicability": "applicable",
+            "reason": "Finding records gain typed basis and provenance semantics while legacy strings remain readable.",
+            "stage_id": "data-model-design"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "No profile fact or explicit recommendation makes this activity necessary.",
+            "stage_id": "proposal"
+          }
+        ],
+        "checkpoint_stage": "data-model-design",
+        "phase_id": "design-decide"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Skill authoring, TDD, JSON Schema, and hook contracts govern the implementation.",
+            "stage_id": "standards-resolution"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The user accepted the exact three controls and their public seams before implementation.",
+            "stage_id": "specification"
+          },
+          {
+            "applicability": "not-applicable",
+            "reason": "The bounded vertical slices and completion evidence are already explicit.",
+            "stage_id": "delivery-planning"
+          }
+        ],
+        "checkpoint_stage": "standards-resolution",
+        "phase_id": "plan"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "implementation"
+          }
+        ],
+        "checkpoint_stage": "implementation",
+        "phase_id": "implement"
+      },
+      {
+        "activities": [
+          {
+            "applicability": "applicable",
+            "reason": "Required by the routing profile or selected destination.",
+            "stage_id": "local-verification"
+          }
+        ],
+        "checkpoint_stage": "local-verification",
+        "phase_id": "verify"
+      }
+    ]
+  },
+  "constraints": [
+    "Leave WB-20260916-WORKBENCH-ADHERENCE-HARDENING and every manual-extraction Workbench item frozen.",
+    "Implement only typed finding projection, one narrow Claude pre-tool hook, and two causal-diagnosis regression cases.",
+    "Do not add a general Stop hook, causal-proof framework, LLM reviewer, or broad session hooks.",
+    "Preserve compatibility with existing string findings without promoting them to established evidence.",
+    "Do not commit, push, deploy, publish, or close the item."
+  ],
+  "created_at": "2026-09-16T21:31:36.856775Z",
+  "desired_outcome": "Workbench preserves hypotheses and inferences without promoting them to established evidence, Claude invokes diagnosing-bugs before investigating Workbench performance or failure reports, and regression cases distinguish observations from demonstrated root causes.",
+  "engagement_intent": "implement",
+  "evidence_references": [
+    "captured-intake",
+    "WB-20260916-WORKBENCH-ADHERENCE-HARDENING",
+    "conversation:minimum typed-findings hook and causal-regression-evals recommendation",
+    "skills/workbench/references/schemas/workbench-handoff.schema.json",
+    "skills/workbench/scripts/workbench.py",
+    "tests/comparison/workbench-adherence/cases.json"
+  ],
+  "execution_lane": "fast",
+  "facts": [
+    {
+      "source_references": [
+        "WB-20260916-WORKBENCH-ADHERENCE-HARDENING"
+      ],
+      "statement": "The predecessor item is awaiting acceptance and explicitly excluded runtime implementation."
+    },
+    {
+      "source_references": [
+        "skills/workbench/references/schemas/workbench-handoff.schema.json",
+        "skills/workbench/scripts/workbench.py"
+      ],
+      "statement": "Accepted handoff findings are currently bare strings and are projected automatically as evidence-established nodes."
+    },
+    {
+      "source_references": [
+        "tests/comparison/workbench-adherence/cases.json"
+      ],
+      "statement": "The existing adherence catalog is a behavior-oracle fixture and does not execute a model."
+    }
+  ],
+  "idempotency_key": "route-start-workbench-evidence-guards-v1:route",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "c50ed48baacac2166abc18d0978a7558a24be2c17895e315863493eba2efbd89"
+  },
+  "intake": {
+    "reference": {
+      "record_id": "INTAKE-WB-20260916-WORKBENCH-EVIDENCE-GUARDS",
+      "record_type": "external",
+      "uri": "intake.json"
+    },
+    "sha256": {
+      "algorithm": "sha256",
+      "value": "730d42aed519bb7626c42028d55be2f0c8fae46cccd281c32b98054fd2748fad"
+    }
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "rationale": "This is a bounded successor to the completed hardening increment: one handoff schema/projection change, one dependency-free pre-tool hook, and two conformance cases at already agreed public seams.",
+  "recommendation": {
+    "assumptions": [
+      "Claude global hook registration is in scope; other agent clients are not."
+    ],
+    "choice": "Implement the minimum three controls without broader hook or proof machinery.",
+    "confidence": "high",
+    "rationale": "These controls directly intercept the observed failure modes at their narrowest enforceable seams.",
+    "tradeoffs": [
+      "The conformance catalog remains an oracle until a separate model-evaluation runner consumes it."
+    ]
+  },
+  "record_type": "workbench-routing-receipt",
+  "routing_id": "RTR-20260916-WORKBENCH-EVIDENCE-GUARDS",
+  "routing_revision": 1,
+  "runtime_route": "small-change-fast-lane",
+  "schema_version": "0.5.0",
+  "solution_context": "brownfield",
+  "stage_recommendations": [
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/workbench/references/schemas/workbench-handoff.schema.json",
+        "skills/workbench/scripts/workbench.py",
+        "tests/runtime"
+      ],
+      "reason": "Existing handoff schemas, projection behavior, hook configuration, and tests bound the patch.",
+      "stage_id": "brownfield-reconnaissance"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skills/workbench/references/schemas/workbench-handoff.schema.json"
+      ],
+      "reason": "Finding records gain typed basis and provenance semantics while legacy strings remain readable.",
+      "stage_id": "data-model-design"
+    },
+    {
+      "applicability": "applicable",
+      "evidence_references": [
+        "skill-creator",
+        "writing-for-agents",
+        "tdd"
+      ],
+      "reason": "Skill authoring, TDD, JSON Schema, and hook contracts govern the implementation.",
+      "stage_id": "standards-resolution"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "conversation:minimum typed-findings hook and causal-regression-evals recommendation"
+      ],
+      "reason": "The user accepted the exact three controls and their public seams before implementation.",
+      "stage_id": "specification"
+    },
+    {
+      "applicability": "not-applicable",
+      "evidence_references": [
+        "captured-intake"
+      ],
+      "reason": "The bounded vertical slices and completion evidence are already explicit.",
+      "stage_id": "delivery-planning"
+    }
+  ],
+  "title": "Enforce Workbench evidence discipline",
+  "unresolved_questions": [],
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

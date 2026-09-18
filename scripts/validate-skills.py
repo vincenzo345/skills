@@ -16,11 +16,23 @@ BUILT_IN_COMMANDS = {"compact", "tmp"}  # `tmp` appears as a documented path, no
 PORTABLE_FLOW_SKILLS = {
     "code-review",
     "diagnosing-bugs",
+    "feature-planner",
+    "openai-docs",
     "prototype",
     "research",
     "resolving-merge-conflicts",
     "tdd",
     "workbench",
+}
+WORKBENCH_COMPANION_SKILLS = {
+    "code-review",
+    "diagnosing-bugs",
+    "feature-planner",
+    "openai-docs",
+    "prototype",
+    "research",
+    "resolving-merge-conflicts",
+    "tdd",
 }
 A4L_MARKERS = re.compile(
     r"(?i)a4l-|applications4life|illustration report generator|nationwide|\baig\b|"
@@ -219,6 +231,11 @@ def main() -> int:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         declared = {Path(value).name for value in manifest.get("skills", [])}
         discovered = {skill_file.parent.name for skill_file in skill_files}
+        missing_companions = WORKBENCH_COMPANION_SKILLS - discovered
+        if missing_companions:
+            errors.append(
+                f"Workbench companion skills are missing from disk: {sorted(missing_companions)}"
+            )
         if declared != discovered:
             errors.append(
                 f"{manifest_path}: declared skills differ from disk "

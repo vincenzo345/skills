@@ -1,0 +1,75 @@
+{
+  "applicability": {
+    "applied": [
+      "local-verification",
+      "runtime-regression",
+      "artifact-integrity",
+      "live-model-comparison"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md",
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T03:04:54Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The focused harness suite passed 36 tests and the complete repository suite passed 167 tests."
+    },
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The promoted Claude candidate passed the target 3/3, regression 5/5, and frozen holdout 12/12; Codex passed the same holdout 12/12."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-VERIFICATION",
+  "idempotency_key": "claude-instruction-optimization:verification:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "8c66314bae0fb31bf3ee526739c9db18cb031c18a4ec75a50715d4fee2f66723"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-IMPLEMENTATION",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "local-verification",
+  "stage": "local-verification",
+  "status": "completed",
+  "suggested_next_stage": "release",
+  "uncertainties": [],
+  "why_next": "Install/confirm the exact promoted hashes and verify normal automatic global discovery.",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

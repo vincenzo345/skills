@@ -1,0 +1,12 @@
+{
+  "category": "integration",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "api",
+    "compatibility",
+    "callers"
+  ],
+  "task_id": "backward-compatible-api",
+  "title": "Backward-compatible API extension"
+}

@@ -1,0 +1,177 @@
+{
+  "artifact_ids": [
+    "ART-WEG-FRAME",
+    "ART-WEG-RECON",
+    "ART-WEG-MODEL",
+    "ART-WEG-STANDARDS",
+    "ART-WEG-IMPLEMENT",
+    "ART-WEG-VERIFICATION"
+  ],
+  "authorization_ids": [
+    "AUTH-WEG-IMPLEMENT"
+  ],
+  "created_at": "2026-09-16T21:31:36.867892Z",
+  "current_stage": "local-verification",
+  "decision_ids": [],
+  "desired_outcome": "Workbench preserves hypotheses and inferences without promoting them to established evidence, Claude invokes diagnosing-bugs before investigating Workbench performance or failure reports, and regression cases distinguish observations from demonstrated root causes.",
+  "handoff_ids": [
+    "HO-WEG-FRAME",
+    "HO-WEG-RECON",
+    "HO-WEG-MODEL",
+    "HO-WEG-STANDARDS",
+    "HO-WEG-IMPLEMENT",
+    "HO-WEG-VERIFIED"
+  ],
+  "latest_event_id": "EVT-20260916-WORKBENCH-EVIDENCE-GUARDS-000013",
+  "map_id": "MAP-20260916-WORKBENCH-EVIDENCE-GUARDS",
+  "next_action": {
+    "description": "Review the destination result, then authorize closure or request a revision.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    },
+    "target_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS",
+    "target_type": "authorization"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "proof_ids": [
+    "PRF-WEG-LOCAL"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-16T21:31:36.867892Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-16T21:33:01.160378Z",
+      "output_artifact_ids": [
+        "ART-WEG-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-16T21:31:36.867892Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-16T21:34:46.869435Z",
+      "output_artifact_ids": [
+        "ART-WEG-RECON"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "brownfield-reconnaissance",
+      "started_at": "2026-09-16T21:33:01.160378Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "data-model-design"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the design-decide phase.",
+      "completed_at": "2026-09-16T21:35:38.918295Z",
+      "output_artifact_ids": [
+        "ART-WEG-MODEL"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "design-decide",
+      "stage_id": "data-model-design",
+      "started_at": "2026-09-16T21:34:46.869435Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-16T21:36:40.934970Z",
+      "output_artifact_ids": [
+        "ART-WEG-STANDARDS"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "standards-resolution",
+      "started_at": "2026-09-16T21:35:38.918295Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "implementation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the implement phase.",
+      "completed_at": "2026-09-16T21:50:10.286774Z",
+      "output_artifact_ids": [
+        "ART-WEG-IMPLEMENT"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "implement",
+      "stage_id": "implementation",
+      "started_at": "2026-09-16T21:36:40.934970Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "local-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the verify phase.",
+      "completed_at": "2026-09-16T21:51:27.435392Z",
+      "output_artifact_ids": [
+        "ART-WEG-VERIFICATION"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "verify",
+      "stage_id": "local-verification",
+      "started_at": "2026-09-16T21:50:10.286774Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 13,
+  "status": "awaiting-acceptance",
+  "title": "Enforce Workbench evidence discipline",
+  "updated_at": "2026-09-16T21:51:27.435392Z",
+  "work_id": "WB-20260916-WORKBENCH-EVIDENCE-GUARDS"
+}

@@ -1,0 +1,36 @@
+{
+  "action": "closure",
+  "authority": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "authorization_id": "AUTH-CLAUDE-PARITY-IMPLEMENTATION-CLOSE",
+  "grant": {
+    "granted_at": "2026-09-17T00:41:51.4498179Z",
+    "granted_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "record_type": "workbench-authorization",
+  "requested_at": "2026-09-17T00:41:51.4498179Z",
+  "requested_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "schema_version": "0.5.0",
+  "scope": {
+    "constraints": [
+      "Close only the accepted zero-cost locally verified controller foundation; do not upgrade it to a live-model, credential-safety, sealed-set-isolation, or parity claim."
+    ],
+    "targets": [
+      {
+        "kind": "work",
+        "planning_destination": "locally-verified-implementation",
+        "target_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+      }
+    ]
+  },
+  "status": "granted",
+  "work_id": "WB-20260916-CLAUDE-PARITY-IMPLEMENTATION"
+}

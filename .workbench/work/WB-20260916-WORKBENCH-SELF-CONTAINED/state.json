@@ -1,0 +1,156 @@
+{
+  "artifact_ids": [
+    "ART-WSC-FRAME",
+    "ART-WSC-RECON",
+    "ART-WSC-PLAN",
+    "ART-WSC-IMPLEMENT",
+    "ART-WSC-VERIFY"
+  ],
+  "authorization_ids": [
+    "AUTH-WSC-IMPLEMENT"
+  ],
+  "created_at": "2026-09-16T23:19:45.969123Z",
+  "current_stage": "local-verification",
+  "decision_ids": [],
+  "desired_outcome": "A Workbench installation from this repository carries every reusable companion method demonstrated in the reported session, uses harness-neutral instructions, and does not require undeclared external skills to complete a Workbench route.",
+  "handoff_ids": [
+    "HO-WSC-FRAME",
+    "HO-WSC-RECON",
+    "HO-WSC-PLAN",
+    "HO-WSC-IMPLEMENT",
+    "HO-WSC-VERIFIED"
+  ],
+  "latest_event_id": "EVT-20260916-WORKBENCH-SELF-CONTAINED-000011",
+  "map_id": "MAP-20260916-WORKBENCH-SELF-CONTAINED",
+  "next_action": {
+    "description": "Review the destination result, then authorize closure or request a revision.",
+    "owner": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    },
+    "target_id": "WB-20260916-WORKBENCH-SELF-CONTAINED",
+    "target_type": "authorization"
+  },
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "planning_destination": "locally-verified-implementation",
+  "proof_ids": [
+    "PRF-WSC-LOCAL"
+  ],
+  "record_type": "workbench-state",
+  "route_selection": {
+    "rationale": "Compiled from the intake-bound routing profile.",
+    "route": "profile-compiled",
+    "selected_at": "2026-09-16T23:19:45.969123Z",
+    "selected_by": {
+      "actor_id": "user:vince",
+      "kind": "human"
+    }
+  },
+  "schema_version": "0.5.0",
+  "stages": [
+    {
+      "activity_stage_ids": [
+        "intake",
+        "outcome-framing"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the frame phase.",
+      "completed_at": "2026-09-16T23:29:29.352491Z",
+      "output_artifact_ids": [
+        "ART-WSC-FRAME"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "frame",
+      "stage_id": "outcome-framing",
+      "started_at": "2026-09-16T23:19:45.969123Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "brownfield-reconnaissance"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the discover phase.",
+      "completed_at": "2026-09-16T23:31:48.951334Z",
+      "output_artifact_ids": [
+        "ART-WSC-RECON"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "discover",
+      "stage_id": "brownfield-reconnaissance",
+      "started_at": "2026-09-16T23:29:29.352491Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "standards-resolution"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the plan phase.",
+      "completed_at": "2026-09-16T23:31:53.218083Z",
+      "output_artifact_ids": [
+        "ART-WSC-PLAN"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "plan",
+      "stage_id": "standards-resolution",
+      "started_at": "2026-09-16T23:31:48.951334Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "implementation"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the implement phase.",
+      "completed_at": "2026-09-16T23:31:57.544561Z",
+      "output_artifact_ids": [
+        "ART-WSC-IMPLEMENT"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "implement",
+      "stage_id": "implementation",
+      "started_at": "2026-09-16T23:31:53.218083Z",
+      "status": "complete"
+    },
+    {
+      "activity_stage_ids": [
+        "local-verification"
+      ],
+      "applicability": "applicable",
+      "applicability_reason": "Checkpoint for the verify phase.",
+      "completed_at": "2026-09-16T23:32:02.053332Z",
+      "output_artifact_ids": [
+        "ART-WSC-VERIFY"
+      ],
+      "owner": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "phase_id": "verify",
+      "stage_id": "local-verification",
+      "started_at": "2026-09-16T23:31:57.544561Z",
+      "status": "complete"
+    }
+  ],
+  "state_revision": 11,
+  "status": "awaiting-acceptance",
+  "title": "Make the Workbench skillset self-contained",
+  "updated_at": "2026-09-16T23:32:02.053332Z",
+  "work_id": "WB-20260916-WORKBENCH-SELF-CONTAINED"
+}

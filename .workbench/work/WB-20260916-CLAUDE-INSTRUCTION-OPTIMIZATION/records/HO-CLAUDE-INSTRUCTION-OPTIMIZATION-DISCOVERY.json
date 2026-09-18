@@ -1,0 +1,85 @@
+{
+  "applicability": {
+    "applied": [
+      "brownfield-reconnaissance",
+      "evidence-intake",
+      "process-model",
+      "process-validation"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION/artifacts/pre-post-results.md",
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-17T03:04:54Z",
+  "decisions_required": [],
+  "findings": [
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Claude's clean baseline passed 19 of 20 original tasks and failed error-contract; the prior installed global instructions failed the same executable oracle."
+    },
+    {
+      "basis": "measurement",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "Prompt-only candidates remained nondeterministic, while the corrected one-shot completion hook produced three consecutive target-task passes with recorded hook activation."
+    },
+    {
+      "basis": "fact",
+      "source_references": [
+        {
+          "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+          "record_type": "artifact"
+        }
+      ],
+      "statement": "The Windows Codex workspace-write sandbox rejected read-only commands, so blocked trials were excluded and disposable Codex holdouts used danger-full-access with a workspace-only instruction."
+    }
+  ],
+  "handoff_id": "HO-CLAUDE-INSTRUCTION-OPTIMIZATION-DISCOVERY",
+  "idempotency_key": "claude-instruction-optimization:discovery:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "1a73a6edc471c3896407e791bce6cc5c81c0c6f8abbf0f988cd7590ff4533e4a"
+  },
+  "inputs_used": [
+    {
+      "record_id": "ART-CLAUDE-INSTRUCTION-OPTIMIZATION-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "workbench-coordinator",
+  "stage": "process-validation",
+  "status": "completed",
+  "suggested_next_stage": "solution-architecture",
+  "uncertainties": [],
+  "why_next": "Record the promoted prompt-plus-hook architecture and its evaluator isolation boundary.",
+  "work_id": "WB-20260916-CLAUDE-INSTRUCTION-OPTIMIZATION"
+}

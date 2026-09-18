@@ -1,0 +1,12 @@
+{
+  "category": "robustness",
+  "schema_version": 1,
+  "suite_canary": "CLAUDE-HARNESS-EVAL-ORIGINAL-SYNTHETIC-V1",
+  "tags": [
+    "filesystem",
+    "atomicity",
+    "failure-path"
+  ],
+  "task_id": "atomic-settings-write",
+  "title": "Atomic settings write"
+}

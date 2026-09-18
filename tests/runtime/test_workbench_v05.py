@@ -81,7 +81,15 @@ def handoff_bundle(artifact_record: dict, *, workbench_policy: str = "0.5.0") ->
         "inputs_used": inputs,
         "applicability": {"applied": ["data-model-audit"], "skipped": [], "could_not_determine": []},
         "policy_versions": policies,
-        "findings": ["The existing tables do not enforce tenant ownership consistently."],
+        "findings": [
+            {
+                "statement": "The existing tables do not enforce tenant ownership consistently.",
+                "basis": "fact",
+                "source_references": [
+                    {"record_type": "artifact", "record_id": artifact_record["artifact_id"]}
+                ],
+            }
+        ],
         "uncertainties": [
             {
                 "description": "Live row populations and active writers are not yet known.",
@@ -154,6 +162,90 @@ def test_accepted_handoff_projects_reasoning_into_resume(tmp_path: Path, workben
     resumed = workbench_cli.invoke("resume", repo, ("--work-id", WORK_ID, "--json"))
     assert_succeeded(resumed)
     assert json.loads(resumed.stdout)["human_control"] == view["human_control"]
+
+
+def test_handoff_projects_only_sourced_facts_and_measurements_as_established(
+    tmp_path: Path, workbench_cli: WorkbenchCLI
+) -> None:
+    repo = routed_repo(tmp_path, workbench_cli)
+    artifact_record = artifact(repo)
+    bundle = handoff_bundle(artifact_record)
+    bundle["handoff"]["findings"] = [
+        {
+            "statement": "The trace contains a completed request.",
+            "basis": "fact",
+            "source_references": [
+                {"record_type": "artifact", "record_id": artifact_record["artifact_id"]}
+            ],
+        },
+        {
+            "statement": "The request took 240 milliseconds.",
+            "basis": "measurement",
+            "source_references": [
+                {"record_type": "artifact", "record_id": artifact_record["artifact_id"]}
+            ],
+        },
+        {
+            "statement": "The synchronous parser may dominate latency.",
+            "basis": "hypothesis",
+            "source_references": [
+                {"record_type": "artifact", "record_id": artifact_record["artifact_id"]}
+            ],
+        },
+        {
+            "statement": "The parser is probably the root cause.",
+            "basis": "inference",
+            "source_references": [],
+        },
+        "Legacy untyped finding.",
+    ]
+    path = tmp_path / "typed-findings.json"
+    path.write_text(json.dumps(bundle, indent=2) + "\n", encoding="utf-8")
+
+    accepted = accept_bundle(workbench_cli, repo, path)
+
+    assert_succeeded(accepted)
+    map_record = json.loads(next(repo.rglob("map.json")).read_text(encoding="utf-8"))
+    projected = {
+        node["title"]: node
+        for node in map_record["nodes"]
+        if node["kind"] == "evidence-task"
+    }
+    assert projected["The trace contains a completed request."]["status"] == "evidence-established"
+    assert projected["The request took 240 milliseconds."]["status"] == "evidence-established"
+    for title in (
+        "The synchronous parser may dominate latency.",
+        "The parser is probably the root cause.",
+        "Legacy untyped finding.",
+    ):
+        assert projected[title]["status"] == "draft"
+        assert "resolution" not in projected[title]
+        assert projected[title]["next_action"]["description"] == (
+            "Gather discriminating evidence before treating this finding as established."
+        )
+
+
+def test_handoff_rejects_an_unsourced_fact_without_mutation(
+    tmp_path: Path, workbench_cli: WorkbenchCLI
+) -> None:
+    repo = routed_repo(tmp_path, workbench_cli)
+    bundle = handoff_bundle(artifact(repo))
+    bundle["handoff"]["findings"] = [
+        {
+            "statement": "The parser is the root cause.",
+            "basis": "fact",
+            "source_references": [],
+        }
+    ]
+    path = tmp_path / "unsourced-fact.json"
+    path.write_text(json.dumps(bundle, indent=2) + "\n", encoding="utf-8")
+    before = persisted_bytes(repo)
+
+    rejected = accept_bundle(workbench_cli, repo, path)
+
+    assert_rejected(rejected)
+    assert "findings[0]" in rejected.output
+    assert persisted_bytes(repo) == before
 
 
 def test_v05_handoff_rejects_stale_workbench_policy_atomically(

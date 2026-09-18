@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-FRAME",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "brownfield-reconnaissance",
+      "kind": "stage",
+      "purpose": "Bound reconnaissance to the accepted destination."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "b2518b76fd66659c819b3ae44ed866edefcbfbf237bcebf2d0684e2e85ab07fb"
+  },
+  "created_at": "2026-09-17T00:50:00Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-PARITY-LIVE-RUNNER/artifacts/outcome-frame.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-framing",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Isolated live-runner outcome",
+  "updated_at": "2026-09-17T00:50:00Z",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

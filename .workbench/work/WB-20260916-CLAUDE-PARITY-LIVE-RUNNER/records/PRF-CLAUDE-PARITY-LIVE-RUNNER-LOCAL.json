@@ -1,0 +1,70 @@
+{
+  "achieved_proof": [
+    {
+      "evidence": [
+        {
+          "record_id": "ART-CLAUDE-PARITY-LIVE-RUNNER-VERIFY",
+          "record_type": "artifact"
+        }
+      ],
+      "kind": "local-implementation",
+      "limitations": [
+        "No Claude or Codex model was invoked.",
+        "No provider credential or network egress was supplied or qualified.",
+        "The local Docker boundary cannot prove immunity to Docker or kernel vulnerabilities.",
+        "No comparative performance, prompt improvement, global configuration, deployment, or business outcome was measured."
+      ],
+      "non_vacuity_check": "The real container observed 13 kernel/cgroup and filesystem canaries, a deliberate sleeper timed out and was removed, a distinct fake agent wrote the expected staged-workspace file, and all 40 untouched task baselines remained red while 40 references were green.",
+      "observed_at": "2026-09-17T01:15:40Z",
+      "observed_by": {
+        "actor_id": "agent:workbench",
+        "kind": "agent"
+      },
+      "oracle": {
+        "description": "129 runtime tests, 22 focused tests with a real Docker journey, two full benchmark author-validation repetitions, live qualification revalidation, container cleanup inspection, repository validators, compilation, and diff checks passed.",
+        "kind": "automated-independent"
+      },
+      "requirement_id": "REQ-CLAUDE-PARITY-LIVE-RUNNER-LOCAL",
+      "result": "passed",
+      "verification_target": {
+        "environment": "local-windows-docker-desktop-linux-engine",
+        "journey": "qualify-to-revalidate-to-live-doctor-to-fake-agent-write-to-timeout-cleanup-to-campaign-preflight",
+        "seam": "claude-harness-eval-cli-artifact-store-and-docker-isolation-runner"
+      }
+    }
+  ],
+  "applicability": "required",
+  "claim": "The Docker isolation qualification and deterministic fake-agent execution boundary is locally implemented and verified at its CLI, artifact-integrity, runtime/image/policy binding, resource, timeout, cleanup, campaign-preflight, and regression seams.",
+  "created_at": "2026-09-17T01:15:40Z",
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "proof_id": "PRF-CLAUDE-PARITY-LIVE-RUNNER-LOCAL",
+  "record_type": "workbench-proof",
+  "required_proof": [
+    {
+      "acceptance_criteria": [
+        "Every isolation canary passes against the real Docker engine.",
+        "Qualified fake execution writes only to its staged workspace and leaves no container.",
+        "Tamper, drift, broad-workspace, timeout, output, and unavailable-runtime paths fail closed.",
+        "Existing evaluator and repository runtime tests pass.",
+        "No provider or parity claim is made."
+      ],
+      "description": "Verify the isolated fake-agent runner and its fail-closed live preflight on the local Docker engine.",
+      "kind": "local-implementation",
+      "oracle_requirement": "Public-seam pytest tests, real Docker kernel/cgroup canaries, benchmark-owned executable oracles, artifact digest checks, repository validators, compilation, and diff checks report non-vacuous results.",
+      "requirement_id": "REQ-CLAUDE-PARITY-LIVE-RUNNER-LOCAL",
+      "verification_target": {
+        "environment": "local-windows-docker-desktop-linux-engine",
+        "journey": "qualify-to-revalidate-to-live-doctor-to-fake-agent-write-to-timeout-cleanup-to-campaign-preflight",
+        "seam": "claude-harness-eval-cli-artifact-store-and-docker-isolation-runner"
+      }
+    }
+  ],
+  "schema_version": "0.5.0",
+  "status": "passed",
+  "updated_at": "2026-09-17T01:15:40Z",
+  "verification_scope": "feature-focused",
+  "work_id": "WB-20260916-CLAUDE-PARITY-LIVE-RUNNER"
+}

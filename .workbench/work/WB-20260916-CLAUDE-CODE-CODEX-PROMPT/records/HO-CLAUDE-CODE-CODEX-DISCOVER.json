@@ -1,0 +1,60 @@
+{
+  "applicability": {
+    "applied": [
+      "evidence-intake",
+      "process-model",
+      "writing-for-agents"
+    ],
+    "could_not_determine": [],
+    "skipped": []
+  },
+  "artifacts_produced": [
+    {
+      "path": ".workbench/work/WB-20260916-CLAUDE-CODE-CODEX-PROMPT/artifacts/execution-loop.md",
+      "record_id": "ART-CLAUDE-CODE-CODEX-LOOP",
+      "record_type": "artifact"
+    }
+  ],
+  "authorization_ids": [],
+  "created_at": "2026-09-16T19:15:29.3659796+00:00",
+  "decisions_required": [],
+  "findings": [
+    "Claude Code's supported persistent cross-project surface is ~/.claude/CLAUDE.md, but its instructions are contextual guidance rather than client-enforced system policy.",
+    "A four-gate loop—Orient, Act, Falsify, Close—places checkable completion criteria at the points where premature completion occurs.",
+    "The verification demand should scale with blast radius and risk while always matching the environment, seam, and journey claimed in the final answer."
+  ],
+  "handoff_id": "HO-CLAUDE-CODE-CODEX-DISCOVER",
+  "idempotency_key": "claude-code-codex-prompt:discover-handoff:v1",
+  "input_fingerprint": {
+    "algorithm": "sha256",
+    "value": "f27493d9537e8d557d684d2a0288908cd3d663487676dccbd4b9b20d80a2802e"
+  },
+  "inputs_used": [
+    {
+      "record_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT",
+      "record_type": "work"
+    },
+    {
+      "record_id": "ART-CLAUDE-CODE-CODEX-FRAME",
+      "record_type": "artifact"
+    }
+  ],
+  "node_id": "O-20260916-CLAUDE-CODE-CODEX-PROMPT",
+  "node_updates": [],
+  "options": [],
+  "owner": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "policy_versions": {
+    "workbench": "0.5.0"
+  },
+  "record_type": "workbench-handoff",
+  "schema_version": "0.5.0",
+  "specialist": "writing-for-agents",
+  "stage": "process-model",
+  "status": "completed",
+  "suggested_next_stage": "specification",
+  "why_next": "Translate the accepted loop into concise, always-loaded instructions and verify every reported failure mode has an operative rule.",
+  "work_id": "WB-20260916-CLAUDE-CODE-CODEX-PROMPT"
+}

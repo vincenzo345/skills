@@ -1,0 +1,48 @@
+{
+  "artifact_id": "ART-CLAUDE-HARNESS-EVALS-FRAME",
+  "artifact_kind": "evidence-record",
+  "confidentiality": "internal",
+  "consumers": [
+    {
+      "consumer_id": "process-model",
+      "kind": "stage",
+      "purpose": "Bound discovery, architecture, implementation, and proof."
+    }
+  ],
+  "content_integrity": {
+    "algorithm": "sha256",
+    "value": "f37aa6044f3a7cd0d395a3320066352dce37179aa7ab1682d81498e38054995c"
+  },
+  "created_at": "2026-09-16T22:21:19.921548Z",
+  "known_defects": [],
+  "location": {
+    "kind": "workspace-path",
+    "value": ".workbench/work/WB-20260916-CLAUDE-HARNESS-EVALS/artifacts/outcome-frame.md"
+  },
+  "obligation_node_ids": [],
+  "owner": {
+    "actor_id": "user:vince",
+    "kind": "human"
+  },
+  "produced_by": {
+    "actor_id": "agent:workbench",
+    "kind": "agent"
+  },
+  "producing_stage": "outcome-framing",
+  "proof_ids": [],
+  "record_type": "workbench-artifact",
+  "schema_version": "0.5.0",
+  "source_lineage": [
+    {
+      "relationship": "derived-from",
+      "source": {
+        "record_id": "WB-20260916-CLAUDE-HARNESS-EVALS",
+        "record_type": "work"
+      }
+    }
+  ],
+  "status": "current",
+  "title": "Claude harness evaluation outcome frame",
+  "updated_at": "2026-09-16T22:21:19.921548Z",
+  "work_id": "WB-20260916-CLAUDE-HARNESS-EVALS"
+}
