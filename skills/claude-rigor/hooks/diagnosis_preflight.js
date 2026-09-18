@@ -66,6 +66,20 @@ function latestRequest(entries) {
   return null;
 }
 
+function interactiveAnswerText(entry) {
+  if (!entry || entry.type !== "user") return "";
+  const answers = entry.toolUseResult && entry.toolUseResult.answers;
+  if (answers && typeof answers === "object" && !Array.isArray(answers)) {
+    return Object.values(answers).filter((value) => typeof value === "string").join("\n");
+  }
+  const content = entry.message && entry.message.content;
+  if (!Array.isArray(content)) return "";
+  return content.filter((item) =>
+    item && item.type === "tool_result" && typeof item.content === "string" &&
+    /^Your questions have been answered:/i.test(item.content)
+  ).map((item) => item.content).join("\n");
+}
+
 function loaded(entries, start, skill) {
   return entries.slice(start).some((entry) => {
     const text = textContent(entry).toLowerCase();
@@ -120,6 +134,7 @@ process.stdin.on("end", () => {
     const request = latestRequest(entries);
     if (!request || !DIAGNOSIS_PATTERN.test(request.text)) return;
     const after = entries.slice(request.index + 1);
+    const coordinateText = [request.text, ...after.map(interactiveAnswerText)].filter(Boolean).join("\n");
 
     const required = [];
     if (
@@ -130,7 +145,7 @@ process.stdin.on("end", () => {
       required.push("load Workbench");
     }
     if (!loaded(entries, request.index + 1, "diagnosing-bugs")) required.push("load diagnosing-bugs");
-    if (!ENVIRONMENT_PATTERN.test(request.text)) {
+    if (!ENVIRONMENT_PATTERN.test(coordinateText)) {
       const prefix = required.length ? `${required.join(" and ")}; then ` : "";
       deny(
         `${prefix}STOP before repository investigation or routing. The observed environment is user-owned and missing. ` +
@@ -183,7 +198,7 @@ process.stdin.on("end", () => {
       return;
     }
     if (after.some((entry) => textContent(entry).includes(MARKER))) return;
-    if (required.length === 0 && hasCompleteCoordinates(request.text)) return;
+    if (required.length === 0 && hasCompleteCoordinates(coordinateText)) return;
     const prefix = required.length ? `${required.join(" and ")}; then ` : "";
     deny(
       `${prefix}disposition environment, deployed/source revision, user journey or seam, representative fixture, and cold/warm cache state before routing or ranking. ` +

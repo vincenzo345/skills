@@ -105,6 +105,46 @@ def test_missing_environment_remains_blocked_after_skill_load(tmp_path: Path) ->
     assert "Ask only whether" in output["permissionDecisionReason"]
 
 
+def test_interactive_question_answer_satisfies_environment_without_retyping(tmp_path: Path) -> None:
+    entries = [
+        human("/workbench the PDF preview is slow; investigate"),
+        skill("workbench"),
+        skill("diagnosing-bugs"),
+        {
+            "type": "user",
+            "isMeta": True,
+            "message": {"content": "DIAGNOSIS_PREFLIGHT_V1: prior denial"},
+        },
+        {
+            "type": "user",
+            "message": {
+                "role": "user",
+                "content": [{
+                    "type": "tool_result",
+                    "content": (
+                        'Your questions have been answered: "Where did you observe the slow PDF '
+                        'loading?"="Deployed test app (devpathwayams.com)". You can now continue '
+                        "with these answers in mind."
+                    ),
+                    "tool_use_id": "toolu_question",
+                }],
+            },
+            "toolUseResult": {
+                "answers": {
+                    "Where did you observe the slow PDF loading?": (
+                        "Deployed test app (devpathwayams.com)"
+                    )
+                }
+            },
+        },
+    ]
+
+    result = invoke(tmp_path, entries)
+
+    assert result.returncode == 0
+    assert result.stdout == ""
+
+
 def test_unrelated_request_and_malformed_input_fail_open(tmp_path: Path) -> None:
     result = invoke(tmp_path, [human("Explain this parser")])
     malformed = subprocess.run(

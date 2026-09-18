@@ -1,6 +1,6 @@
 {
   "name": "claude-rigor",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A correctness-focused Claude Code harness with an enforced final review.",
   "author": {
     "name": "Vince Sandoz",
