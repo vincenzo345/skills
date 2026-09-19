@@ -1,43 +1,21 @@
 #!/usr/bin/env node
 "use strict";
 
-// Request one task-aware skeptical review before Claude completes. Malformed
-// input fails open, and stop_hook_active limits the review to once per turn.
+// Request one skeptical review after a material code change. Read-only work and
+// Workbench/scratch artifacts stay unblocked. Malformed input fails open, and
+// stop_hook_active limits the review to once per turn.
 
 const fs = require("fs");
 const path = require("path");
 
 const EDIT_TOOLS = new Set(["edit", "multiedit", "notebookedit", "write"]);
-const INVESTIGATIVE_TOOLS = new Set([
-  "bash",
-  "glob",
-  "grep",
-  "read",
-  "task",
-  "webfetch",
-  "websearch",
-]);
-const DIAGNOSIS_PATTERN =
-  /\b(?:diagnos(?:e|is|ing)|debug|slow(?:ly)?|broken|failing|fails?|performance(?:\s+regression)?)\b/i;
-const ENVIRONMENT_PATTERN =
-  /\b(?:local(?:ly)?|deployed|deployment|production|prod|staging|stage|test\s+(?:environment|deployment|app)|development\s+(?:environment|server))\b/i;
-const PREFLIGHT_MARKER = "DIAGNOSIS_PREFLIGHT_V1";
-const PROPOSAL_REVIEW_MARKER = "DIAGNOSIS_PROPOSAL_REVIEW_V2";
-const IMPLEMENTATION_REVIEW =
+const TERMINAL_REVIEW_MARKER = "DIAGNOSIS_PROPOSAL_REVIEW_V2";
+const REVIEW =
   "Before finishing, challenge the implementation once as a skeptical reviewer. " +
-  "Re-read the request and inspect the final changes. Build explicit input partitions " +
-  "for valid, boundary, malformed, wrong-type, and failure cases; compare every partition " +
-  "with the required public contract and existing behavior. Resolve any stated judgment calls " +
-  "from repository evidence instead of narrowing the contract or asking the user. Check for " +
-  "missed callers, unintended files, weakened tests, silent fallbacks, and error-path regressions. " +
-  "Run the narrowest meaningful verification available, fix any discovered gap, then report only " +
-  "claims supported by executed evidence.";
-const DIAGNOSIS_REVIEW =
-  "Run one narrow final backstop before finishing. Re-read only the proposed final answer, its recommendation, and the evidence already collected; do not broaden the investigation or rerun benchmarks merely to add confidence. " +
-  "First, ask whether an unresolved environment, cache/path frequency, deployed configuration, fixture, or source-revision premise can reorder any unconditional recommendation. If so, make that option conditional or recommend the smallest measurement first. " +
-  "Second, verify every current, default, or deployed claim against the active worktree or an identified deployed revision and label live state unverified when repository evidence cannot establish it. " +
-  "Keep measurements bounded to their actual seam and fixture, keep aggregate service metrics out of endpoint conclusions, and reserve dominant/root-cause language for a discriminating end-to-end intervention. " +
-  "Correct the durable Workbench artifact and state if the recommendation changes. If these checks already pass, return the final answer immediately without gathering more evidence.";
+  "Re-read the request and inspect the final diff. Check the affected public contract, callers, " +
+  "boundary and failure cases, unintended files, weakened tests, silent fallbacks, and error-path regressions. " +
+  "Run the narrowest meaningful verification, inspect its actual output, fix any discovered gap, " +
+  "then report only claims supported by the evidence.";
 
 function readEntries(value) {
   if (typeof value !== "string" || value.length === 0) return [];
@@ -62,43 +40,51 @@ function isHumanRequest(entry) {
   );
 }
 
-function textContent(value) {
-  if (typeof value === "string") return value;
-  if (Array.isArray(value)) return value.map(textContent).join("\n");
-  if (value && typeof value === "object") {
-    return ["text", "content", "message", "name", "command", "args"]
-      .filter((key) => Object.prototype.hasOwnProperty.call(value, key))
-      .map((key) => textContent(value[key]))
-      .join("\n");
-  }
-  return "";
-}
-
-function latestHumanRequest(entries) {
-  let current = null;
+function latestHumanRequestIndex(entries) {
+  let latest = -1;
   entries.forEach((entry, index) => {
-    if (isHumanRequest(entry)) {
-      current = {
-        index,
-        text: textContent(entry.message && entry.message.content).trim(),
-      };
-    }
+    if (isHumanRequest(entry)) latest = index;
   });
-  return current;
+  return latest;
 }
 
-function toolNamesSince(entries, start) {
-  const tools = new Set();
-  entries.slice(start).forEach((entry) => {
-    if (entry.type !== "assistant") return;
+function isNonSourceArtifact(filePath, cwd) {
+  if (typeof filePath !== "string" || filePath.length === 0) return false;
+  const normalized = filePath.replace(/\\/g, "/").toLowerCase();
+  if (
+    normalized.startsWith(".workbench/") ||
+    normalized.includes("/.workbench/") ||
+    normalized.startsWith(".scratch/") ||
+    normalized.includes("/.scratch/")
+  ) return true;
+
+  // Agents commonly place one-off probes and command output under <cwd>/tmp.
+  // Those files support an investigation; they are not product-source edits.
+  if (typeof cwd !== "string" || cwd.length === 0) return false;
+  try {
+    const resolved = path.resolve(cwd, filePath);
+    const tempRoot = path.resolve(cwd, "tmp");
+    return resolved === tempRoot || resolved.startsWith(tempRoot + path.sep);
+  } catch (_) {
+    return false;
+  }
+}
+
+function hasMaterialEdit(entries, start, cwd) {
+  for (const entry of entries.slice(start)) {
+    if (entry.type !== "assistant") continue;
     const content = entry.message && entry.message.content;
-    if (!Array.isArray(content)) return;
-    content.forEach((item) => {
-      if (!item || typeof item !== "object" || item.type !== "tool_use") return;
-      tools.add(String(item.name || "").split(".").pop().toLowerCase());
-    });
-  });
-  return tools;
+    if (!Array.isArray(content)) continue;
+    for (const item of content) {
+      if (!item || typeof item !== "object" || item.type !== "tool_use") continue;
+      const tool = String(item.name || "").split(".").pop().toLowerCase();
+      if (!EDIT_TOOLS.has(tool)) continue;
+      const input = item.input && typeof item.input === "object" ? item.input : {};
+      const filePath = input.file_path || input.path || input.notebook_path;
+      if (!isNonSourceArtifact(filePath, cwd)) return true;
+    }
+  }
+  return false;
 }
 
 function isTaskWorkspace(value) {
@@ -121,35 +107,11 @@ process.stdin.on("end", () => {
     if (!payload || typeof payload !== "object" || payload.hook_event_name !== "Stop") return;
     if (payload.stop_hook_active === true) return;
     const entries = readEntries(payload.transcript_path);
-    const request = latestHumanRequest(entries);
-    if (
-      request !== null &&
-      DIAGNOSIS_PATTERN.test(request.text) &&
-      !ENVIRONMENT_PATTERN.test(request.text) &&
-      entries.slice(request.index + 1).some((entry) => textContent(entry).includes(PREFLIGHT_MARKER))
-    ) {
-      return;
-    }
-    const tools = toolNamesSince(entries, request ? request.index + 1 : 0);
-    const diagnosis =
-      request !== null &&
-      DIAGNOSIS_PATTERN.test(request.text) &&
-      [...tools].some((tool) => INVESTIGATIVE_TOOLS.has(tool));
-    if (diagnosis) {
-      if (
-        entries
-          .slice(request.index + 1)
-          .some((entry) => textContent(entry).includes(PROPOSAL_REVIEW_MARKER))
-      ) {
-        return;
-      }
-      process.stdout.write(JSON.stringify({ decision: "block", reason: DIAGNOSIS_REVIEW }));
-      return;
-    }
-    const edited = [...tools].some((tool) => EDIT_TOOLS.has(tool));
-    if (!edited && !isTaskWorkspace(payload.cwd)) return;
-    process.stdout.write(JSON.stringify({ decision: "block", reason: IMPLEMENTATION_REVIEW }));
+    const start = latestHumanRequestIndex(entries) + 1;
+    if (entries.slice(start).some((entry) => JSON.stringify(entry).includes(TERMINAL_REVIEW_MARKER))) return;
+    if (!hasMaterialEdit(entries, start, payload.cwd) && !isTaskWorkspace(payload.cwd)) return;
+    process.stdout.write(JSON.stringify({ decision: "block", reason: REVIEW }));
   } catch (_) {
-    // Hooks must not prevent completion when their own input is malformed.
+    // A guard that cannot understand its own input must not prevent completion.
   }
 });

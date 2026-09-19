@@ -56,12 +56,13 @@ def test_installer_preserves_unknown_settings_and_removes_only_known_legacy_hook
     assert "old duplicate" not in installed_claude
     assert installed_claude.count("# Claude Rigor (managed)") == 1
     assert "@~/.claude/skills/claude-rigor/agents/rigorous-engineer.md" in installed_claude
-    assert report["pre_tool_use"] == 1 and report["stop"] == 1
+    assert report["pre_tool_use"] == 3 and report["user_prompt_submit"] == 1 and report["stop"] == 1
     assert report["global_prompt_import"] == "~/.claude/skills/claude-rigor/agents/rigorous-engineer.md"
     assert set(report["hook_file_sha256"]) == {
-        "hooks.json", "diagnosis_preflight.js", "completion_guard.js",
+        "hooks.json", "completion_guard.js", "read_only_network_guard.js", "workbench_new_item_guard.js",
+        "workbench_prompt_router.js", "performance_budget_guard.js",
     }
-    assert (home / "skills" / "claude-rigor" / "hooks" / "diagnosis_preflight.js").is_file()
+    assert not (home / "skills" / "claude-rigor" / "hooks" / "diagnosis_preflight.js").exists()
 
 
 def test_installer_is_effectively_idempotent(tmp_path: Path) -> None:

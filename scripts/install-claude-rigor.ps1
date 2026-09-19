@@ -12,6 +12,10 @@ $backupDir = Join-Path $ClaudeHome "backups"
 
 New-Item -ItemType Directory -Force -Path $destination, $backupDir | Out-Null
 Copy-Item -Path (Join-Path $source "*") -Destination $destination -Recurse -Force
+$retiredPreflight = Join-Path $destination "hooks\diagnosis_preflight.js"
+if (Test-Path -LiteralPath $retiredPreflight) {
+    Remove-Item -LiteralPath $retiredPreflight -Force
+}
 
 function Backup-File([string]$Path, [string]$Label) {
     $stamp = Get-Date -Format "yyyyMMdd-HHmmssfff"
@@ -80,15 +84,31 @@ Apply the mandatory engineering operating contract imported below to every softw
 
 $hooks = Get-Content -Raw -LiteralPath (Join-Path $destination "hooks\hooks.json") | ConvertFrom-Json
 $hookFileHashes = [ordered]@{}
-foreach ($hookFile in @("hooks.json", "diagnosis_preflight.js", "completion_guard.js")) {
+foreach ($hookFile in @("hooks.json", "completion_guard.js", "read_only_network_guard.js", "workbench_new_item_guard.js", "workbench_prompt_router.js", "performance_budget_guard.js")) {
     $hookFileHashes[$hookFile] = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $destination "hooks\$hookFile")).Hash.ToLowerInvariant()
+}
+$preToolUseCount = if ($null -ne $hooks.hooks.PSObject.Properties["PreToolUse"]) {
+    @($hooks.hooks.PreToolUse).Count
+} else {
+    0
+}
+$userPromptSubmitCount = if ($null -ne $hooks.hooks.PSObject.Properties["UserPromptSubmit"]) {
+    @($hooks.hooks.UserPromptSubmit).Count
+} else {
+    0
+}
+$stopCount = if ($null -ne $hooks.hooks.PSObject.Properties["Stop"]) {
+    @($hooks.hooks.Stop).Count
+} else {
+    0
 }
 [ordered]@{
     claude_home = $ClaudeHome
     installed = $destination
     removed_legacy_commands = @($removed)
-    pre_tool_use = @($hooks.hooks.PreToolUse).Count
-    stop = @($hooks.hooks.Stop).Count
+    pre_tool_use = $preToolUseCount
+    user_prompt_submit = $userPromptSubmitCount
+    stop = $stopCount
     global_prompt_import = "~/.claude/skills/claude-rigor/agents/rigorous-engineer.md"
     prompt_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $destination "agents\rigorous-engineer.md")).Hash.ToLowerInvariant()
     hooks_sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $destination "hooks\hooks.json")).Hash.ToLowerInvariant()

@@ -148,10 +148,18 @@ def test_workbench_routes_remain_executable_without_external_skills() -> None:
     discovery = (ROOT / "skills" / "workbench" / "references" / "discovery.md").read_text(
         encoding="utf-8"
     )
+    performance = (
+        ROOT / "skills" / "workbench" / "references" / "performance-investigation.md"
+    ).read_text(encoding="utf-8")
 
     assert "never as undeclared route prerequisites" in routing
     assert "absence of an optional skill is not itself a blocker" in routing
     assert "shipped by the same repository distribution as Workbench" in discovery
+    assert "self-contained" in performance
+    assert "external debugging skill is optional" in performance
+    assert "do not require a harness-provided diagnosis skill" in (
+        ROOT / "skills" / "workbench" / "SKILL.md"
+    ).read_text(encoding="utf-8")
 
 
 def test_reported_workbench_companions_are_shipped() -> None:

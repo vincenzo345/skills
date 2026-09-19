@@ -23,7 +23,7 @@ def test_skill_is_a_self_contained_claude_skills_directory_plugin() -> None:
     assert settings == {"agent": "rigorous-engineer"}
 
 
-def test_plugin_registers_portable_one_shot_completion_guard() -> None:
+def test_plugin_registers_narrow_read_only_guard_and_completion_guard() -> None:
     hooks = json.loads((PLUGIN / "hooks" / "hooks.json").read_text(encoding="utf-8"))
     stop = hooks["hooks"]["Stop"]
     command = stop[0]["hooks"][0]["command"]
@@ -32,26 +32,39 @@ def test_plugin_registers_portable_one_shot_completion_guard() -> None:
     assert "completion_guard.js" in command
     assert (PLUGIN / "hooks" / "completion_guard.js").is_file()
 
-    preflight = hooks["hooks"]["PreToolUse"]
-    preflight_command = preflight[0]["hooks"][0]["command"]
-    assert "${CLAUDE_PLUGIN_ROOT}" in preflight_command
-    assert "diagnosis_preflight.js" in preflight_command
-    assert (PLUGIN / "hooks" / "diagnosis_preflight.js").is_file()
+    pre = hooks["hooks"]["PreToolUse"]
+    assert "workbench_new_item_guard.js" in pre[0]["hooks"][0]["command"]
+    assert pre[1]["matcher"] == "Bash"
+    assert "read_only_network_guard.js" in pre[1]["hooks"][0]["command"]
+    assert "performance_budget_guard.js" in pre[2]["hooks"][0]["command"]
+    submit = hooks["hooks"]["UserPromptSubmit"]
+    assert "workbench_prompt_router.js" in submit[0]["hooks"][0]["command"]
+    assert (PLUGIN / "hooks" / "read_only_network_guard.js").is_file()
+    assert (PLUGIN / "hooks" / "workbench_new_item_guard.js").is_file()
+    assert (PLUGIN / "hooks" / "workbench_prompt_router.js").is_file()
+    assert (PLUGIN / "hooks" / "performance_budget_guard.js").is_file()
+    assert not (PLUGIN / "hooks" / "diagnosis_preflight.js").exists()
 
 
 def test_default_agent_carries_the_validated_operating_contract() -> None:
     agent = (PLUGIN / "agents" / "rigorous-engineer.md").read_text(encoding="utf-8")
 
     assert "name: rigorous-engineer" in agent
-    assert "Orient before editing" in agent
-    assert "Act coherently" in agent
-    assert "Falsify the solution" in agent
-    assert "Close honestly" in agent
-    assert "valid inputs, boundary values, malformed values, wrong-type values" in agent
-    assert "wrong input type" in agent
-    assert "Diagnosis preflight" in agent
-    assert "environment, deployed revision or source provenance" in agent
-    assert "ask that prerequisite question by itself" in agent
+    assert "## Orient" in agent
+    assert "## Act" in agent
+    assert "## Verify" in agent
+    assert "## Completion" in agent
+    assert "valid, boundary, malformed, wrong-type" in agent
+    assert "structured answer returned by an interactive question tool" in agent
+    assert "active worktree, deployed revision, runtime configuration" in agent
+    assert "service-wide aggregates as service-wide" in agent
+    assert "populate caches" in agent
+    assert "request-level identity or a controlled intervention" in agent
+    assert '"Clean" and "unchanged by this task" are different claims' in agent
+    assert "Use removes, eliminates, guarantees" in agent
+    assert "Reuse does not transfer validity" in agent
+    assert "Cross-check option numbers" in agent
+    assert "detaches work from a request" in agent
 
 
 def test_plugin_has_no_repository_relative_runtime_dependencies() -> None:
@@ -60,7 +73,10 @@ def test_plugin_has_no_repository_relative_runtime_dependencies() -> None:
         PLUGIN / "agents" / "rigorous-engineer.md",
         PLUGIN / "hooks" / "hooks.json",
         PLUGIN / "hooks" / "completion_guard.js",
-        PLUGIN / "hooks" / "diagnosis_preflight.js",
+        PLUGIN / "hooks" / "read_only_network_guard.js",
+        PLUGIN / "hooks" / "workbench_new_item_guard.js",
+        PLUGIN / "hooks" / "workbench_prompt_router.js",
+        PLUGIN / "hooks" / "performance_budget_guard.js",
     ]
 
     for path in runtime_files:

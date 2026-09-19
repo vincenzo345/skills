@@ -22,6 +22,9 @@ def test_prepare_handoff_owns_mechanical_envelope_and_is_accepted(
     artifact_path = repo / ".workbench" / "work" / WORK_ID / "artifacts" / "outcome.md"
     artifact_path.parent.mkdir(parents=True)
     artifact_path.write_text("# Outcome\n\nThe bounded outcome is recorded.\n", encoding="utf-8")
+    dynamic_route = repo / "frontend" / "pages" / "cases" / "[caseId]" / "index.tsx"
+    dynamic_route.parent.mkdir(parents=True)
+    dynamic_route.write_text("export default function CasePage() {}\n", encoding="utf-8")
     source = {
         "handoff_id": "HO-PREPARED-FRAME",
         "specialist": "workbench",
@@ -35,6 +38,10 @@ def test_prepare_handoff_owns_mechanical_envelope_and_is_accepted(
             "statement": "The requested outcome and boundary are explicit.",
             "finding_type": "fact",
             "sources": [".workbench/work/WB-INTAKE-001/intake.json"],
+        }, {
+            "statement": "The dynamic route is part of the inspected seam.",
+            "finding_type": "fact",
+            "sources": ["frontend/pages/cases/[caseId]/index.tsx"],
         }],
         "uncertainties": [{
             "question": "A downstream implementation detail remains open.",
@@ -75,6 +82,9 @@ def test_prepare_handoff_owns_mechanical_envelope_and_is_accepted(
     assert bundle["records"][0]["custom_kind"] == "outcome-frame"
     assert bundle["records"][1]["status"] == "passed"
     assert bundle["handoff"]["findings"][0]["basis"] == "fact"
+    assert bundle["handoff"]["findings"][1]["source_references"][0]["uri"] == (
+        "frontend/pages/cases/[caseId]/index.tsx"
+    )
     assert bundle["handoff"]["options"] == [{
         "name": "OPT-MEASURE",
         "benefits": ["Measure the active journey first."],
@@ -287,6 +297,89 @@ def test_prepared_compact_routing_starts_without_schema_discovery(
     assert terminal_bundle["handoff"]["terminal_disposition"] == "completed-for-destination"
     state = json.loads((repo / ".workbench" / "work" / work_id / "state.json").read_text(encoding="utf-8"))
     assert state["status"] == "awaiting-acceptance"
+
+
+def test_accept_to_proposal_serializes_final_result_once(
+    tmp_path: Path, workbench_cli: WorkbenchCLI,
+) -> None:
+    repo = routed_repo(tmp_path, workbench_cli)
+    work_id = "WB-ONE-PROPOSAL-HANDOFF"
+    captured = workbench_cli.invoke(
+        "capture-intake", repo,
+        ("--work-id", work_id, "--request", "Investigate latency and give options.",
+         "--idempotency-key", "one-proposal:intake"),
+    )
+    assert_succeeded(captured)
+    routing = tmp_path / "routing.json"
+    routing.write_text(json.dumps({
+        "request": "Investigate latency and give options.",
+        "title": "Latency options",
+        "desired_outcome": "Provide ranked latency options.",
+        "solution_context": "brownfield",
+        "execution_lane": "full",
+        "business_basis": "technical-only",
+        "engagement_intent": "explore",
+        "planning_destination": "proposal",
+        "recommendation": "Measure the relevant seam.",
+    }), encoding="utf-8")
+    prepared_routing = tmp_path / "prepared-routing.json"
+    routing_helper = PROJECT_ROOT / "skills" / "workbench" / "scripts" / "prepare-routing.py"
+    prepared = subprocess.run(
+        [sys.executable, str(routing_helper), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(routing), "--output", str(prepared_routing)],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert prepared.returncode == 0, prepared.stderr
+    started = workbench_cli.invoke(
+        "route-and-start", repo,
+        ("--work-id", work_id, "--routing-input", str(prepared_routing),
+         "--idempotency-key", "one-proposal:start"),
+    )
+    assert_succeeded(started)
+
+    artifact = repo / "proposal.md"
+    artifact.write_text("# Proposal\n\nRanked, bounded options.\n", encoding="utf-8")
+    source = tmp_path / "proposal-source.json"
+    source_value = {
+        "handoff_id": "HO-ONE-PROPOSAL",
+        "artifact": {
+            "artifact_id": "ART-ONE-PROPOSAL", "path": "proposal.md",
+            "title": "Latency proposal", "artifact_kind": "proposal",
+        },
+        "findings": [{"summary": "Options are ranked.", "classification": "inference", "sources": ["proposal.md"]}],
+    }
+    source.write_text(json.dumps(source_value), encoding="utf-8")
+    output = tmp_path / "proposal-bundle.json"
+
+    rejected = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(source), "--output", str(output), "--accept-to-proposal"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert rejected.returncode == 2
+    assert "terminal acceptance requires review fields" in rejected.stderr
+    unchanged = json.loads((repo / ".workbench" / "work" / work_id / "state.json").read_text(encoding="utf-8"))
+    assert unchanged["current_stage"] == "outcome-framing"
+
+    source_value["review"] = {field: True for field in (
+        "provenance_reconciled", "measurements_bounded",
+        "conditional_ordering", "durable_artifact_final",
+    )}
+    source.write_text(json.dumps(source_value), encoding="utf-8")
+    completed = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(source), "--output", str(output), "--accept-to-proposal"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    result = json.loads(completed.stdout)
+    assert result["result"] == "accepted-to-proposal"
+    assert result["review_marker"] == "DIAGNOSIS_PROPOSAL_REVIEW_V2"
+    assert output.exists()
+    assert output.with_name("proposal-bundle.framing.json").exists()
+    state = json.loads((repo / ".workbench" / "work" / work_id / "state.json").read_text(encoding="utf-8"))
+    assert state["status"] == "awaiting-acceptance"
+    assert len(state["handoff_ids"]) == 2
 
 
 def test_prepare_routing_can_capture_and_start_in_one_invocation(tmp_path: Path) -> None:

@@ -69,7 +69,10 @@ def external_reference(repo: Path, value: str) -> dict:
     raw = value.strip()
     candidate = raw.split(":", 1)[0] if ":" in raw and not raw.startswith(("urn:", "http:" , "https:")) else raw
     path = repo / candidate
-    uri = quote(candidate.replace("\\", "/"), safe="/._-") if path.exists() else "urn:workbench:" + quote(raw, safe="._-")
+    # Square brackets are ordinary filename characters in repositories that use
+    # dynamic-route conventions (for example Next.js `[caseId]`). Keep them
+    # literal because Workbench later resolves workspace-path URIs as paths.
+    uri = quote(candidate.replace("\\", "/"), safe="/._-[]") if path.exists() else "urn:workbench:" + quote(raw, safe="._-")
     return {"record_type": "external", "record_id": raw, "uri": uri}
 
 
@@ -84,16 +87,7 @@ def next_action(value: str | dict, *, owner: dict, target_type: str, target_id: 
     }
 
 
-def require_terminal_review(repo: Path, work_id: str, source: dict) -> None:
-    """Require an explicit final-content review before an irreversible terminal snapshot."""
-    state = load_json(repo / ".workbench" / "work" / work_id / "state.json")
-    stages = state["stages"]
-    stage_index = next(
-        index for index, item in enumerate(stages)
-        if item["stage_id"] == state["current_stage"]
-    )
-    if stage_index + 1 < len(stages):
-        return
+def require_review_fields(source: dict) -> None:
     review = source.get("review")
     missing = [
         field for field in TERMINAL_REVIEW_FIELDS
@@ -104,6 +98,14 @@ def require_terminal_review(repo: Path, work_id: str, source: dict) -> None:
             "terminal acceptance requires review fields set to true after reviewing the final artifact: "
             + ", ".join(missing)
         )
+
+
+def require_terminal_review(repo: Path, work_id: str, source: dict) -> None:
+    """Require an explicit final-content review before an irreversible terminal snapshot."""
+    state, stage_index = current_route(repo, work_id)
+    if stage_index + 1 < len(state["stages"]):
+        return
+    require_review_fields(source)
 
 
 def lifecycle_summary(value: dict) -> dict:
@@ -129,6 +131,80 @@ def lifecycle_summary(value: dict) -> dict:
         if recorded:
             summary["verification"] = recorded
     return summary
+
+
+def current_route(repo: Path, work_id: str) -> tuple[dict, int]:
+    state = load_json(repo / ".workbench" / "work" / work_id / "state.json")
+    stage_index = next(
+        index for index, item in enumerate(state["stages"])
+        if item["stage_id"] == state["current_stage"]
+    )
+    return state, stage_index
+
+
+def accept_and_advance(repo: Path, work_id: str, bundle: dict, output: Path) -> dict:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(bundle, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
+    handoff_id = bundle["handoff"]["handoff_id"]
+    run_workbench([
+        "accept-handoff", "--repo", str(repo), "--work-id", work_id,
+        "--handoff-bundle", str(output.resolve()),
+        "--idempotency-key", f"helper:accept:{handoff_id}",
+    ])
+    return run_workbench([
+        "advance-stage", "--repo", str(repo), "--work-id", work_id,
+        "--accepted-handoff", handoff_id,
+        "--idempotency-key", f"helper:advance:{handoff_id}",
+    ])
+
+
+def accept_to_proposal(repo: Path, work_id: str, source: dict, output: Path) -> tuple[dict, dict]:
+    """Record framing mechanically, then accept one reviewed proposal source.
+
+    This intentionally supports only the common two-stage investigation route. It
+    must not become a generic way to skip substantive design or delivery stages.
+    """
+    state, stage_index = current_route(repo, work_id)
+    remaining = [item["stage_id"] for item in state["stages"][stage_index:]]
+    if remaining != ["outcome-framing", "proposal"] or state.get("planning_destination") != "proposal":
+        raise ValueError(
+            "--accept-to-proposal requires the current route to be exactly "
+            "outcome-framing -> proposal"
+        )
+    require_review_fields(source)
+
+    work_dir = repo / ".workbench" / "work" / work_id
+    framing_path = work_dir / "artifacts" / "outcome-framing.md"
+    framing_path.parent.mkdir(parents=True, exist_ok=True)
+    framing_path.write_text(
+        "# Outcome frame\n\n"
+        f"- Outcome: {state['desired_outcome']}\n"
+        f"- Destination: {state['planning_destination']}\n"
+        "- Boundary: investigation and decision-ready options; no implementation implied.\n",
+        encoding="utf-8",
+    )
+    framing_source = {
+        "handoff_id": f"HO-{work_id.removeprefix('WB-')}-FRAME",
+        "artifact": {
+            "artifact_id": f"ART-{work_id.removeprefix('WB-')}-FRAME",
+            "path": framing_path.relative_to(repo).as_posix(),
+            "title": "Outcome frame",
+            "artifact_kind": "other",
+        },
+        "findings": [{
+            "statement": "The requested outcome and proposal boundary are recorded.",
+            "basis": "fact",
+            "sources": ["captured-intake"],
+        }],
+    }
+    framing_bundle = compile_bundle(repo, work_id, framing_source)
+    framing_output = output.with_name(f"{output.stem}.framing{output.suffix or '.json'}")
+    accept_and_advance(repo, work_id, framing_bundle, framing_output)
+
+    require_terminal_review(repo, work_id, source)
+    proposal_bundle = compile_bundle(repo, work_id, source)
+    lifecycle = accept_and_advance(repo, work_id, proposal_bundle, output)
+    return proposal_bundle, lifecycle
 
 
 def compile_bundle(repo: Path, work_id: str, source: dict) -> dict:
@@ -214,10 +290,12 @@ def compile_bundle(repo: Path, work_id: str, source: dict) -> dict:
             findings.append(item)
             continue
         sources = item.get("sources", item.get("source_references", []))
-        statement = item.get("statement", item.get("claim", item.get("finding", item.get("description"))))
+        statement = item.get(
+            "statement", item.get("claim", item.get("finding", item.get("description", item.get("summary"))))
+        )
         if not statement:
             raise ValueError("each finding needs statement, claim, finding, or description")
-        basis = item.get("basis", item.get("finding_type", "inference"))
+        basis = item.get("basis", item.get("finding_type", item.get("classification", "inference")))
         findings.append({
             "statement": statement,
             "basis": basis,
@@ -383,10 +461,28 @@ def main() -> int:
         "--accept-and-advance", action="store_true",
         help="register the prepared bundle and advance its lifecycle gate in the same invocation",
     )
+    parser.add_argument(
+        "--accept-to-proposal", action="store_true",
+        help="for an exact outcome-framing -> proposal route, record framing and accept the reviewed proposal in one invocation",
+    )
     args = parser.parse_args()
     try:
         repo = Path(args.repo).resolve()
         source = load_json(Path(args.input))
+        if args.accept_and_advance and args.accept_to_proposal:
+            raise ValueError("choose either --accept-and-advance or --accept-to-proposal")
+        if args.accept_to_proposal:
+            require_terminal_review(repo, args.work_id, source)
+            output = Path(args.output)
+            bundle, lifecycle = accept_to_proposal(repo, args.work_id, source, output)
+            print(json.dumps({
+                "result": "accepted-to-proposal", "work_id": args.work_id,
+                "stage": bundle["handoff"]["stage"],
+                "handoff_id": bundle["handoff"]["handoff_id"],
+                "output": str(output), "review_marker": TERMINAL_REVIEW_MARKER,
+                "lifecycle": lifecycle_summary(lifecycle),
+            }, sort_keys=True))
+            return 0
         if args.accept_and_advance:
             require_terminal_review(repo, args.work_id, source)
         bundle = compile_bundle(repo, args.work_id, source)
@@ -395,17 +491,7 @@ def main() -> int:
         output.write_text(json.dumps(bundle, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
         lifecycle = None
         if args.accept_and_advance:
-            handoff_id = bundle["handoff"]["handoff_id"]
-            run_workbench([
-                "accept-handoff", "--repo", str(repo), "--work-id", args.work_id,
-                "--handoff-bundle", str(output.resolve()),
-                "--idempotency-key", f"helper:accept:{handoff_id}",
-            ])
-            lifecycle = run_workbench([
-                "advance-stage", "--repo", str(repo), "--work-id", args.work_id,
-                "--accepted-handoff", handoff_id,
-                "--idempotency-key", f"helper:advance:{handoff_id}",
-            ])
+            lifecycle = accept_and_advance(repo, args.work_id, bundle, output)
         terminal_reviewed = args.accept_and_advance and "terminal_disposition" in bundle["handoff"]
         print(json.dumps({
             "result": "accepted-and-advanced" if lifecycle else "prepared", "work_id": args.work_id,

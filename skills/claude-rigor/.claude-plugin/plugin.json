@@ -1,7 +1,7 @@
 {
   "name": "claude-rigor",
-  "version": "1.5.2",
-  "description": "A correctness-focused Claude Code harness with an enforced final review.",
+  "version": "1.14.1",
+  "description": "A Codex-aligned Claude Code operating contract with a code-change completion backstop.",
   "author": {
     "name": "Vince Sandoz",
     "url": "https://github.com/vincenzo345"

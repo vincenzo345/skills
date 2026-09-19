@@ -40,9 +40,9 @@ def test_blocks_first_stop_after_edit_with_contract_review_guidance(tmp_path: Pa
 
     assert code == 0
     assert output["decision"] == "block"
-    assert "input partitions" in output["reason"]
-    assert "existing behavior" in output["reason"]
-    assert "judgment calls" in output["reason"]
+    assert "public contract" in output["reason"]
+    assert "failure cases" in output["reason"]
+    assert "actual output" in output["reason"]
     assert stderr == ""
 
 
@@ -53,6 +53,22 @@ def test_allows_second_stop_to_prevent_an_infinite_loop(tmp_path: Path) -> None:
     ]
 
     code, output, stderr = run_hook(tmp_path, entries, stop_hook_active=True)
+
+    assert code == 0
+    assert output == {}
+    assert stderr == ""
+
+
+def test_terminal_workbench_review_marker_suppresses_duplicate_stop_review(tmp_path: Path) -> None:
+    entries = [
+        {"type": "user", "message": {"content": "/workbench investigate and give options"}},
+        {"type": "assistant", "message": {"content": [{
+            "type": "tool_use", "name": "Write", "input": {"file_path": "E:/tmp/wb/phase.json"},
+        }]}},
+        {"type": "user", "isMeta": True, "message": {"content": "review_marker: DIAGNOSIS_PROPOSAL_REVIEW_V2"}},
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries)
 
     assert code == 0
     assert output == {}
@@ -72,9 +88,7 @@ def test_does_not_interrupt_read_only_answers(tmp_path: Path) -> None:
     assert stderr == ""
 
 
-def test_blocks_first_stop_after_read_only_performance_investigation(
-    tmp_path: Path,
-) -> None:
+def test_does_not_interrupt_read_only_performance_investigation(tmp_path: Path) -> None:
     entries = [
         {
             "type": "user",
@@ -93,15 +107,7 @@ def test_blocks_first_stop_after_read_only_performance_investigation(
     code, output, stderr = run_hook(tmp_path, entries)
 
     assert code == 0
-    assert output["decision"] == "block"
-    assert "cache/path frequency" in output["reason"]
-    assert "aggregate service metrics" in output["reason"]
-    assert "discriminating end-to-end intervention" in output["reason"]
-    assert "active worktree" in output["reason"]
-    assert "unresolved environment" in output["reason"]
-    assert "durable Workbench artifact and state" in output["reason"]
-    assert "do not broaden" in output["reason"]
-    assert "input partitions" not in output["reason"]
+    assert output == {}
     assert stderr == ""
 
 
@@ -123,20 +129,20 @@ def test_diagnostic_prompt_without_investigative_tool_use_does_not_block(
     assert stderr == ""
 
 
-def test_waiting_for_missing_environment_does_not_trigger_final_review(tmp_path: Path) -> None:
+def test_workbench_artifact_write_does_not_trigger_final_review(tmp_path: Path) -> None:
     entries = [
         {
             "type": "user",
-            "message": {"content": "The PDF preview is slow. Investigate and give options."},
+            "message": {"content": "/workbench investigate the PDF preview."},
         },
         {
             "type": "assistant",
-            "message": {"content": [{"type": "tool_use", "name": "Bash", "input": {}}]},
-        },
-        {
-            "type": "user",
             "message": {
-                "content": [{"type": "tool_result", "content": "DIAGNOSIS_PREFLIGHT_V1: ask environment"}]
+                "content": [{
+                    "type": "tool_use",
+                    "name": "Write",
+                    "input": {"file_path": "C:/repo/.workbench/work/WB-1/options.md"},
+                }]
             },
         },
     ]
@@ -148,30 +154,14 @@ def test_waiting_for_missing_environment_does_not_trigger_final_review(tmp_path:
     assert stderr == ""
 
 
-def test_diagnostic_stop_review_runs_even_after_legacy_proposal_marker(tmp_path: Path) -> None:
+def test_scratch_write_does_not_trigger_final_review(tmp_path: Path) -> None:
     entries = [
-        {"type": "user", "message": {"content": "/workbench diagnose the deployed preview journey"}},
-        {"type": "assistant", "message": {"content": [{"type": "tool_use", "name": "Read", "input": {}}]}},
-        {"type": "user", "isMeta": True, "message": {
-            "content": "DIAGNOSIS_PROPOSAL_REVIEW_V1: reviewed before acceptance"
-        }},
-    ]
-
-    code, output, stderr = run_hook(tmp_path, entries)
-
-    assert code == 0
-    assert output["decision"] == "block"
-    assert "narrow final backstop" in output["reason"]
-    assert stderr == ""
-
-
-def test_diagnostic_stop_review_is_skipped_after_terminal_review_marker(tmp_path: Path) -> None:
-    entries = [
-        {"type": "user", "message": {"content": "/workbench diagnose the deployed preview journey"}},
-        {"type": "assistant", "message": {"content": [{"type": "tool_use", "name": "Read", "input": {}}]}},
-        {"type": "user", "isMeta": True, "message": {
-            "content": "{\"review_marker\":\"DIAGNOSIS_PROPOSAL_REVIEW_V2\"}"
-        }},
+        {"type": "user", "message": {"content": "Record the investigation notes"}},
+        {"type": "assistant", "message": {"content": [{
+            "type": "tool_use",
+            "name": "Write",
+            "input": {"file_path": ".scratch/investigation.md"},
+        }]}},
     ]
 
     code, output, stderr = run_hook(tmp_path, entries)
@@ -181,31 +171,59 @@ def test_diagnostic_stop_review_is_skipped_after_terminal_review_marker(tmp_path
     assert stderr == ""
 
 
-def test_diagnostic_review_takes_precedence_when_investigation_also_edits(
-    tmp_path: Path,
-) -> None:
+def test_workspace_tmp_probe_does_not_trigger_final_review(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
     entries = [
-        {
-            "type": "user",
-            "message": {"content": "Diagnose the slow API and record the findings."},
-        },
-        {
-            "type": "assistant",
-            "message": {
-                "content": [
-                    {"type": "tool_use", "name": "Read", "input": {}},
-                    {"type": "tool_use", "name": "Write", "input": {}},
-                ]
-            },
-        },
+        {"type": "user", "message": {"content": "Investigate the live latency"}},
+        {"type": "assistant", "message": {"content": [{
+            "type": "tool_use",
+            "name": "Write",
+            "input": {"file_path": str(workspace / "tmp" / "probe.py")},
+        }]}},
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries, cwd=str(workspace))
+
+    assert code == 0
+    assert output == {}
+    assert stderr == ""
+
+
+def test_tmp_named_source_outside_workspace_still_triggers_review(tmp_path: Path) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    source = tmp_path / "tmp" / "product.py"
+    entries = [
+        {"type": "user", "message": {"content": "Implement the product change"}},
+        {"type": "assistant", "message": {"content": [{
+            "type": "tool_use",
+            "name": "Write",
+            "input": {"file_path": str(source)},
+        }]}},
+    ]
+
+    code, output, stderr = run_hook(tmp_path, entries, cwd=str(workspace))
+
+    assert code == 0
+    assert output["decision"] == "block"
+    assert stderr == ""
+
+
+def test_source_write_triggers_final_review(tmp_path: Path) -> None:
+    entries = [
+        {"type": "user", "message": {"content": "Create the parser"}},
+        {"type": "assistant", "message": {"content": [{
+            "type": "tool_use",
+            "name": "Write",
+            "input": {"file_path": "src/parser.py"},
+        }]}},
     ]
 
     code, output, stderr = run_hook(tmp_path, entries)
 
     assert code == 0
     assert output["decision"] == "block"
-    assert "discriminating end-to-end intervention" in output["reason"]
-    assert "input partitions" not in output["reason"]
     assert stderr == ""
 
 
