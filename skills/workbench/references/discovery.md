@@ -2,6 +2,8 @@
 
 Use this reference when Workbench knows the desired destination but does not yet know enough to route safely or recommend a consequential decision.
 
+For collaborative feature delivery, use the uncertainty-to-method router and proof boundaries in [collaborative-delivery.md](collaborative-delivery.md). Repository inspection, primary-source research, domain modeling, mockups, throwaway prototypes, bounded design POCs, and measurement are selected by the decision they can unlock—not run as a checklist.
+
 ## Start with the smallest useful inquiry
 
 Discovery exists to resolve named uncertainty, not to produce a comprehensive document by default. Record the question, why it matters, who owns the answer, what evidence could settle it, and the decision or stage it unlocks.

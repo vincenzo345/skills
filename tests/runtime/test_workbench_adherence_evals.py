@@ -20,6 +20,10 @@ REQUIRED_CASES = {
     "measured-bottleneck-needs-discrimination",
     "aggregate-metrics-do-not-prove-endpoint-cause",
     "single-fixture-does-not-generalize-performance",
+    "collaborative-feature-planning",
+    "evidence-method-follows-uncertainty",
+    "implementation-destination-fidelity",
+    "dependent-ticket-frontier",
 }
 
 
@@ -69,6 +73,23 @@ def test_human_decision_case_keeps_orthogonal_dimensions_separate() -> None:
     assert case["decision_dimensions"] == ["measurement", "delivery-depth"]
     assert case["expected"]["question_count"] == 2
     assert case["expected"]["nonselection_is_decision"] is False
+
+
+def test_collaborative_delivery_cases_preserve_alignment_and_execution() -> None:
+    cases = by_id(load_cases())
+
+    collaborative = cases["collaborative-feature-planning"]["expected"]
+    assert collaborative["planning_posture"] == "collaborative"
+    assert "confirm-shared-understanding" in collaborative["required_actions"]
+    assert "complete-long-proposal-before-confirmation" in collaborative["forbidden_actions"]
+
+    implementation = cases["implementation-destination-fidelity"]["expected"]
+    assert implementation["engagement_intent"] == "implement"
+    assert implementation["planning_destination"] == "locally-verified-implementation"
+
+    frontier = cases["dependent-ticket-frontier"]["expected"]
+    assert frontier["initial_ready"] == ["A", "C"]
+    assert frontier["initial_blocked"] == ["B"]
 
 
 def test_quantitative_claim_requires_observed_or_explicitly_bounded_basis() -> None:

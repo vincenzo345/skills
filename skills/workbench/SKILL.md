@@ -24,28 +24,34 @@ Create compact helper inputs inside the target repository (prefer `.workbench/tm
 1. Resolve the repository, `.workbench` store, and related resumable work before mutation.
 2. Treat the user's natural description as valid intake and preserve it verbatim, including named references.
 3. Inspect the current repository and every accessible reference needed to understand the request before asking questions. Separate explicit, inferred, discoverable, and decision-required information.
-4. Choose the narrowest supported destination and route. Put the verbatim request in the compact input's `request` field and invoke:
+4. Select and expose `planning_posture`: use `collaborative` for “help me plan/work through/figure out,” fuzzy targets, or unresolved material choices; use `delegated` only for an explicit request to draft, propose, recommend, or choose within recorded bounds. When cues conflict, choose collaborative.
+5. Route intent faithfully: explore/options normally stop at `proposal`; planning a buildable system normally stops at `implementation-plan`; specification-only stops at `specification`; build/fix/implement targets `locally-verified-implementation`; release requires an explicit release destination.
+6. Choose the narrowest supported destination and route. Put the verbatim request in the compact input's `request` field and invoke:
 
    ```text
    python -B "<workbench-skill-dir>/scripts/prepare-routing.py" --repo "<repo>" --work-id "<id>" --input "<compact.json>" --output "<prepared.json>" --capture-and-start
    ```
 
    This captures intake and uses the validated receipt to start atomically with `route-and-start`. Do not call the underlying `capture-intake` or `route-and-start` commands.
-5. Show one compact execution card: environment, outcome, destination, lane, checkpoints, assumptions, exclusions, and granted versus withheld actions. For a performance investigation, begin the card with `Environment:` before words such as ranking or recommendation.
+7. Show one compact execution card: environment, posture, outcome, intent, destination, lane, checkpoints, assumptions, exclusions, and granted versus withheld actions. For a performance investigation, begin the card with `Environment:` before words such as ranking or recommendation.
 
-Compact routing input is semantic JSON: `request`, title, desired outcome, solution context, lane, business basis, intent, destination, rationale, sourced facts, assumptions, constraints, acceptance evidence, unresolved questions, recommendation, optional stage recommendations, and granted actions. Use `unresolved_questions` only for answers required before start and set `blocks_start: true`; conditional unknowns belong in phase uncertainties. If material human answers remain, consult [references/intake.md](references/intake.md), ask one compact batch, and record a superseding revision.
+Compact routing input is semantic JSON: `request`, title, desired outcome, solution context, lane, business basis, intent, destination, `planning_posture`, rationale, sourced facts, assumptions, constraints, acceptance evidence, unresolved questions, recommendation, optional stage recommendations, and granted actions. The helper canonicalizes these documented aliases and rejects unknown or conflicting semantic fields. Use `unresolved_questions` with `blocks_start: true` only when routing cannot start. Nonblocking questions become durable phase decision/evidence nodes, never assumptions. If material human answers remain, consult [references/intake.md](references/intake.md), ask one compact batch, and record a superseding revision.
 
 Choose one uppercase ID matching `WB-[A-Z0-9][A-Z0-9._-]{1,63}`; do not probe alternatives. Existing software or document-processing systems are `brownfield`; reserve `process-only` for a non-software operating process. A request to implement or fix authorizes ordinary in-scope repository mutation after gates pass, but not commit, deployment, external publication, or closure.
+
+Use the fast lane only when behavior, blast radius, acceptance oracle, and proof are already clear; no material product, domain, architecture, scope, risk, migration, external-coordination, or multi-ticket choice remains; and the work fits one session. Otherwise use the full route and the collaborative-delivery method.
 
 For existing work, read [references/state-management.md](references/state-management.md), run `resume`, and trust the validated projection over conversation memory. Read only records needed for the ready frontier.
 
 ## Operating loop
 
 1. **Orient once.** Use the latest mutation or resume projection. Refresh only when state may have changed. Make visible: current position, evidence, decisions and rejected options, why the next action is ready, and remaining uncertainty.
-2. **Act on the ready frontier.** Do agent-owned work with satisfied dependencies and authorization; continue independent work while dependent work waits.
-3. **Use methods proportionally.** Activity labels identify concerns, not mandatory documents, skills, stages, or subagents. Use a method only when it creates evidence, resolves uncertainty, supports a decision, or proves a claim.
-4. **Accept one meaningful phase handoff.** Review one consolidated artifact. For the exact `outcome-framing -> proposal` route, use `prepare-handoff.py --accept-to-proposal` once; the helper records the intake-derived frame mechanically and accepts the reviewed proposal. For every other route, use `--accept-and-advance` once per substantive stage.
-5. **Stop at the destination.** Its gate yields authorized completion or `awaiting-acceptance`. Never close, implement, deploy, publish, or commit without the corresponding authority.
+2. **Establish shared understanding.** For collaborative or unsettled full routes, read [references/collaborative-delivery.md](references/collaborative-delivery.md). Investigate facts, surface the material decision frontier, gather proportional evidence, and obtain confirmation of a ready shared-understanding artifact before specification.
+3. **Act on the ready frontier.** Do agent-owned work with satisfied dependencies and authorization; continue independent work while dependent work waits.
+4. **Use methods proportionally.** Activity labels identify concerns, not mandatory documents, skills, stages, or subagents. Research, domain models, mockups, prototypes, POCs, and measurements are evidence tasks for named uncertainties, not decorations.
+5. **Accept meaningful handoffs.** Use `--accept-and-advance` for a completed phase. During implementation, use `--accept-only` for ticket-scoped results so one ticket cannot complete the whole stage.
+6. **Execute approved tickets.** Claim dependency-ready deliverables atomically, complete them with review and proof, and continue through the recomputed frontier until every required ticket is terminal.
+7. **Stop at the destination.** Its gate yields authorized completion or `awaiting-acceptance`. Never close, implement, deploy, publish, or commit without the corresponding authority.
 
 ## Compact handoff contract
 
@@ -57,7 +63,9 @@ python -B "<workbench-skill-dir>/scripts/prepare-handoff.py" --repo "<repo>" --w
 
 For an exact two-stage investigation ending in a proposal, replace `--accept-and-advance` with `--accept-to-proposal`. Supply only the final reviewed proposal JSON; do not serialize a duplicate framing result.
 
-Do not call `--help`, reconstruct envelopes, or call underlying accept/advance commands. Compact phase JSON contains `handoff_id`, specialist, `artifact` (`artifact_id`, repository-relative path, title, kind), findings, and uncertainties. Findings may use `statement`, `summary`, `claim`, or `finding`; classification may use `basis`, `classification`, or `finding_type`; sources may be strings. Uncertainties may use `description` or `question`. For destination proof, add `proof` with `proof_id` beginning `PRF-`, `requirement_id` beginning `REQ-`, claim, acceptance criteria, and non-vacuity check. The helper owns stage, node, lineage, fingerprints, normalization, registration, and advancement.
+Do not call `--help`, reconstruct envelopes, or call underlying accept/advance commands. Compact phase JSON contains `handoff_id`, specialist, `artifact` or `artifacts` (`artifact_id`, repository-relative path, title, kind, readiness), findings, uncertainties, decisions, optional node additions/dependencies, and node updates. Findings may use `statement`, `summary`, `claim`, or `finding`; classification may use `basis`, `classification`, or `finding_type`; sources may be strings. Decisions preserve authority, options, confirmation, provenance, and consequences. For destination or ticket proof, add `proof` with `proof_id` beginning `PRF-`, `requirement_id` beginning `REQ-`, claim, acceptance criteria, and non-vacuity check. The helper owns stage, lineage, fingerprints, normalization, and registration.
+
+Use `--accept-only` for intermediate ticket handoffs. Before implementation, invoke `workbench.py claim-node --work-id <id> --node-id <ticket> --expected-revision <n> --idempotency-key <key>`. Dependency-blocked tickets do not appear in `frontier.agent_ready`.
 
 The compact phase JSON is an index, not a second proposal. Record at most six decision-relevant findings and consolidate uncertainties that share the same proof action. Keep option detail in the artifact; do not duplicate every option's prose in the handoff or final response.
 
@@ -92,6 +100,7 @@ The bundled runtime schemas are authoritative. Read one reference only when the 
 
 - Intake revision: [references/intake.md](references/intake.md)
 - Route or destination: [references/routing.md](references/routing.md)
+- Collaborative alignment, evidence routing, specification, tickets, and implementation frontier: [references/collaborative-delivery.md](references/collaborative-delivery.md)
 - Investigation: [references/discovery.md](references/discovery.md)
 - Performance investigation: [references/performance-investigation.md](references/performance-investigation.md)
 - Persisted-data design or audit: [references/data-modeling.md](references/data-modeling.md) or [references/data-model-auditing.md](references/data-model-auditing.md)

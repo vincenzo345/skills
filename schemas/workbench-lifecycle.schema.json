@@ -73,7 +73,7 @@
     }
   },
   "x-workbench": {
-    "registry_version": "0.5.0",
+    "registry_version": "0.6.0",
     "phases": [
       {
         "id": "frame",

@@ -17,13 +17,16 @@ Resume an existing item when the user names its work ID or asks to continue, ins
 
 ## Build a routing profile
 
-Classify five independent questions using evidence available now, and explain each answer:
+Classify six independent questions using evidence available now, and explain each answer:
 
 - **Business basis:** `hypothesis` when value, demand, or process behavior remains unproven; `operating-process` when current business work is the basis; `supplied-requirements` when an accepted requirement set is the basis; `technical-only` when the request originates in software behavior without a separate process claim.
 - **Solution context:** `greenfield` for a new software context; `brownfield` when existing code, data, integrations, or deployment behavior will change; `process-only` before software is justified; `undetermined` only while evidence or a human decision genuinely blocks classification.
 - **Engagement intent:** `explore`, `plan`, `implement`, or `release`, based on what the user asked Workbench to do now—not what might eventually happen.
 - **Planning destination:** choose the narrowest lifecycle destination that satisfies the current request and authority. Proposal is a destination, not an entrance. Reaching it does not establish a later destination or the desired business outcome.
 - **Execution lane:** use `fast` only when behavior, blast radius, applicable standards, proof, and execution context are bounded and no material choice or evidence gap is hidden. Otherwise use `full`. A failed preflight expands the same work item.
+- **Planning posture:** `collaborative` means the agent discovers facts while the user owns material choices; `delegated` permits reversible defaults only inside explicit bounds. “Help me plan/work through/figure out” and any unsettled consequential choice select collaborative. “Draft/propose/recommend using your judgment” may select delegated.
+
+Intent and destination must agree. Explore and option comparison normally target `proposal`; a buildable plan targets `implementation-plan`; a behavior contract targets `specification`; build, fix, and implement target `locally-verified-implementation`; release targets an explicit release destination. Never allow a semantic helper default to weaken the user's requested destination.
 
 For every `greenfield` or `brownfield` software profile, inspect persistence and include an explicit `data-model-design` stage recommendation. Mark it applicable when a database or durable store is introduced or its semantics may change; mark it not applicable only with evidence that persistence is unaffected; use undetermined when the impact cannot yet be established. Read [data-modeling.md](data-modeling.md) when this branch applies. A no-impact disposition keeps a small change lean while preventing the data layer from disappearing by default.
 
@@ -48,7 +51,7 @@ When the path is unclear:
 3. Add the smallest evidence task, experiment, decision, obligation, or deliverable needed to resolve a question.
 4. Give every open node an owner, dependency set, next action, and completion condition.
 5. Attach evidence to the node and decision it informs.
-6. Recompute the ready frontier after accepted evidence or a changed dependency. Accepted v0.5 handoffs project their findings, uncertainties, and decision records into the canonical map; dependency-derived readiness and post-start rerouting remain explicit rather than inferred.
+6. Recompute the ready frontier after accepted evidence or a changed dependency. Accepted v0.6 handoffs project findings, uncertainties, decisions, implementation-ticket nodes, and dependency edges into the canonical map. Deliverables with incomplete dependencies stay off `agent_ready`; post-start rerouting remains explicit rather than inferred.
 
 Prefer breadth-first discovery: expose the major questions blocking the destination before deeply pursuing one branch. Admit a node only when it supports the desired outcome, the planning destination, or a surviving obligation.
 
@@ -80,4 +83,4 @@ If no focused companion is available, apply the baseline method in Workbench's r
 
 Before lifecycle start, append a routing revision with `revise-routing`. Its `expected-routing-revision` prevents concurrent or stale updates; its `supersedes` link binds the exact prior bytes; and `resolved_questions` makes human answers visible instead of silently rewriting the synthesis. A dropped unresolved question without a recorded answer is rejected. Lifecycle start binds the exact latest revision and freezes pre-start routing.
 
-After lifecycle start, return conceptually to the earliest phase whose conclusion is invalidated. Preserve the work ID and prior events, supersede affected decisions or artifacts rather than rewriting them, and state what remains valid. The v0.5 runtime does not yet expose a post-start route-correction mutation, so keep dependent work blocked rather than editing state or creating a duplicate item. An unproven process that earns a bounded proceed decision should later compile the remaining software phases without restarting completed discovery or becoming universally “proven.”
+After lifecycle start, return conceptually to the earliest phase whose conclusion is invalidated. Preserve the work ID and prior events, supersede affected decisions or artifacts rather than rewriting them, and state what remains valid. The v0.6 runtime does not yet expose a post-start route-correction mutation, so keep dependent work blocked rather than editing state or creating a duplicate item. An unproven process that earns a bounded proceed decision should later compile the remaining software phases without restarting completed discovery or becoming universally “proven.”

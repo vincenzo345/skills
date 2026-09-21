@@ -49,11 +49,19 @@ STAGES = {
 ROUTING_FIELDS = {
     "title", "desired_outcome", "business_basis", "solution_context",
     "engagement_intent", "planning_destination", "execution_lane",
+    "planning_posture", "phase_questions",
     "runtime_route", "rationale", "evidence_references", "facts",
     "constraints", "acceptance_evidence", "assumptions",
     "unresolved_questions", "stage_recommendations",
     "authorization_boundary", "recommendation",
 }
+ROUTING_ALIASES = {
+    "lane": "execution_lane",
+    "intent": "engagement_intent",
+    "destination": "planning_destination",
+    "sourced_facts": "facts",
+}
+COMPACT_ONLY_FIELDS = {"request", "granted_actions", *ROUTING_ALIASES}
 
 
 def lifecycle_summary(value: dict) -> dict:
@@ -101,6 +109,28 @@ def canonical_choice(value: object, allowed: set[str], aliases: dict[str, str], 
 
 
 def normalize(value: dict) -> dict:
+    unknown = sorted(set(value) - ROUTING_FIELDS - COMPACT_ONLY_FIELDS)
+    if unknown:
+        raise ValueError("unknown compact routing fields: " + ", ".join(unknown))
+    value = dict(value)
+    for alias, canonical in ROUTING_ALIASES.items():
+        if alias not in value:
+            continue
+        if canonical in value and value[canonical] != value[alias]:
+            raise ValueError(
+                f"conflicting compact routing fields: {alias} and {canonical}"
+            )
+        value[canonical] = value.pop(alias)
+    if "granted_actions" in value:
+        boundary = dict(value.get("authorization_boundary", {}))
+        if ("granted_actions" in boundary
+                and boundary["granted_actions"] != value["granted_actions"]):
+            raise ValueError(
+                "conflicting compact routing fields: granted_actions and "
+                "authorization_boundary.granted_actions"
+            )
+        boundary["granted_actions"] = value.pop("granted_actions")
+        value["authorization_boundary"] = boundary
     result = {key: item for key, item in value.items() if key in ROUTING_FIELDS}
     result.setdefault("title", "Workbench item")
     result.setdefault("desired_outcome", result["title"])
@@ -141,6 +171,10 @@ def normalize(value: dict) -> dict:
          "option": "explore", "investig": "explore", "explore": "explore"},
         "explore",
     )
+    posture = str(result.get("planning_posture", "delegated")).strip().lower()
+    if posture not in {"collaborative", "delegated"}:
+        raise ValueError("planning_posture must be collaborative or delegated")
+    result["planning_posture"] = posture
     result.setdefault("rationale", "Use the smallest lifecycle that reaches the requested destination.")
     if result["solution_context"] == "brownfield" and result["planning_destination"] == "proposal":
         # The legacy fast-lane route has no proposal destination. A read-only
@@ -190,6 +224,7 @@ def normalize(value: dict) -> dict:
     # In a compact input, an open question is a proposal uncertainty unless it
     # explicitly says that lifecycle work cannot start without the answer.
     blockers = []
+    phase_questions = list(result.get("phase_questions", []))
     assumptions = list(result["assumptions"])
     for item in value.get("unresolved_questions", []):
         if isinstance(item, str):
@@ -199,10 +234,13 @@ def normalize(value: dict) -> dict:
         if not question:
             continue
         if not item.get("blocks_start", False):
-            material = item.get("why_material")
-            assumptions.append(
-                f"Open but non-blocking: {question}" + (f" ({material})" if material else "")
-            )
+            phase_questions.append({
+                "question": question,
+                "why_material": item.get(
+                    "why_material", "The answer changes a downstream artifact or action."
+                ),
+                "owner": actor(item.get("owner", "agent")),
+            })
             continue
         blockers.append({
             "question": question,
@@ -211,6 +249,7 @@ def normalize(value: dict) -> dict:
         })
     result["assumptions"] = list(dict.fromkeys(assumptions))
     result["unresolved_questions"] = blockers
+    result["phase_questions"] = phase_questions
 
     recommendations = []
     for item in result.get("stage_recommendations", []):

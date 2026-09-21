@@ -175,6 +175,12 @@
         }
       }
     },
+    "node_additions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nodeAddition"
+      }
+    },
     "blockers": {
       "type": "array",
       "minItems": 1,
@@ -279,6 +285,26 @@
     }
   ],
   "$defs": {
+    "nodeAddition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node",
+        "depends_on"
+      ],
+      "properties": {
+        "node": {
+          "$ref": "workbench-map.schema.json#/$defs/node"
+        },
+        "depends_on": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nodeId"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
     "finding": {
       "type": "object",
       "additionalProperties": false,

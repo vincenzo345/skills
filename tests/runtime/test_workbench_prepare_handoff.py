@@ -10,6 +10,7 @@ from pathlib import Path
 from conftest import PROJECT_ROOT, WorkbenchCLI, assert_succeeded
 from test_workbench_v03 import routed_repo
 from test_workbench_v05 import WORK_ID
+from test_workbench_routing import routing_input
 
 
 HELPER = PROJECT_ROOT / "skills" / "workbench" / "scripts" / "prepare-handoff.py"
@@ -153,7 +154,12 @@ def test_prepare_routing_normalizes_mechanical_fields_and_detects_prestart_artif
     assert output["facts"] == [{"statement": "fact", "source_references": ["repo"]}]
     assert output["evidence_references"] == ["repo"]
     assert output["unresolved_questions"] == []
-    assert output["assumptions"][0].startswith("Open but non-blocking:")
+    assert output["assumptions"] == []
+    assert output["phase_questions"] == [{
+        "question": "Which live revision is deployed?",
+        "why_material": "It may change option ranking but not the ability to propose conditional options.",
+        "owner": {"actor_id": "user:local", "kind": "human"},
+    }]
     assert output["stage_recommendations"] == [{
         "stage_id": "data-model-design",
         "applicability": "not-applicable",
@@ -173,6 +179,379 @@ def test_prepare_routing_normalizes_mechanical_fields_and_detects_prestart_artif
     )
     assert rejected.returncode == 2
     assert "move analysis artifacts elsewhere" in rejected.stderr
+
+
+def test_prepare_routing_preserves_compact_semantics_and_rejects_ambiguity(
+    tmp_path: Path, workbench_cli: WorkbenchCLI,
+) -> None:
+    repo = routed_repo(tmp_path, workbench_cli)
+    work_id = "WB-COMPACT-SEMANTICS"
+    captured = workbench_cli.invoke(
+        "capture-intake", repo,
+        ("--work-id", work_id, "--request", "Help me plan this system, then implement it.",
+         "--idempotency-key", "compact-semantics:intake"),
+    )
+    assert_succeeded(captured)
+    source_path = tmp_path / "routing-source.json"
+    output_path = tmp_path / "routing-prepared.json"
+    helper = PROJECT_ROOT / "skills" / "workbench" / "scripts" / "prepare-routing.py"
+    source_path.write_text(json.dumps({
+        "title": "Collaborative implementation",
+        "desired_outcome": "Implement the agreed workflow.",
+        "solution_context": "brownfield",
+        "lane": "full",
+        "intent": "implement",
+        "destination": "locally-verified-implementation",
+        "planning_posture": "collaborative",
+        "sourced_facts": [{"statement": "A plan exists.", "sources": ["plan.md"]}],
+        "granted_actions": ["repository-mutation", "implementation"],
+        "unresolved_questions": [{
+            "question": "Which user-visible state names should the workflow use?",
+            "why_material": "The answer changes the specification.",
+            "owner": "human",
+            "blocks_start": False,
+        }],
+        "acceptance_evidence": ["The implementation passes its behavioral tests."],
+        "stage_recommendations": [{
+            "stage_id": "outcome-framing",
+            "applicability": "applicable",
+            "reason": "Confirm the target before implementation.",
+            "evidence_references": ["plan.md"],
+        }, {
+            "stage_id": "data-model-design",
+            "applicability": "not-applicable",
+            "reason": "No persisted product data changes.",
+            "evidence_references": ["plan.md"],
+        }],
+    }), encoding="utf-8")
+
+    prepared = subprocess.run(
+        [sys.executable, str(helper), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(source_path), "--output", str(output_path)],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+
+    assert prepared.returncode == 0, prepared.stderr
+    output = json.loads(output_path.read_text(encoding="utf-8"))
+    assert output["execution_lane"] == "full"
+    assert output["engagement_intent"] == "implement"
+    assert output["planning_destination"] == "locally-verified-implementation"
+    assert output["planning_posture"] == "collaborative"
+    assert output["facts"] == [{"statement": "A plan exists.", "source_references": ["plan.md"]}]
+    assert output["authorization_boundary"]["granted_actions"] == [
+        "implementation", "repository-mutation",
+    ]
+    assert output["assumptions"] == []
+    assert output["phase_questions"][0]["question"].startswith("Which user-visible")
+
+    for update, expected_error in ((
+        {"execution_lane": "fast"}, "conflicting compact routing fields",
+    ), (
+        {"mystery_semantic": "silently lost before"}, "unknown compact routing fields",
+    )):
+        invalid = json.loads(source_path.read_text(encoding="utf-8"))
+        invalid.update(update)
+        source_path.write_text(json.dumps(invalid), encoding="utf-8")
+        rejected = subprocess.run(
+            [sys.executable, str(helper), "--repo", str(repo), "--work-id", work_id,
+             "--input", str(source_path), "--output", str(output_path)],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+        )
+        assert rejected.returncode == 2
+        assert expected_error in rejected.stderr
+
+
+def test_collaborative_outcome_gate_requires_ready_shared_understanding_and_confirmation(
+    tmp_path: Path, workbench_cli: WorkbenchCLI,
+) -> None:
+    repo = tmp_path / "collaborative"
+    repo.mkdir()
+    work_id = "WB-COLLABORATIVE-GATE"
+    assert_succeeded(workbench_cli.invoke(
+        "capture-intake", repo,
+        ("--work-id", work_id, "--request", "Help me plan and implement the workflow.",
+         "--idempotency-key", "collaborative-gate:intake"),
+    ))
+    route = routing_input(
+        planning_posture="collaborative",
+        phase_questions=[],
+        planning_destination="locally-verified-implementation",
+        engagement_intent="implement",
+        execution_lane="full",
+        runtime_route="brownfield-feature",
+        authorization_boundary={
+            "granted_actions": ["repository-mutation", "implementation"],
+            "withheld_actions": [
+                "decision-delegation", "tracker-publication", "commit", "deployment", "closure",
+            ],
+        },
+        stage_recommendations=[{
+            "stage_id": "data-model-design",
+            "applicability": "not-applicable",
+            "reason": "The fixture changes no persisted product data.",
+            "evidence_references": ["captured-intake"],
+        }],
+    )
+    route_path = tmp_path / "collaborative-routing.json"
+    route_path.write_text(json.dumps(route), encoding="utf-8")
+    assert_succeeded(workbench_cli.invoke(
+        "route-and-start", repo,
+        ("--work-id", work_id, "--routing-input", str(route_path),
+         "--idempotency-key", "collaborative-gate:start"),
+    ))
+    understanding = repo / "shared-understanding.md"
+    understanding.write_text("# Shared understanding\n\nOutcome, scope, journey, and proof.\n", encoding="utf-8")
+    source_path = tmp_path / "shared-source.json"
+    bundle_path = tmp_path / "shared-bundle.json"
+    base_source = {
+        "handoff_id": "HO-COLLABORATIVE-FRAME-DRAFT",
+        "artifact": {
+            "artifact_id": "ART-COLLABORATIVE-SHARED-DRAFT",
+            "path": understanding.relative_to(repo).as_posix(),
+            "title": "Shared understanding",
+            "artifact_kind": "shared-understanding",
+            "readiness": "ready",
+        },
+        "findings": [{"statement": "The target is explicit.", "basis": "fact", "sources": ["captured-intake"]}],
+    }
+    source_path.write_text(json.dumps(base_source), encoding="utf-8")
+    rejected = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(source_path), "--output", str(bundle_path), "--accept-and-advance"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert rejected.returncode == 2
+    assert "confirmed user-owned decision" in rejected.stderr
+
+    confirmed_source = dict(base_source)
+    confirmed_source["handoff_id"] = "HO-COLLABORATIVE-FRAME-CONFIRMED"
+    confirmed_source["artifact"] = {
+        **base_source["artifact"],
+        "artifact_id": "ART-COLLABORATIVE-SHARED-CONFIRMED",
+    }
+    confirmed_source["decisions"] = [{
+        "decision_id": "DEC-COLLABORATIVE-SHARED",
+        "question": "Does this artifact represent our shared understanding?",
+        "authority": "user-owned",
+        "state": "confirmed",
+        "options": [
+            {"option_id": "OPT-SHARED-CONFIRM", "name": "Confirm"},
+            {"option_id": "OPT-SHARED-REVISE", "name": "Revise"},
+        ],
+        "selected_option_id": "OPT-SHARED-CONFIRM",
+        "rationale": "The user accepted the target and path.",
+        "artifact_inputs": ["ART-COLLABORATIVE-SHARED-CONFIRMED"],
+    }]
+    source_path.write_text(json.dumps(confirmed_source), encoding="utf-8")
+    accepted = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(source_path), "--output", str(bundle_path), "--accept-and-advance"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert accepted.returncode == 0, accepted.stderr
+    bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+    artifact_record = next(item for item in bundle["records"] if item["record_type"] == "workbench-artifact")
+    decision_record = next(item for item in bundle["records"] if item["record_type"] == "workbench-decision")
+    assert artifact_record["artifact_kind"] == "shared-understanding"
+    assert artifact_record["readiness"] == "ready"
+    assert decision_record["state"] == "confirmed"
+
+
+def test_ticket_frontier_derives_readiness_claims_atomically_and_unlocks_dependents(
+    tmp_path: Path, workbench_cli: WorkbenchCLI,
+) -> None:
+    repo = routed_repo(tmp_path, workbench_cli)
+    for name in ("ticket-a.md", "ticket-b.md"):
+        (repo / name).write_text(f"# {name}\n\nVertical slice and proof contract.\n", encoding="utf-8")
+    source_path = tmp_path / "tickets-source.json"
+    bundle_path = tmp_path / "tickets-bundle.json"
+    source_path.write_text(json.dumps({
+        "handoff_id": "HO-TICKET-FRONTIER",
+        "artifacts": [{
+            "artifact_id": "ART-TICKET-A", "path": "ticket-a.md",
+            "title": "Ticket A", "artifact_kind": "implementation-ticket", "readiness": "ready",
+        }, {
+            "artifact_id": "ART-TICKET-B", "path": "ticket-b.md",
+            "title": "Ticket B", "artifact_kind": "implementation-ticket", "readiness": "ready",
+        }],
+        "node_additions": [{
+            "node": {
+                "node_id": "DLV-TICKET-A", "kind": "deliverable", "title": "Ticket A",
+                "why_it_matters": "Delivers the first vertical slice.",
+                "owner": {"actor_id": "agent:workbench", "kind": "agent"},
+                "status": "ready",
+                "next_action": {"description": "Implement ticket A.", "owner": {"actor_id": "agent:workbench", "kind": "agent"}, "target_type": "node", "target_id": "DLV-TICKET-A"},
+                "done_when": ["Ticket A proof passes."],
+                "evidence": [{"record_type": "artifact", "record_id": "ART-TICKET-A"}],
+                "source_ids": ["AC-1"], "proof_status": "pending"
+            },
+            "depends_on": []
+        }, {
+            "node": {
+                "node_id": "DLV-TICKET-B", "kind": "deliverable", "title": "Ticket B",
+                "why_it_matters": "Delivers the dependent vertical slice.",
+                "owner": {"actor_id": "agent:workbench", "kind": "agent"},
+                "status": "ready",
+                "next_action": {"description": "Implement ticket B.", "owner": {"actor_id": "agent:workbench", "kind": "agent"}, "target_type": "node", "target_id": "DLV-TICKET-B"},
+                "done_when": ["Ticket B proof passes."],
+                "evidence": [{"record_type": "artifact", "record_id": "ART-TICKET-B"}],
+                "source_ids": ["AC-2"], "proof_status": "pending"
+            },
+            "depends_on": ["DLV-TICKET-A"]
+        }],
+    }), encoding="utf-8")
+    accepted = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", WORK_ID,
+         "--input", str(source_path), "--output", str(bundle_path), "--accept-only"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert accepted.returncode == 0, accepted.stderr
+    lifecycle = json.loads(accepted.stdout)["lifecycle"]
+    assert lifecycle["state_revision"] == 2
+
+    projected = workbench_cli.invoke("next", repo, ("--work-id", WORK_ID, "--json"))
+    assert_succeeded(projected)
+    view = json.loads(projected.stdout)
+    ready_ids = {item.get("node_id") for item in view["frontier"]["agent_ready"]}
+    assert "DLV-TICKET-A" in ready_ids
+    assert "DLV-TICKET-B" not in ready_ids
+
+    blocked_claim = workbench_cli.invoke(
+        "claim-node", repo,
+        ("--work-id", WORK_ID, "--node-id", "DLV-TICKET-B", "--expected-revision", "2",
+         "--idempotency-key", "ticket-frontier:claim-b", "--json"),
+    )
+    assert blocked_claim.returncode == 2
+    assert "incomplete dependencies" in blocked_claim.output
+    claimed = workbench_cli.invoke(
+        "claim-node", repo,
+        ("--work-id", WORK_ID, "--node-id", "DLV-TICKET-A", "--expected-revision", "2",
+         "--idempotency-key", "ticket-frontier:claim-a", "--json"),
+    )
+    assert_succeeded(claimed)
+
+    (repo / "implementation-a.md").write_text("# Implementation A\n\nVerified.\n", encoding="utf-8")
+    completion_source = tmp_path / "completion-source.json"
+    completion_bundle = tmp_path / "completion-bundle.json"
+    completion_source.write_text(json.dumps({
+        "handoff_id": "HO-TICKET-A-COMPLETE",
+        "node_id": "DLV-TICKET-A",
+        "artifact": {
+            "artifact_id": "ART-IMPLEMENTATION-A", "path": "implementation-a.md",
+            "title": "Implementation A", "artifact_kind": "implementation", "readiness": "ready",
+        },
+        "proof": {
+            "proof_id": "PRF-TICKET-A", "requirement_id": "REQ-TICKET-A",
+            "claim": "Ticket A meets AC-1.",
+            "acceptance_criteria": ["The public seam passes."],
+            "non_vacuity_check": "The behavior test exercised a non-empty fixture."
+        },
+        "node_updates": [{
+            "node_id": "DLV-TICKET-A", "proposed_status": "completed",
+            "rationale": "The ticket-scoped proof passed."
+        }]
+    }), encoding="utf-8")
+    completed = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", WORK_ID,
+         "--input", str(completion_source), "--output", str(completion_bundle), "--accept-only"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    projected = workbench_cli.invoke("next", repo, ("--work-id", WORK_ID, "--json"))
+    assert_succeeded(projected)
+    ready_ids = {
+        item.get("node_id")
+        for item in json.loads(projected.stdout)["frontier"]["agent_ready"]
+    }
+    assert "DLV-TICKET-B" in ready_ids
+    ready_b = next(
+        item for item in json.loads(projected.stdout)["frontier"]["agent_ready"]
+        if item.get("node_id") == "DLV-TICKET-B"
+    )
+    assert ready_b["blockers"] == []
+
+
+def test_specification_gate_rejects_draft_and_accepts_ready_proven_artifact(
+    tmp_path: Path, workbench_cli: WorkbenchCLI,
+) -> None:
+    repo = tmp_path / "spec-gate"
+    repo.mkdir()
+    work_id = "WB-SPEC-GATE"
+    assert_succeeded(workbench_cli.invoke(
+        "capture-intake", repo,
+        ("--work-id", work_id, "--request", "Write a behavior specification.",
+         "--idempotency-key", "spec-gate:intake"),
+    ))
+    route = routing_input(
+        planning_posture="delegated", phase_questions=[], engagement_intent="plan",
+        planning_destination="specification", execution_lane="full",
+        runtime_route="brownfield-feature",
+        stage_recommendations=[{
+            "stage_id": "data-model-design", "applicability": "not-applicable",
+            "reason": "No persisted data change is part of the fixture.",
+            "evidence_references": ["captured-intake"],
+        }],
+    )
+    route_path = tmp_path / "spec-routing.json"
+    route_path.write_text(json.dumps(route), encoding="utf-8")
+    assert_succeeded(workbench_cli.invoke(
+        "route-and-start", repo,
+        ("--work-id", work_id, "--routing-input", str(route_path),
+         "--idempotency-key", "spec-gate:start"),
+    ))
+    (repo / "frame.md").write_text("# Frame\n\nBounded outcome.\n", encoding="utf-8")
+    frame_source = tmp_path / "spec-frame.json"
+    frame_bundle = tmp_path / "spec-frame-bundle.json"
+    frame_source.write_text(json.dumps({
+        "handoff_id": "HO-SPEC-FRAME",
+        "artifact": {"artifact_id": "ART-SPEC-FRAME", "path": "frame.md", "title": "Frame", "artifact_kind": "other"},
+    }), encoding="utf-8")
+    advanced = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(frame_source), "--output", str(frame_bundle), "--accept-and-advance"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert advanced.returncode == 0, advanced.stderr
+
+    (repo / "spec.md").write_text("# Spec\n\nOUT-1, US-1, INV-1, AC-1, and proof ownership.\n", encoding="utf-8")
+    review = {field: True for field in (
+        "provenance_reconciled", "measurements_bounded", "conditional_ordering", "durable_artifact_final",
+    )}
+    spec_source = tmp_path / "spec-source.json"
+    spec_bundle = tmp_path / "spec-bundle.json"
+    base = {
+        "handoff_id": "HO-SPEC-DRAFT",
+        "artifact": {
+            "artifact_id": "ART-SPEC-DRAFT", "path": "spec.md", "title": "Specification",
+            "artifact_kind": "specification", "readiness": "draft",
+        },
+        "review": review,
+    }
+    spec_source.write_text(json.dumps(base), encoding="utf-8")
+    rejected = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(spec_source), "--output", str(spec_bundle), "--accept-and-advance"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert rejected.returncode == 2
+    assert "marked ready" in rejected.stderr
+
+    ready = dict(base)
+    ready["handoff_id"] = "HO-SPEC-READY"
+    ready["artifact"] = {**base["artifact"], "artifact_id": "ART-SPEC-READY", "readiness": "ready"}
+    ready["proof"] = {
+        "proof_id": "PRF-SPEC-GATE-READY", "requirement_id": "REQ-SPEC-GATE-READY",
+        "claim": "The ready specification is traceable and complete.",
+        "acceptance_criteria": ["Stable IDs and proof ownership are present."],
+        "non_vacuity_check": "The artifact contains OUT-1, US-1, INV-1, and AC-1."
+    }
+    spec_source.write_text(json.dumps(ready), encoding="utf-8")
+    accepted = subprocess.run(
+        [sys.executable, str(HELPER), "--repo", str(repo), "--work-id", work_id,
+         "--input", str(spec_source), "--output", str(spec_bundle), "--accept-and-advance"],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", check=False,
+    )
+    assert accepted.returncode == 0, accepted.stderr
 
 
 def test_prepared_compact_routing_starts_without_schema_discovery(

@@ -281,9 +281,10 @@ def test_finalize_persists_valid_receipt_and_projects_ready_state(
             "solution_context": "brownfield",
             "engagement_intent": "implement",
             "planning_destination": "locally-verified-implementation",
-            "execution_lane": "fast",
-            "runtime_route": "small-change-fast-lane",
-        }
+                "execution_lane": "fast",
+                "runtime_route": "small-change-fast-lane",
+                "planning_posture": "delegated",
+            }
         assert view["frontier"]["agent_ready"]
 
 

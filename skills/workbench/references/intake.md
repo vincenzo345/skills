@@ -60,6 +60,7 @@ Write those fields to a temporary JSON routing-input file using the field contra
   "engagement_intent": "explore | plan | implement | release",
   "planning_destination": "one lifecycle destination ID",
   "execution_lane": "fast | full",
+  "planning_posture": "collaborative | delegated",
   "runtime_route": "one matching legacy route ID or null",
   "rationale": "Why this profile fits the evidence.",
   "evidence_references": ["path, URL, or captured-intake"],
@@ -68,6 +69,7 @@ Write those fields to a temporary JSON routing-input file using the field contra
   "acceptance_evidence": ["Observable evidence that would support completion."],
   "assumptions": ["Labeled assumption and its practical boundary."],
   "unresolved_questions": [{"question": "Material question?", "why_material": "What it changes.", "owner": {"actor_id": "human:...", "kind": "human"}}],
+  "phase_questions": [{"question": "Downstream choice or evidence question?", "why_material": "What later artifact it changes.", "owner": {"actor_id": "human:... | agent:...", "kind": "human | agent"}}],
   "stage_recommendations": [{"stage_id": "canonical-stage-id", "applicability": "applicable | not-applicable | undetermined", "reason": "Why.", "evidence_references": ["source"]}],
   "authorization_boundary": {"granted_actions": []},
   "recommendation": {"choice": "Bounded recommendation.", "rationale": "Why.", "assumptions": [], "tradeoffs": ["What this makes harder."], "confidence": "low | medium | high"}

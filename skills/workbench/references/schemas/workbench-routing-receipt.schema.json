@@ -123,6 +123,20 @@
         "full"
       ]
     },
+    "planning_posture": {
+      "enum": [
+        "collaborative",
+        "delegated"
+      ]
+    },
+    "phase_questions": {
+      "type": "array",
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/unresolvedQuestion"
+      }
+    },
     "runtime_route": {
       "oneOf": [
         {

@@ -26,7 +26,7 @@ else:
 HERE = Path(__file__).resolve().parent
 SCHEMA_DIR = HERE.parent / "references" / "schemas"
 LIFECYCLE_PATH = SCHEMA_DIR / "workbench-lifecycle.schema.json"
-RUNTIME_VERSION = "0.5.0"
+RUNTIME_VERSION = "0.6.0"
 WORK_ID_RE = re.compile(r"^WB-[A-Z0-9][A-Z0-9._-]{1,63}$")
 BLOCKING = {"waiting-for-human", "external-blocked", "evidence-blocked"}
 LEGAL_CHANGE_PREFIXES = {
@@ -46,7 +46,11 @@ LEGAL_CHANGE_PREFIXES = {
             "/state_revision", "/updated_at", "/latest_event_id",
             "/next_action", "/status",
         ),
-        "map": ("/nodes", "/edges", "/fog", "/updated_at"),
+        "map": ("/nodes", "/nodes/", "/edges", "/fog", "/updated_at"),
+    },
+    "node-updated": {
+        "work": ("/state_revision", "/updated_at", "/latest_event_id"),
+        "map": ("/nodes/", "/updated_at"),
     },
     "work-closed": {
         "work": (
@@ -100,6 +104,7 @@ ROUTING_INPUT_FIELDS = {
     "unresolved_questions", "stage_recommendations",
     "authorization_boundary", "recommendation",
 }
+ROUTING_OPTIONAL_FIELDS = {"planning_posture", "phase_questions"}
 ROUTING_REVISION_FIELDS = {
     "revision_reason", "resolved_questions",
 }
@@ -824,6 +829,7 @@ def replay_events(events: list[dict[str, Any]], expected_work_id: str) -> tuple[
             "work-started": "start",
             "stage-completed": "advance-stage",
             "handoff-accepted": "accept-handoff",
+            "node-updated": "claim-node",
             "work-closed": "close",
         }.get(event_type)
         fail(expected_command is not None, f"unsupported replay event type: {event_type}")
@@ -835,13 +841,17 @@ def replay_events(events: list[dict[str, Any]], expected_work_id: str) -> tuple[
         fail(isinstance(expected_actor_id, str) and event.get("actor") == actor(expected_actor_id),
              f"event {expected_sequence} actor does not match its fingerprinted input")
         expected_outputs = [{"record_type": "work", "record_id": expected_work_id}]
-        if event_type == "handoff-accepted":
+        if event_type == "node-updated":
+            expected_outputs = [{"record_type": "node", "record_id": fp_input["node_id"]}]
+        elif event_type == "handoff-accepted":
             expected_outputs.extend(copy.deepcopy(fp_input.get("record_refs", [])))
         elif event_type == "work-closed":
             expected_outputs.append(copy.deepcopy(fp_input["authorization_reference"]))
         fail(event.get("outputs") == expected_outputs,
              f"event {expected_sequence} has noncanonical outputs")
         expected_inputs = copy.deepcopy(fp_input.get("inputs_used", [])) if event_type == "handoff-accepted" else []
+        if event_type == "node-updated":
+            expected_inputs = [{"record_type": "node", "record_id": fp_input["node_id"]}]
         if event_type == "work-closed":
             expected_inputs = [copy.deepcopy(fp_input["authorization_reference"])]
         if event_type == "work-started":
@@ -855,9 +865,13 @@ def replay_events(events: list[dict[str, Any]], expected_work_id: str) -> tuple[
             "work-started": "Start Workbench work item.",
             "stage-completed": f"Complete stage {(fp_input.get('gate_receipt') or {}).get('stage_id')}.",
             "handoff-accepted": f"Accept specialist handoff {fp_input.get('handoff_id')}.",
+            "node-updated": f"Claim implementation ticket {fp_input.get('node_id')}.",
             "work-closed": "Close the accepted Workbench destination.",
         }[event_type]
-        expected_cause_kind = "specialist-output" if event_type == "handoff-accepted" else "user-request"
+        expected_cause_kind = {
+            "handoff-accepted": "specialist-output",
+            "node-updated": "system",
+        }.get(event_type, "user-request")
         fail(event.get("cause") == {
             "kind": expected_cause_kind, "description": expected_description,
             "references": expected_inputs,
@@ -1393,6 +1407,11 @@ def validate_routing(record: dict[str, Any], intake: dict[str, Any] | None = Non
     if schema_version >= (0, 5, 0) and context in {"greenfield", "brownfield"}:
         fail("data-model-design" in stage_ids,
              f"{label} must explicitly classify data-model-design for software work")
+    if schema_version >= (0, 6, 0):
+        fail(record.get("planning_posture") in {"collaborative", "delegated"},
+             f"{label} must declare planning_posture")
+        fail(isinstance(record.get("phase_questions"), list),
+             f"{label} must declare phase_questions")
 
     if schema_version >= (0, 3, 0):
         _, _, destinations, phases = lifecycle()
@@ -1522,13 +1541,15 @@ def routing_is_ready(record: dict[str, Any]) -> bool:
 
 
 def routing_profile(record: dict[str, Any]) -> dict[str, Any]:
-    return {
+    profile = {
         key: copy.deepcopy(record[key])
         for key in (
             "business_basis", "solution_context", "engagement_intent",
             "planning_destination", "execution_lane", "runtime_route",
         )
     }
+    profile["planning_posture"] = record.get("planning_posture", "delegated")
+    return profile
 
 
 def routing_summary(record: dict[str, Any],
@@ -1676,6 +1697,9 @@ def build_routing_record(work_id: str, intake: dict[str, Any], intake_path: Path
                          idempotency_key: str, destinations: dict[str, Any],
                          phases: list[dict[str, Any]], *, revision: int = 1,
                          previous: tuple[dict[str, Any], Path] | None = None) -> dict[str, Any]:
+    routing_input = copy.deepcopy(routing_input)
+    routing_input.setdefault("planning_posture", "delegated")
+    routing_input.setdefault("phase_questions", [])
     record: dict[str, Any] = {
         "record_type": "workbench-routing-receipt",
         "schema_version": RUNTIME_VERSION,
@@ -1686,7 +1710,7 @@ def build_routing_record(work_id: str, intake: dict[str, Any], intake_path: Path
             "reference": intake_reference(work_id),
             "sha256": {"algorithm": "sha256", "value": file_digest(intake_path)},
         },
-        **copy.deepcopy(routing_input),
+        **routing_input,
         "owner": actor(owner_id),
         "idempotency_key": idempotency_key,
         "created_at": now(),
@@ -1725,7 +1749,7 @@ def finalize_intake(args: argparse.Namespace, store: Store, routes: dict[str, An
     require_shape(
         routing_input,
         ROUTING_INPUT_FIELDS,
-        ROUTING_INPUT_FIELDS,
+        ROUTING_INPUT_FIELDS | ROUTING_OPTIONAL_FIELDS,
         "routing input",
     )
     with store.locked():
@@ -1766,7 +1790,7 @@ def revise_routing(args: argparse.Namespace, store: Store, routes: dict[str, Any
     require_shape(
         routing_input,
         ROUTING_INPUT_FIELDS | ROUTING_REVISION_FIELDS,
-        ROUTING_INPUT_FIELDS | ROUTING_REVISION_FIELDS,
+        ROUTING_INPUT_FIELDS | ROUTING_OPTIONAL_FIELDS | ROUTING_REVISION_FIELDS,
         "routing revision input",
     )
     with store.locked():
@@ -1820,7 +1844,12 @@ def route_and_start(args: argparse.Namespace, store: Store, routes: dict[str, An
     fail(WORK_ID_RE.fullmatch(args.work_id) is not None, "work_id must match WB-<readable-token>")
     fail(len(args.idempotency_key) <= 240, "idempotency key is too long for atomic route-and-start")
     routing_input = load_json(Path(args.routing_input))
-    require_shape(routing_input, ROUTING_INPUT_FIELDS, ROUTING_INPUT_FIELDS, "routing input")
+    require_shape(
+        routing_input,
+        ROUTING_INPUT_FIELDS,
+        ROUTING_INPUT_FIELDS | ROUTING_OPTIONAL_FIELDS,
+        "routing input",
+    )
     routing_key = f"{args.idempotency_key}:route"
     start_key = f"{args.idempotency_key}:start"
     with store.locked():
@@ -1867,7 +1896,7 @@ def route_and_start(args: argparse.Namespace, store: Store, routes: dict[str, An
         state, map_record, event = build_start_documents(
             args.work_id, candidate["title"], candidate["desired_outcome"], route_id,
             destination_id, args.owner, sequence, phase_by_checkpoint, stages,
-            start_key, fp_input, True,
+            start_key, fp_input, True, candidate,
         )
         for record, label in ((state, "new state"), (map_record, "new map"), (event, "new event")):
             validate_record(record, label)
@@ -1886,6 +1915,47 @@ VERIFICATION_SCOPES = (
     "repository-health", "user-acceptance", "deployment-readiness",
     "deployed-behavior", "business-outcome",
 )
+TERMINAL_NODE_STATUSES = {"evidence-established", "decided", "completed", "excluded", "superseded"}
+
+
+def dependency_ids(map_record: dict[str, Any], node_id: str) -> list[str]:
+    return [
+        edge["to_node_id"] for edge in map_record.get("edges", [])
+        if edge.get("from_node_id") == node_id and edge.get("relationship") == "depends-on"
+    ]
+
+
+def incomplete_dependency_ids(map_record: dict[str, Any], node_id: str) -> list[str]:
+    by_id = {node["node_id"]: node for node in map_record["nodes"]}
+    return [
+        dependency for dependency in dependency_ids(map_record, node_id)
+        if dependency not in by_id or by_id[dependency].get("status") not in TERMINAL_NODE_STATUSES
+    ]
+
+
+def dependencies_complete(map_record: dict[str, Any], node_id: str) -> bool:
+    return not incomplete_dependency_ids(map_record, node_id)
+
+
+def validate_acyclic_dependencies(map_record: dict[str, Any]) -> None:
+    graph = {node["node_id"]: dependency_ids(map_record, node["node_id"])
+             for node in map_record["nodes"]}
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(node_id: str) -> None:
+        fail(node_id not in visiting, "ticket dependency graph contains a cycle")
+        if node_id in visited:
+            return
+        visiting.add(node_id)
+        for dependency in graph.get(node_id, []):
+            fail(dependency in graph, f"ticket dependency points to a missing node: {dependency}")
+            visit(dependency)
+        visiting.remove(node_id)
+        visited.add(node_id)
+
+    for node_id in graph:
+        visit(node_id)
 
 
 def verification_summary(state: dict[str, Any], store: Store | None) -> dict[str, Any]:
@@ -1942,9 +2012,15 @@ def summary(state: dict[str, Any], map_record: dict[str, Any],
         for item in map_record.get("fog", []) if item.get("status") == "unresolved"
     ]
     agent_ready = [
-        {"node_id": node["node_id"], "title": node["title"], "status": node["status"]}
+        {
+            "node_id": node["node_id"], "title": node["title"], "status": node["status"],
+            "source_ids": copy.deepcopy(node.get("source_ids", [])),
+            "blockers": incomplete_dependency_ids(map_record, node["node_id"]),
+            "proof_status": node.get("proof_status", "not-recorded"),
+        }
         for node in map_record["nodes"] if node.get("status") in {"ready", "in-progress"}
         and (node.get("owner") or {}).get("kind") == "agent"
+        and dependencies_complete(map_record, node["node_id"])
     ]
     user_decisions = [
         item for item in decisions
@@ -1996,7 +2072,8 @@ def build_start_documents(work_id: str, title: str, outcome: str, route_id: str,
                           destination_id: str, owner_id: str, sequence: list[str],
                           phase_by_checkpoint: dict[str, dict[str, Any]],
                           stages: dict[str, Any], idempotency_key: str,
-                          fp_input: dict[str, Any], routed: bool) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+                          fp_input: dict[str, Any], routed: bool,
+                          routing: dict[str, Any] | None = None) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     timestamp = now()
     first = sequence[0]
     eid = event_id(work_id, 1)
@@ -2046,6 +2123,8 @@ def build_start_documents(work_id: str, title: str, outcome: str, route_id: str,
         "authorization_ids": [], "handoff_ids": [],
         "created_at": timestamp, "updated_at": timestamp,
     }
+    if routing is not None:
+        state["planning_posture"] = routing.get("planning_posture", "delegated")
     outcome_node = f"O-{work_id.removeprefix('WB-')}"
     map_record = {
         "record_type": "workbench-map", "schema_version": RUNTIME_VERSION if routed else "0.1.0",
@@ -2060,6 +2139,29 @@ def build_start_documents(work_id: str, title: str, outcome: str, route_id: str,
         }],
         "edges": [], "fog": [], "created_at": timestamp, "updated_at": timestamp,
     }
+    for index, question in enumerate((routing or {}).get("phase_questions", []), 1):
+        human_owned = question["owner"]["kind"] == "human"
+        node_id = f"D-PHASE-{index:03d}" if human_owned else f"E-PHASE-{index:03d}"
+        map_record["nodes"].append({
+            "node_id": node_id,
+            "kind": "decision" if human_owned else "evidence-task",
+            "title": short_title(question["question"]),
+            "question": question["question"],
+            "why_it_matters": question["why_material"],
+            "owner": copy.deepcopy(question["owner"]),
+            "status": "waiting-for-human" if human_owned else "ready",
+            "next_action": {
+                "description": (
+                    f"Decide: {question['question']}" if human_owned
+                    else f"Investigate: {question['question']}"
+                ),
+                "owner": copy.deepcopy(question["owner"]),
+                "target_type": "node",
+                "target_id": node_id,
+            },
+            "done_when": [question["why_material"]],
+            "evidence": [],
+        })
     changes = [
         change("work", work_id, "/document", (False, None), (True, state)),
         change("map", state["map_id"], "/document", (False, None), (True, map_record)),
@@ -2178,7 +2280,7 @@ def start(args: argparse.Namespace, store: Store, routes: dict[str, Any], stages
         state, map_record, event = build_start_documents(
             args.work_id, title, outcome, route_id, destination_id, owner_id,
             sequence, phase_by_checkpoint, stages, args.idempotency_key,
-            fp_input, routing is not None,
+            fp_input, routing is not None, routing,
         )
         validate_record(state, "new state")
         validate_record(map_record, "new map")
@@ -2335,9 +2437,12 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
             fail((handoff.get("input_fingerprint") or {}).get("value") == expected_input_fingerprint,
                  "handoff input fingerprint does not match inputs_used and policy_versions")
         handoff_policy_version = handoff["policy_versions"].get("workbench")
-        if handoff_version >= (0, 5, 0):
+        if handoff_version >= (0, 6, 0):
             fail(handoff_policy_version == RUNTIME_VERSION,
-                 f"v0.5 handoff policy_versions.workbench must equal installed runtime {RUNTIME_VERSION}")
+                 f"v0.6 handoff policy_versions.workbench must equal installed runtime {RUNTIME_VERSION}")
+        elif handoff_version >= (0, 5, 0):
+            fail(handoff_policy_version == handoff["schema_version"],
+                 "v0.5 handoff policy_versions.workbench must preserve its recorded schema version")
         elif handoff_policy_version is not None:
             fail(handoff_policy_version == RUNTIME_VERSION,
                  f"handoff cites stale Workbench policy {handoff_policy_version}")
@@ -2346,9 +2451,12 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
                 continue
             decision_version = tuple(int(part) for part in record["schema_version"].split("-")[0].split(".")[:3])
             policy_version = (record.get("provenance") or {}).get("policy_versions", {}).get("workbench")
-            if decision_version >= (0, 5, 0):
+            if decision_version >= (0, 6, 0):
                 fail(policy_version == RUNTIME_VERSION,
-                     f"v0.5 decision {record['decision_id']} must cite installed Workbench {RUNTIME_VERSION}")
+                     f"v0.6 decision {record['decision_id']} must cite installed Workbench {RUNTIME_VERSION}")
+            elif decision_version >= (0, 5, 0):
+                fail(policy_version == record["schema_version"],
+                     f"v0.5 decision {record['decision_id']} must preserve its recorded policy version")
             elif policy_version is not None:
                 fail(policy_version == RUNTIME_VERSION,
                      f"decision {record['decision_id']} cites stale Workbench policy {policy_version}")
@@ -2409,6 +2517,37 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
         outcome_node_id = updated_map["desired_outcome_node_id"]
         existing_node_ids = {node["node_id"] for node in updated_map["nodes"]}
         additions = False
+        node_additions = handoff.get("node_additions", [])
+        pending_ids = [item["node"]["node_id"] for item in node_additions]
+        fail(len(pending_ids) == len(set(pending_ids)),
+             "handoff node_additions contains duplicate node IDs")
+        fail(not (set(pending_ids) & existing_node_ids),
+             "handoff node_additions repeats an existing node ID")
+        available_node_ids = existing_node_ids | set(pending_ids)
+        for addition in node_additions:
+            node = copy.deepcopy(addition["node"])
+            fail(node["node_id"] != outcome_node_id,
+                 "handoff cannot replace the desired outcome node")
+            for reference_index, reference in enumerate(node.get("evidence", [])):
+                validate_reference_resolution(
+                    reference, state, map_record, known_records, store,
+                    f"handoff.node_additions evidence[{reference_index}]",
+                )
+            for dependency in addition["depends_on"]:
+                fail(dependency in available_node_ids,
+                     f"ticket dependency points to a missing node: {dependency}")
+                updated_map["edges"].append({
+                    "edge_id": derived_id("EDGE", node["node_id"], dependency, "depends-on"),
+                    "from_node_id": node["node_id"],
+                    "to_node_id": dependency,
+                    "relationship": "depends-on",
+                    "rationale": "The deliverable cannot start until this dependency is terminal.",
+                })
+            updated_map["nodes"].append(node)
+            existing_node_ids.add(node["node_id"])
+            additions = True
+        if node_additions:
+            validate_acyclic_dependencies(updated_map)
         for index, finding in enumerate(handoff["findings"], 1):
             if isinstance(finding, str):
                 statement = finding
@@ -2531,6 +2670,21 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
         }
         for update in handoff["node_updates"]:
             node = next(node for node in updated_map["nodes"] if node["node_id"] == update["node_id"])
+            if node.get("kind") == "deliverable" and update["proposed_status"] == "completed":
+                passed_proofs = [
+                    record for record in bundled_records
+                    if record.get("record_type") == "workbench-proof"
+                    and record.get("status") == "passed"
+                ]
+                fail(bool(passed_proofs),
+                     "completing a ticket requires a passed ticket-scoped proof record")
+                fail(not any(
+                    record.get("record_type") == "workbench-artifact"
+                    and record.get("artifact_kind") == "review"
+                    and record.get("readiness") == "blocked"
+                    for record in bundled_records
+                ), "a blocking review finding prevents ticket completion")
+                node["proof_status"] = "passed"
             node["status"] = update["proposed_status"]
             if update["proposed_status"] in {"draft", "ready", "in-progress", "waiting-for-human", "evidence-blocked", "external-blocked"}:
                 fail("next_action" in handoff, "active or blocked node update requires handoff.next_action")
@@ -2577,7 +2731,7 @@ def accept_handoff(args: argparse.Namespace, store: Store) -> dict[str, Any]:
                                           get_pointer(map_record, pointer), get_pointer(updated_map, pointer)))
         else:
             for index, _ in enumerate(map_record["nodes"]):
-                for suffix in ("status", "next_action", "resolution"):
+                for suffix in ("status", "next_action", "resolution", "proof_status"):
                     pointer = f"/nodes/{index}/{suffix}"
                     if get_pointer(map_record, pointer) != get_pointer(updated_map, pointer):
                         changes.append(change("map", map_record["map_id"], pointer,
@@ -2672,6 +2826,103 @@ def verify_gate(receipt: dict[str, Any], state: dict[str, Any], map_record: dict
         record for record in known_records.values()
         if record.get("record_type") == "workbench-authorization"
     ]
+    if stage_id == "outcome-framing" and state.get("planning_posture") == "collaborative":
+        shared = [
+            record for record in known_records.values()
+            if record.get("record_type") == "workbench-artifact"
+            and record.get("artifact_kind") == "shared-understanding"
+            and record.get("status") == "current"
+            and record.get("readiness") == "ready"
+        ]
+        fail(bool(shared),
+             "collaborative outcome framing requires a current ready shared-understanding artifact")
+        shared_ids = {record["artifact_id"] for record in shared}
+        confirmations = [
+            record for record in known_records.values()
+            if record.get("record_type") == "workbench-decision"
+            and record.get("authority") == "user-owned"
+            and record.get("state") == "confirmed"
+            and record.get("resolution", {}).get("basis") == "human-decision"
+            and any(
+                reference.get("record_id") in shared_ids
+                for reference in record.get("provenance", {}).get("artifact_inputs", [])
+            )
+        ]
+        fail(bool(confirmations),
+             "collaborative outcome framing requires a confirmed user-owned decision "
+             "that references the shared-understanding artifact")
+    if stage_id == "specification":
+        specifications = [
+            record for record in known_records.values()
+            if record.get("record_type") == "workbench-artifact"
+            and record.get("artifact_kind") == "specification"
+            and record.get("status") == "current"
+            and record.get("readiness") == "ready"
+        ]
+        fail(bool(specifications),
+             "specification gate requires a current specification artifact marked ready")
+        specification_ids = {record["artifact_id"] for record in specifications}
+        fail(any(
+            proof.get("status") == "passed" and any(
+                result.get("kind") == "artifact-validity"
+                and result.get("result") == "passed"
+                and any(reference.get("record_id") in specification_ids
+                        for reference in result.get("evidence", []))
+                for result in proof.get("achieved_proof", [])
+            )
+            for proof in available_proofs
+        ), "specification gate requires passed artifact-validity proof for the ready specification")
+        fail(not any(
+            node.get("kind") == "decision"
+            and node.get("status") in {"ready", "waiting-for-human", "evidence-blocked"}
+            for node in map_record["nodes"]
+        ), "specification gate has an unresolved material decision")
+    if stage_id == "delivery-planning":
+        plans = [
+            record for record in known_records.values()
+            if record.get("record_type") == "workbench-artifact"
+            and record.get("artifact_kind") == "delivery-plan"
+            and record.get("status") == "current"
+            and record.get("readiness") == "ready"
+        ]
+        tickets = [
+            record for record in known_records.values()
+            if record.get("record_type") == "workbench-artifact"
+            and record.get("artifact_kind") == "implementation-ticket"
+            and record.get("status") == "current"
+            and record.get("readiness") == "ready"
+        ]
+        fail(bool(plans), "delivery-planning gate requires a current ready delivery-plan artifact")
+        fail(bool(tickets), "delivery-planning gate requires at least one ready implementation-ticket artifact")
+        ticket_ids = {record["artifact_id"] for record in tickets}
+        plan_ids = {record["artifact_id"] for record in plans}
+        deliverables = [node for node in map_record["nodes"] if node.get("kind") == "deliverable"]
+        fail(bool(deliverables) and all(any(
+            reference.get("record_type") == "artifact" and reference.get("record_id") in ticket_ids
+            for reference in node.get("evidence", [])
+        ) for node in deliverables),
+             "delivery-planning gate requires one deliverable node per implementation ticket")
+        validate_acyclic_dependencies(map_record)
+        required_coverage = ticket_ids | plan_ids
+        fail(any(
+            proof.get("status") == "passed" and any(
+                result.get("kind") == "artifact-validity"
+                and result.get("result") == "passed"
+                and required_coverage <= {
+                    reference.get("record_id") for reference in result.get("evidence", [])
+                    if reference.get("record_type") == "artifact"
+                }
+                for result in proof.get("achieved_proof", [])
+            ) for proof in available_proofs
+        ), "delivery-planning gate requires passed coverage and artifact-validity proof")
+    if stage_id == "implementation":
+        deliverables = [node for node in map_record["nodes"] if node.get("kind") == "deliverable"]
+        incomplete = [
+            node["node_id"] for node in deliverables
+            if node.get("status") not in {"completed", "excluded", "superseded"}
+        ]
+        fail(not incomplete,
+             "implementation stage cannot complete while required tickets remain: " + ", ".join(incomplete))
     if entering_stage in {"implementation", "release"}:
         action = "implementation" if entering_stage == "implementation" else "deployment"
         fail(any(matching_authorization(item, action, state, entering_stage, operation_time) for item in available_auths),
@@ -2850,6 +3101,88 @@ def advance(args: argparse.Namespace, store: Store, routes: dict[str, Any], stag
             writes[record_path] = encode_json(record)
         store.transaction(writes)
         return {"result": "advanced", **summary(updated, updated_map, store=store)}
+
+
+def claim_node(args: argparse.Namespace, store: Store) -> dict[str, Any]:
+    with store.locked():
+        state, map_record, events = checked_checkpoint(store, args.work_id)
+        fp_input = {
+            "command": "claim-node", "work_id": args.work_id,
+            "node_id": args.node_id, "actor": args.actor,
+            "expected_revision": args.expected_revision,
+        }
+        if ensure_idempotency(events, args.idempotency_key, fp_input):
+            return {"result": "idempotent", **summary(state, map_record, store=store)}
+        fail(args.expected_revision == state["state_revision"],
+             f"stale expected revision {args.expected_revision}; current is {state['state_revision']}")
+        node_index = next(
+            (index for index, node in enumerate(map_record["nodes"])
+             if node["node_id"] == args.node_id), None
+        )
+        fail(node_index is not None, f"claim target is absent from the canonical map: {args.node_id}")
+        node = map_record["nodes"][node_index]
+        fail(node.get("kind") == "deliverable", "only implementation ticket nodes can be claimed")
+        fail(node.get("status") == "ready", "claim target is not ready")
+        fail((node.get("owner") or {}).get("kind") == "agent",
+             "claim target is not agent-owned")
+        fail(dependencies_complete(map_record, args.node_id),
+             "claim target has incomplete dependencies")
+
+        updated = copy.deepcopy(state)
+        updated_map = copy.deepcopy(map_record)
+        timestamp = now()
+        revision = state["state_revision"] + 1
+        eid = event_id(args.work_id, revision)
+        claimed = updated_map["nodes"][node_index]
+        claimed["status"] = "in-progress"
+        claimed["next_action"] = {
+            "description": f"Implement and prove ticket {args.node_id}.",
+            "owner": actor(args.actor),
+            "target_type": "node",
+            "target_id": args.node_id,
+        }
+        updated_map["updated_at"] = timestamp
+        updated["state_revision"] = revision
+        updated["latest_event_id"] = eid
+        updated["updated_at"] = timestamp
+        changes = [
+            change("map", map_record["map_id"], f"/nodes/{node_index}/status",
+                   get_pointer(map_record, f"/nodes/{node_index}/status"),
+                   get_pointer(updated_map, f"/nodes/{node_index}/status")),
+            change("map", map_record["map_id"], f"/nodes/{node_index}/next_action",
+                   get_pointer(map_record, f"/nodes/{node_index}/next_action"),
+                   get_pointer(updated_map, f"/nodes/{node_index}/next_action")),
+            change("map", map_record["map_id"], "/updated_at",
+                   get_pointer(map_record, "/updated_at"),
+                   get_pointer(updated_map, "/updated_at")),
+            change("work", args.work_id, "/state_revision",
+                   get_pointer(state, "/state_revision"),
+                   get_pointer(updated, "/state_revision")),
+            change("work", args.work_id, "/latest_event_id",
+                   get_pointer(state, "/latest_event_id"),
+                   get_pointer(updated, "/latest_event_id")),
+            change("work", args.work_id, "/updated_at",
+                   get_pointer(state, "/updated_at"),
+                   get_pointer(updated, "/updated_at")),
+        ]
+        event = make_event(
+            args.work_id, revision, "node-updated", args.actor,
+            args.idempotency_key, fp_input, changes,
+            f"Claim implementation ticket {args.node_id}.",
+            inputs=[{"record_type": "node", "record_id": args.node_id}],
+            outputs=[{"record_type": "node", "record_id": args.node_id}],
+            cause_kind="system",
+        )
+        validate_record(updated, "claim-updated state")
+        validate_record(updated_map, "claim-updated map")
+        validate_record(event, "claim event")
+        folder = store.work_dir(args.work_id)
+        store.transaction({
+            folder / "state.json": encode_json(updated),
+            folder / "map.json": encode_json(updated_map),
+            folder / "events.jsonl": encode_events([*events, event]),
+        })
+        return {"result": "claimed", **summary(updated, updated_map, store=store)}
 
 
 def close_work(args: argparse.Namespace, store: Store,
@@ -3071,6 +3404,12 @@ def parser() -> argparse.ArgumentParser:
     handoff_p.add_argument("--idempotency-key", required=True)
     handoff_p.add_argument("--expected-revision", type=int)
     handoff_p.add_argument("--actor", default="agent:workbench")
+    claim_p = commands.add_parser("claim-node"); add_common(claim_p)
+    claim_p.add_argument("--work-id", required=True)
+    claim_p.add_argument("--node-id", required=True)
+    claim_p.add_argument("--idempotency-key", required=True)
+    claim_p.add_argument("--expected-revision", required=True, type=int)
+    claim_p.add_argument("--actor", default="agent:workbench")
     close_p = commands.add_parser("close"); add_common(close_p)
     close_p.add_argument("--work-id", required=True)
     close_p.add_argument("--authorization-record", required=True,
@@ -3115,6 +3454,8 @@ def main(argv: list[str] | None = None) -> int:
             result = advance(args, store, routes, stages, destinations)
         elif args.command == "accept-handoff":
             result = accept_handoff(args, store)
+        elif args.command == "claim-node":
+            result = claim_node(args, store)
         elif args.command == "close":
             result = close_work(args, store, destinations)
         else:

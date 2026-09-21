@@ -180,6 +180,55 @@
         "observable_result": "The benchmark narrows the hypothesis for that fixture while broader renderer and workload conclusions remain explicitly unproven."
       },
       "failure_caught": "A fast render on one small fixture previously dismissed rendering even though a larger representative document showed materially different cost."
+    },
+    {
+      "id": "collaborative-feature-planning",
+      "stimulus": "Workbench, help me plan a customer-ticket-to-agent-PR workflow and walk me through how it should work.",
+      "preconditions": ["The repository contains relevant intake and GitHub workflow code.", "Material product and operating choices remain."],
+      "expected": {
+        "planning_posture": "collaborative",
+        "required_actions": ["inspect-discoverable-facts", "expose-decision-frontier", "confirm-shared-understanding", "then-synthesize-spec"],
+        "forbidden_actions": ["self-answer-human-owned-decisions", "complete-long-proposal-before-confirmation"],
+        "observable_result": "The agent investigates facts, asks compact material questions, and waits for confirmed shared understanding before producing the specification."
+      },
+      "failure_caught": "Workbench previously generated and accepted a large autonomous proposal when the user asked to plan together."
+    },
+    {
+      "id": "evidence-method-follows-uncertainty",
+      "stimulus": "The API capability is uncertain and the admin interaction is hard to picture.",
+      "preconditions": ["Both questions materially affect the target design."],
+      "expected": {
+        "required_actions": ["primary-source-research-for-api", "mockup-or-prototype-for-interaction", "record-proof-limitations"],
+        "forbidden_actions": ["research-as-interaction-proof", "mockup-as-api-feasibility-proof"],
+        "observable_result": "Each uncertainty receives the smallest discriminating evidence method and no result is generalized beyond its seam."
+      },
+      "failure_caught": "Generic planning prose previously replaced decision-grade research and prototypes."
+    },
+    {
+      "id": "implementation-destination-fidelity",
+      "stimulus": "Workbench, implement the accepted plan.",
+      "preconditions": ["A reviewed plan exists.", "Repository mutation and implementation are authorized."],
+      "expected": {
+        "engagement_intent": "implement",
+        "planning_destination": "locally-verified-implementation",
+        "required_actions": ["create-ready-tickets", "execute-ticket-frontier", "record-local-proof"],
+        "forbidden_actions": ["stop-at-proposal", "require-ceremonial-approval-between-ready-tickets"],
+        "observable_result": "The item proceeds through approved tickets to local verification, pausing only for a real blocker or authority boundary."
+      },
+      "failure_caught": "Compact aliases previously disappeared and silently defaulted implementation requests to explore/proposal."
+    },
+    {
+      "id": "dependent-ticket-frontier",
+      "stimulus": "Implement three tickets where B depends on A and C is independent.",
+      "preconditions": ["The ticket breakdown and implementation authority are approved."],
+      "expected": {
+        "initial_ready": ["A", "C"],
+        "initial_blocked": ["B"],
+        "required_actions": ["claim-with-expected-revision", "complete-with-ticket-proof", "recompute-frontier"],
+        "forbidden_actions": ["claim-blocked-ticket", "complete-stage-after-first-ticket"],
+        "observable_result": "A and C can proceed, B unlocks only after A, and implementation completes only after all required tickets are terminal."
+      },
+      "failure_caught": "The prior frontier listed nominally ready nodes without considering dependency edges and could stop after one implementation handoff."
     }
   ]
 }

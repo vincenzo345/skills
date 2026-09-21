@@ -52,8 +52,10 @@
         "data-model",
         "diagram",
         "standards-profile",
+        "shared-understanding",
         "specification",
         "delivery-plan",
+        "implementation-ticket",
         "implementation",
         "review",
         "release-record",
@@ -73,6 +75,13 @@
         "current",
         "superseded",
         "withdrawn"
+      ]
+    },
+    "readiness": {
+      "enum": [
+        "draft",
+        "blocked",
+        "ready"
       ]
     },
     "owner": {

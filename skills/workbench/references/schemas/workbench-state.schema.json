@@ -50,6 +50,12 @@
     "planning_destination": {
       "$ref": "workbench-common.schema.json#/$defs/planningDestination"
     },
+    "planning_posture": {
+      "enum": [
+        "collaborative",
+        "delegated"
+      ]
+    },
     "route_selection": {
       "type": "object",
       "additionalProperties": false,

@@ -1,6 +1,6 @@
 # Workbench Workflow
 
-**Status:** v0.5 data-model lifecycle correction
+**Status:** v0.6 collaborative delivery and ticket frontier
 
 This document explains lifecycle meaning and route behavior. Workbench's purpose and authority boundaries are defined in the [charter](CHARTER.md). The versioned identifiers, route order, applicability handler IDs, gate handler IDs, planning destinations, and work statuses are owned by [`workbench-lifecycle.schema.json`](../../schemas/workbench-lifecycle.schema.json). Artifact field shapes, decision rules, and state-transition schemas belong in their named contracts; this document does not create a second vocabulary.
 
@@ -8,7 +8,7 @@ A free-form request is first preserved as a pre-route `intake-draft` under [`wor
 
 When a material answer is still needed, `finalize-intake` persists the unresolved question without starting. `revise-routing` then records the answer and complete updated synthesis as an immutable successor receipt under the same work ID. Revision one remains `routing.json`; later receipts live under `routing-revisions/`, bind the exact prior receipt, and become current only as a valid contiguous chain. `start --from-routing` binds the latest ready revision. A finalized-but-incomplete route therefore never requires a replacement work item.
 
-The routing receipt keeps five axes separate: business basis, solution context, engagement intent, planning destination, and execution lane. Proposal is a destination, fast is a lane, and greenfield or brownfield is solution context. Workbench compiles domain activities into one operational checkpoint per applicable phase and ends the plan at the selected destination. Fixed route IDs survive only for old journals and direct legacy starts.
+The routing receipt keeps six axes separate: business basis, solution context, engagement intent, planning destination, execution lane, and planning posture. Proposal is a destination, fast is a lane, collaborative is a posture, and greenfield or brownfield is solution context. Workbench compiles domain activities into one operational checkpoint per applicable phase and ends the plan at the selected destination. Fixed route IDs survive only for old journals and direct legacy starts.
 
 ## Lifecycle rules
 
@@ -35,7 +35,7 @@ The routing receipt keeps five axes separate: business basis, solution context, 
 
 The last applicable activity in a phase supplies that phase's checkpoint and exit-gate identity. This preserves the specialized vocabulary while avoiding a transition for every lens. A large work item grows through map nodes, specialist tasks, evidence, and artifacts rather than ceremonial lifecycle steps.
 
-The v0.5 source runtime implements explicit data-model routing, pre-start routing correction, forward compilation through a selected destination, accepted record handoffs with projected findings, uncertainties, and decisions, derived checkpoint advances, destination acceptance, closure, replay, and verification projections. The loop-back semantics below remain the target lifecycle contract; post-start route correction and dependency-derived readiness are not yet mutation commands. Until those commands are proven, evidence that invalidates an earlier started phase blocks dependent work without rewriting canonical history.
+The v0.6 source runtime adds collaborative posture, phase decision/evidence nodes, shared-understanding confirmation, artifact readiness, multiple artifacts per handoff, semantic specification and delivery gates, implementation-ticket dependency nodes, dependency-derived readiness, atomic ticket claims, and ticket-scoped proof handoffs. It keeps v0.5 records readable and replayable without rewriting them. Post-start route correction remains deferred; evidence that invalidates an earlier started phase blocks dependent work without rewriting canonical history.
 
 ## Canonical activity registry
 

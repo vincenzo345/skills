@@ -16,9 +16,19 @@ For the active phase checkpoint:
 
 Do not manually reinterpret a handler ID. If the installed runtime does not implement it, report that gate as unsupported and leave the stage unchanged.
 
+## Semantic delivery gates
+
+- Collaborative outcome framing requires a current ready `shared-understanding` artifact and a confirmed human-owned decision that cites it.
+- Specification requires a current ready `specification`, passed artifact-validity proof for it, and no unresolved behavior-changing decision.
+- Delivery planning requires a current ready `delivery-plan`, at least one ready `implementation-ticket`, one cited deliverable node per ticket, acyclic dependencies, and passed coverage/artifact proof.
+- A ticket can become completed only through a ticket-scoped handoff containing passed proof and no blocking review artifact.
+- Implementation cannot advance after one slice; every required deliverable must be completed, excluded, or superseded.
+
+These semantic checks sit above the common structural, reference, proof, authorization, and idempotency checks.
+
 ## Accepted handoff path
 
-The normal v0.5 path is one structured handoff bundle followed by a derived advance:
+The normal v0.6 phase path is one structured handoff bundle followed by a derived advance:
 
 ```text
 python -B "<workbench-skill-dir>/scripts/workbench.py" accept-handoff --repo "<current-repo>" --work-id "WB-DEMO-001" --handoff-bundle "<bundle.json>" --idempotency-key "..." --expected-revision 1 --actor "agent:workbench"
@@ -27,7 +37,7 @@ python -B "<workbench-skill-dir>/scripts/workbench.py" advance-stage --repo "<cu
 
 The bundle contains one `handoff` valid against `workbench-handoff.schema.json` and a `records` array containing its artifact, decision, proof, and authorization outputs. The handoff's `input_fingerprint` is the canonical SHA-256 digest of its `inputs_used` and `policy_versions`. Every workspace artifact must exist beneath the target repository and match its recorded digest. Workbench registers the records, updates state pointers and checkpoint outputs, and appends one event atomically. An exact retry is idempotent; a conflicting retry or any invalid record changes nothing.
 
-For a v0.5 handoff, set `schema_version` and `policy_versions.workbench` to the installed runtime version. Accepted findings become evidence nodes, uncertainties become durable fog, and supplied decision records become decision nodes, so `resume` exposes the reasoning frontier without rereading the artifact. Use `node_updates` for existing nodes; do not duplicate the automatically projected records.
+For a v0.6 handoff, set `schema_version` and `policy_versions.workbench` to the installed runtime version. Accepted findings become evidence nodes, uncertainties become durable fog, supplied decision records become decision nodes, and validated node additions can create implementation-ticket deliverables with dependency edges. Use `node_updates` for existing nodes; do not duplicate automatically projected records. During implementation, accept ticket handoffs without advancing the phase, then claim the next dependency-ready node.
 
 `advance-stage --accepted-handoff` derives the gate evidence from that registered handoff and its outputs. It cannot make a weak handoff stronger: the checkpoint still requires the record types named by its gate, and destination, implementation, deployment, and closure rules still apply.
 

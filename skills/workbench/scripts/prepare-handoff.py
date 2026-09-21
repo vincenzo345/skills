@@ -25,7 +25,8 @@ HUMAN = {"actor_id": "user:local", "kind": "human"}
 ARTIFACT_KINDS = {
     "evidence-record", "process-model", "validation-plan", "validation-result", "proposal",
     "experience-design", "prototype", "architecture", "data-model", "diagram",
-    "standards-profile", "specification", "delivery-plan", "implementation", "review",
+    "standards-profile", "shared-understanding", "specification", "delivery-plan",
+    "implementation-ticket", "implementation", "review",
     "release-record", "outcome-measurement", "other",
 }
 TERMINAL_REVIEW_FIELDS = (
@@ -108,6 +109,80 @@ def require_terminal_review(repo: Path, work_id: str, source: dict) -> None:
     require_review_fields(source)
 
 
+def prepare_artifact(
+    repo: Path, work_dir: Path, state: dict, stage: str, following: str | None,
+    artifact_spec: dict, timestamp: str, used_ids: set[str],
+) -> tuple[dict, Path]:
+    artifact_path = Path(artifact_spec["path"])
+    if artifact_path.is_absolute():
+        raise ValueError("artifact.path must be repository-relative")
+    absolute_artifact = (repo / artifact_path).resolve()
+    if repo.resolve() not in absolute_artifact.parents or not absolute_artifact.is_file():
+        raise ValueError(f"artifact.path must name an existing file inside the repository: {artifact_path}")
+    artifact_id = compact_id(artifact_spec["artifact_id"], "ART-")
+    reused_artifact_id = artifact_id in used_ids
+    if reused_artifact_id:
+        content_tag = hashlib.sha256(absolute_artifact.read_bytes()).hexdigest()[:10].upper()
+        artifact_id = compact_id(f"{artifact_id}-{stage.upper()}-{content_tag}", "ART-")
+    if artifact_id in used_ids:
+        raise ValueError(f"artifact ID is duplicated in this handoff: {artifact_id}")
+    used_ids.add(artifact_id)
+    canonical_artifact_dir = work_dir / "artifacts"
+    try:
+        already_canonical = absolute_artifact.parent == canonical_artifact_dir.resolve()
+    except OSError:
+        already_canonical = False
+    if not already_canonical or reused_artifact_id:
+        suffix = artifact_path.suffix or ".md"
+        canonical_artifact_dir.mkdir(parents=True, exist_ok=True)
+        snapshot = canonical_artifact_dir / f"{stage}-{artifact_id.removeprefix('ART-')}{suffix}"
+        if snapshot.resolve() != absolute_artifact:
+            shutil.copyfile(absolute_artifact, snapshot)
+        absolute_artifact = snapshot.resolve()
+        artifact_path = absolute_artifact.relative_to(repo)
+    requested_kind = artifact_spec.get("artifact_kind", "other")
+    artifact_kind = requested_kind if requested_kind in ARTIFACT_KINDS else "other"
+    artifact = {
+        "record_type": "workbench-artifact",
+        "schema_version": RUNTIME_VERSION,
+        "artifact_id": artifact_id,
+        "work_id": state["work_id"],
+        "artifact_kind": artifact_kind,
+        "title": artifact_spec["title"],
+        "status": "current",
+        "readiness": artifact_spec.get("readiness", "ready"),
+        "owner": AGENT.copy(),
+        "producing_stage": stage,
+        "produced_by": AGENT.copy(),
+        "location": {"kind": "workspace-path", "value": artifact_path.as_posix()},
+        "source_lineage": [{
+            "relationship": "derived-from",
+            "source": {"record_type": "work", "record_id": state["work_id"]},
+            "note": artifact_spec.get("lineage", f"Records the accepted result for {stage}."),
+        }],
+        "consumers": [{
+            "kind": "stage" if following else "work-item",
+            "consumer_id": following or state["work_id"],
+            "purpose": artifact_spec.get("purpose", "Preserve the accepted phase result for the next lifecycle decision."),
+        }],
+        "proof_ids": [],
+        "obligation_node_ids": artifact_spec.get("obligation_node_ids", []),
+        "content_integrity": {
+            "algorithm": "sha256",
+            "value": hashlib.sha256(absolute_artifact.read_bytes()).hexdigest(),
+        },
+        "confidentiality": artifact_spec.get("confidentiality", "internal"),
+        "known_defects": artifact_spec.get("known_defects", []),
+        "created_at": timestamp,
+        "updated_at": timestamp,
+    }
+    if artifact_kind == "other":
+        artifact["custom_kind"] = artifact_spec.get(
+            "custom_kind", requested_kind if requested_kind != "other" else "phase-result"
+        )
+    return artifact, artifact_path
+
+
 def lifecycle_summary(value: dict) -> dict:
     summary = {
         key: value[key] for key in (
@@ -155,6 +230,17 @@ def accept_and_advance(repo: Path, work_id: str, bundle: dict, output: Path) -> 
         "advance-stage", "--repo", str(repo), "--work-id", work_id,
         "--accepted-handoff", handoff_id,
         "--idempotency-key", f"helper:advance:{handoff_id}",
+    ])
+
+
+def accept_only(repo: Path, work_id: str, bundle: dict, output: Path) -> dict:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(bundle, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
+    handoff_id = bundle["handoff"]["handoff_id"]
+    return run_workbench([
+        "accept-handoff", "--repo", str(repo), "--work-id", work_id,
+        "--handoff-bundle", str(output.resolve()),
+        "--idempotency-key", f"helper:accept:{handoff_id}",
     ])
 
 
@@ -217,68 +303,21 @@ def compile_bundle(repo: Path, work_id: str, source: dict) -> dict:
     following = stages[stage_index + 1]["stage_id"] if stage_index + 1 < len(stages) else None
     timestamp = now()
 
-    artifact_spec = source["artifact"]
-    artifact_path = Path(artifact_spec["path"])
-    if artifact_path.is_absolute():
-        raise ValueError("artifact.path must be repository-relative")
-    absolute_artifact = (repo / artifact_path).resolve()
-    if repo.resolve() not in absolute_artifact.parents or not absolute_artifact.is_file():
-        raise ValueError(f"artifact.path must name an existing file inside the repository: {artifact_path}")
-    artifact_id = compact_id(artifact_spec["artifact_id"], "ART-")
-    reused_artifact_id = artifact_id in state.get("artifact_ids", [])
-    if reused_artifact_id:
-        content_tag = hashlib.sha256(absolute_artifact.read_bytes()).hexdigest()[:10].upper()
-        artifact_id = compact_id(f"{artifact_id}-{stage.upper()}-{content_tag}", "ART-")
-    canonical_artifact_dir = work_dir / "artifacts"
-    try:
-        already_canonical = absolute_artifact.parent == canonical_artifact_dir.resolve()
-    except OSError:
-        already_canonical = False
-    if not already_canonical or reused_artifact_id:
-        suffix = artifact_path.suffix or ".md"
-        canonical_artifact_dir.mkdir(parents=True, exist_ok=True)
-        snapshot = canonical_artifact_dir / f"{stage}-{artifact_id.removeprefix('ART-')}{suffix}"
-        if snapshot.resolve() != absolute_artifact:
-            shutil.copyfile(absolute_artifact, snapshot)
-        absolute_artifact = snapshot.resolve()
-        artifact_path = absolute_artifact.relative_to(repo)
-    requested_kind = artifact_spec.get("artifact_kind", "other")
-    artifact_kind = requested_kind if requested_kind in ARTIFACT_KINDS else "other"
-    artifact = {
-        "record_type": "workbench-artifact",
-        "schema_version": RUNTIME_VERSION,
-        "artifact_id": artifact_id,
-        "work_id": work_id,
-        "artifact_kind": artifact_kind,
-        "title": artifact_spec["title"],
-        "status": "current",
-        "owner": AGENT.copy(),
-        "producing_stage": stage,
-        "produced_by": AGENT.copy(),
-        "location": {"kind": "workspace-path", "value": artifact_path.as_posix()},
-        "source_lineage": [{
-            "relationship": "derived-from",
-            "source": {"record_type": "work", "record_id": work_id},
-            "note": artifact_spec.get("lineage", f"Records the accepted result for {stage}."),
-        }],
-        "consumers": [{
-            "kind": "stage" if following else "work-item",
-            "consumer_id": following or work_id,
-            "purpose": artifact_spec.get("purpose", "Preserve the accepted phase result for the next lifecycle decision."),
-        }],
-        "proof_ids": [],
-        "obligation_node_ids": [],
-        "content_integrity": {
-            "algorithm": "sha256",
-            "value": hashlib.sha256(absolute_artifact.read_bytes()).hexdigest(),
-        },
-        "confidentiality": artifact_spec.get("confidentiality", "internal"),
-        "known_defects": [],
-        "created_at": timestamp,
-        "updated_at": timestamp,
-    }
-    if artifact_kind == "other":
-        artifact["custom_kind"] = artifact_spec.get("custom_kind", requested_kind if requested_kind != "other" else "phase-result")
+    artifact_specs = source.get("artifacts")
+    if artifact_specs is None:
+        artifact_specs = [source["artifact"]]
+    if not isinstance(artifact_specs, list) or not artifact_specs:
+        raise ValueError("handoff needs one or more artifacts")
+    used_ids = set(state.get("artifact_ids", []))
+    prepared_artifacts = [
+        prepare_artifact(repo, work_dir, state, stage, following, item, timestamp, used_ids)
+        for item in artifact_specs
+    ]
+    artifacts = [item[0] for item in prepared_artifacts]
+    artifact_paths = [item[1] for item in prepared_artifacts]
+    artifact = artifacts[0]
+    artifact_path = artifact_paths[0]
+    artifact_id = artifact["artifact_id"]
 
     inputs = [{"record_type": "work", "record_id": work_id}]
     inputs.extend({"record_type": "handoff", "record_id": item} for item in state.get("handoff_ids", []))
@@ -321,6 +360,134 @@ def compile_bundle(repo: Path, work_id: str, source: dict) -> dict:
             ),
         })
 
+    decisions = []
+    for index, item in enumerate(source.get("decisions", []), 1):
+        decision_id = compact_id(item["decision_id"], "DEC-")
+        authority = item.get("authority", "user-owned")
+        state_name = item.get("state", "proposed")
+        decision_owner = actor(item.get(
+            "owner", "human" if authority == "user-owned" else "agent"
+        ))
+        options = []
+        for option_index, option in enumerate(item.get("options", []), 1):
+            options.append({
+                "option_id": compact_id(
+                    option.get("option_id", f"OPT-{decision_id.removeprefix('DEC-')}-{option_index}"),
+                    "OPT-",
+                ),
+                "name": option.get("name", f"Option {option_index}"),
+                "benefits": option.get("benefits", []),
+                "costs": option.get("costs", []),
+                "risks": option.get("risks", []),
+            })
+        artifact_inputs = item.get("artifact_inputs", [artifact_id])
+        decision = {
+            "record_type": "workbench-decision",
+            "schema_version": RUNTIME_VERSION,
+            "decision_id": decision_id,
+            "work_id": work_id,
+            "question": item["question"],
+            "materiality": item.get("materiality", "consequential"),
+            "authority": authority,
+            "state": state_name,
+            "owner": decision_owner,
+            "provenance": {
+                "artifact_inputs": [
+                    {"record_type": "artifact", "record_id": compact_id(value, "ART-")}
+                    for value in artifact_inputs
+                ],
+                "evidence": [
+                    value if isinstance(value, dict) else external_reference(repo, value)
+                    for value in item.get("evidence", [])
+                ],
+                "prior_decisions": [
+                    {"record_type": "decision", "record_id": compact_id(value, "DEC-")}
+                    for value in item.get("prior_decisions", [])
+                ],
+                "assumptions": item.get("assumptions", []),
+                "policy_versions": {"workbench": RUNTIME_VERSION},
+            },
+            "created_at": timestamp,
+            "updated_at": timestamp,
+        }
+        if item.get("node_id"):
+            decision["node_id"] = item["node_id"]
+        if options:
+            decision["options"] = options
+        if state_name in {"proposed", "evidence-blocked"}:
+            decision["next_action"] = next_action(
+                item.get("next_action", f"Resolve: {item['question']}"),
+                owner=decision_owner, target_type="decision", target_id=decision_id,
+            )
+        if state_name == "confirmed":
+            basis = (
+                "human-decision" if authority == "user-owned"
+                else "factual-evidence" if authority == "factual"
+                else "delegated-agent-decision"
+            )
+            resolution = {
+                "basis": basis,
+                "rationale": item["rationale"],
+                "resolved_by": decision_owner,
+                "resolved_at": timestamp,
+            }
+            selected = item.get("selected_option_id")
+            if basis in {"human-decision", "delegated-agent-decision"}:
+                if not selected:
+                    raise ValueError(f"confirmed decision {decision_id} needs selected_option_id")
+                resolution["selected_option_id"] = compact_id(selected, "OPT-")
+            if basis == "delegated-agent-decision":
+                resolution["authorization_id"] = compact_id(item["authorization_id"], "AUTH-")
+            decision["resolution"] = resolution
+            if authority in {"user-owned", "delegable"}:
+                rejected = [option for option in options if option["option_id"] != selected]
+                decision["consequence_receipt"] = {
+                    "receipt_version": RUNTIME_VERSION,
+                    "consequence_summary": item.get("consequence_summary", item["rationale"]),
+                    "long_term_tradeoffs": item.get("long_term_tradeoffs", []),
+                    "alternatives_not_selected": [
+                        {"option_id": option["option_id"], "reason": "Not selected by the authorized decision owner."}
+                        for option in rejected
+                    ],
+                    "assumptions": item.get("assumptions", []),
+                    "uncertainties": item.get("uncertainties", []),
+                    "confidence": item.get("confidence", "high"),
+                    "reversibility": item.get("reversibility", "Revisit through a superseding decision record."),
+                    "revisit_triggers": item.get("revisit_triggers", []),
+                    "known_falsifiers": item.get("known_falsifiers", []),
+                    "downstream_effects": item.get("downstream_effects", []),
+                }
+        decisions.append(decision)
+
+    authorizations = []
+    for item in source.get("authorizations", []):
+        authorization_id = compact_id(item["authorization_id"], "AUTH-")
+        action = item["action"]
+        authority = actor(item.get("authority", "human"))
+        authorization = {
+            "record_type": "workbench-authorization",
+            "schema_version": RUNTIME_VERSION,
+            "authorization_id": authorization_id,
+            "work_id": work_id,
+            "action": action,
+            "status": item.get("status", "granted"),
+            "scope": {
+                "targets": item.get("targets", [{"kind": "work", "target_id": work_id}]),
+                "constraints": item.get("constraints", []),
+                **({"environment": item["environment"]} if item.get("environment") else {}),
+            },
+            "requested_by": actor(item.get("requested_by", "agent")),
+            "authority": authority,
+            "requested_at": item.get("requested_at", timestamp),
+        }
+        if authorization["status"] == "granted":
+            authorization["grant"] = {
+                "granted_by": authority,
+                "granted_at": item.get("granted_at", timestamp),
+                **({"expires_at": item["expires_at"]} if item.get("expires_at") else {}),
+            }
+        authorizations.append(authorization)
+
     handoff_id = compact_id(source["handoff_id"], "HO-")
     handoff = {
         "record_type": "workbench-handoff",
@@ -355,12 +522,21 @@ def compile_bundle(repo: Path, work_id: str, source: dict) -> dict:
             }
             for index, item in enumerate(source.get("options", []), 1)
         ],
-        "decisions_required": [],
-        "artifacts_produced": [{
-            "record_type": "artifact", "record_id": artifact_id, "path": artifact_path.as_posix(),
-        }],
+        "decisions_required": [
+            {"decision_id": item["decision_id"], "question": item["question"]}
+            for item in decisions
+        ],
+        "artifacts_produced": [
+            {
+                "record_type": "artifact",
+                "record_id": item["artifact_id"],
+                "path": path.as_posix(),
+            }
+            for item, path in zip(artifacts, artifact_paths)
+        ],
         "node_updates": source.get("node_updates", []),
-        "authorization_ids": [],
+        "node_additions": source.get("node_additions", []),
+        "authorization_ids": [item["authorization_id"] for item in authorizations],
         "why_next": source.get("why_next", f"The {stage} result is recorded and its lifecycle gate can now be evaluated."),
         "created_at": timestamp,
     }
@@ -371,7 +547,7 @@ def compile_bundle(repo: Path, work_id: str, source: dict) -> dict:
     else:
         handoff["terminal_disposition"] = source.get("terminal_disposition", "completed-for-destination")
 
-    records = [artifact]
+    records = [*artifacts, *decisions, *authorizations]
     proof_spec = source.get("proof")
     if not proof_spec and not following and state.get("planning_destination") in {
         "proposal", "proof-of-concept", "specification", "implementation-plan",
@@ -427,7 +603,10 @@ def compile_bundle(repo: Path, work_id: str, source: dict) -> dict:
                         "oracle_description", "Reviewed the artifact against each stated acceptance criterion."
                     ),
                 },
-                "evidence": [{"record_type": "artifact", "record_id": artifact_id}],
+                "evidence": [
+                    {"record_type": "artifact", "record_id": item["artifact_id"]}
+                    for item in artifacts
+                ],
                 "non_vacuity_check": proof_spec["non_vacuity_check"],
                 "observed_by": AGENT.copy(),
                 "observed_at": timestamp,
@@ -440,11 +619,12 @@ def compile_bundle(repo: Path, work_id: str, source: dict) -> dict:
             "created_at": timestamp,
             "updated_at": timestamp,
         }
-        artifact["proof_ids"] = [proof_id]
+        for produced_artifact in artifacts:
+            produced_artifact["proof_ids"] = [proof_id]
         records.append(proof)
     validate_record(artifact, "prepared artifact")
     for record in records[1:]:
-        validate_record(record, "prepared proof")
+        validate_record(record, "prepared bundled record")
     validate_record(handoff, "prepared handoff")
     if not any(node.get("node_id") == handoff["node_id"] for node in map_record["nodes"]):
         raise ValueError(f"node_id is absent from the canonical map: {handoff['node_id']}")
@@ -462,6 +642,10 @@ def main() -> int:
         help="register the prepared bundle and advance its lifecycle gate in the same invocation",
     )
     parser.add_argument(
+        "--accept-only", action="store_true",
+        help="register the prepared bundle without advancing the current lifecycle stage",
+    )
+    parser.add_argument(
         "--accept-to-proposal", action="store_true",
         help="for an exact outcome-framing -> proposal route, record framing and accept the reviewed proposal in one invocation",
     )
@@ -469,8 +653,8 @@ def main() -> int:
     try:
         repo = Path(args.repo).resolve()
         source = load_json(Path(args.input))
-        if args.accept_and_advance and args.accept_to_proposal:
-            raise ValueError("choose either --accept-and-advance or --accept-to-proposal")
+        if sum((args.accept_and_advance, args.accept_only, args.accept_to_proposal)) > 1:
+            raise ValueError("choose only one acceptance mode")
         if args.accept_to_proposal:
             require_terminal_review(repo, args.work_id, source)
             output = Path(args.output)
@@ -492,9 +676,14 @@ def main() -> int:
         lifecycle = None
         if args.accept_and_advance:
             lifecycle = accept_and_advance(repo, args.work_id, bundle, output)
+        elif args.accept_only:
+            lifecycle = accept_only(repo, args.work_id, bundle, output)
         terminal_reviewed = args.accept_and_advance and "terminal_disposition" in bundle["handoff"]
         print(json.dumps({
-            "result": "accepted-and-advanced" if lifecycle else "prepared", "work_id": args.work_id,
+            "result": (
+                "accepted-and-advanced" if args.accept_and_advance
+                else "accepted" if args.accept_only else "prepared"
+            ), "work_id": args.work_id,
             "stage": bundle["handoff"]["stage"], "handoff_id": bundle["handoff"]["handoff_id"],
             "output": str(output),
             **({"review_marker": TERMINAL_REVIEW_MARKER} if terminal_reviewed else {}),

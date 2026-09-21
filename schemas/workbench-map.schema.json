@@ -117,6 +117,22 @@
           },
           "uniqueItems": true
         },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "workbench-common.schema.json#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        },
+        "proof_status": {
+          "enum": [
+            "not-recorded",
+            "pending",
+            "passed",
+            "failed",
+            "blocked"
+          ]
+        },
         "resolution": {
           "$ref": "#/$defs/resolution"
         }
