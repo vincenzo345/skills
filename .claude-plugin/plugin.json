@@ -1,6 +1,6 @@
 {
   "name": "skillsrepo-v2",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Vince's development workflow, adapted from Matt Pocock's engineering skills.",
   "author": {
     "name": "Vince",
@@ -47,7 +47,6 @@
     "./skills/productivity/show-me",
     "./skills/productivity/teach",
     "./skills/productivity/to-questionnaire",
-    "./skills/productivity/wait-what",
     "./skills/productivity/writing-for-agents"
   ]
 }
