@@ -14,7 +14,7 @@ claude plugin marketplace add $source
 claude plugin install skillsrepo-v2@skillsrepo-v2
 ```
 
-Remove the older `mattpocock-skills@claude-plugins-official` plugin to avoid duplicate commands. If updating an existing install, remove the previous `skillsrepo-v2` marketplace, add the newly prepared snapshot, then update the plugin. Restart Claude Code after installation or update.
+Remove the older `mattpocock-skills@claude-plugins-official` plugin to avoid duplicate commands. For a later update, remove the previous `skillsrepo-v2` marketplace, add the newly prepared snapshot, then install the plugin again. Removing the marketplace also removes its installed plugin. Restart Claude Code afterward.
 
 Run `/setup-matt-pocock-skills` once in each application repo to configure its issue tracker, triage labels, and domain-doc location. Then run `/ask-matt` to choose a route. For meeting-derived requirements, start with `/to-record` and `/to-scope`.
 
