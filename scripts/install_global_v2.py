@@ -117,14 +117,14 @@ def main() -> None:
         junction(CODEX / name, AGENTS / name)
 
     # Claude receives v2 through its plugin; retire older standalone copies.
-    for name in ("workbench", "wait-what", "implement", "diagnosing-bugs", "to-record", "to-scope"):
+    for name in ("workbench", "wait-what", "ask-matt", "setup-matt-pocock-skills", "implement", "diagnosing-bugs", "to-record", "to-scope"):
         retire(CLAUDE / name, CLAUDE)
     for base in (AGENTS, CODEX):
-        for name in ("workbench", "wait-what"):
+        for name in ("workbench", "wait-what", "ask-matt", "setup-matt-pocock-skills"):
             retire(base / name, base)
     retire_workbench_hooks()
     print(f"Installed {len(sources)} v2 skills for Codex from {ROOT}")
-    print("Retired global Workbench and wait-what entry points. Restart Codex and Claude Code.")
+    print("Retired superseded global skill entry points. Restart Codex and Claude Code.")
 
 
 if __name__ == "__main__":
