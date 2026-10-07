@@ -23,4 +23,4 @@ Yes. Ask for a decision map or timeline showing what was established, what chang
 
 ## Where it fits
 
-`show-me` is a **reach-for-it-anytime standalone** across discovery, design, implementation and release. It explains the current state; it does not advance a workflow stage or replace [grill-with-docs](https://aihero.dev/skills-grill-with-docs), a spec, or review. [ask-matt](https://aihero.dev/skills-ask-matt) maps the rest of the skills and their handoffs.
+`show-me` is a **reach-for-it-anytime standalone** across discovery, design, implementation and release. It explains the current state; it does not advance a workflow stage or replace [grill-with-docs](https://aihero.dev/skills-grill-with-docs), a spec, or review. [guide-me](../engineering/guide-me.md) maps the rest of the skills and their handoffs.
