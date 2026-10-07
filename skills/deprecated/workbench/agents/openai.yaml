@@ -1,0 +1,4 @@
+interface:
+  display_name: "Workbench"
+  short_description: "Coordinate explicitly requested durable work"
+  default_prompt: "Use $workbench to coordinate this request from durable state, asking only for material decisions that evidence cannot settle."

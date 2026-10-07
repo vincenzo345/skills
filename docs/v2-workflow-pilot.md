@@ -5,7 +5,7 @@ This is branch `v2` of `vincenzo345/skills`. It retains this repository's `main`
 ## Route to test
 
 1. Establish a shared problem and vocabulary with `grill-with-docs`. Use `wayfinder` only when the decision route cannot fit one session. A wayfinder ticket resolves a question, not a build slice.
-2. Gather requirements. For an expert/builder meeting export, use Skillsrepo's `to-record` to preserve the source and `to-scope` to produce expert-corrected scope. For other sources, use the relevant discovery method. Keep the high-level problem statement distinct from transcript evidence and confirmed scope.
+2. Gather requirements. For an expert/builder meeting export, use `to-record` to preserve the source and `to-scope` to produce expert-corrected scope. Both are promoted in this branch. For other sources, use the relevant discovery method. Keep the high-level problem statement distinct from transcript evidence and confirmed scope.
 3. Design the smallest solution, using prototypes and domain/module design when they answer a real uncertainty. Bootstrap or audit the project's GitHub, local checks, CI, deployment and observability before the first feature PR.
 4. Use `to-spec` and `to-tickets` only for a build that needs them; implement bounded slices with TDD, review the diff, require deterministic CI and verify the released revision.
 5. Use `show-me` when a visual helps the user inspect a decision or handoff. Use `retro` after a meaningful run to propose one evidence-backed improvement to checks, instructions or tooling.
@@ -20,4 +20,4 @@ The first deterministic bootstrap check is `scripts/validate_v2_skills.py`, run 
 
 ## Next proof before expansion
 
-Choose one bounded application task with frozen requirements and an independent acceptance check. Run the Matt v2 route and the current Workbench route against the same task and record correctness, rework, elapsed time, token use and human interruptions. Prove a deliberately failing CI check blocks a PR before adding automated issue-to-PR execution. Add only the specialist skill that a task exposes as missing.
+Choose one bounded application task with frozen requirements and an independent acceptance check. Run the v2 route and record correctness, rework, elapsed time, token use and human interruptions. Workbench is archived at `skills/deprecated/workbench` for reference rather than installed. Prove a deliberately failing CI check blocks a PR before adding automated issue-to-PR execution. Add only the specialist skill that a task exposes as missing.

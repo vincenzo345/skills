@@ -1,93 +1,25 @@
-<p>
-  <a href="https://www.aihero.dev/s/skills-newsletter">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://res.cloudinary.com/total-typescript/image/upload/v1777382277/skills-repo-dark_2x.png">
-      <source media="(prefers-color-scheme: light)" srcset="https://res.cloudinary.com/total-typescript/image/upload/v1777382277/skill-repo-light_2x.png">
-      <img alt="Skills" src="https://res.cloudinary.com/total-typescript/image/upload/v1777382277/skill-repo-light_2x.png" width="369">
-    </picture>
-  </a>
-</p>
+# Skillsrepo v2
 
-# Skills For Real Engineers
+A development skill set adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills), with Skillsrepo's `to-record` and `to-scope` requirements flow and a `show-me` visual aid. This branch is maintained at [vincenzo345/skills](https://github.com/vincenzo345/skills/tree/v2); all changes and releases belong to this repository.
 
-[![skills.sh](https://skills.sh/b/mattpocock/skills)](https://skills.sh/mattpocock/skills)
+## Start using it
 
-My agent skills that I use every day to do real engineering - not vibe coding.
+For Codex on Windows, run `python scripts/install_global_v2.py` from this checkout. The installer links the promoted skills to this branch and removes old installed Workbench entry points. Restart Codex so its skill catalog refreshes.
 
-Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
+For Claude Code, add this checkout as a marketplace and install its plugin:
 
-These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own. Enjoy.
-
-If you want to keep up with changes to these skills, and any new ones I create, you can join ~60,000 other devs on my newsletter:
-
-[Sign Up To The Newsletter](https://www.aihero.dev/s/skills-newsletter)
-
-## Installation (30-second setup)
-
-Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when Anthropic's marketplace picks up my releases, so you subscribe rather than fork. **[skills.sh](https://skills.sh/mattpocock/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one: installing both leaves you with every skill twice.
-
-### 1. Get the skills
-
-<details>
-<summary><strong>Claude Code</strong></summary>
-
-```bash
-claude plugins install mattpocock-skills
+```powershell
+claude plugin marketplace add C:\Users\vince\projects\skillsrepo
+claude plugin install skillsrepo-v2@skillsrepo-v2
 ```
 
-Or, from inside a session:
+Remove the older `mattpocock-skills@claude-plugins-official` plugin to avoid duplicate commands. Restart Claude Code after installation. On another machine, use the local path of your own `v2` checkout.
 
-```
-/plugin install mattpocock-skills
-```
+Run `/setup-matt-pocock-skills` once in each application repo to configure its issue tracker, triage labels, and domain-doc location. Then run `/ask-matt` to choose a route. For meeting-derived requirements, start with `/to-record` and `/to-scope`.
 
-It's in Claude Code's official marketplace, so there's nothing to add first. If it says the plugin isn't found, run `claude plugins marketplace update` and retry. Updates reach you when Anthropic's marketplace moves its pin to a new release, which can lag behind this repo by days or weeks.
+The current [v2 workflow](docs/v2-workflow-pilot.md) is a human-driven development flow. Automated app-ticket intake and application-specific CI are integrations configured in the target application, not bundled capabilities of this skill package.
 
-**Stuck on an old version?** `claude plugin list` shows what you have, and [CHANGELOG.md](./CHANGELOG.md) shows the latest release. To track this repo directly instead, switch to its own marketplace and turn on auto-update for it under `/plugin` → Marketplaces (it's off by default for marketplaces outside Anthropic's):
-
-```bash
-claude plugin uninstall mattpocock-skills@claude-plugins-official
-claude plugin marketplace add mattpocock/skills
-claude plugin install mattpocock-skills@mattpocock
-```
-
-</details>
-
-<details>
-<summary><strong>Codex, and other agents</strong></summary>
-
-```bash
-npx skills@latest add mattpocock/skills
-```
-
-Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take, so make sure `setup-matt-pocock-skills` is one of them.**
-
-A native Codex plugin is on the roadmap (see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md)).
-
-</details>
-
-<details>
-<summary><strong>For tinkerers</strong></summary>
-
-Use the same installer, on any agent, including Claude Code:
-
-```bash
-npx skills@latest add mattpocock/skills
-```
-
-It writes the skills into your repo as ordinary files you own and can edit. Nothing updates behind your back; pull my latest changes when you want them with `npx skills update`.
-
-</details>
-
-### 2. Run `/setup-matt-pocock-skills`
-
-In your agent, run it once per repo. It will:
-
-- Ask you which issue tracker you want to use (GitHub, GitLab, local files, or anything else you describe)
-- Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
-- Ask you where you want to save any docs we create
-
-### 3. Bam - you're ready to go.
+The following rationale and skill descriptions are adapted from Matt's upstream README; first-person statements in that material are Matt's.
 
 ## Why These Skills Exist
 
@@ -200,6 +132,8 @@ Skills I use daily for code work.
 **User-invoked**
 
 - **[ask-matt](./skills/engineering/ask-matt/SKILL.md)**: Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+- **[to-record](./skills/engineering/to-record/SKILL.md)**: Preserve a raw meeting export as a normalized transcript and flag record defects.
+- **[to-scope](./skills/engineering/to-scope/SKILL.md)**: Draft a scope tree from that transcript for expert correction.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/engineering/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.

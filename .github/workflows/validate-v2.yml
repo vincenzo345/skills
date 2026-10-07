@@ -24,6 +24,20 @@ jobs:
       - name: Validate promoted skills
         run: python scripts/validate_v2_skills.py
       - name: Prove validator rejects broken packages
-        run: python -m unittest discover -s scripts -p test_validate_v2_skills.py
+        run: python -m unittest discover -s scripts -p 'test_*.py'
+      - name: Verify meeting-record preservation checker
+        run: python skills/engineering/to-record/scripts/test_verify_preservation.py
       - name: Validate plugin version
         run: npm run check-plugin-version
+
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Verify installer safety
+        run: python -m unittest discover -s scripts -p test_install_global_v2.py
