@@ -60,6 +60,43 @@ def junction(path: Path, target: Path) -> None:
         raise RuntimeError(f"could not link {path} to {target}: {result.stdout} {result.stderr}")
 
 
+def retire_workbench_hooks() -> None:
+    config = CLAUDE / "claude-rigor" / "hooks" / "hooks.json"
+    if not config.is_file():
+        return
+    data = json.loads(config.read_text(encoding="utf-8"))
+    hooks = data.get("hooks", {})
+    removed = 0
+    for event, groups in list(hooks.items()):
+        kept = []
+        for group in groups:
+            commands = group.get("hooks", [])
+            active = [
+                item for item in commands
+                if not any(
+                    token in item.get("command", "")
+                    for token in (
+                        "workbench_prompt_router.js",
+                        "workbench_new_item_guard.js",
+                        "performance_budget_guard.js",
+                    )
+                )
+            ]
+            removed += len(commands) - len(active)
+            if active:
+                kept.append({**group, "hooks": active})
+        if kept:
+            hooks[event] = kept
+        else:
+            del hooks[event]
+    if removed:
+        destination = BACKUP / "claude-rigor-hooks.json"
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(config, destination)
+        config.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+        print(f"Retired {removed} Workbench hook registrations; backup: {destination}")
+
+
 def main() -> None:
     if os.name != "nt":
         raise SystemExit("This installer uses Windows junctions; install manually on other systems.")
@@ -84,6 +121,7 @@ def main() -> None:
         retire(CLAUDE / name, CLAUDE)
     for base in (AGENTS, CODEX):
         retire(base / "workbench", base)
+    retire_workbench_hooks()
     print(f"Installed {len(sources)} v2 skills for Codex from {ROOT}")
     print("Retired global Workbench entry points. Restart Codex and Claude Code.")
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -44,6 +45,25 @@ class InstallerTests(unittest.TestCase):
         installer.retire(path, base)
         self.assertFalse(os.path.lexists(path))
         self.assertEqual((source / "SKILL.md").read_text(), "source")
+
+    def test_workbench_hooks_are_removed_without_touching_other_guards(self) -> None:
+        claude = self.root / "claude" / "skills"
+        config = claude / "claude-rigor" / "hooks" / "hooks.json"
+        config.parent.mkdir(parents=True)
+        original = {"hooks": {"PreToolUse": [{"hooks": [
+            {"command": "node workbench_new_item_guard.js"},
+            {"command": "node read_only_network_guard.js"},
+        ]}]}}
+        config.write_text(json.dumps(original), encoding="utf-8")
+        backup = self.root / "backup"
+        with patch.object(installer, "CLAUDE", claude), patch.object(installer, "BACKUP", backup):
+            installer.retire_workbench_hooks()
+        self.assertTrue((backup / "claude-rigor-hooks.json").is_file())
+        commands = [
+            hook["command"] for group in json.loads(config.read_text())["hooks"]["PreToolUse"]
+            for hook in group["hooks"]
+        ]
+        self.assertEqual(commands, ["node read_only_network_guard.js"])
 
 
 if __name__ == "__main__":

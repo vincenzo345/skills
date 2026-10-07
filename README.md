@@ -6,14 +6,15 @@ A development skill set adapted from [Matt Pocock's skills](https://github.com/m
 
 For Codex on Windows, run `python scripts/install_global_v2.py` from this checkout. The installer links the promoted skills to this branch and removes old installed Workbench entry points. Restart Codex so its skill catalog refreshes.
 
-For Claude Code, add this checkout as a marketplace and install its plugin:
+For Claude Code, prepare a clean snapshot of the committed branch, add it as a marketplace, and install its plugin. The snapshot avoids copying ignored working files into Claude's plugin cache:
 
 ```powershell
-claude plugin marketplace add C:\Users\vince\projects\skillsrepo
+$source = python scripts/prepare_claude_plugin.py
+claude plugin marketplace add $source
 claude plugin install skillsrepo-v2@skillsrepo-v2
 ```
 
-Remove the older `mattpocock-skills@claude-plugins-official` plugin to avoid duplicate commands. Restart Claude Code after installation. On another machine, use the local path of your own `v2` checkout.
+Remove the older `mattpocock-skills@claude-plugins-official` plugin to avoid duplicate commands. If updating an existing install, remove the previous `skillsrepo-v2` marketplace, add the newly prepared snapshot, then update the plugin. Restart Claude Code after installation or update.
 
 Run `/setup-matt-pocock-skills` once in each application repo to configure its issue tracker, triage labels, and domain-doc location. Then run `/ask-matt` to choose a route. For meeting-derived requirements, start with `/to-record` and `/to-scope`.
 
