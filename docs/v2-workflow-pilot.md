@@ -14,7 +14,7 @@ Incoming app tickets have a separate on-ramp: backend validation and GitHub issu
 
 ## Installed v2 package
 
-The package promotes 30 skills. `show-me`, `to-record`, and `to-scope` were added to Matt's baseline; the older Workbench implementation is archived at `skills/deprecated/workbench` and is not installed. Codex uses junctions to this checkout. Claude Code uses the `skillsrepo-v2@skillsrepo-v2` plugin from a clean snapshot of this branch. The old official Matt plugin and global Workbench entry points were removed from this machine.
+The package promotes 29 skills. `show-me`, `to-record`, and `to-scope` were added to Matt's baseline; `wait-what` was removed. The older Workbench implementation is archived at `skills/deprecated/workbench` and is not installed. Codex uses junctions to this checkout. Claude Code uses the `skillsrepo-v2@skillsrepo-v2` plugin from a clean snapshot of this branch. The old official Matt plugin and global Workbench entry points were removed from this machine.
 
 The deterministic package check is `scripts/validate_v2_skills.py`, run by `.github/workflows/validate-v2.yml` on v2 pushes and PRs. It checks promoted manifest membership, skill identity, dual-host invocation policy, README links and docs-page presence. The workflow also runs the `to-record` preservation tests and Windows installer safety tests. `v2` requires both CI jobs and a PR. [A deliberately broken PR](https://github.com/vincenzo345/skills/pull/1) failed the skill-package job and GitHub marked it blocked; the PR was closed without merging. These checks validate packaging, not skill outcomes or a target application's behavior.
 
