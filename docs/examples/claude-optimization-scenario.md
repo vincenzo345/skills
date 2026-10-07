@@ -1,1 +1,0 @@
-/workbench PDF loading is still slow on manual extraction in the deployed test environment. Investigate and give me evidence-backed options. Start a new work item and do not implement application changes.

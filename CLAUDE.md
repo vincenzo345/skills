@@ -1,110 +1,31 @@
-# Conventions for this repo
+Skills are organized into bucket folders under `skills/`:
 
-This repo holds agent skills. One skill, one folder, flat under `skills/`:
+- `engineering/`: daily code work
+- `productivity/`: daily non-code workflow tools
+- `misc/`: kept around but rarely used, not promoted
+- `in-progress/`: beta: public on purpose, feedback wanted, not shipped in the plugin
+- `deprecated/`: no longer used
 
-```
-skills/<skill-name>/
-  SKILL.md            <- required
-  agents/openai.yaml  <- required (Codex metadata)
-  <anything else>     <- reference docs, scripts, assets
-```
+Every skill in `engineering/` or `productivity/` (the **promoted** buckets) must have a reference in the top-level `README.md` and an entry in `.claude-plugin/plugin.json`'s `skills` array (the Claude Code plugin ships exactly the promoted set). Skills in `misc/`, `in-progress/`, and `deprecated/` must not appear in either.
 
-Flat, no bucket folders. If this ever passes roughly ten skills, reorganise into
-buckets then — `skills/<bucket>/<skill-name>/` is also supported by the installer.
+Install commands are copied verbatim from [.agents/install-block.md](./.agents/install-block.md). `.claude-plugin/marketplace.json` makes the repo its own single-plugin marketplace (a fallback the install block explains, not the documented route). Run `claude plugin validate . --strict` after touching either manifest. Why a Claude plugin but not (yet) a Codex one lives in [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md).
 
-## SKILL.md frontmatter
+Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
 
-```yaml
----
-name: <skill-name>          # must equal the folder name
-description: <one line>     # see invocation below
----
-```
+Each bucket folder has a `README.md` that lists every skill in the bucket with a one-line description, with the skill name linked to its `SKILL.md`. The promoted buckets' `README.md`s and the top-level `README.md` group entries into **User-invoked** and **Model-invoked**; non-promoted bucket `README.md`s (`misc/`, `in-progress/`) use a flat list.
 
-## Invocation: user-invoked vs model-invoked
+Skills in `engineering/` and `productivity/` also have a human-facing docs page at `docs/<bucket>/<skill-name>.md` (the docs tree mirrors those two bucket folders under `skills/`). The published URL is `https://aihero.dev/skills-<skill-name>` regardless of bucket: the docs path is repo organisation only. When you add, rename, or change the behaviour of a skill in `engineering/` or `productivity/`, create or re-sync its docs page following [.agents/writing-docs.md](./.agents/writing-docs.md). A finished page carries four sections: **What it does**, **When to reach for it**, **Common questions**, and **It's working if**. `writing-docs.md` holds the template, the section order, and where to hunt for the questions. Skills in the non-promoted buckets (`misc/`, `in-progress/`, `deprecated/`) get **no** docs page. The one exception is a promoted skill removed outright: its page stays, marked archived (see `writing-docs.md`).
 
-Every skill is one or the other. Pick deliberately and keep both harnesses in sync
-— a skill is user-invoked in Claude Code and Codex, or in neither.
+Every `SKILL.md` is either user-invoked (`disable-model-invocation: true` plus `policy.allow_implicit_invocation: false` in `agents/openai.yaml`, reachable only by the human) or model-invoked (model- or user-reachable). See [.agents/invocation.md](./.agents/invocation.md).
 
-**Model-invoked** (the default) — the model or the human can reach it. Omit
-`disable-model-invocation` from the frontmatter and omit the `policy` block from
-`agents/openai.yaml`. The `description` is **model-facing**: keep rich trigger
-phrasing ("Use when the user wants..., mentions..., asks for...") so auto-invocation
-actually fires.
+[`ask-matt`](./skills/engineering/ask-matt/SKILL.md) is the router that maps every user-reachable skill and how they relate. The same trigger that re-syncs a docs page applies to it: whenever you add, rename, remove, or change how a user-reachable skill fits the flows, re-read `ask-matt`'s `SKILL.md` and update it so the map stays accurate: a new skill it never mentions, or a stale one it still routes to, is a router that lies.
 
-The test: *could the model usefully reach for this on its own?*
+To (re)link every skill outside `deprecated/` and `misc/` into the local harness skill directories (`~/.claude/skills`, `~/.agents/skills`), run `scripts/link-skills.sh`. Each entry is a symlink into this repo, so a `git pull` keeps installed skills current; re-run the script after adding, removing, or renaming a skill.
 
-**User-invoked** — only the human typing its name can reach it. Set
-`disable-model-invocation: true` in the frontmatter **and**
-`policy.allow_implicit_invocation: false` in `agents/openai.yaml`. The
-`description` is **human-facing**: a one-line summary for someone browsing slash
-commands. Strip the trigger lists.
-
-## agents/openai.yaml
-
-Required beside every `SKILL.md`. Holds Codex picker metadata, plus the policy
-block for user-invoked skills.
-
-Model-invoked:
-
-```yaml
-interface:
-  display_name: "Agent Harness"
-  short_description: "Scaffold a self-verifying build loop"
-```
-
-User-invoked adds:
-
-```yaml
-policy:
-  allow_implicit_invocation: false
-```
-
-## When you add, rename, or remove a skill
-
-1. Add or update its entry in `.claude-plugin/plugin.json`'s `skills` array.
-   That array is the plugin's shipped set — a skill missing from it does not ship.
-2. Add or update its entry in the top-level `README.md`, under **User-invoked** or
-   **Model-invoked**, with the name linked to its `SKILL.md`.
-3. Bump `version` in `.claude-plugin/plugin.json`. Claude Code uses that version to
-   decide when installed users see an update.
-4. Validate both manifests:
-
-   ```bash
-   claude plugin validate .claude-plugin/marketplace.json --strict
-   claude plugin validate .claude-plugin/plugin.json
-   ```
-
-   The plugin manifest is validated **without** `--strict` on purpose. It emits one
-   warning — "CLAUDE.md at the plugin root is not loaded as project context" — which
-   is expected and intended: this file is authoring guidance for working *in* this
-   repo, and deliberately does not ship as plugin context. Exit code is 0. Any
-   *other* warning is a real problem.
-5. Re-run `scripts/link-skills.ps1` so the local junctions match.
-
-## Name collisions with skills from elsewhere
-
-Skills from other packs may already be installed under the same name (for example
-in `~/.claude/skills` or `~/.codex/skills`). **A skill in this repo wins.**
-`link-skills.ps1` removes whatever occupies the slot and junctions ours in its
-place. This is intended: the version we ship is the version we wrote and
-understand. The script prints a line whenever it replaces a real directory.
-
-## Local development
-
-`scripts/link-skills.ps1` junctions every skill in this repo into `~/.claude/skills`
-and `~/.codex/skills`. Junctions, not copies — so an edit here is live in the next
-session, and a `git pull` updates every installed skill at once.
-
-Do not use a `ln -s` based script on Windows: on this setup `ln -s` silently
-creates real directory copies rather than links, which breaks the whole point.
+No em-dashes anywhere in this repo's prose (`SKILL.md` files, docs, `README.md`, `CHANGELOG.md`, ADRs, changesets, code comments). Where a sentence reaches for one, rewrite it instead with a comma, colon, period, parentheses, or a conjunction, whichever the sentence actually wants; never do a blind character substitution.
 
 ## Agent skills
 
-### Issue tracker
+### Triage labels
 
-Local markdown under `.scratch/` (gitignored). See `docs/agents/issue-tracker.md`.
-
-## Style
-
-No emojis, anywhere — including in scripts and printed output.
+Canonical names, unchanged. See `docs/agents/triage-labels.md`. Issues are judged against [`SCOPE.md`](./SCOPE.md).
