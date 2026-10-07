@@ -1,6 +1,6 @@
 # V2 workflow pilot
 
-This branch starts from Matt Pocock's `main` at `f3fc5632f401156837ee3872f14fe33ccf1024ea`, fetched on 2026-10-07. It is an isolated experiment. The existing Skillsrepo and the earlier `workflow-pilot-20261007` worktree remain separate.
+This is branch `v2` of `vincenzo345/skills`. It retains this repository's `main` ancestry and imports the exact tree of Matt Pocock's `main` at `f3fc5632f401156837ee3872f14fe33ccf1024ea`, fetched on 2026-10-07. Matt's repository is a read-only source for this experiment; changes and pushes belong to `vincenzo345/skills`. The prior uncommitted `main` work was saved in a local stash before switching this checkout to `v2`.
 
 ## Route to test
 
@@ -15,6 +15,8 @@ Incoming app tickets have a separate on-ramp: backend validation and GitHub issu
 ## First thin slice
 
 `show-me` is the first branch-local addition. It is explicitly user-invoked in Claude and Codex metadata, listed in the plugin manifest, router, catalog READMEs and docs. The first trial should ask for a visual of a real decision or session handoff, then check that the view is concise, source-faithful and useful to the user. This trial does not establish that the full development workflow improves outcomes.
+
+The first deterministic bootstrap check is `scripts/validate_v2_skills.py`, run by `.github/workflows/validate-v2.yml` on v2 pushes and PRs. It checks promoted manifest membership, skill identity, dual-host invocation policy, README links and docs-page presence. Mutation controls prove it rejects a missing manifest entry, a Claude/Codex invocation mismatch and duplicate YAML keys. It is a package check, not a skill-outcome evaluation or an application CI suite. The GitHub required-check rule and a failing-PR merge test remain to be established after the workflow runs in this repository.
 
 ## Next proof before expansion
 
