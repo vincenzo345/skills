@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skillset workflow | Review draft</title>
+  <style>
+    :root{color-scheme:light;--ink:#17233b;--muted:#53627a;--line:#d9e1ed;--paper:#f5f7fb;--card:#fff;--blue:#2557cf;--cyan:#dff3f8;--violet:#eee9fb;--amber:#fff0cf;--green:#e2f4e8;--rose:#fce8e8}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}a{color:var(--blue)}.wrap{max-width:1180px;margin:auto;padding:32px 24px 72px}.hero{background:linear-gradient(130deg,#132a59,#315cc4);color:#fff;border-radius:20px;padding:34px 38px;box-shadow:0 14px 34px #182f6230}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.76rem;font-weight:700;opacity:.8}.hero h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.08;margin:12px 0}.hero p{max-width:760px;margin:0;color:#e5ebff}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.pill{border:1px solid #ffffff70;border-radius:99px;padding:5px 11px;font-size:.82rem}.notice{margin:20px 0 32px;background:#fff9e9;border:1px solid #efd69b;border-left:5px solid #c38615;padding:15px 18px;border-radius:10px}.notice strong{display:block;margin-bottom:3px}h2{font-size:1.55rem;margin:42px 0 16px}h3{margin:0 0 7px;font-size:1.05rem}.lead{color:var(--muted);max-width:830px}.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:20px 0}.step{position:relative;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px;min-height:146px}.step:not(:last-child):after{content:"→";position:absolute;right:-13px;top:49px;z-index:2;color:var(--blue);font-weight:800;background:var(--paper);padding:0 2px}.step .num{font-size:.75rem;font-weight:800;color:var(--blue);letter-spacing:.08em}.step p{margin:5px 0 0;color:var(--muted);font-size:.88rem}.routes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.route,.skill,.note{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px}.route.feature{border-top:5px solid #4979de}.route.bug{border-top:5px solid #de756f}.route.uncertain{border-top:5px solid #9b74d6}.route p,.skill p,.note p{margin:7px 0 0;color:var(--muted)}.route ol{padding-left:21px;margin:12px 0 0}.route li{margin:5px 0}.tag{display:inline-block;border-radius:99px;padding:2px 8px;font-size:.74rem;font-weight:700;margin:2px;background:var(--violet);color:#493680}.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.skill{min-height:138px}.skill[data-group="discover"]{border-left:4px solid #8f73ce}.skill[data-group="build"]{border-left:4px solid #4a78dc}.skill[data-group="verify"]{border-left:4px solid #53a875}.skill[data-group="support"]{border-left:4px solid #d6a43f}.skill small{display:block;color:var(--muted);font-weight:650;margin-bottom:5px}.callout{display:grid;grid-template-columns:1fr 1fr;gap:14px}.note ul{margin:8px 0 0;padding-left:20px}.note li{margin:5px 0}.foot{border-top:1px solid var(--line);margin-top:38px;padding-top:17px;color:var(--muted);font-size:.88rem}@media(max-width:950px){.flow{grid-template-columns:repeat(3,1fr)}.step:nth-child(3):after{display:none}.routes,.skills{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.wrap{padding:16px 14px 42px}.hero{padding:25px}.flow,.routes,.skills,.callout{grid-template-columns:1fr}.step{min-height:auto}.step:after{display:none}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Skillset map · review draft</div>
+    <h1>How the engineering skills work together</h1>
+    <p>A practical routing map for the skills exposed as <strong>skillsrepo-v2</strong> in the active skill catalog. Start with the task, choose a path, and use specialist skills at the point where they help.</p>
+    <div class="meta"><span class="pill">11 catalogued skills</span><span class="pill">Three main routes</span><span class="pill">Prepared 9 October 2026</span></div>
+  </header>
+
+  <aside class="notice"><strong>Source and review status</strong>This draft uses the active skill catalog descriptions. The local repository command runner failed before the repository files could be inspected, so sequence and handoffs below are a proposed synthesis, not verified rules from CLAUDE.md or individual SKILL.md files.</aside>
+
+  <section aria-labelledby="overview"><h2 id="overview">The shared path</h2><p class="lead">A task does not need every skill. The stages show where to look for help; the route cards below show common combinations.</p>
+    <div class="flow">
+      <div class="step"><div class="num">01 · ROUTE</div><h3>Identify the work</h3><p>Feature, defect, research question, design decision, or delivery task.</p></div>
+      <div class="step"><div class="num">02 · UNDERSTAND</div><h3>Gather evidence</h3><p>Research facts, challenge assumptions, and sharpen domain terms.</p></div>
+      <div class="step"><div class="num">03 · DESIGN</div><h3>Choose a seam</h3><p>Explore an interface or prototype an uncertain behavior or journey.</p></div>
+      <div class="step"><div class="num">04 · BUILD</div><h3>Implement</h3><p>Use a test-first loop when requested or when integration tests are needed.</p></div>
+      <div class="step"><div class="num">05 · VERIFY</div><h3>Review changes</h3><p>Check the result against both repository standards and the originating spec.</p></div>
+      <div class="step"><div class="num">06 · DELIVER</div><h3>Explain the result</h3><p>Prepare a PR description or guide a human through external steps.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="routes"><h2 id="routes">Choose a route</h2><div class="routes">
+    <article class="route feature"><h3>New feature or change</h3><p>Turn an idea into a buildable change, then check the result.</p><ol><li><strong>grilling</strong> when the plan or decision needs stress testing.</li><li><strong>research</strong> for external facts; <strong>domain-modeling</strong> for project language.</li><li><strong>codebase-design</strong> for the module interface; <strong>prototype</strong> for a question best answered by trying it.</li><li><strong>tdd</strong> when test-first work or integration tests are requested.</li><li><strong>code-review</strong>, then <strong>pr</strong> for a PR body.</li></ol></article>
+    <article class="route bug"><h3>Bug or regression</h3><p>Begin with a reproducible symptom and follow the evidence.</p><ol><li><strong>diagnosing-bugs</strong> owns the diagnosis loop for broken, failing, or slow behavior.</li><li>Use <strong>codebase-design</strong> if the fix raises an interface question.</li><li>Use <strong>tdd</strong> when the requested fix calls for a test-first or integration-test workflow.</li><li><strong>code-review</strong> checks the change; <strong>pr</strong> describes it.</li></ol></article>
+    <article class="route uncertain"><h3>Unclear design or decision</h3><p>Reduce uncertainty before committing to a larger implementation.</p><ol><li><strong>grilling</strong> tests the assumptions in a plan.</li><li><strong>research</strong> checks claims against primary sources.</li><li><strong>domain-modeling</strong> resolves terms and records durable decisions.</li><li><strong>prototype</strong> tests a state model or user journey.</li><li><strong>codebase-design</strong> defines a clean module boundary.</li></ol></article>
+  </div></section>
+
+  <section aria-labelledby="inventory"><h2 id="inventory">Skill inventory</h2><p class="lead">These are the 11 skills listed under the <strong>skillsrepo-v2</strong> prefix in the active catalog. The descriptions below are condensed from that catalog.</p><div class="skills">
+    <article class="skill" data-group="discover"><small>Understand</small><h3>grilling</h3><p>Stress-test a plan, decision, or idea through direct questions.</p></article>
+    <article class="skill" data-group="discover"><small>Understand</small><h3>research</h3><p>Investigate a question with primary sources and capture findings in the repo.</p></article>
+    <article class="skill" data-group="discover"><small>Understand</small><h3>domain-modeling</h3><p>Sharpen project terminology and maintain glossary or ADR records.</p></article>
+    <article class="skill" data-group="discover"><small>Understand</small><h3>diagnosing-bugs</h3><p>Run a disciplined diagnosis loop for failures and performance regressions.</p></article>
+    <article class="skill" data-group="build"><small>Design</small><h3>codebase-design</h3><p>Define deep module interfaces, seams, and testable boundaries.</p></article>
+    <article class="skill" data-group="build"><small>Design</small><h3>prototype</h3><p>Build a throwaway experiment to answer a design or journey question.</p></article>
+    <article class="skill" data-group="build"><small>Build</small><h3>tdd</h3><p>Use red, green, refactor when test-first work or integration tests are requested.</p></article>
+    <article class="skill" data-group="verify"><small>Verify</small><h3>code-review</h3><p>Review changes against documented standards and the originating spec.</p></article>
+    <article class="skill" data-group="verify"><small>Deliver</small><h3>pr</h3><p>Write the PR body.</p></article>
+    <article class="skill" data-group="support"><small>Support</small><h3>wizard</h3><p>Create an interactive Bash guide for steps a human must perform.</p></article>
+    <article class="skill" data-group="support"><small>Support</small><h3>writing-for-agents</h3><p>Author or edit skills and agent-facing instructions.</p></article>
+  </div></section>
+
+  <section aria-labelledby="principles"><h2 id="principles">How to read this map</h2><div class="callout"><div class="note"><h3>Skills are selected by need</h3><ul><li>A bug starts with diagnosis; an open question may start with research or a prototype.</li><li>Domain modeling and codebase design can support several routes.</li><li>A simple task may pass through only one or two skills.</li></ul></div><div class="note"><h3>Review questions</h3><ul><li>Are any repository skills missing from this catalogued set?</li><li>Do the actual SKILL.md files prescribe handoffs that differ from these routes?</li><li>Should optional skills installed outside <strong>skillsrepo-v2</strong> appear in this document?</li></ul></div></div></section>
+  <footer class="foot">Review draft based on the active skill catalog. Verify against CLAUDE.md and the repository SKILL.md files before treating this as canonical workflow documentation.</footer>
+</main>
+</body>
+</html>

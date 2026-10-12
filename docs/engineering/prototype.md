@@ -1,14 +1,14 @@
 ## What it does
 
-`prototype` writes **throwaway code that answers a question**: does this state model feel right, or what should this screen look like. The question comes first and decides what you build. A prototype that answers the wrong question is wasted, however good it looks.
+`prototype` writes **throwaway code that answers a question**: does this state model feel right, or how should a user reach an outcome through the UI? The question comes first and decides what you build. A prototype that answers the wrong question is wasted, however good it looks.
 
-Throwaway is a constraint on how the code is *written*, not a promise to destroy it. No tests, no error handling beyond what makes it run, no abstractions, no persistence, because none of that helps you learn the one thing you're trying to learn. Two things survive. The answer goes into the real code, and the prototype goes onto a branch out of main as evidence for the answer.
+Throwaway is a constraint on how the code is *written*, not a promise to destroy it. Keep production hardening out of the prototype while giving the UI enough visual and interaction detail to judge it. Two things survive: the recorded answer, which guides later implementation, and the prototype on a branch out of main as evidence for that answer.
 
 ## When to reach for it
 
 Type `/prototype`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) reaches for it automatically when a task fits.
 
-Reach for it the moment you hit a question you can't settle by talking: a state machine whose edge cases you can't hold in your head, a screen you can't picture until you see three versions side by side. [Grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) sessions grow long on these questions. The agent rephrases, you guess, and the scope grows. Stop grilling, build the throwaway version, look at it, then answer in one line. If instead something already built is misbehaving and you want to know why, use [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs); prototyping explores what to build, not why the built thing is broken.
+Reach for it when a question needs runnable evidence: a state model, an interaction, or a visual choice. Use [design](design.md) for the broader collaborative design process before the experiment. Use [diagnosing-bugs](diagnosing-bugs.md) to investigate existing broken behavior.
 
 You will also arrive here without choosing to. [wayfinder](https://aihero.dev/skills-wayfinder) files `prototype` decision [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) on its map, and you work one with this skill.
 
@@ -17,15 +17,19 @@ You will also arrive here without choosing to. [wayfinder](https://aihero.dev/sk
 The question picks the branch, and the branches produce different artifacts:
 
 - **"Does this logic / state model feel right?"**: a **single shareable HTML file**. One self-contained page, no build and no server, that someone opens by double-clicking. It carries a labelled state panel that re-renders after every click, free-play buttons for poking at the model in any order, and tabbed **guided walkthroughs** (one scenario per tab, each with the ordered buttons to press underneath it). Everything is labelled in domain language, so you can hand it to a designer, a PM or a domain expert and let them try the model themselves. The logic behind the page is a small pure module (a reducer, a machine, a set of functions) with no DOM code in it, so you can move the validated version straight into the real code.
-- **"What should this look like?"**: several **radically different** UI variations on one route, switchable from a floating bottom bar and a `?variant=` URL param. Variants must disagree about structure, not colour; three card grids with small tweaks answer nothing. They render inside a real page wherever possible, against real data and real density, because a variant judged on an empty page always looks fine.
+- **"How does this interaction or visual choice work in practice?"**: a clickable slice using accepted workflow and interface decisions. It runs in the real app context where possible, with realistic content and relevant empty, error, and completion states. Alternatives hold task and data constant and vary the disputed choice.
 
-Both keep state in memory, start with no setup, and show you the full state after every step. The moment you find yourself hardening one (adding a test, wiring the real database, generalising for a case you might want later), you have stopped prototyping.
+Both keep state in memory and start with little setup. The UI branch polishes the experience being examined while leaving backend gaps as proposed contracts. The moment you find yourself hardening one for production, you have stopped prototyping.
+
+## Design input and experiment output
+
+[Design](design.md) owns collaborative exploration of UI, architecture, and module choices. Prototype receives a bounded question, accepted decisions, and representative tasks, then returns runnable evidence and findings. A direct prototype request with sufficient context can proceed immediately. When the broader direction is unclear, use design first.
 
 ## The prototype is a primary source
 
 A finished prototype leaves two things, and they go to different places.
 
-You record the **answer** (the verdict plus the question it settled) somewhere permanent: a commit message, an ADR, the implementation issue. Main keeps the answer, in the real code.
+You record the **answer** (the verdict plus the question it settled) somewhere permanent: a commit message, an ADR, or the implementation issue. It enters the real code when that work is in scope.
 
 The **prototype** is the runnable evidence the answer came from, and you do not delete it. It doesn't belong in main either, because nobody maintains it and it goes stale fast. So you commit it to a throwaway `prototype/<name>` branch out of main, never merge it, and leave a [context pointer](https://www.aihero.dev/ai-coding-dictionary/context-pointer) to that branch on the implementation issue. Main stays clean, and whoever picks the work up next can find and re-run the prototype.
 
@@ -51,12 +55,14 @@ It can be, if you prototype questions you could have answered by talking, or let
 
 ## It's working if
 
+- The experiment has a stated question and preserves the design decisions supplied to it.
 - You can say in one sentence what question the prototype exists to answer, and it's written at the top of the demo, not just in your head.
 - Someone who doesn't read code can drive the logic demo. They open the file, press the buttons in a walkthrough tab, and describe what they see in their own words.
 - Someone says "wait, that shouldn't be possible" or "huh, I assumed X". That's a bug in the *idea*, which is what the prototype is for.
-- The UI variants disagree about layout and information hierarchy, not just colour and copy, and the feedback you get is "the header from B with the sidebar from C".
+- Someone can navigate from entry to success and back, explain why each step is there, and identify what data or backend action each screen assumes.
+- The visual direction feels suited to the product, and any variants compare genuinely different structures or navigation choices.
 - It is answered in one sitting. If you're still building it a day later, the question was too big; split it.
-- When it's over, main contains the decision and none of the prototype, and the implementation issue points at the branch that still holds it.
+- When it's over, the decision is recorded, main contains none of the prototype, and the implementation issue points at the branch that still holds it.
 
 ## Where it fits
 
