@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ontology Map"
+  short_description: "Map business concepts, attributes, rules, and relationships"

@@ -6,7 +6,7 @@
 
 Invoke `/to-scope` after `/to-record` when an expert owns the process and a builder owns the slice to build. It resumes from existing scope artifacts across sessions. Keep the high-level problem statement distinct from the source transcript and the expert-corrected scope.
 
-The result feeds `grill-with-docs` for any remaining design decisions, or `to-spec` once the solution is sufficiently settled.
+The result feeds `grill-with-docs` for any remaining design decisions, or `to-spec` once the solution is sufficiently settled. When a repo has an accepted ontology map, `to-scope` reads the relevant neighborhood and presents candidate node or relationship changes for user approval after expert review. Inferred scope statements remain provisional.
 
 ## Source
 

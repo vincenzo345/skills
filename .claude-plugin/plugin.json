@@ -37,6 +37,7 @@
     "./skills/engineering/prototype",
     "./skills/engineering/research",
     "./skills/engineering/domain-modeling",
+    "./skills/engineering/ontology-map",
     "./skills/engineering/codebase-design",
     "./skills/engineering/datamodel-design",
     "./skills/engineering/code-review",

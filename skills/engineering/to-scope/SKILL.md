@@ -84,6 +84,10 @@ seat is defined by the opposite. It is not free. What it costs is this rule: a f
 comes back untouched means the wrong artifact was presented, and the answer is a better
 presentation, **never more questions**.
 
+## The ontology map
+
+If `docs/ontology/graph.json` exists, use `/ontology-map` to read the relevant business concept neighborhood while drafting and reviewing the scope tree. Compare newly named concepts, attributes, rules, and relationships with the map. Preserve the transcript and the expert's corrections as the authority for their work; the map cannot settle a conflict for them. An inferred criterion can only suggest a map change. After expert review, present candidate node or edge changes with their sources and confirmation status for the user's approval. Do not update the accepted graph from a provisional tree. This step reads domain documentation only; codebase exploration remains below the handover seam.
+
 ## Step 0 - check the input
 
 **Look for a tree at the target path first.** If one is there, go to step 0a and come back: a
