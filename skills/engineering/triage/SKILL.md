@@ -61,6 +61,8 @@ Query the issue tracker and present three buckets, oldest first:
 2. **`needs-triage`**: evaluation in progress.
 3. **`needs-info` with reporter activity since the last triage notes**: needs re-evaluation.
 
+For issues marked `Source: in-app feedback`, the reporter may not have GitHub access. Include them in the third bucket when the maintainer has recorded a response received through the app's support process.
+
 When PRs are in scope, include external PRs in these buckets and tag each line `[PR]` or `[issue]`. Discovery surfaces only *external* PRs (the tracker config defines who counts as external), so a collaborator's in-flight PR is not triage work. This filter is discovery-only; an explicitly named PR is always triaged regardless of author.
 
 Show counts and a one-line summary per item. Let the maintainer pick.
@@ -78,7 +80,7 @@ Show counts and a one-line summary per item. Let the maintainer pick.
 5. **Apply the outcome:**
    - `ready-for-agent`: post an agent brief comment ([AGENT-BRIEF.md](AGENT-BRIEF.md)).
    - `ready-for-human`: same structure as an agent brief, but note why it can't be delegated (judgment calls, external access, design decisions, manual testing).
-   - `needs-info`: post triage notes (template below).
+   - `needs-info`: post triage notes (template below). For in-app feedback sent to a private issue repository, give the maintainer the specific questions to send to the issue's contact email through the approved support process. Record that contact occurred, then wait for the response; a GitHub comment alone does not reach the reporter.
    - For `wontfix`, close the issue, with the comment depending on *why*:
      - **Already implemented**: the change already exists in the codebase. Point to where it lives; do **not** write to `.out-of-scope/` (that KB is for *rejected* requests, not built ones).
      - **Rejected (bug)**: give a polite explanation, then close.
@@ -106,6 +108,8 @@ If the maintainer says "move #42 to ready-for-agent", trust them and apply the r
 ```
 
 Capture everything resolved during grilling under "established so far" so the work isn't lost. Questions must be specific and actionable, not "please provide more info".
+
+For app-origin issues, replace `@reporter` with `reporter via the contact email in the private issue`. Do not copy unrelated private correspondence into the comment.
 
 ## Resuming a previous session
 

@@ -14,6 +14,7 @@ You invoke this by typing `/guide-me`; the agent won't reach for it on its own.
 | A UI, architecture, module, or data model design task | [Design](design.md) for specialist investigation and human decisions, with prototype used for a bounded runnable experiment |
 | A task involving business entities or relationships | [Ontology map](ontology-map.md) to retrieve the relevant concept neighborhood or propose a reviewed update |
 | Bugs and requests arriving from other people | The [triage](https://aihero.dev/skills-triage) on-ramp, and why [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) you generated yourself don't belong on it |
+| An app needs its own bug report and enhancement request form | The beta `/add-app-feedback` installer, followed by `/triage` for the incoming private issues |
 | Two skills that look interchangeable | The line between them, and it is usually one concrete test rather than a matter of taste. [grill-me](https://aihero.dev/skills-grill-me) or [grill-with-docs](https://aihero.dev/skills-grill-with-docs) turns on whether you are in a working directory; [grill-with-docs](https://aihero.dev/skills-grill-with-docs) or [wayfinder](https://aihero.dev/skills-wayfinder) turns on whether the effort fits one session |
 | A long session and a decision about the [context](https://www.aihero.dev/ai-coding-dictionary/context) | The ordered tree over the five options at a phase boundary |
 | A decision or handoff that needs a visual | [show-me](https://aihero.dev/skills-show-me) for the smallest diagram, tree, diff sketch or focused HTML view |
@@ -21,7 +22,7 @@ You invoke this by typing `/guide-me`; the agent won't reach for it on its own.
 
 ## Prerequisites
 
-The router names skills; it does not install them. Everything it points at has to be installed for the recommendation to be actionable, and it only knows the promoted skills in this repo.
+The router names skills; it does not install them. Everything it points at has to be installed for the recommendation to be actionable. Most routes use promoted skills; `/add-app-feedback` is a beta skill that must be installed separately.
 
 The tracker-dependent routes (triage, `to-spec`, `to-tickets`, `implement`) assume [setup-repo](setup-repo.md) has already configured an issue tracker in the repo. The router recommends them even before that has happened.
 

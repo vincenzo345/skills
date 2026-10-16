@@ -43,6 +43,7 @@ The limit on this is the **[smart zone](https://www.aihero.dev/ai-coding-diction
 
 A starting situation that generates work, then merges onto the main flow.
 
+- **An app needs an in-app report form** → **`/add-app-feedback`** (beta, user-invoked). After `/setup-repo`, it installs signed-in bug and enhancement intake that creates private GitHub issues labelled `needs-triage`. Incoming reports then follow `/triage`; this installer does not make them agent-ready itself.
 - **Bugs and requests piling up** → **`/triage`**. It moves issues through triage roles and produces agent-ready issues, which **`/implement`** later picks up.
 
   Triage is only for issues **you didn't create**: bug reports, incoming feature requests, anything that arrives raw. Tickets that `/to-tickets` produced are already agent-ready, so **don't triage them**.

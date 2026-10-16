@@ -1,0 +1,5 @@
+interface:
+  display_name: "Add App Feedback"
+  short_description: "Install private in-app feedback intake"
+policy:
+  allow_implicit_invocation: false

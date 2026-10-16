@@ -12,6 +12,10 @@ _Avoid_: backlog manager, backlog backend, issue host
 A single tracked unit of work inside an **Issue tracker**: a bug, task, spec, or slice produced by `to-tickets`.
 _Avoid_: ticket (use only when quoting external systems that call them tickets, or for a **Decision ticket**, see below)
 
+**Feedback submission**:
+A signed-in app user's report of a bug or request for an enhancement. It is the source of an incoming **Issue**, not an agent-ready work item.
+_Avoid_: ticket, agent brief
+
 **Decision ticket**:
 A `wayfinder` unit: a child **Issue** of a `wayfinder:map` holding a *question* whose resolution is a decision, not a slice of a build to execute. The **decision** qualifier is what keeps it distinct from an implementation ticket; `wayfinder` introduces the term, then uses "ticket".
 
@@ -25,6 +29,7 @@ _Avoid_: ontology database
 ## Relationships
 
 - An **Issue tracker** holds many **Issues**
+- A **Feedback submission** creates one incoming **Issue**
 - An **Issue** carries one **Triage role** at a time
 - A **Decision ticket** is an **Issue** (a child of a `wayfinder:map`)
 
