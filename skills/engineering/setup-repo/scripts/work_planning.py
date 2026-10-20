@@ -34,9 +34,22 @@ class PlanningRecords(WorkRecords):
 
     def _decision(self, target):
         record = self._read(target)
-        if record['metadata']['kind'] != 'decision':
-            raise RecordError('expected decision kind')
-        self._overview(record['metadata']['effort'])
+        meta = record['metadata']
+        if meta['kind'] != 'decision':
+            raise RecordError(f'{target}: expected decision kind')
+        for field in ('effort', 'map'):
+            if not isinstance(meta.get(field), str) or not meta[field]:
+                raise RecordError(f'{target}: missing or invalid decision {field}')
+        if not isinstance(meta.get('type'), str) or meta['type'] not in {'grilling', 'prototype', 'research', 'task'}:
+            raise RecordError(f'{target}: missing or invalid decision type')
+        blockers = meta.get('blocked_by')
+        if not isinstance(blockers, list) or any(not isinstance(ref, str) or not ref for ref in blockers):
+            raise RecordError(f'{target}: missing or invalid decision blocked_by; supply an explicit list')
+        if len(set(blockers)) != len(blockers):
+            raise RecordError(f'{target}: duplicate decision blocked_by')
+        if not isinstance(meta.get('state'), str) or meta['state'] not in {'open', 'resolved', 'canceled', 'superseded'}:
+            raise RecordError(f'{target}: unknown decision state')
+        self._overview(meta['effort'])
         return record
 
     def chart(self, effort, title, destination, fog, notes=''):
@@ -105,14 +118,23 @@ class PlanningRecords(WorkRecords):
         record = self._decision(target)
         meta = record['metadata']
         overview = self._overview(meta['effort'])
-        if overview['metadata'].get('current_map') != meta.get('map') or self._read(meta['map'])['metadata'].get('state') != 'open':
+        map_meta = self._read(meta['map'])['metadata']
+        if overview['metadata'].get('current_map') != meta['map'] or map_meta['kind'] != 'map' or map_meta.get('state') != 'open':
             raise RecordError('decision must belong to the current open map')
         if meta.get('state') != 'open' or meta.get('review_required'):
             raise RecordError('decision is not open or requires dependent review')
-        for blocker in meta.get('blocked_by', []):
-            prior = self._decision(blocker)
-            if prior['metadata'].get('state') != 'resolved' or prior['metadata'].get('review_required'):
-                raise RecordError(f'decision blocked by {blocker}')
+        def check_dependencies(ref, visiting):
+            ref = self._canonical(ref)
+            if ref in visiting:
+                raise RecordError(f'{ref}: decision dependency cycle')
+            prior = self._decision(ref)['metadata']
+            if prior['map'] != meta['map'] or prior['effort'] != meta['effort']:
+                raise RecordError(f'{ref}: decision blocker must belong to this map')
+            for blocker in prior['blocked_by']:
+                check_dependencies(blocker, visiting | {ref})
+            if ref != target and (prior['state'] != 'resolved' or prior.get('review_required')):
+                raise RecordError(f'decision blocked by {ref}')
+        check_dependencies(target, set())
         return record
 
     def claim_decision(self, target, owner):
@@ -157,7 +179,7 @@ class PlanningRecords(WorkRecords):
             if match:
                 history = match.group().partition('; [prior answer]')[2]
                 if history:
-                    entry += '; [prior answer]' + history
+                    entry = entry.rstrip('.') + '; [prior answer]' + history
                 map_record['body'] = pattern.sub(lambda _: entry, map_record['body'], count=1)
             else:
                 map_record['body'] = map_record['body'].replace('## Decisions so far\n', '## Decisions so far\n\n' + entry + '\n', 1)

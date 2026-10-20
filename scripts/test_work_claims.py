@@ -9,6 +9,25 @@ import unittest
 class ClaimTests(unittest.TestCase):
     setUp = handoff.HandoffTests.setUp
     produce = handoff.HandoffTests.produce
+    def test_direct_spec_claim_stops_when_scope_is_decomposed(self):
+        r = self.records
+        effort = r.create_effort('scope', 'Scope', 'Build scope', 'Delivered scope')
+        spec = r.publish_spec(effort, '# Scope')
+        claim = r.claim(spec, 'direct-worker')
+        child = r.publish_issue(effort, 'child', '# Child', 'Approved decomposition')
+        for operation in (
+            lambda: r.revalidate(spec, claim['token']),
+            lambda: r.resume(spec, claim['token']),
+            lambda: r.complete(spec, claim['token'], 'Direct work finished'),
+        ):
+            with self.subTest(operation=operation), self.assertRaisesRegex(RecordError, 'decomposed'):
+                operation()
+        self.assertEqual(r.read(spec)['metadata']['state'], 'current')
+        with self.assertRaisesRegex(RecordError, 'claim'):
+            r.claim(child, 'graph-worker')
+        r.release(spec, claim['token'])
+        self.assertEqual(r.claim(child, 'graph-worker')['target'], child)
+
     def test_resume_recovery_preserves_work_and_invalidates_old_token(self):
         _, _, issue = self.produce()
         old = self.records.claim(issue, 'stopped-worker', workspace=self.root / 'saved-work')

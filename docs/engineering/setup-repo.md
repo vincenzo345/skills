@@ -29,6 +29,8 @@ It writes into the repo you run it in:
 
 You commit all of it as markdown. There is no user-level or global mode. The config lives in the repo, so every repo gets its own copy.
 
+The local work-record helpers require Python with PyYAML and a Git checkout. They use the shared Git administrative directory to coordinate participating worktrees; no remote is required. Tool installation stays in the [repository installation instructions](../../README.md).
+
 ## The three decisions
 
 It starts each section with the recommended answer, and skips any question its exploration already answered. Most runs need only two confirmations.
@@ -45,7 +47,7 @@ The tracker options:
 | --- | --- | --- |
 | **GitHub** | the repo's GitHub Issues | the `gh` CLI |
 | **GitLab** | the repo's GitLab Issues | the `glab` CLI |
-| **Local markdown** | files under `work/<effort>/` in this repo | nothing, not even a remote |
+| **Local markdown** | files under `work/<effort>/` in this repo | Python, PyYAML, and a Git checkout; no remote |
 | **Other** | wherever you say | one paragraph from you describing the workflow |
 
 The first three ship as templates in the skill and work out of the box. Local markdown is a full option, not a fallback. The skill supports a solo project with no remote. One caveat: don't use local markdown if you use GitHub. They are alternatives, so pick one.
