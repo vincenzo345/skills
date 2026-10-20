@@ -14,7 +14,7 @@ Scaffold the per-repo configuration that the engineering skills assume:
 
 This is a prompt-driven skill, not a deterministic script. Explore, present what you found, confirm with the user, then write.
 
-For local tracking, read [the shared work-record contract](WORK-RECORDS.md) before configuring authority or artifact locations. Use the accepted repository convention when present. New local setups use stable `work/<effort>/` folders, separate `tickets/` and `decisions/`, and the shared coordinator. Preserve existing labels, domain docs and historical paths.
+For local tracking, read [the shared work-record contract](WORK-RECORDS.md) before configuring authority or artifact locations. Use the accepted repository convention when present. New local setups use stable `work/<effort>/` folders, separate `tickets/` and `decisions/`, and the shared coordinator. Preserve existing labels, domain docs and historical paths. Explicit legacy references normalize in place; relocation requires the separately reviewed adoption procedure in the shared contract, never an automatic setup migration.
 
 ## Process
 
