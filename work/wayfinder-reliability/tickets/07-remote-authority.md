@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/07-remote-authority.md
 effort: work/wayfinder-reliability
 order: 7
-state: completed
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -50,3 +50,7 @@ Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-
 ## Completion evidence
 
 Six remote contract fixtures and package validation passed. GitHub/GitLab primary documentation checked; authoritative fresh reads, outcome distinctions, incomplete dependencies and conflicting ownership exercised. Both contenders fail closed for unsupported automatic claiming. No live provider write or exclusive claim proof; evaluator is read-only, not an API client.
+
+## Integrated review follow-up
+
+Reopened for two read-only preview discrepancies: accept explicit self-contained null effort/basis, and reject unknown or unready specification readiness. Local blockers have been reverified and completed.

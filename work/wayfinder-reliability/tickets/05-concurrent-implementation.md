@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/05-concurrent-implementation.md
 effort: work/wayfinder-reliability
 order: 5
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -14,8 +14,8 @@ blocked_by:
 - work/wayfinder-reliability/tickets/04-spec-reconciliation.md
 integration:
   ref: integration/wayfinder-reliability
-  commit: 39aa75dfb4adad3a3fe38b1f796761c6a0f82f30
-  verified_tip: 4d07c8576b66de84e3d79339db688cad81fcca43
+  commit: 29473dc38c342b94647f8ad76cff7f084b3d9e8d
+  verified_tip: 29473dc38c342b94647f8ad76cff7f084b3d9e8d
 ---
 
 # 05: Resume claims and integrate concurrent implement-spec workers safely
@@ -50,3 +50,7 @@ Integrated at 39aa75d. Five ownership/integration scenarios and the combined 29-
 ## Integrated review follow-up
 
 Reopened under the user-authorized discrepancy fix: Spec review reproduced direct-spec completion after child publication, stranding the child.
+
+## Completion evidence
+
+Integrated review fixes at 29473dc passed five planning and six claim tests. Independent spec reviewer reproduced rejection of decomposed direct-spec resume/revalidation/completion and missing decision dependencies; standards reviewer cleared actionable findings. Worker also passed eight selection and nine legacy tests.
