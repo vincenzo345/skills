@@ -51,6 +51,27 @@ Follow-up observations:
 
 The temporary fixture remains outside the repository. Its unfinished storage claim belongs only to that replay and is not a production implementation claim.
 
+## Integrated review
+
+Two independent reviewers assessed `git diff c694f8e...75f4a4c`. Targeted reproductions used temporary repositories.
+
+### Standards
+
+- The shared-contract pointers conflict with the repository's blanket cross-skill reference rule. Preserve the accepted architecture with a narrow passive-contract/helper exception; user-only skill invocation remains prohibited.
+- The setup-repo human docs incorrectly claim local tracking has no prerequisites. The helper needs Python, PyYAML, and a Git checkout, although no remote is needed.
+- Nonblocking judgment: migration depends on coordinator internals (possible Feature Envy). Document the small internal storage/transaction boundary rather than introducing a general framework.
+
+Two documented findings and one nonblocking design judgment. The policy conflict is the main standards finding.
+
+### Spec
+
+- P1: a whole-spec claimant could publish child work and then complete the original spec, stranding the open child. Revalidation and completion must enforce undecomposed scope.
+- P2: an externally edited decision with no `blocked_by` field could be claimed. Missing dependencies are unknown authority, not an empty list.
+
+The initial review confirmed two findings. The direct-spec completion hole is the main spec finding. Tickets 03 and 05 were reopened and claimed for the single review-fix implementer before final acceptance.
+
+A focused follow-up confirmed two P2 remote-preview discrepancies: explicit self-contained issues with null effort/spec basis were rejected, while a matching current spec with missing or unready readiness passed inspection. These affect the read-only contract evaluator, which never acquires ownership. Fixes preserve unsupported automatic claiming and require no provider writes. Remote corrections follow completion of the reopened local blockers.
+
 ## Final results
 
 Pending integration, review, and installation.

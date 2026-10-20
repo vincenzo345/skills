@@ -154,12 +154,14 @@ Existing CI targets the v2 branch while this checkout's HEAD names main. Confirm
 
 ## Further Notes
 
-Next work: use the shared record/selection design with to-tickets to propose and approve vertical implementation slices. Suggested sequence is an end-to-end local handoff first, history/reconciliation and legacy compatibility next, and remote/concurrent integration with its own acceptance evidence.
+The subsequently approved [seven implementation slices](issue-plan.md) deliver the shared record/selection design. Their records hold acceptance and integration evidence; [validation](validation.md) records the combined checks, behavioral observations, review findings, and installation outcome.
 
-The first slice must demonstrate more than creating directories: a newly produced ready issue must be discoverable by the implementation consumer. This list is a work outline, not a published or approved implementation issue set.
+The first slice demonstrates more than creating directories: a newly produced ready issue is discoverable by a fresh implementation consumer. The published issue records supersede the earlier work outline.
 
 The earlier discovery document is retained as background. This spec is the current synthesis. The stable folder decision is recorded separately as an ADR.
 
-Revision 2 records the completed contract design and additional acceptance cases. No implementation issues existed when it was published, so there are no child issue bases to reconcile. The current design, this spec, and the overview remain planning artifacts, not an implementation authorization.
+Revision 2 records the completed contract design and additional acceptance cases. No implementation issues existed when it was published, so that revision required no child-basis reconciliation. The design and issue-breakdown approvals were planning approvals; the subsequent explicit implement-spec request authorized implementation and delivery.
 
 Metadata adoption: the active effort/spec gained the designed typed envelope during authorized implementation. Scope remains revision 2; historical work was not migrated. The current implement-spec instruction supersedes earlier session-only implementation restrictions.
+
+Editorial delivery update: the notes now point to published issues and execution evidence. Requirements and acceptance scope remain revision 2.
