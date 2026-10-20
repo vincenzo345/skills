@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/01-local-issue-handoff.md
 effort: work/wayfinder-reliability
 order: 1
-state: open
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -40,3 +40,7 @@ Vince approved the seven-slice breakdown and its dependency graph on 2026-10-20 
 ## Delivery requirements
 
 Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-shared-by-every-slice), including synchronized skill documentation/router guidance, appropriate tests, package validation, and integration-branch confirmation. No work has been claimed or started by publishing this record.
+
+## Execution
+
+Implementation authorized by the current implement-spec invocation. Bootstrap ownership: root orchestrator assigned ticket 01 exclusively to implementer `issue01` on branch `implement/wayfinder-01`, in its separate worktree. The shared coordinator is the deliverable of this first slice; no other worker is assigned this issue. Completion will be recorded only after integration and verification.
