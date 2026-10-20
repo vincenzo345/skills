@@ -6,6 +6,8 @@ Those files are the only thing that varies between repos. The skills themselves 
 
 It is a prompt-driven skill, not a deterministic script. It reads your `git remote`, `CLAUDE.md` and `GLOSSARY.md`, proposes what it found, and waits for you to confirm before it writes anything.
 
+Local tracking uses stable effort folders and separate implementation issues and Wayfinder decisions. A shared coordinator reads one declared checkout across worktrees and validates ownership. Existing repository conventions and historical paths are preserved.
+
 ## When to reach for it
 
 You invoke this by typing `/setup-repo`; the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) won't reach for it on its own. Its metadata marks it non-invokable on purpose, so no other skill can fire it for you.
@@ -41,7 +43,7 @@ The tracker options:
 | --- | --- | --- |
 | **GitHub** | the repo's GitHub Issues | the `gh` CLI |
 | **GitLab** | the repo's GitLab Issues | the `glab` CLI |
-| **Local markdown** | files under `.scratch/<feature>/` in this repo | nothing, not even a remote |
+| **Local markdown** | files under `work/<effort>/` in this repo | nothing, not even a remote |
 | **Other** | wherever you say | one paragraph from you describing the workflow |
 
 The first three ship as templates in the skill and work out of the box. Local markdown is a full option, not a fallback. The skill supports a solo project with no remote. One caveat: don't use local markdown if you use GitHub. They are alternatives, so pick one.
@@ -52,7 +54,7 @@ The first three ship as templates in the skill and work out of the box. Local ma
 
 **Do I have to use GitHub?**
 
-No. GitHub, GitLab and local markdown under `.scratch/` all ship as ready-made templates, and anything else works through the "other" path. This is the most-repeated question, in roughly these words: *"hard locked to github"*, *"can I use GitLab / Jira"*, *"what about Azure DevOps"*. The answer is always the same: setup chooses the tracker, not the skill.
+No. GitHub, GitLab and local markdown under `work/` all ship as ready-made templates, and anything else works through the "other" path. This is the most-repeated question, in roughly these words: *"hard locked to github"*, *"can I use GitLab / Jira"*, *"what about Azure DevOps"*. The answer is always the same: setup chooses the tracker, not the skill.
 
 **Do I need to re-run it after updating the skills?**
 

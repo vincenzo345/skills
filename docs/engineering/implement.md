@@ -4,6 +4,8 @@
 
 It never reopens the plan. There is no interview, no clarifying round, no proposal of a different approach. Whatever was settled upstream is the input, and the skill's whole job is to turn that into a commit. That is what separates it from typing "build this" at a fresh [agent](https://www.aihero.dev/ai-coding-dictionary/agent), which often redesigns the work while it builds it.
 
+A local issue is read from the declared authoritative checkout and claimed only after lifecycle, readiness, spec basis and dependencies pass. A token protects ownership across worktrees; accepted, integrated work closes with completion evidence.
+
 ## When to reach for it
 
 You invoke this by typing `/implement` yourself, and the agent won't reach for it on its own. It ships with `disable-model-invocation: true`, so no other skill can call it either. Wherever [guide-me](guide-me.md) or [to-tickets](https://aihero.dev/skills-to-tickets) says "then `/implement` per ticket", that is an instruction to you, not something the agent will do unprompted.
@@ -50,7 +52,7 @@ The "pre-agreed" part matters, and it is also the skill's weakest point. Nothing
 
 **It finished, but my ticket is still open and the acceptance criteria are still unchecked.**
 
-Correct, and expected. `implement` has no completion step. It ends at the commit and never touches the work item. This is the same on GitHub Issues and on the local markdown tracker, so it is not a tracker integration problem. It also does not act on the findings `code-review` produced, and does not tick the `- [ ]` boxes on the originating issue. Close the ticket and reconcile the criteria yourself. This matters most on a dependency chain, because `to-tickets` defines the frontier as tickets whose blockers are all closed. If nothing gets closed, nothing ever becomes visibly unblocked.
+Completion now requires recorded acceptance and integration evidence under the same claim token. If the issue remains open, inspect its reported validation or integration gap. Finishing edits on an unmerged worker branch does not unblock dependents.
 
 **Can I point it at all my tickets at once, or run several in parallel?**
 
