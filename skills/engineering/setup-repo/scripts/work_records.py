@@ -477,11 +477,8 @@ class WorkRecords:
             raise RecordError('breakdown approval or explicit task authority is required')
         with self.locked():
             self._authority()
-            overview = self._read(effort + '/README.md')
-            if overview['metadata'].get('state') != 'active':
-                raise RecordError('effort is not active')
-            self._assert_no_pending_publication(effort)
-            basis = overview['metadata'].get('current_spec')
+            overview = self._effort(effort)
+            basis = overview['metadata']['current_spec']
             if basis:
                 spec = self._read(basis['ref'])['metadata']
                 if spec.get('kind') != 'spec' or spec.get('revision') != basis.get('revision') or spec.get('state') != 'current':
@@ -545,6 +542,17 @@ class WorkRecords:
         if meta['kind'] != 'effort':
             raise RecordError(f'{effort}: expected effort kind')
         self._state(meta, {'active'}, {'active', 'waiting', 'completed', 'canceled', 'superseded'}, effort)
+        for pointer in ('current_spec', 'current_map'):
+            if pointer not in meta:
+                raise RecordError(f'{effort}: missing or invalid {pointer}; use explicit null when absent')
+            value = meta[pointer]
+            if value is None:
+                continue
+            valid = (isinstance(value, str) and bool(value.strip())) if pointer == 'current_map' else (
+                isinstance(value, dict) and isinstance(value.get('ref'), str) and bool(value['ref'].strip())
+                and type(value.get('revision')) is int and value['revision'] > 0)
+            if not valid:
+                raise RecordError(f'{effort}: missing or invalid {pointer}; expected a valid pointer or explicit null')
         self._assert_no_pending_publication(effort)
         return record
 
@@ -738,10 +746,16 @@ class WorkRecords:
             if any(self._read(ref)['metadata'].get('effort') == effort for ref in self._json('claims.json', {})):
                 raise Ineligible(f'{effort}: outstanding claims')
             for pointer in ('current_spec', 'current_map'):
-                ref = record['metadata'].get(pointer)
-                if ref:
-                    ref = ref['ref'] if isinstance(ref, dict) else ref
-                    if self._read(ref)['metadata'].get('state') != 'completed':
+                value = record['metadata'][pointer]
+                if value is not None:
+                    ref = value['ref'] if pointer == 'current_spec' else value
+                    artifact = self._read(ref)['metadata']
+                    kind = 'spec' if pointer == 'current_spec' else 'map'
+                    if artifact['kind'] != kind or artifact.get('effort') != effort:
+                        raise RecordError(f'{effort}: invalid {pointer} kind or effort identity')
+                    if pointer == 'current_spec' and artifact.get('revision') != value['revision']:
+                        raise RecordError(f'{effort}: invalid current_spec revision')
+                    if artifact.get('state') != 'completed':
                         raise Ineligible(f'{effort}: unfinished {pointer}')
             queue_path = self._path('work/queue.md')
             queue = queue_path.read_text(encoding='utf-8') if queue_path.exists() else None
