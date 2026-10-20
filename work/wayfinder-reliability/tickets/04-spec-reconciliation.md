@@ -11,6 +11,10 @@ basis:
   revision: 2
 blocked_by:
 - work/wayfinder-reliability/tickets/01-local-issue-handoff.md
+integration:
+  ref: integration/wayfinder-reliability
+  commit: f0f045dfe299485377c23c5d8fe5df3dea7ba0e9
+  verified_tip: 4d07c8576b66de84e3d79339db688cad81fcca43
 ---
 
 # 04: Revise specs without leaving obsolete issues actionable

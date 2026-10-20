@@ -4,14 +4,14 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/07-remote-authority.md
 effort: work/wayfinder-reliability
 order: 7
-state: open
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 blocked_by:
-  - work/wayfinder-reliability/tickets/03-planning-continuity.md
-  - work/wayfinder-reliability/tickets/05-concurrent-implementation.md
+- work/wayfinder-reliability/tickets/03-planning-continuity.md
+- work/wayfinder-reliability/tickets/05-concurrent-implementation.md
 ---
 
 # 07: Respect remote authority and bound remote concurrency

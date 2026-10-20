@@ -4,13 +4,17 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/03-planning-continuity.md
 effort: work/wayfinder-reliability
 order: 3
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 blocked_by:
 - work/wayfinder-reliability/tickets/01-local-issue-handoff.md
+integration:
+  ref: integration/wayfinder-reliability
+  commit: 4d07c8576b66de84e3d79339db688cad81fcca43
+  verified_tip: 4d07c8576b66de84e3d79339db688cad81fcca43
 ---
 
 # 03: Preserve planning context and Wayfinder session boundaries
@@ -49,3 +53,7 @@ Integrated in 241cb51. Planning discovery/decision/spec/issue/fresh-consumer han
 ## Replay discrepancy
 
 The bounded continuation replay found that resolve_decision created an empty map-link label from leading body whitespace. Reopened under the user's instruction to fix in-scope discrepancies. Prior deterministic completion evidence is retained; named-pointer regression and fresh replay are required before reclosure.
+
+## Completion evidence
+
+Supersession fixes integrated at 4d07c85. Four planning regression tests passed, including anchored links and replacement resolution. Fresh Codex replay at 2fb68e9 preserved answers, review gates and session boundaries, rejected an unrelated article prerequisite, and required no manual repair for newly generated map entries. Anchored path is covered deterministically; earlier fixture damage remains disclosed in validation.md.

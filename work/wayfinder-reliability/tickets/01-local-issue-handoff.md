@@ -10,6 +10,10 @@ basis:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 blocked_by: []
+integration:
+  ref: integration/wayfinder-reliability
+  commit: 98dffc2ae2424cb0d8cc2a721441b88de84ba7da
+  verified_tip: 4d07c8576b66de84e3d79339db688cad81fcca43
 ---
 
 # 01: Produce and claim a local implementation issue in one stable effort

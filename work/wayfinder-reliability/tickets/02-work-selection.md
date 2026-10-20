@@ -11,6 +11,10 @@ basis:
   revision: 2
 blocked_by:
 - work/wayfinder-reliability/tickets/01-local-issue-handoff.md
+integration:
+  ref: integration/wayfinder-reliability
+  commit: 4481b939df9427e909f6aeb55d8af61f9f91b67d
+  verified_tip: 4d07c8576b66de84e3d79339db688cad81fcca43
 ---
 
 # 02: Select eligible work by queue priority or explicit scope
