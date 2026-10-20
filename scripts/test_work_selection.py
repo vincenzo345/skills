@@ -16,6 +16,62 @@ class SelectionTests(unittest.TestCase):
     def queue(self, *efforts):
         (self.root / 'work/queue.md').write_text('# Queue\n\n' + ''.join(f'1. [Effort]({e.removeprefix("work/")}/README.md)\n' for e in efforts), encoding='utf-8')
 
+    def test_effort_completion_requires_explicit_valid_current_pointers(self):
+        import yaml
+        r = self.records
+        effort = r.create_effort('pointers', 'Pointers', 'Request', 'Outcome')
+        spec = r.publish_spec(effort, '# Current spec')
+        overview = self.root / effort / 'README.md'
+        original = overview.read_text(encoding='utf-8')
+        cases = [('current_spec', 'missing'), ('current_map', 'missing')]
+        cases += [(field, value) for field in ('current_spec', 'current_map') for value in ({}, '', [])]
+        cases += [('current_spec', {'ref': spec, 'revision': revision}) for revision in (0, True, '1', None)]
+        for field, value in cases:
+            with self.subTest(field=field, value=value):
+                _, header, body = original.split('---', 2)
+                meta = yaml.safe_load(header)
+                if value == 'missing':
+                    meta.pop(field)
+                else:
+                    meta[field] = value
+                overview.write_text('---\n' + yaml.safe_dump(meta) + '---' + body, encoding='utf-8')
+                with self.assertRaisesRegex(module.RecordError, 'missing or invalid current_'):
+                    r.complete_effort(effort, 'Outcome')
+                with self.assertRaisesRegex(module.RecordError, 'missing or invalid current_'):
+                    r.publish_issue(effort, 'unsafe', '# Child', 'Approved')
+                self.assertEqual(r.read(effort + '/README.md')['metadata']['state'], 'active')
+        overview.write_text(original, encoding='utf-8')
+        claim = r.claim(spec, 'worker')
+        r.complete(spec, claim['token'], 'Validated')
+        r.complete_effort(effort, 'Outcome')
+        standalone = r.create_effort('empty', 'Empty', 'Request', 'Outcome')
+        r.complete_effort(standalone, 'No artifacts needed')
+        self.assertEqual(r.read(standalone + '/README.md')['metadata']['state'], 'completed')
+
+    def test_completed_artifact_must_match_current_pointer_kind_effort_and_revision(self):
+        r = self.records
+        effort = r.create_effort('owner', 'Owner', 'Request', 'Outcome')
+        issue = r.publish_issue(effort, 'done', '# Task', 'Approved')
+        claim = r.claim(issue, 'worker')
+        r.complete(issue, claim['token'], 'Delivered')
+        other = r.create_effort('other', 'Other', 'Request', 'Outcome')
+        spec = r.publish_spec(other, '# Other scope')
+        claim = r.claim(spec, 'worker')
+        r.complete(spec, claim['token'], 'Delivered')
+        for field, value in (
+            ('current_map', issue),
+            ('current_spec', {'ref': issue, 'revision': 1}),
+            ('current_spec', {'ref': spec, 'revision': 1}),
+        ):
+            with self.subTest(field=field, value=value):
+                self.edit(effort + '/README.md', current_map=None, current_spec=None)
+                self.edit(effort + '/README.md', **{field: value})
+                with self.assertRaisesRegex(module.RecordError, 'kind or effort identity'):
+                    r.complete_effort(effort, 'Outcome')
+        self.edit(other + '/README.md', current_spec={'ref': spec, 'revision': 2})
+        with self.assertRaisesRegex(module.RecordError, 'current_spec revision'):
+            r.complete_effort(other, 'Outcome')
+
     def test_queue_skips_blocked_and_claimed_work_but_respects_explicit_scope(self):
         effort, spec, first = self.produce()
         second = self.records.publish_issue(effort, 'blocked', '- [ ] Dependent', 'Approved', blocked_by=[first])

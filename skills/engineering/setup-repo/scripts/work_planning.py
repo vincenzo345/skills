@@ -27,10 +27,7 @@ class PlanningRecords(WorkRecords):
             self._relative_link(source, target), self._relative_link(source, target, original=True)}) + ')'
 
     def _overview(self, effort):
-        record = self._read(effort + '/README.md')
-        if record['metadata'].get('kind') != 'effort' or record['metadata'].get('state') != 'active':
-            raise RecordError('planning requires an active effort')
-        return record
+        return self._effort(effort)
 
     def _decision(self, target):
         record = self._read(target)
