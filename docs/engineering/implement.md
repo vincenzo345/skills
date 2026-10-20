@@ -30,6 +30,17 @@ The same-session case is worth naming because the skill's own first line doesn't
 
 If the tickets came from [to-tickets](https://aihero.dev/skills-to-tickets), [setup-repo](setup-repo.md) configured the tracker they live on. `code-review` reads the same configuration to find the originating spec at close-out.
 
+## Selecting work
+
+| Input | Scope |
+| --- | --- |
+| No argument | First eligible implementation issue in the ordered effort queue |
+| Explicit issue | That issue only |
+| Explicit effort | Its first eligible implementation issue |
+| Explicit spec | Its issue graph, or the whole spec when undecomposed |
+
+Explicit direction overrides queue membership and position, while readiness, current requirements, blockers, and ownership still apply. Known blocked work can be skipped for an independent issue. Missing readiness or unreadable higher-priority authority stops selection with a diagnostic. The session reports the selected identity and acquires ownership before editing; previewing work alone does not reserve it.
+
 ## What one run does
 
 A run has five steps, in order:

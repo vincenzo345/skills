@@ -6,7 +6,9 @@ disable-model-invocation: true
 
 Implement the work described by the user in the spec or tickets.
 
-Read the configured tracker and [shared work-record contract](../setup-repo/WORK-RECORDS.md) before resolving work. For an explicit local issue, read through the declared authority, validate and claim it with the shared consumer before starting. Report its title, effort, basis and authority, and preserve the ownership token. An ineligible or unavailable target yields its specific reason; it never falls through to unrelated work. Resolve ambiguous identity before execution.
+Read the configured tracker and [shared work-record contract](../setup-repo/WORK-RECORDS.md) before resolving work. Resolve an explicit issue, effort, or spec first; without one, follow the ordered effort queue. Use the shared consumer's `select-and-claim` operation, passing the explicit target when provided, so authoritative selection and acquisition share a lock. An explicit issue selects only itself; an effort or decomposed spec selects its first eligible issue. Only an explicitly selected undecomposed spec permits whole-spec execution. Never infer work from history, filenames, or directory recency.
+
+Report the selected title, effort, basis and authority, and preserve its ownership token. Known blocked, claimed, stale, or unready work permits trying independent work inside the requested scope. Missing readiness, malformed ordering, unavailable authority, and unknown dependency outcomes stop selection with their specific diagnostic. Invalid explicit targets never fall through to unrelated work. Resolve ambiguous identity before execution. A preview from `select` is not ownership; acquire before implementing.
 
 Call the Skill tool with "tdd" where possible, at pre-agreed seams.
 
