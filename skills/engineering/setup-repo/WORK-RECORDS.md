@@ -24,6 +24,8 @@ Readiness uses the configured triage vocabulary: needs-triage, needs-info, ready
 
 Implementation blockers reference implementation IDs, never decision tickets. Validate cycles, self references, unresolved IDs, and kinds. Only completed blockers satisfy dependencies; cancellation/supersession requires explicit reconciliation. During implement-spec, completed means accepted work is available on the integration branch. A required open human decision keeps the affected issue at needs-info. Keep Wayfinder's separate resolved-decision frontier semantics.
 
+Local decisions may carry `review_required: [<invalidated-decision-ID>]` after an upstream answer is superseded. This is a dependent-review gate, not lifecycle or implementation readiness. Planning claims and blocker satisfaction require that gate to be cleared through recorded impact review. Use [local planning operations](../wayfinder/LOCAL-PLANNING.md) to retain answers, supersede decisions, and review affected dependents.
+
 ## Authority and implementation ownership
 
 Use `scripts/work_records.py` beside this reference with Python and PyYAML. Pass `--repo <target-checkout>` even when the helper is installed elsewhere. `--help` and each subcommand's `--help` describe arguments. The public Python interface is `WorkRecords(checkout)`; its producer and consumer methods are also CLI operations.
