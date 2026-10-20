@@ -374,6 +374,55 @@ class WorkRecords:
             self._validate_claim_basis(target, record, claim)
             return {'target': target, 'basis': claim['basis'], 'token': token}
 
+    def resume(self, target, token):
+        """Resume only the same ownership after validating live eligibility."""
+        with self.locked():
+            self._authority()
+            claim = self._json('claims.json', {}).get(target)
+            if not claim or claim.get('token') != token:
+                raise RecordError('claim token does not match')
+            record = self._eligible(target, allow_in_progress=True)
+            self._validate_claim_basis(target, record, claim)
+            return claim
+
+    def recover(self, target, expected_token, owner, stopped_evidence, workspace=None):
+        """Controller attests worker stoppage; compare-and-replace prevents takeover races."""
+        if not owner or not isinstance(stopped_evidence, str) or not stopped_evidence.strip():
+            raise RecordError('owner and evidence that the previous worker stopped are required')
+        with self.locked():
+            self._authority()
+            claims = self._json('claims.json', {})
+            old = claims.get(target)
+            if not old or old.get('token') != expected_token:
+                raise RecordError('claim token does not match')
+            record = self._eligible(target, allow_in_progress=True)
+            self._validate_claim_basis(target, record, old)
+            claim = dict(old, token=uuid.uuid4().hex, owner=owner,
+                         workspace=str(Path(workspace or self.checkout).resolve()),
+                         acquired_at=datetime.now(timezone.utc).isoformat(),
+                         recovered_from=old, stopped_evidence=stopped_evidence.strip())
+            claims[target] = claim
+            self._save_json('claims.json', claims)
+            return claim
+
+    def acknowledge_basis(self, target, token, evidence):
+        """Retain ownership after the issue is reconciled and its worker reviews the change."""
+        if not isinstance(evidence, str) or not evidence.strip():
+            raise RecordError('worker reconciliation evidence is required')
+        with self.locked():
+            self._authority()
+            claims = self._json('claims.json', {})
+            claim = claims.get(target)
+            if not claim or claim.get('token') != token:
+                raise RecordError('claim token does not match')
+            record = self._eligible(target, allow_in_progress=True)
+            meta = record['metadata']
+            basis = {'ref': target, 'revision': meta['revision']} if meta['kind'] == 'spec' else meta['basis']
+            claim.setdefault('basis_reviews', []).append({'previous': claim['basis'], 'current': basis, 'evidence': evidence.strip()})
+            claim['basis'] = basis
+            self._save_json('claims.json', claims)
+            return claim
+
     def publish_issue(self, effort, slug, body, approval, blocked_by=(), readiness='ready-for-agent'):
         if not isinstance(approval, str) or not approval.strip():
             raise RecordError('breakdown approval or explicit task authority is required')
@@ -651,7 +700,45 @@ class WorkRecords:
             if queue is not None:
                 atomic_write(queue_path, queue)
 
-    def complete(self, target, token, evidence):
+    def complete_spec(self, target, expected_revision, evidence):
+        """Finalize a decomposed specification after every child was integrated."""
+        if not isinstance(evidence, str) or not evidence.strip():
+            raise RecordError('spec acceptance evidence is required')
+        with self.locked():
+            self._authority()
+            record = self._spec_eligible(target)
+            meta = record['metadata']
+            if meta['revision'] != expected_revision:
+                raise RecordError('stale spec revision')
+            children = [(ref, child) for ref, child in self._issues(meta['effort'])
+                        if (child.get('basis') or {}).get('ref') == target]
+            if not children:
+                raise RecordError('no issue graph; complete the direct spec claim instead')
+            for ref, child in children:
+                if child.get('state') != 'completed':
+                    raise Ineligible(f'{target}: unfinished issue {ref}')
+                receipt = child.get('integration')
+                if not isinstance(receipt, dict):
+                    raise RecordError(f'{ref}: missing integration receipt')
+                self._integration_receipt(receipt.get('ref'), receipt.get('commit'))
+            self._conflict(target, record, self._json('claims.json', {}))
+            record['metadata']['state'] = 'completed'
+            record['body'] = record['body'].rstrip() + '\n\n## Completion evidence\n\n' + evidence.strip() + '\n'
+            self._write(target, **record)
+
+    def _integration_receipt(self, integration_ref, commit):
+        if not integration_ref or not commit:
+            raise RecordError('both integration_ref and commit are required')
+        integrated = git(self.authority, 'rev-parse', '--verify', integration_ref + '^{commit}')
+        accepted = git(self.authority, 'rev-parse', '--verify', commit + '^{commit}')
+        result = subprocess.run(['git', '-C', str(self.authority), 'merge-base', '--is-ancestor', accepted, integrated], text=True, capture_output=True)
+        if result.returncode == 1:
+            raise RecordError('accepted commit is not available on the integration ref')
+        if result.returncode:
+            raise RecordError(f'Git integration unavailable: {result.stderr.strip()}')
+        return {'ref': integration_ref, 'commit': accepted, 'verified_tip': integrated}
+
+    def complete(self, target, token, evidence, integration_ref=None, commit=None):
         """Close only after caller verifies acceptance and integration availability."""
         if not isinstance(evidence, str) or not evidence.strip():
             raise RecordError('completion evidence is required')
@@ -662,6 +749,8 @@ class WorkRecords:
                 raise RecordError(f'{target}: claim token does not match')
             record = self._eligible(target, allow_in_progress=True)
             self._validate_claim_basis(target, record, claims[target])
+            if integration_ref is not None or commit is not None:
+                record['metadata']['integration'] = self._integration_receipt(integration_ref, commit)
             record['metadata']['state'] = 'completed'
             record['body'] = record['body'].rstrip() + '\n\n## Completion evidence\n\n' + evidence.strip() + '\n'
             self._write(target, **record)
@@ -740,6 +829,25 @@ def main(argv=None):
     complete.add_argument('target')
     complete.add_argument('--token', required=True)
     complete.add_argument('--evidence', required=True)
+    complete.add_argument('--integration-ref')
+    complete.add_argument('--commit')
+    finish_spec = sub.add_parser('complete-spec')
+    finish_spec.add_argument('target')
+    finish_spec.add_argument('--expected-revision', required=True, type=int)
+    finish_spec.add_argument('--evidence', required=True)
+    continuation = sub.add_parser('resume')
+    continuation.add_argument('target')
+    continuation.add_argument('--token', required=True)
+    recovery = sub.add_parser('recover')
+    recovery.add_argument('target')
+    recovery.add_argument('--expected-token', required=True)
+    recovery.add_argument('--owner', required=True)
+    recovery.add_argument('--stopped-evidence', required=True)
+    recovery.add_argument('--workspace')
+    acknowledge = sub.add_parser('acknowledge-basis')
+    acknowledge.add_argument('target')
+    acknowledge.add_argument('--token', required=True)
+    acknowledge.add_argument('--evidence', required=True)
     release = sub.add_parser('release')
     release.add_argument('target')
     release.add_argument('--token', required=True)
