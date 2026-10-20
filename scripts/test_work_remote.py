@@ -13,7 +13,7 @@ class RemoteHandoffTests(unittest.TestCase):
         self.spec = 'https://github.com/example/issues/issues/10'
         self.issue = 'https://github.com/example/issues/issues/11'
         self.data = {
-            self.spec: {'kind': 'spec', 'state': 'current', 'revision': 2},
+            self.spec: {'kind': 'spec', 'state': 'current', 'revision': 2, 'readiness': 'ready-for-agent'},
             self.issue: {'kind': 'implementation', 'state': 'open', 'readiness': 'ready-for-agent',
                          'basis': {'ref': self.spec, 'revision': 2}, 'blocked_by': [],
                          'dependencies_complete': True, 'claim': None, 'order': 1,
@@ -33,6 +33,31 @@ class RemoteHandoffTests(unittest.TestCase):
         with self.assertRaisesRegex(RemoteError, 'stale spec basis'):
             self.remote.inspect(self.issue, acquired_basis=selected['basis'])
         self.assertEqual(self.reads[-2:], [self.issue, self.spec])
+
+    def test_explicit_standalone_issue_and_missing_authority_are_distinct(self):
+        issue = self.data[self.issue]
+        issue.update(effort_state=None, basis=None)
+        self.assertIsNone(self.remote.inspect(self.issue)['basis'])
+        self.assertEqual(self.reads, [self.issue])
+        for field in ('basis', 'effort_state'):
+            with self.subTest(field=field):
+                issue.pop(field)
+                with self.assertRaisesRegex(RemoteError, 'missing'):
+                    self.remote.inspect(self.issue)
+                issue[field] = None
+
+    def test_spec_readiness_is_required_independently_of_issue_readiness(self):
+        spec = self.data[self.spec]
+        for readiness in (None, 'needs-info', 'ready-for-human', 'unknown'):
+            with self.subTest(readiness=readiness):
+                if readiness is None:
+                    spec.pop('readiness', None)
+                else:
+                    spec['readiness'] = readiness
+                with self.assertRaisesRegex(RemoteError, 'spec readiness|spec is not ready-for-agent'):
+                    self.remote.inspect(self.issue)
+        spec['readiness'] = 'ready-for-agent'
+        self.assertEqual(self.remote.inspect(self.issue)['basis']['revision'], 2)
 
 class RemoteFailureTests(unittest.TestCase):
     setUp = RemoteHandoffTests.setUp
@@ -54,6 +79,14 @@ class RemoteFailureTests(unittest.TestCase):
 
 class RemoteOwnershipTests(unittest.TestCase):
     setUp = RemoteHandoffTests.setUp
+
+    def test_pinned_null_basis_cannot_silently_gain_a_spec(self):
+        issue = self.data[self.issue]
+        issue.update(basis=None, claim={'token': 'held', 'owner': 'worker'})
+        self.assertIsNone(self.remote.inspect(self.issue, token='held', acquired_basis=None)['basis'])
+        issue['basis'] = {'ref': self.spec, 'revision': 2}
+        with self.assertRaisesRegex(RemoteError, 'acquired basis changed'):
+            self.remote.inspect(self.issue, token='held', acquired_basis=None)
 
     def test_conflicting_claim_and_reconciled_basis_stop_completion(self):
         self.data[self.issue]['claim'] = {'token': 'held', 'owner': 'another worker'}
