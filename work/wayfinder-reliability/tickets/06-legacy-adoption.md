@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/06-legacy-adoption.md
 effort: work/wayfinder-reliability
 order: 6
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -12,6 +12,10 @@ basis:
 blocked_by:
 - work/wayfinder-reliability/tickets/02-work-selection.md
 - work/wayfinder-reliability/tickets/04-spec-reconciliation.md
+integration:
+  ref: integration/wayfinder-reliability
+  commit: 463f7a275ee104f106aa9779ba87e9145d3951a5
+  verified_tip: 567dbffc612a936fa1fd68148535edfc8bfea6c1
 ---
 
 # 06: Adopt legacy records without breaking references
@@ -22,11 +26,11 @@ blocked_by:
 
 ## Acceptance criteria
 
-- [ ] Explicit legacy references normalize recognized kinds, readiness, parents, and dependencies without changing their originals. Ambiguous records remain blocked with precise missing-information explanations.
-- [ ] A read-only migration plan classifies records and reports identity collisions, ambiguous types, input fingerprints, and inbound references.
-- [ ] Applying a reviewed plan checks for changed inputs, preserves IDs and history, maintains forwarding references where needed, and leaves one writable authority.
-- [ ] Adoption sequencing prevents old readers from mutating forwarding copies. Interrupted application is resumable or leaves an explicit recovery state.
-- [ ] Fixtures demonstrate resumption from a legacy reference, decision/implementation separation, preserved dependency IDs, valid inbound links, and rejection of stale or ambiguous plans.
+- [x] Explicit legacy references normalize recognized kinds, readiness, parents, and dependencies without changing their originals. Ambiguous records remain blocked with precise missing-information explanations.
+- [x] A read-only migration plan classifies records and reports identity collisions, ambiguous types, input fingerprints, and inbound references.
+- [x] Applying a reviewed plan checks for changed inputs, preserves IDs and history, maintains forwarding references where needed, and leaves one writable authority.
+- [x] Adoption sequencing prevents old readers from mutating forwarding copies. Interrupted application is resumable or leaves an explicit recovery state.
+- [x] Fixtures demonstrate resumption from a legacy reference, decision/implementation separation, preserved dependency IDs, valid inbound links, and rejection of stale or ambiguous plans.
 
 ## Boundary
 
@@ -41,3 +45,7 @@ Vince approved the seven-slice breakdown and its dependency graph on 2026-10-20 
 ## Delivery requirements
 
 Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-shared-by-every-slice), including synchronized skill documentation/router guidance, appropriate tests, package validation, and integration-branch confirmation. No work has been claimed or started by publishing this record.
+
+## Completion evidence
+
+Nine legacy and four planning tests passed after integration. Explicit normalization, fingerprinted reviewed adoption, retained history/forwarding links, interrupted recovery, old/new alias contention, and migrated decision resolution/supersession exercised. No historical repository work migrated.
