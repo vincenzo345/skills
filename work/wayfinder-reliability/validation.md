@@ -30,6 +30,18 @@ Claude Code is installed, but `claude auth status` reported no authenticated ses
 
 Provider-specific remote concurrency is not assumed from assignment commands or mocked responses. Any unavailable live provider verification must remain explicit in the final report.
 
+## Bounded Codex behavioral replay
+
+Harness: fresh inherited Codex subagent, using actual skill instructions and helper operations in `E:/tmpdir/wayfinder-notes-replay-5tr174dh`. Initial source was implementation branch `implement/wayfinder-03` at `799658c`. The agent did not read the replay rubric or test assertions. The root supplied the synthetic human turns, rather than asking the agent to invent human answers.
+
+1. Charting input requested a buildable saved-note application spec, with independent search-scope/storage decisions, ranking dependent on scope, and unresolved import fog. The agent created a map and three decision files, kept every decision open, and stopped with the map link, Search scope by name, and the next invocation.
+2. The supplied reply was only "The notes are personal and must work offline." The agent saved this requirement and retained the open Search scope decision and its claim. It asked for the missing searchable-content judgment rather than inferring an answer or advancing to Storage.
+3. The supplied answer was "Title search first." The agent recorded that exact human evidence, released its claim, left Offline storage and Ranking open, kept the map open, and stopped with the next named decision.
+
+The third step exposed a helper defect: the map resolution link had an empty label because record-body whitespace was treated as the title. The replay agent manually corrected only the fixture index under its coordinator lock and disclosed the defect. This initial artifact result is a failure, not an unqualified pass. Ticket 03 was reopened for a public regression and source fix before reclosure.
+
+These observations are bounded model behavior in a controlled subagent session. They are not an authenticated Claude Code CLI run, do not establish general compliance, and do not authenticate human evidence beyond the supplied test turns.
+
 ## Final results
 
 Pending integration, review, and installation.

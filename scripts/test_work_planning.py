@@ -40,6 +40,27 @@ class PlanningTests(unittest.TestCase):
         with self.assertRaisesRegex(RecordError, 'implementation'):
             consumer.claim(decision, 'wrong-kind')
 
+    def test_map_links_keep_decision_titles_with_leading_body_whitespace(self):
+        r = self.records
+        effort = r.create_effort('search', 'Search', 'Find notes', 'Ready specification')
+        map_ref = r.chart(effort, 'Search', 'Ready specification', 'Ranking')
+        old = r.add_decision(effort, 'scope', 'Search scope', 'Titles or text?', 'grilling')
+        replacement = r.add_decision(effort, 'new-scope', 'Revised search scope', 'Full text now?', 'grilling')
+        for ref, title in ((old, 'Search scope'), (replacement, 'Revised search scope')):
+            path = self.root / ref
+            path.write_text(path.read_text(encoding='utf-8').replace('# ' + title, '\n \n\t\n# ' + title), encoding='utf-8')
+        claim = r.claim_decision(old, 'human-session')
+        r.resolve_decision(old, claim['token'], 'Titles', human_answer='Titles, please.')
+        with self.subTest(operation='resolve'):
+            body = r.read(map_ref)['body']
+            self.assertIn('[Search scope](decisions/01-scope.md)', body)
+            self.assertNotIn('[](', body)
+        r.supersede_decision(old, replacement, 'Full text is now required.')
+        with self.subTest(operation='supersede'):
+            body = r.read(map_ref)['body']
+            self.assertIn('[Revised search scope](decisions/02-new-scope.md)', body)
+            self.assertNotIn('[](', body)
+
     def test_supersession_retains_answers_and_requires_dependent_review(self):
         r = self.records
         effort = r.create_effort('search', 'Search', 'Find notes', 'Ready specification')
