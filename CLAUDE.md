@@ -26,6 +26,14 @@ No em-dashes anywhere in this repo's prose (`SKILL.md` files, docs, `README.md`,
 
 ## Agent skills
 
+### Issue tracker
+
+Use local Markdown under `work/<effort>/`. Before creating, fetching, selecting, or updating specs, implementation issues, or Wayfinder records, read [the repository tracker convention](docs/agents/issue-tracker.md). This explicit convention overrides skill defaults for tracker locations.
+
 ### Triage labels
 
 Canonical names, unchanged. See `docs/agents/triage-labels.md`. Issues are judged against [`SCOPE.md`](./SCOPE.md).
+
+### Domain docs
+
+Use the existing single-context glossary and ADRs. Before domain exploration or proposals, read [the domain documentation rules](docs/agents/domain.md).

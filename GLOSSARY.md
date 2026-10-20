@@ -4,6 +4,13 @@ A collection of agent skills (slash commands and behaviors) loaded by Claude Cod
 
 ## Language
 
+**Effort**:
+A bounded piece of work pursuing one requested outcome across discovery, decisions, specification, and implementation. An effort can span multiple conversations and contain multiple Issues.
+_Avoid_: session (when referring to the whole effort)
+
+**Work queue**:
+An ordered set of efforts considered for upcoming work. Position expresses priority; an effort's current readiness determines whether it can be selected.
+
 **Issue tracker**:
 The tool that hosts a repo's issues: GitHub Issues, Linear, a local `.scratch/` markdown convention, or similar. Skills like `to-tickets`, `to-spec`, and `triage` read from and write to it.
 _Avoid_: backlog manager, backlog backend, issue host
