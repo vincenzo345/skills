@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/04-spec-reconciliation.md
 effort: work/wayfinder-reliability
 order: 4
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -21,12 +21,12 @@ blocked_by:
 
 ## Acceptance criteria
 
-- [ ] Material changes increment the revision and retain resolvable previous content. Editorial corrections do not require false material revisions.
-- [ ] Current spec and effort references agree; publication uses the same coordination boundary as claims. Interrupted publication fails closed and retries preserve retained history.
-- [ ] All mismatched unfinished issues initially fail currency checks. Unaffected issues advance with explicit no-impact rationale; affected issues update scope and readiness, with renewed approval when the breakdown materially changes.
-- [ ] Completed issues retain their historical basis. Follow-up requirements become new work rather than retroactively changing completed evidence.
-- [ ] Active consumers revalidate before publishing results or completing; changed bases pause dependent work without stealing claims or discarding existing work.
-- [ ] Fixtures cover affected and unaffected siblings, historical lookup, interrupted publication, concurrent publication/acquisition, and completed-work preservation.
+- [x] Material changes increment the revision and retain resolvable previous content. Editorial corrections do not require false material revisions.
+- [x] Current spec and effort references agree; publication uses the same coordination boundary as claims. Interrupted publication fails closed and retries preserve retained history.
+- [x] All mismatched unfinished issues initially fail currency checks. Unaffected issues advance with explicit no-impact rationale; affected issues update scope and readiness, with renewed approval when the breakdown materially changes.
+- [x] Completed issues retain their historical basis. Follow-up requirements become new work rather than retroactively changing completed evidence.
+- [x] Active consumers revalidate before publishing results or completing; changed bases pause dependent work without stealing claims or discarding existing work.
+- [x] Fixtures cover affected and unaffected siblings, historical lookup, interrupted publication, concurrent publication/acquisition, and completed-work preservation.
 
 ## Boundary
 
@@ -41,3 +41,7 @@ Vince approved the seven-slice breakdown and its dependency graph on 2026-10-20 
 ## Delivery requirements
 
 Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-shared-by-every-slice), including synchronized skill documentation/router guidance, appropriate tests, package validation, and integration-branch confirmation. No work has been claimed or started by publishing this record.
+
+## Completion evidence
+
+Integrated in f0f045d. Combined 23 work tests pass, including interrupted publication recovery, immutable history, individual impact reconciliation, publication/acquisition race and stale active-claim rejection. Package validation passes.

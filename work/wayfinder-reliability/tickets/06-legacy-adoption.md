@@ -4,14 +4,14 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/06-legacy-adoption.md
 effort: work/wayfinder-reliability
 order: 6
-state: open
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 blocked_by:
-  - work/wayfinder-reliability/tickets/02-work-selection.md
-  - work/wayfinder-reliability/tickets/04-spec-reconciliation.md
+- work/wayfinder-reliability/tickets/02-work-selection.md
+- work/wayfinder-reliability/tickets/04-spec-reconciliation.md
 ---
 
 # 06: Adopt legacy records without breaking references

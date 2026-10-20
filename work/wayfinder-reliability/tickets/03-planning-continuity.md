@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/03-planning-continuity.md
 effort: work/wayfinder-reliability
 order: 3
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -21,12 +21,12 @@ blocked_by:
 
 ## Acceptance criteria
 
-- [ ] Maps and decision tickets live separately from implementation issues and remain authoritative for planning answers. Discovery holds ordinary requirements and findings; glossary and qualifying ADRs remain project-wide.
-- [ ] Charting records the destination, breadth-first decisions, and fog, then stops with the map link, next decision by name, and next invocation or required input.
-- [ ] Replies to an unresolved decision continue that decision. One non-research resolution per session and the research exception remain intact.
-- [ ] Human judgments stay unresolved until answered. Proposed experiments name the destination decision and explain how possible results inform it before becoming prerequisites.
-- [ ] Invalidated decisions preserve earlier answers, identify replacements, update current references, and trigger dependent review. A session ending never marks the map complete by itself.
-- [ ] Structural fixtures verify artifact identity and handoff links. Separate synthetic behavioral replays cover continuation, human judgment, legitimate stops, and the Articles scope-drift regression; reports distinguish observed behavior from structural proof.
+- [x] Maps and decision tickets live separately from implementation issues and remain authoritative for planning answers. Discovery holds ordinary requirements and findings; glossary and qualifying ADRs remain project-wide.
+- [x] Charting records the destination, breadth-first decisions, and fog, then stops with the map link, next decision by name, and next invocation or required input.
+- [x] Replies to an unresolved decision continue that decision. One non-research resolution per session and the research exception remain intact.
+- [x] Human judgments stay unresolved until answered. Proposed experiments name the destination decision and explain how possible results inform it before becoming prerequisites.
+- [x] Invalidated decisions preserve earlier answers, identify replacements, update current references, and trigger dependent review. A session ending never marks the map complete by itself.
+- [x] Structural fixtures verify artifact identity and handoff links. Separate synthetic behavioral replays cover continuation, human judgment, legitimate stops, and the Articles scope-drift regression; reports distinguish observed behavior from structural proof.
 
 ## Boundary
 
@@ -41,3 +41,7 @@ Vince approved the seven-slice breakdown and its dependency graph on 2026-10-20 
 ## Delivery requirements
 
 Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-shared-by-every-slice), including synchronized skill documentation/router guidance, appropriate tests, package validation, and integration-branch confirmation. No work has been claimed or started by publishing this record.
+
+## Completion evidence
+
+Integrated in 241cb51. Planning discovery/decision/spec/issue/fresh-consumer handoff and dependent-review fixtures pass. Combined integrated work suite: 23 tests. Bounded charting replay produced real artifacts in a temporary repo and stopped with no human decisions resolved; additional replay evidence is recorded in validation.

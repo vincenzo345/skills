@@ -4,14 +4,14 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/05-concurrent-implementation.md
 effort: work/wayfinder-reliability
 order: 5
-state: open
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 blocked_by:
-  - work/wayfinder-reliability/tickets/02-work-selection.md
-  - work/wayfinder-reliability/tickets/04-spec-reconciliation.md
+- work/wayfinder-reliability/tickets/02-work-selection.md
+- work/wayfinder-reliability/tickets/04-spec-reconciliation.md
 ---
 
 # 05: Resume claims and integrate concurrent implement-spec workers safely
