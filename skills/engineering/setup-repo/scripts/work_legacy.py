@@ -89,7 +89,7 @@ class Legacy:
                     raise self.error('effort relocation is unsupported; map individual records')
                 meta = record['metadata']
                 states = {'implementation': {'open', 'in-progress', 'waiting', 'completed', 'canceled', 'superseded'},
-                          'decision': {'unresolved', 'resolved', 'superseded', 'canceled'},
+                          'decision': {'open', 'resolved', 'superseded', 'canceled'},
                           'map': {'open', 'completed', 'superseded', 'canceled'},
                           'spec': {'current', 'completed', 'superseded', 'canceled'}}
                 if meta.get('state') not in states[meta['kind']]:
@@ -100,8 +100,9 @@ class Legacy:
                     raise self.error('missing basis or dependency information')
                 # Verify dependency identities exist without requiring them to be complete.
                 for dep in record['metadata'].get('blocked_by', []):
-                    if r._read(dep)['metadata']['kind'] != 'implementation':
-                        raise self.error(f'{dep}: blocker is not implementation')
+                    expected = 'decision' if meta['kind'] == 'decision' else 'implementation'
+                    if r._read(dep)['metadata']['kind'] != expected:
+                        raise self.error(f'{dep}: blocker is not {expected}')
                 basis = record['metadata'].get('basis')
                 if basis is not None:
                     if not isinstance(basis, dict) or not isinstance(basis.get('ref'), str) or type(basis.get('revision')) is not int:

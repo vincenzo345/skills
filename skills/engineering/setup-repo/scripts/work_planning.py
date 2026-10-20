@@ -7,6 +7,7 @@ Human evidence is supplied by the caller; this helper cannot authenticate a conv
 from datetime import datetime, timezone
 import argparse
 import json
+import os
 import re
 from pathlib import Path
 import sys
@@ -16,6 +17,15 @@ from work_records import WorkRecords, RecordError, atomic_write
 
 
 class PlanningRecords(WorkRecords):
+    def _relative_link(self, source, target, original=False):
+        target = self._canonical(target)
+        destination = self._raw_path(target) if original else self._path(target)
+        return os.path.relpath(destination, self._path(source).parent).replace('\\', '/')
+
+    def _reference_pattern(self, source, target):
+        return '(?:' + '|'.join(re.escape(link) for link in {
+            self._relative_link(source, target), self._relative_link(source, target, original=True)}) + ')'
+
     def _overview(self, effort):
         record = self._read(effort + '/README.md')
         if record['metadata'].get('kind') != 'effort' or record['metadata'].get('state') != 'active':
@@ -72,13 +82,13 @@ class PlanningRecords(WorkRecords):
             map_ref = overview['metadata'].get('current_map')
             if not map_ref or self._read(map_ref)['metadata'].get('state') != 'open':
                 raise RecordError('an open current map is required')
-            children = list(self._path(effort + '/decisions').glob('*.md'))
-            orders = [self._read(p.relative_to(self.authority).as_posix())['metadata'].get('order') for p in children]
+            children = {self._canonical(p.relative_to(self.authority).as_posix()) for p in self._path(effort + '/decisions').glob('*.md')}
+            orders = [self._read(ref)['metadata'].get('order') for ref in children]
             if any(type(n) is not int or n < 1 for n in orders) or len(set(orders)) != len(orders):
                 raise RecordError('invalid or duplicate decision order')
             order = max(orders, default=0) + 1
             ref = f'{effort}/decisions/{order:02d}-{self._slug(slug)}.md'
-            blockers = list(blocked_by)
+            blockers = [self._canonical(ref) for ref in blocked_by]
             if len(set(blockers)) != len(blockers):
                 raise RecordError('duplicate decision blockers')
             for blocker in blockers:
@@ -110,6 +120,7 @@ class PlanningRecords(WorkRecords):
             raise RecordError('owner is required')
         with self.locked():
             self._authority()
+            target = self._canonical(target)
             self._ready_decision(target)
             claims = self._json('claims.json', {})
             if target in claims:
@@ -124,6 +135,7 @@ class PlanningRecords(WorkRecords):
             raise RecordError('answer is required')
         with self.locked():
             self._authority()
+            target = self._canonical(target)
             record = self._ready_decision(target)
             claims = self._json('claims.json', {})
             if claims.get(target, {}).get('token') != token:
@@ -138,9 +150,9 @@ class PlanningRecords(WorkRecords):
             map_ref = record['metadata']['map']
             map_record = self._read(map_ref)
             title = record['body'].lstrip().splitlines()[0].lstrip('# ').strip()
-            relative = Path(target).relative_to(Path(map_ref).parent).as_posix()
+            relative = self._relative_link(map_ref, target)
             entry = f'- [{title}]({relative}): resolved; read the recorded answer.'
-            pattern = re.compile(r'^- \[[^\n]*?\]\(' + re.escape(relative) + r'(?:#[^)]*)?\):[^\n]*$', re.M)
+            pattern = re.compile(r'^- \[[^\n]*?\]\(' + self._reference_pattern(map_ref, target) + r'(?:#[^)]*)?\):[^\n]*$', re.M)
             match = pattern.search(map_record['body'])
             if match:
                 history = match.group().partition('; [prior answer]')[2]
@@ -159,6 +171,10 @@ class PlanningRecords(WorkRecords):
             raise RecordError('distinct replacement and supersession reason are required')
         with self.locked():
             self._authority()
+            target = self._canonical(target)
+            replacement = self._canonical(replacement)
+            if target == replacement:
+                raise RecordError('distinct replacement is required')
             prior = self._decision(target)
             successor = self._decision(replacement)
             if prior['metadata'].get('state') not in {'open', 'resolved'}:
@@ -168,12 +184,12 @@ class PlanningRecords(WorkRecords):
             if target in self._json('claims.json', {}):
                 raise RecordError('release the prior decision claim before supersession')
             effort = prior['metadata']['effort']
-            records = {p.relative_to(self.authority).as_posix(): self._read(p.relative_to(self.authority).as_posix())
+            records = {self._canonical(p.relative_to(self.authority).as_posix()): self._read(p.relative_to(self.authority).as_posix())
                        for p in self._path(effort + '/decisions').glob('*.md')}
             affected = {target}
             while True:
                 expanded = affected | {ref for ref, record in records.items()
-                                       if set(record['metadata'].get('blocked_by', [])) & affected}
+                                       if {self._canonical(blocker) for blocker in record['metadata'].get('blocked_by', [])} & affected}
                 if expanded == affected:
                     break
                 affected = expanded
@@ -188,19 +204,19 @@ class PlanningRecords(WorkRecords):
                 if target not in reviews:
                     reviews.append(target)
                 record['metadata']['blocked_by'] = list(dict.fromkeys(
-                    replacement if blocker == target else blocker for blocker in record['metadata']['blocked_by']))
-                record['body'] += f'\n## Dependent review required\n\n[{target}]({Path(target).name}) was superseded by [{replacement}]({Path(replacement).name}): {reason}\n'
+                    replacement if self._canonical(blocker) == target else self._canonical(blocker) for blocker in record['metadata']['blocked_by']))
+                record['body'] += f'\n## Dependent review required\n\n[{target}]({self._relative_link(ref, target)}) was superseded by [{replacement}]({self._relative_link(ref, replacement)}): {reason}\n'
                 self._write(ref, **record)
             prior['metadata'].update(state='superseded', superseded_by=replacement)
-            prior['body'] += f'\n## Superseded\n\nReplacement: [{replacement}]({Path(replacement).name}). {reason}\n'
+            prior['body'] += f'\n## Superseded\n\nReplacement: [{replacement}]({self._relative_link(target, replacement)}). {reason}\n'
             self._write(target, **prior)
             map_ref = prior['metadata']['map']
             map_record = self._read(map_ref)
-            old_link = Path(target).relative_to(Path(map_ref).parent).as_posix()
-            new_link = Path(replacement).relative_to(Path(map_ref).parent).as_posix()
+            old_link = self._reference_pattern(map_ref, target)
+            new_link = self._relative_link(map_ref, replacement)
             title = successor['body'].lstrip().splitlines()[0].lstrip('# ').strip()
             lines = map_record['body'].splitlines()
-            pattern = re.compile(r'^- \[[^\n]*?\]\((' + re.escape(old_link) + r'(?:#[^)]*)?)\):')
+            pattern = re.compile(r'^- \[[^\n]*?\]\((' + old_link + r'(?:#[^)]*)?)\):')
             updated = []
             for line in lines:
                 match = pattern.match(line)
@@ -215,6 +231,7 @@ class PlanningRecords(WorkRecords):
             raise RecordError('dependent review rationale is required')
         with self.locked():
             self._authority()
+            target = self._canonical(target)
             record = self._decision(target)
             if record['metadata'].get('state') not in {'open', 'resolved'}:
                 raise RecordError('only current decisions can be reviewed')
