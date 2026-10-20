@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/02-work-selection.md
 effort: work/wayfinder-reliability
 order: 2
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -13,8 +13,8 @@ blocked_by:
 - work/wayfinder-reliability/tickets/01-local-issue-handoff.md
 integration:
   ref: integration/wayfinder-reliability
-  commit: 4481b939df9427e909f6aeb55d8af61f9f91b67d
-  verified_tip: 4d07c8576b66de84e3d79339db688cad81fcca43
+  commit: c472f6f344a2d8121248c5cad6456f912a520786
+  verified_tip: c472f6f344a2d8121248c5cad6456f912a520786
 ---
 
 # 02: Select eligible work by queue priority or explicit scope
@@ -50,3 +50,7 @@ Integrated in 4481b93. Eight selection tests plus six handoff tests pass; packag
 ## Final acceptance follow-up
 
 Reopened after a temporary reproduction showed missing current_spec metadata could let complete_effort bypass an unfinished spec. Current artifact pointers must be present with valid shape or explicit null.
+
+## Completion evidence
+
+Final acceptance guard integrated at c472f6f. Ten selection tests passed after integration; independent reviewer reproduced rejection of missing current_spec while explicit null remains valid. Pointer shape, linked artifact kind/effort/revision, and completion states are validated. Worker also passed six claim and five planning tests.

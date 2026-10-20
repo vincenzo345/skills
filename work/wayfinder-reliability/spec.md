@@ -4,7 +4,7 @@ kind: spec
 id: work/wayfinder-reliability/spec.md
 effort: work/wayfinder-reliability
 revision: 2
-state: current
+state: completed
 readiness: ready-for-agent
 ---
 
@@ -165,3 +165,7 @@ Revision 2 records the completed contract design and additional acceptance cases
 Metadata adoption: the active effort/spec gained the designed typed envelope during authorized implementation. Scope remains revision 2; historical work was not migrated. The current implement-spec instruction supersedes earlier session-only implementation restrictions.
 
 Editorial delivery update: the notes now point to published issues and execution evidence. Requirements and acceptance scope remain revision 2.
+
+## Completion evidence
+
+All seven approved slices are integrated with verified receipts. Final Windows suite passed60 tests with pinned PyYAML6.0.3; preservation27, package, manifest, version and whitespace checks passed. Independent standards/spec reviews and targeted reproductions verified corrections. See validation.md for bounded behavioral evidence and intentional remote capability limits. Installation follows from this validated commit.

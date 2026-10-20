@@ -1,6 +1,6 @@
 # Implementation validation
 
-Status: in progress
+Status: validated; installation pending
 
 ## Execution basis
 
@@ -81,9 +81,11 @@ A focused follow-up confirmed two P2 remote-preview discrepancies: explicit self
 
 Final acceptance follow-up: a separate temporary reproduction showed `complete_effort` could treat a missing current-spec pointer as null and complete an effort with an unfinished spec. Ticket 02 was reopened for explicit pointer-presence/shape and artifact-identity validation, including regressions that preserve legitimate explicit-null records. This correction precedes final installation.
 
+That fix merged at `c472f6f`. Ten selection tests passed after integration, and the spec reviewer independently confirmed the missing-pointer rejection and valid explicit-null path. Completion now verifies linked artifact kind, effort, revision, and terminal state. Issue publication and planning share the pointer-shape gate. All five confirmed spec findings and both actionable standards findings are resolved.
+
 ## Final results
 
-All seven issues have integration receipts; ticket 02 has the final acceptance follow-up described above. The full script suite passed 58 tests in 130.579 seconds with Python 3.12.8 and pinned PyYAML 6.0.3 in an isolated environment. It will run again after the final pointer-gate correction.
+All seven issues have completion evidence and integration receipts; no implementation claims remain. The final full script suite passed all 60 tests in 145.869 seconds: 52 work-record/remote-contract cases and eight existing validator/installer cases. Runtime: Windows, Python 3.12.8 with pinned PyYAML 6.0.3 in an isolated environment. The earlier 58-test pass preceded the final pointer correction and is not substituted for this final run.
 
 Completed checks:
 
@@ -93,4 +95,16 @@ Completed checks:
 - `claude plugin validate . --strict` passed.
 - Working and integrated diffs passed whitespace checks.
 
-Final suite acceptance and installation remain pending.
+No actionable review finding remains. The specification is accepted against revision 2; installation remains pending.
+
+## Delivery boundaries
+
+- Local claims were exercised with real competing processes, stale worktrees, and process termination on Windows. The guarantee is one declared checkout and a shared Git coordinator, not independent clones, machines, or unverified network filesystems.
+- CI includes this integration branch and preserves the existing v2 target and release behavior. Hosted CI and the Linux job were not executed in this local delivery.
+- Behavioral observations are bounded Codex subagent replays with supplied synthetic human turns, at the recorded source revisions. They do not establish universal model compliance. Claude Code was unauthenticated for a live behavioral replay.
+- Remote fixtures inspect normalized observations and fail closed; they are not a live provider client or successful exclusive-claim proof. GitHub/GitLab automatic concurrent claiming remains unsupported. A separately established controller is a deployment precondition, not a newly supplied service.
+- No historical repository work was migrated, and no release or remote push was performed.
+
+## Installation
+
+Pending the documented Windows installation and committed-snapshot verification.
