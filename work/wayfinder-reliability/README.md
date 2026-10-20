@@ -29,7 +29,7 @@ Original request: improve the skills repository after an application-planning se
 - Next action: restart Codex and Claude Code to refresh installed skill discovery.
 - Implementation authorization: the user explicitly invoked implement-spec for the approved tickets, integrated validation/review, and Windows installation. Earlier planning-only statements record the previous session boundary.
 
-The queue lists this effort for navigation and priority. The current implement-spec invocation supplies implementation authorization; the queue itself does not. Implementation and replay evidence is recorded in [validation](validation.md).
+The completed effort has left the active queue and retains its stable path. The explicit implement-spec request authorized this delivery; queue membership alone never does. Implementation and replay evidence is recorded in [validation](validation.md).
 
 ## Decisions and evidence
 
