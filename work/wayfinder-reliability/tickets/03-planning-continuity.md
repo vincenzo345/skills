@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/03-planning-continuity.md
 effort: work/wayfinder-reliability
 order: 3
-state: completed
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -57,3 +57,7 @@ The bounded continuation replay found that resolve_decision created an empty map
 ## Completion evidence
 
 Supersession fixes integrated at 4d07c85. Four planning regression tests passed, including anchored links and replacement resolution. Fresh Codex replay at 2fb68e9 preserved answers, review gates and session boundaries, rejected an unrelated article prerequisite, and required no manual repair for newly generated map entries. Anchored path is covered deterministically; earlier fixture damage remains disclosed in validation.md.
+
+## Integrated review follow-up
+
+Reopened under the user-authorized discrepancy fix: Spec review reproduced missing decision dependencies being treated as an empty list.

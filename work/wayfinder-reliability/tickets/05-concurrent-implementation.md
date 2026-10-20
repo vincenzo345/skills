@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/05-concurrent-implementation.md
 effort: work/wayfinder-reliability
 order: 5
-state: completed
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -46,3 +46,7 @@ Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-
 ## Completion evidence
 
 Integrated at 39aa75d. Five ownership/integration scenarios and the combined 29-test work-record suite passed on Windows; token resume, stopped-worker recovery, stale worktrees, killed lock holder, and verified commit ancestry exercised.
+
+## Integrated review follow-up
+
+Reopened under the user-authorized discrepancy fix: Spec review reproduced direct-spec completion after child publication, stranding the child.
