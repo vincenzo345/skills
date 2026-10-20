@@ -64,3 +64,11 @@ Use `select [target]` only to preview. `select-and-claim [target] --owner SESSIO
 Known ineligibility is reported separately from indeterminate authority. Missing readiness, bad ordering, unknown blocker outcomes, and inaccessible records stop the affected scope; do not silently choose lower-priority work. A direct-spec claim conflicts with every child claim based on it. Claims retain the acquired basis for later reconciliation checks.
 
 `complete TARGET --token TOKEN --evidence TEXT` completes the claimed issue or direct spec after acceptance and integration verification. A completed spec cannot run again. `complete-effort EFFORT --evidence TEXT` requires terminal issues, completed current spec/map when present, and no outstanding claims. It records the outcome and removes the queue link while preserving every artifact path. Finishing a spec alone never declares the overall effort complete.
+
+## Resume, recovery, and integrated completion
+
+`resume <ref> --token ...` returns the existing claim only after live eligibility and acquired basis validation. `recover <ref> --expected-token ... --owner ... --stopped-evidence ...` atomically replaces ownership after the controller establishes worker stoppage. The prior claim, including its worktree pointer, remains in `recovered_from`. A narrative alone cannot prove stoppage: inspect the worker/process controller first. If stoppage is unknown, leave the claim blocking. No clock-based takeover is supported.
+
+After a material revision, reconcile the issue first, then have the owning worker review retained work and call `acknowledge-basis --token ... --evidence ...`. This records both bases and the review; it does not infer impact or approve changed slices.
+
+For implement-spec, each worker owns an individual issue. `complete --integration-ref <branch> --commit <accepted-commit>` verifies that commit is an ancestor of the integration tip and stores a receipt. Acceptance evidence remains the caller's responsibility. Ordinary standalone completion can omit the receipt; decomposed-spec finalization cannot. `complete-spec <ref> --expected-revision N --evidence ...` requires every child completed with a valid integrated receipt and no overlapping claims. Finalize the effort separately after its overall outcome is verified.
