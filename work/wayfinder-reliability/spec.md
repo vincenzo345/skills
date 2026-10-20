@@ -168,4 +168,4 @@ Editorial delivery update: the notes now point to published issues and execution
 
 ## Completion evidence
 
-All seven approved slices are integrated with verified receipts. Final Windows suite passed60 tests with pinned PyYAML6.0.3; preservation27, package, manifest, version and whitespace checks passed. Independent standards/spec reviews and targeted reproductions verified corrections. See validation.md for bounded behavioral evidence and intentional remote capability limits. Installation follows from this validated commit.
+All seven approved slices are integrated with verified receipts. Final Windows suite passed 60 tests with pinned PyYAML 6.0.3; 27 preservation tests, package, manifest, version and whitespace checks passed. Independent standards/spec reviews and targeted reproductions verified corrections. See validation.md for bounded behavioral evidence and intentional remote capability limits. Installation follows from this validated commit.

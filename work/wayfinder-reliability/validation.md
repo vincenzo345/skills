@@ -1,6 +1,6 @@
 # Implementation validation
 
-Status: validated; installation pending
+Status: completed, validated, and installed
 
 ## Execution basis
 
@@ -95,7 +95,7 @@ Completed checks:
 - `claude plugin validate . --strict` passed.
 - Working and integrated diffs passed whitespace checks.
 
-No actionable review finding remains. The specification is accepted against revision 2; installation remains pending.
+No actionable review finding remains. The specification is accepted against revision 2 and the Windows installation is verified.
 
 ## Delivery boundaries
 
@@ -107,4 +107,12 @@ No actionable review finding remains. The specification is accepted against revi
 
 ## Installation
 
-Pending the documented Windows installation and committed-snapshot verification.
+The documented Windows procedure completed:
+
+- `python scripts/install_global_v2.py` refreshed all 32 promoted skills. Every link in both Codex discovery roots resolves to this checkout.
+- `python scripts/prepare_claude_plugin.py` produced `C:\Users\vince\.claude\skillsrepo-v2-snapshots\00ff5b94ebab` from the validated commit.
+- The existing `skillsrepo-v2` marketplace was removed and re-added from that snapshot; `skillsrepo-v2@skillsrepo-v2` was installed for the user.
+- `claude plugin details` reports version 2.1.0 and all 32 expected skills. All 111 installed skill files match the committed Git archive byte-for-byte, accounting for Git's normalized line endings. The upstream duplicate plugin remains absent.
+- Both installed helper locations successfully read this repository's completed authoritative specification.
+
+Subsequent commits contain completion evidence and queue cleanup only; the installed skill source is exactly `00ff5b94ebab`. Restart Codex and Claude Code to refresh discovery. This installation verification is separate from the unavailable authenticated Claude behavioral replay.
