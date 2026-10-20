@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/02-work-selection.md
 effort: work/wayfinder-reliability
 order: 2
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -21,13 +21,13 @@ blocked_by:
 
 ## Acceptance criteria
 
-- [ ] Queue order controls cross-effort priority; issue order controls selection within an effort. Blocked or claimed issues do not prevent independent eligible work.
-- [ ] Explicit references override queue position and membership without bypassing eligibility. An invalid explicit target never falls through to unrelated work.
-- [ ] Bare selection excludes decisions, history, waiting/terminal efforts, stale bases, and undecomposed specs. Missing readiness, invalid ordering, and unavailable authority have distinct diagnostics.
-- [ ] An indeterminate higher-priority effort prevents claiming that a lower effort is first eligible. Known ineligibility permits traversal to continue.
-- [ ] An explicitly selected undecomposed spec and a self-contained issue remain supported. Decomposed spec selection uses its issue graph.
-- [ ] Whole-spec and child-issue claims conflict. Completed specs cannot authorize repeat execution; completed efforts leave the queue without changing paths.
-- [ ] Fixtures cover multiple efforts, independent blocked work, explicit overrides, optional inputs, scope conflicts, and no-eligible-work explanations.
+- [x] Queue order controls cross-effort priority; issue order controls selection within an effort. Blocked or claimed issues do not prevent independent eligible work.
+- [x] Explicit references override queue position and membership without bypassing eligibility. An invalid explicit target never falls through to unrelated work.
+- [x] Bare selection excludes decisions, history, waiting/terminal efforts, stale bases, and undecomposed specs. Missing readiness, invalid ordering, and unavailable authority have distinct diagnostics.
+- [x] An indeterminate higher-priority effort prevents claiming that a lower effort is first eligible. Known ineligibility permits traversal to continue.
+- [x] An explicitly selected undecomposed spec and a self-contained issue remain supported. Decomposed spec selection uses its issue graph.
+- [x] Whole-spec and child-issue claims conflict. Completed specs cannot authorize repeat execution; completed efforts leave the queue without changing paths.
+- [x] Fixtures cover multiple efforts, independent blocked work, explicit overrides, optional inputs, scope conflicts, and no-eligible-work explanations.
 
 ## Basis and approval
 
@@ -38,3 +38,7 @@ Vince approved the seven-slice breakdown and its dependency graph on 2026-10-20 
 ## Delivery requirements
 
 Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-shared-by-every-slice), including synchronized skill documentation/router guidance, appropriate tests, package validation, and integration-branch confirmation. No work has been claimed or started by publishing this record.
+
+## Completion evidence
+
+Integrated in 4481b93. Eight selection tests plus six handoff tests pass; package validation passes. Covers explicit scope, queue priority, independent blocked work, historical and stale inputs, unavailable authority, claim conflicts and completion.
