@@ -55,9 +55,11 @@ class PlanningRecords(WorkRecords):
             path = self._path(ref)
             body = path.read_text(encoding='utf-8') if path.exists() else '# Discovery\n'
             atomic_write(path, body.rstrip() + '\n\n' + finding.strip() + '\n')
+            if not overview['metadata'].get('current_map') and not overview['metadata'].get('current_spec'):
+                overview['metadata'].update(stage='discovery', next_action='Continue the recorded open questions or synthesize the agreed specification.')
             if '[Discovery](discovery.md)' not in overview['body']:
                 overview['body'] += '\n[Discovery](discovery.md) holds ordinary requirements and open questions.\n'
-                self._write(effort + '/README.md', **overview)
+            self._write(effort + '/README.md', **overview)
             return ref
 
     def add_decision(self, effort, slug, title, question, decision_type, blocked_by=()):
