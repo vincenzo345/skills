@@ -42,6 +42,15 @@ The third step exposed a helper defect: the map resolution link had an empty lab
 
 These observations are bounded model behavior in a controlled subagent session. They are not an authenticated Claude Code CLI run, do not establish general compliance, and do not authenticate human evidence beyond the supplied test turns.
 
+Follow-up observations:
+
+4. Requiring full-text search preserved the title-only answer as superseded and gated Ranking for impact review. This exposed a second defect: a prior map URL ending in `#resolution` was not replaced. No manual repair was applied to this result.
+5. The title and anchored-link fixes were integrated at `4d07c85`. Four deterministic planning tests passed, including resolving an old answer, superseding its anchored pointer, and resolving the replacement without duplicate current entries.
+6. A fresh continuation using source `2fb68e9` required title-only search again. It preserved both prior answers and Ranking's review gates. Newly generated map entries had nonempty names, retained the prior-answer link, and changed from unresolved to resolved without manual repair. This continuation exercised an unanchored replacement; the anchored path has deterministic regression evidence. The old damaged entry from the earlier run was not retroactively repaired. A cosmetic `answer.;` punctuation artifact remained.
+7. Asked whether a full sample article rewrite was necessary before storage planning, the agent rejected it as a prerequisite because no relationship to a storage decision was established. It asked the unresolved Offline storage question, retained that decision open for human input, and created no article or blocking rewrite task.
+
+The temporary fixture remains outside the repository. Its unfinished storage claim belongs only to that replay and is not a production implementation claim.
+
 ## Final results
 
 Pending integration, review, and installation.

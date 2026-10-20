@@ -8,8 +8,7 @@ current_spec:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 current_map: null
-next_action: Integrate and validate the claimed selection, planning, and revision
-  slices.
+next_action: Finish legacy and remote validation, review integrated changes, and install.
 ---
 
 # Wayfinder workflow reliability
@@ -27,10 +26,10 @@ Original request: improve the skills repository after an application-planning se
 - Contract design: [Shared work-record contract](design.md), including metadata, lifecycle, revisions, readiness, dependencies, claims, selection, and handoff walkthroughs.
 - Implementation issues: [Seven published slices](issue-plan.md#published-issues), each with its own authoritative record.
 - Approved breakdown: [Seven vertical implementation slices](issue-plan.md), including dependencies, acceptance criteria, and approval evidence.
-- Next action: integrate and validate the claimed selection, planning, and revision slices; dispatch later work only when its blockers complete.
+- Next action: finish legacy and remote validation, review the integrated changes, and follow the Windows installation procedure.
 - Implementation authorization: the user explicitly invoked implement-spec for the approved tickets, integrated validation/review, and Windows installation. Earlier planning-only statements record the previous session boundary.
 
-The queue lists this effort for navigation and priority. The current implement-spec invocation supplies implementation authorization; the queue itself does not. No new queue-selection behavior is installed yet.
+The queue lists this effort for navigation and priority. The current implement-spec invocation supplies implementation authorization; the queue itself does not. Implementation and replay evidence is recorded in [validation](validation.md).
 
 ## Decisions and evidence
 

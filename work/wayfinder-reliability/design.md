@@ -1,6 +1,6 @@
 # Shared work-record contract
 
-Status: design complete for issue planning; not implemented
+Status: design accepted for implementation; delivery evidence in [validation](validation.md)
 Date: 2026-10-20
 Basis: [specification revision 1](history/spec-r1.md)
 Current scope: [specification revision 2](spec.md)
@@ -11,7 +11,7 @@ Use a small typed record envelope in Markdown, explicit references, and a shared
 
 The [accepted ADR](../../docs/adr/0001-stable-effort-workspaces.md) settles stable effort folders, separated history, and remote tracker authority. The [discovery record](../../docs/plans/wayfinder-reliability.md) supplies the failure case and upstream comparison. Their accepted decisions remain unchanged. The metadata, state names, revision format, and protocols below are technical design recommendations selected for this handoff, not claims of earlier user approval.
 
-This design defines future behavior. Existing documents in this effort retain their current format until adoption. No skill, tracker, installer, or queue consumer is changed here. Approval of an implementation breakdown remains a subsequent to-tickets activity.
+This document records the design decisions. The subsequently approved [implementation breakdown](issue-plan.md) and the explicit implement-spec request authorize delivery. The active effort adopted the typed envelope during implementation; historical documents retain their original formats.
 
 ## One source for each fact
 
