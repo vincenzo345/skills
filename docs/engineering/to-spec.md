@@ -4,7 +4,7 @@
 
 It does not interview you. When you reach for it, the deciding is already done. So it synthesises what is known (from the thread, the codebase, your `GLOSSARY.md` and ADRs) and does not start a new round of questions. The spec records decisions you already made. It is not a place to make new ones.
 
-For local work, the spec stays in its identified effort with a durable current pointer. Creating a ready spec creates no implementation issues and does not approve a future breakdown. Material revisions preserve the prior basis.
+For local work, the spec stays in its identified effort with a durable current pointer. Creating a ready spec creates no implementation issues and does not approve a future breakdown. Material revisions preserve the prior basis and make unfinished issues with an older basis ineligible until individually reconciled. An unaffected issue needs a no-impact rationale; changed slices need updated criteria, readiness, and approval. Completed issues keep their original basis. Interrupted publication can resume without overwriting retained history, and active workers retain their work and claims while requirements are reconciled.
 
 ## When to reach for it
 

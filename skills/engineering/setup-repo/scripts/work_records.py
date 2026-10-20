@@ -212,20 +212,161 @@ class WorkRecords:
             self._write(effort + '/README.md', meta, body)
             return effort
 
+    def _assert_no_pending_publication(self, effort):
+        pending = self._json('publications.json', {})
+        if effort in pending:
+            raise RecordError(f'{effort}: incomplete spec publication; resume publication before selecting work')
+
+    def _apply_publication(self, effort, transaction):
+        # A durable journal survives interruption between the two atomic writes.
+        history = transaction.get('history')
+        if history:
+            path = self._path(history['ref'])
+            if path.exists():
+                if path.read_text(encoding='utf-8') != history['text']:
+                    raise RecordError('retained history differs; reconcile publication without overwriting history')
+            else:
+                atomic_write(path, history['text'])
+        for ref, text in transaction['writes'].items():
+            path = self._path(ref)
+            current = path.read_text(encoding='utf-8') if path.exists() else None
+            if current not in (transaction['before'][ref], text):
+                raise RecordError(f'{ref}: changed during interrupted publication; reconcile explicitly')
+            atomic_write(path, text)
+        pending = self._json('publications.json', {})
+        pending.pop(effort)
+        self._save_json('publications.json', pending)
+        return effort + '/spec.md'
+
+    @staticmethod
+    def _record_text(record):
+        return '---\n' + yaml.safe_dump(record['metadata'], sort_keys=False, allow_unicode=True) + '---\n\n' + record['body'].lstrip()
+
+    def _publish_revision(self, effort, body, expected_revision, readiness, rationale, material):
+        self._assert_no_pending_publication(effort)
+        overview_ref = effort + '/README.md'
+        overview = self._read(overview_ref)
+        if overview['metadata'].get('state') != 'active':
+            raise RecordError('effort is not active')
+        ref = effort + '/spec.md'
+        previous = None
+        history = None
+        if expected_revision == 0:
+            if overview['metadata'].get('current_spec') or self._path(ref).exists():
+                raise RecordError('spec already exists; publish a retained revision rather than overwrite')
+            metadata = dict(schema=1, kind='spec', id=ref, effort=effort, revision=1, state='current', readiness=readiness)
+        else:
+            spec = self._read(ref)
+            metadata = spec['metadata']
+            if metadata.get('kind') != 'spec' or metadata.get('state') != 'current' or metadata.get('revision') != expected_revision or overview['metadata'].get('current_spec') != {'ref': ref, 'revision': expected_revision}:
+                raise RecordError('stale spec revision or inconsistent current pointer')
+            previous = self._path(ref).read_text(encoding='utf-8')
+            if material:
+                history = {'ref': effort + f'/history/spec-r{expected_revision}.md', 'text': previous}
+                metadata['revision'] += 1
+            metadata['readiness'] = readiness
+            body = body.rstrip() + '\n\n## Revision note\n\n' + rationale.strip() + '\n'
+        overview['metadata'].update(current_spec={'ref': ref, 'revision': metadata['revision']}, next_action='Review implementation issues against the current specification.' if previous else 'Review and approve implementation slices.')
+        transaction = {'history': history, 'before': {ref: previous, overview_ref: self._path(overview_ref).read_text(encoding='utf-8')}, 'writes': {ref: self._record_text({'metadata': metadata, 'body': body}), overview_ref: self._record_text(overview)}}
+        pending = self._json('publications.json', {})
+        pending[effort] = transaction
+        self._save_json('publications.json', pending)
+        return self._apply_publication(effort, transaction)
+
     def publish_spec(self, effort, body, readiness='ready-for-agent'):
         with self.locked():
             self._authority()
-            overview = self._read(effort + '/README.md')
-            if overview['metadata'].get('state') != 'active':
+            return self._publish_revision(effort, body, 0, readiness, '', True)
+
+    def revise_spec(self, effort, body, expected_revision, rationale, material=True, readiness='ready-for-agent'):
+        if type(expected_revision) is not int or expected_revision < 1:
+            raise RecordError('expected_revision must identify a positive published revision')
+        if not isinstance(rationale, str) or not rationale.strip():
+            raise RecordError('revision rationale is required')
+        with self.locked():
+            self._authority()
+            return self._publish_revision(effort, body, expected_revision, readiness, rationale, material)
+
+    def resume_publication(self, effort):
+        with self.locked():
+            self._authority()
+            pending = self._json('publications.json', {})
+            if effort not in pending:
+                raise RecordError('no incomplete publication for this effort')
+            return self._apply_publication(effort, pending[effort])
+
+    def read_revision(self, spec_ref, revision):
+        with self.locked():
+            self._authority()
+            spec = self._read(spec_ref)['metadata']
+            if spec['kind'] != 'spec' or type(revision) is not int or revision < 1:
+                raise RecordError('expected spec identity and positive revision')
+            effort = spec.get('effort')
+            self._assert_no_pending_publication(effort)
+            if spec.get('revision') == revision:
+                return self._path(spec_ref).read_text(encoding='utf-8')
+            if not effort or revision > spec.get('revision', 0):
+                raise RecordError('requested revision is unavailable')
+            path = self._path(effort + f'/history/spec-r{revision}.md')
+            if not path.exists():
+                raise RecordError('requested historical revision is unavailable')
+            return path.read_text(encoding='utf-8')
+
+    def reconcile_issue(self, target, rationale, affected=False, body=None, readiness=None, approval=None):
+        if not isinstance(rationale, str) or not rationale.strip():
+            raise RecordError('explicit reconciliation rationale is required')
+        with self.locked():
+            self._authority()
+            issue = self._read(target)
+            meta = issue['metadata']
+            if meta['kind'] != 'implementation' or meta.get('state') not in {'open', 'in-progress', 'waiting'}:
+                raise RecordError('reconciliation requires an unfinished issue; terminal evidence is immutable')
+            effort = meta.get('effort')
+            self._assert_no_pending_publication(effort)
+            overview = self._read(effort + '/README.md')['metadata']
+            basis = overview.get('current_spec')
+            if not basis or not meta.get('basis') or basis['ref'] != meta['basis']['ref']:
+                raise RecordError('reconciliation requires the same specification identity')
+            if overview.get('state') != 'active':
                 raise RecordError('effort is not active')
-            ref = effort + '/spec.md'
-            if overview['metadata'].get('current_spec') or self._path(ref).exists():
-                raise RecordError('spec already exists; publish a retained revision rather than overwrite')
-            meta = dict(schema=1, kind='spec', id=ref, effort=effort, revision=1, state='current', readiness=readiness)
-            self._write(ref, meta, body)
-            overview['metadata'].update(current_spec={'ref': ref, 'revision': 1}, stage='specification', next_action='Review and approve implementation slices.')
-            self._write(effort + '/README.md', **overview)
-            return ref
+            old_revision = meta['basis'].get('revision')
+            if type(old_revision) is not int or old_revision < 1 or old_revision > basis['revision']:
+                raise RecordError('invalid original basis revision')
+            spec = self._read(basis['ref'])['metadata']
+            if spec.get('kind') != 'spec' or spec.get('revision') != basis['revision'] or spec.get('state') != 'current':
+                raise RecordError('inconsistent current spec pointer')
+            if affected:
+                if not body or not readiness:
+                    raise RecordError('affected issues require updated scope and readiness')
+                if readiness == 'ready-for-agent' and not (isinstance(approval, str) and approval.strip()):
+                    raise RecordError('changed-slice approval is required before affected work is ready')
+                issue['body'] = body
+                meta['readiness'] = readiness
+            elif body is not None or readiness is not None:
+                raise RecordError('scope or readiness changes require affected reconciliation')
+            previous = meta['basis']['revision']
+            meta['basis'] = dict(basis)
+            issue['body'] = issue['body'].rstrip() + f'\n\n## Reconciliation r{previous} to r{basis["revision"]}\n\n' + ('Affected: ' if affected else 'No impact: ') + rationale.strip() + ('\n\nApproval: ' + approval.strip() if approval else '') + '\n'
+            self._write(target, **issue)
+            return target
+
+    @staticmethod
+    def _validate_claim_basis(target, record, claim):
+        meta = record['metadata']
+        live_basis = {'ref': target, 'revision': meta.get('revision')} if meta['kind'] == 'spec' else meta.get('basis')
+        if 'basis' not in claim or claim['basis'] != live_basis:
+            raise RecordError(f'{target}: acquired basis changed; retain work and explicitly reconcile the active claim')
+
+    def revalidate(self, target, token):
+        """Call immediately before publishing results as well as at completion."""
+        with self.locked():
+            self._authority()
+            claim = self._json('claims.json', {}).get(target)
+            if not claim or claim.get('token') != token:
+                raise RecordError('claim token does not match')
+            record = self._eligible(target, allow_in_progress=True)
+            self._validate_claim_basis(target, record, claim)
+            return {'target': target, 'basis': claim['basis'], 'token': token}
 
     def publish_issue(self, effort, slug, body, approval, blocked_by=(), readiness='ready-for-agent'):
         if not isinstance(approval, str) or not approval.strip():
@@ -235,6 +376,7 @@ class WorkRecords:
             overview = self._read(effort + '/README.md')
             if overview['metadata'].get('state') != 'active':
                 raise RecordError('effort is not active')
+            self._assert_no_pending_publication(effort)
             basis = overview['metadata'].get('current_spec')
             if basis:
                 spec = self._read(basis['ref'])['metadata']
@@ -290,6 +432,7 @@ class WorkRecords:
         effort = meta.get('effort')
         overview = None
         if effort:
+            self._assert_no_pending_publication(effort)
             overview = self._read(effort + '/README.md')['metadata']
             if overview.get('state') != 'active':
                 raise RecordError(f'{target}: effort is not active')
@@ -323,6 +466,7 @@ class WorkRecords:
                 raise RecordError(f'{target}: already claimed by {claims[target].get("owner")}')
             record = self._eligible(target)
             claim = dict(target=target, token=uuid.uuid4().hex, owner=owner, workspace=str(Path(workspace or self.checkout).resolve()), acquired_at=datetime.now(timezone.utc).isoformat())
+            claim['basis'] = record['metadata'].get('basis')
             claims[target] = claim
             self._save_json('claims.json', claims)
             record['metadata']['state'] = 'in-progress'
@@ -339,6 +483,7 @@ class WorkRecords:
             if target not in claims or claims[target].get('token') != token:
                 raise RecordError(f'{target}: claim token does not match')
             record = self._eligible(target, allow_in_progress=True)
+            self._validate_claim_basis(target, record, claims[target])
             record['metadata']['state'] = 'completed'
             record['body'] = record['body'].rstrip() + '\n\n## Completion evidence\n\n' + evidence.strip() + '\n'
             self._write(target, **record)
@@ -371,6 +516,28 @@ def main(argv=None):
     for name in ('slug', 'title', 'request', 'outcome'):
         create.add_argument('--' + name, required=True)
     create.add_argument('--effort')
+    revision = sub.add_parser('revise-spec')
+    revision.add_argument('--effort', required=True)
+    revision.add_argument('--body-file', required=True)
+    revision.add_argument('--expected-revision', required=True, type=int)
+    revision.add_argument('--rationale', required=True)
+    revision.add_argument('--editorial', dest='material', action='store_false')
+    revision.add_argument('--readiness', default='ready-for-agent')
+    resume = sub.add_parser('resume-publication')
+    resume.add_argument('--effort', required=True)
+    history = sub.add_parser('read-revision')
+    history.add_argument('spec_ref')
+    history.add_argument('revision', type=int)
+    reconcile = sub.add_parser('reconcile-issue')
+    reconcile.add_argument('target')
+    reconcile.add_argument('--rationale', required=True)
+    reconcile.add_argument('--affected', action='store_true')
+    reconcile.add_argument('--body-file')
+    reconcile.add_argument('--readiness')
+    reconcile.add_argument('--approval')
+    validate = sub.add_parser('revalidate')
+    validate.add_argument('target')
+    validate.add_argument('--token', required=True)
     spec = sub.add_parser('publish-spec')
     spec.add_argument('--effort', required=True)
     spec.add_argument('--body-file', required=True)
@@ -394,7 +561,9 @@ def main(argv=None):
     try:
         records = WorkRecords(args.pop('repo'))
         if 'body_file' in args:
-            args['body'] = Path(args.pop('body_file')).read_text(encoding='utf-8-sig')
+            body_file = args.pop('body_file')
+            if body_file:
+                args['body'] = Path(body_file).read_text(encoding='utf-8-sig')
         result = getattr(records, command)(**args)
         print(json.dumps(result, indent=2))
         return 0
