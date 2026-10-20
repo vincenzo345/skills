@@ -136,7 +136,7 @@ class PlanningRecords(WorkRecords):
             self._write(target, **record)
             map_ref = record['metadata']['map']
             map_record = self._read(map_ref)
-            title = record['body'].splitlines()[0].lstrip('# ')
+            title = record['body'].lstrip().splitlines()[0].lstrip('# ').strip()
             relative = Path(target).relative_to(Path(map_ref).parent).as_posix()
             map_record['body'] = map_record['body'].replace('## Decisions so far\n', f'## Decisions so far\n\n- [{title}]({relative}): resolved; read the recorded answer.\n', 1)
             self._write(map_ref, **map_record)
@@ -188,7 +188,7 @@ class PlanningRecords(WorkRecords):
             map_record = self._read(map_ref)
             old_link = Path(target).relative_to(Path(map_ref).parent).as_posix()
             new_link = Path(replacement).relative_to(Path(map_ref).parent).as_posix()
-            title = successor['body'].splitlines()[0].lstrip('# ')
+            title = successor['body'].lstrip().splitlines()[0].lstrip('# ').strip()
             lines = map_record['body'].splitlines()
             lines = [f'- [{title}]({new_link}): unresolved replacement; [prior answer]({old_link}) superseded.'
                      if f']({old_link})' in line else line for line in lines]

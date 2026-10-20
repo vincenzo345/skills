@@ -27,20 +27,20 @@ Its implementation issues are in `work/wayfinder-reliability/tickets/`. Any Wayf
 
 ## Publish, fetch, and update
 
-- When a skill says to publish a spec, use the identified effort's current spec location. Preserve materially different earlier revisions according to the [shared contract design](../../work/wayfinder-reliability/design.md).
+- When a skill says to publish a spec, use the identified effort's current spec location. Preserve materially different earlier revisions through the [shared work-record contract and helper](../../skills/engineering/setup-repo/WORK-RECORDS.md).
 - When to-tickets publishes an approved breakdown, write one implementation issue per file in `tickets/`, with its specification basis and explicit blocking references. Keep existing IDs and numbering stable.
 - When fetching a record, resolve its explicit path first. A bare number needs effort and record-kind context; ask if it could refer to both an implementation issue and a decision ticket.
 - The new implementation issues use YAML front matter for kind, identity, lifecycle, readiness, spec basis, order, and dependencies. Read and update those fields rather than adding a conflicting `Status:` line. Use the unchanged [triage label vocabulary](triage-labels.md) for readiness.
 - Existing spec/overview formats remain valid explicit inputs. Read their current fields as written; this setup does not convert them. For missing or ambiguous eligibility information, report the gap instead of guessing.
 - Append comments and conversation notes under `## Comments` when needed. Keep issue state in the issue and link to it from overviews.
 
-Read the shared contract design for lifecycle, revisions, dependency satisfaction, selection precedence, and claim semantics. It defines the intended shared behavior; this configuration supplies locations and instructions, not an executable selector or claim coordinator. Explicit inputs take precedence over queue order, but readiness, blockers, and ownership still require validation. Queue membership alone does not authorize implementation.
+Read the shared work-record contract for lifecycle, revisions, dependency satisfaction, selection precedence, and claim semantics. Its packaged helper supplies authoritative reads, selection, and claims; always pass this repository as the target checkout. The [effort design](../../work/wayfinder-reliability/design.md) retains the rationale. Explicit inputs take precedence over queue order, but readiness, blockers, and ownership still require validation. Queue membership alone does not authorize implementation.
 
 ## Wayfinding operations
 
 Use the separate map and `decisions/` paths above for Wayfinder's map, child records, and frontier queries. Decision tickets hold questions and their authoritative answers; they are never implementation issues and never receive implementation readiness merely because they are unblocked.
 
-For new typed planning records, use the map/decision envelopes in the shared contract design: decision type, lifecycle, blocking references, and order. Resolve local decision blockers through their recorded answers, preserve superseded answers, and append a named context pointer to the map on resolution. Keep upstream charting, human-decision, and session boundaries intact.
+For new typed planning records, use the map/decision envelopes and [local planning operations](../../skills/engineering/wayfinder/LOCAL-PLANNING.md): decision type, lifecycle, blocking references, and order. Resolve local decision blockers through their recorded answers, preserve superseded answers, and append a named context pointer to the map on resolution. Keep upstream charting, human-decision, and session boundaries intact.
 
 Record ownership before working on a decision. An existing legacy `claimed` status remains a claim to respect. Typed-record claims follow the shared contract; a status edit alone does not establish atomic exclusivity across sessions. If the required shared claim mechanism is unavailable, report that limitation rather than asserting concurrent ownership.
 
