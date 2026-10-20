@@ -40,8 +40,12 @@ class LegacyTests(unittest.TestCase):
             self.records.claim(ref, 'other')
         self.assertEqual(self.records.read(ref)['metadata']['state'], 'in-progress')
         self.assertIn('forward', (self.root / ref).read_text(encoding='utf-8').lower())
-        self.assertEqual(len(list((self.root / 'work/legacy-history').glob('*.md'))), 1)
+        snapshots = list((self.root / 'work/legacy-history').glob('*.md'))
+        self.assertEqual(len(snapshots), 1)
+        with self.assertRaisesRegex(fixtures.RecordError, 'historical'):
+            self.records.select(snapshots[0].relative_to(self.root).as_posix())
         self.records.revalidate(dest, claim['token'])
+        self.assertEqual(self.records.resume(dest, claim['token'])['target'], ref)
         self.records.release(dest, claim['token'])
         self.assertEqual(self.records.select(dest)['target'], ref)
 
@@ -130,6 +134,9 @@ class LegacyTests(unittest.TestCase):
         with self.assertRaisesRegex(fixtures.RecordError, 'ownership requires explicit recovery'):
             self.records.claim(ref, 'new-session')
         self.assertEqual((self.root / ref).read_bytes(), before)
+        (self.root / ref).write_text(before.decode().replace('**Owner:** prior-session', '**ID:** foreign-id'), encoding='utf-8')
+        with self.assertRaisesRegex(fixtures.RecordError, 'reconcile identity'):
+            self.records.select(ref)
 
 if __name__ == '__main__':
     unittest.main()
