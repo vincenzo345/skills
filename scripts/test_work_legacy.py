@@ -124,5 +124,12 @@ class LegacyTests(unittest.TestCase):
         self.assertEqual(sorted(code for _, code in results), [0, 2])
         self.assertIn('already claimed', next(output[1] for output, code in results if code == 2))
 
+    def test_legacy_ownership_requires_recovery_without_source_mutation(self):
+        ref = self.legacy(extra='**Owner:** prior-session')
+        before = (self.root / ref).read_bytes()
+        with self.assertRaisesRegex(fixtures.RecordError, 'ownership requires explicit recovery'):
+            self.records.claim(ref, 'new-session')
+        self.assertEqual((self.root / ref).read_bytes(), before)
+
 if __name__ == '__main__':
     unittest.main()

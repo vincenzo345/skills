@@ -20,6 +20,9 @@ def normalize(text, ref, error):
             fields[key] = yaml.safe_load(value)
         except yaml.YAMLError as exc:
             raise error(f'{ref}: malformed legacy {key}') from exc
+    ownership = {'claim', 'claimed_by', 'claim_token', 'owner', 'workspace', 'assignee'}
+    if any(fields.get(key) not in (None, '', False) for key in ownership) or fields.get('status') in {'claimed', 'in-progress'} or fields.get('state') == 'in-progress':
+        raise error(f'{ref}: legacy ownership requires explicit recovery; confirm the prior worker stopped before adoption')
     kind = fields.get('kind')
     if kind not in {'implementation', 'decision', 'map', 'spec'}:
         raise error(f'{ref}: missing or ambiguous legacy kind; supply explicit Kind')
