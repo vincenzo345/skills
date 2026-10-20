@@ -8,7 +8,7 @@ A loose idea has arrived, too big for one agent session, and wrapped in fog: the
 
 The destination varies per effort, and naming it is the first act of charting: it shapes every ticket. It might be a spec to hand off and iterate on, a decision to lock before planning starts, or a change made in place like a data-structure migration. The map is domain-agnostic: engineering work, course content, whatever fits the shape.
 
-Before creating or resuming records, read the configured tracker and [shared work-record contract](../setup-repo/WORK-RECORDS.md). Carry one identified effort through discovery, decisions, specification, and implementation. For local creation, continuation, claims, or supersession, read [local planning operations](LOCAL-PLANNING.md). Remote operations stay on the configured tracker.
+Before creating or resuming records, read the configured tracker and [shared work-record contract](../setup-repo/WORK-RECORDS.md). Carry one identified effort through discovery, decisions, specification, and implementation. For local creation, continuation, claims, or supersession, read [local planning operations](LOCAL-PLANNING.md). For remote operations, read [the remote adapter contract](../setup-repo/REMOTE-WORK.md); records stay on the configured tracker and simultaneous consumers require established exclusive dispatch.
 
 ## Plan, don't do
 

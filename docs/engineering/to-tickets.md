@@ -6,6 +6,8 @@ Every ticket is a **tracer bullet**: a narrow but complete path through every la
 
 Local issues belong to the identified effort and reference the current spec revision. Approval is recorded with each published issue; dependencies and observable acceptance criteria let a fresh implementation session validate and claim the work.
 
+On GitHub or GitLab, approved issues retain explicit specification revisions and native blocking links. Readiness does not bypass a stale basis, unfinished blockers, or the remote ownership capability boundary.
+
 ## When to reach for it
 
 You invoke this by typing `/to-tickets`. The [agent](https://www.aihero.dev/ai-coding-dictionary/agent) won't reach for it on its own.

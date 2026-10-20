@@ -6,6 +6,8 @@ It never reopens the plan. There is no interview, no clarifying round, no propos
 
 A local issue is read from the declared authoritative checkout and claimed only after lifecycle, readiness, spec basis and dependencies pass. A token protects ownership across worktrees; accepted, integrated work closes with completion evidence.
 
+Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
+
 ## When to reach for it
 
 You invoke this by typing `/implement` yourself, and the agent won't reach for it on its own. It ships with `disable-model-invocation: true`, so no other skill can call it either. Wherever [guide-me](guide-me.md) or [to-tickets](https://aihero.dev/skills-to-tickets) says "then `/implement` per ticket", that is an instruction to you, not something the agent will do unprompted.
