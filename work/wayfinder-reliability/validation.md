@@ -77,11 +77,13 @@ A focused follow-up confirmed two P2 remote-preview discrepancies: explicit self
 - Local fixes merged at `29473dc`: direct-spec resume/revalidation/completion reject newly decomposed scope; decision claims validate required metadata and recursive dependencies. Five planning and six claim tests passed after integration; eight selection and nine legacy tests also passed on the worker.
 - The standards reviewer confirmed the passive-reference exception and prerequisite corrections. The migration storage boundary is documented as an intentional internal interface; no general framework was added.
 - Remote fixes merged at `2535ded`: nine fixtures cover explicit-null standalone records, missing authority, spec readiness, and changes from an acquired null basis. Both providers still reject automatic concurrent claiming.
-- The spec reviewer independently confirmed resolution of all four runtime/preview findings. No actionable review finding remains. The replay punctuation artifact was also corrected.
+- The spec reviewer independently confirmed resolution of those four runtime/preview findings. The replay punctuation artifact was also corrected.
+
+Final acceptance follow-up: a separate temporary reproduction showed `complete_effort` could treat a missing current-spec pointer as null and complete an effort with an unfinished spec. Ticket 02 was reopened for explicit pointer-presence/shape and artifact-identity validation, including regressions that preserve legitimate explicit-null records. This correction precedes final installation.
 
 ## Final results
 
-All seven issues have completion evidence and integration receipts. The final full script suite is running with Python 3.12.8 and the pinned PyYAML 6.0.3 in an isolated environment.
+All seven issues have integration receipts; ticket 02 has the final acceptance follow-up described above. The full script suite passed 58 tests in 130.579 seconds with Python 3.12.8 and pinned PyYAML 6.0.3 in an isolated environment. It will run again after the final pointer-gate correction.
 
 Completed checks:
 
