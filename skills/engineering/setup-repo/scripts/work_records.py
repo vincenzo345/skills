@@ -569,7 +569,11 @@ class WorkRecords:
         record = self._read(target)
         meta = record['metadata']
         if meta['kind'] == 'spec':
-            return self._spec_eligible(target)
+            record = self._spec_eligible(target)
+            children = self._issues(meta['effort']) if meta.get('effort') else []
+            if any((child.get('basis') or {}).get('ref') == target for _, child in children):
+                raise Ineligible(f'{target}: spec scope is decomposed; release the direct claim and use the issue graph')
+            return record
         if meta['kind'] != 'implementation':
             raise Ineligible(f'{target}: expected implementation kind')
         self._state(meta, {'open', 'in-progress'} if allow_in_progress else {'open'},

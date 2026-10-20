@@ -4,6 +4,7 @@ import sys
 import subprocess
 import tempfile
 import unittest
+import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'skills/engineering/setup-repo/scripts'))
 from work_planning import PlanningRecords, RecordError
@@ -39,6 +40,40 @@ class PlanningTests(unittest.TestCase):
         self.assertEqual(consumer.claim(issue, 'fresh-worker')['target'], issue)
         with self.assertRaisesRegex(RecordError, 'implementation'):
             consumer.claim(decision, 'wrong-kind')
+
+    def test_external_decision_metadata_fails_closed_before_claim_and_resolution(self):
+        r = self.records
+        effort = r.create_effort('search', 'Search', 'Find notes', 'Ready specification')
+        r.chart(effort, 'Search', 'Ready specification', 'Ranking')
+        prior = r.add_decision(effort, 'scope', 'Scope', 'Titles?', 'grilling')
+        claim = r.claim_decision(prior, 'session')
+        r.resolve_decision(prior, claim['token'], 'Titles', human_answer='Titles')
+        target = r.add_decision(effort, 'ranking', 'Ranking', 'How rank?', 'grilling', [prior])
+        claim = r.claim_decision(target, 'session')
+        originals = {ref: (self.root / ref).read_text(encoding='utf-8') for ref in (prior, target)}
+        cases = [
+            (ref, key, value)
+            for ref in (target, prior)
+            for key, value in [('blocked_by', None), ('blocked_by', {}), ('blocked_by', 'none'),
+                               ('blocked_by', [3]), ('effort', None), ('map', None),
+                               ('type', None), ('type', 'unknown'), ('kind', 'implementation')]
+        ] + [(prior, 'blocked_by', [target])]
+        for ref, key, value in cases:
+            with self.subTest(record=ref, field=key, value=value):
+                for original_ref, text in originals.items():
+                    (self.root / original_ref).write_text(text, encoding='utf-8')
+                _, header, body = originals[ref].split('---', 2)
+                meta = yaml.safe_load(header)
+                if value is None:
+                    meta.pop(key)
+                else:
+                    meta[key] = value
+                (self.root / ref).write_text('---\n' + yaml.safe_dump(meta) + '---' + body, encoding='utf-8')
+                with self.assertRaisesRegex(RecordError, 'missing|invalid|expected|cycle'):
+                    r.claim_decision(target, 'competing-session')
+                with self.assertRaisesRegex(RecordError, 'missing|invalid|expected|cycle'):
+                    r.resolve_decision(target, claim['token'], 'Recent first', human_answer='Recent first')
+                self.assertEqual(r.read(target)['metadata']['state'], 'open')
 
     def test_map_links_keep_decision_titles_with_leading_body_whitespace(self):
         r = self.records
@@ -85,6 +120,7 @@ class PlanningTests(unittest.TestCase):
             self.assertNotIn('unresolved replacement', body)
             self.assertIn('[prior answer](decisions/01-scope.md#resolution) superseded', body)
             self.assertIn('Titles, please.', r.read(old)['body'])
+            self.assertNotIn('answer.;', body)
 
     def test_supersession_retains_answers_and_requires_dependent_review(self):
         r = self.records

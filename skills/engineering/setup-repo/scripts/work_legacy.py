@@ -1,6 +1,16 @@
 """Explicit legacy normalization and reviewed, resumable local adoption.
 
 No scan or read moves records. Migration requires a saved plan and its review digest.
+
+Internal boundary: Legacy is the storage migration component of WorkRecords, not
+an independent tracker client. Its public plan/apply/resume operations acquire
+records.locked() and validate _authority() before using the coordinator's internal
+storage interface: _read/_record_text and path/identity resolution, plus
+_json/_save_json for claims, publication checks, and the recovery journal.
+Callers supply the same
+WorkRecords instance so migrations and ordinary operations share one authority,
+lock, resolver, and error type. Keep these accesses within this component rather
+than exposing unlocked storage operations to skill consumers.
 """
 from __future__ import annotations
 import hashlib

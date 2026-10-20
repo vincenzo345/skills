@@ -63,6 +63,8 @@ Use `select [target]` only to preview. `select-and-claim [target] --owner SESSIO
 
 Known ineligibility is reported separately from indeterminate authority. Missing readiness, bad ordering, unknown blocker outcomes, and inaccessible records stop the affected scope; do not silently choose lower-priority work. A direct-spec claim conflicts with every child claim based on it. Claims retain the acquired basis for later reconciliation checks.
 
+If children are published while a direct-spec claim exists, resume, revalidation, and completion reject that now-decomposed scope. Retain the direct worker's results for reconciliation, release its claim, and continue through the issue graph. Publishing children never authorizes the original direct worker to complete their shared scope.
+
 `complete TARGET --token TOKEN --evidence TEXT` completes the claimed issue or direct spec after acceptance and integration verification. A completed spec cannot run again. `complete-effort EFFORT --evidence TEXT` requires terminal issues, completed current spec/map when present, and no outstanding claims. It records the outcome and removes the queue link while preserving every artifact path. Finishing a spec alone never declares the overall effort complete.
 
 ## Explicit legacy inputs and reviewed adoption
