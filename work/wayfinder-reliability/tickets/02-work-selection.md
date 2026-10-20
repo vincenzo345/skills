@@ -4,13 +4,13 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/02-work-selection.md
 effort: work/wayfinder-reliability
 order: 2
-state: open
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 blocked_by:
-  - work/wayfinder-reliability/tickets/01-local-issue-handoff.md
+- work/wayfinder-reliability/tickets/01-local-issue-handoff.md
 ---
 
 # 02: Select eligible work by queue priority or explicit scope

@@ -4,13 +4,13 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/04-spec-reconciliation.md
 effort: work/wayfinder-reliability
 order: 4
-state: open
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 blocked_by:
-  - work/wayfinder-reliability/tickets/01-local-issue-handoff.md
+- work/wayfinder-reliability/tickets/01-local-issue-handoff.md
 ---
 
 # 04: Revise specs without leaving obsolete issues actionable

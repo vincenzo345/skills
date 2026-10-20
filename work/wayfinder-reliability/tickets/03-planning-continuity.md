@@ -4,13 +4,13 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/03-planning-continuity.md
 effort: work/wayfinder-reliability
 order: 3
-state: open
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 blocked_by:
-  - work/wayfinder-reliability/tickets/01-local-issue-handoff.md
+- work/wayfinder-reliability/tickets/01-local-issue-handoff.md
 ---
 
 # 03: Preserve planning context and Wayfinder session boundaries
