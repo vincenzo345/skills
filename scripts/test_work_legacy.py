@@ -138,5 +138,67 @@ class LegacyTests(unittest.TestCase):
         with self.assertRaisesRegex(fixtures.RecordError, 'reconcile identity'):
             self.records.select(ref)
 
+    def test_migrated_open_decisions_keep_planning_dependencies_and_one_claim(self):
+        from work_legacy import Legacy
+        from work_planning import PlanningRecords, RecordError
+        r = PlanningRecords(self.root)
+        effort = r.create_effort('plan', 'Plan', 'Choose scope', 'Buildable scope')
+        map_ref = r.chart(effort, 'Plan', 'Buildable scope', 'Scope')
+        first = r.add_decision(effort, 'scope', 'Scope', 'Which scope?', 'grilling')
+        child = r.add_decision(effort, 'detail', 'Detail', 'Which detail?', 'grilling', blocked_by=[first])
+        first_new = effort + '/decisions/adopted/scope.md'
+        child_new = effort + '/decisions/adopted/detail.md'
+        service = Legacy(r)
+        plan = service.plan({first: first_new, child: child_new})
+        self.assertEqual(plan['problems'], [])
+        service.apply(plan, review=plan['digest'], readers_adopted=True)
+        self.assertEqual(r.read(first_new)['metadata']['state'], 'open')
+        self.assertEqual(r.read(child_new)['metadata']['blocked_by'], [first])
+        with self.assertRaisesRegex(RecordError, 'blocked'):
+            r.claim_decision(child_new, 'later')
+        claim = r.claim_decision(first_new, 'one')
+        self.assertEqual(claim['target'], first)
+        with self.assertRaisesRegex(RecordError, 'already claimed'):
+            r.claim_decision(first, 'two')
+        r.resolve_decision(first, claim['token'], 'Small scope', human_answer='Use small scope.')
+        self.assertEqual(r.read(first_new)['metadata']['state'], 'resolved')
+        replacement = r.add_decision(effort, 'replacement', 'New scope', 'Scope changed?', 'grilling')
+        self.assertEqual(r.supersede_decision(first_new, replacement, 'Changed requirement'), [child])
+        self.assertEqual(r.read(child_new)['metadata']['blocked_by'], [replacement])
+        r.review_decision(child_new, 'Question remains useful.')
+        claim = r.claim_decision(replacement, 'one')
+        r.resolve_decision(replacement, claim['token'], 'Large scope', human_answer='Use large scope.')
+        claim = r.claim_decision(child_new, 'one')
+        r.release(child, claim['token'])
+        self.assertEqual(r.read(first)['metadata']['superseded_by'], replacement)
+        self.assertIn('prior answer', r.read(map_ref)['body'])
+        import re
+        for ref in (first_new, child_new, map_ref):
+            for link in re.findall(r'\]\(([^)]+)\)', r.read(ref)['body']):
+                self.assertTrue(((self.root / ref).parent / link.split('#')[0]).exists(), link)
+
+    def test_decision_from_scratch_resolves_with_links_to_relocated_authority(self):
+        from work_legacy import Legacy
+        from work_planning import PlanningRecords
+        import yaml
+        r = PlanningRecords(self.root)
+        effort = r.create_effort('old-plan', 'Plan', 'Choose scope', 'Buildable scope')
+        map_ref = r.chart(effort, 'Plan', 'Buildable scope', 'Scope')
+        old = '.scratch/plan/01-decision.md'
+        path = self.root / old
+        path.parent.mkdir(parents=True)
+        meta = dict(schema=1, kind='decision', id=old, effort=effort, map=map_ref,
+                    order=1, type='grilling', state='open', blocked_by=[])
+        path.write_text('---\n' + yaml.safe_dump(meta) + '---\n# Scope\n\nChoose scope.\n', encoding='utf-8')
+        new = effort + '/decisions/01-scope.md'
+        service = Legacy(r)
+        plan = service.plan({old: new})
+        service.apply(plan, review=plan['digest'], readers_adopted=True)
+        claim = r.claim_decision(new, 'planner')
+        r.resolve_decision(new, claim['token'], 'Small scope', human_answer='Small, please.')
+        self.assertEqual(r.read(old)['metadata']['id'], old)
+        self.assertEqual(r.read(new)['metadata']['state'], 'resolved')
+        self.assertIn('[Scope](decisions/01-scope.md)', r.read(map_ref)['body'])
+
 if __name__ == '__main__':
     unittest.main()
