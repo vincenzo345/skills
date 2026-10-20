@@ -8,15 +8,15 @@ Original request: improve the skills repository after an application-planning se
 
 ## Current state
 
-- Stage: implementation breakdown approved and issues published.
+- Stage: implementation in progress on `integration/wayfinder-reliability`.
 - Current specification: [Reliable planning and implementation workspaces](spec.md), revision 2, `ready-for-agent`.
 - Contract design: [Shared work-record contract](design.md), including metadata, lifecycle, revisions, readiness, dependencies, claims, selection, and handoff walkthroughs.
 - Implementation issues: [Seven published slices](issue-plan.md#published-issues), each with its own authoritative record.
 - Approved breakdown: [Seven vertical implementation slices](issue-plan.md), including dependencies, acceptance criteria, and approval evidence.
-- Next action: when implementation is requested, begin with [Local issue handoff](tickets/01-local-issue-handoff.md) and confirm the integration branch before delivery.
-- Implementation authorization: this session covers planning/specification only.
+- Next action: integrate and validate [Local issue handoff](tickets/01-local-issue-handoff.md), then dispatch its eligible dependents.
+- Implementation authorization: the user explicitly invoked implement-spec for the approved tickets, integrated validation/review, and Windows installation. Earlier planning-only statements record the previous session boundary.
 
-The queue lists this effort for navigation and priority. It does not authorize bare implement to start, and no new queue-selection behavior is installed yet.
+The queue lists this effort for navigation and priority. The current implement-spec invocation supplies implementation authorization; the queue itself does not. No new queue-selection behavior is installed yet.
 
 ## Decisions and evidence
 
