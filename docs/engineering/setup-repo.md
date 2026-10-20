@@ -37,7 +37,7 @@ It starts each section with the recommended answer, and skips any question its e
 
 | Decision | What it proposes | When it asks |
 | --- | --- | --- |
-| **Issue tracker** | the one matching your `git remote` | always, because this is the one real choice |
+| **Issue tracker** | the one matching your `git remote` | when not already selected or configured |
 | **Triage labels** | keep two category names (`bug`, `enhancement`) and five state names (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`) | only if the `triage` skill is installed |
 | **Domain docs** | single-context: one `GLOSSARY.md` plus `docs/adr/` at the root | only if it spots monorepo signals, and then it offers a multi-context `GLOSSARY-MAP.md` |
 
@@ -50,7 +50,7 @@ The tracker options:
 | **Local markdown** | files under `work/<effort>/` in this repo | Python, PyYAML, and a Git checkout; no remote |
 | **Other** | wherever you say | one paragraph from you describing the workflow |
 
-The first three ship as templates in the skill and work out of the box. Local markdown is a full option, not a fallback. The skill supports a solo project with no remote. One caveat: don't use local markdown if you use GitHub. They are alternatives, so pick one.
+The first three ship as templates in the skill and work out of the box. Local markdown is a full option, not a fallback. The skill supports a solo project with no remote. Choose one configured issue-tracker authority; hosting code on GitHub does not preclude tracking its work in local Markdown.
 
 "Other" is a full option too. It is how Jira, Linear, Azure DevOps and Beads all work. You describe the workflow, the skill records your prose in `docs/agents/issue-tracker.md`, and the downstream skills follow the prose. Users have already built this: a Jira-over-[MCP](https://www.aihero.dev/ai-coding-dictionary/mcp) variant, a Gitea CLI shaped like `gh`, a hand-built local dashboard.
 
