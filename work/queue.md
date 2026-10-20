@@ -1,6 +1,6 @@
 # Work queue
 
-Efforts are listed in priority order. Their own records determine readiness; inclusion here is not implementation authorization. Skill support for automatic queue selection is specified but not yet implemented.
+Efforts are listed in priority order. Their own records determine readiness; inclusion here is not implementation authorization. The shared work-record consumer validates eligibility and claims before selecting work.
 
 1. [Wayfinder workflow reliability](wayfinder-reliability/README.md)
 

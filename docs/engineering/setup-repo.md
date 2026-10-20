@@ -6,7 +6,7 @@ Those files are the only thing that varies between repos. The skills themselves 
 
 It is a prompt-driven skill, not a deterministic script. It reads your `git remote`, `CLAUDE.md` and `GLOSSARY.md`, proposes what it found, and waits for you to confirm before it writes anything.
 
-Local tracking uses stable effort folders and separate implementation issues and Wayfinder decisions. A shared coordinator reads one declared checkout across worktrees and validates ownership. Existing repository conventions and historical paths are preserved.
+Local tracking uses stable effort folders and separate implementation issues and Wayfinder decisions. A shared coordinator reads one declared checkout across worktrees and validates ownership. Existing repository conventions and historical paths are preserved. Explicit legacy records can be read without relocation. Optional migration produces a classification and reference plan for review, preserves original IDs through forwarding references, and checks unchanged inputs before applying. Participating tools must adopt the shared resolver before moving records; ordinary setup never moves historical work. See the [legacy adoption procedure](../../skills/engineering/setup-repo/WORK-RECORDS.md#explicit-legacy-inputs-and-reviewed-adoption).
 
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 

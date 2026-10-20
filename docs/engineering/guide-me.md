@@ -103,3 +103,5 @@ Check the changelog for a rename before assuming it is gone. `writing-great-skil
 `guide-me` is a **standalone router** that sits over the whole set. It is never a step in a chain. It points into every chain, and the other docs pages link back to it so none of them has to redraw the graph. From here you most often land on [grill-with-docs](https://aihero.dev/skills-grill-with-docs), the head of the main flow, or [triage](https://aihero.dev/skills-triage), the on-ramp for work that arrived rather than work you started.
 
 It is a [secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source) over the skills it describes. Where the router and a `SKILL.md` disagree, the `SKILL.md` is right.
+
+For existing local work, setup preserves historical paths. Use explicit legacy references in place, or request the separately reviewed [adoption procedure](../../skills/engineering/setup-repo/WORK-RECORDS.md#explicit-legacy-inputs-and-reviewed-adoption); configuration alone never authorizes relocation.
