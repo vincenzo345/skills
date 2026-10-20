@@ -1,3 +1,16 @@
+---
+schema: 1
+kind: effort
+id: work/wayfinder-reliability
+state: active
+stage: implementation
+current_spec:
+  ref: work/wayfinder-reliability/spec.md
+  revision: 2
+current_map: null
+next_action: Integrate local issue handoff and dispatch its eligible dependents.
+---
+
 # Wayfinder workflow reliability
 
 ## Purpose

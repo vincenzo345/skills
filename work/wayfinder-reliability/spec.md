@@ -1,8 +1,15 @@
+---
+schema: 1
+kind: spec
+id: work/wayfinder-reliability/spec.md
+effort: work/wayfinder-reliability
+revision: 2
+state: current
+readiness: ready-for-agent
+---
+
 # Reliable planning and implementation workspaces
 
-Status: ready-for-agent
-Kind: spec
-Revision: 2
 Date: 2026-10-20
 
 ## Problem Statement
@@ -154,3 +161,5 @@ The first slice must demonstrate more than creating directories: a newly produce
 The earlier discovery document is retained as background. This spec is the current synthesis. The stable folder decision is recorded separately as an ADR.
 
 Revision 2 records the completed contract design and additional acceptance cases. No implementation issues existed when it was published, so there are no child issue bases to reconcile. The current design, this spec, and the overview remain planning artifacts, not an implementation authorization.
+
+Metadata adoption: the active effort/spec gained the designed typed envelope during authorized implementation. Scope remains revision 2; historical work was not migrated. The current implement-spec instruction supersedes earlier session-only implementation restrictions.
