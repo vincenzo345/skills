@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/03-planning-continuity.md
 effort: work/wayfinder-reliability
 order: 3
-state: completed
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -45,3 +45,7 @@ Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-
 ## Completion evidence
 
 Integrated in 241cb51. Planning discovery/decision/spec/issue/fresh-consumer handoff and dependent-review fixtures pass. Combined integrated work suite: 23 tests. Bounded charting replay produced real artifacts in a temporary repo and stopped with no human decisions resolved; additional replay evidence is recorded in validation.
+
+## Replay discrepancy
+
+The bounded continuation replay found that resolve_decision created an empty map-link label from leading body whitespace. Reopened under the user's instruction to fix in-scope discrepancies. Prior deterministic completion evidence is retained; named-pointer regression and fresh replay are required before reclosure.
