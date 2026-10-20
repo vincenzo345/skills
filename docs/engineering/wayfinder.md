@@ -4,6 +4,8 @@
 
 It plans and does not build. Every ticket asks a question, and the answer is a decision, not a slice of a build. The map is finished when nothing is left to decide before someone builds the thing. This rule separates a wayfinder ticket from an ordinary implementation [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket), and it is the rule agents break most often. When the map clears, wayfinder hands off and does not continue into code.
 
+Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
+
 ## When to reach for it
 
 You invoke this by typing `/wayfinder`; the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) won't reach for it on its own.

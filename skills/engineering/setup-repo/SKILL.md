@@ -50,6 +50,8 @@ Default posture: these skills were designed for GitHub. If a `git remote` points
 
 Record the choice in `docs/agents/issue-tracker.md`. The GitHub and GitLab templates carry a "PRs as a request surface" flag, defaulted **off**. Leave it off and don't raise it: a user who wants external PRs in the triage queue can flip the flag in the file later.
 
+For GitHub or GitLab, read [REMOTE-WORK.md](REMOTE-WORK.md) and preserve its remote authority and unsupported automatic-concurrency boundary in the generated configuration. Record the GitLab host/project explicitly too.
+
 For GitHub, record the selected issue repository as an explicit `owner/repo`, even when it matches the git remote. A project can keep its issues in a different repository, for example a private issues repository for a public app. Make the generated `gh` commands and API paths target that issue repository. PR discovery, if enabled later, remains scoped to the code repository.
 
 **Section B: Triage label vocabulary.** Skip this section entirely if the `triage` skill isn't installed (exploration told you), since an uninstalled skill needs no labels.

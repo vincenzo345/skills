@@ -16,6 +16,8 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 **Implementer subagents** should be run in the background where possible for maximum concurrency.
 
+For remote trackers, read [the remote adapter contract](../setup-repo/REMOTE-WORK.md) before dispatch. Automatic concurrent claiming is unsupported without an established exclusive controller or verified provider path. Refresh remote state before selection and completion.
+
 ## Steps
 
 1. Read the configured tracker and [shared work-record contract](../setup-repo/WORK-RECORDS.md), then the current spec, linked design, and approved issues. Verify completed issues against their evidence and integration availability; work only on the remaining eligible frontier. Never infer completion from a worker report or a stale worktree. If no issues exist, use explicit direct-spec implementation through `implement` instead.

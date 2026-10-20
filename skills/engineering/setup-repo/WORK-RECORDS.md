@@ -84,3 +84,7 @@ Application journals intended writes before relocation. All normal record access
 After a material revision, reconcile the issue first, then have the owning worker review retained work and call `acknowledge-basis --token ... --evidence ...`. This records both bases and the review; it does not infer impact or approve changed slices.
 
 For implement-spec, each worker owns an individual issue. `complete --integration-ref <branch> --commit <accepted-commit>` verifies that commit is an ancestor of the integration tip and stores a receipt. Acceptance evidence remains the caller's responsibility. Ordinary standalone completion can omit the receipt; decomposed-spec finalization cannot. `complete-spec <ref> --expected-revision N --evidence ...` requires every child completed with a valid integrated receipt and no overlapping claims. Finalize the effort separately after its overall outcome is verified.
+
+## Remote adapters
+
+For GitHub or GitLab tracking, read [REMOTE-WORK.md](REMOTE-WORK.md) before planning, selecting, claiming or completing work. It defines remote field/outcome mappings and the verified capability boundary. The local helper does not acquire remote ownership.
