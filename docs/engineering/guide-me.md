@@ -38,6 +38,12 @@ The skill's leading word is **flow**, a path *through* the skills rather than a 
 - **Standalones**, which sit off every flow and which you use on their own: the prototype, the questionnaire, the research run, and [show-me](https://aihero.dev/skills-show-me) for a visual of the current discussion.
 - **A vocabulary layer underneath**, the shared references the other skills pull in when the words rather than the process are the problem.
 
+## Durable handoffs
+
+Planning carries the same stable effort through Wayfinder, grill-with-docs, to-spec, and to-tickets. Ordinary requirements live in discovery; decision answers stay in their separate decision records. Material spec revisions retain earlier content and require individual reconciliation of unfinished issues; completed issues keep their historical basis. Charting ends with a map link and named next decision, and a reply to an unresolved question continues that question.
+
+For implementation, an explicit issue, effort, or spec directs selection. Bare implement follows the ordered effort queue and skips known blocked work for independent eligible issues. A decomposed spec uses its issue frontier; a ready undecomposed spec can be selected explicitly. Unavailable higher-priority authority produces a diagnostic. Preparing records alone never starts implementation.
+
 ## The phase boundary
 
 The skill's other key idea is the **phase boundary**. A phase is a chunk of work inside a session (the [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling), the implementation, the QA), and the boundary between two of them is the only place the question "what do I do with this context?" belongs. Mid-phase there is nothing to decide: continue, or split what is left into [subagents](https://www.aihero.dev/ai-coding-dictionary/subagent).
