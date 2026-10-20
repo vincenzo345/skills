@@ -7,6 +7,7 @@ Human evidence is supplied by the caller; this helper cannot authenticate a conv
 from datetime import datetime, timezone
 import argparse
 import json
+import re
 from pathlib import Path
 import sys
 import uuid
@@ -138,7 +139,16 @@ class PlanningRecords(WorkRecords):
             map_record = self._read(map_ref)
             title = record['body'].lstrip().splitlines()[0].lstrip('# ').strip()
             relative = Path(target).relative_to(Path(map_ref).parent).as_posix()
-            map_record['body'] = map_record['body'].replace('## Decisions so far\n', f'## Decisions so far\n\n- [{title}]({relative}): resolved; read the recorded answer.\n', 1)
+            entry = f'- [{title}]({relative}): resolved; read the recorded answer.'
+            pattern = re.compile(r'^- \[[^\n]*?\]\(' + re.escape(relative) + r'(?:#[^)]*)?\):[^\n]*$', re.M)
+            match = pattern.search(map_record['body'])
+            if match:
+                history = match.group().partition('; [prior answer]')[2]
+                if history:
+                    entry += '; [prior answer]' + history
+                map_record['body'] = pattern.sub(lambda _: entry, map_record['body'], count=1)
+            else:
+                map_record['body'] = map_record['body'].replace('## Decisions so far\n', '## Decisions so far\n\n' + entry + '\n', 1)
             self._write(map_ref, **map_record)
             del claims[target]
             self._save_json('claims.json', claims)
@@ -190,8 +200,12 @@ class PlanningRecords(WorkRecords):
             new_link = Path(replacement).relative_to(Path(map_ref).parent).as_posix()
             title = successor['body'].lstrip().splitlines()[0].lstrip('# ').strip()
             lines = map_record['body'].splitlines()
-            lines = [f'- [{title}]({new_link}): unresolved replacement; [prior answer]({old_link}) superseded.'
-                     if f']({old_link})' in line else line for line in lines]
+            pattern = re.compile(r'^- \[[^\n]*?\]\((' + re.escape(old_link) + r'(?:#[^)]*)?)\):')
+            updated = []
+            for line in lines:
+                match = pattern.match(line)
+                updated.append(f'- [{title}]({new_link}): unresolved replacement; [prior answer]({match.group(1)}) superseded.' if match else line)
+            lines = updated
             map_record['body'] = '\n'.join(lines) + '\n'
             self._write(map_ref, **map_record)
             return sorted(affected - {target})
