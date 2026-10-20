@@ -24,6 +24,10 @@ class RecordError(ValueError):
     """A record is ineligible or its authority is indeterminate."""
 
 
+class Ineligible(RecordError):
+    """Known work that cannot currently start; queue traversal may continue."""
+
+
 class UniqueLoader(yaml.SafeLoader):
     pass
 
@@ -276,23 +280,62 @@ class WorkRecords:
         visiting.remove(target)
         return blockers
 
-    def _eligible(self, target, allow_in_progress=False):
-        if 'history' in Path(target).parts:
-            raise RecordError(f'{target}: historical records cannot be executed; use the current record')
+    @staticmethod
+    def _state(meta, allowed, known, target):
+        state = meta.get('state')
+        if state not in known:
+            raise RecordError(f'{target}: missing or unknown lifecycle {state!r}')
+        if state not in allowed:
+            raise Ineligible(f'{target}: lifecycle is not eligible ({state})')
+
+    @staticmethod
+    def _ready(meta, target):
+        value = meta.get('readiness')
+        if value not in {'needs-triage', 'needs-info', 'ready-for-agent', 'ready-for-human', 'wontfix'}:
+            raise RecordError(f'{target}: missing or unknown readiness {value!r}')
+        if value != 'ready-for-agent':
+            raise Ineligible(f'{target}: readiness is not ready-for-agent ({value})')
+
+    def _effort(self, effort):
+        record = self._read(effort + '/README.md')
+        meta = record['metadata']
+        if meta['kind'] != 'effort':
+            raise RecordError(f'{effort}: expected effort kind')
+        self._state(meta, {'active'}, {'active', 'waiting', 'completed', 'canceled', 'superseded'}, effort)
+        if hasattr(self, '_assert_no_pending_publication'):
+            self._assert_no_pending_publication(effort)
+        return record
+
+    def _spec_eligible(self, target):
         record = self._read(target)
         meta = record['metadata']
+        if meta['kind'] != 'spec':
+            raise RecordError(f'{target}: expected spec kind')
+        self._state(meta, {'current'}, {'current', 'completed', 'superseded', 'canceled'}, target)
+        self._ready(meta, target)
+        if type(meta.get('revision')) is not int or meta['revision'] < 1:
+            raise RecordError(f'{target}: invalid spec revision')
+        if meta.get('effort'):
+            overview = self._effort(meta['effort'])['metadata']
+            if overview.get('current_spec') != {'ref': target, 'revision': meta['revision']}:
+                raise RecordError(f'{target}: stale spec pointer or inconsistent current pointer')
+        return record
+
+    def _eligible(self, target, allow_in_progress=False):
+        if 'history' in Path(target).parts:
+            raise Ineligible(f'{target}: historical records cannot be executed; use the current record')
+        record = self._read(target)
+        meta = record['metadata']
+        if meta['kind'] == 'spec':
+            return self._spec_eligible(target)
         if meta['kind'] != 'implementation':
-            raise RecordError(f'{target}: expected implementation kind')
-        if meta.get('state') not in ({'open', 'in-progress'} if allow_in_progress else {'open'}):
-            raise RecordError(f'{target}: lifecycle is not open ({meta.get("state")})')
-        if meta.get('readiness') != 'ready-for-agent':
-            raise RecordError(f'{target}: readiness is not ready-for-agent ({meta.get("readiness")})')
+            raise Ineligible(f'{target}: expected implementation kind')
+        self._state(meta, {'open', 'in-progress'} if allow_in_progress else {'open'},
+                    {'open', 'in-progress', 'waiting', 'completed', 'canceled', 'superseded'}, target)
+        self._ready(meta, target)
         effort = meta.get('effort')
-        overview = None
         if effort:
-            overview = self._read(effort + '/README.md')['metadata']
-            if overview.get('state') != 'active':
-                raise RecordError(f'{target}: effort is not active')
+            self._effort(effort)
             if type(meta.get('order')) is not int or meta['order'] < 1:
                 raise RecordError(f'{target}: missing or invalid order')
         if 'basis' not in meta:
@@ -301,33 +344,169 @@ class WorkRecords:
         if basis is not None:
             if not isinstance(basis, dict) or not isinstance(basis.get('ref'), str) or type(basis.get('revision')) is not int or basis['revision'] < 1:
                 raise RecordError(f'{target}: invalid spec basis')
-            spec = self._read(basis['ref'])['metadata']
-            if spec['kind'] != 'spec' or spec.get('state') != 'current' or spec.get('readiness') != 'ready-for-agent':
-                raise RecordError(f'{target}: basis is not a current ready spec')
-            if spec.get('revision') != basis['revision'] or (overview and overview.get('current_spec') != basis):
-                raise RecordError(f'{target}: stale spec basis or inconsistent current pointer')
+            spec = self._spec_eligible(basis['ref'])['metadata']
+            if spec['revision'] != basis['revision']:
+                raise Ineligible(f'{target}: stale spec basis')
             if effort and spec.get('effort') != effort:
                 raise RecordError(f'{target}: spec effort mismatch')
         for blocker in self._dependencies(target):
-            if self._read(blocker)['metadata'].get('state') != 'completed':
-                raise RecordError(f'{target}: blocked by {blocker} (not completed)')
+            state = self._read(blocker)['metadata'].get('state')
+            if state not in {'open', 'in-progress', 'waiting', 'completed', 'canceled', 'superseded'}:
+                raise RecordError(f'{blocker}: unknown dependency outcome')
+            if state != 'completed':
+                raise Ineligible(f'{target}: blocked by {blocker} (not completed)')
         return record
 
-    def claim(self, target, owner, workspace=None):
+    def _issues(self, effort):
+        self._effort(effort)
+        records = []
+        for path in self._path(effort + '/tickets').glob('*.md'):
+            ref = path.relative_to(self.authority).as_posix()
+            meta = self._read(ref)['metadata']
+            if meta['kind'] != 'implementation':
+                continue
+            if meta.get('effort') != effort:
+                raise RecordError(f'{ref}: effort membership mismatch')
+            records.append((ref, meta))
+        orders = [meta.get('order') for _, meta in records]
+        if any(type(n) is not int or n < 1 for n in orders) or len(set(orders)) != len(orders):
+            raise RecordError(f'{effort}: missing, invalid or duplicate issue order')
+        return sorted(records, key=lambda item: item[1]['order'])
+
+    def _queue(self):
+        try:
+            text = self._path('work/queue.md').read_text(encoding='utf-8')
+        except OSError as exc:
+            raise RecordError(f'queue authority unavailable: {exc}') from exc
+        efforts = []
+        for line in text.splitlines():
+            if not re.match(r'^\s*(?:[0-9]+[.)]|[-*])\s+', line):
+                continue
+            match = re.search(r'\[[^]]+\]\(([^)]+)\)', line)
+            if not match:
+                raise RecordError('queue entry must link an effort overview')
+            ref = match[1]
+            if not ref.endswith('/README.md'):
+                raise RecordError(f'invalid queue effort reference: {ref}')
+            effort = 'work/' + ref.removesuffix('/README.md')
+            self._path(effort)
+            if effort in efforts:
+                raise RecordError(f'duplicate queue effort: {effort}')
+            efforts.append(effort)
+        return efforts
+
+    def _conflict(self, target, record, claims):
+        if target in claims:
+            raise Ineligible(f'{target}: already claimed by {claims[target].get("owner")}')
+        meta = record['metadata']
+        spec = target if meta['kind'] == 'spec' else (meta.get('basis') or {}).get('ref')
+        if spec:
+            for ref in claims:
+                other = self._read(ref)['metadata']
+                other_spec = ref if other['kind'] == 'spec' else (other.get('basis') or {}).get('ref')
+                if spec == other_spec and (meta['kind'] == 'spec' or other['kind'] == 'spec'):
+                    raise Ineligible(f'{target}: scope conflicts with claim on {ref}')
+
+    def _select(self, target, claims):
+        reasons = []
+        if target:
+            if 'history' in Path(target).parts:
+                raise Ineligible(f'{target}: historical records cannot be executed; use the current record')
+            if self._path(target).is_dir():
+                target = target.rstrip('/') + '/README.md'
+            record = self._read(target)
+            meta = record['metadata']
+            if meta['kind'] == 'implementation':
+                candidates = [(target, meta)]
+            elif meta['kind'] == 'effort':
+                candidates = self._issues(meta['id'])
+            elif meta['kind'] == 'spec':
+                self._spec_eligible(target)
+                children = self._issues(meta['effort']) if meta.get('effort') else []
+                candidates = [(ref, child) for ref, child in children if (child.get('basis') or {}).get('ref') == target]
+                if not candidates:
+                    candidates = [(target, meta)]
+            else:
+                raise Ineligible(f'{target}: expected implementation, spec, or effort kind')
+            scopes = [candidates]
+        else:
+            scopes = None
+        def candidates_by_scope():
+            if scopes is not None:
+                yield from scopes
+            else:
+                for effort in self._queue():
+                    try:
+                        yield self._issues(effort)
+                    except Ineligible as exc:
+                        reasons.append(str(exc))
+        for candidates in candidates_by_scope():
+            for ref, _ in candidates:
+                try:
+                    record = self._read(ref)
+                    self._conflict(ref, record, claims)
+                    record = self._eligible(ref)
+                    return {'target': ref, 'record': record, 'authority': str(self.authority), 'skipped': reasons}
+                except Ineligible as exc:
+                    reasons.append(str(exc))
+        raise Ineligible('No eligible work: ' + ('; '.join(reasons) or 'no implementation issues in the requested scope'))
+
+    def select(self, target=None):
+        """Read-only preview. Execution must use select_and_claim to recheck atomically."""
+        with self.locked():
+            self._authority()
+            return self._select(target, self._json('claims.json', {}))
+
+    def select_and_claim(self, owner, target=None, workspace=None):
         if not owner:
             raise RecordError('claim owner is required')
         with self.locked():
             self._authority()
             claims = self._json('claims.json', {})
-            if target in claims:
-                raise RecordError(f'{target}: already claimed by {claims[target].get("owner")}')
-            record = self._eligible(target)
+            selected = self._select(target, claims)
+            target, record = selected['target'], selected['record']
             claim = dict(target=target, token=uuid.uuid4().hex, owner=owner, workspace=str(Path(workspace or self.checkout).resolve()), acquired_at=datetime.now(timezone.utc).isoformat())
+            meta = record['metadata']
+            claim['basis'] = {'ref': target, 'revision': meta['revision']} if meta['kind'] == 'spec' else meta['basis']
             claims[target] = claim
             self._save_json('claims.json', claims)
-            record['metadata']['state'] = 'in-progress'
-            self._write(target, **record)
+            if record['metadata']['kind'] == 'implementation':
+                record['metadata']['state'] = 'in-progress'
+                self._write(target, **record)
             return claim
+
+    def claim(self, target, owner, workspace=None):
+        return self.select_and_claim(owner, target, workspace)
+
+    def complete_effort(self, effort, evidence):
+        """Record a verified overall outcome while preserving stable artifact paths."""
+        if not isinstance(evidence, str) or not evidence.strip():
+            raise RecordError('completion evidence is required')
+        with self.locked():
+            self._authority()
+            record = self._effort(effort)
+            for ref, meta in self._issues(effort):
+                if meta.get('state') not in {'completed', 'canceled', 'superseded'}:
+                    raise Ineligible(f'{effort}: unfinished issue {ref}')
+            if any(self._read(ref)['metadata'].get('effort') == effort for ref in self._json('claims.json', {})):
+                raise Ineligible(f'{effort}: outstanding claims')
+            for pointer in ('current_spec', 'current_map'):
+                ref = record['metadata'].get(pointer)
+                if ref:
+                    ref = ref['ref'] if isinstance(ref, dict) else ref
+                    if self._read(ref)['metadata'].get('state') != 'completed':
+                        raise Ineligible(f'{effort}: unfinished {pointer}')
+            queue_path = self._path('work/queue.md')
+            queue = queue_path.read_text(encoding='utf-8') if queue_path.exists() else None
+            if queue is not None:
+                link = effort.removeprefix('work/') + '/README.md'
+                queue = ''.join(line for line in queue.splitlines(keepends=True) if f']({link})' not in line)
+            record['metadata']['state'] = 'completed'
+            record['metadata']['next_action'] = 'Completed; see recorded outcome.'
+            record['body'] += '\n## Completion evidence\n\n' + evidence.strip() + '\n'
+            self._write(effort + '/README.md', **record)
+            if queue is not None:
+                atomic_write(queue_path, queue)
 
     def complete(self, target, token, evidence):
         """Close only after caller verifies acceptance and integration availability."""
@@ -339,6 +518,8 @@ class WorkRecords:
             if target not in claims or claims[target].get('token') != token:
                 raise RecordError(f'{target}: claim token does not match')
             record = self._eligible(target, allow_in_progress=True)
+            if hasattr(self, '_validate_claim_basis'):
+                self._validate_claim_basis(target, record, claims[target])
             record['metadata']['state'] = 'completed'
             record['body'] = record['body'].rstrip() + '\n\n## Completion evidence\n\n' + evidence.strip() + '\n'
             self._write(target, **record)
@@ -378,6 +559,15 @@ def main(argv=None):
     for name in ('effort', 'slug', 'body-file', 'approval'):
         issue.add_argument('--' + name, required=True)
     issue.add_argument('--blocked-by', action='append', default=[])
+    selection = sub.add_parser('select')
+    selection.add_argument('target', nargs='?')
+    acquire = sub.add_parser('select-and-claim')
+    acquire.add_argument('target', nargs='?')
+    acquire.add_argument('--owner', required=True)
+    acquire.add_argument('--workspace')
+    finish_effort = sub.add_parser('complete-effort')
+    finish_effort.add_argument('effort')
+    finish_effort.add_argument('--evidence', required=True)
     claim = sub.add_parser('claim')
     claim.add_argument('target')
     claim.add_argument('--owner', required=True)
