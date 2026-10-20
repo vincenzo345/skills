@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/02-work-selection.md
 effort: work/wayfinder-reliability
 order: 2
-state: completed
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -46,3 +46,7 @@ Apply the [shared delivery requirements](../issue-plan.md#delivery-requirements-
 ## Completion evidence
 
 Integrated in 4481b93. Eight selection tests plus six handoff tests pass; package validation passes. Covers explicit scope, queue priority, independent blocked work, historical and stale inputs, unavailable authority, claim conflicts and completion.
+
+## Final acceptance follow-up
+
+Reopened after a temporary reproduction showed missing current_spec metadata could let complete_effort bypass an unfinished spec. Current artifact pointers must be present with valid shape or explicit null.

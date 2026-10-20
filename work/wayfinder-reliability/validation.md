@@ -72,6 +72,23 @@ The initial review confirmed two findings. The direct-spec completion hole is th
 
 A focused follow-up confirmed two P2 remote-preview discrepancies: explicit self-contained issues with null effort/spec basis were rejected, while a matching current spec with missing or unready readiness passed inspection. These affect the read-only contract evaluator, which never acquires ownership. Fixes preserve unsupported automatic claiming and require no provider writes. Remote corrections follow completion of the reopened local blockers.
 
+### Review resolution
+
+- Local fixes merged at `29473dc`: direct-spec resume/revalidation/completion reject newly decomposed scope; decision claims validate required metadata and recursive dependencies. Five planning and six claim tests passed after integration; eight selection and nine legacy tests also passed on the worker.
+- The standards reviewer confirmed the passive-reference exception and prerequisite corrections. The migration storage boundary is documented as an intentional internal interface; no general framework was added.
+- Remote fixes merged at `2535ded`: nine fixtures cover explicit-null standalone records, missing authority, spec readiness, and changes from an acquired null basis. Both providers still reject automatic concurrent claiming.
+- The spec reviewer independently confirmed resolution of all four runtime/preview findings. No actionable review finding remains. The replay punctuation artifact was also corrected.
+
 ## Final results
 
-Pending integration, review, and installation.
+All seven issues have completion evidence and integration receipts. The final full script suite is running with Python 3.12.8 and the pinned PyYAML 6.0.3 in an isolated environment.
+
+Completed checks:
+
+- Promoted skill package validator passed with the pinned dependency.
+- Twenty-seven meeting-record preservation tests passed.
+- Plugin version consistency passed at 2.1.0.
+- `claude plugin validate . --strict` passed.
+- Working and integrated diffs passed whitespace checks.
+
+Final suite acceptance and installation remain pending.

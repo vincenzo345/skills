@@ -4,7 +4,7 @@ kind: implementation
 id: work/wayfinder-reliability/tickets/07-remote-authority.md
 effort: work/wayfinder-reliability
 order: 7
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/wayfinder-reliability/spec.md
@@ -14,8 +14,8 @@ blocked_by:
 - work/wayfinder-reliability/tickets/05-concurrent-implementation.md
 integration:
   ref: integration/wayfinder-reliability
-  commit: 567dbffc612a936fa1fd68148535edfc8bfea6c1
-  verified_tip: 567dbffc612a936fa1fd68148535edfc8bfea6c1
+  commit: 2535dedfd85b359948780083b8e15f10bb9edd67
+  verified_tip: 2535dedfd85b359948780083b8e15f10bb9edd67
 ---
 
 # 07: Respect remote authority and bound remote concurrency
@@ -54,3 +54,7 @@ Six remote contract fixtures and package validation passed. GitHub/GitLab primar
 ## Integrated review follow-up
 
 Reopened for two read-only preview discrepancies: accept explicit self-contained null effort/basis, and reject unknown or unready specification readiness. Local blockers have been reverified and completed.
+
+## Completion evidence
+
+Review corrections integrated at 2535ded. All nine remote fixtures passed; independent reviewer confirmed explicit-null standalone handling, missing-field diagnostics, independent spec readiness, and acquired-null basis continuity. Inspection remains read-only; automatic remote claiming remains unsupported.
