@@ -19,6 +19,10 @@ import uuid
 
 import yaml
 
+# The helper is shipped beside this script in installed skill bundles.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from work_legacy import normalize
+
 
 class RecordError(ValueError):
     """A record is ineligible or its authority is indeterminate."""
@@ -68,6 +72,7 @@ def git(checkout, *args):
 
 
 class WorkRecords:
+    error_type = RecordError
     def __init__(self, checkout):
         self.checkout = Path(git(checkout, 'rev-parse', '--show-toplevel')).resolve()
         self.common = Path(git(self.checkout, 'rev-parse', '--path-format=absolute', '--git-common-dir')).resolve()
@@ -147,7 +152,35 @@ class WorkRecords:
         self.authority = root
         return root
 
+    def _legacy_mapping(self):
+        if (self.control / 'migration.json').exists():
+            raise RecordError('incomplete migration; resume migration before accessing records')
+        path = self._raw_path('work/legacy-map.json')
+        if not path.exists():
+            return {}
+        try:
+            data = json.loads(path.read_text(encoding='utf-8'))
+            mappings = data['mappings']
+            if data['schema'] != 1 or not isinstance(mappings, dict):
+                raise ValueError('unsupported mapping schema')
+            for old, new in mappings.items():
+                self._raw_path(old)
+                self._raw_path(new)
+            if len(set(mappings.values())) != len(mappings) or set(mappings) & set(mappings.values()):
+                raise ValueError('ambiguous identity mapping')
+            return mappings
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            raise RecordError(f'legacy mapping unavailable: {exc}') from exc
+
+    def _canonical(self, ref):
+        mappings = self._legacy_mapping()
+        return next((old for old, new in mappings.items() if new == ref), ref)
+
     def _path(self, ref):
+        mappings = self._legacy_mapping()
+        return self._raw_path(mappings.get(ref, ref))
+
+    def _raw_path(self, ref):
         if not isinstance(ref, str) or not ref or '\\' in ref:
             raise RecordError(f'invalid repository-relative reference: {ref!r}')
         path = Path(ref)
@@ -160,6 +193,7 @@ class WorkRecords:
         return resolved
 
     def _read(self, ref):
+        ref = self._canonical(ref)
         path = self._path(ref)
         try:
             text = path.read_text(encoding='utf-8-sig')
@@ -167,7 +201,7 @@ class WorkRecords:
             raise RecordError(f'{ref}: unavailable record: {exc}') from exc
         match = re.match(r'\A---\r?\n(.*?)\r?\n---(?:\r?\n|$)(.*)\Z', text, re.S)
         if not match:
-            raise RecordError(f'{ref}: missing typed metadata; normalize the explicit legacy input first')
+            return normalize(text, ref, RecordError)
         try:
             meta = yaml.load(match[1], Loader=UniqueLoader)
         except (yaml.YAMLError, TypeError, ValueError) as exc:
@@ -299,6 +333,16 @@ class WorkRecords:
                 raise RecordError('no incomplete publication for this effort')
             return self._apply_publication(effort, pending[effort])
 
+    def read_revision_unlocked_for_migration(self, spec_ref, revision):
+        spec = self._read(spec_ref)['metadata']
+        if spec.get('kind') != 'spec' or type(revision) is not int or revision < 1:
+            raise RecordError('invalid legacy basis')
+        if revision == spec.get('revision'):
+            return
+        effort = spec.get('effort')
+        if not effort or revision > spec.get('revision', 0) or not self._path(effort + f'/history/spec-r{revision}.md').exists():
+            raise RecordError('legacy historical basis unavailable')
+
     def read_revision(self, spec_ref, revision):
         with self.locked():
             self._authority()
@@ -321,6 +365,7 @@ class WorkRecords:
             raise RecordError('explicit reconciliation rationale is required')
         with self.locked():
             self._authority()
+            target = self._canonical(target)
             issue = self._read(target)
             meta = issue['metadata']
             if meta['kind'] != 'implementation' or meta.get('state') not in {'open', 'in-progress', 'waiting'}:
@@ -367,6 +412,7 @@ class WorkRecords:
         """Call immediately before publishing results as well as at completion."""
         with self.locked():
             self._authority()
+            target = self._canonical(target)
             claim = self._json('claims.json', {}).get(target)
             if not claim or claim.get('token') != token:
                 raise RecordError('claim token does not match')
@@ -407,6 +453,7 @@ class WorkRecords:
             return ref
 
     def _dependencies(self, target, visiting=None):
+        target = self._canonical(target)
         visiting = set() if visiting is None else visiting
         if target in visiting:
             raise RecordError(f'{target}: dependency cycle')
@@ -504,7 +551,7 @@ class WorkRecords:
         self._effort(effort)
         records = []
         for path in self._path(effort + '/tickets').glob('*.md'):
-            ref = path.relative_to(self.authority).as_posix()
+            ref = self._canonical(path.relative_to(self.authority).as_posix())
             meta = self._read(ref)['metadata']
             if meta['kind'] != 'implementation':
                 continue
@@ -553,6 +600,7 @@ class WorkRecords:
     def _select(self, target, claims):
         reasons = []
         if target:
+            target = self._canonical(target)
             if 'history' in Path(target).parts:
                 raise Ineligible(f'{target}: historical records cannot be executed; use the current record')
             if self._path(target).is_dir():
@@ -657,6 +705,7 @@ class WorkRecords:
             raise RecordError('completion evidence is required')
         with self.locked():
             self._authority()
+            target = self._canonical(target)
             claims = self._json('claims.json', {})
             if target not in claims or claims[target].get('token') != token:
                 raise RecordError(f'{target}: claim token does not match')
@@ -671,6 +720,7 @@ class WorkRecords:
     def release(self, target, token):
         with self.locked():
             self._authority()
+            target = self._canonical(target)
             claims = self._json('claims.json', {})
             if target not in claims or claims[target].get('token') != token:
                 raise RecordError(f'{target}: claim token does not match')
