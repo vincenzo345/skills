@@ -1,0 +1,14 @@
+{
+  "charting_map_open": true,
+  "charting_three_open_decisions": true,
+  "incomplete_reply_scope_open": true,
+  "explicit_answer_scope_resolved": true,
+  "original_answer_preserved": true,
+  "full_text_answer_preserved": true,
+  "current_answer_resolved": true,
+  "anchored_prior_pointer_preserved": true,
+  "current_map_pointer_replaced": true,
+  "ranking_still_open_after_recorded_review": true,
+  "final_map_and_storage_open": true,
+  "no_spec_or_implementation_artifacts": true
+}

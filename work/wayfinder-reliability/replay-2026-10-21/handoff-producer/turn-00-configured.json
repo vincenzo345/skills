@@ -1,0 +1,10 @@
+{
+  "AGENTS.md": {
+    "sha256": "339b929663dd2f2c033dd466c674e331f31e6751b373cadf5c173bad745312eb",
+    "text": "CLAUDE.md\r\n"
+  },
+  "CLAUDE.md": {
+    "sha256": "5f5f5a296f3ccde292b392a30325e707aa73d34ad8b4832461f6905a6e5d88b8",
+    "text": "# Agent skills\r\n\r\n## Issue tracker\r\nUse local Markdown under work/<effort>/ with the installed setup-repo shared work-record contract and helper. This checkout is the authority.\r\n\r\n## Triage labels\r\nCanonical: needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix.\r\n\r\n## Domain docs\r\nUse root GLOSSARY.md and docs/adr/, creating only qualifying ADRs.\r\n"
+  }
+}

@@ -4,6 +4,10 @@
 
 It recommends and stops. It does not grill, write a [spec](https://www.aihero.dev/ai-coding-dictionary/spec), open a file or fire the skill it just named; what you get back is the next thing to type, and you type it. It is also a hand-written map of the skills in this repo rather than a scan of what you have installed, so it will not route you over your own skills or another author's.
 
+Local planning and implementation share one stable effort folder. Specs hand off approved issues to a consumer that validates current authority and claims ownership; Wayfinder decision tickets stay separate.
+
+Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
+
 ## When to reach for it
 
 You invoke this by typing `/guide-me`; the agent won't reach for it on its own.
@@ -35,6 +39,12 @@ The skill's leading word is **flow**, a path *through* the skills rather than a 
 - **Codebase health**, upkeep rather than feature work. [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) surveys the code for deepening opportunities, and each one it finds re-enters the main flow as an idea.
 - **Standalones**, which sit off every flow and which you use on their own: the prototype, the questionnaire, the research run, and [show-me](https://aihero.dev/skills-show-me) for a visual of the current discussion.
 - **A vocabulary layer underneath**, the shared references the other skills pull in when the words rather than the process are the problem.
+
+## Durable handoffs
+
+Planning carries the same stable effort through Wayfinder, grill-with-docs, to-spec, and to-tickets. Ordinary requirements live in discovery; decision answers stay in their separate decision records. Material spec revisions retain earlier content and require individual reconciliation of unfinished issues; completed issues keep their historical basis. Charting ends with a map link and named next decision, and a reply to an unresolved question continues that question.
+
+For implementation, an explicit issue, effort, or spec directs selection. Bare implement follows the ordered effort queue and skips known blocked work for independent eligible issues. A decomposed spec uses its issue frontier; a ready undecomposed spec can be selected explicitly. Unavailable higher-priority authority produces a diagnostic. Preparing records alone never starts implementation.
 
 ## The phase boundary
 
@@ -93,3 +103,5 @@ Check the changelog for a rename before assuming it is gone. `writing-great-skil
 `guide-me` is a **standalone router** that sits over the whole set. It is never a step in a chain. It points into every chain, and the other docs pages link back to it so none of them has to redraw the graph. From here you most often land on [grill-with-docs](https://aihero.dev/skills-grill-with-docs), the head of the main flow, or [triage](https://aihero.dev/skills-triage), the on-ramp for work that arrived rather than work you started.
 
 It is a [secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source) over the skills it describes. Where the router and a `SKILL.md` disagree, the `SKILL.md` is right.
+
+For existing local work, setup preserves historical paths. Use explicit legacy references in place, or request the separately reviewed [adoption procedure](../../skills/engineering/setup-repo/WORK-RECORDS.md#explicit-legacy-inputs-and-reviewed-adoption); configuration alone never authorizes relocation.

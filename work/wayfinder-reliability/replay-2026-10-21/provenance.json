@@ -1,0 +1,28 @@
+{
+  "source_revision": "00ff5b94ebab4fdd7d6fea9681e79957fcedbc57",
+  "repository_head": "46a6bd3abf69a00ce1a9ec70dd9e920d1d00e899",
+  "installed_skills": 32,
+  "results": [
+    {
+      "runtime": "codex",
+      "files": 111,
+      "mismatches": [],
+      "comparison": "CRLF normalized"
+    },
+    {
+      "runtime": "claude",
+      "files": 111,
+      "mismatches": [],
+      "comparison": "byte exact"
+    }
+  ],
+  "claude_auth_exit": 1,
+  "claude_auth": {
+    "loggedIn": false,
+    "authMethod": "none",
+    "apiProvider": "firstParty",
+    "analyticsDisabled": false,
+    "projectsDirectory": "C:\\Users\\vince\\.claude\\projects",
+    "configDirectory": "C:\\Users\\vince\\.claude"
+  }
+}

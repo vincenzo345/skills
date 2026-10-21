@@ -1,0 +1,18 @@
+{
+  "source": "E:\\tmpdir\\installed-handoff-e3k78jmn\\consumer-evidence",
+  "capture": "Source UTF-8/UTF-16 detected by BOM and encoded as UTF-8 JSON. Original snapshot byte SHA256 retained; no content repairs.",
+  "files": {
+    "actual-response.md.json": "f3128c8f238922273e33773880f422c3c617eac6273bba987c694d7ca74fd12f",
+    "claim-output.json": "4fa544cbe0f90b705d65c92665c5c13339918a0d535333f077a9ca24385caf77",
+    "cleanup-response.md.json": "d185aa69ad37c62c040748b938bed48025327feb7d94908c85c1ba65f62befcd",
+    "cleanup-supplied-turn.txt.json": "6f66a34d006bc4259f16c7d33c62c94cccb800e7b8c4fedb237243236ed188ef",
+    "contender.json": "39210e08a2cbbfc5d5e4b5924a2cd3d403edd117121f9a564f2e99143ced95c6",
+    "effort-output.txt.json": "b58df721f21f2bee309d3729ebb279ffd982dda4718d34cabdd84c07f707f5b7",
+    "final-snapshot.json": "c0d120cf35485c9c2ef39044193e140853571936cda0f18739ad39d49a78fe8e",
+    "release-output.json": "abdfbffecbe18ed94df9829819e596ee285b52a94aa108514452a9121721c789",
+    "released-record-output.json": "c7fe6fa2675b10fe0b0241983f2c0e1383152d8df7765931d8c337b1b5f952f8",
+    "selected-record-output.txt.json": "76d069114004ae422c8aab8e1ea3c31026aec44d270a610284c8356f3a6a1a79",
+    "snapshot.json": "8b936053afdcbdc2ff000fa591201bc34d2e7c72fe74e6be8bdffa8ffb0d7a57",
+    "supplied-turn.txt.json": "17f30ac8d2aac298137c847d8cb993ece1bfcc348877af694e4261e160436091"
+  }
+}

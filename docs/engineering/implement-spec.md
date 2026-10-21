@@ -4,6 +4,8 @@
 
 It reads the tickets as a **task graph**, not a list. Blocking edges decide what can start, so at any moment there is a **frontier** of tickets whose blockers have all landed, and every ticket on the frontier runs at once. That is the difference from working the tickets one by one. The graph's shape sets the pace, not the tickets' order on the tracker.
 
+Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
+
 ## When to reach for it
 
 You invoke this by typing `/implement-spec`, and the agent won't reach for it on its own.
@@ -33,6 +35,12 @@ The tracker decides whether a pull request exists at all. If your tracker closes
 
 Implementers talk to the orchestrator through [context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer) (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries. This keeps each subagent's prompt small and leaves room in the orchestrator's window for the graph.
 
+## Ownership and integration
+
+Each worker claims one eligible issue through the same authority used by `implement`. Worktree snapshots never grant ownership. Resuming requires the saved token; recovery requires evidence that the prior worker stopped and preserves its work pointer. Changed specifications pause workers until reconciliation and explicit review of their retained work.
+
+A finished worker branch does not unblock dependents. The orchestrator merges and verifies the accepted commit, records the integration receipt, then closes the issue. Spec completion requires integrated children and overall acceptance evidence. Filesystem checks establish ownership and ancestry, not the truth of a worker's acceptance claims.
+
 ## Common questions
 
 **How is this different from running `/implement` on each ticket myself?**
@@ -57,7 +65,7 @@ Worktrees don't remove collisions; they postpone them to merge time. A blocking 
 
 **Blocked tickets never start, even after their blocker has merged.**
 
-This is a known problem on GitHub. The tracker's blocked-by count only drops when a blocker *closes*, and tickets typically close when the PR merges, which is the end of the run. The tracker is the right source for the starting graph but a stale one mid-run. Tell the orchestrator to track which tickets have merged into the integration branch itself and compute the frontier from that.
+This is a known problem on GitHub. The tracker's blocked-by count only drops when a blocker *closes*, and tickets typically close when the PR merges, which is the end of the run. Read the authoritative adapter state throughout the run. For local tracking, record completion only after verified integration, with a commit receipt; this releases the dependent frontier. A remote adapter must explicitly define integrated completion without inventing a second local tracker.
 
 **Does this replace Sandcastle or an AFK script?**
 

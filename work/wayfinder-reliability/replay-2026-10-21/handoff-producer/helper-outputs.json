@@ -1,0 +1,101 @@
+[
+  {
+    "argv": [
+      "git",
+      "init"
+    ],
+    "stdout": "Initialized empty Git repository in E:/tmpdir/installed-handoff-e3k78jmn/repo/.git/\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "C:\\Users\\vince\\miniconda3\\python.exe",
+      "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_records.py",
+      "--repo",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+      "configure",
+      "--authority",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo"
+    ],
+    "stdout": "\"E:\\\\tmpdir\\\\installed-handoff-e3k78jmn\\\\repo\"\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "C:\\Users\\vince\\miniconda3\\python.exe",
+      "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_records.py",
+      "--repo",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+      "create-effort",
+      "--slug",
+      "offline-note-title-search",
+      "--title",
+      "Offline note title search",
+      "--request",
+      "Use grill-with-docs to retain these settled requirements, then to-spec to publish a buildable spec in one effort: a small command-line tool searches a supplied UTF-8 JSON list of personal notes by title, case-insensitively, and prints matching titles in input order. All operation is offline; no persistent storage, import pipeline, ranking, or app UI is needed. A note has title and body strings; body text does not match. Accept an empty query as all titles. For malformed JSON or malformed note fields, report an error and exit nonzero. I approve the test seam: run the command with a temporary input file and inspect stdout and exit status. These are settled choices; publish the spec, then stop before ticket planning or implementation.",
+      "--outcome",
+      "Publish a buildable specification retaining settled requirements; stop before ticket planning or implementation."
+    ],
+    "stdout": "\"work/offline-note-title-search\"\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "C:\\Users\\vince\\miniconda3\\python.exe",
+      "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_planning.py",
+      "--repo",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+      "record-discovery",
+      "--request-file",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\evidence\\discovery-request.json"
+    ],
+    "stdout": "\"work/offline-note-title-search/discovery.md\"\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "C:\\Users\\vince\\miniconda3\\python.exe",
+      "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_records.py",
+      "--repo",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+      "publish-spec",
+      "--effort",
+      "work/offline-note-title-search",
+      "--body-file",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\evidence\\spec-body.md"
+    ],
+    "stdout": "\"work/offline-note-title-search/spec.md\"\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "C:\\Users\\vince\\miniconda3\\python.exe",
+      "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_records.py",
+      "--repo",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+      "read",
+      "work/offline-note-title-search/README.md"
+    ],
+    "stdout": "{\n  \"metadata\": {\n    \"schema\": 1,\n    \"kind\": \"effort\",\n    \"id\": \"work/offline-note-title-search\",\n    \"state\": \"active\",\n    \"stage\": \"discovery\",\n    \"current_spec\": {\n      \"ref\": \"work/offline-note-title-search/spec.md\",\n      \"revision\": 1\n    },\n    \"current_map\": null,\n    \"next_action\": \"Review and approve implementation slices.\"\n  },\n  \"body\": \"\\n# Offline note title search\\n\\n## Original request\\n\\nUse grill-with-docs to retain these settled requirements, then to-spec to publish a buildable spec in one effort: a small command-line tool searches a supplied UTF-8 JSON list of personal notes by title, case-insensitively, and prints matching titles in input order. All operation is offline; no persistent storage, import pipeline, ranking, or app UI is needed. A note has title and body strings; body text does not match. Accept an empty query as all titles. For malformed JSON or malformed note fields, report an error and exit nonzero. I approve the test seam: run the command with a temporary input file and inspect stdout and exit status. These are settled choices; publish the spec, then stop before ticket planning or implementation.\\n\\n## Desired outcome\\n\\nPublish a buildable specification retaining settled requirements; stop before ticket planning or implementation.\\n\\n[Discovery](discovery.md) holds ordinary requirements and open questions.\\n\"\n}\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "C:\\Users\\vince\\miniconda3\\python.exe",
+      "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_records.py",
+      "--repo",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+      "read",
+      "work/offline-note-title-search/spec.md"
+    ],
+    "stdout": "{\n  \"metadata\": {\n    \"schema\": 1,\n    \"kind\": \"spec\",\n    \"id\": \"work/offline-note-title-search/spec.md\",\n    \"effort\": \"work/offline-note-title-search\",\n    \"revision\": 1,\n    \"state\": \"current\",\n    \"readiness\": \"ready-for-agent\"\n  },\n  \"body\": \"\\n# Offline note title search\\n\\n## Problem Statement\\n\\nA person with a supplied list of personal notes needs to find notes by title locally and receive the matching titles without configuring an application or storage system.\\n\\n## Solution\\n\\nProvide a small command-line tool accepting an input file and a query. Read the supplied UTF-8 JSON list, validate its notes, and print titles matching the query case-insensitively in their original input order. An empty query returns every title. All operation is offline.\\n\\n## User Stories\\n\\n1. As a note owner, I want to supply my notes as a UTF-8 JSON file, so that I can search existing data.\\n2. As a note owner, I want to search titles, so that results reflect the names of my notes.\\n3. As a note owner, I want case-insensitive search, so that capitalization does not prevent a match.\\n4. As a note owner, I want only titles printed, so that output stays concise.\\n5. As a note owner, I want matching titles in input order, so that the original ordering is preserved.\\n6. As a note owner, I want body-only matches excluded, so that unrelated titles do not appear.\\n7. As a note owner, I want an empty query to return all titles, so that I can list my notes.\\n8. As a note owner, I want malformed JSON reported as an error with a nonzero exit, so that failures are detectable.\\n9. As a note owner, I want malformed note fields rejected, so that invalid notes do not silently distort results.\\n10. As a note owner, I want offline operation, so that no service or network connection is required.\\n11. As a note owner, I want no persistent storage setup, so that I can run the command directly on my file.\\n12. As a note owner, I want an empty list or no matches to produce no matching titles, so that empty results are usable.\\n\\n## Implementation Decisions\\n\\n- Expose one command accepting an input file path and a query string, including an explicitly empty query. The command name and argument syntax are implementation choices and must be documented with the delivered tool.\\n- The input is a UTF-8 JSON top-level list. Every entry must be an object with title and body fields whose values are strings. Missing fields, null values, wrong field types, non-object entries, and a non-list root are invalid. Additional fields need not participate in search.\\n- Use case-insensitive literal substring matching on titles as the concrete search behavior; preserve original title spelling in output. This is a synthesis detail, not a separately supplied user judgment.\\n- Print each matching title to stdout in input order, retaining duplicate matching entries. Successful searches exit zero, including no matches and an empty list.\\n- An empty query matches every valid note. Body text never contributes to matching.\\n- Validate the full input before printing results. On invalid JSON, invalid fields, invalid UTF-8, or an unreadable input file, report a diagnostic to stderr and exit nonzero.\\n- Read and search only the supplied file. No network operation, persistent index, database, or background process is required.\\n\\n## Testing Decisions\\n\\nThe user explicitly approved the external command seam: run the command with a temporary input file and inspect stdout and exit status. Use that one seam for acceptance tests; stderr can also be inspected for required diagnostics. Test observable behavior, without binding tests to internal modules or data structures. This new repository has no application code or existing tests to reuse.\\n\\nAcceptance criteria:\\n\\n- Mixed-case title/query pairs match while original title spelling is printed.\\n- A partial title query finds the containing title; unrelated titles are excluded.\\n- Multiple matches remain in input order, including duplicate titles.\\n- A query present only in body produces no matching titles and exits zero.\\n- Empty query prints all titles in order; empty input list prints none and exits zero.\\n- No matches prints no titles and exits zero.\\n- UTF-8 titles are read and emitted without corruption.\\n- Malformed JSON, a non-list root, a non-object entry, missing title/body, and non-string title/body each report an error and exit nonzero.\\n- A malformed later entry does not permit partial successful title output.\\n- Invalid UTF-8 and unreadable files report errors and exit nonzero.\\n- The command succeeds without network access and does not create persistent application storage.\\n\\n## Out of Scope\\n\\nPersistent storage, an import pipeline, ranking, body search, an app UI, remote services, ticket planning, and implementation during this request.\\n\\n## Further Notes\\n\\nSettled requirements and the user's test-seam approval are retained in [discovery](discovery.md). The stable [effort](README.md) owns this specification. Readiness is ready-for-agent because the requested behavior, error cases, and approved external test seam are sufficient for implementation. Readiness does not authorize an implementation breakdown or begin implementation. Stop after publication as requested. No project ADR is warranted by these small, reversible scope choices.\\n\"\n}\n",
+    "stderr": "",
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,190 @@
+{
+  "conclusion": "success",
+  "headSha": "2518eae51d863336925217d19a86f47864d8c3f6",
+  "jobs": [
+    {
+      "completedAt": "2026-10-21T14:19:17Z",
+      "conclusion": "success",
+      "databaseId": 119275309361,
+      "name": "windows-installer",
+      "startedAt": "2026-10-21T14:16:59Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-21T14:17:01Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-21T14:17:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:14Z",
+          "conclusion": "success",
+          "name": "Checkout",
+          "number": 2,
+          "startedAt": "2026-10-21T14:17:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:14Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-10-21T14:17:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:22Z",
+          "conclusion": "success",
+          "name": "Verify installer safety",
+          "number": 4,
+          "startedAt": "2026-10-21T14:17:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:36Z",
+          "conclusion": "success",
+          "name": "Install work-record dependency",
+          "number": 5,
+          "startedAt": "2026-10-21T14:17:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:19:13Z",
+          "conclusion": "success",
+          "name": "Verify work-record behavior on Windows",
+          "number": 6,
+          "startedAt": "2026-10-21T14:17:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:19:13Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 11,
+          "startedAt": "2026-10-21T14:19:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:19:15Z",
+          "conclusion": "success",
+          "name": "Post Checkout",
+          "number": 12,
+          "startedAt": "2026-10-21T14:19:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:19:15Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13,
+          "startedAt": "2026-10-21T14:19:15Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vincenzo345/skills/actions/runs/39615504001/job/119275309361"
+    },
+    {
+      "completedAt": "2026-10-21T14:17:10Z",
+      "conclusion": "success",
+      "databaseId": 119275309666,
+      "name": "skill-package",
+      "startedAt": "2026-10-21T14:16:58Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-21T14:17:00Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-21T14:16:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:00Z",
+          "conclusion": "success",
+          "name": "Checkout",
+          "number": 2,
+          "startedAt": "2026-10-21T14:17:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:01Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-10-21T14:17:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:02Z",
+          "conclusion": "success",
+          "name": "Install validator dependency",
+          "number": 4,
+          "startedAt": "2026-10-21T14:17:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:02Z",
+          "conclusion": "success",
+          "name": "Validate promoted skills",
+          "number": 5,
+          "startedAt": "2026-10-21T14:17:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:08Z",
+          "conclusion": "success",
+          "name": "Prove validator rejects broken packages",
+          "number": 6,
+          "startedAt": "2026-10-21T14:17:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:08Z",
+          "conclusion": "success",
+          "name": "Verify meeting-record preservation checker",
+          "number": 7,
+          "startedAt": "2026-10-21T14:17:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:08Z",
+          "conclusion": "success",
+          "name": "Validate plugin version",
+          "number": 8,
+          "startedAt": "2026-10-21T14:17:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:09Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 15,
+          "startedAt": "2026-10-21T14:17:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:09Z",
+          "conclusion": "success",
+          "name": "Post Checkout",
+          "number": 16,
+          "startedAt": "2026-10-21T14:17:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-21T14:17:09Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-10-21T14:17:09Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/vincenzo345/skills/actions/runs/39615504001/job/119275309666"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/vincenzo345/skills/actions/runs/39615504001"
+}
