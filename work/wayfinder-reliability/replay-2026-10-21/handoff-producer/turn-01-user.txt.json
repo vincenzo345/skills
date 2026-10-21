@@ -1,0 +1,4 @@
+{
+  "original_file": "turn-01-user.txt",
+  "text": "Use grill-with-docs to retain these settled requirements, then to-spec to publish a buildable spec in one effort: a small command-line tool searches a supplied UTF-8 JSON list of personal notes by title, case-insensitively, and prints matching titles in input order. All operation is offline; no persistent storage, import pipeline, ranking, or app UI is needed. A note has title and body strings; body text does not match. Accept an empty query as all titles. For malformed JSON or malformed note fields, report an error and exit nonzero. I approve the test seam: run the command with a temporary input file and inspect stdout and exit status. These are settled choices; publish the spec, then stop before ticket planning or implementation."
+}

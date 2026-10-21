@@ -1,0 +1,11 @@
+{
+  "target": "work/offline-note-title-search/tickets/01-deliver-offline-note-title-search-cli.md",
+  "token": "1c397b6d79114b67b1682e52244bd8d3",
+  "owner": "installed-handoff-consumer",
+  "workspace": "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+  "acquired_at": "2026-10-21T13:46:13.261118+00:00",
+  "basis": {
+    "ref": "work/offline-note-title-search/spec.md",
+    "revision": 1
+  }
+}

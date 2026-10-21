@@ -1,6 +1,6 @@
 # Implementation validation
 
-Status: completed, validated, and installed
+Status: implementation completed, validated, and installed; subsequent verification findings recorded below
 
 ## Execution basis
 
@@ -118,3 +118,15 @@ The documented Windows procedure completed:
 Subsequent commits contain completion evidence and queue cleanup only; the installed skill source is exactly `00ff5b94ebab`. Restart Codex and Claude Code to refresh discovery. This installation verification is separate from the unavailable authenticated Claude behavioral replay.
 
 All eight temporary implementation/review worktrees were verified clean and merged, then removed. The completed effort remains at its original path and is absent from the active queue; a final consumer smoke check reports no eligible work. Unrelated untracked files were preserved.
+
+## Installed-source follow-up, 2026-10-21
+
+[Fresh verification evidence](replay-2026-10-21/README.md) records three fresh Codex agent contexts using installed skills in two isolated temporary repositories. All 111 skill files match source 00ff5b94ebab for both Codex (normalized line endings) and Claude (byte exact). Claude authentication remains unavailable.
+
+The bounded planning replay preserved charting/continuation boundaries, human choices, changed answers and anchored history pointers, and rejected an unrelated article prerequisite. A separate small-effort discovery-to-spec-to-approved-issue handoff reached a fresh implementation consumer, which selected and claimed the child from an explicit spec. A deterministic contender was rejected; the consumer then released its unfinished claim without coding or completion. These are bounded observations, not universal behavior or full application implementation.
+
+Fresh Windows validation passed all 60 script tests in 123.480 seconds with Python 3.12.8/PyYAML 6.0.3, plus 27 preservation tests, package, version, and strict plugin manifest checks. Existing runtime/test/CI sources were unchanged.
+
+Two new findings remain open: V-01, spec publication retained discovery stage; V-02, the actor suggested unavailable spec-to-issues rather than to-tickets. The earlier review-resolution statements above describe that earlier review, not disposition of these later findings. Both are preserved in the replay evidence and prepared draft PR; neither was fixed and completed production issue/spec states were not changed.
+
+The [publication plan](publication-plan.md) proposes integration/wayfinder-reliability into main as a draft PR. Head pushes trigger existing hosted Windows/Linux validation; main-target PR events do not independently trigger it. Hosted results remain pending explicit publication approval. No push, PR, merge, release, reinstall, historical migration, or optional improvement was performed in this follow-up.

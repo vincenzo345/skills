@@ -1,0 +1,6 @@
+{
+  "controller_action": "Seed a valid section anchor on the current resolved answer before the next invalidation. This is scenario preparation, not a repair of an observed failure.",
+  "target": "work/saved-note-search/map.md",
+  "old": "decisions/05-full-text-search-scope.md",
+  "new": "decisions/05-full-text-search-scope.md#resolution"
+}

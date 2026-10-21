@@ -1,0 +1,22 @@
+{
+  "AGENTS.md": {
+    "sha256": "339b929663dd2f2c033dd466c674e331f31e6751b373cadf5c173bad745312eb",
+    "text": "CLAUDE.md\r\n"
+  },
+  "CLAUDE.md": {
+    "sha256": "5f5f5a296f3ccde292b392a30325e707aa73d34ad8b4832461f6905a6e5d88b8",
+    "text": "# Agent skills\r\n\r\n## Issue tracker\r\nUse local Markdown under work/<effort>/ with the installed setup-repo shared work-record contract and helper. This checkout is the authority.\r\n\r\n## Triage labels\r\nCanonical: needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix.\r\n\r\n## Domain docs\r\nUse root GLOSSARY.md and docs/adr/, creating only qualifying ADRs.\r\n"
+  },
+  "GLOSSARY.md": {
+    "sha256": "9d08f6c4b9d01605e50ff73b8e7983414f1dc3c98b0f0eed9eed1b2eed0ae7d8",
+    "text": "# Personal notes\r\n\r\nPersonal notes and their searchable titles.\r\n\r\n## Language\r\n\r\n**Note**:\r\nA personal written item with a title and body.\r\n_Avoid_: Document, record\r\n\r\n**Title**:\r\nThe name of a note, used to find it.\r\n\r\n**Body**:\r\nThe content of a note, separate from its title.\r\n"
+  },
+  "work/offline-note-title-search/discovery.md": {
+    "sha256": "38b40f8dfb7366a4212f8130629429ccd9c0700ddd355170e187f1c7b82af2b3",
+    "text": "# Discovery\n\nSource: supplied user turn 1, settled choices. Build a small offline CLI that searches a supplied UTF-8 JSON list of personal notes by title, case-insensitively, printing matching titles in input order. Each note has title and body strings; body text does not match. Empty query returns all titles. Malformed JSON or malformed note fields produce an error and nonzero exit. No persistent storage, import pipeline, ranking, or app UI. The user explicitly approved invoking the command with a temporary input file and inspecting stdout and exit status as the test seam. The user requested publication now, then stopping before ticket planning or implementation. No additional human choices are required for the bounded specification. Next invocation: to-spec, using this same effort and discovery record. No breakdown approval was supplied.\n"
+  },
+  "work/offline-note-title-search/README.md": {
+    "sha256": "5a5c841e55bae716ab8d0a74d14b339ab7c0cc716ece57f16730a71f0ca14860",
+    "text": "---\nschema: 1\nkind: effort\nid: work/offline-note-title-search\nstate: active\nstage: discovery\ncurrent_spec: null\ncurrent_map: null\nnext_action: Continue the recorded open questions or synthesize the agreed specification.\n---\n\n# Offline note title search\n\n## Original request\n\nUse grill-with-docs to retain these settled requirements, then to-spec to publish a buildable spec in one effort: a small command-line tool searches a supplied UTF-8 JSON list of personal notes by title, case-insensitively, and prints matching titles in input order. All operation is offline; no persistent storage, import pipeline, ranking, or app UI is needed. A note has title and body strings; body text does not match. Accept an empty query as all titles. For malformed JSON or malformed note fields, report an error and exit nonzero. I approve the test seam: run the command with a temporary input file and inspect stdout and exit status. These are settled choices; publish the spec, then stop before ticket planning or implementation.\n\n## Desired outcome\n\nPublish a buildable specification retaining settled requirements; stop before ticket planning or implementation.\n\n[Discovery](discovery.md) holds ordinary requirements and open questions.\n"
+  }
+}

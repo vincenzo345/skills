@@ -1,0 +1,35 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\vince\\miniconda3\\python.exe",
+      "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_records.py",
+      "--repo",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+      "publish-issue",
+      "--effort",
+      "work/offline-note-title-search",
+      "--slug",
+      "deliver-offline-note-title-search-cli",
+      "--body-file",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\evidence\\turn-03-ticket-body.md",
+      "--approval",
+      "I approve the single Deliver offline note title search CLI slice and its empty blocking dependencies. Publish it using to-tickets, with its spec basis and self-contained criteria. Stop before implementation."
+    ],
+    "stdout": "\"work/offline-note-title-search/tickets/01-deliver-offline-note-title-search-cli.md\"\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "C:\\Users\\vince\\miniconda3\\python.exe",
+      "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_records.py",
+      "--repo",
+      "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+      "read",
+      "work/offline-note-title-search/tickets/01-deliver-offline-note-title-search-cli.md"
+    ],
+    "stdout": "{\n  \"metadata\": {\n    \"schema\": 1,\n    \"kind\": \"implementation\",\n    \"id\": \"work/offline-note-title-search/tickets/01-deliver-offline-note-title-search-cli.md\",\n    \"effort\": \"work/offline-note-title-search\",\n    \"order\": 1,\n    \"state\": \"open\",\n    \"readiness\": \"ready-for-agent\",\n    \"basis\": {\n      \"ref\": \"work/offline-note-title-search/spec.md\",\n      \"revision\": 1\n    },\n    \"blocked_by\": []\n  },\n  \"body\": \"\\n# 01: Deliver offline note title search CLI\\n\\n**What to build:** A runnable, documented offline command that accepts a supplied UTF-8 JSON notes file and a query, validates the input, and prints matching note titles. A note has title and body strings. Search only title text using case-insensitive literal substring matching, preserving each matching title's original spelling and input order, including duplicates. Include automated external command tests and instructions for running both the tool and tests.\\n\\n**Blocked by:** None (can start immediately after acquiring implementation ownership).\\n\\n**Spec basis:** [Offline note title search specification](../spec.md), revision 1. [Discovery](../discovery.md) retains the settled requirements and user-approved test seam. Use the project glossary's Note, Title, and Body terms.\\n\\n## Acceptance criteria\\n\\n- [ ] A documented invocation accepts an input file path and query, including an explicitly empty query.\\n- [ ] Mixed-case and partial-title queries match titles case-insensitively, print only matching titles to stdout, and preserve original title spelling, ordering, and duplicate entries.\\n- [ ] Body-only matches are excluded. No matches and an empty list produce empty stdout and exit zero.\\n- [ ] Empty query prints all titles in input order. UTF-8 titles are read and emitted without corruption.\\n- [ ] Input is a JSON top-level list of objects with title and body string fields. Malformed JSON, non-list roots, non-object entries, missing fields, null values, and other non-string title/body values produce diagnostics on stderr and a nonzero exit.\\n- [ ] Validate the full input before printing results: an invalid later entry causes no partial successful title output.\\n- [ ] Invalid UTF-8 and unreadable input files produce diagnostics and nonzero exit.\\n- [ ] Successful searches exit zero, including empty results.\\n- [ ] The command operates without network access and creates no persistent application storage.\\n- [ ] Automated tests invoke the actual command with temporary input files, inspect stdout and exit status, and inspect stderr for diagnostics. Cover valid searches, order, duplicates, body exclusion, empty query/list, no match, UTF-8, and each invalid-input category above.\\n- [ ] Delivery includes instructions for invoking the command and running its acceptance tests.\\n\\n## Delivery requirements\\n\\nDeliver the complete runnable behavior, documentation, and passing external-behavior tests together. Choose and document the command name, argument syntax, and runtime in implementation. No persistent storage, import pipeline, ranking, app UI, body search, or remote service is in scope. Do not split this approved slice into separate layer tickets.\\n\\n## Approval context\\n\\nThe user approved this single slice and its empty blocking dependencies in supplied turn 3: \\\"I approve the single Deliver offline note title search CLI slice and its empty blocking dependencies. Publish it using to-tickets, with its spec basis and self-contained criteria. Stop before implementation.\\\"\\n\\nPublication is authorized; implementation is explicitly deferred.\\n\\n## Approval\\n\\nI approve the single Deliver offline note title search CLI slice and its empty blocking dependencies. Publish it using to-tickets, with its spec basis and self-contained criteria. Stop before implementation.\\n\"\n}\n",
+    "stderr": "",
+    "exit_code": 0
+  }
+]

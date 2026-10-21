@@ -1,0 +1,16 @@
+{
+  "type": "deterministic installed-helper contender after fresh-agent claim",
+  "argv": [
+    "C:\\Users\\vince\\miniconda3\\python.exe",
+    "C:\\Users\\vince\\.codex\\skills\\setup-repo\\scripts\\work_records.py",
+    "--repo",
+    "E:\\tmpdir\\installed-handoff-e3k78jmn\\repo",
+    "select-and-claim",
+    "work/offline-note-title-search/spec.md",
+    "--owner",
+    "independent-contender"
+  ],
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "No eligible work: work/offline-note-title-search/tickets/01-deliver-offline-note-title-search-cli.md: already claimed by installed-handoff-consumer\n"
+}

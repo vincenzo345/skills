@@ -1,0 +1,27 @@
+{
+  "source": "E:\\tmpdir\\installed-handoff-e3k78jmn\\evidence",
+  "capture": "Original relative path/text and SHA256 retained for snapshots; transcripts encoded as JSON without repairs.",
+  "files": {
+    "discovery-request.json": "6a9ad8e79db586e28d278f2d53e1ed9730c7a5546e84bc57fce241d2f455a0c1",
+    "execution-notes.md.json": "50664757112070b737768f142e9a5302e53eb3d22c3c5bf5def8928313e5a269",
+    "helper-outputs.json": "5a2bfd83e6376d8b52294ca38efb0d16ece1e40827a0b90d0928e1d5035049e0",
+    "spec-body.md.json": "003b8a620c57f095ebc4393c6991157b05759a2666ece73c4f4cf86c8ce3f99c",
+    "turn-00-configured.json": "fc4eb88a88b4fa83ff39ede17d4ced597d2ed49fcfe89e7e4a6d8ffdafdac3ff",
+    "turn-01-after-discovery.json": "74faa4bd52d8ca2393008731bf1dd7278d12d64211ca4b56ea6c55ebf0caf351",
+    "turn-01-assistant-commentary.txt.json": "004f01b11c9786f1724ac62b2c5d850e3464ede80b4aa75d07c80d1b19c07fa8",
+    "turn-01-assistant-final.txt.json": "eca7762f53de2c7b993a0a1f0d52900d2e6d514835cb0670d20c3a89b6d435cb",
+    "turn-01-final-snapshot.json": "f2a7cc323ec8ccabd13568f649916a61f65be8fc3084a37bbbb642f80d2f3818",
+    "turn-01-user.txt.json": "382df11486d6eccfafa0b956968fbdaa0fdc912f721f6852983751e310f638d3",
+    "turn-02-assistant-commentary.txt.json": "740be3e4477356b2ad945bb07bbb468ad002087b9216c90f4f185fef5d3b9dcd",
+    "turn-02-assistant-final.txt.json": "b44f3424104a14cdf0ef8ba9f1e5f86ef38f358fd0b09334e0a42ea43b3bac4a",
+    "turn-02-final-snapshot.json": "f2a7cc323ec8ccabd13568f649916a61f65be8fc3084a37bbbb642f80d2f3818",
+    "turn-02-helper-outputs.json": "91aa44ebe97bb05b88a60d93428fe521d365a108686decc309e1995116b91761",
+    "turn-02-user.txt.json": "e480e5598da7ad23f59a9c7f1faf80749ba01b1ff6159c97407b8e4a216dc11f",
+    "turn-03-assistant-commentary.txt.json": "dd15c0eece2bb0e8213f16a1d7435b3fee2bde2fa46965fce2b3cd8eb704b8b2",
+    "turn-03-assistant-final.txt.json": "0dffa2fde5faccabe8ab07969692385f3ebdd793593335b6d11554f8ab0821e5",
+    "turn-03-final-snapshot.json": "39c8b4777b6221a092c6dc69e523cae82ca9c9b6da1fefd226522334cc99a38d",
+    "turn-03-helper-outputs.json": "02e55f5eba7a5776ed915d229d6596830c4616d3cb0300be80520c4ce51661dc",
+    "turn-03-ticket-body.md.json": "0b7748b8d1dfd6ae71b31c75ceddd68b0e03c8863b0917f2f5b9d9c20beae75a",
+    "turn-03-user.txt.json": "e94195c3baca12dd396804d69806948896f871c9dd837df2d15e4a2c54463b67"
+  }
+}

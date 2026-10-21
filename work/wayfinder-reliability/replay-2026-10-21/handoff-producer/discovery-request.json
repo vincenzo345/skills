@@ -1,0 +1,4 @@
+{
+  "effort": "work/offline-note-title-search",
+  "finding": "Source: supplied user turn 1, settled choices. Build a small offline CLI that searches a supplied UTF-8 JSON list of personal notes by title, case-insensitively, printing matching titles in input order. Each note has title and body strings; body text does not match. Empty query returns all titles. Malformed JSON or malformed note fields produce an error and nonzero exit. No persistent storage, import pipeline, ranking, or app UI. The user explicitly approved invoking the command with a temporary input file and inspecting stdout and exit status as the test seam. The user requested publication now, then stopping before ticket planning or implementation. No additional human choices are required for the bounded specification. Next invocation: to-spec, using this same effort and discovery record. No breakdown approval was supplied."
+}

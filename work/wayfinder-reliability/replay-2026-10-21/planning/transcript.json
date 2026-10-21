@@ -1,0 +1,45 @@
+[
+  {
+    "turn": 1,
+    "user": "Plan a local application for finding saved notes. The destination is a buildable specification. Search scope, offline storage, and ranking are unresolved. Please chart the map.",
+    "supplied_context": "Search scope and storage are independent initial decisions. Ranking depends on the scope answer. We have not decided how import should work.",
+    "assistant_commentary": "I?m using Wayfinder to chart the decisions toward a buildable specification. Search scope and offline storage can start independently; ranking follows scope, and import remains an area to clarify.",
+    "assistant": "Charted the [Saved note search map](E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/map.md) toward a buildable specification.\n\n- **Search scope** and **Offline storage** are independent, open decisions.\n- **Result ranking** is blocked by Search scope.\n- Import remains in **Not yet specified** until its question is clearer.\n\nNo decisions are resolved; the map remains open. Next: **Search scope**. Run `/wayfinder E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/map.md` to decide which saved notes and note fields search should cover."
+  },
+  {
+    "turn": 2,
+    "user": "Use Wayfinder to start Search scope.",
+    "assistant_commentary": "I'm continuing Wayfinder with Search scope, using grilling and domain-modeling to clarify what counts as a searchable note.",
+    "assistant": "Started [Search scope](E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/decisions/01-search-scope.md). It remains open while we settle these choices.\n\n\u2753 **Q1 \u2014 Supported notes:** Should the first version search plain-text and Markdown notes, leaving PDFs, images, and other attachment content outside its search scope?\n\n\u27a1\ufe0f I recommend yes: start with text notes.\n\n---\n\n\u2753 **Q2 \u2014 Searchable fields:** Should search cover both each note's title and body, with tags, filenames, and other metadata excluded initially?\n\n\u27a1\ufe0f I recommend yes: title and body search.\n\nPlease answer each question; \"yes\" accepts its recommendation."
+  },
+  {
+    "turn": 3,
+    "user": "The notes are personal and must work offline.",
+    "assistant_commentary": "I'll record that the notes are personal and the app must work offline. Search scope still needs your choices about note formats and searchable fields.",
+    "assistant": "Recorded: these are personal notes, and the application must work offline. [Search scope](E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/decisions/01-search-scope.md) remains open.\n\n\u2753 **Q1 \u2014 Supported notes:** Should the first version search plain-text and Markdown notes, excluding PDF and image contents?\n\n\u27a1\ufe0f I recommend yes.\n\n---\n\n\u2753 **Q2 \u2014 Searchable fields:** Should search cover note titles and bodies, excluding tags, filenames, and other metadata initially?\n\n\u27a1\ufe0f I recommend yes.\n\nPlease answer each question; \"yes to both\" accepts both recommendations."
+  },
+  {
+    "turn": 4,
+    "user": "Yes to plain-text and Markdown notes. Title search first.",
+    "assistant_commentary": "I'll record plain-text and Markdown notes with title-only search as the Search scope decision, then update the map to show what's ready next.",
+    "assistant": "Resolved [Search scope](E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/decisions/01-search-scope.md): plain-text and Markdown notes, with **title-only search first**.\n\nUpdated the [Saved note search map](E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/map.md). Result ranking is now unblocked. Import has become a concrete **Note import** decision, including how imported notes get their searchable titles.\n\nThe map remains open. Next: **Offline storage**. Run `/wayfinder E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/map.md` to decide what stays locally and what must work offline."
+  },
+  {
+    "turn": 5,
+    "user": "Full text is now required. Reconsider search scope, but keep the old answer so we can see what changed.",
+    "assistant_commentary": "I'll preserve the title-only answer and record full-text search as its replacement, then review how that change affects ranking and import.",
+    "assistant": "Updated the [Saved note search map](E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/map.md): **Full-text search scope** now requires searching titles and bodies of plain-text and Markdown notes.\n\nThe original **Search scope** answer is preserved as superseded, with a link to its replacement. Ranking now follows the revised scope; its open question includes how title and body matches should compare. Note import still needs a decision.\n\nThe map remains open. Next: **Offline storage**. Run `/wayfinder E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/map.md` to continue."
+  },
+  {
+    "turn": 6,
+    "user": "For the first release, revert to title-only search. Preserve both earlier answers so the change remains traceable.",
+    "assistant_commentary": "I'll record title-only search as the first-release scope and preserve both earlier answers in the decision history.",
+    "assistant": "Recorded **First-release title-only search** on the [Saved note search map](E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/map.md). Body search is deferred beyond the first release.\n\nBoth earlier answers remain intact, with replacement links tracing **Search scope** to **Full-text search scope** to **First-release title-only search**. Ranking now asks about title matches only and remains unresolved.\n\nThe map remains open. Next: **Offline storage**. Run `/wayfinder E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/map.md` to continue."
+  },
+  {
+    "turn": 7,
+    "user": "Continue planning the application. Someone proposed rewriting a full sample article before discussing offline storage. Do we need that rewrite?",
+    "assistant_commentary": "I'll check whether the proposed article rewrite informs an unresolved decision, then continue with Offline storage.",
+    "assistant": "No. A full article rewrite has no identified bearing on the offline-storage decision, so it is not a prerequisite. If we later need sample notes to test a specific search behavior, we can choose a small example tied to that question.\n\nI have started [Offline storage](E:/tmpdir/wayfinder-installed-replay-vd7yjutt/fixture/work/saved-note-search/decisions/02-offline-storage.md).\n\n\u2753 **Q1 \u2014 Local note copies:** Should the application retain its own local copy of each imported note, together with its search data, so imported notes remain searchable and readable offline even if the original file moves?\n\n\u27a1\ufe0f I recommend yes for reliable offline access. The tradeoff is duplicate storage and a later decision about how changes to original files reach those copies.\n\nThis choice remains open; \"yes\" accepts the recommendation."
+  }
+]

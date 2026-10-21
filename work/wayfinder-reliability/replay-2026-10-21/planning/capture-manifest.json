@@ -1,0 +1,19 @@
+{
+  "source": "E:\\tmpdir\\wayfinder-installed-replay-vd7yjutt\\evidence",
+  "capture": "Snapshot files encoded as JSON maps of original relative path to UTF-8 text and original byte SHA256. No snapshot content repaired.",
+  "files": {
+    "active-claim.json": "3515a63366d243e76771ec903a83f197fb84168168768edc8ae07ecd078cec2a",
+    "anchor-precondition-snapshot.json": "d0f724103ce6861e9036c1d6862c2dd60364617fdea6b24da1d6fa351b086eda",
+    "anchor-precondition.json": "88b25997d3a030648171232a2f5c4df7fafe4daec2b16e47f611ab85d68805b7",
+    "execution-notes.md": "84cf2529cb20b84bbe4c96b3c6cc5223847637e394fbe5bae5c407690052fe62",
+    "paths.json": "e394a594e29d44b25758f95753caaa95fbf84b9bc11a79a162c98eb56f41b183",
+    "transcript.json": "0d5d4bf064aee6e5afc28cf8936874119636540bbade71e6e8248eacc7467888",
+    "turn-01-snapshot.json": "d811af39bd24d5d55dd04c5f4dd4226aab2b925c088b672aaf250244836704b8",
+    "turn-02-snapshot.json": "87eb1c14ebd35b2d53aaabea6fd25cb2923ed20d0525bb6fc60ce2e7727be5c8",
+    "turn-03-snapshot.json": "76809313dd1ca0bc984a8412aeddc9904cb622e2785581df9762b2e6144d6695",
+    "turn-04-snapshot.json": "7e6079d86d6d15c8b1f48c9f09bb3c42979e0a33e6b4d19ea6b678ac577f0d80",
+    "turn-05-snapshot.json": "f4058dfe24c3a463d97221edad65f14d74f1f60d8f79e1be8a1d4492ea320f53",
+    "turn-06-snapshot.json": "4a48e4f21e6f3bf9a3481d9fd8856e5a8e613d5507026f591348b29b37087908",
+    "turn-07-snapshot.json": "c414007d3b35c83fd0102e05c044b3d86cb48c461cefdb6ee2a57e4deb44adea"
+  }
+}
