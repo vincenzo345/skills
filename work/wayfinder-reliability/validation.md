@@ -130,3 +130,9 @@ Fresh Windows validation passed all 60 script tests in 123.480 seconds with Pyth
 Two new findings remain open: V-01, spec publication retained discovery stage; V-02, the actor suggested unavailable spec-to-issues rather than to-tickets. The earlier review-resolution statements above describe that earlier review, not disposition of these later findings. Both are preserved in the replay evidence and prepared draft PR; neither was fixed and completed production issue/spec states were not changed.
 
 The [publication plan](publication-plan.md) proposes integration/wayfinder-reliability into main as a draft PR. Head pushes trigger existing hosted Windows/Linux validation; main-target PR events do not independently trigger it. Hosted results remain pending explicit publication approval. No push, PR, merge, release, reinstall, historical migration, or optional improvement was performed in this follow-up.
+
+## Publication and hosted validation, 2026-10-21
+
+The user approved publication. Commit `2518eae51d863336925217d19a86f47864d8c3f6` was pushed to `integration/wayfinder-reliability` and [draft PR #6](https://github.com/vincenzo345/skills/pull/6) opened against main. [Hosted run 39615504001](https://github.com/vincenzo345/skills/actions/runs/39615504001) completed successfully: both Linux skill-package and Windows windows-installer jobs passed. Exact job and step results are retained in [hosted CI evidence](replay-2026-10-21/hosted-ci.json). This closes the previously pending hosted-platform execution gap at that SHA; it does not resolve V-01/V-02 or the Claude authentication limitation.
+
+No merge or release occurred. The following publication-evidence commit changes documentation/results only and triggers the same checks on its new head; GitHub retains those head check results on the PR. Unrelated untracked research and the ontology document remain untouched.

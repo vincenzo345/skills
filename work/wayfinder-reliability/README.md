@@ -8,7 +8,7 @@ current_spec:
   ref: work/wayfinder-reliability/spec.md
   revision: 2
 current_map: null
-next_action: Review verification findings and approve draft PR publication.
+next_action: Resolve or disposition V-01 and V-02 before marking draft PR 6 ready.
 ---
 
 # Wayfinder workflow reliability
@@ -26,7 +26,7 @@ Original request: improve the skills repository after an application-planning se
 - Contract design: [Shared work-record contract](design.md), including metadata, lifecycle, revisions, readiness, dependencies, claims, selection, and handoff walkthroughs.
 - Implementation issues: [Seven published slices](issue-plan.md#published-issues), each with its own authoritative record.
 - Approved breakdown: [Seven vertical implementation slices](issue-plan.md), including dependencies, acceptance criteria, and approval evidence.
-- Next action: review the [installed-source verification](replay-2026-10-21/README.md) and approve the [draft PR publication plan](publication-plan.md). Two newly observed discrepancies remain unresolved; completed implementation records are preserved.
+- Next action: resolve or explicitly disposition V-01 and V-02 before marking [draft PR #6](https://github.com/vincenzo345/skills/pull/6) ready. Hosted Linux and Windows checks passed at 2518eae; see [publication results](publication-plan.md#publication-results). Completed implementation records are preserved.
 - Implementation authorization: the user explicitly invoked implement-spec for the approved tickets, integrated validation/review, and Windows installation. Earlier planning-only statements record the previous session boundary.
 
 The completed effort has left the active queue and retains its stable path. The explicit implement-spec request authorized this delivery; queue membership alone never does. Implementation and replay evidence is recorded in [validation](validation.md).
