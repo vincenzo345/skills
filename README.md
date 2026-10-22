@@ -1,12 +1,12 @@
 # Skillsrepo v2
 
-A development skill set adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills), with Skillsrepo's `to-record` and `to-scope` requirements flow and a `show-me` visual aid. This branch is maintained at [vincenzo345/skills](https://github.com/vincenzo345/skills/tree/v2); all changes and releases belong to this repository.
+A development skill set adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills), with Skillsrepo's `to-record` and `to-scope` requirements flow and a `show-me` visual aid. The primary branch is [main](https://github.com/vincenzo345/skills/tree/main); all changes and releases belong to this repository. `skillsrepo-v2` is the plugin name, independent of the Git branch.
 
 ## Start using it
 
-For Codex on Windows, run `python scripts/install_global_v2.py` from this checkout. The installer links the promoted skills to this branch and removes old installed Workbench entry points. Restart Codex so its skill catalog refreshes.
+For Codex on Windows, run `python scripts/install_global_v2.py` from an up-to-date `main` checkout. The installer links the promoted skills to this checkout and removes old installed Workbench entry points. Keep the globally linked checkout on `main` and use separate worktrees for development branches. Restart Codex so its skill catalog refreshes.
 
-For Claude Code, prepare a clean snapshot of the committed branch, add it as a marketplace, and install its plugin. The snapshot avoids copying ignored working files into Claude's plugin cache:
+For Claude Code, prepare a clean snapshot of committed `main`, add it as a marketplace, and install its plugin. The snapshot avoids copying ignored working files into Claude's plugin cache:
 
 ```powershell
 $source = python scripts/prepare_claude_plugin.py

@@ -2,6 +2,8 @@
 
 The top-level [README](../README.md) is the user-facing installation guide. This file records the maintainer steps and their reason.
 
+`main` is the primary branch and the source for global installations. `skillsrepo-v2` is the plugin and marketplace name, not a branch selector. Keep the globally linked checkout on `main`; use separate worktrees for development branches. Prepare Claude snapshots from committed `main`.
+
 ## Codex on Windows
 
 Run `python scripts/install_global_v2.py` from this checkout. The script reads the promoted skill list from `.claude-plugin/plugin.json`, links those skills into `~/.agents/skills` and `~/.codex/skills`, and retires names removed or renamed by this fork. Re-run it after a promoted-skill change and start a new Codex session to refresh discovery.
