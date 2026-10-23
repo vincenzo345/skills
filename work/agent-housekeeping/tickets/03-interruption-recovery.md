@@ -4,13 +4,17 @@ kind: implementation
 id: work/agent-housekeeping/tickets/03-interruption-recovery.md
 effort: work/agent-housekeeping
 order: 3
-state: open
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/agent-housekeeping/spec.md
   revision: 1
 blocked_by:
 - work/agent-housekeeping/tickets/02-owned-service-cleanup.md
+integration:
+  ref: feat/agent-housekeeping
+  commit: ce9e953d9d2748f2251628d2a0a5ec392230ed01
+  verified_tip: ce9e953d9d2748f2251628d2a0a5ec392230ed01
 ---
 
 # Recover interrupted tasks with bounded overhead
@@ -48,3 +52,7 @@ blocked_by:
 ## Approval
 
 User explicitly approved the three-ticket breakdown and dependency chain 1 -> 2 -> 3 in issue-plan.md, based on specification revision 1, and authorized implementation on feat/agent-housekeeping with a draft PR targeting main. Keep the PR draft; no merge or auto-merge.
+
+## Completion evidence
+
+Accepted conditional recovery and actual setup publication at custom policy path. Fresh configured/fallback actors observed scoped discovery, inactive-owner cleanup, active/ambiguous resource protection and diagnostic resolution. All files/live fixtures cleaned; two empty hidden Git fixture directories remain policy-blocked, disclosed in validation.md. Final review/checks pending.
