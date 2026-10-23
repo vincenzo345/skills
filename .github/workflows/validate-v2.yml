@@ -4,7 +4,7 @@ on:
   push:
     branches: [v2, integration/wayfinder-reliability]
   pull_request:
-    branches: [v2, integration/wayfinder-reliability]
+    branches: [main, v2, integration/wayfinder-reliability]
 
 permissions:
   contents: read
