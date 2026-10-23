@@ -15,7 +15,7 @@ This skill has you show commands, outputs and captured artifacts. **Redact every
 
 If the redacted output is not enough to diagnose the bug, say so and ask the user.
 
-For disposable validation or interrupted work, read the housekeeping reference named by repository instructions; otherwise use the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration).
+For disposable validation or interrupted work, read the housekeeping reference named by repository instructions, or the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration) if none is configured.
 
 ## Phase 1: Build a feedback loop
 
