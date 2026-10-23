@@ -4,6 +4,8 @@
 
 The [agent](https://www.aihero.dev/ai-coding-dictionary/agent) writes the script; it never runs it. You do, on your own machine. A wizard is a program, not a list of instructions. The script runs each step in order and keeps the values you enter. Your part is to click, paste, and press Enter.
 
+One-run wizard files and validation output use the repository housekeeping convention. A wizard intentionally kept as a repeatable setup path is maintained tooling; ordinary one-off checks remain disposable.
+
 ## When to reach for it
 
 You can type `/wizard`, and the agent can also reach for it on its own. When it hits a step you have to take (a key it can't mint, a dashboard it can't click), it builds you a wizard instead of writing the instructions into the chat, where they scroll away.
