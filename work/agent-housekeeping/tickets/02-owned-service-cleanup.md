@@ -4,13 +4,17 @@ kind: implementation
 id: work/agent-housekeeping/tickets/02-owned-service-cleanup.md
 effort: work/agent-housekeeping
 order: 2
-state: open
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/agent-housekeeping/spec.md
   revision: 1
 blocked_by:
 - work/agent-housekeeping/tickets/01-setup-and-file-lifetime.md
+integration:
+  ref: feat/agent-housekeeping
+  commit: ee428b1c1a43801fcdc41012ba8c197cb687b227
+  verified_tip: ee428b1c1a43801fcdc41012ba8c197cb687b227
 ---
 
 # Release task-owned processes and Docker resources
@@ -48,3 +52,7 @@ blocked_by:
 ## Approval
 
 User explicitly approved the three-ticket breakdown and dependency chain 1 -> 2 -> 3 in issue-plan.md, based on specification revision 1, and authorized implementation on feat/agent-housekeeping with a draft PR targeting main. Keep the PR draft; no merge or auto-merge.
+
+## Completion evidence
+
+Accepted native service lifecycle guidance and observed process/Docker success, failed assertion, partial startup, stale-identity protection and anonymous-volume red/green. All owned fixtures cleaned. See validation.md; constrained replay overhead disclosed.
