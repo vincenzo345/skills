@@ -4,6 +4,8 @@ Temporary root: `{{TEMP_ROOT}}`
 
 Read for temporary placement, retained evidence or resources that can survive interruption. The persistent baseline covers ordinary work; use only the branch needed here.
 
+For local processes or Docker resources, read [service lifecycle](housekeeping-services.md) before acquisition or reconciliation. File-only work skips that reference.
+
 ## Task workspace
 
 Use a fresh task ID beneath the configured root. Keep the same ID while resuming the task. A task directory is disposable, not a deliverable or an effort tracker. Requested artifacts, maintained linting and regression tests belong in their established project locations.
