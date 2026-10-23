@@ -61,7 +61,17 @@ The first three ship as templates in the skill and work out of the box. Local ma
 
 A reusable lint rule or regression test belongs in the maintained project tooling. A one-off script answers the current question and is removed when it is no longer needed. Generated reports and data have their own lifetime even when the checker is permanent.
 
-Setup records one temporary root with task-isolated directories and narrowly scoped ignore rules. Existing scratch notes and durable effort records remain where they are. Ordinary edits use a short persistent baseline; only temporary or resumed work loads the fuller reference. Process and Docker work loads a separate service branch, uses native teardown, and records exact ownership for interrupted work. Interrupted tasks locate one recovery note through the configured root or repository-specific OS temporary namespace. Recovery verifies prior-owner inactivity and current ownership before cleanup; unknown or active resources remain reported and untouched. Shared services and persistent data remain protected. Unconfigured work can use an owned OS temporary directory and suggest setup once. Setup adds a lasting convention without becoming a prerequisite for every edit.
+Setup records one temporary root with task-isolated directories and narrowly scoped ignore rules. Existing scratch notes and durable effort records remain where they are. Shared services and persistent data remain protected.
+
+| Work | Guidance |
+| --- | --- |
+| Ordinary edit | Use the short persistent baseline. |
+| Temporary validation | Load the fuller reference when needed. |
+| Process or Docker work | Load the service branch, use native teardown, and record exact ownership for interrupted work. |
+| Interrupted task | Find one recovery note through the configured root or repository-specific OS temporary namespace. Verify prior-owner inactivity and current ownership before cleanup; preserve and report unknown or active resources. |
+| Unconfigured repository | Use an owned OS temporary directory and suggest setup once. |
+
+Setup adds a lasting convention without becoming a prerequisite for every edit.
 
 ## Common questions
 
@@ -75,7 +85,15 @@ Re-run it to add a missing configuration section or refresh a changed convention
 
 **It wrote to `CLAUDE.md`, but I'm on Codex.**
 
-Setup still prefers an existing `CLAUDE.md`, then `AGENTS.md`. For housekeeping it also checks that the chosen file is actually loaded, directly or through a pointer. When that connection is missing, it includes the smallest pointer correction in the reviewed draft instead of silently duplicating the policy. If neither file exists, it asks which to create.
+Setup selects an instruction file and verifies that housekeeping reaches the current environment:
+
+| Condition | Setup behavior |
+| --- | --- |
+| `CLAUDE.md` exists | Prefer it. |
+| Only `AGENTS.md` exists | Use it. |
+| Neither file exists | Ask which to create. |
+| Selected file is loaded directly or through a pointer | Keep that connection. |
+| Selected file is not loaded | Include the smallest pointer correction in the reviewed draft, preserving one policy source. |
 
 **Did it create my triage labels?**
 

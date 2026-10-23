@@ -8,7 +8,7 @@ You have been provided a spec. This spec should have tickets associated with it,
 
 The issue tracker should have been provided to you. If not, tell the user to run `/setup-repo`.
 
-For disposable validation or interrupted work, read the housekeeping reference named by repository instructions; otherwise use the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration).
+For disposable validation or interrupted work, read the housekeeping reference named by repository instructions, or the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration) if none is configured.
 
 The goal is the entire spec implemented on a single **integration branch**, with every ticket resolved the way the issue tracker closes work.
 

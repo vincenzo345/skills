@@ -11,7 +11,7 @@ The delightful UX is already solved by [template.sh](template.sh): stage-by-stag
 
 A wizard is ephemeral by default: built for one run, saved to a scratch or `scripts/` path, deleted when the job's done. Commit it only when the user wants a repeatable setup path that should live in the repo.
 
-For disposable validation or interrupted work, read the housekeeping reference named by repository instructions; otherwise use the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration).
+For disposable validation or interrupted work, read the housekeeping reference named by repository instructions, or the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration) if none is configured.
 
 ## Process
 
