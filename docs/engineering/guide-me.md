@@ -8,6 +8,8 @@ Local planning and implementation share one stable effort folder. Specs hand off
 
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 
+Housekeeping belongs to /setup-repo: ordinary work uses concise repository instructions, while service creation and interrupted-task recovery load their relevant branches. Recovery does not add a separate skill to choose.
+
 ## When to reach for it
 
 You invoke this by typing `/guide-me`; the agent won't reach for it on its own.

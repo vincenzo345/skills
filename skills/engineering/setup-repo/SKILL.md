@@ -76,7 +76,7 @@ Show the user a draft of:
 
 - The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
 - The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
-- The housekeeping baseline, temporary root, narrow ignore rule and `docs/agents/housekeeping.md` reference with its conditional service branch
+- The housekeeping baseline, temporary root, narrow ignore rule and `docs/agents/housekeeping.md` reference with its conditional service and recovery branches
 
 Let them edit before writing.
 
@@ -123,7 +123,7 @@ Then write the docs files using the seed templates in this skill folder as a sta
 - [issue-tracker-local.md](./issue-tracker-local.md): local-markdown issue tracker
 - [triage-labels.md](./triage-labels.md): label mapping (only if `triage` is installed)
 - [domain.md](./domain.md): domain doc consumer rules + layout
-- [housekeeping.md](./housekeeping.md): temporary placement, lifetime and retention rules, adapted through [housekeeping setup](HOUSEKEEPING-SETUP.md)
+- [housekeeping.md](./housekeeping.md): temporary placement, lifetime and retention rules with conditional service and recovery branches, adapted through [housekeeping setup](HOUSEKEEPING-SETUP.md)
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 

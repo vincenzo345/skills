@@ -9,7 +9,7 @@ TDD is the red → green loop. This skill is the reference that makes that loop 
 
 When exploring the codebase, read `GLOSSARY.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
 
-For disposable validation, follow the repository housekeeping policy; read `docs/agents/housekeeping.md` when configured, otherwise the [temporary fallback](../setup-repo/housekeeping.md#without-repository-configuration). Keep reusable checks in the existing suite; generated output has its own lifetime.
+For disposable validation or interrupted work, read the housekeeping reference named by repository instructions; otherwise use the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration). Keep reusable checks in the existing suite; generated output has its own lifetime.
 
 ## What a good test is
 

@@ -2,9 +2,11 @@
 
 Temporary root: `{{TEMP_ROOT}}`
 
-Read for temporary placement, retained evidence or resources that can survive interruption. The persistent baseline covers ordinary work; use only the branch needed here.
+Read for temporary placement, retained evidence, services or interrupted work. The persistent baseline covers ordinary work; use only the branch needed here.
 
 For local processes or Docker resources, read [service lifecycle](housekeeping-services.md) before acquisition or reconciliation. File-only work skips that reference.
+
+For resumed work or explicit recovery, read [interruption recovery](housekeeping-recovery.md). Unrelated edits skip recovery.
 
 ## Task workspace
 
@@ -18,7 +20,7 @@ Record ownership through the task directory and known created paths. Before remo
 
 After success or failure, remove disposable scripts and outputs once no longer needed. Preserve requested deliverables and intentional prototype evidence under their existing lifecycle rules. For unresolved failures, retain only the useful evidence and note its purpose and revisit condition. Reconcile that evidence when the issue is resolved. A clean Git status alone does not establish cleanup.
 
-If task files or other resources may survive interruption, use one small `recovery.md` inside the task directory. Record canonical repository identity, task ID, owner evidence, created paths/resource identities, intended cleanup and any retention reason. Reuse that note while work continues, and remove it with the disposable task directory after reconciliation. A note records provenance; it does not prove the owner has stopped. Preserve and report resources whose ownership or active use is uncertain.
+If task files or other resources may survive interruption, use one small `recovery.md` inside the task directory. Record canonical repository identity, task ID, owner controller/session or process identity, created paths/resource identities, intended cleanup and any retention reason. Include its path in an available task handoff. Reuse that note while work continues, and remove it with the disposable task directory after reconciliation. A note records provenance; it does not prove the owner has stopped. Preserve and report resources whose ownership or active use is uncertain.
 
 ## Without repository configuration
 
