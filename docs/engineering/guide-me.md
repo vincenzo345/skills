@@ -8,6 +8,8 @@ Local planning and implementation share one stable effort folder. Specs hand off
 
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 
+Housekeeping belongs to /setup-repo: ordinary work uses concise repository instructions, while service creation and interrupted-task recovery load their relevant branches. Recovery does not add a separate skill to choose.
+
 ## When to reach for it
 
 You invoke this by typing `/guide-me`; the agent won't reach for it on its own.
@@ -105,3 +107,5 @@ Check the changelog for a rename before assuming it is gone. `writing-great-skil
 It is a [secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source) over the skills it describes. Where the router and a `SKILL.md` disagree, the `SKILL.md` is right.
 
 For existing local work, setup preserves historical paths. Use explicit legacy references in place, or request the separately reviewed [adoption procedure](../../skills/engineering/setup-repo/WORK-RECORDS.md#explicit-legacy-inputs-and-reviewed-adoption); configuration alone never authorizes relocation.
+
+Housekeeping is configured by [setup-repo](setup-repo.md) and applies during ordinary work. Useful lint and regression checks stay maintained; one-off validation uses a task workspace and is cleaned up. There is no separate cleanup command to remember.

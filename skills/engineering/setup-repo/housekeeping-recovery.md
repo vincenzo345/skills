@@ -1,0 +1,10 @@
+# Interruption recovery
+
+Read only when resuming affected work or explicitly recovering it. Apply [housekeeping](housekeeping.md) ownership and retention rules; unrelated tasks need no inventory.
+
+1. Locate the task's `recovery.md` through its handoff or configured temporary root. Without configuration, derive the repository's OS-temporary namespace as described in housekeeping. If the task ID is missing, inspect only recovery notes directly inside that root's task children. Match canonical repository and task identity; ambiguous matches require clarification, not a wider search.
+2. Establish that the prior owner has stopped using its controller/session status or recorded process identity. A note, timestamp or absent heartbeat is not proof. Verify each resource still matches recorded identity and is neither shared nor in active use. Preserve and briefly report anything whose ownership, inactivity or current identity cannot be established. For process or Docker observations and teardown, use the [service branch](housekeeping-services.md).
+3. Reconcile only the affected task. If acquisition stopped before recording an ID, use its recorded intent and native ownership evidence within the exact namespace to identify it; a similar name alone is insufficient. Capture recovered identities in the same note before acting. Preserve ambiguous partial acquisitions and report the missing evidence instead of guessing.
+4. Remove proven owned disposable resources when no longer needed. Keep useful diagnostics until their recorded revisit condition is met, then apply the same cleanup. Preserve requested results and maintained verification. Update the existing note to cover only unresolved or intentionally retained resources; remove it and the disposable task directory once reconciled. Report only useful exceptions, without adding a second tracker or cleanup report.
+
+Recovery runs when an agent resumes the task. It cannot guarantee cleanup while the agent is closed, the runtime is inaccessible or ownership evidence is missing.
