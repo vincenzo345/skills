@@ -104,3 +104,23 @@ Measured with tiktoken o200k_base: default persistent baseline **176 tokens / 99
 Cleanup: all replay Docker resources, anonymous mounts, task processes and evaluator control process are absent; exact identities/labels were independently checked. Fixture Git fsmonitor daemons were stopped natively. The OS-temp repository-key subtree and evaluator JSON were removed. After resolved-boundary and reparse checks, explicit nonforced native file removals and empty-directory removals left **only two empty hidden directories**: E:/tmpdir/housekeeping-03-configured/.git and E:/tmpdir/housekeeping-03-fallback/.git, plus their parent fixture roots. Nonforced removal failed Windows access checks; automatic approval review rejected exact forced removal with only "blocked by policy". These empty fixture shells remain unresolved; no attribute/runtime workaround was attempted. No fixture files or live resources remain.
 
 Limitations: bounded model runs do not guarantee universal compliance; exact model revision and inaccessible-runtime behavior remain unverified. Interruption was seeded with actual exited owners and real resources, not a forced agent crash. A recovery note proves provenance only; native observations supplied inactivity and identity evidence.
+
+## Final integration review and delivery
+
+Compared feature HEAD against recorded origin/main baseline a3dc1bb8acda362a6d8078f36d83c2e517468407. Separate read-only review agents inspected standards and specification compliance. All three issues have verified integration receipts; review corrections are integrated at 515e82597d4f68e933531808c35c53f81499fb0d.
+
+### Standards
+
+Two low-priority documented violations: setup documentation expressed multi-way branches as paragraphs rather than required tables/lists. One judgment concern: six pointers used an ambiguous "otherwise" that could attach to the task trigger instead of missing configuration. Commit 65ffc18 converts both passages to tables and explicitly limits fallback to absent configuration. Focused reviewer recheck confirmed all three resolved. No remaining findings.
+
+### Spec
+
+No actionable requirement, scope or behavior defect found against revision 1. Seeded interruption, unavailable exact model revision, unexercised runtime outage and policy-blocked empty fixture shells remain evidence qualifications. No helper or broader test platform was justified. Final totals: Standards 2 documented findings plus 1 clarity concern, all resolved; Spec 0 actionable findings.
+
+### Checks and retained state
+
+- Repository unittest discovery: 60 passed in 133.498 seconds. Preservation suite: 27 passed in 0.644 seconds. The final pointer/table clarification changes no executable code; package validation and whitespace checks passed again after its integration.
+- Promoted-package validator, plugin version check (2.1.0), strict Claude plugin validation and final diff check passed. Linux and Windows PR CI passed the three-slice integration at ad9a295; final metadata push is checked separately in the PR.
+- Independent final tokenizer check: o200k_base baseline 176 tokens/992 characters; configured common reference 663 tokens (raw template 662); services 527; recovery 356. Ordinary-edit incremental housekeeping calls remain zero. Resource/recovery measurements above establish bounded outcomes, not call savings.
+- Windows global installer ran from the original main checkout and installed 32 promoted skills. Draft changes are intentionally not globally activated. Original main and unrelated work were preserved; disposable worker/review worktrees and branches were removed. The feature worktree is intentionally retained for human review.
+- Draft PR: https://github.com/vincenzo345/skills/pull/7. No merge, ready conversion or auto-merge. Two empty hidden fixture directories and their parent shells remain as the documented automatic-review cleanup limitation; root independently verified both directories empty. All observed task-owned processes, Docker resources and fixture files are gone.

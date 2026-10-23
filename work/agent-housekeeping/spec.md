@@ -4,7 +4,7 @@ kind: spec
 id: work/agent-housekeeping/spec.md
 effort: work/agent-housekeeping
 revision: 1
-state: current
+state: completed
 readiness: ready-for-agent
 ---
 
@@ -104,3 +104,7 @@ The user confirmed the design and explicitly required token efficiency. The test
 This extends established skills to address an observed failure in this fork. Preserve the stable-effort-workspace decision and the distinction between hard setup dependencies and guidance that degrades gracefully.
 
 Sources and authority: [effort](README.md), [accepted answers and efficiency requirement](discovery.md), [primary-source research](research/cleanup-patterns.md), [existing behavioral validation](../wayfinder-reliability/validation.md), [replay prior art](../../scripts/fixtures/wayfinder-replays.md), [stable workspace decision](../../docs/adr/0001-stable-effort-workspaces.md), and [setup dependency decision](../../.agents/adr/0001-explicit-setup-pointer-only-for-hard-dependencies.md). Superseded research proposals and earlier unanswered interview rounds do not override the later accepted answers.
+
+## Completion evidence
+
+All three approved issues integrated on feat/agent-housekeeping with verified receipts; final review corrections integrated at515e825. Standards findings resolved and Spec review clear. Behavioral cases, measured overhead, passing repository checks and bounded evidence limitations are recorded in validation.md. DraftPR7 remains unmerged. Two empty hidden fixture directories remain policy-blocked; no live test resources remain.

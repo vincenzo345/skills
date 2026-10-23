@@ -2,14 +2,14 @@
 schema: 1
 kind: effort
 id: work/agent-housekeeping
-state: active
+state: completed
 stage: implementation
 current_spec:
   ref: work/agent-housekeeping/spec.md
   revision: 1
 current_map: null
-next_action: Implement the approved chain on feat/agent-housekeeping; retain a draft
-  PR for human review and do not merge main.
+next_action: 'Review draft PR #7; no merge or auto-merge authorized. See validation.md
+  for measured overhead and two policy-blocked empty fixture directories.'
 ---
 
 # Agent housekeeping and resource cleanup
@@ -29,3 +29,7 @@ An evidence-backed agreed design for preventing unnecessary artifacts and cleani
 [Current specification](spec.md) is revision 1; the behavioral testing seam is confirmed.
 
 [Approved issue breakdown](issue-plan.md) links the three published implementation issues.
+
+## Completion evidence
+
+Implemented specification revision1 and published draft PR https://github.com/vincenzo345/skills/pull/7 for human review. Three issues accepted in dependency order; standards/spec review complete and relevant checks passed. Main and unrelated work preserved. No new helper, hook or cleanup skill. See validation.md for measurements and the explicitly unresolved empty fixture-directory cleanup limitation. Human review and any later merge are separate; PR must remain draft for this delivery.
