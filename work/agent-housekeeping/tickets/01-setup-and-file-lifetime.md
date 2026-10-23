@@ -4,12 +4,16 @@ kind: implementation
 id: work/agent-housekeeping/tickets/01-setup-and-file-lifetime.md
 effort: work/agent-housekeeping
 order: 1
-state: open
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/agent-housekeeping/spec.md
   revision: 1
 blocked_by: []
+integration:
+  ref: feat/agent-housekeeping
+  commit: bc90d6a568c59a662ce05cb0b922a2386fa8d86f
+  verified_tip: d460db603b90156d870c94f03a8956cc2eda3b76
 ---
 
 # Configure housekeeping and complete ordinary verification cleanly
@@ -47,3 +51,7 @@ blocked_by: []
 ## Approval
 
 User explicitly approved the three-ticket breakdown and dependency chain 1 -> 2 -> 3 in issue-plan.md, based on specification revision 1, and authorized implementation on feat/agent-housekeeping with a draft PR targeting main. Keep the PR draft; no merge or auto-merge.
+
+## Completion evidence
+
+Integrated bc90d6a via d460db6. Actual setup/file-lifetime replays and independent fixture checks passed; baseline 177 o200k_base tokens; matched ordinary-edit incremental calls zero; warm one-off comparison explicitly limited. Package validator and whitespace check passed; fixtures cleaned. Details: work/agent-housekeeping/validation.md.
