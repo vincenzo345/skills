@@ -101,4 +101,4 @@ Off the main flow entirely.
 
 ## Precondition
 
-**`/setup-repo`**: run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work. Existing local records remain usable by explicit reference; optional relocation belongs to setup-repo's reviewed legacy-adoption procedure, after all readers use the shared resolver.
+**`/setup-repo`**: run before your first engineering flow to configure the issue tracker, triage labels, domain docs, and housekeeping conventions. Ordinary tasks use its short persistent baseline; temporary work reads the resource-specific reference only when needed. Custom issue trackers also work. Existing local records remain usable by explicit reference; optional relocation belongs to setup-repo's reviewed legacy-adoption procedure, after all readers use the shared resolver.

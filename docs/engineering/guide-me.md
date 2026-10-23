@@ -105,3 +105,5 @@ Check the changelog for a rename before assuming it is gone. `writing-great-skil
 It is a [secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source) over the skills it describes. Where the router and a `SKILL.md` disagree, the `SKILL.md` is right.
 
 For existing local work, setup preserves historical paths. Use explicit legacy references in place, or request the separately reviewed [adoption procedure](../../skills/engineering/setup-repo/WORK-RECORDS.md#explicit-legacy-inputs-and-reviewed-adoption); configuration alone never authorizes relocation.
+
+Housekeeping is configured by [setup-repo](setup-repo.md) and applies during ordinary work. Useful lint and regression checks stay maintained; one-off validation uses a task workspace and is cleaned up. There is no separate cleanup command to remember.
