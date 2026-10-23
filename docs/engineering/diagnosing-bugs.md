@@ -4,7 +4,7 @@
 
 It will not let the agent form a theory until a **tight** feedback loop exists: one named command, already run once, that goes red on *this* bug and green when it is fixed. Given a bug report, a coding agent by default reads code and guesses. This skill blocks that. If no red-capable command exists, there is no Phase 2. That single gate is what the skill is for. Once the loop exists, everything after it (bisection, hypothesis-testing, instrumentation) is mechanical.
 
-The feedback loop distinguishes maintained regression coverage from disposable probes. One-off scripts and outputs follow the repository housekeeping policy; retained failure evidence carries a purpose and revisit condition. A debug folder name alone is not a reason to retain it indefinitely.
+The feedback loop distinguishes maintained regression coverage from disposable probes. One-off scripts and outputs follow the repository housekeeping policy; retained failure evidence carries a purpose and revisit condition. A debug folder name alone is not a reason to retain it indefinitely. Resuming interrupted verification follows the configured policy pointer and recovers only proven inactive, task-owned resources.
 
 ## When to reach for it
 

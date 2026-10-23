@@ -12,7 +12,7 @@ Report the selected title, effort, basis and authority, and preserve its ownersh
 
 Call the Skill tool with "tdd" where possible, at pre-agreed seams.
 
-For disposable validation, follow the repository housekeeping policy; read `docs/agents/housekeeping.md` when configured, otherwise the [temporary fallback](../setup-repo/housekeeping.md#without-repository-configuration).
+For disposable validation or interrupted work, read the housekeeping reference named by repository instructions; otherwise use the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration).
 
 Run typechecking regularly, single test files regularly, and the full test suite once at the end.
 

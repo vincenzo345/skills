@@ -4,7 +4,7 @@
 
 It writes no test at a seam you have not agreed to first. Before any test exists, it names the public boundaries it intends to test at and stops for your confirmation. Testing effort is finite, and this step spends it on the critical paths instead of on every edge case. `tdd` is also a **reference**, not a driver. It contains the rules of the loop, and something else (you, or [implement](https://aihero.dev/skills-implement)) runs the [session](https://www.aihero.dev/ai-coding-dictionary/session) that applies them.
 
-Useful lint rules and regression tests belong in maintained tooling. A one-off diagnostic check has a separate lifetime and is removed when its question is answered. Temporary output is classified separately from the test that produced it; repository housekeeping guidance supplies its placement and cleanup rules.
+Useful lint rules and regression tests belong in maintained tooling. A one-off diagnostic check has a separate lifetime and is removed when its question is answered. Temporary output is classified separately from the test that produced it; repository housekeeping guidance supplies its placement and cleanup rules. Resuming interrupted verification follows the configured policy pointer and recovers only proven inactive, task-owned resources.
 
 ## When to reach for it
 

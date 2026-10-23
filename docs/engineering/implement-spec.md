@@ -6,7 +6,7 @@ It reads the tickets as a **task graph**, not a list. Blocking edges decide what
 
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 
-Each worker follows the same repository housekeeping convention in its own task namespace. Disposable validation is cleaned up while retained evidence, other workers and the existing worktree integration rules remain protected.
+Each worker follows the same repository housekeeping convention in its own task namespace. Disposable validation is cleaned up while retained evidence, other workers and the existing worktree integration rules remain protected. Resuming interrupted verification follows the configured policy pointer and recovers only proven inactive, task-owned resources.
 
 ## When to reach for it
 

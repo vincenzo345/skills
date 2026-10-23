@@ -16,7 +16,7 @@ claude plugin install skillsrepo-v2@skillsrepo-v2
 
 Remove the older `mattpocock-skills@claude-plugins-official` plugin to avoid duplicate commands. For a later update, remove the previous `skillsrepo-v2` marketplace, add the newly prepared snapshot, then install the plugin again. Removing the marketplace also removes its installed plugin. Restart Claude Code afterward.
 
-Run `/setup-repo` once in each application repo to configure its issue tracker, triage labels, domain-doc location, and temporary workspace. Then run `/guide-me` to choose a route. For meeting-derived requirements, start with `/to-record` and `/to-scope`.
+Run `/setup-repo` once in each application repo to configure its issue tracker, triage labels, domain-doc location, and temporary workspace with task recovery. Then run `/guide-me` to choose a route. For meeting-derived requirements, start with `/to-record` and `/to-scope`.
 
 The current [v2 workflow](docs/v2-workflow-pilot.md) is a human-driven development flow. Automated app-ticket intake and application-specific CI are integrations configured in the target application, not bundled capabilities of this skill package.
 

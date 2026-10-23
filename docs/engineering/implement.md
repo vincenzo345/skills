@@ -8,7 +8,7 @@ A local issue is read from the declared authoritative checkout and claimed only 
 
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 
-Housekeeping follows the configured repository policy during implementation. Existing checks and useful regression tests remain maintained; one-off validation artifacts are cleaned up before completion. An ordinary edit needs no additional housekeeping inventory.
+Housekeeping follows the configured repository policy during implementation. Existing checks and useful regression tests remain maintained; one-off validation artifacts are cleaned up before completion. An ordinary edit needs no additional housekeeping inventory. Resuming interrupted verification follows the configured policy pointer and recovers only proven inactive, task-owned resources.
 
 ## When to reach for it
 
