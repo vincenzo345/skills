@@ -25,7 +25,7 @@ It writes into the repo you run it in:
 | `issue-tracker.md` | `docs/agents/` |
 | `domain.md` | `docs/agents/` |
 | `triage-labels.md` | `docs/agents/`, only when the `triage` skill is installed |
-| `housekeeping.md` | `docs/agents/`, or the existing authoritative location |
+| `housekeeping.md` and its conditional `housekeeping-services.md` branch | `docs/agents/`, or the existing authoritative location |
 | A narrow temporary-output ignore rule | the existing ignore configuration |
 | An `## Agent skills` block and short housekeeping baseline | the existing agent instruction file, with its loading path verified |
 
@@ -61,7 +61,7 @@ The first three ship as templates in the skill and work out of the box. Local ma
 
 A reusable lint rule or regression test belongs in the maintained project tooling. A one-off script answers the current question and is removed when it is no longer needed. Generated reports and data have their own lifetime even when the checker is permanent.
 
-Setup records one temporary root with task-isolated directories and narrowly scoped ignore rules. Existing scratch notes and durable effort records remain where they are. Ordinary edits use a short persistent baseline; only temporary work loads the fuller reference. Unconfigured work can use an owned OS temporary directory and suggest setup once. Setup adds a lasting convention without becoming a prerequisite for every edit.
+Setup records one temporary root with task-isolated directories and narrowly scoped ignore rules. Existing scratch notes and durable effort records remain where they are. Ordinary edits use a short persistent baseline; only temporary work loads the fuller reference. Process and Docker work loads a separate service branch, uses native teardown, and records exact ownership for interrupted work. Shared services and persistent data remain protected. Unconfigured work can use an owned OS temporary directory and suggest setup once. Setup adds a lasting convention without becoming a prerequisite for every edit.
 
 ## Common questions
 
@@ -101,6 +101,7 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 - For GitHub, `docs/agents/issue-tracker.md` names the exact issue repository. If it differs from the code repository, issue commands target the recorded repository.
 - Afterwards, `/to-tickets` publishes without asking you where issues live, and `/triage` applies labels rather than inventing them.
 - Maintained checks remain available, and completed one-off validation leaves no unexplained files in the repo.
+- Completed service checks release their owned processes and disposable Docker resources while shared services stay available; failed cleanup remains visible in a scoped recovery note.
 - An ordinary edit does not trigger a housekeeping scan or a separate report.
 - Nothing in the skill files themselves changed. If setup edited a `SKILL.md`, something went wrong.
 
