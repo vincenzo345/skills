@@ -76,3 +76,62 @@ Actual generated fresh instruction text measures 18 tokens for the loaded pointe
 Promoted-package validation and `git diff --check` passed on the updated source. Human setup documentation, both catalogs, router and UI description ship with the behavior. No executable helper, hook, new skill or service/recovery policy was added. The accepted H checks above remain applicable to unchanged executable/package infrastructure; parent owns final integration checks and two-axis review.
 
 All setup/discovery/edit actors exited. Evaluation repositories and raw evidence are intentionally retained for parent verification and reuse of generated guidance in T2, with a revisit condition of controller acceptance/capture. They are not claimed cleaned merely because actors exited or Git status is clean. The parent must retire these task-owned fixtures/raw output after the necessary evidence is captured, preserve its unrelated evaluation/control files, and record any cleanup limitation. T2 and final integration/review evidence remain to be supplied by Issue 02 and the integration controller.
+
+## T2: Bounded design/prototype and recovery (incomplete cleanup)
+
+Revision 6, accepted H `b86774500cdcc5cca98de791573cd6106b6eeeb2`, and Issue 01's accepted integration remain the basis. Issue 02 code connects the existing design handoff and prototype capture to configured durable locations, explicit proposal/acceptance/implementation distinctions, and findings/limitations/source capture before environment retirement. The earlier source omitted those explicit connections; no baseline actor failure is claimed. The actual case below exercises the approved seam. Common/service/recovery policy and the persistent setup baseline are unchanged, so the prior H evidence and T1/T3 remain applicable.
+
+The evaluator copied T1's actual generated configuration into `E:/tmpdir/agent-workflow-eval/02-case`, seeded existing maintained checks and one reusable case record, and adapted installation/authority addresses. The bound was one question, one pure module interface, at most two synthetic cases and one disposable Git worktree. Only `case-1` was needed. Existing tools supplied Node and headless Chrome; no tools, services or global configuration were installed. Windows, Codex CLI 0.164.0 and the existing configured `gpt-6.1-sol`/high setting match T1. The actor received this question, not prescribed artifact files or a success claim:
+
+> Can one pure lifecycle module support closing and reopening a case while keeping its identity stable and rejecting an invalid repeated close?
+
+The task invoked the current design/prototype sources, explicitly delegated routine reversible choices within the synthetic fixture, requested a reviewable answer, and retained the useful invalid-transition diagnostic until follow-up review. It excluded production implementation, additional environments and services. Exact task/invocation/UTF-8 transcript records are `02-design-prompt.txt`, `02-design-invocation.txt` and `02-design.jsonl` under the evaluation root. The decisive transcript SHA-256 is `c09e93d718428669b17e64ff04a708b30043338d11105b90ae5200c2a201aaf5`.
+
+**Preparation and reviewer assistance:** one relative tracker reference still named the retired Issue 01 worker when the first actor read it. The evaluator corrected that fixture-specific reference; the actor's failed contract read and recovery through the already-correct helper path are included in observed costs. This is not an assistance-free setup/discovery sample. Later reviewer feedback corrected stale knowledge-index wording and removed temporary evidence links from durable findings. Fresh recovery also fixed a fixture queue formatting defect without changing the shared helper. These are disclosed review corrections, not autonomous first-attempt successes.
+
+| Observation | Actual outcome |
+| --- | --- |
+| Architecture, module and data reasoning | A pure `transition(caseRecord, action)` owns legality and stable identity; the caller owns current state/presentation. Existing identity normalisation stays authoritative. Persistence, concurrency, authorisation and Python integration remain untested. |
+| Accepted current knowledge and effort history | `docs/modules/case-lifecycle.md` links effort evidence; the current index links that document and accurately identifies uncreated roles. `work/case-reopen/discovery.md` retains question, observed sequences, alternatives, limitations and reproduction/source references. Acceptance is only under explicit fixture delegation. |
+| Verification and deliverable retention | Existing syntax check and all three maintained tests pass. Source, checker, regression tests, reusable `tests/fixtures/case.json`, requested answer and approved prior history survive unchanged where applicable. Both evaluator controls remain byte-identical. |
+| Prototype source and execution | Source committed off fixture main at `34c3687831eaf0aaef9326f34e70c0b9b39aea37`; reachability verified before native Git retirement. The execution worktree and screenshot are absent. No disposable validation-script file was created; the verifier ran inline. |
+| Logic and rendering | Actor Node observations and an independent evaluator Node/VM probe confirm stable identity, unchanged inputs and repeated-close rejection. Existing Chrome rendered the initial state and guided controls. Clicking every walkthrough was not automated. |
+| Owned browser process | Chrome PID 32504 was supervised by its native child handle and exited 0. Final all-process-name observation scoped to the exact profile namespace found zero matches, with the known observer excluded; PID 32504 was absent. This does not infer absence from Git status. |
+| Intentional retention and recovery | The diagnostic was retained with a purpose/revisit condition, then reviewed. A fresh actor found the existing note after the original actor exited. Actual owner wrapper PID 46228 and native Codex PID 59780 were independently observed absent. The condition is resolved, but removal is blocked as described below. |
+| Concurrent/ambiguous controls | The active other-task sentinel and unattributed prior artifact were preserved and uncertainty reported. The evaluator's separate creation receipt establishes fixture-control ownership for eventual teardown; no evaluator control deletion or autonomous ambiguous cleanup is credited. |
+
+The portable [source bundle](evidence/README.md) preserves fixture main, the separate prototype branch and full history with no Git prerequisites. Its main commit is `b505846252ab077cbb5677f97741ffd8b327a561`, after normal review/recovery corrections. Root independently verified the bundle/hash/references, source, diagnostic, maintained artifacts, controls, native process absence and retired worktree. The bundle keeps the useful knowledge reviewable independently of any later fixture teardown; no loose prototype code is shipped on integration/main.
+
+### Measured context and execution
+
+Counts below are emitted completed shell events, not agent claims. Rejected operations were blocked before execution and are listed separately. Document counts are explicit PowerShell `Get-Content` expressions, including repeats and the failed stale-path read; other filesystem operations are not mislabelled as document reads. `o200k_base` measures LF-normalised captured text.
+
+| Measurement | Initial design/prototype actor | Fresh recovery actor |
+| --- | --- | --- |
+| Completed shell events | 23 | 15 |
+| Reported unexecuted approval rejections | 2 | 1 |
+| Explicit `Get-Content` expressions | 25 | 25 |
+| Emitted file-change events | 4 | 3 |
+| Cumulative captured command-output context | 15,946 tokens | 29,682 tokens |
+| Runtime-reported cumulative input (cached input) | 1,321,556 (1,288,192) | 589,664 (549,376) |
+| Observed wall time | 594.969 seconds | 214.421 seconds |
+
+The command-output measure includes triggered documents, helper/source excerpts, native observations and results; it is not attributed entirely to policy. Runtime cumulative input repeats prior context and is reported separately. The loaded fixture entry point is 18 tokens plus its 329-token shared source. Triggered design/prototype instructions changed from H's 778/720 tokens to 868/845; the configured common/service/recovery references measured 487/527/356. Ordinary-edit persistent guidance and zero-trigger result remain the separate T3 measurement. No new execution mechanism was added, and this case establishes no timing or call savings.
+
+Through metrics extraction, this child evaluator used 26 preparation/observation/archive shell invocations, two actor-launch wrappers and five polling requests. Implementation/delivery commands and additional independent parent observations are excluded from that bounded observer count. Assistance included the stale-path correction, independent module probe, native identity/absence observations, review feedback and archival capture. Parent observations are separately identified above; these counts are not a complete session-cost benchmark.
+
+### Blocked cleanup and remaining acceptance
+
+Automatic approval review first rejected disposal of the browser profile and subsequently browser stderr, reporting only **"blocked by policy"**. After actual owner exit, fresh resolved-path/reparse/native-identity checks supported a materially safer proposal using literal-file removals and removals of verified empty directories. Automatic approval review rejected that command before execution with the same sole reason. No deletion occurred in recovery, and no alternate runtime, shell, attribute/security change or equivalent force retry was used.
+
+Both actors exited 0; fresh recovery took 214.421 seconds. Its transcript SHA-256 is `a9674573807f18266be46ac1aa4c2b93120102a98396df60fcf2dbf6f42f165a`. Native receipts and the exact residual manifest remain under the evaluation root as `02-owner-exit-native.json`, `02-final-native-observation.json` and `02-residual-paths.json` for the controller. At final observation the task tree contained 175 files and 61 descendant directories, with no descendant reparse points. Top-level residual paths are exactly:
+
+```text
+E:/tmpdir/agent-workflow-eval/02-case/.scratch/agent-tmp/case-reopen-20261028-e41/browser-profile/
+E:/tmpdir/agent-workflow-eval/02-case/.scratch/agent-tmp/case-reopen-20261028-e41/browser-temp/
+E:/tmpdir/agent-workflow-eval/02-case/.scratch/agent-tmp/case-reopen-20261028-e41/browser-stderr.txt
+E:/tmpdir/agent-workflow-eval/02-case/.scratch/agent-tmp/case-reopen-20261028-e41/invalid-transition.txt
+E:/tmpdir/agent-workflow-eval/02-case/.scratch/agent-tmp/case-reopen-20261028-e41/recovery.md
+```
+
+The diagnostic no longer has a retention condition. The note/task directory remain necessary because disposal is unresolved. The fixture, raw provenance and both controls are intentionally preserved for controller review and eventual authorised teardown. **T2 owned raw-file/environment cleanup, reviewed-diagnostic removal and final task-owned fixture cleanup are incomplete. Issue 02, the specification and effort must remain unfinished.** Integrating this code for draft review is not an acceptance receipt or a cleanup pass. Hooks/helpers remain deferred; this runtime rejection supplies no approval to implement a mechanism or bypass.

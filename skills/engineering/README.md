@@ -24,8 +24,8 @@ Reachable only when you type them (Claude Code: `disable-model-invocation: true`
 
 Model- or user-reachable (rich trigger phrasing so the model can reach for them).
 
-- **[design](./design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design using evidence, concrete alternatives, and human decisions.
-- **[prototype](./prototype/SKILL.md)**: Build a bounded runnable experiment to resolve a design question.
+- **[design](./design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design; retain effort evidence and accepted current knowledge.
+- **[prototype](./prototype/SKILL.md)**: Answer a bounded design question; retain findings and source before retiring disposable execution work.
 
 - **[diagnosing-bugs](./diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: build a feedback loop that goes red on this bug → minimise → hypothesise → instrument → fix → regression-test.
 - **[research](./research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.

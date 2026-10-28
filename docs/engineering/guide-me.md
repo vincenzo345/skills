@@ -10,6 +10,8 @@ Remote GitHub and GitLab records remain authoritative. Assignment shows intent b
 
 Shared repository guidance and current-knowledge locations belong to /setup-repo. It checks discovery in Codex while preserving existing instructions. Design work follows the relevant index entry; ordinary edits need no extra housekeeping action. Service creation and interrupted-task recovery load their relevant branches. Recovery does not add a separate skill to choose.
 
+Design keeps proposals and evidence in the stable effort and promotes accepted current knowledge through that index. Prototype captures findings, limitations and its retained source before retiring disposable execution work through the existing housekeeping lifecycle.
+
 ## When to reach for it
 
 You invoke this by typing `/guide-me`; the agent won't reach for it on its own.

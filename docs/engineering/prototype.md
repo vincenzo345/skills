@@ -4,7 +4,9 @@
 
 Throwaway is a constraint on how the code is *written*, not a promise to destroy it. Keep production hardening out of the prototype while giving the UI enough visual and interaction detail to judge it. Two things survive: the recorded answer, which guides later implementation, and the prototype on a branch out of main as evidence for that answer.
 
-The requested prototype remains reviewable under its branch-retention rule. Auxiliary validation scripts and data follow the repository housekeeping convention and are removed after use, so retaining the experiment does not retain every temporary output. Resuming interrupted verification follows the configured policy pointer and recovers only proven inactive, task-owned resources.
+The requested prototype remains reviewable under its branch-retention rule. Before retiring execution files or an owned worktree, the existing effort retains the question, findings, limitations, source commit and necessary reproduction reference. Accepted current knowledge returns to the maintained design document and index; a successful experiment remains distinct from production implementation.
+
+Auxiliary validation scripts and raw output follow the repository housekeeping convention. Native worktree retirement accounts for unique work while keeping the source branch reachable. Retained diagnostics follow their recorded revisit condition; resuming interrupted verification uses the configured recovery pointer. Keeping source evidence does not require keeping the execution environment.
 
 ## When to reach for it
 
@@ -65,6 +67,7 @@ It can be, if you prototype questions you could have answered by talking, or let
 - The visual direction feels suited to the product, and any variants compare genuinely different structures or navigation choices.
 - It is answered in one sitting. If you're still building it a day later, the question was too big; split it.
 - When it's over, the decision is recorded, main contains none of the prototype, and the implementation issue points at the branch that still holds it.
+- Findings and limitations remain reachable after disposable execution files retire, while maintained checks, fixtures, requested deliverables and effort history survive.
 
 ## Where it fits
 
