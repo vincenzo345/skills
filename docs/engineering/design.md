@@ -38,7 +38,7 @@ No. Confirmed decisions and routine conventions are reused. Your input is needed
 - You can see what decision is being made and why it matters before being asked to choose.
 - Each iteration retains accepted choices and explains the specific change.
 - A sketch, diagram, or usage example makes the tradeoff concrete.
-- The result records chosen tradeoffs, evidence, and remaining uncertainty clearly enough for the next activity.
+- The handoff leaves updated findings and accepted knowledge, with chosen tradeoffs, evidence and remaining implementation assumptions or blockers clear enough for the next activity.
 - Accepted current knowledge is findable from the existing index, while plans, proposals and prior reasoning remain at stable effort paths.
 
 ## Where it fits

@@ -22,9 +22,9 @@ It writes into the repo you run it in:
 
 | It writes | Where |
 | --- | --- |
-| `issue-tracker.md` | `docs/agents/` |
-| `domain.md` | `docs/agents/` |
-| `triage-labels.md` | `docs/agents/`, only when the `triage` skill is installed |
+| Tracker reference | existing configured path, or `docs/agents/issue-tracker.md` for new configuration |
+| Domain reference | existing configured path, or `docs/agents/domain.md` for new configuration |
+| Label reference | existing configured path; new configuration defaults to `docs/agents/triage-labels.md` when `triage` is installed |
 | `housekeeping.md` and its conditional service and recovery branches | `docs/agents/`, or the existing authoritative location |
 | A narrow temporary-output ignore rule | the existing ignore configuration |
 | One short current-knowledge index | an existing suitable index, or `docs/README.md` |
@@ -40,9 +40,9 @@ It starts each section with the recommended answer, and skips any question its e
 
 | Decision | What it proposes | When it asks |
 | --- | --- | --- |
-| **Issue tracker** | the one matching your `git remote` | when not already selected or configured |
-| **Triage labels** | keep two category names (`bug`, `enhancement`) and five state names (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`) | only if the `triage` skill is installed |
-| **Domain docs** | single-context: one `GLOSSARY.md` plus `docs/adr/` at the root | only if it spots monorepo signals, and then it offers a multi-context `GLOSSARY-MAP.md` |
+| **Issue tracker** | reuse the configured authority; otherwise suggest the one matching your `git remote` | when not already selected or configured |
+| **Triage labels** | reuse the configured mapping; new mappings default to the two category names and five state names | when a mapping is missing and `triage` is installed |
+| **Domain docs** | reuse the configured layout; new layouts default to one `GLOSSARY.md` plus `docs/adr/` at the root | when choosing a new layout and monorepo signals suggest a multi-context `GLOSSARY-MAP.md` |
 | **Housekeeping** | reuse a suitable temporary workspace or establish an isolated subtree | present the chosen root, narrow ignore rule and guidance in the setup draft |
 | **Current knowledge** | reuse an index and suitable architecture/module/data-model/decision locations | review missing content and the conditional pointer, creating documents only when useful content exists |
 | **Instruction discovery** | the smallest compatible connection to one shared source | review missing connections; verify fresh Codex discovery |
@@ -58,7 +58,7 @@ The tracker options:
 
 The first three ship as templates in the skill and work out of the box. Local markdown is a full option, not a fallback. The skill supports a solo project with no remote. Choose one configured issue-tracker authority; hosting code on GitHub does not preclude tracking its work in local Markdown.
 
-"Other" is a full option too. It is how Jira, Linear, Azure DevOps and Beads all work. You describe the workflow, the skill records your prose in `docs/agents/issue-tracker.md`, and the downstream skills follow the prose. Users have already built this: a Jira-over-[MCP](https://www.aihero.dev/ai-coding-dictionary/mcp) variant, a Gitea CLI shaped like `gh`, a hand-built local dashboard.
+"Other" is a full option too. It is how Jira, Linear, Azure DevOps and Beads all work. You describe the workflow, the skill records your prose at the chosen tracker path (default `docs/agents/issue-tracker.md` for new configuration), and the downstream skills follow the prose. Users have already built this: a Jira-over-[MCP](https://www.aihero.dev/ai-coding-dictionary/mcp) variant, a Gitea CLI shaped like `gh`, a hand-built local dashboard.
 
 ## Maintained checks and disposable validation
 
@@ -113,11 +113,11 @@ Setup preserves one shared source and connects the entry point Codex actually lo
 | No shared source exists | Review a shared `AGENTS.md`. |
 | Existing override or pointer already connects them | Verify it and reuse it without another block. |
 
-A fresh Codex session receives a neutral repository task, without supplied policy or a request to read a named instruction file. File inspection cannot prove discovery; an unavailable observation remains unresolved. Existing instruction files remain protected regardless of their name; additional runtime setup and validation are outside this flow.
+After all approved instruction and reference changes are written, a fresh Codex session receives a neutral repository task, without supplied policy or a request to read a named instruction file. File inspection cannot prove discovery; an unavailable observation remains unresolved. Existing instruction files remain protected regardless of their name; additional runtime setup and validation are outside this flow.
 
 **Did it create my triage labels?**
 
-When `triage` is installed and the tracker is GitHub or GitLab, setup creates the configured category and state labels that are missing. `docs/agents/triage-labels.md` records the mapping that later skills read. Setup does not create [wayfinder](https://aihero.dev/skills-wayfinder)'s `wayfinder:map` and `wayfinder:<type>` labels; create those before the first wayfinder run.
+When label configuration is reviewed for GitHub or GitLab, setup creates the configured category and state labels that are missing. The configured label reference records the mapping that later skills read. Setup does not create [wayfinder](https://aihero.dev/skills-wayfinder)'s `wayfinder:map` and `wayfinder:<type>` labels; create those before the first wayfinder run.
 
 **Can I configure the other skills' behaviour here ([grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) cadence, question format, tone)?**
 

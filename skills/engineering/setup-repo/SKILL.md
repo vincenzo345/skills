@@ -47,14 +47,14 @@ Lead each section with the recommended answer so the user can accept it in a wor
 
 > Explainer: The "issue tracker" is where issues live for this repo. Skills like `to-tickets`, `triage`, and `to-spec` read from and write to it. They need to know whether to call `gh issue create`, write a markdown file under `work/`, or follow some other workflow you describe. Pick the place you actually track work for this repo.
 
-Default posture: these skills were designed for GitHub. If a `git remote` points at GitHub, propose that. If a `git remote` points at GitLab (`gitlab.com` or a self-hosted host), propose GitLab. Otherwise (or if the user prefers), offer:
+For new or missing tracker configuration, use the code remote as a suggested default: propose GitHub for a GitHub remote or GitLab for a GitLab remote (`gitlab.com` or a self-hosted host). Otherwise (or if the user prefers), offer:
 
 - **GitHub**: issues live in the repo's GitHub Issues (uses the `gh` CLI)
 - **GitLab**: issues live in the repo's GitLab Issues (uses the [`glab`](https://gitlab.com/gitlab-org/cli) CLI)
 - **Local markdown**: issues live as files under `work/<effort>/` in this repo (good for solo projects or repos without a remote)
 - **Other** (Jira, Linear, etc.): ask the user to describe the workflow in one paragraph; the skill will record it as freeform prose
 
-Record the choice in `docs/agents/issue-tracker.md`. The GitHub and GitLab templates carry a "PRs as a request surface" flag, defaulted **off**. Leave it off and don't raise it: a user who wants external PRs in the triage queue can flip the flag in the file later.
+Record approved changes in the existing tracker reference; use `docs/agents/issue-tracker.md` for new configuration without a chosen path. New GitHub and GitLab configurations keep the templates' "PRs as a request surface" flag **off**. Users can enable it later; preserve its existing value on reruns.
 
 For GitHub or GitLab, read [REMOTE-WORK.md](REMOTE-WORK.md) and preserve its remote authority and unsupported automatic-concurrency boundary in the generated configuration. Record the GitLab host/project explicitly too.
 
@@ -62,15 +62,15 @@ For GitHub, record the selected issue repository as an explicit `owner/repo`, ev
 
 **Section B: Triage label vocabulary.** Skip this section entirely if the `triage` skill isn't installed (exploration told you), since an uninstalled skill needs no labels.
 
-If it is installed, ask exactly one question:
+For a new or missing label mapping, ask exactly one question:
 
 > Do you want to keep the default triage labels? (recommended: **yes**)
 
 The defaults are the two category roles (`bug`, `enhancement`) and five state roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`), each mapped to an identical label string. On **yes**, write them as-is. Only if the user says no, usually because their tracker already uses other names (e.g. `bug:triage` for `needs-triage`), collect the overrides so `triage` applies existing labels instead of creating duplicates.
 
-**Section C: Domain docs.** Default to **single-context** (one `GLOSSARY.md` + `docs/adr/` at the repo root). This fits almost every repo; write it without asking.
+**Section C: Domain docs.** Reuse the configured layout. For new or missing configuration, recommend **single-context** (one `GLOSSARY.md` + `docs/adr/` at the repo root) in the setup draft without a separate question.
 
-Offer **multi-context** (a root `GLOSSARY-MAP.md` pointing to per-context `GLOSSARY.md` files) only when exploration found monorepo signals. Then confirm which layout they want.
+When choosing a new layout, offer **multi-context** (a root `GLOSSARY-MAP.md` pointing to per-context `GLOSSARY.md` files) only when exploration found monorepo signals. Then confirm which layout they want.
 
 **Section D: Housekeeping.** Read [housekeeping setup](HOUSEKEEPING-SETUP.md). Reuse an established workspace or propose the dedicated fallback. Include the baseline and adapted reference in the same setup review; avoid a separate questionnaire when discovery settles the choice.
 
@@ -99,11 +99,9 @@ Let them edit before writing.
 | No shared source exists | Recommend `AGENTS.md` as the shared source; confirm this in the setup draft. |
 | An override or existing pointer already connects them | Reuse it after checking its scope and discovery; do not append a second connection. |
 
-A filename or a successful explicit read is not fresh-session discovery evidence. Start a fresh Codex session with a neutral repository task that neither supplies the policy nor requests a named instruction-file read. Observe discovery and the source reached; check nested scope where applicable. If the runtime is unavailable, report discovery as unresolved instead of inferring it from file inspection. Additional runtime setup and validation are outside this flow.
-
 If an `## Agent skills` block already exists, merge the approved additions in place. Preserve existing user edits inside and outside the block; do not regenerate whole sections from templates. Keep core obligations inline in the shared source and branch details behind conditional pointers.
 
-The block:
+The block (use the configured paths in place of these defaults):
 
 ```markdown
 ## Agent skills
@@ -125,7 +123,7 @@ Add the reviewed housekeeping baseline after this block.
 
 Add a brief current-knowledge pointer using the chosen index path: `For architecture, module, data-model or decision context, follow the relevant entry in [current knowledge](<index-path>).` Ordinary edits need no index read.
 
-Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.
+For new or missing label configuration, include the `### Triage labels` sub-block and write the configured label reference (default `docs/agents/triage-labels.md`) only when `triage` is installed and Section B ran. Preserve existing configuration on reruns.
 
 When Section B ran on GitHub or GitLab, create each configured label the tracker lacks (`gh label create` / `glab label create`).
 
@@ -138,10 +136,12 @@ For new configuration, use the seed templates as a starting point. Existing auth
 - [domain.md](./domain.md): domain doc consumer rules + layout
 - [housekeeping.md](./housekeeping.md): temporary placement, lifetime and retention rules with conditional service and recovery branches, adapted through [housekeeping setup](HOUSEKEEPING-SETUP.md)
 
-For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
+For a newly configured "other" issue tracker, write its reference from the user's description at the chosen path (default `docs/agents/issue-tracker.md`).
 
-### 5. Done
+### 5. Verify and report
 
 Verify every published local reference resolves from its document and the intended permanent documents are Git-visible with `git check-ignore` and `git status --untracked-files=all`. Check disposable contents are ignored and unrelated protected/generated paths retain their rules. A broad ignore conflict needs a targeted reviewed exception for the exact permanent paths and necessary parent traversal; never unignore an entire protected tree. On repeated setup, check preserved content and absence of duplicate sections/connections.
+
+After all approved instruction and reference writes are complete, start a fresh Codex session with a neutral repository task that neither supplies the policy nor requests a named instruction-file read. Observe discovery and the source reached; check nested scope where applicable. A filename or a successful explicit read is not fresh-session discovery evidence. If the runtime is unavailable, report discovery as unresolved instead of inferring it from file inspection. Additional runtime setup and validation are outside this flow.
 
 Report the configured locations, Codex discovery outcome and any unresolved observation. Setup is complete only for the outcomes verified. Mention the user can edit the configured references directly; re-running adds missing configuration while preserving their choices. Keep dependency/evaluation controls outside ordinary repository guidance.
