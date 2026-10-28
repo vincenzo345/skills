@@ -81,3 +81,7 @@ Controller independently inspected actual T1/T3 evidence and preservation result
 ## Draft delivery
 
 Draft PR: https://github.com/vincenzo345/skills/pull/8. Keep it draft throughout this execution. Issue 01 is accepted and integrated; Issue 02/T2 and final two-axis review remain in progress. Its completed clean worker worktree/branch were retired through Git after verified integration; accepted commits remain reachable on the integration branch.
+
+## Final review and remaining teardown
+
+Standards review: 0 findings; specification review: 0 new defects and 1 known mandatory acceptance blocker. Exact retained source references now resolve. Both implementer worktrees are retired, no claims remain, main/user edits and PR7 are preserved. Controller teardown of captured T1 fixtures was also policy-rejected before execution; those roots/raw records remain alongside the blocked T2 fixture. See validation.md for exact paths and next condition. PR8 remains draft. No spec/effort completion or acceptance deviation is asserted.

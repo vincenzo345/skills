@@ -135,3 +135,28 @@ E:/tmpdir/agent-workflow-eval/02-case/.scratch/agent-tmp/case-reopen-20261028-e4
 ```
 
 The diagnostic no longer has a retention condition. The note/task directory remain necessary because disposal is unresolved. The fixture, raw provenance and both controls are intentionally preserved for controller review and eventual authorised teardown. **T2 owned raw-file/environment cleanup, reviewed-diagnostic removal and final task-owned fixture cleanup are incomplete. Issue 02, the specification and effort must remain unfinished.** Integrating this code for draft review is not an acceptance receipt or a cleanup pass. Hooks/helpers remain deferred; this runtime rejection supplies no approval to implement a mechanism or bypass.
+
+## Final integration review and draft handoff
+
+Issue01 accepted worker `52cb759f75d7703504240138a2cb67fa1b5e3f6f` is integrated at `b814a67bd4edb1b1caa18d85a6d3c39d76fba912` with a verified coordinator completion receipt. Issue02 reviewable worker `6dae45dfe07e297237df1f8419d8a641e3d77c91` is integrated at `d8956deaacaed3524d57a3e72c91a945552eb57e`, without an acceptance receipt or completion claim. Its known-stopped ownership was released and readiness/state changed through the coordinator to needs-info/waiting. The effort is waiting and specification remains current/uncompleted. No active claims remain.
+
+Independent Standards and Spec reviewers compared accepted H `b867745` with integration `180e124`, then focused on supporting source retention at `f280641`. Standards: 0 documented violations and 0 actionable heuristic concerns. Spec: 0 new code/document defects, 0 scope-creep findings and 1 known external-policy acceptance blocker, the incomplete T2/final fixture teardown. No implementation fix can treat a rejected deletion as a pass or bypass the approval boundary. No new hook/helper is authorised.
+
+The final local-reference check resolves 200 actual Markdown targets, excluding template inputs and resolving historical spec links against their original directory per contract. It initially found the retained r1/r2 advisory source absent from the integration snapshot. The controller preserved the existing `docs/plans/hygene-recommendations.md` byte-for-byte at that original path (SHA-256 `3eed789d715ac1d3ae707522ff2f54cbde53024384a2d38e15797d2eaee83838`). Both reviewers cleared this directly supporting preservation change. Its explicit advisory/unapproved status remains; none of its recommendations is adopted here.
+
+Integrated package validation, version synchronisation (2.1.0), ancestry and whitespace checks pass. The exact H checks above and PR8's first Linux/Windows CI run 40764602546 passed; final-head CI is recorded in PR8 rather than inferred from that earlier run. No excluded-runtime validation was repeated after scope reduction.
+
+Both clean implementer worktrees/branches were retired through native Git only after their commits were reachable on the integration branch. The integration worktree remains for draft review; the original housekeeping worktree/PR7 remain unchanged. Before retiring worker02, the controller redirected the remaining synthetic fixture's helper/contract references to identical sources in the retained integration worktree, preserving its configured authority. This is evaluator handoff maintenance outside the blocked task subtree, not actor success; the portable bundle remains the exact earlier archived snapshot.
+
+Additional controller teardown was also rejected before execution with only "blocked by policy": one proposed bounded native-PowerShell command to remove the four captured T1 fixture repositories and their raw 01 records. None of its checks, native stops or deletions executed. No filesystem deletion retry/bypass was attempted. Thus these exact roots and their raw01 evidence also remain:
+
+- `E:/tmpdir/agent-workflow-eval/01-red/`
+- `E:/tmpdir/agent-workflow-eval/01-fresh/`
+- `E:/tmpdir/agent-workflow-eval/01-custom/`
+- `E:/tmpdir/agent-workflow-eval/01-ordinary/`
+
+Separate native Git daemon stops succeeded for 01-red and 02-case; Git reported no daemon running for 01-fresh/custom/ordinary. These process-only lifecycle operations did not delete rejected resources. The T2 fixture, raw provenance and controls remain preserved for permitted-cleanup review, with only the documented handoff pointer edit. Root independently verified actual browser/all-profile-process absence and the residual manifest of 175 files and 61 descendant directories; that is not a fixture-cleanup pass.
+
+Final preservation check: globally linked checkout stays on main `a3dc1bb8acda362a6d8078f36d83c2e517468407`; all three pre-existing edited files match captured SHA-256 values, and the advisory source is unchanged. PR7 remains open/draft at `b86774500cdcc5cca98de791573cd6106b6eeeb2`. No merge, installation, global development activation or live-repository adoption occurred.
+
+Draft PR: https://github.com/vincenzo345/skills/pull/8. Keep it draft. Remaining work is a permitted cleanup path with fresh identity/inactivity/boundary checks, disposal and independent absence evidence, then re-evaluation of Issue02/T2 and final fixture teardown under coordinator ownership. Any exact acceptance deviation requires user approval and a material spec revision. Only afterward should the user consider merge approval, a main-based release/installation and separately reviewed setup in target repositories. Current residue/provenance remains intentionally preserved pending that cleanup decision, and must be reconciled at that condition.
