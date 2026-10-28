@@ -17,6 +17,8 @@ Type `/design`, or the agent reaches for it automatically when the task fits. Us
 
 The agent brings evidence and a recommendation. You choose where the answer depends on your priorities or judgment. Accepted decisions carry forward, and feedback changes the affected part. When a question needs runnable evidence, [prototype](prototype.md) builds an experiment and returns the findings to the design conversation.
 
+Proposals, evidence and useful reasoning stay in the existing effort. Accepted current architecture, module and data-model knowledge belongs in the configured maintained documents, linked back to that evidence and discoverable through the short knowledge index. The handoff distinguishes proposed intent, accepted choices and implemented behavior; it links glossary and schema authority rather than copying them.
+
 ## Common questions
 
 **Where does grill-with-docs end and design begin?**
@@ -37,6 +39,7 @@ No. Confirmed decisions and routine conventions are reused. Your input is needed
 - Each iteration retains accepted choices and explains the specific change.
 - A sketch, diagram, or usage example makes the tradeoff concrete.
 - The result records chosen tradeoffs, evidence, and remaining uncertainty clearly enough for the next activity.
+- Accepted current knowledge is findable from the existing index, while plans, proposals and prior reasoning remain at stable effort paths.
 
 ## Where it fits
 

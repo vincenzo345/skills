@@ -148,8 +148,8 @@ Skills I use daily for code work.
 
 **Model-invoked**
 
-- **[design](./skills/engineering/design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design using evidence, concrete alternatives, and human decisions.
-- **[prototype](./skills/engineering/prototype/SKILL.md)**: Build a bounded runnable experiment to resolve a design question.
+- **[design](./skills/engineering/design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design; retain effort evidence and accepted current knowledge.
+- **[prototype](./skills/engineering/prototype/SKILL.md)**: Answer a bounded design question; retain findings and source before retiring disposable execution work.
 - **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: build a feedback loop that goes red on this bug → minimise → hypothesise → instrument → fix → regression-test.
 - **[research](./skills/engineering/research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.
 - **[tdd](./skills/engineering/tdd/SKILL.md)**: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
