@@ -25,7 +25,7 @@ For local tracking, read [the shared work-record contract](WORK-RECORDS.md) befo
 Look at the current repo to understand its starting state. Read whatever exists; don't assume:
 
 - `git remote -v` and `.git/config`: is this a GitHub repo? Which one?
-- Instruction entry points for Codex and Claude, including applicable overrides, imports, pointers and nested scope. Read existing `AGENTS.md` and `CLAUDE.md`; trace how each runtime reaches repository-wide guidance instead of choosing by filename.
+- Instruction entry points used by Codex, including applicable overrides, pointers and nested scope. Preserve existing instruction files and trace how Codex reaches repository-wide guidance instead of choosing by filename.
 - `GLOSSARY.md` and `GLOSSARY-MAP.md` at the repo root
 - `docs/adr/` and any `src/*/docs/adr/` directories
 - Prior setup output, including custom paths linked from instructions; do not assume `docs/agents/` is its authority
@@ -80,7 +80,7 @@ Offer **multi-context** (a root `GLOSSARY-MAP.md` pointing to per-context `GLOSS
 
 Show the user a draft of:
 
-- The `## Agent skills` additions and minimal instruction connections for both runtimes (step 4), preserving existing scope
+- The `## Agent skills` additions and minimal Codex instruction connection (step 4), preserving existing scope
 - Missing additions to the configured tracker, domain and label references (default paths below apply only to new configuration)
 - The housekeeping baseline, temporary root, narrow ignore rule and `docs/agents/housekeeping.md` reference with its conditional service and recovery branches
 - The current-knowledge index, chosen locations, conditional pointer and any targeted Git-visibility correction
@@ -89,17 +89,17 @@ Let them edit before writing.
 
 ### 4. Write
 
-**Connect the instruction entry points:** Keep one authoritative repository-wide guidance source, normally the existing source. Preserve each entry point's independent instructions and scope. Include any new connection in the reviewed draft; avoid cycles and duplicate policy blocks.
+**Connect the Codex instruction entry point:** Keep one authoritative repository-wide guidance source, normally the existing source. Preserve existing instructions and scope. Include any new connection in the reviewed draft; avoid cycles and duplicate policy blocks.
 
 | Existing structure | Smallest proposed connection |
 | --- | --- |
 | `CLAUDE.md` owns shared guidance | Keep it authoritative; connect Codex's loaded entry point with an explicit instruction to read that file for shared repository guidance. |
-| `AGENTS.md` owns shared guidance | Keep it authoritative; connect Claude with an import such as `@AGENTS.md` in its loaded `CLAUDE.md`. |
+| Codex's loaded entry point owns shared guidance | Keep it authoritative; no extra connection is needed. |
 | Both have independent content | Preserve both; add only the missing connection to the chosen shared source, respecting narrower scope. |
-| Neither exists | Recommend `AGENTS.md` as the shared source and a brief `CLAUDE.md` import; confirm this in the setup draft. |
+| No shared source exists | Recommend `AGENTS.md` as the shared source; confirm this in the setup draft. |
 | An override or existing pointer already connects them | Reuse it after checking its scope and discovery; do not append a second connection. |
 
-A filename or a successful explicit read is not fresh-session discovery evidence. Start a fresh session in each available runtime with a neutral repository task that neither supplies the policy nor requests a named instruction-file read. Observe discovery and the source reached; check nested scope where applicable. If a runtime is unavailable, report its discovery as unresolved. Do not claim support from another runtime's result or file inspection.
+A filename or a successful explicit read is not fresh-session discovery evidence. Start a fresh Codex session with a neutral repository task that neither supplies the policy nor requests a named instruction-file read. Observe discovery and the source reached; check nested scope where applicable. If the runtime is unavailable, report discovery as unresolved instead of inferring it from file inspection. Additional runtime setup and validation are outside this flow.
 
 If an `## Agent skills` block already exists, merge the approved additions in place. Preserve existing user edits inside and outside the block; do not regenerate whole sections from templates. Keep core obligations inline in the shared source and branch details behind conditional pointers.
 
@@ -144,4 +144,4 @@ For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch us
 
 Verify every published local reference resolves from its document and the intended permanent documents are Git-visible with `git check-ignore` and `git status --untracked-files=all`. Check disposable contents are ignored and unrelated protected/generated paths retain their rules. A broad ignore conflict needs a targeted reviewed exception for the exact permanent paths and necessary parent traversal; never unignore an entire protected tree. On repeated setup, check preserved content and absence of duplicate sections/connections.
 
-Report the configured locations, both runtime discovery outcomes and any unresolved observation. Setup is complete only for the outcomes verified. Mention the user can edit the configured references directly; re-running adds missing configuration while preserving their choices. Keep dependency/evaluation controls outside ordinary repository guidance.
+Report the configured locations, Codex discovery outcome and any unresolved observation. Setup is complete only for the outcomes verified. Mention the user can edit the configured references directly; re-running adds missing configuration while preserving their choices. Keep dependency/evaluation controls outside ordinary repository guidance.

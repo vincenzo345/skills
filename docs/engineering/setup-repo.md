@@ -28,7 +28,7 @@ It writes into the repo you run it in:
 | `housekeeping.md` and its conditional service and recovery branches | `docs/agents/`, or the existing authoritative location |
 | A narrow temporary-output ignore rule | the existing ignore configuration |
 | One short current-knowledge index | an existing suitable index, or `docs/README.md` |
-| An `## Agent skills` block, concise survival/ownership baseline and conditional knowledge pointer | one shared instruction source, connected to the entry points used by Codex and Claude |
+| An `## Agent skills` block, concise survival/ownership baseline and conditional knowledge pointer | one shared instruction source reached through Codex's loaded entry point |
 
 You commit all of it as markdown. There is no user-level or global mode. The config lives in the repo, so every repo gets its own copy.
 
@@ -45,7 +45,7 @@ It starts each section with the recommended answer, and skips any question its e
 | **Domain docs** | single-context: one `GLOSSARY.md` plus `docs/adr/` at the root | only if it spots monorepo signals, and then it offers a multi-context `GLOSSARY-MAP.md` |
 | **Housekeeping** | reuse a suitable temporary workspace or establish an isolated subtree | present the chosen root, narrow ignore rule and guidance in the setup draft |
 | **Current knowledge** | reuse an index and suitable architecture/module/data-model/decision locations | review missing content and the conditional pointer, creating documents only when useful content exists |
-| **Instruction discovery** | the smallest compatible connections to one shared source | review missing connections; verify fresh discovery independently in each available runtime |
+| **Instruction discovery** | the smallest compatible connection to one shared source | review missing connections; verify fresh Codex discovery |
 
 The tracker options:
 
@@ -103,17 +103,17 @@ Re-run it to add a missing configuration section or refresh a changed convention
 
 **It wrote to `CLAUDE.md`, but I'm on Codex.**
 
-Setup preserves one shared source and connects the entry points each runtime actually loads:
+Setup preserves one shared source and connects the entry point Codex actually loads:
 
 | Condition | Setup behavior |
 | --- | --- |
 | `CLAUDE.md` owns shared guidance | Keep it and connect Codex's loaded entry point to it. |
-| `AGENTS.md` owns shared guidance | Keep it and connect Claude through a brief import in its loaded `CLAUDE.md`. |
+| Codex's loaded entry point owns shared guidance | Keep it without an extra connection. |
 | Both carry independent instructions | Preserve their content and scope; add only the missing connection. |
-| Neither exists | Review a shared `AGENTS.md` with a brief `CLAUDE.md` import. |
+| No shared source exists | Review a shared `AGENTS.md`. |
 | Existing override or pointer already connects them | Verify it and reuse it without another block. |
 
-A fresh session receives a neutral repository task, without supplied policy or a request to read a named instruction file. Each runtime's observed discovery is recorded separately. File inspection and another runtime's success cannot prove it; an unavailable runtime remains unresolved.
+A fresh Codex session receives a neutral repository task, without supplied policy or a request to read a named instruction file. File inspection cannot prove discovery; an unavailable observation remains unresolved. Existing instruction files remain protected regardless of their name; additional runtime setup and validation are outside this flow.
 
 **Did it create my triage labels?**
 
@@ -134,7 +134,7 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 ## It's working if
 
 - The configured tracker and domain references exist, plus the label mapping if `triage` is installed. New setups normally use `docs/agents/`.
-- Fresh Codex and Claude sessions each discover the shared guidance, or the unavailable observation is reported explicitly.
+- A fresh Codex session discovers the shared guidance, or the unavailable observation is reported explicitly.
 - A short index points to current knowledge at the chosen paths, and all permanent references resolve and are visible to Git.
 - Repeated setup preserves custom locations, user edits and unrelated ignores, without duplicate guidance blocks.
 - The recorded tracker is the one you selected, which may differ from the git remote, and the label strings match labels that exist in that tracker.
