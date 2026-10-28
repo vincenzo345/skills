@@ -2,18 +2,24 @@
 schema: 1
 kind: effort
 id: work/agent-workflow-reliability
-state: active
+state: waiting
 stage: implementation
 current_spec:
   ref: work/agent-workflow-reliability/spec.md
   revision: 6
 current_map: null
-next_action: Issue 01 accepted/integrated at52cb759 (merge b814a67); acquire and implement
-  eligible Issue 02 under revision6. Retain reviewed draft PR; no global activation
-  or merge.
+next_action: Resolve policy-blocked T2 owned-file/diagnostic cleanup through a permitted
+  path, verify native absence and preserved evidence, then reassess Issue02 acceptance.
+  PR8 remains draft; no merge/global activation/live adoption.
 ---
 
 # Durable project knowledge and disposable agent work
+
+## Current delivery (2026-10-28)
+
+Draft PR: https://github.com/vincenzo345/skills/pull/8, branch `feat/agent-workflow-reliability`. Current specification is revision6, Codex-only after the user's scope reduction. Issue01 is completed with its accepted integration receipt. Issue02 implementation/evidence is integrated for draft review at `d8956de`, but mandatory T2 owned-file cleanup, reviewed-diagnostic reconciliation and final fixture teardown remain incomplete after automatic approval rejection. Issue02 and the effort are waiting; the specification remains current, not completed. No claims remain. See validation.md for exact residue, evidence, costs and assistance.
+
+The accepted H basis remains `b86774500cdcc5cca98de791573cd6106b6eeeb2`. Main, globally linked installations and PR7 remain unchanged. Earlier publication, readiness and prerequisite snapshots below are historical and superseded by this current state. Keep PR8 draft; later merge, installation and live adoption require separate authorization.
 
 ## Original request
 
@@ -71,3 +77,7 @@ After the expired Claude OAuth observation, the user explicitly directed "skip a
 ## Issue 01 accepted integration
 
 Controller independently inspected actual T1/T3 evidence and preservation results. The merger accepted `52cb759f75d7703504240138a2cb67fa1b5e3f6f` at merge `b814a67bd4edb1b1caa18d85a6d3c39d76fba912`. The shared coordinator verified ancestry and recorded the Issue 01 receipt before selecting Issue 02. See validation.md and Issue 01 completion evidence.
+
+## Draft delivery
+
+Draft PR: https://github.com/vincenzo345/skills/pull/8. Keep it draft throughout this execution. Issue 01 is accepted and integrated; Issue 02/T2 and final two-axis review remain in progress. Its completed clean worker worktree/branch were retired through Git after verified integration; accepted commits remain reachable on the integration branch.

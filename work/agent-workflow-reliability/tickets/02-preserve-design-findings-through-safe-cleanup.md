@@ -4,8 +4,8 @@ kind: implementation
 id: work/agent-workflow-reliability/tickets/02-preserve-design-findings-through-safe-cleanup.md
 effort: work/agent-workflow-reliability
 order: 2
-state: open
-readiness: ready-for-agent
+state: waiting
+readiness: needs-info
 basis:
   ref: work/agent-workflow-reliability/spec.md
   revision: 6
@@ -92,3 +92,15 @@ Approval: User 2026-10-28 authorizes both revision-5 Issues and edge 01 -> 02 th
 ## Reconciliation r5 to r6
 
 No impact: No implementation or T2 acceptance impact: Issue 02 uses configured durable locations, design/prototype retention and existing housekeeping. Revision 6 removes only new Claude-specific setup/discovery from Issue 01; Issue 02 has no Claude-specific work. Preserve approved scope and 01 -> 02 edge.
+
+## Reviewable integration and blocked acceptance
+
+Implementation/evidence worker `6dae45dfe07e297237df1f8419d8a641e3d77c91` is available on `feat/agent-workflow-reliability` at merge `d8956deaacaed3524d57a3e72c91a945552eb57e`. This is code availability for draft PR #8, not accepted completion. The merger revalidated ownership/revision6, ancestry, package, whitespace and source bundle. No integration completion receipt is asserted.
+
+T1/T3 passed; T2 retains durable findings/source, maintained checks, fixture, deliverable and history, preserves controls, and retired its owned Git worktree/native browser process. Automatic approval review rejected original browser-profile/stderr deletion and a materially safer exact-file/verified-empty-directory recovery before execution, stating only "blocked by policy". No bypass was attempted. Remaining owned disposable resources and reviewed diagnostic cannot be reported cleaned: see validation.md and the local recovery note under E:/tmpdir/agent-workflow-eval/02-case/.scratch/agent-tmp/case-reopen-20261028-e41/.
+
+Missing condition: a permitted cleanup path with fresh ownership/inactivity, resolved-boundary/reparse and native identity checks, successful disposal and independent absence verification. Until then T2 retirement/diagnostic reconciliation and final fixture teardown remain incomplete. Any acceptance deviation requires the user's exact approval and material specification revision; none is granted. Preserve blocked resources/provenance. The known-stopped worker's claim was released with its work preserved on the integration branch; resume through current readiness and a new claim after the missing condition is resolved.
+
+## Reconciliation r6 to r6
+
+Affected: Readiness-only change at revision6: code integrated for draft review, but mandatory T2 cleanup and diagnostic reconciliation blocked by automatic approval review. Scope unchanged; no completion or deviation accepted.
