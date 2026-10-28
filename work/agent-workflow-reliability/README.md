@@ -6,10 +6,11 @@ state: active
 stage: implementation
 current_spec:
   ref: work/agent-workflow-reliability/spec.md
-  revision: 5
+  revision: 6
 current_map: null
-next_action: Implement approved Issue 01 then Issue 02 under shared claims on feat/agent-workflow-reliability;
-  retain draft PR. See authorized basis below.
+next_action: Implement reconciled revision-6 Issue 01 then Issue 02, verify Codex-only
+  T1 plus T2/T3, and retain reviewed draft PR. Preserve existing instructions and
+  globally linked main.
 ---
 
 # Durable project knowledge and disposable agent work
@@ -20,13 +21,13 @@ Synthesize the October 20-27 retrospective into dependable completion, durable a
 
 ## Desired outcome
 
-1. Give durable project knowledge a clear home and short index, with concise repository guidance discoverable in both agents.
+1. Give durable project knowledge a clear home and short index, with concise repository guidance discoverable in Codex.
 2. Preserve maintained checks, deliverables, plans and useful findings while retiring owned disposable execution work safely.
 3. Demonstrate these outcomes through the confirmed seam with minimal ordinary context, calls and bookkeeping.
 
 ## Current artifacts
 
-[Specification revision 5](spec.md) contains ten nonredundant user stories and T1-T3 acceptance cases. [Folder examples](spec.md#illustrative-folder-outcomes) show active/completed work and a future existing-repository mapping.
+[Specification revision 6](spec.md) contains ten nonredundant user stories and T1-T3 acceptance cases. [Folder examples](spec.md#illustrative-folder-outcomes) show active/completed work and a future existing-repository mapping.
 
 [Published implementation breakdown](issue-plan.md#published-issues) records the approved two slices and genuine 01 -> 02 edge. Both Issues are needs-info pending H; publication does not establish implementation eligibility.
 
@@ -62,3 +63,7 @@ Specification revision 5, the two published Issue IDs and 01 -> 02 edge remain c
 Prior housekeeping evidence: `work/agent-housekeeping/validation.md`, exact-head passing Linux/Windows CI run 40013022186, independent review and local package, preservation (27), version, strict plugin and whitespace checks. Unchanged service/recovery observations are reused. Earlier supplied instruction reads do not prove fresh discovery. Two policy-blocked empty fixture shells, exact model revision, actual agent crash and runtime outage observations remain inherited limitations, not newly claimed successes.
 
 Live work-record authority stays `C:/Users/vince/projects/skillsrepo`; shared coordinator is its Git common-directory `work-records` state. Worker/integration tracker copies are snapshots only. The linked checkout stays on main with user edits preserved.
+
+## Current scope and basis (revision 6)
+
+After the expired Claude OAuth observation, the user explicitly directed "skip anything claude related". The coordinator retained exact revision 5 in history/spec-r5.md and published revision 6. Issue 01 was reconciled as affected with this approval; Issue 02 was reconciled as unaffected. The original two Issue identities and 01 -> 02 edge remain. Existing instructions stay protected; no new Claude bridges or validation are included. Missing Claude discovery is excluded by explicit scope change, not reported as a pass. Earlier publication/readiness/prerequisite snapshots above are historical; accepted H b867745 and feature-branch authority remain in force.

@@ -4,17 +4,17 @@ kind: implementation
 id: work/agent-workflow-reliability/tickets/01-configure-discoverable-guidance-and-durable-knowledge-locations.md
 effort: work/agent-workflow-reliability
 order: 1
-state: open
+state: in-progress
 readiness: ready-for-agent
 basis:
   ref: work/agent-workflow-reliability/spec.md
-  revision: 5
+  revision: 6
 blocked_by: []
 ---
 
 # 01: Configure discoverable guidance and durable knowledge locations
 
-**What to build:** Setup configures a usable documentation index and temporary workspace, and fresh Codex/Claude sessions find the concise shared repository guidance.
+**What to build:** Setup configures a usable documentation index and temporary workspace, and fresh Codex sessions find the concise shared repository guidance.
 
 **Objective:** 1 and the setup/overhead portions of 3.
 
@@ -23,7 +23,7 @@ blocked_by: []
 ## Acceptance criteria
 
 - [ ] Fresh setup reuses or establishes appropriate knowledge roles, a short index and a temporary convention; creates no empty documentation taxonomy.
-- [ ] Codex and Claude fresh-session observations demonstrate discovery without a prompt that explicitly supplies the policy or orders a named instruction-file read.
+- [ ] Codex fresh-session observations demonstrate discovery without a prompt that explicitly supplies the policy or orders a named instruction-file read.
 - [ ] One authoritative policy source is reached through appropriate entry points; existing instructions, custom locations, tracker authority and user edits survive repeated setup without duplicate blocks.
 - [ ] References resolve, permanent docs are Git-visible, and narrow temporary ignore rules preserve unrelated content.
 - [ ] Conditional pointers expose creation, retention ambiguity, services and recovery without loading all references for ordinary edits.
@@ -34,14 +34,14 @@ blocked_by: []
 
 ## Additional observable acceptance detail
 
-- [ ] T1 includes fresh and custom/repeated setup; fresh Codex and Claude sessions each discover generated guidance without supplied policy or a prompt to read a named instruction file. Missing runtime observations remain unresolved, never inferred from files or another runtime.
+- [ ] T1 includes fresh and custom/repeated setup; fresh Codex sessions discover generated guidance without supplied policy or a prompt to read a named instruction file. Missing runtime observations remain unresolved, never inferred from files or another runtime.
 - [ ] Reuse appropriate architecture/module/data-model/decision/domain/tracker locations. Establish a suitable temporary workspace when absent and create task children on demand. Create documentation collections only for useful content; the short index links current knowledge without duplicating glossary/schema authority. Editable diagrams stay beside documents and reusable synthetic data stays with maintained fixtures.
 - [ ] Essential survival/ownership obligations stay inline in the authoritative baseline. Conditional pointers load the knowledge index for relevant design context, common housekeeping when creating disposable work or resolving retention ambiguity, services before resource operations, and recovery when resuming interrupted work. Dependency and evaluation controls stay in this effort, outside ordinary loaded guidance.
 - [ ] Repeated setup preserves existing instruction scope, content, custom paths, tracker authority, user edits and narrow ignores. Resolve permanent-document visibility conflicts only through targeted reviewed changes preserving unrelated protected/generated content.
 
 ## Specification basis and delivery
 
-Basis: [specification revision 5](../spec.md), verified current at publication, including its implementation decisions, T1-T3 testing decisions and scope limits. See the [approved breakdown](../issue-plan.md) and [effort overview](../README.md). Revalidate the basis before implementation and before publishing results; impact-review any revision change rather than assuming this approval covers changed scope.
+Basis: [specification revision 6](../spec.md), verified current at publication, including its implementation decisions, T1-T3 testing decisions and scope limits. See the [approved breakdown](../issue-plan.md) and [effort overview](../README.md). Revalidate the basis before implementation and before publishing results; impact-review any revision change rather than assuming this approval covers changed scope.
 
 Use existing skills, one authoritative guidance source and precise conditional pointers. Preserve approved plans, stable effort history, useful reasoning, maintained linting/regression checks, reusable fixtures and requested deliverables. Repository instructions guide behavior, not enforcement. New hooks/helpers/cleanup skills remain deferred: an observed gap permits a targeted proposal only, requiring separate justification and scope approval before implementation. No automatic deletion, repeated policy injection, historical migration, personal/global configuration, live adoption or unrelated repairs.
 
@@ -84,3 +84,13 @@ Live work-record authority stays `C:/Users/vince/projects/skillsrepo`; shared co
 Affected: Revision 5 unchanged; H accepted after two-axis review and ancestry exit 0; execution authorization supplied. Readiness-only reconciliation preserves approved scope.
 
 Approval: User 2026-10-28 authorizes both revision-5 Issues and edge 01 -> 02 through reviewed draft PR; accepted H b867745 is on feat/agent-workflow-reliability.
+
+## Approved scope reduction (2026-10-28)
+
+The user directed "skip anything claude related". Revision 6 excludes new Claude-specific setup, bridges and runtime validation. Preserve existing instructions and shared authority, including an existing CLAUDE.md source; configure and verify Codex discovery only. All other criteria, approved Issue identity, 01 -> 02 edge and delivery limits remain. Original revision-5 approvals above remain historical evidence.
+
+## Reconciliation r5 to r6
+
+Affected: Affected by approved runtime scope reduction only. Remove new Claude-specific work/validation; retain mandatory Codex T1, safe existing setup, T3, documentation and integration requirements.
+
+Approval: User 2026-10-28: "skip anything claude related"; continue the previously authorized implementation and draft PR with Codex-only discovery. No other scope expansion or acceptance waiver.
