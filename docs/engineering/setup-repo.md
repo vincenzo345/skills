@@ -1,8 +1,8 @@
 ## What it does
 
-`/setup-repo` configures the repo conventions the engineering skills consume: issue tracking, triage labels, domain docs, and housekeeping. It records the answers as markdown files under `docs/agents/`. For GitHub, it records the issue repository explicitly, which may differ from the code repository.
+`/setup-repo` configures issue tracking, triage labels, domain docs, current-knowledge locations and housekeeping. It reuses existing authorities and user edits, including custom documentation paths, rather than replacing them with defaults. New configuration normally lives under `docs/agents/`.
 
-Those files are the only thing that varies between repos. The skills themselves are identical everywhere. They read `docs/agents/issue-tracker.md` at run time and do what it says. That is why the set is not tied to GitHub, and why you never edit a skill file to point it at another tracker. Invoking it with "link the skills to a custom issue tracker" works with anything you can connect to programmatically, with no changes to the skills.
+Those references vary between repos; the skills themselves are identical everywhere. They follow the configured tracker authority at run time. That is why the set is not tied to GitHub, and why you never edit a skill file to point it at another tracker. Invoking it with "link the skills to a custom issue tracker" works with anything you can connect to programmatically, with no changes to the skills.
 
 It is a prompt-driven skill, not a deterministic script. It reads your `git remote`, `CLAUDE.md` and `GLOSSARY.md`, proposes what it found, and waits for you to confirm before it writes anything.
 
@@ -27,7 +27,8 @@ It writes into the repo you run it in:
 | `triage-labels.md` | `docs/agents/`, only when the `triage` skill is installed |
 | `housekeeping.md` and its conditional service and recovery branches | `docs/agents/`, or the existing authoritative location |
 | A narrow temporary-output ignore rule | the existing ignore configuration |
-| An `## Agent skills` block and short housekeeping baseline | the existing agent instruction file, with its loading path verified |
+| One short current-knowledge index | an existing suitable index, or `docs/README.md` |
+| An `## Agent skills` block, concise survival/ownership baseline and conditional knowledge pointer | one shared instruction source reached through Codex's loaded entry point |
 
 You commit all of it as markdown. There is no user-level or global mode. The config lives in the repo, so every repo gets its own copy.
 
@@ -43,6 +44,8 @@ It starts each section with the recommended answer, and skips any question its e
 | **Triage labels** | keep two category names (`bug`, `enhancement`) and five state names (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`) | only if the `triage` skill is installed |
 | **Domain docs** | single-context: one `GLOSSARY.md` plus `docs/adr/` at the root | only if it spots monorepo signals, and then it offers a multi-context `GLOSSARY-MAP.md` |
 | **Housekeeping** | reuse a suitable temporary workspace or establish an isolated subtree | present the chosen root, narrow ignore rule and guidance in the setup draft |
+| **Current knowledge** | reuse an index and suitable architecture/module/data-model/decision locations | review missing content and the conditional pointer, creating documents only when useful content exists |
+| **Instruction discovery** | the smallest compatible connection to one shared source | review missing connections; verify fresh Codex discovery |
 
 The tracker options:
 
@@ -73,6 +76,21 @@ Setup records one temporary root with task-isolated directories and narrowly sco
 
 Setup adds a lasting convention without becoming a prerequisite for every edit.
 
+## Current knowledge without another tracker
+
+The short index helps a contributor find only the design context needed for a task. It distinguishes the roles of current documentation while preserving existing locations:
+
+| Role | What belongs there |
+| --- | --- |
+| Architecture | System responsibilities and runtime boundaries |
+| Module design | Interfaces, dependencies, invariants and testing seams |
+| Data-model design | Identity, relationships, integrity and lifecycle intent, linked to schemas and migrations |
+| Decisions and domain | Existing ADRs own consequential choices; the glossary owns business meaning |
+
+Plans, proposals, research and evidence stay in their stable effort. Accepted current knowledge links back to that evidence. Setup creates no empty design taxonomy and does not invent accepted decisions. Editable diagrams stay beside their document; reusable synthetic data stays with maintained fixtures.
+
+Repeated setup preserves the index, tracker authority, existing instruction scope and user edits inside generated blocks. Permanent documents must be visible to Git. An ignore conflict is corrected only for the reviewed paths while unrelated private/generated content stays protected.
+
 ## Common questions
 
 **Do I have to use GitHub?**
@@ -85,15 +103,17 @@ Re-run it to add a missing configuration section or refresh a changed convention
 
 **It wrote to `CLAUDE.md`, but I'm on Codex.**
 
-Setup selects an instruction file and verifies that housekeeping reaches the current environment:
+Setup preserves one shared source and connects the entry point Codex actually loads:
 
 | Condition | Setup behavior |
 | --- | --- |
-| `CLAUDE.md` exists | Prefer it. |
-| Only `AGENTS.md` exists | Use it. |
-| Neither file exists | Ask which to create. |
-| Selected file is loaded directly or through a pointer | Keep that connection. |
-| Selected file is not loaded | Include the smallest pointer correction in the reviewed draft, preserving one policy source. |
+| `CLAUDE.md` owns shared guidance | Keep it and connect Codex's loaded entry point to it. |
+| Codex's loaded entry point owns shared guidance | Keep it without an extra connection. |
+| Both carry independent instructions | Preserve their content and scope; add only the missing connection. |
+| No shared source exists | Review a shared `AGENTS.md`. |
+| Existing override or pointer already connects them | Verify it and reuse it without another block. |
+
+A fresh Codex session receives a neutral repository task, without supplied policy or a request to read a named instruction file. File inspection cannot prove discovery; an unavailable observation remains unresolved. Existing instruction files remain protected regardless of their name; additional runtime setup and validation are outside this flow.
 
 **Did it create my triage labels?**
 
@@ -101,11 +121,11 @@ When `triage` is installed and the tracker is GitHub or GitLab, setup creates th
 
 **Can I configure the other skills' behaviour here ([grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) cadence, question format, tone)?**
 
-It configures tracker, labels, domain-doc layout and housekeeping. General tone or interview preferences remain outside its scope. Users have asked to make it the place for per-user preferences. The answer is that skills stay opinionated and take no per-user config. Preferences belong in your `CLAUDE.md` as plain instructions, which every skill already reads.
+It configures repository workflow and knowledge locations. General tone or interview preferences remain outside its scope. Preferences belong in your existing repository instructions; setup preserves them and verifies the loading connections.
 
 **Can I keep the config in `~/.claude` instead of committing it to every repo?**
 
-Not today. A user who runs the skills across many repos has an open request for this, but no user-level mode exists. Every repo carries its own `docs/agents/`.
+Not today. A user who runs the skills across many repos has an open request for this, but no user-level mode exists. Each repo carries its own configuration at the chosen locations.
 
 **Isn't it strange to have a skill that configures the other skills?**
 
@@ -113,10 +133,12 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 
 ## It's working if
 
-- `docs/agents/issue-tracker.md` and `docs/agents/domain.md` exist, plus `triage-labels.md` if `triage` is installed.
-- An `## Agent skills` section appears in the instruction file your harness reads, with a one-line summary pointing at each of those files.
+- The configured tracker and domain references exist, plus the label mapping if `triage` is installed. New setups normally use `docs/agents/`.
+- A fresh Codex session discovers the shared guidance, or the unavailable observation is reported explicitly.
+- A short index points to current knowledge at the chosen paths, and all permanent references resolve and are visible to Git.
+- Repeated setup preserves custom locations, user edits and unrelated ignores, without duplicate guidance blocks.
 - The recorded tracker is the one you selected, which may differ from the git remote, and the label strings match labels that exist in that tracker.
-- For GitHub, `docs/agents/issue-tracker.md` names the exact issue repository. If it differs from the code repository, issue commands target the recorded repository.
+- For GitHub, the tracker reference names the exact issue repository. If it differs from the code repository, issue commands target the recorded repository.
 - Afterwards, `/to-tickets` publishes without asking you where issues live, and `/triage` applies labels rather than inventing them.
 - Maintained checks remain available, and completed one-off validation leaves no unexplained files in the repo.
 - Completed service checks release their owned processes and disposable Docker resources while shared services stay available; failed cleanup remains visible in a scoped recovery note.

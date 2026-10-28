@@ -1,6 +1,6 @@
 ---
 name: setup-repo
-description: "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, domain doc layout, and housekeeping. Run once before first use of the other engineering skills."
+description: "Configure repository workflows, discoverable agent guidance, durable knowledge locations, and housekeeping."
 disable-model-invocation: true
 ---
 
@@ -11,6 +11,7 @@ Scaffold the per-repo configuration that the engineering skills assume:
 - **Issue tracker**: where issues live (GitHub by default; local markdown is also supported out of the box)
 - **Triage labels**: the strings used for the two category roles and five state roles
 - **Domain docs**: where `GLOSSARY.md` and ADRs live, and the consumer rules for reading them
+- **Current knowledge**: one short index to architecture, module, data-model and decision knowledge, reusing suitable locations
 - **Housekeeping**: a temporary workspace and a short policy for maintained checks, disposable validation and ownership
 
 This is a prompt-driven skill, not a deterministic script. Explore, present what you found, confirm with the user, then write.
@@ -24,10 +25,11 @@ For local tracking, read [the shared work-record contract](WORK-RECORDS.md) befo
 Look at the current repo to understand its starting state. Read whatever exists; don't assume:
 
 - `git remote -v` and `.git/config`: is this a GitHub repo? Which one?
-- `AGENTS.md` and `CLAUDE.md` at the repo root: does either exist? Is there already an `## Agent skills` section in either?
+- Instruction entry points used by Codex, including applicable overrides, pointers and nested scope. Preserve existing instruction files and trace how Codex reaches repository-wide guidance instead of choosing by filename.
 - `GLOSSARY.md` and `GLOSSARY-MAP.md` at the repo root
 - `docs/adr/` and any `src/*/docs/adr/` directories
-- `docs/agents/`: does this skill's prior output already exist?
+- Prior setup output, including custom paths linked from instructions; do not assume `docs/agents/` is its authority
+- Existing documentation indexes, architecture/module/data-model records, decisions, editable diagrams and maintained synthetic fixtures
 - `work/`: a sign that a local-markdown issue tracker convention is already in use
 - Existing temporary-workspace conventions, ignore rules and project verification commands
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
@@ -36,6 +38,8 @@ Look at the current repo to understand its starting state. Read whatever exists;
 ### 2. Present findings and ask
 
 Summarise what's present and what's missing. Then take the sections in order. One section, one answer, then the next.
+
+An existing configured authority takes precedence over defaults and the code remote. Preserve its paths, content and user edits, including edits inside generated sections. Present only missing additions or a precise proposed diff. Reuse equivalent guidance; conflicting policies need explicit reconciliation rather than replacement or a second policy. A prior approved choice needs no new question.
 
 Lead each section with the recommended answer so the user can accept it in a word. Give a one-line explainer only when the choice genuinely branches; skip the section entirely when exploration already settled it (Section B when `triage` isn't installed, Section C when there's no monorepo).
 
@@ -70,27 +74,34 @@ Offer **multi-context** (a root `GLOSSARY-MAP.md` pointing to per-context `GLOSS
 
 **Section D: Housekeeping.** Read [housekeeping setup](HOUSEKEEPING-SETUP.md). Reuse an established workspace or propose the dedicated fallback. Include the baseline and adapted reference in the same setup review; avoid a separate questionnaire when discovery settles the choice.
 
+**Section E: Current knowledge.** Read [knowledge placement](KNOWLEDGE-SETUP.md). Reuse a suitable index and documentation locations; propose only missing content and the conditional index pointer in the same review.
+
 ### 3. Confirm and edit
 
 Show the user a draft of:
 
-- The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
-- The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
+- The `## Agent skills` additions and minimal Codex instruction connection (step 4), preserving existing scope
+- Missing additions to the configured tracker, domain and label references (default paths below apply only to new configuration)
 - The housekeeping baseline, temporary root, narrow ignore rule and `docs/agents/housekeeping.md` reference with its conditional service and recovery branches
+- The current-knowledge index, chosen locations, conditional pointer and any targeted Git-visibility correction
 
 Let them edit before writing.
 
 ### 4. Write
 
-**Pick the file to edit:**
+**Connect the Codex instruction entry point:** Keep one authoritative repository-wide guidance source, normally the existing source. Preserve existing instructions and scope. Include any new connection in the reviewed draft; avoid cycles and duplicate policy blocks.
 
-- If `CLAUDE.md` exists, edit it.
-- Else if `AGENTS.md` exists, edit it.
-- If neither exists, ask the user which one to create; don't pick for them.
+| Existing structure | Smallest proposed connection |
+| --- | --- |
+| `CLAUDE.md` owns shared guidance | Keep it authoritative; connect Codex's loaded entry point with an explicit instruction to read that file for shared repository guidance. |
+| Codex's loaded entry point owns shared guidance | Keep it authoritative; no extra connection is needed. |
+| Both have independent content | Preserve both; add only the missing connection to the chosen shared source, respecting narrower scope. |
+| No shared source exists | Recommend `AGENTS.md` as the shared source; confirm this in the setup draft. |
+| An override or existing pointer already connects them | Reuse it after checking its scope and discovery; do not append a second connection. |
 
-Never create `AGENTS.md` when `CLAUDE.md` already exists (or vice versa); always edit the one that's already there.
+A filename or a successful explicit read is not fresh-session discovery evidence. Start a fresh Codex session with a neutral repository task that neither supplies the policy nor requests a named instruction-file read. Observe discovery and the source reached; check nested scope where applicable. If the runtime is unavailable, report discovery as unresolved instead of inferring it from file inspection. Additional runtime setup and validation are outside this flow.
 
-If an `## Agent skills` block already exists in the chosen file, update its contents in-place rather than appending a duplicate. Don't overwrite user edits to the surrounding sections.
+If an `## Agent skills` block already exists, merge the approved additions in place. Preserve existing user edits inside and outside the block; do not regenerate whole sections from templates. Keep core obligations inline in the shared source and branch details behind conditional pointers.
 
 The block:
 
@@ -112,11 +123,13 @@ The block:
 
 Add the reviewed housekeeping baseline after this block.
 
+Add a brief current-knowledge pointer using the chosen index path: `For architecture, module, data-model or decision context, follow the relevant entry in [current knowledge](<index-path>).` Ordinary edits need no index read.
+
 Include the `### Triage labels` sub-block, and write `docs/agents/triage-labels.md`, only when `triage` is installed and Section B ran. When it isn't, both are omitted.
 
 When Section B ran on GitHub or GitLab, create each configured label the tracker lacks (`gh label create` / `glab label create`).
 
-Then write the docs files using the seed templates in this skill folder as a starting point:
+For new configuration, use the seed templates as a starting point. Existing authoritative files and custom paths remain in place:
 
 - [issue-tracker-github.md](./issue-tracker-github.md): GitHub issue tracker
 - [issue-tracker-gitlab.md](./issue-tracker-gitlab.md): GitLab issue tracker
@@ -129,4 +142,6 @@ For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch us
 
 ### 5. Done
 
-Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later; re-running this skill can add or refresh a missing configuration section while preserving their existing choices.
+Verify every published local reference resolves from its document and the intended permanent documents are Git-visible with `git check-ignore` and `git status --untracked-files=all`. Check disposable contents are ignored and unrelated protected/generated paths retain their rules. A broad ignore conflict needs a targeted reviewed exception for the exact permanent paths and necessary parent traversal; never unignore an entire protected tree. On repeated setup, check preserved content and absence of duplicate sections/connections.
+
+Report the configured locations, Codex discovery outcome and any unresolved observation. Setup is complete only for the outcomes verified. Mention the user can edit the configured references directly; re-running adds missing configuration while preserving their choices. Keep dependency/evaluation controls outside ordinary repository guidance.
