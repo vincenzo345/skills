@@ -4,6 +4,8 @@
 
 Throwaway is a constraint on how the code is *written*, not a promise to destroy it. Keep production hardening out of the prototype while giving the UI enough visual and interaction detail to judge it. Two things survive: the recorded answer, which guides later implementation, and the prototype on a branch out of main as evidence for that answer.
 
+The requested prototype remains reviewable under its branch-retention rule. Auxiliary validation scripts and data follow the repository housekeeping convention and are removed after use, so retaining the experiment does not retain every temporary output. Resuming interrupted verification follows the configured policy pointer and recovers only proven inactive, task-owned resources.
+
 ## When to reach for it
 
 Type `/prototype`, or the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) reaches for it automatically when a task fits.

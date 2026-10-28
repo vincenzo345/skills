@@ -19,6 +19,8 @@ This is about **operative** instructions: a skill's own steps telling the agent 
 
 The shared [work-record contract](../skills/engineering/setup-repo/WORK-RECORDS.md) is a narrow passive-reference exception. Participating skills may link directly to this contract and its packaged helper instructions, and use those helpers to follow an already configured tracker. Reading the contract or running a record operation does not invoke its owner, `setup-repo`. Repository setup and all other operative calls to user-invoked skills still require the human to invoke that skill.
 
+The packaged [housekeeping reference](../skills/engineering/setup-repo/housekeeping.md) is also a passive-reference exception: resource-producing or resumed-work skills may read its fallback branch and triggered service or recovery references when the repository has no configured housekeeping policy. This reads shared lifecycle guidance; it does not invoke `setup-repo` or authorize writing repository configuration. Prefer the configured repository reference when present.
+
 The Skill tool takes one skill per call. A step that needs two skills is two calls, not one call with two names: say so (`Call the Skill tool twice, for "grilling" and "domain-modeling"`), not "call it with X and Y," which reads as a single call taking both.
 
 This whole convention only holds when the named skill is **model-invoked**. A user-invoked skill can never be reached this way, full stop: per the invariant above, no other skill can call it, including by naming it to the Skill tool. When a step's precondition is a user-invoked skill (e.g. `setup-repo`), phrase it as an instruction for the human to act on: "tell the user to run `/setup-repo`", never as a Skill tool call.

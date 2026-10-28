@@ -1,6 +1,6 @@
 ## What it does
 
-`setup-repo` answers three questions about one repo: where issues live, what the triage labels are called, and where the domain docs sit. It records the answers as markdown files under `docs/agents/`. For GitHub, it records the issue repository explicitly, which may differ from the code repository.
+`/setup-repo` configures the repo conventions the engineering skills consume: issue tracking, triage labels, domain docs, and housekeeping. It records the answers as markdown files under `docs/agents/`. For GitHub, it records the issue repository explicitly, which may differ from the code repository.
 
 Those files are the only thing that varies between repos. The skills themselves are identical everywhere. They read `docs/agents/issue-tracker.md` at run time and do what it says. That is why the set is not tied to GitHub, and why you never edit a skill file to point it at another tracker. Invoking it with "link the skills to a custom issue tracker" works with anything you can connect to programmatically, with no changes to the skills.
 
@@ -25,13 +25,15 @@ It writes into the repo you run it in:
 | `issue-tracker.md` | `docs/agents/` |
 | `domain.md` | `docs/agents/` |
 | `triage-labels.md` | `docs/agents/`, only when the `triage` skill is installed |
-| An `## Agent skills` block | whichever of `CLAUDE.md` or `AGENTS.md` already exists |
+| `housekeeping.md` and its conditional service and recovery branches | `docs/agents/`, or the existing authoritative location |
+| A narrow temporary-output ignore rule | the existing ignore configuration |
+| An `## Agent skills` block and short housekeeping baseline | the existing agent instruction file, with its loading path verified |
 
 You commit all of it as markdown. There is no user-level or global mode. The config lives in the repo, so every repo gets its own copy.
 
 The local work-record helpers require Python with PyYAML and a Git checkout. They use the shared Git administrative directory to coordinate participating worktrees; no remote is required. Tool installation stays in the [repository installation instructions](../../README.md).
 
-## The three decisions
+## The setup decisions
 
 It starts each section with the recommended answer, and skips any question its exploration already answered. Most runs need only two confirmations.
 
@@ -40,6 +42,7 @@ It starts each section with the recommended answer, and skips any question its e
 | **Issue tracker** | the one matching your `git remote` | when not already selected or configured |
 | **Triage labels** | keep two category names (`bug`, `enhancement`) and five state names (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`) | only if the `triage` skill is installed |
 | **Domain docs** | single-context: one `GLOSSARY.md` plus `docs/adr/` at the root | only if it spots monorepo signals, and then it offers a multi-context `GLOSSARY-MAP.md` |
+| **Housekeeping** | reuse a suitable temporary workspace or establish an isolated subtree | present the chosen root, narrow ignore rule and guidance in the setup draft |
 
 The tracker options:
 
@@ -54,6 +57,22 @@ The first three ship as templates in the skill and work out of the box. Local ma
 
 "Other" is a full option too. It is how Jira, Linear, Azure DevOps and Beads all work. You describe the workflow, the skill records your prose in `docs/agents/issue-tracker.md`, and the downstream skills follow the prose. Users have already built this: a Jira-over-[MCP](https://www.aihero.dev/ai-coding-dictionary/mcp) variant, a Gitea CLI shaped like `gh`, a hand-built local dashboard.
 
+## Maintained checks and disposable validation
+
+A reusable lint rule or regression test belongs in the maintained project tooling. A one-off script answers the current question and is removed when it is no longer needed. Generated reports and data have their own lifetime even when the checker is permanent.
+
+Setup records one temporary root with task-isolated directories and narrowly scoped ignore rules. Existing scratch notes and durable effort records remain where they are. Shared services and persistent data remain protected.
+
+| Work | Guidance |
+| --- | --- |
+| Ordinary edit | Use the short persistent baseline. |
+| Temporary validation | Load the fuller reference when needed. |
+| Process or Docker work | Load the service branch, use native teardown, and record exact ownership for interrupted work. |
+| Interrupted task | Find one recovery note through the configured root or repository-specific OS temporary namespace. Verify prior-owner inactivity and current ownership before cleanup; preserve and report unknown or active resources. |
+| Unconfigured repository | Use an owned OS temporary directory and suggest setup once. |
+
+Setup adds a lasting convention without becoming a prerequisite for every edit.
+
 ## Common questions
 
 **Do I have to use GitHub?**
@@ -62,11 +81,19 @@ No. GitHub, GitLab and local markdown under `work/` all ship as ready-made templ
 
 **Do I need to re-run it after updating the skills?**
 
-The direct answer after v1.1 was yes. The skill's own closing message is softer. It tells you to re-run only to switch trackers or start over. Both are defensible. The seed templates change between versions, so a `docs/agents/issue-tracker.md` from an older release can go out of date against the skills that now read it. If a downstream skill does something different from what the docs describe, re-run setup. It is cheap.
+Re-run it to add a missing configuration section or refresh a changed convention. Setup preserves existing choices and user edits, rather than appending another copy. The temporary workspace and narrow ignore rule are included in the same review as the other configuration.
 
 **It wrote to `CLAUDE.md`, but I'm on Codex.**
 
-This is a known gap, and still open. The file-selection rule is "edit `CLAUDE.md` if it exists, else `AGENTS.md`". It checks which file exists, not which [harness](https://www.aihero.dev/ai-coding-dictionary/harness) is running. In a repo with a `CLAUDE.md` left over from Claude Code, the skill writes its `## Agent skills` block to a file Codex never reads. Users have two workarounds: move the block to `AGENTS.md` by hand, or keep `AGENTS.md` canonical and make `CLAUDE.md` a one-line pointer at it. If neither file exists, the skill asks you which to create instead of picking one. This has confused people who expected it to decide.
+Setup selects an instruction file and verifies that housekeeping reaches the current environment:
+
+| Condition | Setup behavior |
+| --- | --- |
+| `CLAUDE.md` exists | Prefer it. |
+| Only `AGENTS.md` exists | Use it. |
+| Neither file exists | Ask which to create. |
+| Selected file is loaded directly or through a pointer | Keep that connection. |
+| Selected file is not loaded | Include the smallest pointer correction in the reviewed draft, preserving one policy source. |
 
 **Did it create my triage labels?**
 
@@ -74,7 +101,7 @@ When `triage` is installed and the tracker is GitHub or GitLab, setup creates th
 
 **Can I configure the other skills' behaviour here ([grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) cadence, question format, tone)?**
 
-No. It configures three things: tracker, labels, doc layout. Users have asked to make it the place for per-user preferences. The answer is that skills stay opinionated and take no per-user config. Preferences belong in your `CLAUDE.md` as plain instructions, which every skill already reads.
+It configures tracker, labels, domain-doc layout and housekeeping. General tone or interview preferences remain outside its scope. Users have asked to make it the place for per-user preferences. The answer is that skills stay opinionated and take no per-user config. Preferences belong in your `CLAUDE.md` as plain instructions, which every skill already reads.
 
 **Can I keep the config in `~/.claude` instead of committing it to every repo?**
 
@@ -91,6 +118,10 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 - The recorded tracker is the one you selected, which may differ from the git remote, and the label strings match labels that exist in that tracker.
 - For GitHub, `docs/agents/issue-tracker.md` names the exact issue repository. If it differs from the code repository, issue commands target the recorded repository.
 - Afterwards, `/to-tickets` publishes without asking you where issues live, and `/triage` applies labels rather than inventing them.
+- Maintained checks remain available, and completed one-off validation leaves no unexplained files in the repo.
+- Completed service checks release their owned processes and disposable Docker resources while shared services stay available; failed cleanup remains visible in a scoped recovery note.
+- A new session can find an interrupted task's recovery note without lost conversation IDs; unresolved ownership remains visible.
+- An ordinary edit does not trigger a housekeeping scan or a separate report.
 - Nothing in the skill files themselves changed. If setup edited a `SKILL.md`, something went wrong.
 
 ## Where it fits
