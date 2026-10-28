@@ -1,5 +1,5 @@
 interface:
   display_name: "Setup Repo"
-  short_description: "Configure workflows and housekeeping"
+  short_description: "Configure workflows and shared guidance"
 policy:
   allow_implicit_invocation: false

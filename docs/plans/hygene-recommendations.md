@@ -1,0 +1,26 @@
+# Hygene recommendations
+
+**Status:** Advisory handoff, 2026-10-24. The user asked to keep these recommendations separate from the Applications4Life cleanup specification. No recommendation below is an approved implementation task or a condition for closing that cleanup.
+
+## Context
+
+The Applications4Life workspace accumulated duplicate-looking Git worktrees, experimental application code, generated files, and remnants of several development processes. The agreed cleanup aims for one current `applications4life/app/` checkout, only active worktrees, compact retained history, and local output under `applications4life/.local/`. Useful older work must be preserved before old checkouts are retired. The active cleanup discovery record is `applications4life/a4l-feedback-integration/wayfinder/repository-structure-cleanup/discovery.md`; its authority must be handed off as part of the cleanup.
+
+The current restructuring checkout is `applications4life/worktrees/repository-cleanup-integration/`. At the time of this handoff, the shared Git metadata is inside `applications4life/illustration report generator/.git`, and the work-record authority is `applications4life/a4l-feedback-integration/`. These are reasons to plan the handoff carefully, not reasons to retain two visible old application folders.
+
+## Recommended development habits
+
+1. **Maintain one named current checkout.** Create a linked worktree for an active task only. At task completion, account for its unique commits, tracked changes, untracked files, and relevant ignored assets; then remove an eligible worktree with Git's worktree commands. Keep a branch or compact archive for valuable unfinished work. Review the active worktree list at task close rather than letting every experiment become a permanent folder. [Git worktree reference](https://git-scm.com/docs/git-worktree).
+2. **Give every new file an owner and location.** Use the existing capability modules for application code, framework-required route and public locations for Next.js, and a small set of support directories for infrastructure, scripts, tooling, tests, and docs. Require a specific reason before adding another top-level directory. Extend the existing `scripts/check_repository_structure.py` and workspace audit when enforcement is needed; avoid a parallel governance system. [Next.js Pages Router structure](https://nextjs.org/docs/pages/getting-started/project-structure).
+3. **Give experiments an exit.** Put disposable local prototypes and generated results in workspace `.local/`. For a shared experiment, use a short-lived branch or worktree and record its conclusion. At completion, promote useful code into its owning module, retain only durable reasoning or unique evidence, and remove the remaining prototype files from the active application.
+4. **Make new source and documentation visible to Git.** The current application `.gitignore` begins with `*.md` and many exceptions. Replace that blanket rule, after inventorying what it currently hides, with explicit generated-output and secret patterns. Keep project-wide ignore rules in `.gitignore`, local personal patterns in Git's local excludes, and inspect ignored files during cleanup. Ignore rules do not affect files Git already tracks. [Git ignore reference](https://git-scm.com/docs/gitignore), [Git status reference](https://git-scm.com/docs/git-status).
+5. **Use one active tracker and concise current guidance.** Wayfinder is the application's active work tracker. Retire duplicate process systems from the active tree after preserving useful records. Keep an ADR when a consequential decision needs future explanation; mark superseded decisions and link their replacements. Keep the current contributor entry point short and link to detailed material only where it is still used.
+6. **Finish replacements in the same change.** When new code supersedes old code, review consumers and remove the old implementation, tests, wrappers, and instructions in that change. Keep tests that protect current behavior even when old. Run focused checks for the changed behavior and the repository's currently required CI before merge. Preserve any required security or deployment gates until the owner revises their policy explicitly. [GitHub protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches).
+
+## Smallest useful adoption
+
+Start with habits 1, 2, and 4. They address the three observed recurrence paths: abandoned worktrees, new root clutter, and hidden new documents. Apply the other habits during ordinary feature work. Prefer a short check in an existing script and a clear current README over another large process document.
+
+## Boundary and next use
+
+The user declined adding these preventive rules to the cleanup spec and said to do the cleanup already discussed. Treat this page as a handoff for a separate future housekeeping decision. The next cleanup planning invocation is `to-spec` on the existing `wayfinder/repository-structure-cleanup` effort, using its discovery record and confirmed design. That revision should focus on the agreed workspace and source cleanup and keep broader CI and TEST deployment gaps visible without claiming they passed.

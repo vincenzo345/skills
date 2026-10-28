@@ -12,7 +12,7 @@ Reachable only when you type them (Claude Code: `disable-model-invocation: true`
 - **[grill-with-docs](./grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-repo](./setup-repo/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain docs, housekeeping). Run once per repo.
+- **[setup-repo](./setup-repo/SKILL.md)**: Configure workflows, discoverable shared guidance, current-knowledge locations and housekeeping while preserving existing repository choices. Run once per repo.
 - **[to-spec](./to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker.
 - **[to-tickets](./to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, whether as text in a local file or as native blocking links on a real tracker.
 - **[implement](./implement/SKILL.md)**: Build the work described by a spec or set of tickets, driving `/tdd` at pre-agreed seams and closing out with `/code-review` before committing.
@@ -24,8 +24,8 @@ Reachable only when you type them (Claude Code: `disable-model-invocation: true`
 
 Model- or user-reachable (rich trigger phrasing so the model can reach for them).
 
-- **[design](./design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design using evidence, concrete alternatives, and human decisions.
-- **[prototype](./prototype/SKILL.md)**: Build a bounded runnable experiment to resolve a design question.
+- **[design](./design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design; retain effort evidence and accepted current knowledge.
+- **[prototype](./prototype/SKILL.md)**: Answer a bounded design question; retain findings and source before retiring disposable execution work.
 
 - **[diagnosing-bugs](./diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: build a feedback loop that goes red on this bug → minimise → hypothesise → instrument → fix → regression-test.
 - **[research](./research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.

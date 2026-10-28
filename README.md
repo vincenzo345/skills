@@ -16,7 +16,7 @@ claude plugin install skillsrepo-v2@skillsrepo-v2
 
 Remove the older `mattpocock-skills@claude-plugins-official` plugin to avoid duplicate commands. For a later update, remove the previous `skillsrepo-v2` marketplace, add the newly prepared snapshot, then install the plugin again. Removing the marketplace also removes its installed plugin. Restart Claude Code afterward.
 
-Run `/setup-repo` once in each application repo to configure its issue tracker, triage labels, domain-doc location, and temporary workspace with task recovery. Then run `/guide-me` to choose a route. For meeting-derived requirements, start with `/to-record` and `/to-scope`.
+Run `/setup-repo` once in each application repo to configure its issue tracker, triage labels, discoverable Codex guidance, current-knowledge index and temporary workspace with task recovery. It preserves existing instructions and suitable locations. Then run `/guide-me` to choose a route. For meeting-derived requirements, start with `/to-record` and `/to-scope`.
 
 The current [v2 workflow](docs/v2-workflow-pilot.md) is a human-driven development flow. Automated app-ticket intake and application-specific CI are integrations configured in the target application, not bundled capabilities of this skill package.
 
@@ -138,7 +138,7 @@ Skills I use daily for code work.
 - **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/engineering/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-repo](./skills/engineering/setup-repo/SKILL.md)**: Configure this repo for the engineering skills (issue tracker, triage labels, domain docs, housekeeping). Run once per repo before using the other engineering skills.
+- **[setup-repo](./skills/engineering/setup-repo/SKILL.md)**: Configure workflows, discoverable shared guidance, current-knowledge locations and housekeeping while preserving existing repository choices. Run once per repo.
 - **[to-spec](./skills/engineering/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview, just synthesizes what you've already discussed.
 - **[to-tickets](./skills/engineering/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
 - **[implement](./skills/engineering/implement/SKILL.md)**: Build the work described by a spec or set of tickets, driving `/tdd` at pre-agreed seams and closing out with `/code-review` before committing.
@@ -148,8 +148,8 @@ Skills I use daily for code work.
 
 **Model-invoked**
 
-- **[design](./skills/engineering/design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design using evidence, concrete alternatives, and human decisions.
-- **[prototype](./skills/engineering/prototype/SKILL.md)**: Build a bounded runnable experiment to resolve a design question.
+- **[design](./skills/engineering/design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design; retain effort evidence and accepted current knowledge.
+- **[prototype](./skills/engineering/prototype/SKILL.md)**: Answer a bounded design question; retain findings and source before retiring disposable execution work.
 - **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: build a feedback loop that goes red on this bug → minimise → hypothesise → instrument → fix → regression-test.
 - **[research](./skills/engineering/research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.
 - **[tdd](./skills/engineering/tdd/SKILL.md)**: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
