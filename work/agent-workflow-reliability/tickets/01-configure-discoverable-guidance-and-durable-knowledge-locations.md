@@ -4,12 +4,16 @@ kind: implementation
 id: work/agent-workflow-reliability/tickets/01-configure-discoverable-guidance-and-durable-knowledge-locations.md
 effort: work/agent-workflow-reliability
 order: 1
-state: in-progress
+state: completed
 readiness: ready-for-agent
 basis:
   ref: work/agent-workflow-reliability/spec.md
   revision: 6
 blocked_by: []
+integration:
+  ref: feat/agent-workflow-reliability
+  commit: 52cb759f75d7703504240138a2cb67fa1b5e3f6f
+  verified_tip: b814a67bd4edb1b1caa18d85a6d3c39d76fba912
 ---
 
 # 01: Configure discoverable guidance and durable knowledge locations
@@ -22,22 +26,22 @@ blocked_by: []
 
 ## Acceptance criteria
 
-- [ ] Fresh setup reuses or establishes appropriate knowledge roles, a short index and a temporary convention; creates no empty documentation taxonomy.
-- [ ] Codex fresh-session observations demonstrate discovery without a prompt that explicitly supplies the policy or orders a named instruction-file read.
-- [ ] One authoritative policy source is reached through appropriate entry points; existing instructions, custom locations, tracker authority and user edits survive repeated setup without duplicate blocks.
-- [ ] References resolve, permanent docs are Git-visible, and narrow temporary ignore rules preserve unrelated content.
-- [ ] Conditional pointers expose creation, retention ambiguity, services and recovery without loading all references for ordinary edits.
-- [ ] T1 passes. T3 shows zero added routine housekeeping actions, specialized reads or bookkeeping in matched baseline/candidate ordinary edits; context and execution differences are reported separately. Missing runtime observations remain unresolved.
-- [ ] Relevant setup documentation/catalog/router changes and existing package checks ship in this slice.
+- [x] Fresh setup reuses or establishes appropriate knowledge roles, a short index and a temporary convention; creates no empty documentation taxonomy.
+- [x] Codex fresh-session observations demonstrate discovery without a prompt that explicitly supplies the policy or orders a named instruction-file read.
+- [x] One authoritative policy source is reached through appropriate entry points; existing instructions, custom locations, tracker authority and user edits survive repeated setup without duplicate blocks.
+- [x] References resolve, permanent docs are Git-visible, and narrow temporary ignore rules preserve unrelated content.
+- [x] Conditional pointers expose creation, retention ambiguity, services and recovery without loading all references for ordinary edits.
+- [x] T1 passes. T3 shows zero added routine housekeeping actions, specialized reads or bookkeeping in matched baseline/candidate ordinary edits; context and execution differences are reported separately. Missing runtime observations remain unresolved.
+- [x] Relevant setup documentation/catalog/router changes and existing package checks ship in this slice.
 
 **Documentation and validation:** Setup consumer documentation and relevant catalog/router entries; T1 and T3 evidence in the effort's compact evaluation summary.
 
 ## Additional observable acceptance detail
 
-- [ ] T1 includes fresh and custom/repeated setup; fresh Codex sessions discover generated guidance without supplied policy or a prompt to read a named instruction file. Missing runtime observations remain unresolved, never inferred from files or another runtime.
-- [ ] Reuse appropriate architecture/module/data-model/decision/domain/tracker locations. Establish a suitable temporary workspace when absent and create task children on demand. Create documentation collections only for useful content; the short index links current knowledge without duplicating glossary/schema authority. Editable diagrams stay beside documents and reusable synthetic data stays with maintained fixtures.
-- [ ] Essential survival/ownership obligations stay inline in the authoritative baseline. Conditional pointers load the knowledge index for relevant design context, common housekeeping when creating disposable work or resolving retention ambiguity, services before resource operations, and recovery when resuming interrupted work. Dependency and evaluation controls stay in this effort, outside ordinary loaded guidance.
-- [ ] Repeated setup preserves existing instruction scope, content, custom paths, tracker authority, user edits and narrow ignores. Resolve permanent-document visibility conflicts only through targeted reviewed changes preserving unrelated protected/generated content.
+- [x] T1 includes fresh and custom/repeated setup; fresh Codex sessions discover generated guidance without supplied policy or a prompt to read a named instruction file. Missing runtime observations remain unresolved, never inferred from files or another runtime.
+- [x] Reuse appropriate architecture/module/data-model/decision/domain/tracker locations. Establish a suitable temporary workspace when absent and create task children on demand. Create documentation collections only for useful content; the short index links current knowledge without duplicating glossary/schema authority. Editable diagrams stay beside documents and reusable synthetic data stays with maintained fixtures.
+- [x] Essential survival/ownership obligations stay inline in the authoritative baseline. Conditional pointers load the knowledge index for relevant design context, common housekeeping when creating disposable work or resolving retention ambiguity, services before resource operations, and recovery when resuming interrupted work. Dependency and evaluation controls stay in this effort, outside ordinary loaded guidance.
+- [x] Repeated setup preserves existing instruction scope, content, custom paths, tracker authority, user edits and narrow ignores. Resolve permanent-document visibility conflicts only through targeted reviewed changes preserving unrelated protected/generated content.
 
 ## Specification basis and delivery
 
@@ -94,3 +98,7 @@ The user directed "skip anything claude related". Revision 6 excludes new Claude
 Affected: Affected by approved runtime scope reduction only. Remove new Claude-specific work/validation; retain mandatory Codex T1, safe existing setup, T3, documentation and integration requirements.
 
 Approval: User 2026-10-28: "skip anything claude related"; continue the previously authorized implementation and draft PR with Codex-only discovery. No other scope expansion or acceptance waiver.
+
+## Completion evidence
+
+Revision6 acceptance verified by controller using actual T1 setup/repeat and neutral fresh Codex transcripts, independent preservation of19 originals/references/Gitvisibility/ignores/inline safety checks, and matched T3 edit2->2 calls/0 housekeeping activity. See validation.md. Merger accepted worker52cb759 at b814a67, verified acceptedH ancestry and integrated package/whitespace checks. Claude-specific scope removed by explicit user direction in r6, not inferred pass. Native service/recovery unchanged; priorH qualifications retained.

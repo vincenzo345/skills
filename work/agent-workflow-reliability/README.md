@@ -8,9 +8,9 @@ current_spec:
   ref: work/agent-workflow-reliability/spec.md
   revision: 6
 current_map: null
-next_action: Implement reconciled revision-6 Issue 01 then Issue 02, verify Codex-only
-  T1 plus T2/T3, and retain reviewed draft PR. Preserve existing instructions and
-  globally linked main.
+next_action: Issue 01 accepted/integrated at52cb759 (merge b814a67); acquire and implement
+  eligible Issue 02 under revision6. Retain reviewed draft PR; no global activation
+  or merge.
 ---
 
 # Durable project knowledge and disposable agent work
@@ -67,3 +67,7 @@ Live work-record authority stays `C:/Users/vince/projects/skillsrepo`; shared co
 ## Current scope and basis (revision 6)
 
 After the expired Claude OAuth observation, the user explicitly directed "skip anything claude related". The coordinator retained exact revision 5 in history/spec-r5.md and published revision 6. Issue 01 was reconciled as affected with this approval; Issue 02 was reconciled as unaffected. The original two Issue identities and 01 -> 02 edge remain. Existing instructions stay protected; no new Claude bridges or validation are included. Missing Claude discovery is excluded by explicit scope change, not reported as a pass. Earlier publication/readiness/prerequisite snapshots above are historical; accepted H b867745 and feature-branch authority remain in force.
+
+## Issue 01 accepted integration
+
+Controller independently inspected actual T1/T3 evidence and preservation results. The merger accepted `52cb759f75d7703504240138a2cb67fa1b5e3f6f` at merge `b814a67bd4edb1b1caa18d85a6d3c39d76fba912`. The shared coordinator verified ancestry and recorded the Issue 01 receipt before selecting Issue 02. See validation.md and Issue 01 completion evidence.
