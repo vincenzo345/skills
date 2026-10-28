@@ -8,7 +8,7 @@ state: open
 readiness: ready-for-agent
 basis:
   ref: work/agent-workflow-reliability/spec.md
-  revision: 5
+  revision: 6
 blocked_by:
 - work/agent-workflow-reliability/tickets/01-configure-discoverable-guidance-and-durable-knowledge-locations.md
 ---
@@ -45,7 +45,7 @@ blocked_by:
 
 ## Specification basis and delivery
 
-Basis: [specification revision 5](../spec.md), verified current at publication, including its implementation decisions, T1-T3 testing decisions and scope limits. See the [approved breakdown](../issue-plan.md) and [effort overview](../README.md). Revalidate the basis before implementation and before publishing results; impact-review any revision change rather than assuming this approval covers changed scope.
+Original publication basis: [specification revision 5](../history/spec-r5.md), verified current at publication, including its implementation decisions, T1-T3 testing decisions and scope limits. See the [approved breakdown](../issue-plan.md) and [effort overview](../README.md). Revalidate the basis before implementation and before publishing results; impact-review any revision change rather than assuming this approval covers changed scope.
 
 Use existing skills, one authoritative guidance source and precise conditional pointers. Preserve approved plans, stable effort history, useful reasoning, maintained linting/regression checks, reusable fixtures and requested deliverables. Repository instructions guide behavior, not enforcement. New hooks/helpers/cleanup skills remain deferred: an observed gap permits a targeted proposal only, requiring separate justification and scope approval before implementation. No automatic deletion, repeated policy injection, historical migration, personal/global configuration, live adoption or unrelated repairs.
 
@@ -88,3 +88,7 @@ Live work-record authority stays `C:/Users/vince/projects/skillsrepo`; shared co
 Affected: Revision 5 unchanged; H accepted after two-axis review and ancestry exit 0; execution authorization supplied. Issue 01 remains a blocking dependency.
 
 Approval: User 2026-10-28 authorizes both revision-5 Issues and edge 01 -> 02 through reviewed draft PR; accepted H b867745 is on feat/agent-workflow-reliability.
+
+## Reconciliation r5 to r6
+
+No impact: No implementation or T2 acceptance impact: Issue 02 uses configured durable locations, design/prototype retention and existing housekeeping. Revision 6 removes only new Claude-specific setup/discovery from Issue 01; Issue 02 has no Claude-specific work. Preserve approved scope and 01 -> 02 edge.

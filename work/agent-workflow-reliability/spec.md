@@ -3,7 +3,7 @@ schema: 1
 kind: spec
 id: work/agent-workflow-reliability/spec.md
 effort: work/agent-workflow-reliability
-revision: 5
+revision: 6
 state: current
 readiness: ready-for-agent
 ---
@@ -20,7 +20,7 @@ Users need discoverable project knowledge, safe task completion and concise guid
 
 Deliver three objectives through existing skills:
 
-1. **Give durable knowledge a clear home.** Setup reuses appropriate documentation locations and a short index, and makes the essential guidance discoverable in Codex and Claude.
+1. **Give durable knowledge a clear home.** Setup reuses appropriate documentation locations and a short index, and makes the essential guidance discoverable in Codex.
 2. **Define what survives completion.** Preserve maintained verification, deliverables, plans and useful findings while retiring owned disposable work through existing housekeeping.
 3. **Prove the outcomes with minimal burden.** Observe setup, one bounded design/prototype lifecycle and a matched ordinary edit at the confirmed end-to-end seam.
 
@@ -29,7 +29,7 @@ Repository instructions guide behavior; they do not guarantee compliance or prov
 ## User Stories
 
 1. As a maintainer, I want setup to reuse suitable locations and preserve my instructions, so that configuration does not create competing structures or policies.
-2. As a Codex or Claude user, I want fresh sessions to discover the repository guidance, so that behavior does not depend on which agent I open.
+2. As a Codex user, I want fresh sessions to discover the repository guidance, so that behavior does not depend on an explicit instruction-file read in my task prompt.
 3. As a contributor, I want a short index to current architecture, module, data-model and decision knowledge, so that I can find the relevant material selectively.
 4. As a designer, I want accepted decisions linked to their evidence and distinguished from proposals and implementation, so that future work uses the correct authority.
 5. As a planner, I want approved plans, effort history and unique reasoning retained at stable paths, so that cleanup preserves context.
@@ -55,13 +55,13 @@ Repeated setup preserves content, custom paths, tracker authority, user edits an
 
 ### Instruction discovery and placement
 
-Setup inspects the instruction entry points used by Codex and Claude and proposes the smallest compatible connection to one authoritative guidance source. Replace the filename-preference assumption with verified discovery. Preserve existing instruction structure and scope; when both entry points are needed, use brief appropriate references rather than duplicated policy blocks.
+Setup inspects the instruction entry points used by Codex and proposes the smallest compatible connection to one authoritative guidance source. Replace the filename-preference assumption with verified discovery. Preserve existing instruction structure and scope, including an existing shared source housed in CLAUDE.md; use brief appropriate references rather than duplicated policy blocks. New Claude-specific setup, instruction bridges and runtime validation are outside this effort following the user's explicit scope reduction.
 
 Keep the essential survival and ownership obligations inline in the authoritative baseline, with precise conditional pointers:
 
 | Material | Authoritative home and trigger |
 | --- | --- |
-| Core housekeeping obligations and repository locations | Concise repository guidance, reached through each supported agent's loaded entry point |
+| Core housekeeping obligations and repository locations | Concise repository guidance, reached through Codex's loaded entry point |
 | Current project knowledge | Short index; follow the relevant entry when the task needs design context |
 | Temporary placement and retention detail | Existing common housekeeping reference, when creating disposable resources or resolving retention ambiguity |
 | Process/container acquisition or reconciliation | Existing service branch, before the relevant resource operation |
@@ -111,17 +111,17 @@ Each proposed implementation Issue maps to an objective and T1-T3 criteria, with
 
 ### Confirmed seam and acceptance cases
 
-Reuse the confirmed seam: setup generates guidance, a fresh agent uses it to perform or resume authorized design/prototype work, and an evaluator inspects durable artifacts, resource outcomes and overhead. Codex/Claude discovery adds runtime coverage within this seam, not a new testing seam.
+Reuse the confirmed seam: setup generates guidance, a fresh agent uses it to perform or resume authorized design/prototype work, and an evaluator inspects durable artifacts, resource outcomes and overhead. Codex discovery adds runtime coverage within this seam, not a new testing seam.
 
 | Case | Observable acceptance |
 | --- | --- |
-| **T1: Setup and discovery** | Fresh setup provides usable knowledge locations/index and a temporary convention. Custom/repeated setup preserves content, user choices, tracker authority and one policy source. References resolve; permanent documents are Git-visible. Fresh Codex and Claude sessions discover the generated guidance without the task explicitly supplying the policy or telling the actor to read a particular instruction file |
+| **T1: Setup and discovery** | Fresh setup provides usable knowledge locations/index and a temporary convention. Custom/repeated setup preserves content, user choices, tracker authority and one policy source. References resolve; permanent documents are Git-visible. Fresh Codex sessions discover the generated guidance without the task explicitly supplying the policy or telling the actor to read a particular instruction file |
 | **T2: Design/prototype through cleanup** | One coherent question yields relevant architecture/module/data reasoning, accepted conclusions linked to evidence and retained effort history. Maintained lint/checks, a reusable fixture and requested deliverable survive. Findings and source reference remain after owned one-off files, raw output and disposable environment are retired. A diagnostic is retained with a reason/revisit condition and reconciled afterward. Another task's sentinel is unchanged; an ambiguous-ownership artifact is preserved and reported unresolved |
 | **T3: Ordinary edit** | Matched baseline/candidate edits complete with zero added housekeeping calls, specialized reads, notes or mandatory reporting. Persistent/triggered context and execution differences are recorded separately |
 
 Bound T2 before execution to one question, one lifecycle, one module interface, minimum synthetic data and one disposable environment using existing tooling. A small case-record lifecycle is sufficient; the actor's task asks the design question rather than dictating files or success claims. Stop extending the example once the required observations are obtained.
 
-Use existing temporary-repository replay patterns and relevant package checks. T1 covers fresh and custom/repeated variants, with fresh discovery evidence in both runtimes. Unavailable runtime validation is reported as unresolved acceptance, not inferred from file content or another runtime's success.
+Use existing temporary-repository replay patterns and relevant package checks. T1 covers fresh and custom/repeated variants, with fresh discovery evidence in Codex. Unavailable required runtime validation is reported as unresolved acceptance, not inferred from file content. Claude validation is excluded by user direction and supplies no support claim.
 
 For T3 hold task, initial fixture, permissions, model/configuration and observation method constant within each baseline/candidate pair. Record unavoidable differences; a confounded or incomplete pair establishes neither an overhead pass nor savings. Measure text with a named tokenizer, document reads, tool/command invocations and created bookkeeping artifacts. Measure execution latency if a newly proposed mechanism introduces it.
 
@@ -160,7 +160,6 @@ Names illustrate roles. Reuse suitable existing paths and create only needed con
 ```text
 project/
   AGENTS.md                         # Loaded entry point to shared guidance
-  CLAUDE.md                         # Existing or needed Claude entry point
   docs/
     README.md                       # Short current-knowledge index
     architecture/system.md
@@ -186,7 +185,6 @@ project/
 ```text
 project/
   AGENTS.md
-  CLAUDE.md
   docs/                             # Current knowledge remains
   work/case-redesign/                # Stable plans, findings and history remain
   tests/                            # Maintained verification remains
@@ -217,8 +215,12 @@ This illustration authorizes no live migration or cleanup. Articles retains its 
 - [Stable workspaces](../../docs/adr/0001-stable-effort-workspaces.md), [setup dependency rule](../../.agents/adr/0001-explicit-setup-pointer-only-for-hard-dependencies.md) and [installation authority](../../.agents/install-block.md).
 - [Existing replay prior art](../wayfinder-reliability/validation.md).
 
-Revision 5 synthesizes the confirmed recommendations, preserving the three objectives, testing seam and prior history. No child implementation Issues existed at publication, so no basis reconciliation was needed.
+Revision 6 preserves the three objectives, testing seam, approved two-Issue structure and 01 -> 02 dependency while removing Claude-specific work and validation. Existing instructions remain protected. The two unfinished Issues require impact review and reconciliation to revision 6 before results are published.
 
 ## Revision note
 
-User-authorized rewrite: verified Codex/Claude instruction discovery, one shared guidance source, configured knowledge locations, precise conditional triggers, findings-before-cleanup integration and evidence-based hook deferral. Preserve the three objectives and confirmed seam; propose two implementation slices without approving or publishing Issues.
+The user authorized implementation through a reviewed draft PR and then directed: "skip anything claude related" (2026-10-28). Fresh Codex discovery remains mandatory; no unavailable Claude observation is counted as a pass. Safe preservation, T2/T3, coordinator ownership, accepted housekeeping ancestry, review, draft-only delivery and adoption limits remain unchanged.
+
+## Revision note
+
+User explicitly directed "skip anything claude related" after the expired-session observation. Remove new Claude-specific setup/bridges/discovery and validation from scope, preserve all existing instructions and one guidance authority, retain mandatory Codex discovery and all other acceptance. Both approved Issues and their dependency remain; reconcile affected Issue 01 and no-impact Issue 02 before further publication.

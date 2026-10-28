@@ -1,6 +1,14 @@
 # Approved implementation breakdown
 
+## Current execution basis
+
+The user authorized isolated implementation through a reviewed draft PR, then explicitly directed "skip anything claude related". [Revision 6](spec.md) removes new Claude-specific setup/bridges/validation and preserves existing instructions. Exact [revision 5](history/spec-r5.md) is retained. Existing Issues were reconciled through the shared coordinator: Issue 01 affected with approval, Issue 02 no impact. Codex T1, all other acceptance, identities and 01 -> 02 remain. Accepted H is b86774500cdcc5cca98de791573cd6106b6eeeb2, verified ancestor of feat/agent-workflow-reliability before readiness. See the overview and each Issue for current lifecycle/claims; older needs-info and planning-only statements below are publication history.
+
 **Published 2026-10-28 through the configured local work-record producer. Specification basis: [revision 5](spec.md), verified current and unchanged. The user approved both slices and the genuine 1 -> 2 edge. Both Issues remain needs-info; publication grants no implementation eligibility.**
+
+## Original approved breakdown (historical revision 5)
+
+The publication state and authorization snapshots below describe the original publication. Current basis and authorization are recorded above and in the live Issues.
 
 ## Improvements and their authoritative homes
 
