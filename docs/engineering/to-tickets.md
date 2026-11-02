@@ -6,6 +6,8 @@ It maps the whole outcome and requirement coverage, but fully refines only the n
 
 Local issues belong to the identified effort and reference the current spec revision. Approval is recorded with each published issue; dependencies and observable acceptance criteria let a fresh implementation session validate and claim the work.
 
+Refinement uses applicable precedent evidence in the existing sizing note. Sufficient local implementation and verification end discovery; a gap or needed alternative can trigger a source configured through [setup-repo](setup-repo.md). Evidence must support the required behavior, including relevant failure conditions. A familiar example does not make an uncertain outcome ready.
+
 On GitHub or GitLab, approved issues retain explicit specification revisions and native blocking links. Readiness does not bypass a stale basis, unfinished blockers, or the remote ownership capability boundary.
 
 ## When to reach for it

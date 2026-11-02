@@ -6,6 +6,8 @@ It implements the accepted plan after checking the [shared sizing and readiness 
 
 A local issue is read from the declared authoritative checkout and claimed only after lifecycle, readiness, spec basis and dependencies pass. A token protects ownership across worktrees; accepted, integrated work closes with completion evidence.
 
+Preparation follows [precedent evidence](../../skills/engineering/setup-repo/TICKET-SIZING.md#precedent-evidence): applicable local code and verification can be enough to proceed. An evidence gap can lead to a configured reference source, targeted documentation or a bounded experiment. The existing sizing note carries the finding, so dispatch need not repeat valid research. Confident assertions and familiar examples do not establish guarantees; mandatory checks remain mandatory.
+
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 
 Housekeeping follows the configured repository policy during implementation. Existing checks and useful regression tests remain maintained; one-off validation artifacts are cleaned up before completion. An ordinary edit needs no additional housekeeping inventory. Resuming interrupted verification follows the configured policy pointer and recovers only proven inactive, task-owned resources.

@@ -1,6 +1,6 @@
 ## What it does
 
-`/setup-repo` configures issue tracking, triage labels, domain docs, current-knowledge locations and housekeeping. It reuses existing authorities and user edits, including custom documentation paths, rather than replacing them with defaults. New configuration normally lives under `docs/agents/`.
+`/setup-repo` configures issue tracking, triage labels, domain docs, current-knowledge locations, optional reference sources and housekeeping. It reuses existing authorities and user edits, including custom documentation paths, rather than replacing them with defaults. New configuration normally lives under `docs/agents/`.
 
 Those references vary between repos; the skills themselves are identical everywhere. They follow the configured tracker authority at run time. That is why the set is not tied to GitHub, and why you never edit a skill file to point it at another tracker. Invoking it with "link the skills to a custom issue tracker" works with anything you can connect to programmatically, with no changes to the skills.
 
@@ -46,7 +46,7 @@ It starts each section with the recommended answer, and skips any question its e
 | **Triage labels** | reuse the configured mapping; new mappings default to the two category names and five state names | when a mapping is missing and `triage` is installed |
 | **Domain docs** | reuse the configured layout; new layouts default to one `GLOSSARY.md` plus `docs/adr/` at the root | when choosing a new layout and monorepo signals suggest a multi-context `GLOSSARY-MAP.md` |
 | **Housekeeping** | reuse a suitable temporary workspace or establish an isolated subtree | present the chosen root, narrow ignore rule and guidance in the setup draft |
-| **Current knowledge** | reuse an index and suitable architecture/module/data-model/decision locations | review missing content and the conditional pointer, creating documents only when useful content exists |
+| **Current knowledge** | reuse an index and suitable architecture/module/data-model/decision locations, with optional reference sources such as Cookbook | review missing content and the conditional pointer, creating documents only when useful content exists |
 | **Instruction discovery** | the smallest compatible connection to one shared source | review missing connections; verify fresh Codex discovery |
 
 The tracker options:
@@ -80,7 +80,7 @@ Setup adds a lasting convention without becoming a prerequisite for every edit.
 
 ## Current knowledge without another tracker
 
-The short index helps a contributor find only the design context needed for a task. It distinguishes the roles of current documentation while preserving existing locations:
+The short index helps a contributor find relevant design context or reference sources for a gap in implementation evidence. It distinguishes the roles of current documentation while preserving existing locations:
 
 | Role | What belongs there |
 | --- | --- |
@@ -88,12 +88,23 @@ The short index helps a contributor find only the design context needed for a ta
 | Module design | Interfaces, dependencies, invariants and testing seams |
 | Data-model design | Identity, relationships, integrity and lifecycle intent, linked to schemas and migrations |
 | Decisions and domain | Existing ADRs own consequential choices; the glossary owns business meaning |
+| Optional reference sources | A selected source's scope, locator and entry point; examples remain evidence to assess, not automatically approved approaches |
+
+Cookbook or another reference repository is configurable per repository through this index. Setup preserves custom paths and existing entries on reruns, and includes missing additions in the same setup review. It does not install a reader or change the source repository.
 
 Plans, proposals, research and evidence stay in their stable effort. Accepted current knowledge links back to that evidence. Setup creates no empty design taxonomy and does not invent accepted decisions. Editable diagrams stay beside their document; reusable synthetic data stays with maintained fixtures.
 
 Repeated setup preserves the index, tracker authority, existing instruction scope and user edits inside generated blocks. Permanent documents must be visible to Git. An ignore conflict is corrected only for the reviewed paths while unrelated private/generated content stays protected.
 
 ## Common questions
+
+**Will the agent always search Cookbook before implementing?**
+
+No. The [shared precedent-evidence check](../../skills/engineering/setup-repo/TICKET-SIZING.md#precedent-evidence) stops at sufficient applicable local evidence. Gaps or needed alternatives trigger a relevant source lookup. An unavailable optional source leads to other evidence; only an unresolved required fact blocks the affected work. Required checks still apply.
+
+**Can different repositories use different Cookbook locations?**
+
+Yes. Each repository selects its own source locator and entry point in its configured knowledge index. A local path is specific to that machine; other checkouts can use their established access convention. There is no bundled Cookbook path or requirement to configure a source.
 
 **Do I have to use GitHub?**
 

@@ -24,7 +24,7 @@ For remote trackers, read [the remote adapter contract](../setup-repo/REMOTE-WOR
 
 1. Read the configured tracker and [shared work-record contract](../setup-repo/WORK-RECORDS.md), then the current spec, linked design, and approved issues. Verify completed issues against their evidence and integration availability; work only on the remaining eligible frontier. Never infer completion from a worker report or a stale worktree. If no issues exist, use explicit direct-spec implementation through `implement` instead.
 
-2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. This lets **implementer subagents** focus on implementation rather than exploration.
+2. (optional) Use an **exploration subagent** for evidence gaps identified by [ticket sizing](../setup-repo/TICKET-SIZING.md#precedent-evidence). Reuse the existing issue/effort evidence note and context pointers accessible to implementers. Retain a separate research artifact in the configured effort only when the investigation needs one; sufficient existing evidence requires no new exploration.
 
 3. Establish the integration branch and its base explicitly. Preserve existing work when resuming; do not reset a dirty worktree. For local tracking, declare one authoritative checkout and the shared Git coordinator before dispatch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.
 

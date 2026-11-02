@@ -11,7 +11,7 @@ Scaffold the per-repo configuration that the engineering skills assume:
 - **Issue tracker**: where issues live (GitHub by default; local markdown is also supported out of the box)
 - **Triage labels**: the strings used for the two category roles and five state roles
 - **Domain docs**: where `GLOSSARY.md` and ADRs live, and the consumer rules for reading them
-- **Current knowledge**: one short index to architecture, module, data-model and decision knowledge, reusing suitable locations
+- **Current knowledge**: one short index to architecture, module, data-model and decision knowledge, plus optional implementation reference sources, reusing suitable locations
 - **Housekeeping**: a temporary workspace and a short policy for maintained checks, disposable validation and ownership
 
 This is a prompt-driven skill, not a deterministic script. Explore, present what you found, confirm with the user, then write.
@@ -30,6 +30,7 @@ Look at the current repo to understand its starting state. Read whatever exists;
 - `docs/adr/` and any `src/*/docs/adr/` directories
 - Prior setup output, including custom paths linked from instructions; do not assume `docs/agents/` is its authority
 - Existing documentation indexes, architecture/module/data-model records, decisions, editable diagrams and maintained synthetic fixtures
+- Optional reference-source locations named by the user or existing configuration; inspect narrowly identified candidates such as Cookbook without scanning whole disks or treating a folder name as authority
 - `work/`: a sign that a local-markdown issue tracker convention is already in use
 - Existing temporary-workspace conventions, ignore rules and project verification commands
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
@@ -74,7 +75,7 @@ When choosing a new layout, offer **multi-context** (a root `GLOSSARY-MAP.md` po
 
 **Section D: Housekeeping.** Read [housekeeping setup](HOUSEKEEPING-SETUP.md). Reuse an established workspace or propose the dedicated fallback. Include the baseline and adapted reference in the same setup review; avoid a separate questionnaire when discovery settles the choice.
 
-**Section E: Current knowledge.** Read [knowledge placement](KNOWLEDGE-SETUP.md). Reuse a suitable index and documentation locations; propose only missing content and the conditional index pointer in the same review.
+**Section E: Current knowledge.** Read [knowledge placement](KNOWLEDGE-SETUP.md). Reuse a suitable index and documentation locations; propose only missing content, selected optional reference sources and the conditional index pointer in the same review.
 
 ### 3. Confirm and edit
 
@@ -83,7 +84,7 @@ Show the user a draft of:
 - The `## Agent skills` additions and minimal Codex instruction connection (step 4), preserving existing scope
 - Missing additions to the configured tracker, domain and label references (default paths below apply only to new configuration)
 - The housekeeping baseline, temporary root, narrow ignore rule and `docs/agents/housekeeping.md` reference with its conditional service and recovery branches
-- The current-knowledge index, chosen locations, conditional pointer and any targeted Git-visibility correction
+- The current-knowledge index, chosen locations, selected optional reference sources, conditional pointer and any targeted Git-visibility correction
 
 Let them edit before writing.
 
@@ -121,7 +122,7 @@ The block (use the configured paths in place of these defaults):
 
 Add the reviewed housekeeping baseline after this block.
 
-Add a brief current-knowledge pointer using the chosen index path: `For architecture, module, data-model or decision context, follow the relevant entry in [current knowledge](<index-path>).` Ordinary edits need no index read.
+Add or extend the current-knowledge pointer using the chosen index path, preserving existing scope: `For architecture, module, data-model or decision context, follow the relevant entry in [current knowledge](<index-path>). When implementation evidence has a gap or alternatives are needed, follow its Reference sources section or equivalent link.` Ordinary edits with sufficient local evidence need no index read. Reuse an existing equivalent pointer instead of adding another.
 
 For new or missing label configuration, include the `### Triage labels` sub-block and write the configured label reference (default `docs/agents/triage-labels.md`) only when `triage` is installed and Section B ran. Preserve existing configuration on reruns.
 

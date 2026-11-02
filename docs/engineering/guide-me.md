@@ -52,6 +52,8 @@ For implementation, an explicit issue, effort, or spec directs selection. Bare i
 
 The [shared sizing gate](../../skills/engineering/setup-repo/TICKET-SIZING.md) applies to both tickets and direct specs. [to-tickets](to-tickets.md) maps all requirement coverage but fully refines only the next eligible work; later outcomes stay provisional. [implement-spec](implement-spec.md) checks discoveries after integration and updates affected future work. Finished workers awaiting integration remain visible and keep dependents blocked. Routine refinement stays within accepted scope; consequential changes return to you.
 
+Preparation stops when applicable local code and verification support the approach. Gaps or needed alternatives can lead to optional reference sources, focused documentation research or a bounded experiment through that same gate. [setup-repo](setup-repo.md) can configure Cookbook or another source per repository in the existing knowledge index. Source availability and the agent's confidence do not replace evidence for the required behavior.
+
 ## The phase boundary
 
 The skill's other key idea is the **phase boundary**. A phase is a chunk of work inside a session (the [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling), the implementation, the QA), and the boundary between two of them is the only place the question "what do I do with this context?" belongs. Mid-phase there is nothing to decide: continue, or split what is left into [subagents](https://www.aihero.dev/ai-coding-dictionary/subagent).

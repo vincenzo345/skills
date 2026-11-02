@@ -37,6 +37,8 @@ The tracker decides whether a pull request exists at all. If your tracker closes
 
 Implementers talk to the orchestrator through [context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer) (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries. This keeps each subagent's prompt small and leaves room in the orchestrator's window for the graph.
 
+Exploration follows gaps in [precedent evidence](../../skills/engineering/setup-repo/TICKET-SIZING.md#precedent-evidence). Valid findings stay in the existing issue or effort note and are reused at dispatch. A separate research artifact is useful only when the investigation needs one; sufficient local evidence does not trigger another exploration pass. Integration discoveries can invalidate the affected findings before future work starts.
+
 ## Ownership and integration
 
 Each worker claims one eligible issue through the same authority used by `implement`. Worktree snapshots never grant ownership. Resuming requires the saved token; recovery requires evidence that the prior worker stopped and preserves its work pointer. Changed specifications pause workers until reconciliation and explicit review of their retained work.
