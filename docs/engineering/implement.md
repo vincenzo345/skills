@@ -2,7 +2,7 @@
 
 `implement` builds work that has already been decided. You point it at a [ticket](https://www.aihero.dev/ai-coding-dictionary/ticket), a [spec](https://www.aihero.dev/ai-coding-dictionary/spec), or the plan you just agreed in the conversation, and it writes the code, drives [tdd](https://aihero.dev/skills-tdd) at the seams, typechecks as it goes, runs [code-review](https://aihero.dev/skills-code-review) at the end, and commits to the current branch.
 
-It never reopens the plan. There is no interview, no clarifying round, no proposal of a different approach. Whatever was settled upstream is the input, and the skill's whole job is to turn that into a commit. That is what separates it from typing "build this" at a fresh [agent](https://www.aihero.dev/ai-coding-dictionary/agent), which often redesigns the work while it builds it.
+It implements the accepted plan after checking the [shared sizing and readiness gate](../../skills/engineering/setup-repo/TICKET-SIZING.md), including for a direct spec or conversation request. An [agent](https://www.aihero.dev/ai-coding-dictionary/agent) reports discoveries that change the scope, refines within existing authority, and brings consequential changes to accepted behavior, guarantees or architecture back to you with a concrete proposal.
 
 A local issue is read from the declared authoritative checkout and claimed only after lifecycle, readiness, spec basis and dependencies pass. A token protects ownership across worktrees; accepted, integrated work closes with completion evidence.
 
@@ -49,13 +49,13 @@ Explicit direction overrides queue membership and position, while readiness, cur
 
 A run has five steps, in order:
 
-1. Read the ticket or spec and work out the seams.
+1. Read the ticket or spec, check its sizing/readiness evidence and work out the seams.
 2. Drive [tdd](https://aihero.dev/skills-tdd) at the pre-agreed seams, one red-green slice at a time.
-3. Typecheck often, run single test files as it goes.
-4. Run the full test suite once, at the end.
+3. Run repository-required and affected checks as the work changes.
+4. Verify whole-spec behavior at appropriate integration boundaries, retaining mandatory full-suite checks and rerunning evidence invalidated by code or environment changes.
 5. Run [code-review](https://aihero.dev/skills-code-review), then commit to the current branch.
 
-One run covers one ticket. The tickets [to-tickets](https://aihero.dev/skills-to-tickets) produces are tracer-bullet vertical slices sized to fit a single fresh [context window](https://www.aihero.dev/ai-coding-dictionary/context-window), so the intended rhythm is: clear context, implement one ticket, commit, clear again. Each ticket is self-contained, so you can discard the previous ticket's context.
+One run covers a bounded outcome. [to-tickets](to-tickets.md) maps the overall requirements but fully refines only the next eligible work. Each ready slice carries enough evidence for a fresh session; later outcomes stay provisional. Completion reports include downstream implications and whether the work is accepted or still awaiting integration.
 
 ## Pre-agreed seams
 
@@ -85,7 +85,7 @@ Separately, some people do not want the review inside the run at all, because an
 
 **One ticket burned 150k tokens. Am I using it wrong?**
 
-Probably not. The ticket is more likely too big. A run does codebase exploration, a red-green loop per seam, a full suite, and a review, so a non-trivial ticket exceeding 100k [tokens](https://www.aihero.dev/ai-coding-dictionary/token) is normal rather than a sign something broke. The fix is upstream. Right-size the tickets in [to-tickets](https://aihero.dev/skills-to-tickets) so each fits one fresh window. If a single ticket keeps going over, split it rather than raising the [effort](https://www.aihero.dev/ai-coding-dictionary/effort) level.
+Look at the remaining outcome and its uncertainty, not just the amount of text generated. The shared sizing gate includes verification, review and integration. If discoveries make the work oversized, preserve the partial work and refine the remainder through [to-tickets](to-tickets.md)'s rules. Raising model effort does not resolve an unclear acceptance boundary.
 
 **`/implement #2` in a fresh session worked on something completely unrelated.**
 
@@ -95,7 +95,7 @@ The agent resolved `#2` against another numbered list in context, such as a todo
 
 - The session opens by reading the ticket or spec and restating what it will build, rather than asking you what to build.
 - You can see an actual `tdd` Skill tool call in the trace, not just tests appearing in the diff.
-- Typechecks and single test files run repeatedly during the run, and the full suite runs once near the end.
+- Required and affected checks have current evidence; mandatory full-suite checks remain present.
 - The run reaches a commit on your current branch without you prompting it to carry on.
 - The diff is one ticket's worth of change: a vertical slice through every layer, not several tickets swept together.
 
@@ -107,7 +107,7 @@ The agent resolved `#2` against another numbered list in context, such as a todo
 grill-with-docs → to-spec → to-tickets → implement → code-review → retro
 ```
 
-Its neighbours are [to-tickets](https://aihero.dev/skills-to-tickets), which produces the tickets it consumes and declares the blocking edges that decide their order; [tdd](https://aihero.dev/skills-tdd), which it drives internally at each seam; and [code-review](https://aihero.dev/skills-code-review), which it runs before committing. It sits downstream of the planning skills and trusts them. It does not re-validate the shape of what it was handed, so a badly-structured map or a horizontally-layered ticket gets built as written.
+Its neighbours are [to-tickets](to-tickets.md), which refines the outcomes it consumes; [tdd](tdd.md), which it drives internally at each seam; and [code-review](code-review.md), which reviews the completed change. It checks readiness at entry and reports downstream implications when evidence changes the plan.
 
 That trust is why [wayfinder](https://aihero.dev/skills-wayfinder) merges onto the chain at [to-spec](https://aihero.dev/skills-to-spec) rather than looping its map straight into `implement`. Go straight to `implement` from a map only when the effort turned out small.
 

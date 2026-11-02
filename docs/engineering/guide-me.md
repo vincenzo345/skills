@@ -50,6 +50,8 @@ Planning carries the same stable effort through Wayfinder, grill-with-docs, to-s
 
 For implementation, an explicit issue, effort, or spec directs selection. Bare implement follows the ordered effort queue and skips known blocked work for independent eligible issues. A decomposed spec uses its issue frontier; a ready undecomposed spec can be selected explicitly. Unavailable higher-priority authority produces a diagnostic. Preparing records alone never starts implementation.
 
+The [shared sizing gate](../../skills/engineering/setup-repo/TICKET-SIZING.md) applies to both tickets and direct specs. [to-tickets](to-tickets.md) maps all requirement coverage but fully refines only the next eligible work; later outcomes stay provisional. [implement-spec](implement-spec.md) checks discoveries after integration and updates affected future work. Finished workers awaiting integration remain visible and keep dependents blocked. Routine refinement stays within accepted scope; consequential changes return to you.
+
 ## The phase boundary
 
 The skill's other key idea is the **phase boundary**. A phase is a chunk of work inside a session (the [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling), the implementation, the QA), and the boundary between two of them is the only place the question "what do I do with this context?" belongs. Mid-phase there is nothing to decide: continue, or split what is left into [subagents](https://www.aihero.dev/ai-coding-dictionary/subagent).

@@ -2,7 +2,7 @@
 
 `implement-spec` takes a [spec](https://www.aihero.dev/ai-coding-dictionary/spec) and its [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) and lands the whole thing in one run. The orchestrating [agent](https://www.aihero.dev/ai-coding-dictionary/agent) hands each ticket to an implementer [subagent](https://www.aihero.dev/ai-coding-dictionary/subagent) working in its own git worktree, merges each finished branch into a single **integration branch**, runs [code-review](https://aihero.dev/skills-code-review) over the result, and resolves the tickets.
 
-It reads the tickets as a **task graph**, not a list. Blocking edges decide what can start, so at any moment there is a **frontier** of tickets whose blockers have all landed, and every ticket on the frontier runs at once. That is the difference from working the tickets one by one. The graph's shape sets the pace, not the tickets' order on the tracker.
+It reads the tickets as a **task graph** and checks the [shared sizing/readiness gate](../../skills/engineering/setup-repo/TICKET-SIZING.md) before each dispatch. The **frontier** contains refined ready work whose blockers have landed; available worker capacity limits concurrency. Later outcomes remain provisional until refined, and integration discoveries update affected remaining work before dispatch.
 
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 
@@ -22,7 +22,7 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 ## Prerequisites
 
 - **An issue tracker.** The skill reads the tickets from, and resolves them on, the tracker [setup-repo](setup-repo.md) configured. If none has been configured, it stops and tells you to run that first rather than guessing.
-- **Tickets with blocking edges**, as [to-tickets](https://aihero.dev/skills-to-tickets) writes them. Without edges the graph is flat and every ticket starts at once.
+- **Refined tickets with blocking edges**, as [to-tickets](to-tickets.md) writes them, plus provisional coverage for later outcomes. No blockers alone does not make a ticket ready.
 - **A [harness](https://www.aihero.dev/ai-coding-dictionary/harness) that runs subagents in the background and gives each one a git worktree.** The skill exists to run tickets at the same time, so on a harness that runs subagents one at a time, it is only a slower `implement`.
 
 ## The integration branch
@@ -31,7 +31,7 @@ Everything lands on one branch. Each implementer:
 
 1. confirms its worktree is based on the integration branch before it starts,
 2. builds its ticket with [tdd](https://aihero.dev/skills-tdd), red-green one slice at a time,
-3. merges the integration branch tip into its own branch before reporting done, so landing it is a fast-forward.
+3. merges the integration branch tip into its own branch before handing off verified results and downstream implications for integration.
 
 The tracker decides whether a pull request exists at all. If your tracker closes work through PRs, or you ask for one, the skill opens a draft PR after the first merge and marks it ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
 
@@ -42,6 +42,8 @@ Implementers talk to the orchestrator through [context pointers](https://www.aih
 Each worker claims one eligible issue through the same authority used by `implement`. Worktree snapshots never grant ownership. Resuming requires the saved token; recovery requires evidence that the prior worker stopped and preserves its work pointer. Changed specifications pause workers until reconciliation and explicit review of their retained work.
 
 A finished worker branch does not unblock dependents. The orchestrator merges and verifies the accepted commit, records the integration receipt, then closes the issue. Spec completion requires integrated children and overall acceptance evidence. Filesystem checks establish ownership and ancestry, not the truth of a worker's acceptance claims.
+
+Pending handoffs name the worker, branch, candidate commit, evidence and next integration action. The controller observes results and performs integration with its available tools; Markdown does not guarantee scheduling. After integration, it checks remaining assumptions, scope, dependencies, estimates and verification. Routine refinement uses existing authorization, while consequential changes come back to you with a concrete proposal. Oversized discoveries pause the affected scope with its work preserved; independent ready work can continue.
 
 ## Common questions
 
@@ -55,7 +57,7 @@ No, not any more. One user who liked the in-progress version had exactly this co
 
 **Its review and fix loop ran for hours, or kept "fixing" tickets that hadn't been built yet.**
 
-Both happen when `code-review` runs anywhere other than the one point the skill gives it. It compares the code against the whole spec, so it only makes sense once every ticket has landed. If it runs mid-run, every unbuilt ticket reads as a failure. The agent then builds that ticket, and that triggers another review. At the end, the skill runs `code-review` once and sends every finding to one fix subagent, but it doesn't yet say when to stop after that fix. One user reported a five-ticket feature where "the review and fix loop took roughly four hours". If you see a second broad review start, tell it to run focused checks for the fixed findings and stop. Expect that first review to find real problems. The run's output is a draft that the review completes, not something to ship on its own.
+Whole-spec review runs after all required outcomes are integrated, so unfinished future work is not mistaken for a defect. Review fixes pass through the same sizing gate as other implementation work. Repository-required checks remain mandatory, and whole-spec acceptance is checked after fixes and at earlier integration boundaries where shared behavior changes. Evidence is reused only while its relevant code and environment remain valid.
 
 **Does it drive tdd like implement does?**
 
@@ -79,10 +81,10 @@ A worktree holds only what git tracks. Tests that read gitignored fixtures, loca
 
 ## It's working if
 
-- Several implementers are running at once whenever the graph allows, not one after another.
-- A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
+- Independent ready work proceeds within available capacity while affected future work is refined.
+- A finished worker awaiting integration has an explicit handoff, and its dependents remain blocked.
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
-- Merges into the integration branch are fast-forwards, not conflict resolutions.
+- Integration discoveries update remaining work before the next dispatch.
 - The run ends on one branch with every ticket resolved, and a PR only if your tracker wanted one.
 
 ## Where it fits

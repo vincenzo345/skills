@@ -10,6 +10,8 @@ Local tracking uses stable effort folders and separate implementation issues and
 
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 
+The packaged [ticket sizing reference](../../skills/engineering/setup-repo/TICKET-SIZING.md) supplies the shared readiness rules for planning and implementation. Provisional requirement coverage can stay in the breakdown without becoming a ready issue. These are agent workflow rules; setup adds no sizing enforcement or automatic scheduler.
+
 ## When to reach for it
 
 You invoke this by typing `/setup-repo`; the [agent](https://www.aihero.dev/ai-coding-dictionary/agent) won't reach for it on its own. Its metadata marks it non-invokable on purpose, so no other skill can fire it for you.

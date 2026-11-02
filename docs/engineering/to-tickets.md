@@ -2,7 +2,7 @@
 
 `to-tickets` takes a plan, a [spec](https://www.aihero.dev/ai-coding-dictionary/spec), or the conversation you are in, and breaks it into a set of **[tickets](https://www.aihero.dev/ai-coding-dictionary/ticket)** on your issue tracker. Each ticket declares its **blocking edges**: the other tickets that have to finish before it can start.
 
-Every ticket is a **tracer bullet**: a narrow but complete path through every layer of the change (schema, API, UI, tests) that you can demo on its own as soon as it lands. This is what makes the skill different from the obvious way to split work, which is to cut one layer at a time and integrate at the end. It also sizes each ticket to fit in a single fresh [context window](https://www.aihero.dev/ai-coding-dictionary/context-window), because a [session](https://www.aihero.dev/ai-coding-dictionary/session) that has never seen your spec will pick the ticket up.
+It maps the whole outcome and requirement coverage, but fully refines only the next eligible work. A ready ticket is a **tracer bullet**: a narrow complete path through the layers needed for an independently verifiable outcome. Later outcomes stay explicitly provisional. The [shared sizing reference](../../skills/engineering/setup-repo/TICKET-SIZING.md) covers the estimate, readiness evidence and refinement rules.
 
 Local issues belong to the identified effort and reference the current spec revision. Approval is recorded with each published issue; dependencies and observable acceptance criteria let a fresh implementation session validate and claim the work.
 
@@ -16,11 +16,12 @@ You invoke this by typing `/to-tickets`. The [agent](https://www.aihero.dev/ai-c
 | --- | --- |
 | You have a spec issue and the build spans several sessions | `/to-tickets`, or `/to-tickets #<spec_issue>` |
 | The plan is only in the conversation, never written up | `/to-tickets` reads the thread directly, no spec needed |
-| The whole change fits in one context window | [implement](https://aihero.dev/skills-implement), skip the tickets |
+| The whole change meets the shared sizing/readiness gate | [implement](implement.md), skip the tickets |
+| Integration evidence changes future work | Revise the existing breakdown, preserving accepted evidence and requirement coverage |
 | Nothing is decided yet | [grill-with-docs](https://aihero.dev/skills-grill-with-docs), then [to-spec](https://aihero.dev/skills-to-spec) |
 | A [wayfinder](https://aihero.dev/skills-wayfinder) map has cleared | [to-spec](https://aihero.dev/skills-to-spec) first, to collapse the map, then `/to-tickets` |
 
-Tickets that `to-tickets` produced are agent-ready by construction. Don't run [triage](https://aihero.dev/skills-triage) over them. Triage is for work that arrived from someone else.
+Only approved, refined work is agent-ready. Provisional outcomes return here for refinement; [triage](triage.md) is for incoming work from someone else.
 
 ## Prerequisites
 
@@ -32,7 +33,7 @@ A **horizontal** slice ships one layer of the change. Nothing works until every 
 
 This is the rule people break most often. One team ran a 26-ticket stack sliced by layer (corpus, producer, aggregator, selector) and got roughly twenty agent runs per closed ticket, about three quarters of them rework. Their own post-mortem traced every failure class back to the horizontal slicing rather than to the implementations.
 
-Two things happen before anything is published. `to-tickets` looks for prefactoring (the principle "make the change easy, then make the easy change") and orders that work first. Then it presents the breakdown as a numbered list and quizzes you on it: is the granularity right, are the blocking edges real, should anything merge or split. Nothing reaches the tracker until you approve, and that quiz is the place to push back.
+The initial breakdown comes back for approval with ready slices distinguished from provisional coverage. During authorized implementation, routine refinement records existing authority rather than repeating the approval ceremony. Changes to accepted behavior, guarantees or architecture need a concrete proposal for your decision.
 
 ## Blocking edges
 
@@ -40,8 +41,8 @@ The edges are the point of the artifact. They work in two ways, depending on the
 
 | Tracker | Where the edges live | How you work them |
 | --- | --- | --- |
-| Local markdown | Text in one file per ticket under `work/<effort>/tickets/<NN>-<slug>.md`, numbered blockers-first | Top to bottom, by hand |
-| A real tracker (GitHub, Linear) | Native blocking links, or sub-issues where the tracker has them | Any ticket whose blockers are done is on the **frontier** and can be grabbed |
+| Local markdown | Authoritative blocking references in each issue under `work/<effort>/tickets/` | Claim refined ready work whose blockers are integrated through the shared consumer |
+| A real tracker (GitHub, Linear) | Native blocking links where available; parent links group the work | Select the ready **frontier** through the configured ownership path |
 
 The edges live in the ticket either way. The tracker only decides whether anything can act on them in parallel. `to-tickets` produces the artifact; running it (one session at a time, or a fleet) is your job, not the skill's.
 
@@ -55,12 +56,12 @@ One shape breaks the tracer-bullet rule. A **wide refactor** is a single mechani
 - **Migrate**: move call sites over in batches sized by blast radius (per package, per directory), one ticket per batch, each blocked by the expand. CI stays green because the old form still exists.
 - **Contract**: delete the old form once no caller remains, in a ticket blocked by every migrate batch.
 
-Where even the batches can't stay green alone, they share an integration branch and all block a final integrate-and-verify ticket. CI only has to be green at that ticket.
+Each batch must meet the same sizing gate and demonstrate compatibility independently. If that is not possible, refine the compatibility boundary before dispatch; a final integration ticket cannot absorb all earlier verification obligations.
 
 ## Common questions
 
 **It produced twelve tickets for a three-line change.**
-Over-decomposition is the most reported problem with this skill, and many users see it. The [model](https://www.aihero.dev/ai-coding-dictionary/model) defaults to atomic units and loses the grouping that would make them meaningful. The quiz step is where you fix this. Ask it to merge tickets, and it will. There is also a lower limit. If the whole change fits in one context window, you don't need this skill at all. Go straight to [implement](https://aihero.dev/skills-implement).
+Over-decomposition loses the independently useful outcome. Ask for the smallest coherent outcome that includes its verification and integration, not one ticket per file or layer. If the whole change meets the shared sizing/readiness gate, go straight to [implement](implement.md).
 
 **The tickets came out one per layer: all the schema in one, all the API in another.**
 This is the failure the vertical-slice rule is written against, and the skill still produces it sometimes. Catch it at the quiz step by asking one question per ticket: what can I demo when this is done? A ticket with no answer is a horizontal slice. Some people add a "demo path" line to each ticket for this reason, and report that it pushes the model toward vertical slices.
@@ -81,15 +82,15 @@ A very large spec can outgrow what a tracker issue serves back cleanly. There is
 The template asks for criteria and says nothing about whether they can fail, so this happens. Three shapes recur: a criterion already true at the base commit, a criterion that only work in another ticket can satisfy, and one that restates the request rather than deriving from the artifact. Vertical slicing prevents most of it, because a slice that delivers new behaviour fails at the base commit by construction. The check is still worth doing by hand. For each criterion, name the observation that would show it false, and confirm it fails at the commit the implementer starts from.
 
 **The tickets are published. How do I actually run them?**
-The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is manual: look at the board, count the tickets with no open blockers, and open that many agent sessions. Give each ticket a fresh context, and clear between them. [implement](implement.md) records completion after acceptance and integration evidence; an unfinished or unmerged issue remains blocking.
+The skill stops at the artifact. Use [implement](implement.md) for one refined slice or [implement-spec](implement-spec.md) to manage the ready frontier through available worker tools. Readiness, ownership and integration evidence still gate work. Provisional future coverage is not dispatchable just because its blockers have finished.
 
 ## It's working if
 
 - Every ticket has an answer to "what can I demo when this is done?", and the answer is behaviour, not a layer.
 - The list comes back to you numbered, with a "Blocked by" line on each, before anything is published.
-- The ticket at the top has no blockers and can be started immediately.
+- The next ready slice has sizing evidence, and provisional outcomes name what still needs refinement.
 - Each issue links its spec/design basis while avoiding brittle implementation paths and line numbers.
-- Each ticket reads like something a fresh session could finish without you in the room.
+- Every requirement maps to accepted evidence, a refined slice or an explicitly provisional outcome.
 - Prefactoring, where it found any, is at the front of the order rather than mixed into feature tickets.
 
 ## Where it fits
