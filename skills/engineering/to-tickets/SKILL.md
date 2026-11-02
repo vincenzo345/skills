@@ -41,7 +41,7 @@ Give each ticket its **blocking edges**: the other tickets that must complete be
 
 **Wide refactors use expand–contract.** Add the compatible new form, migrate bounded caller groups, then remove the old form after all callers migrate. Each slice must satisfy the shared sizing and verification gate, including an observable compatibility outcome. If a batch cannot be verified independently, refine the compatibility boundary before dispatch.
 
-### 4. Quiz the user
+### 4. Confirm the authorization boundary
 
 Present the proposed breakdown as a numbered list. For each ticket, show:
 
@@ -50,13 +50,13 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **What it delivers**: the end-to-end behaviour this ticket makes work
 - **Coverage and readiness**: requirement references; refined or provisional; for refined work, the sizing note required by the shared reference
 
-Ask the user:
+For the initial breakdown or a consequential change proposal, ask the user:
 
 - Does the granularity feel right? (too coarse / too fine)
 - Are the blocking edges correct: does each ticket only depend on tickets that genuinely gate it?
 - Should any tickets be merged or split further?
 
-Obtain approval of the initial breakdown, distinguishing ready slices from provisional coverage. For revisions during authorized implementation, use the shared reference's authorization boundary: routine refinement records existing authority; consequential changes need a concrete user decision.
+Obtain approval of the initial breakdown, distinguishing ready slices from provisional coverage. For routine revisions during authorized implementation, record existing authority and proceed without another quiz; use the shared reference's authorization boundary for consequential changes.
 
 ### 5. Publish the tickets to the configured tracker
 
