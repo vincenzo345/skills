@@ -8,7 +8,8 @@ current_spec:
   ref: work/precedent-evidence/spec.md
   revision: 1
 current_map: null
-next_action: Review and approve implementation slices.
+next_action: Finish validation and review, then complete the explicitly claimed specification;
+  do not push.
 ---
 
 # Lightweight precedent evidence
@@ -21,6 +22,6 @@ Design evidence-based preparation routes and optional Cookbook configuration; do
 
 A proposed routing design, scenario evaluation and sized implementation plan in discovery.md for user review.
 
-## Design handoff
+## Current implementation
 
-See [the design, scenario walkthrough and sized plan](discovery.md). The user confirmed that sufficient local evidence ends discovery; consult Cookbook for gaps or alternatives. Detailed routing remains a recommendation. No implementation issues or ready specification have been published.
+The user authorized implementation of [specification revision 1](spec.md), using the [design and latest refinement](discovery.md). Earlier design-only statements retain historical context; this invocation supersedes that boundary. The explicit specification is claimed through the shared authority. Skill and documentation changes are committed on main; validation, review and installation evidence will be retained in validation.md before closeout. No unrelated queued effort is selected.
