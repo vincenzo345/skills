@@ -4,8 +4,12 @@ kind: spec
 id: work/precedent-evidence/spec.md
 effort: work/precedent-evidence
 revision: 1
-state: current
+state: completed
 readiness: ready-for-agent
+integration:
+  ref: main
+  commit: 8114d959a6cc59b28dbe1f297a6efc46279e4d04
+  verified_tip: 8114d959a6cc59b28dbe1f297a6efc46279e4d04
 ---
 
 # Lightweight precedent-evidence implementation
@@ -32,3 +36,7 @@ Setup-repo must support optional per-repository reference sources through its ex
 ## Sizing and readiness
 
 3 points, high confidence for this documentation implementation. Local evidence: existing sizing pointers, setup knowledge-index and approval mechanisms, Cookbook source inspection recorded in discovery.md, and the refined draft/scenario traces. Implementation, docs, review and package integration are bounded; no runtime behavior or architecture decision remains open. Verification covers package/check suite, scenario review, reference resolution and available fresh-session discovery. Runtime access remains an environmental verification uncertainty, not a reason to invent new tooling.
+
+## Completion evidence
+
+Implemented and reviewed in 7a97aca and 8114d95; 60 Python and 27 preservation tests passed, package/version/reference checks passed, three neutral read-only discovery sessions observed custom/legacy/unconfigured routing. Both review axes have no remaining findings. Codex links and Claude snapshot 8114d95 installed. See work/precedent-evidence/validation.md for evidence and limitations, including eager index reads and policy-blocked temporary cleanup. No push or pilot.

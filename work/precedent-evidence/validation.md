@@ -28,7 +28,7 @@ The prompt named no policy, index, source or instruction file. Each fixture supp
 
 All three processes exited 0. Observed commands read fixture files; no source service, source acquisition, external recipe execution or application edits occurred. The run logs contained a harmless CLI stdin notice. Both configured runs loaded the index together with the sizing reference before separately reading implementation files: these runs establish discovery, not strict lazy-read ordering or minimized context load. Sufficient-local-evidence stopping is covered by instruction review below, not a claimed runtime efficiency result.
 
-The temporary fixtures copied the policy from `7a97aca` before the two subsequent editorial clarifications; those clarifications do not change the discovery branch exercised. Raw disposable traces are summarized here and removed after all processes finish. No actual Cookbook service or application was run or modified.
+The temporary fixtures copied the policy from `7a97aca` before the two subsequent editorial clarifications; those clarifications do not change the discovery branch exercised. Raw disposable traces are summarized here. All discovery processes finished, but automatic command review rejected removal of the owned temporary directory as "blocked by policy" without a more specific reason. The fixtures, traces and recovery note remain at `E:/tmpdir/agent-housekeeping/71875c64fc10411e/precedent-discovery-20261102` for cleanup when policy permits. No actual Cookbook service or application was run or modified.
 
 ## Scenario review against the completed workflow
 
@@ -52,7 +52,9 @@ Manual instruction walkthroughs are separate from the observed fresh-session che
 
 ## Review and completion
 
-The code-review skill's independent Standards and Spec passes reviewed `c15d480...7a97aca`. Spec found no missing requirements or scope creep. Standards found stale effort overview wording and an ambiguous empty-search sentence; both were corrected. Final follow-up review results and packaging closeout are recorded with effort completion.
+The code-review skill's independent Standards and Spec passes reviewed `c15d480...7a97aca`. Spec found no missing requirements or scope creep. Standards found stale effort overview wording and an ambiguous empty-search sentence; both were corrected. Both reviewers rechecked the corrections and validation report and reported no remaining findings. Reviewed implementation and validation are committed in `7a97aca` and `8114d95`.
+
+The Windows installer completed successfully and linked all 32 promoted skills for Codex. A clean Claude snapshot was prepared from `8114d95` at `C:/Users/vince/.claude/skillsrepo-v2-snapshots/8114d959a6cc`; the existing skillsrepo-v2 marketplace was replaced with that snapshot and the plugin reinstalled. Plugin details confirm version 2.1.0 and 32 skills. Subsequent closeout changes affect effort records only, not installed skill content. Restart the applications to refresh discovery. No release or push was performed.
 
 ## Limits
 
