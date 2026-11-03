@@ -45,7 +45,7 @@ Each worker claims one eligible issue through the same authority used by `implem
 
 A finished worker branch does not unblock dependents. The orchestrator merges and verifies the accepted commit, records the integration receipt, then closes the issue. Spec completion requires integrated children and overall acceptance evidence. Filesystem checks establish ownership and ancestry, not the truth of a worker's acceptance claims.
 
-Pending handoffs name the worker, branch, candidate commit, evidence and next integration action. The controller observes results and performs integration with its available tools; Markdown does not guarantee scheduling. After integration, it checks remaining assumptions, scope, dependencies, estimates and verification. Routine refinement uses existing authorization, while consequential changes come back to you with a concrete proposal. Oversized discoveries pause the affected scope with its work preserved; independent ready work can continue.
+Pending handoffs name the worker, branch, candidate commit, evidence and next integration action. The controller prioritizes ready integration over starting more workers. After integration it updates affected records, keeping an unchanged conclusion in the existing handoff. Routine refinement stays within the accepted approach; material new state, coordination or operating burden is a design choice even when each ticket is small. Required checks remain, while valid worker evidence is reused and integration checks target changed interactions.
 
 ## Common questions
 
@@ -63,7 +63,7 @@ Whole-spec review runs after all required outcomes are integrated, so unfinished
 
 **Does it drive tdd like implement does?**
 
-It does now, though it didn't at first. Users running the in-progress version noticed that "the implementer subagents don't inherit the /tdd directive", so red-green stopped as soon as they scaled up from one ticket to a whole spec. Each implementer now builds its ticket with `tdd`. There is still no step where you agree seams interactively, as there is in an `implement` session, so name the seams in the spec or the tickets if you want them pinned.
+Each implementer builds its ticket with [tdd](tdd.md). Agreed boundaries carry forward from the spec or ticket; routine test choices use TDD's boundary guidance without another approval. A change to the agreed proof or behavior still needs a concrete decision.
 
 **Two implementers running in parallel collided on the same file, or picked different names for the same thing.**
 

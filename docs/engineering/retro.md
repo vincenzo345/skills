@@ -2,7 +2,7 @@
 
 `retro` looks back over a coding [session](https://www.aihero.dev/ai-coding-dictionary/session) and suggests improvements to the agent's **[environment](https://www.aihero.dev/ai-coding-dictionary/environment)**, so the next run goes better. It reads the session's own record (the current one by default, or one you point it at in the session logs). It finds the moments where the agent struggled, and gives you a list of candidate fixes, most severe first.
 
-It changes the environment, not the code. Take the bug the agent shipped, the file it needed twenty [tool calls](https://www.aihero.dev/ai-coding-dictionary/tool-call) to find, or the rule the reviewer missed. `retro` does not fix any of them directly. It asks what in the repo let them happen, and proposes the check, pointer, or standard that prevents them next time. It also only proposes. Nothing changes until you pick a candidate.
+It examines the environment rather than fixing the application. The bug the agent shipped, a file that took twenty [tool calls](https://www.aihero.dev/ai-coding-dictionary/tool-call) to find, or repeated bookkeeping can each reveal a different cause. It separates required complexity, agent mistakes and workflow overhead, then proposes the smallest effective change. Normally you select a candidate first; an explicit request to refine the skills authorizes targeted edits.
 
 ## When to reach for it
 
@@ -17,26 +17,26 @@ Each candidate belongs to one category, and the category decides where the fix g
 | What went wrong in the session | Fix it with |
 | --- | --- |
 | The agent took a long time to find a file or fact | A **navigation pointer** from a file it already reads |
-| It made a mistake a tool could have caught | An **[automated check](https://www.aihero.dev/ai-coding-dictionary/automated-check)**: lint rule, type, test, pre-commit hook, CI job |
+| An important repeatable mistake is mechanical | Reuse or repair an existing **[automated check](https://www.aihero.dev/ai-coding-dictionary/automated-check)** first; add one when its prevention value justifies the cost |
 | The reviewer missed a judgement-call mistake | A rule in `CODING_STANDARDS.md` for the reviewer agent |
 | `AGENTS.md` or `CLAUDE.md` is large | Move its steering out, into standards or checks |
 | A tool call was expensive for what it returned | Streamline the tool, or replace it |
 | A steering file is full of lines that change nothing | Delete the **no-ops** |
 | The agent needed information it couldn't reach | Widen its access: tee the dev server log to a file, give read-only access to a service |
 
-The leading idea is that standards belong to the **reviewer**, not the implementer. The implementing agent has the most context pressure, because it explores, writes code, and debugs failures. The reviewing agent gets a diff and nothing else. So a new rule goes where there is room to apply it, which is review. It never goes in [AGENTS.md](https://www.aihero.dev/ai-coding-dictionary/agents-md), which loads into every session's [context window](https://www.aihero.dev/ai-coding-dictionary/context-window) whether it is relevant or not.
+Implementation needs the constraints that make the change correct. Review checks the diff and surrounding design, including unnecessary complexity. Detailed judgement guidance belongs where it is used; [AGENTS.md](https://www.aihero.dev/ai-coding-dictionary/agents-md) should mainly carry pointers rather than a checklist loaded into every [context window](https://www.aihero.dev/ai-coding-dictionary/context-window).
 
-Before `retro` writes any rule, it classifies the violation. A **mechanical** violation (a banned API, an import shape, a file-location rule) gets a deterministic check, because a check can fail and a sentence in a standards file can't. Only real judgement calls, which no linter can enforce, become prose. If the repo has no guardrail at all (no pre-commit hook, and no CI job that runs lint, typecheck, and tests), `retro` reports that as a finding of its own.
+Before proposing a rule, `retro` checks what already exists and what the extra work would cost. Worthwhile mechanical checks belong in tooling; design tradeoffs need judgement. A missing guardrail can be a finding, while a one-off mistake may need only a local fix. Removing a misleading instruction can be more useful than another gate.
 
 ## Common questions
 
 **Does it write the lint rule itself, or wait for a yes? Can I wire it to run after every session?**
 
-It waits. `retro` only proposes. Nothing changes until you pick a candidate, so it edits nothing by hand and installs no hook automatically. This is deliberate. One user asked for exactly this after being "burned by auto-hooks that blocked good changes." It takes judgement to decide what deserves a permanent check, so the skill stays [human-in-the-loop](https://www.aihero.dev/ai-coding-dictionary/human-in-the-loop) and user-invoked. Some users do run it after every implementation run. But a smooth session has little to teach, so a run after every session mostly produces rules nobody needed. There is no dry-run mode. A proposed check is code like any other, so try it against the repo before you let it block merges.
+It proposes unless you authorize changes. One user reported being "burned by auto-hooks that blocked good changes"; a retrospective is no reason to install a gate automatically. Keep permanent enforcement [human-in-the-loop](https://www.aihero.dev/ai-coding-dictionary/human-in-the-loop), and try a proposed check against the repo before it blocks merges. A smooth session may need no change.
 
 **Won't this pile up lint rules forever? Does it ever suggest removing one?**
 
-Partly, and this is its weakest spot. It can remove prose: no-ops in steering files, and steering in `AGENTS.md` or `CLAUDE.md` that belongs in standards or a check. It flags these for deletion when the files are large. It judges them against the one session it reads, so treat each one as a candidate for the deletion test, not a verdict. It does not audit the lint rules, hooks, or CI jobs it proposed last month. It sees one session, so it cannot tell you that a rule now fires too often or that the bug behind it is gone. You must still prune checks yourself. A rule that fires constantly on good code is the sign to remove it.
+The first options are removing, clarifying or reusing existing instructions and checks. Each addition needs an observed failure and enough prevention value to justify its run and maintenance cost. The session provides evidence for pruning; a full audit of unrelated hooks and jobs is outside its scope.
 
 **Won't it just invent generic advice to fill its categories?**
 
@@ -48,7 +48,7 @@ By default it reviews the current session. That is the best case, because the st
 
 **The agent keeps making the same mistake. Should I add a line to `CLAUDE.md`?**
 
-Usually not, and `retro` pushes back on this more than anything else. A line in `CLAUDE.md` loads into every session, gives less weight to everything else in the file, and goes out of date as the code changes. If the mistake is mechanical, the fix is a check that fails. If it is a judgement call, it goes in the coding standards the reviewer reads. `AGENTS.md` and `CLAUDE.md` are for navigation pointers and little else. For the same reason, `retro` is not a [memory system](https://www.aihero.dev/ai-coding-dictionary/memory-system). It does not store what happened. It changes the environment so the mistake cannot happen again.
+Usually start with the instruction or check already responsible. Worthwhile mechanical failures can use existing tooling; judgement calls can improve review guidance. A navigation pointer keeps `AGENTS.md` small. `retro` is not a [memory system](https://www.aihero.dev/ai-coding-dictionary/memory-system), and another instruction cannot guarantee that the mistake never recurs.
 
 **My setup mentions `CODING_STANDARDS.md` and I don't have one. Where does it come from?**
 

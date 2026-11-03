@@ -8,6 +8,8 @@ Local issues belong to the identified effort and reference the current spec revi
 
 Refinement uses applicable precedent evidence in the existing sizing note. Sufficient local implementation and verification end discovery; a gap or needed alternative can trigger a source configured through [setup-repo](setup-repo.md). Evidence must support the required behavior, including relevant failure conditions. A familiar example does not make an uncertain outcome ready.
 
+The approach is simplified before it is sized. Several small tickets can still build an unnecessarily complex system. New maintained mechanisms need a concrete requirement that the simpler existing path cannot meet; material choices stay visible in the existing design or sizing note. Prefactoring earns its place by reducing total delivery work.
+
 On GitHub or GitLab, approved issues retain explicit specification revisions and native blocking links. Readiness does not bypass a stale basis, unfinished blockers, or the remote ownership capability boundary.
 
 ## When to reach for it
@@ -93,7 +95,7 @@ The skill stops at the artifact. Use [implement](implement.md) for one refined s
 - The next ready slice has sizing evidence, and provisional outcomes name what still needs refinement.
 - Each issue links its spec/design basis while avoiding brittle implementation paths and line numbers.
 - Every requirement maps to accepted evidence, a refined slice or an explicitly provisional outcome.
-- Prefactoring, where it found any, is at the front of the order rather than mixed into feature tickets.
+- Necessary prefactoring enables a concrete outcome; a separate ticket has its own useful compatibility result.
 
 ## Where it fits
 

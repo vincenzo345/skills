@@ -21,6 +21,8 @@ The central idea is two budgets that every document and pointer spends:
 
 Once you think in these two loads, most authoring decisions (split or don't, inline or disclose, point or push) become the same trade made in different places.
 
+Instructions also spend execution time. A short mandatory step can create expensive checks, artifacts and handoffs on every run. Prefer removing or clarifying an existing rule, and tie additions to an observed failure and a specific trigger. Exhaustiveness means covering the agreed outcome and required constraints, rather than inventing hypothetical work.
+
 ## The levers
 
 - **[Context pointers](https://www.aihero.dev/ai-coding-dictionary/context-pointer)**: the reference held in context that names out-of-context material and encodes when to reach it. A skill description and an `AGENTS.md` line naming a doc are the same thing. The pointer's *wording*, not its target, decides how reliably the agent follows it.

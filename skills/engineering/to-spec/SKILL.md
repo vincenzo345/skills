@@ -14,11 +14,11 @@ Before publishing or resuming local work, read the configured tracker and [share
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
 
-2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
+2. Record test boundaries using [TDD's seam guidance](../tdd/SKILL.md#seams-where-tests-go): the cheapest stable public boundary that detects the relevant failure, with real interaction coverage where required.
 
-Check with the user that these seams match their expectations.
+Reuse confirmed test boundaries. Check with the user only when a new seam changes the agreed proof or behavior.
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+3. Write the spec using the template below, then publish it to the project issue tracker. Apply `ready-for-agent` when the required behavior and consequential decisions are settled; retain unresolved choices as `needs-info`. Publication records agreement, not approval of an agent's new design proposal.
 
 <spec-template>
 
@@ -32,7 +32,7 @@ The solution to the problem, from the user's perspective.
 
 ## User Stories
 
-A LONG, numbered list of user stories. Each user story should be in the format of:
+A numbered list of the agreed user outcomes. Each user story should be in the format of:
 
 1. As an <actor>, I want a <feature>, so that <benefit>
 
@@ -40,11 +40,11 @@ A LONG, numbered list of user stories. Each user story should be in the format o
 1. As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
 </user-story-example>
 
-This list of user stories should be extremely extensive and cover all aspects of the feature.
+Group repeated outcomes. Include only agreed behavior and necessary consequences; leave speculative extensions out of scope.
 
 ## Implementation Decisions
 
-A list of implementation decisions that were made. This can include:
+A list of accepted implementation decisions and their rationale. Label assumptions and unresolved proposals separately so they cannot become requirements through transcription. Prefer the simplest approach that meets the agreed constraints. Decisions can include:
 
 - The modules that will be built/modified
 - The interfaces of those modules that will be modified

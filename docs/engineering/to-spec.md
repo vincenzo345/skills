@@ -27,13 +27,13 @@ Reach for it when the build is too big for one agent [session](https://www.aiher
 
 The spec exists because context windows end. You settled many things while [grilling](https://www.aihero.dev/ai-coding-dictionary/grilling): the shape of the solution, the choices you argued through, and what you deliberately refused. All of that is in one conversation that you are about to clear. The spec keeps it.
 
-So the spec does not validate or decide anything. It records what you decided, in your project's own vocabulary, so a fresh session can pick up the work without you explaining it again. If the spec states something you never said, that is a defect.
+The spec records agreed behavior and accepted choices in your project's vocabulary. Assumptions and proposals remain visibly separate. User stories cover the agreed outcomes without padding the scope to fill the template; a proposed mechanism gains no authority merely by appearing in the document.
 
 ## Seams before prose
 
-Before it writes anything, `to-spec` sketches the **seams** where the feature will be tested, and checks them with you. It prefers existing seams to new ones, and picks the highest seam it can. The ideal number of seams for a change is one.
+`to-spec` reuses agreed **seams** using [TDD's boundary guidance](tdd.md): the cheapest stable public boundary that detects the relevant failure, retaining real interaction coverage where needed. It checks with you when a new seam changes the agreed proof or behavior, rather than repeating a settled conversation.
 
-Other skills use those agreed seams later. [tdd](https://aihero.dev/skills-tdd) works only at seams you agreed in advance. [code-review](https://aihero.dev/skills-code-review) reviews the diff against the spec, so a seam nobody agreed to shows up as a review finding. Both connections go through this document. That is why you should take the seam conversation seriously here, and not leave it for implementation.
+Other skills reuse those decisions. [tdd](tdd.md) chooses routine boundaries within the accepted approach without another approval, and [code-review](code-review.md) checks whether the resulting evidence meets the spec. A cheaper test cannot replace required proof of real interactions.
 
 ## Common questions
 
@@ -50,7 +50,7 @@ Often you should. The spec is worth its step only on multi-session work. Its val
 Give it the main map issue, `/to-spec #<map_issue>`, not the individual decision tickets. [wayfinder](https://aihero.dev/skills-wayfinder) produces decisions spread across a map, not deliverables. `to-spec` collapses them into one document you can build from. If you loop the map straight into `/implement`, you lose that step.
 
 **Is the spec for me to review, or is it just for the agent?**
-Mostly for the agent, and it reads that way: complete, dense, and full of references. Read the seams and the out-of-scope section. In those two places, a wrong decision is cheapest to catch now and most expensive to find later. People do complain about reading the whole thing, and there is no summary mode. But if the spec surprises you, the grilling was too shallow; the spec is not too long.
+Both you and the agent need to recognize the agreed outcome. Read the seams, implementation choices and out-of-scope section. Unexpected mechanisms or speculative stories are reasons to revise the document, rather than evidence that you should have supplied a longer interview. Unsettled consequential choices keep it at `needs-info`.
 
 **Do I keep the spec frozen once tickets start, or let the agent rewrite it?**
 Nothing keeps it in sync. In practice it is a snapshot of what you knew at that moment, and it goes out of date the first time implementation teaches you something. Treat it as disposable after the work ships. Your `GLOSSARY.md` and ADRs are the files meant to last. If you learn something during implementation that should last, put it there, not in an edited spec.
@@ -67,7 +67,7 @@ A tracker issue may not return a very large spec in full, and there is no local 
 ## It's working if
 
 - It starts writing instead of asking you a new round of questions.
-- It shows you the seams before it writes, and proposes as few as it can.
+- It records relevant test boundaries and reuses settled proof decisions.
 - It uses your project's nouns, not generic product-management boilerplate.
 - You remember making every decision in it. It invented nothing to fill a section.
 - The out-of-scope section lists real things. The things you refused are usually the most useful lines on the page.

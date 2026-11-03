@@ -12,7 +12,7 @@ Read the configured tracker and [shared work-record contract](../setup-repo/WORK
 
 Report the selected title, effort, basis and authority, and preserve its ownership token. Known blocked, claimed, stale, or unready work permits trying independent work inside the requested scope. Missing readiness, malformed ordering, unavailable authority, and unknown dependency outcomes stop selection with their specific diagnostic. Invalid explicit targets never fall through to unrelated work. Resolve ambiguous identity before execution. A preview from `select` is not ownership; acquire before implementing.
 
-Call the Skill tool with "tdd" where possible, at pre-agreed seams.
+Call the Skill tool with "tdd" where possible, reusing agreed seams and following its guidance for new boundaries.
 
 For disposable validation or interrupted work, read the housekeeping reference named by repository instructions, or the [shared fallback](../setup-repo/housekeeping.md#without-repository-configuration) if none is configured.
 

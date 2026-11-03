@@ -26,6 +26,8 @@ Every document and pointer you add spends one of two budgets:
 
 Material reached only through a pointer escapes context load at the price of the pointer's own line; material with no pointer at all rides entirely on cognitive load.
 
+Instructions also spend **execution time**. Prefer removing or clarifying a rule before adding a step, artifact or handoff. Tie additions to an observed failure and put conditional work behind its trigger. Exhaustiveness covers the agreed outcome and required constraints; it does not require hypothetical features, failure protocols or a new checklist for every mistake.
+
 ## Information hierarchy
 
 A document is built from two content types: **steps** (the ordered actions the agent performs) and **reference** (definitions, rules, facts consulted on demand). The two mix freely: all steps (a recipe), all reference (a review's rules, this skill), or both. The core decision is where each piece sits on the **information hierarchy**, a ladder ranked by how immediately the agent needs the material:

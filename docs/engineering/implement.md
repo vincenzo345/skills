@@ -52,18 +52,18 @@ Explicit direction overrides queue membership and position, while readiness, cur
 A run has five steps, in order:
 
 1. Read the ticket or spec, check its sizing/readiness evidence and work out the seams.
-2. Drive [tdd](https://aihero.dev/skills-tdd) at the pre-agreed seams, one red-green slice at a time.
+2. Drive [tdd](tdd.md), reusing agreed seams and choosing routine new boundaries under its guidance, one red-green slice at a time.
 3. Run repository-required and affected checks as the work changes.
 4. Verify whole-spec behavior at appropriate integration boundaries, retaining mandatory full-suite checks and rerunning evidence invalidated by code or environment changes.
 5. Run [code-review](https://aihero.dev/skills-code-review), then commit to the current branch.
 
 One run covers a bounded outcome. [to-tickets](to-tickets.md) maps the overall requirements but fully refines only the next eligible work. Each ready slice carries enough evidence for a fresh session; later outcomes stay provisional. Completion reports include downstream implications and whether the work is accepted or still awaiting integration.
 
-## Pre-agreed seams
+## Reuse agreed seams
 
 The skill's central idea is the **seam**, the public boundary you observe behaviour at without reaching inside. Tests live at seams. When the seam is agreed before any code exists, the tests last, and you can rewrite the implementation underneath without changing them.
 
-The "pre-agreed" part matters, and it is also the skill's weakest point. Nothing inside `implement` agrees the seams. `tdd` is the skill that asks, and it refuses to write a test at an unconfirmed seam. So in practice the agreement happens either upstream in the spec, or in the first exchange of the run. If it happens nowhere, the run becomes "just write the code" and nothing warns you. Naming the seams in the spec is what stops that.
+[tdd](tdd.md) reuses settled boundaries without asking again. Within the accepted approach, it chooses the cheapest stable public boundary that detects the relevant failure. Changes to the agreed proof or behavior come back to you with concrete tradeoffs. Required interaction coverage remains in place.
 
 ## Common questions
 

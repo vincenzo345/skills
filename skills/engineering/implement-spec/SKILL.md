@@ -16,7 +16,7 @@ The tickets are not a list of steps. They are a **task graph** with blocking rel
 
 Communication to and from subagents should be sparse. Communicate primarily through **context pointers**: to the spec, tickets, research notes, and previous commits. Don't duplicate information already available via pointers.
 
-**Implementer subagents** should be run in the background where possible for maximum concurrency.
+Run independent ready **implementer subagents** in the background when that shortens delivery. Prioritize ready handoffs and integration over starting more workers.
 
 For remote trackers, read [the remote adapter contract](../setup-repo/REMOTE-WORK.md) before dispatch. Automatic concurrent claiming is unsupported without an established exclusive controller or verified provider path. Refresh remote state before selection and completion.
 
@@ -37,9 +37,9 @@ For remote trackers, read [the remote adapter contract](../setup-repo/REMOTE-WOR
    - reports scope-changing discoveries immediately and follows the shared reference's recovery and re-estimation rules, preserving work while independent ready work continues;
    - merges the integration branch tip into its own branch before reporting results, with the shared reference's handoff and explicit pending integration action.
 
-5. Once a worker reports verified results, revalidate its claim and merge its work with a **merger subagent**. Resolve discrepancies and run relevant integration checks. Only then record issue completion in the authority. For local records, use `complete` with the ownership token, acceptance evidence, `--integration-ref <branch>`, and `--commit <accepted-commit>`; the helper verifies ancestry and retains the receipt. Unmerged work remains in-progress and blocks dependents. Do not merge stale worker tracker files over live authority.
+5. Once a worker reports verified results, revalidate its claim and merge its work with a **merger subagent**. Resolve discrepancies and verify changed interactions, reusing valid worker evidence under the shared verification rules. Only then record issue completion in the authority. For local records, use `complete` with the ownership token, acceptance evidence, `--integration-ref <branch>`, and `--commit <accepted-commit>`; the helper verifies ancestry and retains the receipt. Unmerged work remains in-progress and blocks dependents. Do not merge stale worker tracker files over live authority.
 
-6. After each integration, apply the shared reference's discovery impact check to remaining work. Update affected assumptions, scope, dependencies, estimates and verification before dispatch; preserve completed evidence and requirement coverage. Routine refinement uses existing authority; consequential changes return to the user as a concrete proposal. Refresh authoritative state and claims, then dispatch the eligible **frontier** within available capacity. Observe worker results through the actual controller tools and retain pending handoffs in existing tracker notes; Markdown alone does not schedule workers or integrate their branches. If no work is ready, identify whether refinement, a user decision, or pending integration is next rather than treating provisional outcomes as complete.
+6. Apply the shared reference's discovery impact check, including whether further decomposition is making the combined design more complicated. Update only affected records; use existing authority for routine refinement and bring consequential choices to the user. Refresh authoritative state and claims, then dispatch the eligible **frontier** within available capacity. Observe results through actual controller tools and retain handoffs in existing tracker notes. If nothing is ready, identify the next refinement, decision or integration action; provisional outcomes remain unfinished.
 
 7. Once every required outcome is covered by accepted integrated work, call the Skill tool with `code-review` on the integration branch. Refine review fixes through the same sizing gate before dispatching them.
 

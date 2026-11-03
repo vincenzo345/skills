@@ -45,6 +45,8 @@ This design exists to avoid a generic review skill that does not know your stand
 
 The **smell baseline** sits under the repo's standards. It is twelve code smells from chapter 3 of Fowler's _Refactoring_: Mysterious Name, Duplicated Code, Feature Envy, Data Clumps, Primitive Obsession, Repeated Switches, Shotgun Surgery, Divergent Change, Speculative Generality, Message Chains, Middle Man, Refused Bequest. Each is a labelled heuristic ("possible Feature Envy"), never a hard violation. Each states what the smell is and how to fix it, so a finding comes with a fix attached rather than only a complaint. Both axes skip anything your linter already enforces.
 
+The suggested fixes are options. A useful complexity finding identifies concrete harm and a simpler adequate alternative. Local repetition or a descriptive value can be cheaper than a new abstraction or type. Review considers the combined design, so splitting an unnecessary mechanism into small tickets does not justify it.
+
 ## Common questions
 
 **It collides with Claude Code's own `/code-review`. What do I do?**
