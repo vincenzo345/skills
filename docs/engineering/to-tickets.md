@@ -10,6 +10,8 @@ Refinement uses applicable precedent evidence in the existing sizing note. Suffi
 
 The approach is simplified before it is sized. Several small tickets can still build an unnecessarily complex system. New maintained mechanisms need a concrete requirement that the simpler existing path cannot meet; material choices stay visible in the existing design or sizing note. Prefactoring earns its place by reducing total delivery work.
 
+Before the breakdown comes back to you, the agent checks it against the refined plan when one is linked: outcomes need coverage, and slices and blockers must preserve the agreed approach and constraints. It can combine coherent work that fits the sizing gate, while consequential changes to the approach remain your decision. Without a plan, it uses the spec or conversation as its basis.
+
 On GitHub or GitLab, approved issues retain explicit specification revisions and native blocking links. Readiness does not bypass a stale basis, unfinished blockers, or the remote ownership capability boundary.
 
 ## When to reach for it

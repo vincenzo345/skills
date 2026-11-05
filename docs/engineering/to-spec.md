@@ -29,6 +29,8 @@ The spec exists because context windows end. You settled many things while [gril
 
 The spec records agreed behavior and accepted choices in your project's vocabulary. Assumptions and proposals remain visibly separate. User stories cover the agreed outcomes without padding the scope to fill the template; a proposed mechanism gains no authority merely by appearing in the document.
 
+The spec links the refined plan when available, carries its approach, evidence and material tradeoffs forward, and checks the synthesis against the agreed outcome. An unsettled consequential choice stays `needs-info` and names the input needed; a recommendation is not an accepted decision. It also works from conversation and evidence when there is no prior plan.
+
 ## Seams before prose
 
 `to-spec` reuses agreed **seams** using [TDD's boundary guidance](tdd.md): the cheapest stable public boundary that detects the relevant failure, retaining real interaction coverage where needed. It checks with you when a new seam changes the agreed proof or behavior, rather than repeating a settled conversation.

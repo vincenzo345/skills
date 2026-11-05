@@ -14,9 +14,11 @@ Before publishing or resuming local work, read the configured tracker and [share
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
 
+   Read the refined plan in discovery when present, link it as the planning basis, and carry forward its approach, relevant evidence and material tradeoffs. Check the synthesis against the agreed outcomes and retained decisions; correct omissions and flag consequential gaps as unresolved rather than redesigning accepted choices. Distinguish accepted decisions from assumptions and proposals. An unsettled consequential choice stays `needs-info`, with the input needed named; do not interview or imply acceptance. When no refined plan exists, use the available conversation and evidence as the basis.
+
 2. Record test boundaries using [TDD's seam guidance](../tdd/SKILL.md#seams-where-tests-go): the cheapest stable public boundary that detects the relevant failure, with real interaction coverage where required.
 
-Reuse confirmed test boundaries. Check with the user only when a new seam changes the agreed proof or behavior.
+Reuse confirmed test boundaries. When a new seam changes the agreed proof or behavior, record the choice as unresolved, retain `needs-info`, and identify the input needed in the handoff.
 
 3. Write the spec using the template below, then publish it to the project issue tracker. Apply `ready-for-agent` when the required behavior and consequential decisions are settled; retain unresolved choices as `needs-info`. Publication records agreement, not approval of an agent's new design proposal.
 

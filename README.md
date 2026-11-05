@@ -148,6 +148,7 @@ Skills I use daily for code work.
 
 **Model-invoked**
 
+- **[feature-planner](./skills/engineering/feature-planner/SKILL.md)**: Develop and evaluate a repo-aware implementation plan before coding.
 - **[design](./skills/engineering/design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design; retain effort evidence and accepted current knowledge.
 - **[prototype](./skills/engineering/prototype/SKILL.md)**: Answer a bounded design question; retain findings and source before retiring disposable execution work.
 - **[diagnosing-bugs](./skills/engineering/diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: build a feedback loop that goes red on this bug → minimise → hypothesise → instrument → fix → regression-test.

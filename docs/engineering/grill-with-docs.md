@@ -24,7 +24,7 @@ The wayfinder split comes down to session count: `/grill-with-docs` for single-s
 
 The skill writes into your repo, so you need to be somewhere it is safe to write. Resolved terms go to a `GLOSSARY.md` glossary at the root, or to the relevant context's `GLOSSARY.md`, if a `GLOSSARY-MAP.md` at the root marks the repo as multi-context. Decisions go to `docs/adr/`. The skill creates both only when it needs them. Read the configured tracker to resume or create the stable effort. Domain files are created only when actual terms or qualifying decisions require them.
 
-It also needs two other skills present, because they supply its interview and domain-writing methods. [grilling](https://aihero.dev/skills-grilling) supplies the interview, and [domain-modeling](https://aihero.dev/skills-domain-modeling) supplies the writing. Installing `grill-with-docs` alone gets you a skill that does not work.
+It also needs [feature-planner](feature-planner.md), `grilling`, and `domain-modeling` available. They supply the initial plan, interview, and domain-writing methods respectively. A consequential specialist design choice also needs [design](design.md). These skills are included in the promoted package; if `feature-planner` is unavailable, the flow stops and reports the missing dependency.
 
 ## The paper trail
 
@@ -37,6 +37,10 @@ Three things come out of a session, and they are not equal.
 | Ordinary requirements, findings, and open questions | The effort's discovery record, or the current decision with a discovery link |
 
 The third row preserves what later sessions need without turning the glossary into a specification. Decision answers have one authoritative home; discovery links to them. Pass these effort references to [to-spec](to-spec.md), and review its synthesis against the retained constraints.
+
+Before the interview, the agent calls `feature-planner` to investigate the codebase and draft an approach. If the planner needs a blocking decision before it can finish, the interview resolves that question and the planner resumes with your answer. You refine the proposal together, using its evidence to focus on consequential choices. For a specific unresolved UI, architecture, data-model or module choice, the agent explains the question and calls [design](design.md), then returns the accepted findings to feature-planner to review their effect on the plan. Routine work can skip design. The effort's discovery record retains the plan, decisions and unresolved input for [to-spec](to-spec.md).
+
+When the harness has no Skill tool, the agent reads and applies the installed instructions for these model-invoked dependencies. A missing required skill is reported rather than silently replaced.
 
 The glossary remains the shared vocabulary output. This skill builds domain language: the project's own words, agreed once, so you, the agent and your colleagues do not have to work them out again. Not everyone agrees that this improves agent performance. The strongest objection is that a term and its plain-English expansion get the same result from the [model](https://www.aihero.dev/ai-coding-dictionary/model), and that the vocabulary mainly shortens communication between the humans who share it. On that view the glossary is still valuable, but the value goes to the humans.
 

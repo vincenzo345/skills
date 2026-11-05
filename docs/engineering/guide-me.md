@@ -1,10 +1,14 @@
 ## What it does
 
+The main flow starts `grill-with-docs` with `feature-planner` and refines that proposal in the interview. A specific consequential design choice can call [design](design.md), then return its findings to the planner. Multi-session work carries the reviewed plan into the spec, and the issue breakdown is checked against it before approval. Small ready work can go directly to implementation. Unsettled consequential choices remain open for your decision.
+
 `guide-me` is the router over the skills in this repo. You describe the situation you are in (an idea you cannot start, a pile of incoming bug reports, a [session](https://www.aihero.dev/ai-coding-dictionary/session) that has run long), and it names the skill or the sequence of skills that fits, plus where the human decisions in that sequence sit.
 
 It recommends and stops. It does not grill, write a [spec](https://www.aihero.dev/ai-coding-dictionary/spec), open a file or fire the skill it just named; what you get back is the next thing to type, and you type it. It is also a hand-written map of the skills in this repo rather than a scan of what you have installed, so it will not route you over your own skills or another author's.
 
 Local planning and implementation share one stable effort folder. Specs hand off approved issues to a consumer that validates current authority and claims ownership; Wayfinder decision tickets stay separate.
+
+Implementation checks relevant discoveries against remaining work. Necessary in-scope fixes proceed; material expansions return to you with evidence and a simpler alternative before affected work continues. The spec controller also pauses other active workers whose scope may be affected, retaining their claims and work for reconciliation.
 
 Remote GitHub and GitLab records remain authoritative. Assignment shows intent but does not prove exclusive ownership. Automatic concurrent claiming is unavailable unless an exclusive provider path or one shared controller has been established and verified; unavailable remote information stops work instead of falling back to local status.
 
@@ -19,6 +23,7 @@ You invoke this by typing `/guide-me`; the agent won't reach for it on its own.
 | Your situation | What the router gives back |
 | --- | --- |
 | An idea, and no idea where to start | The head of the main flow, and whether the build is small enough to skip the spec |
+| A repo-aware implementation plan or plan review | [Feature-planner](feature-planner.md) for a concrete approach and verification plan |
 | A UI, architecture, module, or data model design task | [Design](design.md) for specialist investigation and human decisions, with prototype used for a bounded runnable experiment |
 | A task involving business entities or relationships | [Ontology map](ontology-map.md) to retrieve the relevant concept neighborhood or propose a reviewed update |
 | Bugs and requests arriving from other people | The [triage](https://aihero.dev/skills-triage) on-ramp, and why [tickets](https://www.aihero.dev/ai-coding-dictionary/ticket) you generated yourself don't belong on it |

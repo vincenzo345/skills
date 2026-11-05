@@ -24,6 +24,7 @@ Reachable only when you type them (Claude Code: `disable-model-invocation: true`
 
 Model- or user-reachable (rich trigger phrasing so the model can reach for them).
 
+- **[feature-planner](./feature-planner/SKILL.md)**: Develop and evaluate a repo-aware implementation plan before coding.
 - **[design](./design/SKILL.md)**: Collaborate on UI, architecture, module, and data model design; retain effort evidence and accepted current knowledge.
 - **[prototype](./prototype/SKILL.md)**: Answer a bounded design question; retain findings and source before retiring disposable execution work.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feature Planner"
+  short_description: "Plan implementation-ready new features"
+  default_prompt: "Use $feature-planner to plan this new feature before implementation."

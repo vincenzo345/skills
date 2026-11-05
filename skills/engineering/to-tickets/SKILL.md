@@ -28,6 +28,10 @@ Prefer the existing implementation path. Prefactor when it removes a concrete ob
 
 Map each requirement to an outcome and its likely dependencies. Fully refine only the next eligible outcomes using the shared sizing rubric; keep later outcomes explicitly provisional with their refinement condition. On an existing breakdown, review integrated evidence first, preserve completed work and stable IDs, and reconcile affected remaining coverage rather than recreating the plan.
 
+Before presenting the breakdown, review the combined approach against the required outcomes. Trace prerequisites to the mechanism that created them, reconsider that mechanism when a simpler accepted path suffices, and combine slices when they form one coherent outcome within the sizing gate. Preserve coverage and surface consequential approach changes for the user's decision.
+
+When a refined plan is linked from the spec or effort, compare the whole proposed breakdown against it: map its agreed outcomes to issues or provisional coverage, check that the slices and blockers preserve its approach and constraints, and identify omissions or added mechanisms. Correct routine discrepancies before presenting the breakdown; present consequential changes for the user's decision. If no plan exists, use the spec or conversation as the basis.
+
 <vertical-slice-rules>
 
 - Each slice cuts a narrow but COMPLETE path through the layers needed for its outcome, including verification

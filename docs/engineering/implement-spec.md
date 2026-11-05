@@ -47,6 +47,8 @@ A finished worker branch does not unblock dependents. The orchestrator merges an
 
 Pending handoffs name the worker, branch, candidate commit, evidence and next integration action. The controller prioritizes ready integration over starting more workers. After integration it updates affected records, keeping an unchanged conclusion in the existing handoff. Routine refinement stays within the accepted approach; material new state, coordination or operating burden is a design choice even when each ticket is small. Required checks remain, while valid worker evidence is reused and integration checks target changed interactions.
 
+When a worker finds a possible scope expansion, it pauses affected work and reports the evidence. The controller also identifies and notifies other active workers who may be affected, preserving their claims and work. If it cannot confirm a pause, their results remain pending rather than integrated. Before adding or dispatching a new guarantee or materially larger mechanism, the controller brings you the simpler alternative, costs and affected outcomes. After your decision it reconciles affected work and revalidates claims; independent ready work may continue. Necessary fixes already covered by the accepted outcome do not need a new approval.
+
 ## Common questions
 
 **How is this different from running `/implement` on each ticket myself?**
